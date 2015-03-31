@@ -86,6 +86,37 @@ function getWindowCoordinates( theWindow ) {
 	};
 }
 
+var popupEnhancer = function() {
+
+	// Links within content areas, tests included with page
+	$( this )
+		.find( "a" )
+		.jqmEnhanceable()
+		.filter( ":jqmData(rel='popup')[href][href!='']" )
+		.each( function() {
+
+			// Accessibility info for popups
+			var element = this,
+				idref = element.getAttribute( "href" ).substring( 1 );
+
+			if ( idref ) {
+				element.setAttribute( "aria-haspopup", true );
+				element.setAttribute( "aria-owns", idref );
+				element.setAttribute( "aria-expanded", false );
+			}
+		})
+		.end()
+		.not( ".ui-btn, :jqmData(role='none')" )
+		.addClass( "ui-link" );
+};
+
+if ( $.fn.enhance.hooks ) {
+	$.fn.enhance.hooks.push( popupEnhancer );
+} else {
+	$.fn.enhance = $.fn.enhance || $.noop;
+	$.fn.enhance.hooks = [ popupEnhancer ];
+}
+
 $.widget( "mobile.popup", {
 	version: "@VERSION",
 

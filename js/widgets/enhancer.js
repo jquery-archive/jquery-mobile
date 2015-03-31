@@ -14,25 +14,26 @@
 }(function( $ ) {
 
 var plugin = {
-	enhance: function() {
+		enhance: function() {
 
-		// Call the default enhancer function
-		$.fn.enhance.defaultFunction.apply( this, arguments );
+			// Call the default enhancer function
+			$.fn.enhance.defaultFunction.apply( this, arguments );
 
-		// Loop over and execute any hooks that exist
-		for ( var i = 0; i < $.fn.enhance.hooks.length; i++ ) {
-			$.fn.enhance.hooks[ i ].apply( this, arguments );
+			// Loop over and execute any hooks that exist
+			for ( var i = 0; i < $.fn.enhance.hooks.length; i++ ) {
+				$.fn.enhance.hooks[ i ].apply( this, arguments );
+			}
+			return this;
 		}
-		return this;
-	}
-};
+	},
+	getNamespace = function(){
+		return  $.fn.enhance.ns || $.mobile.ns || "";
+	};
 
 // Generate the init selector to be used by a widget
 plugin.enhance.initGenerator = function( widgetName ) {
-	return "[data-" + plugin.enhance.ns + "role='" + widgetName + "']";
+	return "[data-" + getNamespace() + "role='" + widgetName + "']";
 };
-
-plugin.enhance.ns = "";
 
 // Check if the enhancer has already been defined if it has copy its hooks if not
 // define an empty array
@@ -44,10 +45,14 @@ plugin.enhance.defaultFunction = function(){
 
 	// Enhance widgets
 	function crawlChildren( _childConstructors ) {
+
 		$.each( _childConstructors, function( index, constructor ) {
-			that.find( constructor.prototype.initSelector ||
-				$.fn.enhance.initGenerator( constructor.prototype.widgetName )
-			)[ constructor.prototype.widgetName ]();
+			var prototype = constructor.prototype;
+
+			that.find( prototype.initSelector ||
+				$[ prototype.namespace ][ prototype.widgetName ].prototype.initSelector ||
+				plugin.enhance.initGenerator( prototype.widgetName )
+			)[ prototype.widgetName ]();
 			if ( constructor._childConstructors && constructor._childConstructors.length > 0 ) {
 				crawlChildren( constructor._childConstructors );
 			}
@@ -73,7 +78,7 @@ $.extend( $.Widget.prototype, {
 
 		// Translate data-attributes to options
 		for ( option in this.options ) {
-			value = data[ plugin.enhance.ns.replace( "-", "" ) + option.charAt(0).toUpperCase() + option.slice(1) ];
+			value = data[ getNamespace().replace( "-", "" ) + option.charAt(0).toUpperCase() + option.slice(1) ];
 			if ( value !== undefined ) {
 				options[ option ] = value;
 			}

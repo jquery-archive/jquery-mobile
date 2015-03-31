@@ -44,6 +44,7 @@ if ( $.mobileBackcompat !== false ) {
 				this._super();
 				if ( !this.options.enhanced && this.options.wrapperClass ) {
 					this._addClass( this.widget(), null, this.options.wrapperClass );
+
 				}
 			},
 
