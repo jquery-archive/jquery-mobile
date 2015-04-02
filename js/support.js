@@ -31,21 +31,25 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 function inlineSVG() {
 	// Thanks Modernizr & Erik Dahlstrom
 	var w = window,
+		returnValue = false,
 		svg = !!w.document.createElementNS && !!w.document.createElementNS( "http://www.w3.org/2000/svg", "svg" ).createSVGRect && !( w.opera && navigator.userAgent.indexOf( "Chrome" ) === -1 ),
 		support = function( data ) {
 			if ( !( data && svg ) ) {
-				$( "html" ).addClass( "ui-nosvg" );
+				return false;
 			}
+			return true;
 		},
 		img = new w.Image();
 
 	img.onerror = function() {
-		support( false );
+		returnValue = support( false );
 	};
 	img.onload = function() {
-		support( img.width === 1 && img.height === 1 );
+		returnValue = support( img.width === 1 && img.height === 1 );
 	};
 	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+
+	return returnValue;
 }
 
 function transform3dTest() {
@@ -238,11 +242,6 @@ if ( nokiaLTE7_3 ) {
 	$(function() {
 		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
 	});
-}
-
-// For ruling out shadows via css
-if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-noboxshadow" );
 }
 
 })( jQuery );

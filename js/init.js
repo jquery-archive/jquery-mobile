@@ -18,12 +18,17 @@ define([
 	"./vmouse" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
-	var	$html = $( "html" ),
+	var	html = $( "html" ),
 		$window = $.mobile.window;
 
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass() {
-		$html.removeClass( "ui-mobile-rendering" );
+		html.removeClass( "ui-mobile-rendering" );
+	}
+
+	// For ruling out shadows via css
+	if ( !$.support.boxShadow ) {
+		$( "html" ).addClass( "ui-noboxshadow" );
 	}
 
 	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
@@ -43,7 +48,7 @@ define([
 	}
 
 	// Add mobile, initial load "rendering" classes to docEl
-	$html.addClass( "ui-mobile ui-mobile-rendering" );
+	html.addClass( "ui-mobile ui-mobile-rendering" );
 
 	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
 	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
@@ -136,8 +141,11 @@ define([
 	});
 
 	$(function() {
-		//Run inlineSVG support test
-		$.support.inlineSVG();
+
+		//Add nosvg class based on result of inlineSVG support test
+		if ( !$.support.inlineSVG() ) {
+			html.addClass( "ui-nosvg" );
+		}
 
 		// check which scrollTop value should be used by scrolling to 1 immediately at domready
 		// then check what the scroll top is. Android will report 0... others 1
