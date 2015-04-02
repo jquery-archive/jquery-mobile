@@ -50,6 +50,12 @@ define(["jquery",
 			// is not fired.
 			window.history.replaceState( state, state.title || document.title, href );
 
+			// If we haven't yet received the initial popstate, we need to update the reference
+			// href so that we compare against the correct location
+			if ( this.ignoreInitialHashChange ) {
+				initialHref = href;
+			}
+
 			return state;
 		},
 
