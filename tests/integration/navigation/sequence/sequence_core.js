@@ -9,8 +9,6 @@
 	// The more we click around the test pages and the more combinations of paths
 	// we try, the better.
 
-	$.testHelper.setPushState();
-
 	// If the start page is not there, wait for it to appear. Otherwise, leave
 	// some time before starting the actual run to allow the popstate handler to
 	// awaken from its slumber
@@ -46,7 +44,8 @@
 
 		maybeWaitForStartPage([
 			function() {
-				origUrl = location.href.replace( "&ui-state=dialog", "" );
+				origUrl = $.mobile.path.parseUrl(
+					location.href.replace( "&ui-state=dialog", "" ) ).hrefNoHash;
 				$( "#openInternalPage" ).click();
 			},
 			{

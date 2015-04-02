@@ -9,8 +9,10 @@
 	<script src="../../../../js/jquery.tag.inserter.js"></script>
 	<script>
 		$(document).bind('mobileinit',function(){
+
 			// Expect content to inherit this theme when not explicitly set
 			$.mobile.page.prototype.options.contentTheme = "d";
+			$.testHelper.setPushState();
 		});
 	</script>
 	<script src="../../../jquery.setNameSpace.js"></script>
@@ -21,7 +23,7 @@
 		$.testHelper.asyncLoad([
 			[
 				"widgets/dialog",
-				"widgets/page",
+				"widgets/page.dialog",
 				"widgets/popup"
 			],
 			[ "init" ],
@@ -31,25 +33,23 @@
 		], "../../../../js");
 	</script>
 
-
 	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
-
 	<script src="../../../swarminject.js"></script>
 </head>
 <body>
 
-<div id="qunit"></div>
+	<div id="qunit"></div>
 
-<div data-nstest-role="page" id="sequenceRedirect"></div>
-<div id="internal-page" data-nstest-role="page"></div>
+	<div data-nstest-role="page" id="sequenceRedirect"></div>
+	<div id="internal-page" data-nstest-role="page"></div>
 
-<!--
-This test page is used when testing initial URLs of the form
-http://domain/path/to/page1.html#/path/to/page2.html. It really only works if
-you load sequence-tests.html via the hash, i.e.,
-http://domain/path/to/sequence/index.html#/path/to/sequence-redirect.html
--->
+	<!--
+	This test page is used when testing initial URLs of the form
+	http://domain/path/to/page1.html#/path/to/page2.html. It really only works if
+	you load sequence-tests.html via the hash, i.e.,
+	http://domain/path/to/sequence/index.html#/path/to/sequence-redirect.html
+	-->
 
 </body>
 </html>
