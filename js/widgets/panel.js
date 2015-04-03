@@ -161,7 +161,8 @@ $.widget( "mobile.panel", {
 	},
 
 	_positionPanel: function( scrollToTop ) {
-		var self = this,
+		var heightWithMargins, heightWithoutMargins,
+			self = this,
 			panelInnerHeight = self._panelInner.outerHeight(),
 			expand = panelInnerHeight > $.mobile.getScreenHeight();
 
@@ -169,6 +170,15 @@ $.widget( "mobile.panel", {
 			if ( expand ) {
 				self._unfixPanel();
 				$.mobile.resetActivePageHeight( panelInnerHeight );
+			} else if ( !this._parentPage ) {
+				heightWithMargins = this.element.outerHeight( true );
+				if ( heightWithMargins < this.document.height() ) {
+					heightWithoutMargins = this.element.outerHeight();
+
+					// Set the panel's total height (including margins) to the document height
+					this.element.outerHeight( this.document.height() -
+						( heightWithMargins - heightWithoutMargins ) );
+				}
 			}
 			if ( scrollToTop === true ) {
 				this.window[ 0 ].scrollTo( 0, $.mobile.defaultHomeScroll );
