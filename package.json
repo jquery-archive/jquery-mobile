@@ -45,7 +45,7 @@
 		"grunt-qunit-junit": "0.1.0-alpha2",
 		"grunt-spider": "0.2.2",
 		"jsdom": "0.8.3",
-		"load-grunt-tasks": "0.3.0",
+		"load-grunt-config": "0.16.0",
 		"optimist": "0.6.0",
 		"requirejs": "2.1.8",
 		"underscore": "1.5.2",
@@ -56,10 +56,8 @@
 		"node": ">= 0.8.0"
 	},
 	"scripts": {
-		"ci": "grunt test coveralls",
-		"demos": "grunt crawl",
-		"test": "grunt test",
-		"lint": "grunt jshint"
+		"ci": "grunt ci",
+		"test": "grunt test"
 	},
 	"keywords": []
 }
