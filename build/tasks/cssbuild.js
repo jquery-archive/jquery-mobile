@@ -31,7 +31,7 @@ module.exports = function( grunt ) {
 			function( file, callback ) {
 				var src = grunt.template.process( file.orig.src[0] ),
 					dest = file.dest;
-				
+
 				grunt.log.debug( "Building '" + src + "' -> '" + dest + "'" );
 
 				async.series([

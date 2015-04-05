@@ -110,8 +110,7 @@ module.exports = function( grunt ) {
 			}
 
 			return onBuildWrite ? onBuildWrite.apply( this, arguments ) : contents;
-		});
-
+		} );
 
 		grunt.config( "requirejs.js.options.onModuleBundleComplete", function() {
 
@@ -197,7 +196,7 @@ module.exports = function( grunt ) {
 						"jquery.mobile.css" ) {
 					all = singleCSSFile;
 				}
-			});
+			} );
 
 			// Create temporary structure file and update the grunt config
 			// reference
@@ -212,7 +211,7 @@ module.exports = function( grunt ) {
 						// css files are originally relative to "js/"
 						path.join( "js", file ) );
 					cssFileContents += "@import url(\"" + file + "\");\n";
-				});
+				} );
 				structure.src = path.join( destinationPath,
 					"jquery.mobile.custom.structure.css" );
 				grunt.file.write( structure.src, cssFileContents,
@@ -231,7 +230,7 @@ module.exports = function( grunt ) {
 						// css files are originally relative to "js/"
 						path.join( "js", file ) );
 					cssFileContents += "@import url(\"" + file + "\");\n";
-				});
+				} );
 				theme.src = path.join( destinationPath,
 					"jquery.mobile.custom.theme.css" );
 				grunt.file.write( theme.src, cssFileContents,
@@ -254,6 +253,6 @@ module.exports = function( grunt ) {
 			if ( onModuleBundleComplete ) {
 				return onModuleBundleComplete.apply( this, arguments );
 			}
-		});
-	});
+		} );
+	} );
 };

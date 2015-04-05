@@ -12,7 +12,7 @@ module.exports = function( Release ) {
 		},
 
 		generateArtifacts: function( done ) {
-			Release.exec( "grunt dist:release" );
+			Release.exec( "grunt build:release" );
 			done([]);
 		},
 
