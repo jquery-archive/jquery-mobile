@@ -5,6 +5,10 @@ php:
 
 sudo: false
 
+cache:
+  directories:
+  - node_modules
+
 before_script: 
   - npm install -g grunt-cli
   - npm install
