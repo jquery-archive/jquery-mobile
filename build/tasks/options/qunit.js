@@ -1,7 +1,7 @@
 var _ = require( "underscore" );
 var path = require( "path" );
 
-module.exports = function( grunt ){
+module.exports = function( grunt ) {
 	return {
 		options: {
 			timeout: 30000,
@@ -22,7 +22,7 @@ module.exports = function( grunt ){
 
 		http: {
 			options: {
-				urls: (function() {
+				urls: ( function() {
 					var allSuites, patterns, paths,
 						testDirs = [ "unit", "integration", "css" ],
 						suites = ( grunt.option( "suites" ) || process.env.SUITES || "" )
@@ -52,8 +52,8 @@ module.exports = function( grunt ){
 							},
 							_.map( testDirs, function( dir ) {
 								return dir + "/*";
-							})
-						))
+							} )
+						) )
 						.map( function( dir ) { return dir.split( "/" )[ 1 ]; } )
 						.difference( excludes )
 						.unique()
@@ -62,13 +62,13 @@ module.exports = function( grunt ){
 					// Remove negations from list of suites
 					suites = _.filter( suites, function( suite ) {
 						return ( !/^-/.test( suite ) );
-					});
+					} );
 
-					if ( types.length ){
+					if ( types.length ) {
 						testDirs = [];
-						types.forEach(function( type ) {
+						types.forEach( function( type ) {
 							testDirs.push( type );
-						});
+						} );
 					}
 
 					patterns = [];
@@ -84,32 +84,34 @@ module.exports = function( grunt ){
 								dir = "tests/" + dir;
 
 								if ( suite.indexOf( "/" ) >= 0 ) {
+
 									// If the suite is a path, then append it exactly
 									patterns.push( dir + "/" + suite );
 
 								} else {
 
 									// If not, append all patterns we care about
-									patterns = patterns.concat([
+									patterns = patterns.concat( [
 										dir + "/" + suite + "/index.html",
 										dir + "/" + suite + "/*/index.html",
 										dir + "/" + suite + "/**/*-tests.html"
-									]);
+									] );
 								}
-							});
-						});
+							} );
+						} );
 					paths = grunt.file.expand( patterns )
 						.filter( function( testPath ) {
 							if ( grunt.file.isDir( testPath ) ) {
 								testPath = path.join( testPath, "index.html" );
 							}
 							return grunt.file.exists( testPath );
-						})
+						} )
 						.map( function( path ) {
+
 							// Some of our tests (ie. navigation) don't like having the
 							// index.html too much
 							return path.replace( /\/index.html$/, "/" );
-						});
+						} );
 
 					paths = grunt.util._.uniq( paths );
 
@@ -118,8 +120,8 @@ module.exports = function( grunt ){
 							versionedPaths = versionedPaths.concat(
 								jQueries.map( function( jQVersion ) {
 									return path + "?jquery=" + jQVersion;
-							}) );
-						});
+							} ) );
+						} );
 					}
 
 					if ( versionedPaths.length ) {
@@ -138,8 +140,8 @@ module.exports = function( grunt ){
 
 					return paths.map( function( path ) {
 						return "http://localhost:<%= connect.server.options.port %>/" + path;
-					});
-				}())
+					} );
+				}() )
 			}
 		}
 	}

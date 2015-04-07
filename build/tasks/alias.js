@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		// Set the version suffix for releases
 		grunt.config.set( "versionSuffix", "-" + pkg.version );
-	});
+	} );
 
 	//Build Tasks these build the various js, css, and demo files
 	grunt.registerTask( "build", [
@@ -20,8 +20,9 @@ module.exports = function( grunt ) {
 		"build:demos",
 		"compress:dist",
 		"compress:images"
-	]);
+	] );
 	grunt.registerTask( "build:js", [
+		"modules",
 		"requirejs",
 		"concat:js",
 		"uglify",
@@ -39,7 +40,7 @@ module.exports = function( grunt ) {
 		"copy:demos.php",
 		"copy:demos.unprocessed",
 		"copy:demos.backbone"
-	]);
+	] );
 	grunt.registerTask( "build:cdn", [
 		"copy:jqueryCDN",
 		"clean:tmp",
@@ -48,7 +49,7 @@ module.exports = function( grunt ) {
 		"hash-manifest:googleCDN",
 		"compress:googleCDN",
 		"clean:tmp"
-	]);
+	] );
 	grunt.registerTask( "build:release", [
 		"release:init",
 		"build",
@@ -63,6 +64,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test", [
 		"clean:testsOutput",
 		"jshint",
+		"jscs:build",
+		"jscs:good",
 		"build:js",
 		"connect",
 		"qunit:http"

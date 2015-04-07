@@ -36,22 +36,22 @@ module.exports = function( grunt ) {
 				destDir = destDir || ".";
 				var list = [];
 				_.values( files.css ).forEach( function( value ) {
-					list.push({
+					list.push( {
 						src: value.src,
 						dest: path.join( destDir, value.unminified )
-					});
-				});
+					} );
+				} );
 				return list;
 			},
 			getMinifiedCSSFiles: function( destDir ) {
 				destDir = destDir || ".";
 				var list = [];
 				_.values( files.css ).forEach( function( value ) {
-					list.push({
+					list.push( {
 						src: path.join( destDir, value.unminified ),
 						dest: path.join( destDir, value.minified )
-					});
-				});
+					} );
+				} );
 				return list;
 			},
 			cdn: [
@@ -80,15 +80,14 @@ module.exports = function( grunt ) {
 
 			distZipOut: path.join( "<%= dist %>", "<%= name %><%= versionSuffix %>.zip" ),
 
-			imagesZipOut: path.join( "<%= dist %>", "<%= name %>.images<%= versionSuffix %>.zip" ),
+			imagesZipOut: path.join( "<%= dist %>", "<%= name %>.images<%= versionSuffix %>.zip" )
 
 		};
 
 	// Add minified property to files.css.*
 	_.forEach( files.css, function( o ) {
 		o.minified = o.unminified.replace( /\.css$/, ".min.css" );
-	});
-
+	} );
 
 	files.cdn = [
 		"<%= name %><%= versionSuffix %>.js",
@@ -122,7 +121,8 @@ module.exports = function( grunt ) {
 		"demos/**"
 	];
 
-	files.googleCDNZipOut = path.join( path.join( "<%= dist %>", "cdn-google" ),files.zipFileName );
+	files.googleCDNZipOut = path.join( path.join( "<%= dist %>", "cdn-google" ),
+		files.zipFileName );
 
 	return files;
 }
