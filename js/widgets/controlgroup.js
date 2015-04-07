@@ -11,8 +11,9 @@ define( [
 	"./widget.theme",
 	"jquery-ui/controlgroup"
 ], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
@@ -28,7 +29,7 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 					this.refresh();
 				}
 			}
-		});
+		} );
 	},
 
 	// Deprecated as of 1.5.0 and will be removed in 1.6.0
@@ -42,11 +43,13 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 			this._super();
 		}
 	}
-});
+} );
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, $.mobile.widget.theme );
 
-})(jQuery);
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
