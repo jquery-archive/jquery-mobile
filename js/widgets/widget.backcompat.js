@@ -9,8 +9,9 @@ define( [
 	"jquery",
 	"../ns",
 	"jquery-ui/widget" ], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
 
@@ -38,7 +39,7 @@ if ( $.mobileBackcompat !== false ) {
 				var that = this,
 					valueArray = value[ this.classProp ].match( classSplitterRegex ) || [];
 
-				$.each( this._boolOptions, function( option, className ){
+				$.each( this._boolOptions, function( option, className ) {
 					if ( that.options[ option ] !== undefined ) {
 						if ( $.inArray( className, valueArray ) !== -1 ) {
 							that.options[ option ] = true;
@@ -46,7 +47,7 @@ if ( $.mobileBackcompat !== false ) {
 							that.options[ option ] = false;
 						}
 					}
-				});
+				} );
 			}
 		},
 
@@ -83,10 +84,10 @@ if ( $.mobileBackcompat !== false ) {
 				// of the classes option value
 				if ( original.classes[ prop ] !== this.options.classes[ prop ] ) {
 					$.each( this._boolOptions, function( option, className ) {
-						if( options[ option ] !== undefined ) {
+						if ( options[ option ] !== undefined ) {
 							options[ option ] = ( $.inArray( className, currentClasses ) !== -1 );
 						}
-					}) ;
+					} ) ;
 
 				// Otherwise we assume that we're dealing with legacy code and look for style
 				// option values which diverge from the defaults. If we find any that diverge, we
@@ -129,10 +130,12 @@ if ( $.mobileBackcompat !== false ) {
 
 			this._superApply( arguments );
 		}
-	}}, $.mobile.widget );
+	} }, $.mobile.widget );
 }
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
