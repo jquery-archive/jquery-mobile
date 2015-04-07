@@ -30,10 +30,11 @@ $.widget( "ui.tabs", $.ui.tabs, {
 
 		return this._superApply( arguments );
 	}
-});
+} );
 
-})( jQuery );
+} )( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
