@@ -36,8 +36,8 @@
              <label for="text-1">Text input:</label>
              <input type="text" name="text-1" id="text-1" value="">
 
-             <label for="text-3">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-3" id="text-3" value="">
+             <label for="text-3">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-3" id="text-3" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -314,19 +314,20 @@
         <div data-demo-html="true">
         <form>
             <label for="text-enhanced">Text input:</label>
-            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+            <div class="ui-textinput-text ui-body-inherit ui-corner-all ui-shadow-inset ui-textinput-has-clear-button">
                 <input type="text" data-enhanced="true" data-clear-button="true" name="text-enhanced" id="text-enhanced" value="">
-                <a href="#" class="ui-input-clear ui-button ui-button-icon-only ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-textinput-clear-button ui-button ui-button-icon-only ui-corner-all ui-textinput-clear-button-hidden" title="Clear text">Clear text<span class="ui-icon ui-icon-delete"></span></a>
             </div>
 
             <label for="search-enhanced">Search:</label>
-            <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+            <div class="ui-textinput-search ui-body-inherit ui-corner-all ui-shadow-inset ui-textinput-has-clear-button">
+				<span class="ui-textinput-search-icon ui-alt-icon ui-icon-search"></span>
                 <input type="text" data-type="search" data-enhanced="true" name="search-enhanced" id="search-enhanced" value="">
-                <a href="#" class="ui-input-clear ui-button ui-button-icon-only ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-textinput-clear-button ui-button ui-button-icon-only ui-corner-all ui-textinput-clear-button-hidden" title="Clear text">Clear text<span class="ui-icon ui-icon-delete"></span></a>
             </div>
 
             <label for="textarea-enhanced">Textarea:</label>
-            <textarea name="textarea-enhanced" id="textarea-enhanced" data-enhanced="true" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"></textarea>
+            <textarea name="textarea-enhanced" id="textarea-enhanced" data-enhanced="true" class="ui-textinput-text ui-shadow-inset ui-body-inherit ui-corner-all"></textarea>
         </form>
         </div><!-- /demo-html -->
 

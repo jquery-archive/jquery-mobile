@@ -26,7 +26,7 @@ define( [
 		},
 
 		_autogrow: function() {
-			this.element.addClass( "ui-textinput-autogrow" );
+			this._addClass( "ui-textinput-autogrow" );
 
 			this._on({
 				"keyup": "_timeout",
@@ -60,11 +60,11 @@ define( [
 				this.element.is( ":visible" ) ) {
 
 				if ( event.type !== "popupbeforeposition" ) {
+					this._addClass( "ui-textinput-autogrow-resize" );
 					this.element
-						.addClass( "ui-textinput-autogrow-resize" )
 						.animationComplete(
 							$.proxy( function() {
-								this.element.removeClass( "ui-textinput-autogrow-resize" );
+								this._removeClass( "ui-textinput-autogrow-resize" );
 							}, this ),
 						"transition" );
 				}
@@ -73,7 +73,7 @@ define( [
 		},
 
 		_unbindAutogrow: function() {
-			this.element.removeClass( "ui-textinput-autogrow" );
+			this._removeClass( "ui-textinput-autogrow" );
 			this._off( this.element, "keyup change input paste" );
 			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
@@ -158,6 +158,11 @@ define( [
 					this._unbindAutogrow();
 				}
 			}
+		},
+
+		_destroy: function() {
+			this._unbindAutogrow();
+			this._super();
 		}
 
 	});

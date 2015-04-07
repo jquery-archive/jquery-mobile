@@ -37,22 +37,34 @@
 		deepEqual($.Widget.prototype._getCreateOptions(), expected);
 	});
 
-	test( "elements embedded in sub page elements are excluded on create when they match the keep native selector", function() {
-		// uses default keep native of data-role=none
-		$("#enhance-prevented")
-				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-'+$.mobile.ns+'role="none" />')
-				.trigger("create");
+	test( "elements embedded in sub page elements are excluded on create when they match the " +
+		"keep native selector",
+		function( assert ) {
 
-		ok( !$("#unenhanced").parent().hasClass( "ui-input-text" ), "doesn't have the ui input text class (unenhanced)");
-	});
+			// uses default keep native of data-role=none
+			$( "#enhance-prevented" )
+					.append(
+						'<label for="unenhanced">Text Input:</label>' +
+						'<input type="text" name="name" id="unenhanced" ' +
+						'value="" data-' + $.mobile.ns + 'role="none" />')
+					.trigger( "create" );
 
-	test( "elements embedded in sub page elements are included on create when they don't match the keep native selector", function() {
+			assert.lacksClasses( $( "#unenhanced" ).parent()[ 0 ], "ui-textinput-text",
+				"doesn't have the ui input text class (unenhanced)" );
+		} );
 
-		// uses default keep native of data-role=none
-		$("#enhance-allowed")
-				.append('<label for="enhanced">Text Input:</label><input type="text" name="name" id="enhanced" value=""/>')
-				.trigger("create");
+	test( "elements embedded in sub page elements are included on create when they don't match " +
+		"the keep native selector",
+		function( assert ) {
 
-		ok( $("#enhanced").parent().hasClass( "ui-input-text" ), "has the ui input text class (unenhanced)");
-	});
+			// uses default keep native of data-role=none
+			$("#enhance-allowed")
+					.append(
+						'<label for="enhanced">Text Input:</label>' +
+						'<input type="text" name="name" id="enhanced" value=""/>' )
+					.trigger("create");
+
+			assert.hasClasses( $( "#enhanced" ).parent()[ 0 ], "ui-textinput-text",
+				"has the ui input text class (enhanced)" );
+		} );
 })(jQuery);

@@ -22,29 +22,31 @@
 		});
 	}
 
-	test( "focus/blur adds resp. removes focus class", function() {
+	test( "focus/blur adds resp. removes focus class", function( assert ) {
 		var input = $( "#focus-class-test-for-input" ),
 			textarea = $( "#focus-class-test-for-textarea" ),
 			testFocusBlur = function( widget ) {
 				widget.blur();
-				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), false, widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
+				assert.lacksClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+					widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
 				widget.focus();
-				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), true, widget.attr( "id" ) + ": focus class is present when the widget is focused." );
+				assert.hasClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+					widget.attr( "id" ) + ": focus class is present when the widget is focused." );
 			};
 
 		testFocusBlur( input );
 		testFocusBlur( textarea );
 	});
 
-	test( "inputs without type specified are enhanced", function(){
-		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
+	test( "inputs without type specified are enhanced", function( assert ) {
+		assert.hasClasses( $( "#typeless-input" ).parent()[ 0 ], "ui-textinput-text",
+			"Input is enhanced" );
 	});
 
-	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
-
 	// not testing the positive case here since's it's obviously tested elsewhere
-	test( "textarea in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("textarea.should-be-native").is("ui-input-text") );
+	test( "textarea in the keepNative set shouldn't be enhanced", function( assert ) {
+		assert.lacksClasses( $( "textarea.should-be-native" )[ 0 ], "ui-textinput-text",
+			"Class ui-textinput-text not present" );
 	});
 
 	asyncTest( "textarea should autogrow on document ready", function() {
@@ -93,27 +95,34 @@
 
 	// NOTE init binding to alter the setting is in settings.js
 	test( "'clear text' button for search inputs should use configured text", function(){
-		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
+		strictEqual( $( "#search-input" )
+			.closest( ".ui-textinput-search" )
+				.find( ".ui-textinput-clear-button" )
+					.attr( "title" ), "custom value" );
 	});
 
-	test( "data-clear-button adds clear button to text inputs", function() {
+	test( "data-clear-btn adds clear button to text inputs", function( assert ) {
 		ok( $( '#text-input-clear-button' ).next()
-			.is( 'a.ui-input-clear[tabindex="-1"][aria-hidden="true"]' ),
+			.is( 'a[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );
+		assert.hasClasses( $( "#text-input-clear-button" ).next()[ 0 ],
+			"ui-textinput-clear-button", "clear button has class ui-textinput-clear-button" );
+	});
+
+	test( "data-clear-btn does not add clear button to textarea", function( assert ) {
+		assert.lacksClasses( $( "#textarea-clear-btn" ).next()[ 0 ],
+			"ui-textinput-clear-button",
+			"data-clear-btn does not add clear button to textarea" );
 	});
 
 	test( "data-clear-button does not add clear button to textarea", function() {
-		ok( ! $( "#textarea-clear-button" ).next().is( "a.ui-input-clear" ), "data-clear-button does not add clear button to textarea" );
+		deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
+			"No anchors have been inserted as children of the data-clear-btn textarea element" );
 	});
 
-	test( "data-clear-button does not add clear button to textarea", function() {
-		deepEqual( $( "#textarea-clear-button" ).children( "a" ).length, 0,
-			"No anchors have been inserted as children of the data-clear-button textarea element" );
-	});
-
-	test( "data-clear-button does not add clear button to slider input", function() {
-		ok( ! $( "#slider-input" ).next().is( "a.ui-input-clear" ),
-			"data-clear-button does not add clear button to slider input" );
+	test( "data-clear-btn does not add clear button to slider input", function( assert ) {
+		assert.lacksClasses( $( "#slider-input" ).next(), "ui-textinput-clear-button",
+			"data-clear-btn does not add clear button to slider input" );
 	});
 
 	test( "data-clear-button does not add clear button to slider input", function() {
@@ -142,28 +151,28 @@
 		ok( !d, "native clear button is still visible" );
 	});
 
-	test( "clearBtn option works at runtime", function() {
+	test( "clearBtn option works at runtime", function( assert ) {
 		var input = $( "#test-clear-button-option" );
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"input initially has no clear button" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
-			"wrapper does not initially have class 'ui-input-has-clear'" );
+		assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
+			"wrapper does not initially have class 'ui-textinput-has-clear-button'" );
 
 		input.textinput( "option", "clearBtn", true );
 
 		deepEqual( input.siblings( "a" ).length, 1,
 			"turning on clearBtn option causes an anchor to be added" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), true,
-			"turning on clearBtn option causes 'ui-input-has-clear' to be " +
+		assert.hasClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
+			"turning on clearBtn option causes 'ui-textinput-has-clear-button' to be " +
 				"added to wrapper" );
 
 		input.textinput( "option", "clearBtn", false );
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"turning off clearBtn removes clear button anchor" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
-			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
+		assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
+			"turning off clearBtn removes wrapper class 'ui-textinput-has-clear-button'" );
 	});
 
 	test( "cannot inject script via clearBtnText option", function() {
@@ -181,4 +190,19 @@
 			"Original DOM is restored after textinput destruction" );
 	});
 
+	test( "textinput is disabled/enabled correctly", function( assert ) {
+		var textinput = $( "#disable-test" );
+
+		assert.lacksClasses( textinput.parent()[ 0 ], "ui-state-disabled",
+			"Initially the ui-state-disabled class is absent" );
+		assert.deepEqual( textinput.prop( "disabled" ), false,
+			"Initially the 'disabled' prop is false" );
+
+		textinput.textinput( "option", "disabled", true );
+
+		assert.hasClasses( textinput.parent()[ 0 ], "ui-state-disabled",
+			"After disabling, the ui-state-disabled class is present" );
+		assert.deepEqual( textinput.prop( "disabled" ), true,
+			"After disabling, the 'disabled' prop is true" );
+	} );
 })(jQuery);
