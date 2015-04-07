@@ -3,6 +3,7 @@ module.exports = function( grunt ) {
 
 	var path = require( "path" );
 	var dist = "dist" + path.sep;
+	var today = grunt.template.today( "UTC:yyyy" );
 
 	require( "load-grunt-config" )( grunt, {
 		configPath: [
@@ -14,7 +15,7 @@ module.exports = function( grunt ) {
 			pkg: grunt.file.readJSON( "package.json" ),
 			dist: dist,
 			name: "jquery.mobile",
-			phpPort: Math.floor( 8000 + Math.random()*1000 ),
+			phpPort: Math.floor( 8000 + Math.random() * 1000 ),
 			versionSuffix: "",
 			headHash: "",
 			headShortHash: "",
@@ -35,7 +36,7 @@ module.exports = function( grunt ) {
 				grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 				"* http://jquerymobile.com",
 				"*",
-				"* Copyright 2010, " + grunt.template.today( "UTC:yyyy" ) + " jQuery Foundation, Inc. and other" +
+				"* Copyright 2010, " + today + " jQuery Foundation, Inc. and other" +
 				" contributors",
 				"* Released under the MIT license.",
 				"* http://jquery.org/license",
@@ -48,8 +49,8 @@ module.exports = function( grunt ) {
 
 			bannerMin: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD" +
 			"hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) +
-			"T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + grunt.template.today( "UTC:yyyy" ) +
-			" jQuery Foundation, Inc. | jquery.org/license */\n"
+			"T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " +
+			today + " jQuery Foundation, Inc. | jquery.org/license */\n"
 		}
 	} );
 };

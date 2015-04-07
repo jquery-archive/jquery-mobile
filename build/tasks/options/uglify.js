@@ -7,12 +7,12 @@ module.exports = {
 			sourceMap: path.join( "<%= dist %>", "<%= name %>" ) + "<%= versionSuffix %>.min.map",
 			sourceMappingURL: "<%= name %>" + "<%= versionSuffix %>.min.map",
 			beautify: {
-				ascii_only: true
+				"ascii_only": true
 			}
 		},
 		files: {
-			"dist/jquery.mobile<%= versionSuffix %>.min.js": path.join( "<%= dist %>", "<%= name %>" ) +
-			"<%= versionSuffix %>.js"
+			"dist/jquery.mobile<%= versionSuffix %>.min.js":
+				path.join( "<%= dist %>", "<%= name %>" ) + "<%= versionSuffix %>.js"
 		}
 	}
 };

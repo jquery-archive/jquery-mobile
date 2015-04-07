@@ -11,7 +11,8 @@ module.exports = function( grunt ) {
 				"qunit/qunit.js": "qunit/qunit/qunit.js",
 				"qunit/qunit.css": "qunit/qunit/qunit.css",
 				"qunit/LICENSE.txt": "qunit/LICENSE.txt",
-				"qunit-assert-classes/qunit-assert-classes.js": "qunit-assert-classes/qunit-assert-classes.js",
+				"qunit-assert-classes/qunit-assert-classes.js":
+					"qunit-assert-classes/qunit-assert-classes.js",
 				"qunit-assert-classes/LICENSE.txt": "qunit-assert-classes/LICENSE",
 				"jshint/jshint.js": "jshint/dist/jshint.js"
 			}
@@ -53,6 +54,6 @@ module.exports = function( grunt ) {
 				"jquery-ui/controlgroup.js": "jquery-ui/ui/controlgroup.js",
 				"jquery-ui/LICENSE.txt": "jquery-ui/LICENSE.txt"
 			}
-		},
+		}
 	};
 };
