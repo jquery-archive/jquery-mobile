@@ -5,7 +5,7 @@ module.exports = function( Release ) {
 		shell = require( "shelljs" ),
 		clonedRepos = {};
 
-	Release.define({
+	Release.define( {
 		issueTracker: "github",
 		changelogShell: function() {
 			return "# Changelog for jQuery Mobile v" + Release.newVersion + "\n";
@@ -13,7 +13,7 @@ module.exports = function( Release ) {
 
 		generateArtifacts: function( done ) {
 			Release.exec( "grunt build:release" );
-			done([]);
+			done( [] );
 		},
 
 		_cloneDemosRepo: function() {
@@ -41,7 +41,7 @@ module.exports = function( Release ) {
 			shell.mkdir( "-p", dest );
 			shell.cp( "-r", src + "/*", dest );
 
-			if (!Release.preRelease) {
+			if ( !Release.preRelease ) {
 				console.log( "Updating demos index..." );
 				fs.writeFileSync( repo + "/index.php",
 					"<?php header('Location: " + Release.newVersion + "');" );
@@ -78,7 +78,8 @@ module.exports = function( Release ) {
 			var builder, $, option, newOption,
 				repo = Release._cloneWebsiteRepo(),
 				dest = repo + "/resources/download",
-				src = Release.dir.repo + "/dist/jquery.mobile.images-" + Release.newVersion + ".zip",
+				src = Release.dir.repo + "/dist/jquery.mobile.images-" +
+					Release.newVersion + ".zip",
 				commitMessage = "Builder: Added version " + Release.newVersion;
 
 			shell.cp( src, dest );
@@ -87,13 +88,18 @@ module.exports = function( Release ) {
 			$ = cheerio.load( fs.readFileSync( repo + "/pages/download-builder.html", "utf8" ) );
 
 			if ( Release.preRelease ) {
+
 				// If it's a prerelease the option should not be selected
 				// and need to be inserted in the unstable optgroup
-				newOption = "<option value='" + Release.newVersion + "'>" + Release.newVersion + "</option>\n\t\t"
+				newOption = "<option value='" + Release.newVersion + "'>" + Release.newVersion +
+					"</option>\n\t\t"
 				option = $( "select#branch optgroup[label='Unstable'] option" ).eq( 0 );
 			} else {
-				// If it's a release the option should be selected and need to be inserted in the stable optgroup
-				newOption = "<option value='" + Release.newVersion + "' selected>" + Release.newVersion + "</option>\n\t\t";
+
+				// If it's a release the option should be selected and need to be
+				// inserted in the stable optgroup
+				newOption = "<option value='" + Release.newVersion + "' selected>" +
+					Release.newVersion + "</option>\n\t\t";
 				option = $( "select#branch optgroup[label='Stable'] option[selected]" );
 				if ( semver.gt( Release.newVersion, option.val() ) ) {
 					option.removeAttr( "selected" );
@@ -101,9 +107,8 @@ module.exports = function( Release ) {
 			}
 
 			// Figure out where to insert the new option
-			while( option.length
-					&& semver.valid( option.val() )
-					&& semver.lt( Release.newVersion, option.val() ) ) {
+			while ( option.length && semver.valid( option.val() ) &&
+					semver.lt( Release.newVersion, option.val() ) ) {
 				option = option.next();
 			}
 
@@ -129,7 +134,8 @@ module.exports = function( Release ) {
 			var repo = Release._cloneWebsiteRepo(),
 				dest = repo + "/resources/download",
 				dist = Release.dir.repo + "/dist/jquery.mobile-" + Release.newVersion + ".zip",
-				images = Release.dir.repo + "/dist/jquery.mobile.images-" + Release.newVersion + ".zip",
+				images = Release.dir.repo + "/dist/jquery.mobile.images-" +
+					Release.newVersion + ".zip",
 				commitMessage = "Release: Added zip for version " + Release.newVersion;
 
 			shell.mkdir( "-p", dest );
@@ -148,7 +154,7 @@ module.exports = function( Release ) {
 		},
 
 		_complete: function( done ) {
-			Release.walk([
+			Release.walk( [
 				Release._section( "publishing demos" ),
 				Release._publishDemos,
 				Release._section( "publishing zip files" ),
@@ -159,11 +165,12 @@ module.exports = function( Release ) {
 		},
 
 		complete: function() {
-			Release._complete(function() {
-				console.log( "Release of " + Release.project + " version " + Release.newVersion + " complete." );
-			});
+			Release._complete( function() {
+				console.log( "Release of " + Release.project + " version " +
+					Release.newVersion + " complete." );
+			} );
 		}
-	});
+	} );
 };
 
 module.exports.dependencies = [

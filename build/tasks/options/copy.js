@@ -7,7 +7,7 @@ module.exports = function( grunt ) {
 	var name = "jquery.mobile";
 	var replaceCombinedCssReference = function( href, processedName ) {
 		return href
-			.replace( /^css/, "demos/css")
+			.replace( /^css/, "demos/css" )
 			.replace( /\.\.\/css/, "css" )
 			.replace( /jquery\.mobile\.css/, processedName + ".min.css" );
 	};
@@ -21,7 +21,7 @@ module.exports = function( grunt ) {
 				// If we've already handled the nested includes use the version
 				// that was copied to the dist folder
 				// TODO use the config from copy:demos.nested.files
-				if( includePath.match(/jqm\-(contents|navmenu|search)\.php/) ) {
+				if ( includePath.match( /jqm\-(contents|navmenu|search)\.php/ ) ) {
 					newSrcPath = "dist/" + newSrcPath;
 				}
 
@@ -69,12 +69,12 @@ module.exports = function( grunt ) {
 								}
 
 								return prefix + " " + group.join( "," ) + " ";
-							});
+							} );
 
 					//element.html( text );
 					element[ 0 ].children[ 0 ].data = text;
 				}
-			});
+			} );
 			$( "link[rel='stylesheet'][href]" ).each( function() {
 				var element = $( this );
 
@@ -86,23 +86,23 @@ module.exports = function( grunt ) {
 					// processed here
 					.replace( /css\/structure\/jquery\.mobile\.structure\.css/gi,
 						path.join( "css", "themes", "default",
-							grunt.config.process( name + ".structure" + "<%= versionSuffix %>" )
-							+ ".min.css" )
+							grunt.config.process( name + ".structure" + "<%= versionSuffix %>" ) +
+							".min.css" )
 					)
 
 					// References to the icons CSS file need to be processed here
 					.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/,
 						path.join( "css/themes/default", "jquery.mobile.icons.min.css" )
-					));
+					) );
 
-			});
+			} );
 
 			$( "a[href]" ).each( function() {
 				var element = $( this );
 
 				element.attr( "href",
 					element.attr( "href" ).replace( /\.php$/, ".html" ) );
-			});
+			} );
 
 			content = $.html();
 		}
@@ -118,6 +118,7 @@ module.exports = function( grunt ) {
 		},
 		"demos.nested-includes": {
 			options: {
+
 				// TODO duplicated in demos.firstpass
 				processContent: function( content, srcPath ) {
 					content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
@@ -200,9 +201,9 @@ module.exports = function( grunt ) {
 							element.attr( "href",
 								replaceCombinedCssReference( element.attr( "href" ),
 									processedName ) );
-						});
+						} );
 
-						$( "script" ).each( function ( idx, element ) {
+						$( "script" ).each( function( idx, element ) {
 							var script = $( element );
 							if ( /requirejs\.config\.js$/.test( script.attr( "src" ) ) ) {
 
@@ -217,7 +218,7 @@ module.exports = function( grunt ) {
 									pkg.devDependencies.requirejs +
 									"/require.min.js" );
 							}
-						});
+						} );
 
 						// write out newly created file contents
 						content = $.html();
@@ -281,6 +282,7 @@ module.exports = function( grunt ) {
 			]
 		},
 		sourcemap: {
+
 			// Processes the sourceMap to fix
 			// issue: https://github.com/mishoo/UglifyJS2/issues/47
 			options: {
@@ -297,17 +299,18 @@ module.exports = function( grunt ) {
 			]
 		},
 		"jqueryCDN": {
-			files: [{
+			files: [ {
 				expand: true,
 				cwd: "<%= dist %>",
 				src: "<%= files.cdn %>",
 				dest: "<%= dirs.cdn.jquery %>/"
-			}]
+			} ]
 		},
 		"googleCDN": {
 			options: {
 				processContent: function( content, srcPath ) {
 					if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
+
 						// We need to rewrite the map info
 						var re = new RegExp(
 								grunt.template.process( "<%= versionSuffix %>" ),
@@ -319,6 +322,7 @@ module.exports = function( grunt ) {
 				processContentExclude: [ "**/*.+(gif|png)" ]
 			},
 			files: {
+
 				// WARNING: This will be modified by the config:copy:noversion task
 				cwd: "<%= dist %>",
 				src: "<%= files.cdn %>",
@@ -329,6 +333,7 @@ module.exports = function( grunt ) {
 			options: {
 				processContent: function( content, srcPath ) {
 					if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
+
 						// We need to rewrite the map info
 						var re = new RegExp( name, "g" );
 						content = content.replace( re, name + "-git" );
@@ -338,6 +343,7 @@ module.exports = function( grunt ) {
 				processContentExclude: [ "**/*.zip", "**/*.gif", "**/*.png" ]
 			},
 			files: {
+
 				// WARNING: This will be modified by the config:copy:git task
 				cwd: "<%= dist %>",
 				src: "<%= files.cdn %>",
