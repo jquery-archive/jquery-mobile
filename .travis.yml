@@ -17,9 +17,17 @@ script: npm run-script ci
 
 env:
   - JQUERIES=1.8.3
+    CITYPE=test
+    SUITES=-navigation/sequence/sequence-dialog-hash-key-tests.html,-navigation/sequence/sequence-push-ate-disabled-path1-path2-dialog-hash-key-tests.html
   - JQUERIES=1.11.1
+    CITYPE=test
+    SUITES=-navigation/sequence/sequence-dialog-hash-key-tests.html,-navigation/sequence/sequence-push-ate-disabled-path1-path2-dialog-hash-key-tests.html
   - JQUERIES=2.1.1
+    CITYPE=test
+    SUITES=-navigation/sequence/sequence-dialog-hash-key-tests.html,-navigation/sequence/sequence-push-ate-disabled-path1-path2-dialog-hash-key-tests.html
   - JQUERIES=git
+    CITYPE=test
+    SUITES=-navigation/sequence/sequence-dialog-hash-key-tests.html,-navigation/sequence/sequence-push-ate-disabled-path1-path2-dialog-hash-key-tests.html
   - CITYPE=demos
 
 notifications:
