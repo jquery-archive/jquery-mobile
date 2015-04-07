@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define([
+define( [
 	"jquery",
 	"../../core",
 	"../../widget",
@@ -13,8 +13,9 @@ define([
 	"checkboxradio",
 	"checkboxradio.backcompat"
 	], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.button", $.ui.button, {
@@ -27,19 +28,18 @@ if ( $.mobileBackcompat !== false ) {
 			corners: true
 		},
 
-
 		classProp: "ui-button",
 
 		_create: function() {
 			if ( this.options.iconPosition !== $.ui.button.prototype.options.iconPosition ) {
-				this._set_iconpos( this.options.iconPosition );
+				this._seticonpos( this.options.iconPosition );
 			} else if ( this.options.iconpos !== $.ui.button.prototype.options.iconpos ) {
-				this._set_iconPosition( this.options.iconpos );
+				this._seticonPosition( this.options.iconpos );
 			}
 			this._super();
 		},
 
-		_set_iconPosition: function( value ) {
+		_seticonPosition: function( value ) {
 			if ( value === "end" ) {
 				this.options.iconpos = "right";
 			} else if ( value !== "left" ) {
@@ -47,7 +47,7 @@ if ( $.mobileBackcompat !== false ) {
 			}
 		},
 
-		_set_iconpos: function( value ) {
+		_seticonpos: function( value ) {
 			if ( value === "right" ) {
 				this._setOption( "iconPosition", "end" );
 			} else if ( value !== "left" ) {
@@ -61,11 +61,13 @@ if ( $.mobileBackcompat !== false ) {
 			}
 			this._superApply( arguments );
 		}
-	});
+	} );
 	$.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
 }
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
