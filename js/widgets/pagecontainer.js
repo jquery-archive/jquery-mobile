@@ -39,6 +39,11 @@ define( [
 		initSelector: false,
 
 		_create: function() {
+
+			// Maintain a global array of pagecontainers
+			$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
+				.concat( [ this.element ] );
+
 			this._trigger( "beforecreate" );
 			this.setLastScrollEnabled = true;
 
@@ -1189,6 +1194,19 @@ define( [
 			var closestBase = ( this.activePage &&
 			$.mobile.getClosestBaseUrl( this.activePage ) );
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
+		},
+
+		_destroy: function() {
+			var myIndex;
+
+			if ( $.mobile.pagecontainers ) {
+				myIndex = $.inArray( this.element, $.mobile.pagecontainers );
+				if ( myIndex >= 0 ) {
+					$.mobile.pagecontainers.splice( myIndex, 1 );
+				}
+			}
+
+			this._super();
 		}
 	});
 
