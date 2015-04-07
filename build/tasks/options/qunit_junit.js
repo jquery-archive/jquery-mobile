@@ -6,4 +6,4 @@ module.exports = {
 			return match[2].replace(/\//g, ".").replace(/\.html/, "" ).replace(/\?/, "-");
 		}
 	}
-}
+};
