@@ -1,4 +1,6 @@
 var _ = require( "underscore" );
+var path = require( "path" );
+
 module.exports = function( grunt ){
 	return {
 		options: {
@@ -31,7 +33,7 @@ module.exports = function( grunt ){
 						jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" )
 							.split( "," ),
 						excludes = _.chain( suites )
-							.filter( function( suite ) { return ( /^!/.test( suite ) ); } )
+							.filter( function( suite ) { return ( /^-/.test( suite ) ); } )
 							.map( function( suite ) { return suite.substring( 1 ); } )
 							.value();
 
@@ -57,10 +59,9 @@ module.exports = function( grunt ){
 						.unique()
 						.value();
 
-
 					// Remove negations from list of suites
 					suites = _.filter( suites, function( suite ) {
-						return ( !/^!/.test( suite ) );
+						return ( !/^-/.test( suite ) );
 					});
 
 					if ( types.length ){
@@ -83,9 +84,9 @@ module.exports = function( grunt ){
 								dir = "tests/" + dir;
 
 								if ( suite.indexOf( "/" ) >= 0 ) {
-
 									// If the suite is a path, then append it exactly
 									patterns.push( dir + "/" + suite );
+
 								} else {
 
 									// If not, append all patterns we care about
@@ -97,7 +98,6 @@ module.exports = function( grunt ){
 								}
 							});
 						});
-
 					paths = grunt.file.expand( patterns )
 						.filter( function( testPath ) {
 							if ( grunt.file.isDir( testPath ) ) {
@@ -125,6 +125,16 @@ module.exports = function( grunt ){
 					if ( versionedPaths.length ) {
 						paths = versionedPaths;
 					}
+
+					paths = _.filter( paths, function( path ) {
+						var found = false;
+						excludes.forEach( function( exclude ) {
+							if ( new RegExp( exclude ).test( path ) ) {
+								found = true
+							}
+						} );
+						return !found;
+					} );
 
 					return paths.map( function( path ) {
 						return "http://localhost:<%= connect.server.options.port %>/" + path;
