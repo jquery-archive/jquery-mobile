@@ -139,7 +139,7 @@ $.widget( "mobile.textinput", {
 	},
 
 	_handleBlur: function() {
-		this._removeClass( this._outer, null, $.mobile.focusClass );
+		this._removeClass( this._outer, null, "ui-focus" );
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.enable( true );
 		}
@@ -152,7 +152,7 @@ $.widget( "mobile.textinput", {
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
-		this._addClass( this._outer, null, $.mobile.focusClass );
+		this._addClass( this._outer, null, "ui-focus" );
 	},
 
 	_setOptions: function ( options ) {
