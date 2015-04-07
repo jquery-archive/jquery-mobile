@@ -5,15 +5,16 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define([
+define( [
 	"jquery",
 	"../../core",
 	"../../widget",
 	"jquery-ui/checkboxradio",
 	"../widget.theme"
 	], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
 	initSelector: "input[type='radio'],input[type='checkbox']:not(:jqmData(role='flipswitch'))",
@@ -30,11 +31,13 @@ $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
 			this.icon = this.element.find( "ui-button-icon" );
 		}
 	}
-});
+} );
 
 $.widget( "ui.checkboxradio", $.ui.checkboxradio, $.mobile.widget.theme );
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");

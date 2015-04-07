@@ -14,12 +14,14 @@ define( [
 	"widget.backcompat"
 
 ], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
 		shadow: false,
+
 		//corners: true,
 		type: "vertical",
 		mini: false
@@ -43,11 +45,13 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		}
 		this._superApply( arguments );
 	}
-});
+} );
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, $.mobile.widget.backcompat );
 
-})(jQuery);
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");

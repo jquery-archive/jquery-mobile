@@ -104,10 +104,10 @@ module.exports = function( grunt ) {
 					endFile: "build/wrap.end"
 				},
 
-				onBuildWrite: function (moduleName, path, contents) {
+				onBuildWrite: function( moduleName, path, contents ) {
 					return contents.replace( /__version__/g, grunt.config.process(
 						"\"<%= boom %>\""
-					));
+					) );
 				}
 			}
 		}

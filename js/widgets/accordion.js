@@ -11,18 +11,21 @@ define( [
 	"widget.theme",
 	"jquery-ui/accordion"
 ], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.widget( "ui.accordion", $.ui.accordion, {
 	options: {
 		theme: null
 	}
-});
+} );
 
 $.widget( "ui.accordion", $.ui.accordion, $.mobile.widget.theme );
 
-})(jQuery);
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");

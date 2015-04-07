@@ -1,28 +1,28 @@
 module.exports = function( grunt ) {
-	var requirejs = require( 'requirejs' ),
+	var requirejs = require( "requirejs" ),
 		async = grunt.util.async;
 
-	requirejs.define('node/print', [], function() {
-		return function print(msg) {
-			if (msg.substring(0, 5) === 'Error') {
-				grunt.log.errorlns(msg);
-				grunt.fail.warn('RequireJS failed.');
+	requirejs.define( "node/print", [], function() {
+		return function print( msg ) {
+			if ( msg.substring( 0, 5 ) === "Error" ) {
+				grunt.log.errorlns( msg );
+				grunt.fail.warn( "RequireJS failed." );
 			} else {
-				grunt.log.oklns(msg);
+				grunt.log.oklns( msg );
 			}
 		};
-	});
+	} );
 
 	function expandFiles( files ) {
 		return grunt.util._.pluck( grunt.file.expandMapping( files ), "src" );
 	}
 
-	grunt.registerMultiTask( 'cssbuild', 'Resolve CSS @imports and concat files', function() {
+	grunt.registerMultiTask( "cssbuild", "Resolve CSS @imports and concat files", function() {
 		var done = this.async(),
 			_ = grunt.util._,
-			options = _.clone( this.options({
-				banner: ''
-			})),
+			options = _.clone( this.options( {
+				banner: ""
+			} ) ),
 			banner = options.banner;
 
 		delete options.banner;
@@ -34,17 +34,18 @@ module.exports = function( grunt ) {
 
 				grunt.log.debug( "Building '" + src + "' -> '" + dest + "'" );
 
-				async.series([
+				async.series( [
 					function( next ) {
+
 						// pull the includes together using require js
 						requirejs.optimize(
-							_.extend({
+							_.extend( {
 								cssIn: src,
 								out: dest
 							}, options
 						), function( response ) {
 							next();
-						});
+						} );
 					},
 					function( next ) {
 						var contents = grunt.file.read( dest );
@@ -58,5 +59,5 @@ module.exports = function( grunt ) {
 				], callback );
 			}, done
 		);
-	});
+	} );
 };

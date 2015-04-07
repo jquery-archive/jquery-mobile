@@ -11,8 +11,9 @@ define( [
 	"../widget.theme",
 	"jquery-ui/button"
 ], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 	$.widget( "ui.button", $.ui.button, {
 		initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
 		" [data-role='button']",
@@ -29,7 +30,7 @@ define( [
 				this.icon = this.element.find( "ui-button-icon" );
 			}
 		}
-	});
+	} );
 
 	$.widget( "ui.button", $.ui.button, $.mobile.widget.theme );
 
@@ -38,7 +39,9 @@ define( [
 	};
 	return $.ui.button;
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
