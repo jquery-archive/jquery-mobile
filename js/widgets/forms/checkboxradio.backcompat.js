@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define([
+define( [
 	"jquery",
 	"../../core",
 	"../../widget",
@@ -13,8 +13,9 @@ define([
 	"../widget.backcompat",
 	"./checkboxradio"
 	], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.checkboxradio", $.ui.checkboxradio, {
@@ -27,11 +28,13 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		classProp: "ui-checkboxradio-label"
-	});
+	} );
 	$.widget( "ui.checkboxradio", $.ui.checkboxradio, $.mobile.widget.backcompat );
 }
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
