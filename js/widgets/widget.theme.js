@@ -8,8 +8,9 @@ define( [ "jquery",
 	"../core",
 	"../widget"
 	], function( jQuery ) {
+
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.mobile.widget.theme = {
 	_create: function() {
@@ -29,7 +30,9 @@ $.mobile.widget.theme = {
 	}
 };
 
-})( jQuery );
+} )( jQuery );
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
+
 //>>excludeEnd("jqmBuildExclude");
