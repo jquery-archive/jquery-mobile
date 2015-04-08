@@ -1,17 +1,34 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Enhances and consistently styles text inputs.
-//>>label: Textarea Autosize
+/*!
+ * jQuery Mobile Autogrow @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+//>>label: Textarea Autogrow
 //>>group: Forms
+//>>description: Textarea elements automatically grow/shrink to accommodate their contents.
+//>>docs: http://api.jquerymobile.com/textinput/#option-autogrow
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.autogrow.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"./textinput" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-	$.widget( "mobile.textinput", $.mobile.textinput, {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./textinput" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+	return $.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
 			autogrow:true,
 			keyupTimeoutBuffer: 100
@@ -161,7 +178,4 @@ define( [
 		}
 
 	});
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

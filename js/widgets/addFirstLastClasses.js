@@ -1,11 +1,29 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior mixin to mark first and last visible item with special classes.
+/*!
+ * jQuery Mobile First And Last Classes @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: First & Last Classes
 //>>group: Widgets
+//>>description: Behavior mixin to mark first and last visible item with special classes.
 
-define( [ "jquery", "../core" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var uiScreenHiddenRegex = /\bui-screen-hidden\b/;
 function noHiddenClass( elements ) {
@@ -51,7 +69,6 @@ $.mobile.behaviors.addFirstLastClasses = {
 	}
 };
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.mobile.behaviors.addFirstLastClasses;
+
 });
-//>>excludeEnd("jqmBuildExclude");

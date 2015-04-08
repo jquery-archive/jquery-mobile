@@ -1,20 +1,32 @@
-/*
-* fallback transition for flow in non-3D supporting browsers (which tend to handle complex transitions poorly in general
-*/
+/*!
+ * jQuery Mobile Flow Transition Fallback @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Flow Transition
 //>>group: Transitions
+//>>description: Flow transition fallback definition for non-3D supporting browsers
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
 //>>css.structure: ../css/structure/jquery.mobile.transition.flow.css
 
-define( [ "jquery", "../handlers" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 $.mobile.transitionFallbacks.flow = "fade";
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

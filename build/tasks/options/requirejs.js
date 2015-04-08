@@ -24,17 +24,11 @@ module.exports = function( grunt ) {
 
 				include: [ "jquery.mobile" ],
 
-				exclude: [
-					"jquery",
-					"json",
-					"json!../package.json"
-				],
+				exclude: [ "jquery" ],
+
+				excludeShallow: [ "jquery.mobile" ],
 
 				out: path.join( "dist", "<%= name %>" ) + "<%= versionSuffix %>.js",
-
-				pragmasOnSave: {
-					jqmBuildExclude: true
-				},
 
 				//File paths are relative to the build file, or if running a commmand
 				//line build, the current directory.

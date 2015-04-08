@@ -2,10 +2,6 @@
 $type = 'text/javascript';
 $files = array(
 	'../LICENSE-INFO.txt',
-	// note that define is only included here as a means
-	// to revert to the pre async include, and should not be
-	// used in other build methods
-	'jquery.mobile.define.js',
 	'ns.js',
 	'../external/jquery-ui/widget.js',
 	'widget.js',

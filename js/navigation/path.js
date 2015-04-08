@@ -1,13 +1,31 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Path parsing and manipulation helpers
+/*!
+ * jQuery Mobile Path Utility @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Path Helpers
 //>>group: Navigation
-define([
-	"jquery",
-	"./../ns" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+//>>description: Path parsing and manipulation helpers
+//>>docs: http://api.jquerymobile.com/category/methods/path/
 
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 		var path, $base, dialogHashKey = "&ui-state=dialog";
 
 		$.mobile.path = path = {
@@ -446,8 +464,6 @@ define([
 			//return the original document base url
 			getDocumentBase: path.getDocumentBase
 		});
-})( jQuery );
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return path;
 });
-//>>excludeEnd("jqmBuildExclude");

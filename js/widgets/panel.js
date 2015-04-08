@@ -1,15 +1,38 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Responsive presentation and behavior for HTML data panels
+/*!
+ * jQuery Mobile Panel @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Panel
 //>>group: Widgets
+//>>description: Responsive presentation and behavior for HTML data panels
+//>>docs: http://api.jquerymobile.com/panel/
+//>>demos: http://demos.jquerymobile.com/@VERSION/panel/
 //>>css.structure: ../css/structure/jquery.mobile.panel.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../widget", "./page" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-$.widget( "mobile.panel", {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"./page" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+return $.widget( "mobile.panel", {
+	version: "@VERSION",
+
 	options: {
 		classes: {
 			panel: "ui-panel",
@@ -514,7 +537,4 @@ $.widget( "mobile.panel", {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

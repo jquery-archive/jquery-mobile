@@ -1,22 +1,40 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+/*!
+ * jQuery Mobile Navigation @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Content Management
 //>>group: Navigation
-define( [
-	"jquery",
-	"./core",
-	"./navigation/path",
-	"./events/navigate",
-	"./navigation/history",
-	"./navigation/navigator",
-	"./navigation/method",
-	"./support",
-	"./animationComplete",
-	"./widgets/pagecontainer",
-	"./widgets/page",
-	"./transitions/handlers" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./core",
+			"./navigation/path",
+			"./events/navigate",
+			"./navigation/history",
+			"./navigation/navigator",
+			"./navigation/method",
+			"./support",
+			"./animationComplete",
+			"./widgets/pagecontainer",
+			"./widgets/page",
+			"./transitions/handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 		// resolved on domready
 	var domreadyDeferred = $.Deferred(),
@@ -436,7 +454,6 @@ define( [
 	}
 
 	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
+	return $.mobile;
 });
-//>>excludeEnd("jqmBuildExclude");
