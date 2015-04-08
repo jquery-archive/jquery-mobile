@@ -7,7 +7,6 @@
  * http://jquery.org/license
  */
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>group: exclude
 
 ( function( factory ) {
@@ -76,4 +75,3 @@
 } )( function() {
 	require( [ "./init" ], function() {} );
 });
-//>>excludeEnd("jqmBuildExclude");

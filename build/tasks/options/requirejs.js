@@ -24,11 +24,9 @@ module.exports = function( grunt ) {
 
 				include: [ "jquery.mobile" ],
 
-				exclude: [
-					"jquery",
-					"json",
-					"json!../package.json"
-				],
+				exclude: [ "jquery" ],
+
+				excludeShallow: [ "jquery.mobile" ],
 
 				out: path.join( "dist", "<%= name %>" ) + "<%= versionSuffix %>.js",
 
