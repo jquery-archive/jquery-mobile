@@ -1,18 +1,38 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Displays a page as a modal dialog with inset appearance and overlay background
+/*!
+ * jQuery Mobile Dialog @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Dialogs (deprecated)
 //>>group: Widgets
+//>>description: Displays a page as a modal dialog with inset appearance and overlay background
+//>>docs: http://api.jquerymobile.com/dialog/
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery",
-	"../widget",
-	"./page",
-	"../navigation" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-$.widget( "mobile.dialog", {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"./page",
+			"../navigation" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+return $.widget( "mobile.dialog", {
+	version: "@VERSION",
+
 	options: {
 
 		// Accepts left, right and none
@@ -166,7 +186,4 @@ $.widget( "mobile.dialog", {
 	}
 });
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

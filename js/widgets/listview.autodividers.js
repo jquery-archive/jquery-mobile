@@ -1,10 +1,31 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Generates dividers for listview items
+/*!
+ * jQuery Mobile Listview Autodividers @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Listview Autodividers
 //>>group: Widgets
-define( [ "jquery", "./listview" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+//>>description: Generates dividers for listview items
+//>>docs: http://api.jquerymobile.com/listview/#option-autodividers
+//>>demos: http://demos.jquerymobile.com/@VERSION/listview/#Autodividers
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./listview" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 function defaultAutodividersSelector( elt ) {
 	// look for the text in the given element
@@ -20,7 +41,7 @@ function defaultAutodividersSelector( elt ) {
 	return text;
 }
 
-$.widget( "mobile.listview", $.mobile.listview, {
+return $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
 		autodividers: false,
 		autodividersSelector: defaultAutodividersSelector
@@ -59,7 +80,4 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

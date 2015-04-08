@@ -1,20 +1,41 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+/*!
+ * jQuery Mobile Toolbar @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Toolbars: Fixed
 //>>group: Widgets
+//>>description: Headers and footers
+//>>docs: http://api.jquerymobile.com/toolbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/toolbar/
+//>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../widget",
-	"../core",
-	"../navigation",
-	"../zoom" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-	$.widget( "mobile.toolbar", {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"../core",
+			"../navigation",
+			"../zoom" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+	return $.widget( "mobile.toolbar", {
+		version: "@VERSION",
+
 		initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
 
 		options: {
@@ -193,8 +214,4 @@ define( [
 			this.element.removeClass( "ui-" + this.role ).removeAttr( "role" );
 		}
 	});
-
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");
