@@ -30,10 +30,6 @@ module.exports = function( grunt ) {
 
 				out: path.join( "dist", "<%= name %>" ) + "<%= versionSuffix %>.js",
 
-				pragmasOnSave: {
-					jqmBuildExclude: true
-				},
-
 				//File paths are relative to the build file, or if running a commmand
 				//line build, the current directory.
 				wrap: {
