@@ -1,9 +1,25 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+/*!
+ * jQuery Mobile Core @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>group: exclude
 
-define([
-	"./defaults",
-	"./data",
-	"./helpers"
-], function() {});
-//>>excludeEnd("jqmBuildExclude");
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"./defaults",
+			"./data",
+			"./helpers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function(){} );

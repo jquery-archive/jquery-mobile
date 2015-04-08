@@ -19,9 +19,7 @@ module.exports = function( grunt ) {
 		},
 		requirejs: {
 			files: {
-				"requirejs/require.js": "requirejs/require.js",
-				"requirejs/plugins/text.js": "requirejs-text/text.js",
-				"requirejs/plugins/json.js": "requirejs-plugins/src/json.js"
+				"requirejs/require.js": "requirejs/require.js"
 			}
 		},
 		jquery: {

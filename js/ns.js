@@ -1,12 +1,29 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The mobile namespace on the jQuery object
+/*!
+ * jQuery Mobile Namespace @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Namespace
 //>>group: Core
-define([ "jquery" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $ ) {
-	$.mobile = {};
-}( jQuery ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: The mobile namespace on the jQuery object
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [ "jquery" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+	$.mobile = { version: "@VERSION" };
+
+	return $.mobile;
 });
-//>>excludeEnd("jqmBuildExclude");

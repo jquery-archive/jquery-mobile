@@ -1,14 +1,30 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Dynamic Base Tag Support
+/*!
+ * jQuery Mobile Base Tag Support @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Base Tag
 //>>group: Navigation
-define([
-	"jquery",
-	"./path",
-	"./../ns" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+//>>description: Dynamic Base Tag Support
 
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./path",
+			"./../ns" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 	var base,
 
@@ -78,8 +94,5 @@ define([
 
 	$.mobile.base = base;
 
-})( jQuery );
-
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return base;
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,13 +1,30 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Adds classes to links.
+/*!
+ * jQuery Mobile Links @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Link Classes
 //>>group: Utilities
+//>>description: Adds classes to links.
 
-define( [ "jquery",
-	"./core",
-	"./navigation/path" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./core",
+			"./navigation/path" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 $.mobile.links = function( target ) {
 
@@ -33,8 +50,6 @@ $.mobile.links = function( target ) {
 
 };
 
-})( jQuery );
+return $.mobile.links;
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,23 +1,40 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Global initialization of the library.
+/*!
+ * jQuery Mobile Init @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Init
 //>>group: Core
+//>>description: Global initialization of the library.
 
-define([
-	"jquery",
-	"jquery-ui/core",
-	"./defaults",
-	"./helpers",
-	"./data",
-	"./support",
-	"./events/navigate",
-	"./navigation/path",
-	"./navigation/method",
-	"./navigation",
-	"./widgets/loader",
-	"./vmouse" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"jquery-ui/core",
+			"./defaults",
+			"./helpers",
+			"./data",
+			"./support",
+			"./events/navigate",
+			"./navigation/path",
+			"./navigation/method",
+			"./navigation",
+			"./widgets/loader",
+			"./vmouse" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	var	$html = $( "html" ),
 		$window = $.mobile.window;
 
@@ -179,7 +196,4 @@ define([
 			);
 		}
 	});
-}( jQuery, this ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

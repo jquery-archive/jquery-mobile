@@ -1,21 +1,40 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: For creating grouped collapsible content areas.
+/*!
+ * jQuery Mobile Collapsible Set @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Collapsible Sets (Accordions)
 //>>group: Widgets
+//>>description: For creating grouped collapsible content areas.
+//>>docs: http://api.jquerymobile.com/collapsibleset/
+//>>demos: http://demos.jquerymobile.com/@VERSION/collapsibleset/
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../widget",
-	"./collapsible",
-	"./addFirstLastClasses" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"./collapsible",
+			"./addFirstLastClasses" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
 
-$.widget( "mobile.collapsibleset", $.extend( {
+return $.widget( "mobile.collapsibleset", $.extend( {
+	version: "@VERSION",
 
 	// The initSelector is deprecated as of 1.4.0. In 1.5.0 we will use
 	// :jqmData(role='collapsibleset') which will allow us to get rid of the line
@@ -121,7 +140,4 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

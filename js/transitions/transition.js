@@ -1,20 +1,37 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animated page change base constructor and logic
+/*!
+ * jQuery Mobile Transition @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Transition Core
 //>>group: Transitions
-//>>css.structure: ../css/structure/jquery.mobile.transition.css, ../css/structure/jquery.mobile.transition.fade.css
+//>>description: Animated page change base constructor and logic
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
+//>>css.structure: ../css/structure/jquery.mobile.transition.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../core",
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-	// TODO event.special.scrollstart
-	"../events/scroll",
-	"../animationComplete" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core",
 
-(function( $, window, undefined ) {
+			// TODO event.special.scrollstart
+			"../events/scroll",
+			"../animationComplete" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 	// TODO remove direct references to $.mobile and properties, we should
 	//      favor injection with params to the constructor
@@ -166,7 +183,6 @@ define( [
 			return this.deferred.promise();
 		}
 	});
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
+	return $.mobile.Transition;
 });
-//>>excludeEnd("jqmBuildExclude");

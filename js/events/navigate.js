@@ -1,16 +1,34 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Provides a wrapper around hashchange and popstate
+/*!
+ * jQuery Mobile Navigate Event @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Navigate
 //>>group: Events
+//>>description: Provides a wrapper around hashchange and popstate
+//>>docs: http://api.jquerymobile.com/navigate/
+//>>demos: http://api.jquerymobile.com/@VERSION/navigation/
 
 // TODO break out pushstate support test so we don't depend on the whole thing
-define([
-	"jquery",
-	"./../ns",
-	"./../support" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-(function( $, undefined ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"./../support" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	var $win = $.mobile.window, self,
 		dummyFnToInitNavigate = function() {
 		};
@@ -129,8 +147,6 @@ define([
 			}
 		}
 	};
-})( jQuery );
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.event.special.navigate;
 });
-//>>excludeEnd("jqmBuildExclude");

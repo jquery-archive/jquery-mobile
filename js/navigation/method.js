@@ -1,11 +1,34 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: A wrapper for the primary Navigator and History objects in jQuery Mobile
+/*!
+ * jQuery Mobile Navigate Method @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Navigate Method
 //>>group: Navigation
-define([ "jquery", "./path", "./history", "./navigator" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+//>>description: A wrapper for the primary Navigator and History objects in jQuery Mobile
+//>>docs: http://api.jquerymobile.com/jQuery.mobile.navigate/
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
 
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./path",
+			"./history",
+			"./navigator" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	// TODO consider queueing navigation activity until previous activities have completed
 	//      so that end users don't have to think about it. Punting for now
 	// TODO !! move the event bindings into callbacks on the navigate event
@@ -22,8 +45,6 @@ define([ "jquery", "./path", "./history", "./navigator" ], function( jQuery ) {
 
 	var loc = $.mobile.path.parseLocation();
 	$.mobile.navigate.history.add( loc.href, {hash: loc.hash} );
-})( jQuery );
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.navigate;
 });
-//>>excludeEnd("jqmBuildExclude");

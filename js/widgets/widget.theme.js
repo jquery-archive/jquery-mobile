@@ -1,16 +1,31 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Adds Theme option to widgets
+/*!
+ * jQuery Mobile Theme Option @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Widget Theme
 //>>group: Widgets
+//>>description: Adds Theme option to widgets
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery",
-	"../core",
-	"../widget"
-	], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-//>>excludeEnd("jqmBuildExclude");
-( function( $, undefined ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core",
+			"../widget" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+} )( function( $ ) {
 
 $.mobile.widget.theme = {
 	_create: function() {
@@ -30,9 +45,6 @@ $.mobile.widget.theme = {
 	}
 };
 
-} )( jQuery );
+return $.mobile.widget.theme;
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 } );
-
-//>>excludeEnd("jqmBuildExclude");

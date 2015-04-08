@@ -1,15 +1,36 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Hides dividers when all items in the section they designate become hidden
+/*!
+ * jQuery Mobile Listview Hide Dividers @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Listview Hide Dividers
 //>>group: Widgets
-define( [ "jquery", "./listview" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+//>>description: Hides dividers when all items in the section they designate become hidden
+//>>docs: http://api.jquerymobile.com/listview/#option-hideDividers
+//>>demos: http://demos.jquerymobile.com/@VERSION/listview/
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./listview" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var rdivider = /(^|\s)ui-li-divider($|\s)/,
 	rhidden = /(^|\s)ui-screen-hidden($|\s)/;
 
-$.widget( "mobile.listview", $.mobile.listview, {
+return $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
 		hideDividers: false
 	},
@@ -38,7 +59,4 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

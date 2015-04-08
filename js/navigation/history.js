@@ -1,11 +1,32 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
+/*!
+ * jQuery Mobile History Manager @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: History Manager
 //>>group: Navigation
-define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+//>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
 
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"./path" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	$.mobile.History = function( stack, index ) {
 		this.stack = stack || [];
 		this.activeIndex = index || 0;
@@ -140,8 +161,6 @@ define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
 			}
 		}
 	});
-})( jQuery );
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.History;
 });
-//>>excludeEnd("jqmBuildExclude");

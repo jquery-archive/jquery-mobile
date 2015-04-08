@@ -1,21 +1,41 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for native select menus. Tapping opens a native select menu.
+/*!
+ * jQuery Mobile Select Menu @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Selects
 //>>group: Forms
+//>>description: Consistent styling for native select menus. Tapping opens a native select menu.
+//>>docs: http://api.jquerymobile.com/selectmenu/
+//>>demos: http://demos.jquerymobile.com/@VERSION/selectmenu/
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../../core",
-	"../../widget",
-	"../../zoom",
-	"../../navigation/path",
-	"./reset" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-$.widget( "mobile.selectmenu", $.extend( {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../widget",
+			"../../zoom",
+			"../../navigation/path",
+			"./reset" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+return $.widget( "mobile.selectmenu", $.extend( {
+	version: "@VERSION",
+
 	initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
 
 	options: {
@@ -299,7 +319,4 @@ $.widget( "mobile.selectmenu", $.extend( {
 	}
 }, $.mobile.behaviors.formReset ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

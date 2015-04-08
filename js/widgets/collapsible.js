@@ -1,23 +1,41 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Creates collapsible content blocks.
+/*!
+ * jQuery Mobile Collapsible @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Collapsible
 //>>group: Widgets
+//>>description: Creates collapsible content blocks.
+//>>docs: http://api.jquerymobile.com/collapsible/
+//>>demos: http://demos.jquerymobile.com/@VERSION/collapsible/
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-	// Deprecated as of 1.4.0 and will be removed in 1.5.0
-	// We only need this dependency so we get the $.widget shim from page, so we
-	// can use $.mobile.collapsible.initSelector in collapsibleset. As of 1.5.0
-	// we will assume that all children of the collapsibleset are to be turned
-	// into collapsibles.
-	"./page",
-	"../core",
-	"../widget" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+
+			// Deprecated as of 1.4.0 and will be removed in 1.5.0
+			// We only need this dependency so we get the $.widget shim from page, so we
+			// can use $.mobile.collapsible.initSelector in collapsibleset. As of 1.5.0
+			// we will assume that all children of the collapsibleset are to be turned
+			// into collapsibles.
+			"./page",
+			"../core",
+			"../widget" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var rInitialLetter = /([A-Z])/g,
 
@@ -28,6 +46,8 @@ var rInitialLetter = /([A-Z])/g,
 	};
 
 $.widget( "mobile.collapsible", {
+	version: "@VERSION",
+
 	options: {
 		enhanced: false,
 		expandCueText: null,
@@ -364,7 +384,6 @@ $.mobile.collapsible.defaults = {
 	mini: false
 };
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.mobile.collapsible;
+
 });
-//>>excludeEnd("jqmBuildExclude");

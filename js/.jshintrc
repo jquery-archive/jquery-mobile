@@ -6,6 +6,7 @@
 	"eqnull": true,
 	"expr": true,
 	"immed": true,
+	"jquery": true,
 	"noarg": true,
 	"onevar": true,
 	"quotmark": "double",
