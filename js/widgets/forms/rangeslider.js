@@ -1,20 +1,41 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Range Slider form widget
+/*!
+ * jQuery Mobile Range Slider @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Range Slider
 //>>group: Forms
+//>>description: Range Slider form widget
+//>>docs: http://api.jquerymobile.com/rangeslider/
+//>>demos: http://demos.jquerymobile.com/@VERSION/rangeslider/
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery",
-	"../../core",
-	"../../widget",
-	"./textinput",
-	"../../vmouse",
-	"./reset",
-	"./slider" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
-	$.widget( "mobile.rangeslider", $.extend( {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../widget",
+			"./textinput",
+			"../../vmouse",
+			"./reset",
+			"./slider" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
+	return $.widget( "mobile.rangeslider", $.extend( {
+		version: "@VERSION",
 
 		options: {
 			theme: null,
@@ -271,7 +292,4 @@ define( [ "jquery",
 
 	}, $.mobile.behaviors.formReset ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

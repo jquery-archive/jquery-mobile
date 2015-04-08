@@ -1,17 +1,39 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies listview styling of various types (standard, numbered, split button, etc.)
+/*!
+ * jQuery Mobile Listview @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Listview
 //>>group: Widgets
+//>>description: Applies listview styling of various types (standard, numbered, split button, etc.)
+//>>docs: http://api.jquerymobile.com/listview/
+//>>demos: http://demos.jquerymobile.com/@VERSION/listview/
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../widget", "./addFirstLastClasses" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"./addFirstLastClasses" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var getAttr = $.mobile.getAttribute;
 
-$.widget( "mobile.listview", $.extend( {
+return $.widget( "mobile.listview", $.extend( {
+	version: "@VERSION",
 
 	options: {
 		theme: null,
@@ -209,7 +231,4 @@ $.widget( "mobile.listview", $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

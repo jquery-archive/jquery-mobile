@@ -1,17 +1,32 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Helper functions and references
+/*!
+ * jQuery Mobile Helpers @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Helpers
 //>>group: Core
+//>>description: Helper functions and references
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"./ns",
-	"./navigation/base",
-	"jquery-ui/core" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./ns",
+			"jquery-ui/core" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 	// Subtract the height of external toolbars from the page height, if the page does not have
 	// internal toolbars of the same type. We take care to use the widget options if we find a
@@ -338,7 +353,5 @@ define( [
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile;
 });
-//>>excludeEnd("jqmBuildExclude");

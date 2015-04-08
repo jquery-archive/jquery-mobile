@@ -1,10 +1,32 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+/*!
+ * jQuery Mobile Support Tests @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>description: Assorted tests to qualify browsers by detecting features
 //>>label: Support Tests
 //>>group: Core
-define( [  "jquery", "./core", "./media", "./support/touch", "./support/orientation" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./core",
+			"./media",
+			"./support/touch",
+			"./support/orientation" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 // thx Modernizr
 function propExists( prop ) {
@@ -220,7 +242,6 @@ if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-noboxshadow" );
 }
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.support;
+
 });
-//>>excludeEnd("jqmBuildExclude");
