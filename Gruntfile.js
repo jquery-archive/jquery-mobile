@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 			versionSuffix: "",
 			headHash: "",
 			headShortHash: "",
-			version: "<%= version %>",
+			version: "<%= pkg.version %>",
 			dirs: {
 				dist: dist,
 				cdn: {
