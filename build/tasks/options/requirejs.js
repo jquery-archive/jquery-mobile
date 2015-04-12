@@ -38,8 +38,8 @@ module.exports = function( grunt ) {
 				},
 
 				onBuildWrite: function( moduleName, path, contents ) {
-					return contents.replace( /__version__/g, grunt.config.process(
-						"\"<%= version %>\""
+					return contents.replace( /@VERSION/g, grunt.config.process(
+						"<%= version %>"
 					) );
 				}
 			}
