@@ -1,5 +1,27 @@
 module.exports = function( grunt ) {
-	var path = require( "path" );
+	var path = require( "path" ),
+		esprima = require( "esprima" ),
+		grabFactory = function( contents ) {
+			var range,
+				parsedFile = esprima.parse( contents, { range: true } );
+
+			// Descend into the parsed file to find the factory function. If we do not find it we
+			// return the contents as-is.
+			if ( parsedFile && parsedFile.body && parsedFile.body[ 0 ] &&
+					parsedFile.body[ 0 ].expression && parsedFile.body[ 0 ].expression.arguments &&
+					parsedFile.body[ 0 ].expression.arguments[ 0 ] &&
+					parsedFile.body[ 0 ].expression.arguments[ 0 ].range &&
+					parsedFile.body[ 0 ].expression.arguments[ 0 ].range.length >= 2 ) {
+
+				range = parsedFile.body[ 0 ].expression.arguments[ 0 ].range;
+
+				// Turn the factory into an IIFE
+				contents = "( " +
+					contents.substr( range[ 0 ], range[ 1 ] - range[ 0 ] ) +
+					" )( jQuery )";
+			}
+			return contents;
+		};
 
 	return {
 		js: {
@@ -38,9 +60,9 @@ module.exports = function( grunt ) {
 				},
 
 				onBuildWrite: function( moduleName, path, contents ) {
-					return contents.replace( /@VERSION/g, grunt.config.process(
+					return grabFactory( contents.replace( /@VERSION/g, grunt.config.process(
 						"<%= version %>"
-					) );
+					) ) );
 				}
 			}
 		}
