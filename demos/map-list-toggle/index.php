@@ -6,21 +6,56 @@
 	<title>Google Maps - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<style>
-	.segmented-control { text-align:center; }
-	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
+	.segmented-control {
+		text-align: center;
+	}
 
-	#map-page { width:100%; height:100%; }
-	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
-	#gmap-marker-link { color:#00a0df; text-decoration:none; }
+	.segmented-control .ui-controlgroup {
+		display: inline;
+		margin: .2em 0px;
+	}
 
-	.ui-gmap-canvas { width:100%; height:100%; }
-	.ui-gmap-infobox { display:none; }
+	.map-page {
+		width: 100%;
+		height: 100%;
+	}
+	
+	#map-canvas {
+		width: 100%;
+		height: 100%;
+		margin-top: -30px;
+		padding: 0px!important;
+	}
 
-	#show-more .ui-li-heading { text-align:center; }
-	#show-more .ui-icon { visibility:hidden; }
+	#gmap-marker-link {
+		color: #00a0df;
+		text-decoration: none;
+	}
 
-	.ui-li-has-count .ui-li-count { border-color:transparent; }
-	.wrap { white-space:normal; }
+	.ui-gmap-canvas {
+		width: 100%;
+		height: 100%;
+	}
+
+	.ui-gmap-infobox {
+		display: none;
+	}
+
+	#show-more .ui-li-heading {
+		text-align: center;
+	}
+
+	#show-more .ui-icon {
+		visibility: hidden;
+	}
+
+	.ui-li-has-count .ui-li-count {
+		border-color: transparent;
+	}
+
+	.wrap {
+		white-space: normal;
+	}
 	</style>
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
@@ -31,23 +66,22 @@
 	<!-- Google Maps JS assets are loaded at bottom of page for performance -->
 	<script>
 	$( document ).on( "pagecreate", "#map-page", function() {
-		var $mapSwitch = $( "#map-switch" ),
-		    $listSwitch = $( "#list-switch" ),
-			$map = $( "#map-canvas" ),
-	        $list = $( "#list-canvas" );
+		var map = $( "#map-canvas" ),
+		    list = $( "#list-canvas" ),
+		    page = $( this );
 
-	    $mapSwitch.on( "click", function( e ){
-	       	$map.show();
-	       	$map.gmap();
-	       	$list.hide();
-	    });
+		$( "#list-switch, #map-switch" ).on( "click", function(){
+			var isMap = this.id === "map-switch";
 
-	    $listSwitch.on( "click", function( e ){
-	       	$list.show();
-			$map.hide();
-	    });
+			page.toggleClass( "map-page", isMap );
 
-	    $( "#show-more a" ).on( "click", function( e ){
+			map[ isMap ? "show" : "hide" ]();
+			map.gmap();
+
+			list[ !isMap ? "show" : "hide" ]();
+		});
+
+	    	$( "#show-more a" ).on( "click", function( e ){
 			// Assume we already have a cached geolocation because it's not necessary for this example.
 			var location = location || {};
 			    location.coords = location.coords || {};
