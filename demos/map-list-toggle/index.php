@@ -8,8 +8,8 @@
 	<style>
 	.segmented-control { text-align:center; }
 	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
-
-	#map-page { width:100%; height:100%; }
+	.map-page { width:100%; height:100%; }
+	
 	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
 	#gmap-marker-link { color:#00a0df; text-decoration:none; }
 
@@ -34,15 +34,18 @@
 		var $mapSwitch = $( "#map-switch" ),
 		    $listSwitch = $( "#list-switch" ),
 			$map = $( "#map-canvas" ),
-	        $list = $( "#list-canvas" );
+	        $list = $( "#list-canvas" ),
+	        $mapPage= $( this );
 
 	    $mapSwitch.on( "click", function( e ){
+	    	$mapPage.addClass( 'map-page' );
 	       	$map.show();
 	       	$map.gmap();
 	       	$list.hide();
 	    });
 
 	    $listSwitch.on( "click", function( e ){
+	    	$mapPage.removeClass( 'map-page' );
 	       	$list.show();
 			$map.hide();
 	    });
