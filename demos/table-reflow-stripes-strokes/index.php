@@ -12,8 +12,7 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		.movie-list thead th,
-		.movie-list tbody tr:last-child {
+		.movie-list thead th {
 			border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
 			border-bottom: 1px solid rgba(0,0,0,.1);
 		}
@@ -21,10 +20,6 @@
 		.movie-list tbody td {
 			border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
 			border-bottom: 1px solid rgba(0,0,0,.05);
-		}
-		.movie-list tbody tr:last-child th,
-		.movie-list tbody tr:last-child td {
-			border-bottom: 0;
 		}
 		.movie-list tbody tr:nth-child(odd) td,
 		.movie-list tbody tr:nth-child(odd) th {
