@@ -23,10 +23,9 @@
 			"jquery",
 			"../../core",
 			"../../navigation",
-			"../dialog",
 			"./select",
 			"../listview",
-			"../page",
+			"../page.dialog.backcompat",
 			"../popup" ], factory );
 	} else {
 
@@ -41,7 +40,7 @@ var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.u
 			.not( unfocusableItemSelector )
 				.first();
 
-		// if there's a previous option, focus it
+		// If there's a previous option, focus it
 		if ( adjacent.length ) {
 			target
 				.blur()
@@ -57,8 +56,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		this._origTabIndex = ( this.element.attr( "tabindex" ) === undefined ) ? false : this.element.attr( "tabindex" );
 
-		// Custom selects cannot exist inside popups, so revert the "nativeMenu"
-		// option to true if a parent is a popup
+		// Custom selects cannot exist inside popups, so revert the "nativeMenu" option to true if
+		// a parent is a popup
 		o.nativeMenu = o.nativeMenu || ( this.element.parents( ":jqmData(role='popup'),:mobile-popup" ).length > 0 );
 
 		return this._super();
@@ -107,16 +106,19 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var target = $( event.target ),
 			li = target.closest( "li" );
 
-		// switch logic based on which key was pressed
+		// Switch logic based on which key was pressed
 		switch ( event.keyCode ) {
-		// up or left arrow keys
+
+		// Up or left arrow keys
 		case 38:
 			goToAdjacentItem( li, target, "prev" );
 			return false;
-		// down or right arrow keys
+
+		// Down or right arrow keys
 		case 40:
 			goToAdjacentItem( li, target, "next" );
 			return false;
+
 		// If enter or space is pressed, trigger click
 		case 13:
 		case 32:
@@ -150,17 +152,16 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this._delayedTrigger();
 
 		// TODO centralize page removal binding / handling in the page plugin.
-		// Suggestion from @jblas to do refcounting
+		// Suggestion from @jblas to do refcounting.
 		//
 		// TODO extremely confusing dependency on the open method where the pagehide.remove
-		// bindings are stripped to prevent the parent page from disappearing. The way
-		// we're keeping pages in the DOM right now sucks
+		// bindings are stripped to prevent the parent page from disappearing. The way we're
+		// keeping pages in the DOM right now sucks
 		//
-		// rebind the page remove that was unbound in the open function
-		// to allow for the parent page removal from actions other than the use
-		// of a dialog sized custom select
+		// Rebind the page remove that was unbound in the open function to allow for the parent
+		// page removal from actions other than the use of a dialog sized custom select
 		//
-		// doing this here provides for the back button on the custom select dialog
+		// Doing this here provides for the back button on the custom select dialog
 		this.thisPage.page( "bindRemove" );
 	},
 
@@ -237,7 +238,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'></div>" +
 			"</div>" +
-			"<div data-" + $.mobile.ns + "role='content'></div>" +
+			"<div class='ui-content'></div>" +
 			"</div>" )
 			.attr( "id", dialogId );
 		listbox = $( "<div" + themeAttr + overlayThemeAttr +
@@ -301,8 +302,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"click li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)": "_handleListItemClick"
 		} );
 
-		// button refocus ensures proper height calculation
-		// by removing the inline style and ensuring page inclusion
+		// Button refocus ensures proper height calculation by removing the inline style and
+		// ensuring page inclusion
 		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
 
 		// Events on the popup
@@ -334,9 +335,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var list = this.list.find( "li" ),
 			options = this._selectOptions().not( ".ui-screen-hidden" );
 
-		// TODO exceedingly naive method to determine difference
-		// ignores value changes etc in favor of a forcedRebuild
-		// from the user in the refresh method
+		// TODO exceedingly naive method to determine difference ignores value changes etc in favor
+		// of a forcedRebuild from the user in the refresh method
 		return options.text() !== list.text();
 	},
 
@@ -395,14 +395,16 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var self = this;
 
 		if ( self.menuType === "page" ) {
-			self.menuPage.dialog( "close" );
+			if ( self.menuPage.hasClass( "ui-page-active" ) ) {
+				$.mobile.back();
+			}
 			self.list.appendTo( self.listbox );
 		} else {
 			self.listbox.popup( "close" );
 		}
 
 		self._focusButton();
-		// allow the dialog to be closed again
+		// Allow the dialog to be closed again
 		self.isOpen = false;
 	},
 
@@ -433,12 +435,11 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			self.menuPageContent = self.menuPage.find( ".ui-content" );
 			self.menuPageClose = self.menuPage.find( ".ui-header a" );
 
-			// prevent the parent page from being removed from the DOM,
-			// otherwise the results of selecting a list item in the dialog
-			// fall into a black hole
+			// Prevent the parent page from being removed from the DOM, otherwise the results of
+			// selecting a list item in the dialog fall into a black hole
 			self.thisPage.unbind( "pagehide.remove" );
 
-			//for WebOS/Opera Mini (set lastscroll using button offset)
+			// For WebOS/Opera Mini (set lastscroll using button offset)
 			if ( scrollTop === 0 && buttonOffset > screenHeight ) {
 				self.thisPage.one( "pagehide", function() {
 					$( this ).jqmData( "lastScroll", buttonOffset );
@@ -526,9 +527,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				needPlaceholder = false;
 				isPlaceholderItem = true;
 
-				// If we have identified a placeholder, record the fact that it was
-				// us who have added the placeholder to the option and mark it
-				// retroactively in the select as well
+				// If we have identified a placeholder, record the fact that it was us who have
+				// added the placeholder to the option. Mark it retroactively in the select.
 				if ( null === option.getAttribute( dataPlaceholderAttr ) ) {
 					this._removePlaceholderAttr = true;
 				}

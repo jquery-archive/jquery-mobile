@@ -1,15 +1,15 @@
 test( "_find() can handle weird data-url attributes", function() {
-deepEqual(
-	$.mobile.pagecontainer.prototype._find.call( {
-		_createFileUrl: $.mobile.pagecontainer.prototype._createFileUrl,
-		_createDataUrl: $.mobile.pagecontainer.prototype._createDataUrl,
-		_getInitialContent: $.mobile.pagecontainer.prototype._getInitialContent,
-		element: $( "body" ),
-		_getNs: $.mobile.pagecontainer.prototype._getNs,
+	deepEqual(
+		$.mobile.pagecontainer.prototype._find.call( {
+			_createFileUrl: $.mobile.pagecontainer.prototype._createFileUrl,
+			_createDataUrl: $.mobile.pagecontainer.prototype._createDataUrl,
+			_getInitialContent: $.mobile.pagecontainer.prototype._getInitialContent,
+			element: $( "body" ),
+			_getNs: $.mobile.pagecontainer.prototype._getNs
 
-	}, "Raison d'être.html" )[ 0 ],
-	$( ".weird-data-url" )[ 0 ],
-	"Correct element is retrieved when the file name is weird" );
+		}, "Raison d'être.html" )[ 0 ],
+		$( ".weird-data-url" )[ 0 ],
+		"Correct element is retrieved when the file name is weird" );
 } );
 
 ( function() {
@@ -51,38 +51,39 @@ test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedenc
 		reloadPage: false
 	} );
 
-	deepEqual( triggerData.options.reload, true,
+	strictEqual( triggerData.options.reload, true,
 		"The value of option 'reload' is not affected by the value of option 'reloadPage'" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html", {
 		reloadPage: true
 	} );
 
-	deepEqual( triggerData.options.reload, true,
+	strictEqual( triggerData.options.reload, true,
 		"The value of option 'reloadPage' is copied to the value of option 'reload' if the " +
 		"latter is absent from the options hash" );
 } );
 
 module( "_handleDialog()" );
 
-test( "A dialog is recognized via presence of the data key, not the ui-dialog class", function() {
+test( "Recognize dialog via presence of the data key, not the ui-page-dialog class", function() {
 	var getActiveHistoryCalled = false;
 
-	deepEqual( $.mobile.pagecontainer.prototype._handleDialog.call( {
+	strictEqual( $.mobile.pagecontainer.prototype._handleDialog.call( {
 		getActivePage: function() {
-			return $( "<div class='ui-dialog'></div>" );
+			return $( "<div class='ui-page-dialog'></div>" );
 		},
 		_getActiveHistory: function() {
 			getActiveHistoryCalled = true;
 			return {};
 		},
 		back: $.noop,
-		forward: $.noop,
+		forward: $.noop
 	}, {}, {
 		pageUrl: "xyzzy.html"
-	} ), false, "page is recognized as page even when the ui-dialog class is present" );
+	} ), false, "page is recognized as page even when the ui-page-dialog class is present" );
 
-	deepEqual( getActiveHistoryCalled, false, "_getActiveHistory() should not have been called" );
+	strictEqual( getActiveHistoryCalled, false,
+		"_getActiveHistory() should not have been called" );
 } );
 
 } )();

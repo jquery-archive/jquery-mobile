@@ -16,7 +16,7 @@ module( 'jquery.mobile.navigation.js - base tag', {
 	}
 } );
 
-asyncTest( "can navigate between internal and external pages", function() {
+asyncTest( "can navigate between internal and external pages", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
 			// Navigate from default internal page to another internal page.
@@ -25,7 +25,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the 2nd internal page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				push: home + "#internal-page-2",
 				hash: "internal-page-2",
 				report: "navigate to internal page"
@@ -38,7 +38,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-1.html",
 				report: "navigate from internal page to page in base directory"
 			} );
@@ -49,7 +49,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-2.html",
 				report: "navigate from base directory page to another base directory page"
 			} );
@@ -60,9 +60,10 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
-				report: "navigate from base directory page to a page in a different directory hierarchy"
+				report: "navigate from base directory page to a page in a different directory " +
+					"hierarchy"
 			} );
 
 			// Navigate to another page in a directory that is the sibling of the base.
@@ -71,7 +72,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-2.html",
 				report: "navigate to another page within the same non-base directory hierarchy"
 			} );
@@ -84,7 +85,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 			// Verify that we are on the expected page.
 			// the hash based nav result (hash:) is dictate by the fact that #internal-page-1
 			// is the original root page element
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: home,
 				report: "navigate from a page in a non-base directory to an internal page"
 			} );
@@ -95,7 +96,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-1.html",
 				report: "call changePage() with a filename (no path)"
 			} );
@@ -106,7 +107,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
 				report: "call changePage() with a relative path containing up-level references"
 			} );
@@ -117,9 +118,10 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-2.html",
-				report: "call changePage() with a relative path should resolve relative to current page"
+				report: "call changePage() with a relative path should resolve relative to " +
+					"current page"
 			} );
 
 			// test that an internal page works
@@ -128,7 +130,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hash: "internal-page-2",
 				push: home + "#internal-page-2",
 				report: "call changePage() with a page id"
@@ -140,10 +142,11 @@ asyncTest( "can navigate between internal and external pages", function() {
 
 		function() {
 			// Verify that we are on the expected page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hash: "internal-page-2",
 				push: home + "#internal-page-2",
-				report: "calling changePage() with a page id that is not prefixed with '#' should not change page"
+				report: "calling changePage() with a page id that is not prefixed with '#' " +
+					"should not change page"
 			} );
 
 			// Previous load should have failed and left us on internal-page-2.
@@ -152,7 +155,7 @@ asyncTest( "can navigate between internal and external pages", function() {
 	] );
 } );
 
-asyncTest( "internal form with no action submits to document URL", function() {
+asyncTest( "internal form with no action submits to document URL", function( assert ) {
 	$.testHelper.pageSequence( [
 		// open our test page
 		function() {
@@ -164,7 +167,7 @@ asyncTest( "internal form with no action submits to document URL", function() {
 		},
 
 		function() {
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: location.pathname + "?foo=1&bar=2",
 				report: "hash should match document url and not base url"
 			} );
@@ -174,7 +177,7 @@ asyncTest( "internal form with no action submits to document URL", function() {
 	] );
 } );
 
-asyncTest( "external page form with no action submits to external page URL", function() {
+asyncTest( "external page form with no action submits to external page URL", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
 			// Go to an external page that has a form.
@@ -183,7 +186,7 @@ asyncTest( "external page form with no action submits to external page URL", fun
 
 		function() {
 			// Make sure we actually navigated to the external page.
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
 				report: "should be on content-page-1.html"
 			} );
@@ -193,7 +196,7 @@ asyncTest( "external page form with no action submits to external page URL", fun
 		},
 
 		function() {
-			$.testHelper.assertUrlLocation( {
+			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html?foo=1&bar=2",
 				report: "hash should match page url and not document url"
 			} );

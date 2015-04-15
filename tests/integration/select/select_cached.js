@@ -2,106 +2,120 @@
  * mobile select unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
 var resetHash;
+
+function jqmDataSelector( expression ) {
+	return "[data-" + $.mobile.ns + expression + "]";
+}
 
 resetHash = function( timeout ) {
 	$.testHelper.openPage( location.hash.indexOf( "#default" ) >= 0 ? "#" : "#default" );
 };
 
 // https://github.com/jquery/jquery-mobile/issues/2181
-asyncTest( "dialog sized select should alter the value of its parent select", function() {
-	var selectButton, value;
+QUnit.asyncTest( "dialog sized select should alter the value of its parent select",
+	function( assert ) {
+		var selectButton, value;
 
-	$.testHelper.pageSequence( [
-		resetHash,
+		$.testHelper.pageSequence( [
+			resetHash,
 
-		function() {
-			$.mobile.changePage( "cached.html" );
-		},
+			function() {
+				$.mobile.changePage( "cached.html" );
+			},
 
-		function() {
-			ok( $.mobile.activePage.is( "#dialog-select-parent-cache-test" ), "cached page appears" );
-			selectButton = $( "#cached-page-select" ).siblings( 'a' );
-			selectButton.click();
-		},
+			function() {
+				assert.ok( $.mobile.activePage.is( "#dialog-select-parent-cache-test" ),
+					"cached page appears" );
+				selectButton = $( "#cached-page-select" ).siblings( "a" );
+				selectButton.click();
+			},
 
-		function() {
-			ok( $.mobile.activePage.hasClass( 'ui-dialog' ), "the dialog came up" );
-			var option = $.mobile.activePage.find( "li a" ).not( ":contains('" + selectButton.text() + "')" ).last();
-			value = $.trim( option.text() );
-			option.click();
-		},
+			function() {
+				assert.hasClasses( $.mobile.activePage, "ui-page-dialog", "the dialog came up" );
+				var option = $.mobile.activePage.find( "li a" )
+					.not( ":contains('" + selectButton.text() + "')" ).last();
+				value = $.trim( option.text() );
+				option.click();
+			},
 
-		function() {
-			deepEqual( value, $.trim( selectButton.text() ), "the selected value is propogated back to the button text" );
-			start();
-		}
-	] );
-} );
+			function() {
+				assert.strictEqual( value, $.trim( selectButton.text() ),
+					"the selected value is propogated back to the button text" );
+				QUnit.start();
+			}
+		] );
+	} );
 
 // https://github.com/jquery/jquery-mobile/issues/2181
-asyncTest( "dialog sized select should prevent the removal of its parent page from the dom", function() {
-	var selectButton, parentPageId;
+QUnit.asyncTest( "dialog sized select should prevent the removal of its parent page",
+	function( assert ) {
+		var selectButton, parentPageId;
 
-	expect( 2 );
+		assert.expect( 2 );
 
-	$.testHelper.pageSequence( [
-		resetHash,
+		$.testHelper.pageSequence( [
+			resetHash,
 
-		function() {
-			$.mobile.changePage( "cached.html" );
-		},
+			function() {
+				$.mobile.changePage( "cached.html" );
+			},
 
-		function() {
-			selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
-			parentPageId = $.mobile.activePage.attr( 'id' );
-			deepEqual( $( "#" + parentPageId ).length, 1, "establish the parent page exists" );
-			selectButton.click();
-		},
+			function() {
+				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( "a" );
+				parentPageId = $.mobile.activePage.attr( "id" );
+				assert.strictEqual( $( "#" + parentPageId ).length, 1,
+					"establish the parent page exists" );
+				selectButton.click();
+			},
 
-		function() {
-			deepEqual( $( "#" + parentPageId ).length, 1, "make sure parent page is still there after opening the dialog" );
-			$.mobile.activePage.find( "li a" ).last().click();
-		},
+			function() {
+				assert.strictEqual( $( "#" + parentPageId ).length, 1,
+					"make sure parent page is still there after opening the dialog" );
+				$.mobile.activePage.find( "li a" ).last().click();
+			},
 
-		start
-	] );
-} );
+			QUnit.start
+		] );
+	} );
 
-asyncTest( "dialog sized select shouldn't rebind its parent page remove handler when closing, if the parent page domCache option is true", function() {
-	expect( 3 );
+QUnit.asyncTest( "dialog sized select shouldn't rebind its parent page remove handler when " +
+	"closing, if the parent page domCache option is true", function( assert ) {
+		expect( 3 );
 
-	$.testHelper.pageSequence( [
-		resetHash,
+		$.testHelper.pageSequence( [
+			resetHash,
 
-		function() {
-			$.mobile.changePage( "cached-dom-cache-true.html" );
-		},
+			function() {
+				$.mobile.changePage( "cached-dom-cache-true.html" );
+			},
 
-		function() {
-			$.mobile.activePage.find( "#domcache-page-select" ).siblings( 'a' ).click();
-		},
+			function() {
+				$.mobile.activePage.find( "#domcache-page-select" ).siblings( "a" ).click();
+			},
 
-		function() {
-			ok( $.mobile.activePage.hasClass( 'ui-dialog' ), "the dialog came up" );
-			$.mobile.activePage.find( "li a" ).last().click();
-		},
+			function() {
+				assert.hasClasses( $.mobile.activePage, "ui-page-dialog", "the dialog came up" );
+				$.mobile.activePage.find( "li a" ).last().click();
+			},
 
-		function() {
-			ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
-			$.mobile.changePage( $( "#default" ) );
-		},
+			function() {
+				assert.ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ),
+					"the dialog closed" );
+				$.mobile.changePage( $( "#default" ) );
+			},
 
-		function() {
-			deepEqual( $( "#dialog-select-parent-domcache-test" ).length, 1, "make sure the select parent page is still cached in the dom after changing page" );
-			start();
-		}
-	] );
-} );
+			function() {
+				assert.strictEqual( $( "#dialog-select-parent-domcache-test" ).length, 1,
+					"select parent page is still cached in the dom after changing page" );
+				QUnit.start();
+			}
+		] );
+	} );
 
-asyncTest( "menupage is removed when the parent page is removed", function() {
-	var dialogCount = $( ":jqmData(role='dialog')" ).length;
+QUnit.asyncTest( "menupage is removed when the parent page is removed", function( assert ) {
+	var dialogCount = $( jqmDataSelector( "role='dialog'" ) ).length;
 	$.testHelper.pageSequence( [
 		resetHash,
 
@@ -110,28 +124,31 @@ asyncTest( "menupage is removed when the parent page is removed", function() {
 		},
 
 		function() {
-			// for performance reason we don't initially create the menu dialog now
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount );
 
-			// manually trigger dialog opening
-			$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).open();
+			// For performance reasons we don't initially create the menu dialog now
+			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
+
+			// Manually trigger dialog opening
+			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).open();
 		},
 
 		function() {
-			// check if dialog was successfully  created
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount + 1 );
-			$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).close();
+
+			// Check if dialog was successfully  created
+			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount + 1 );
+			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).close();
 		},
 
 		function() {
-			// navigate to parent(initial) page
+
+			// Navigate to parent(initial) page
 			window.history.back();
 		},
 
 		function() {
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount );
-			start();
+			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
+			QUnit.start();
 		}
 	] );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );

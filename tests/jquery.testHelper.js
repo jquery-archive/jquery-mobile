@@ -392,14 +392,14 @@ $.testHelper = {
 		};
 	},
 
-	assertUrlLocation: function( args ) {
+	assertUrlLocation: function( assert, args ) {
 		var parts = $.mobile.path.parseUrl( location.href ),
 			pathnameOnward = location.href.replace( parts.domain, "" );
 
 		if ( $.support.pushState ) {
-			deepEqual( pathnameOnward, args.hashOrPush || args.push, args.report );
+			assert.deepEqual( pathnameOnward, args.hashOrPush || args.push, args.report );
 		} else {
-			deepEqual( parts.hash, "#" + ( args.hashOrPush || args.hash ), args.report );
+			assert.deepEqual( parts.hash, "#" + ( args.hashOrPush || args.hash ), args.report );
 		}
 	},
 
