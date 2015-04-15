@@ -598,7 +598,7 @@ $.widget( "mobile.slider", $.extend( {
                             (this.options.corners ? "ui-corner-all" : null),
                             (this.options.mini ? "ui-mini" : null),
                             ("ui-body-" + this.options.theme || "inherit")
-                        ].join(' ')
+                        ].join( " " )
                 );
                 this.element.removeAttr( "data-type" );
                 this.element.next().remove();
