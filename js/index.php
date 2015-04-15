@@ -27,6 +27,7 @@ $files = array(
 	'widgets/enhancer.widgetCrawler.js',
 	'widgets/page.js',
 	'widgets/page.dialog.js',
+	'widgets/page.dialog.backcompat.js',
 	'widgets/loader.js',
 	
 	'events/navigate.js',

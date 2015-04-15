@@ -1022,7 +1022,7 @@ asyncTest( "external page containing form with no action submits to page URL", f
 	] );
 } );
 
-asyncTest( "handling of active button state when navigating", 1, function() {
+asyncTest( "handling of active button state when navigating", 1, function( assert ) {
 
 	$.testHelper.pageSequence( [
 		// open our test page
@@ -1039,7 +1039,8 @@ asyncTest( "handling of active button state when navigating", 1, function() {
 		},
 
 		function() {
-			ok( !$( "#active-state-page1 a" ).hasClass( "ui-button-active" ), "No button should not have class ui-button-active" );
+			assert.lacksClasses( $( "#active-state-page1 a" ), "ui-button-active",
+				"No button should not have class " + $.mobile.activeBtnClass );
 			start();
 		}
 	] );
@@ -1110,7 +1111,7 @@ asyncTest( "clicks with middle mouse button are ignored", function() {
 	] );
 } );
 
-asyncTest( "disabling link binding disables navigation via links and highlighting", function() {
+asyncTest( "disabling link binding disables nav via links and highlighting", function( assert ) {
 	$.mobile.linkBindingEnabled = false;
 
 	$.testHelper.pageSequence( [
@@ -1123,14 +1124,15 @@ asyncTest( "disabling link binding disables navigation via links and highlightin
 		},
 
 		function( timeout ) {
-			ok( !$.mobile.activePage.find( "a" ).hasClass( "ui-button-active" ), "vlick handler doesn't add the activebutton class" );
+			assert.lacksClasses( $.mobile.activePage.find( "a" ), "ui-button-active",
+				"vlick handler doesn't add the activebutton class" );
 			ok( timeout, "no page change was fired" );
 			start();
 		}
 	] );
 } );
 
-asyncTest( "handling of button active state when navigating by clicking back button", 1, function() {
+asyncTest( "handling of button active state when back-button-navigating", 2, function( assert ) {
 	$.testHelper.pageSequence( [
 		// open our test page
 		function() {
@@ -1150,7 +1152,10 @@ asyncTest( "handling of button active state when navigating by clicking back but
 		},
 
 		function() {
-			ok( !$( "#active-state-page2 a" ).hasClass( "ui-button-active" ), "No button should not have class ui-button-active" );
+			$( "#active-state-page2 a" ).each( function() {
+				assert.lacksClasses( this, "ui-button-active",
+					"No button should have class ui-button-active" );
+			} );
 			start();
 		}
 	] );
@@ -1187,7 +1192,7 @@ asyncTest( "can navigate to dynamically injected page with dynamically injected 
 	] );
 } );
 
-asyncTest( "application url with dialogHashKey loads application's first page", function() {
+asyncTest( "application url with dialogHashKey loads first application page", function( assert ) {
 	$.testHelper.pageSequence( [
 		// open our test page
 		function() {
@@ -1207,15 +1212,15 @@ asyncTest( "application url with dialogHashKey loads application's first page", 
 			ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "navigated successfully to first-page" );
 
 			// Now make sure opening the page didn't result in page duplication.
-			ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
-			deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
+			assert.hasClasses( $.mobile.firstPage, "first-page", "first page has expected class" );
+			assert.strictEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 			start();
 		}
 	] );
 } );
 
-asyncTest( "navigate to non-existent internal page throws pagechangefailed", function() {
+asyncTest( "navigate to non-existent internal page throws pagechangefailed", function( assert ) {
 	var pagechangefailed = false,
 		pageChangeFailedCB = function( e ) {
 			pagechangefailed = true;
@@ -1227,8 +1232,8 @@ asyncTest( "navigate to non-existent internal page throws pagechangefailed", fun
 		// open our test page
 		function() {
 			// Make sure there's only one copy of the first-page in the DOM to begin with.
-			ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
-			deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
+			assert.hasClasses( $.mobile.firstPage, "first-page", "first page has expected class" );
+			assert.strictEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 			// Navigate to any page except the first page of the application.
 			$.testHelper.openPage( "#foo" );
@@ -1236,8 +1241,9 @@ asyncTest( "navigate to non-existent internal page throws pagechangefailed", fun
 
 		function() {
 			var $foo = $( "#foo" );
-			ok( $.mobile.activePage[ 0 ] === $foo[ 0 ], "navigated successfully to #foo" );
-			deepEqual( pagechangefailed, false, "no page change failures" );
+			assert.deepEqual( $.mobile.activePage[ 0 ], $foo[ 0 ],
+				"navigated successfully to #foo" );
+			assert.strictEqual( pagechangefailed, false, "no page change failures" );
 
 			// Now navigate to a non-existent page.
 			$foo.find( "#bad-internal-page-link" ).click();
@@ -1260,7 +1266,7 @@ asyncTest( "navigate to non-existent internal page throws pagechangefailed", fun
 	] );
 } );
 
-asyncTest( "prefetched links with data rel dialog result in a dialog", function() {
+asyncTest( "prefetched links with data rel dialog result in a dialog", function( assert ) {
 	$.testHelper.pageSequence( [
 		// open our test page
 		function() {
@@ -1273,7 +1279,8 @@ asyncTest( "prefetched links with data rel dialog result in a dialog", function(
 		},
 
 		function() {
-			ok( $.mobile.activePage.is( ".ui-dialog" ), "prefetched page is rendered as a dialog" );
+			assert.hasClasses( $.mobile.activePage, "ui-page-dialog",
+				"prefetched page is rendered as a dialog" );
 			start();
 		}
 	] );
@@ -1351,7 +1358,7 @@ asyncTest( "first page gets reloaded if pruned from the DOM", function() {
 	] );
 } );
 
-asyncTest( "test that clicks are ignored where data-ajax='false' parents exist", function() {
+asyncTest( "clicks are ignored where data-ajax='false' parents exist", function( assert ) {
 	var $disabledByParent = $( "#unhijacked-link-by-parent" ),
 		$disabledByAttr = $( "#unhijacked-link-by-attr" );
 
@@ -1367,7 +1374,8 @@ asyncTest( "test that clicks are ignored where data-ajax='false' parents exist",
 		},
 
 		function() {
-			ok( $.mobile.activePage.is( "#link-hijacking-destination" ), "nav works for links to hijacking destination" );
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "link-hijacking-destination",
+				"nav works for links to hijacking destination" );
 			window.history.back();
 		},
 
@@ -1376,7 +1384,8 @@ asyncTest( "test that clicks are ignored where data-ajax='false' parents exist",
 		},
 
 		function() {
-			ok( $.mobile.activePage.is( "#link-hijacking-test" ), "click should be ignored keeping the active mobile page the same as before" );
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "link-hijacking-test",
+				"click should be ignored keeping the active mobile page the same as before" );
 		},
 
 		function() {
@@ -1384,7 +1393,8 @@ asyncTest( "test that clicks are ignored where data-ajax='false' parents exist",
 		},
 
 		function() {
-			ok( $.mobile.activePage.is( "#link-hijacking-test" ), "click should be ignored keeping the active mobile page the same as before" );
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "link-hijacking-test",
+				"click should be ignored keeping the active mobile page the same as before" );
 
 			$.mobile.ignoreContentEnabled = false;
 			start();
@@ -1392,10 +1402,10 @@ asyncTest( "test that clicks are ignored where data-ajax='false' parents exist",
 	] );
 } );
 
-asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function() {
-	var $disabledByParent = $( "#unhijacked-link-by-parent" ),
-		$disabledByAttr = $( "#unhijacked-link-by-attr" ),
-		$hijacked = $( "#hijacked-link" );
+asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function( assert ) {
+	var disabledByParent = $( "#unhijacked-link-by-parent" ),
+		disabledByAttr = $( "#unhijacked-link-by-attr" ),
+		hijacked = $( "#hijacked-link" );
 
 	$.mobile.ignoreContentEnabled = true;
 
@@ -1406,15 +1416,18 @@ asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function
 
 		function() {
 			// force the active button class
-			$hijacked.addClass( "ui-button-active" );
-			$hijacked.trigger( 'vclick' );
-			ok( $hijacked.hasClass( "ui-button-active" ), "active button class is added to the link per normal" );
+			hijacked.addClass( "ui-button-active" );
+			hijacked.trigger( 'vclick' );
+			assert.hasClasses( hijacked, "ui-button-active",
+				"active button class is added to the link per normal" );
 
-			$disabledByParent.trigger( 'vclick' );
-			ok( !$disabledByParent.hasClass( "ui-button-active" ), "active button class is never added to the link" );
+			disabledByParent.trigger( 'vclick' );
+			assert.lacksClasses( disabledByParent, "ui-button-active",
+				"active button class is never added to the link" );
 
-			$disabledByAttr.trigger( 'vclick' );
-			ok( !$disabledByAttr.hasClass( "ui-button-active" ), "active button class is never added to the link" );
+			disabledByAttr.trigger( 'vclick' );
+			assert.lacksClasses( disabledByAttr, "ui-button-active",
+				"active button class is never added to the link" );
 
 			$.mobile.ignoreContentEnabled = false;
 			start();

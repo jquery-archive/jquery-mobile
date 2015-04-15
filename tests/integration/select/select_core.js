@@ -40,15 +40,15 @@ module( libName, {
 	}
 } );
 
-asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function() {
+asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function( assert ) {
 	expect( 3 );
 
 	$.testHelper.sequence( [
 		function() {
 			// bring up the optgroup menu
 			ok( $( "#optgroup-and-placeholder-container a" ).length > 0, "there is in fact a button in the page" );
-			deepEqual( $( "#optgroup-and-placeholder-menu li.ui-li-divider" )
-				.first().hasClass( "ui-bar-b" ), true, "Optgroup header has swatch b" );
+			assert.hasClasses( $( "#optgroup-and-placeholder-menu li.ui-li-divider" ).first(),
+				"ui-bar-b", "Optgroup header has swatch b" );
 			$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 		},
 
@@ -58,7 +58,8 @@ asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding",
 		},
 
 		function() {
-			ok( $( "#optgroup-and-placeholder-menu li:first" ).hasClass( "ui-screen-hidden" ), "the placeholder item has the ui-screen-hidden class" );
+			assert.hasClasses( $( "#optgroup-and-placeholder-menu li:first" ), "ui-screen-hidden",
+				"the placeholder item has the ui-screen-hidden class" );
 			start();
 		}
 	], 1000 );
@@ -253,7 +254,7 @@ asyncTest( "using custom refocuses the button after close", function() {
 	], 1500 );
 } );
 
-asyncTest( "selected items are highlighted", function() {
+asyncTest( "selected items are highlighted", function( assert ) {
 	$.testHelper.sequence( [
 		resetHash,
 
@@ -265,7 +266,7 @@ asyncTest( "selected items are highlighted", function() {
 
 		function() {
 			var firstMenuChoice = $( "#select-choice-few\\.dotTest-menu li:first a" );
-			ok( firstMenuChoice.hasClass( "ui-button-active" ),
+			assert.hasClasses( firstMenuChoice, "ui-button-active",
 				"default menu choice has the active button class" );
 
 			$( "#select-choice-few\\.dotTest-menu a:last" ).click();
@@ -278,7 +279,7 @@ asyncTest( "selected items are highlighted", function() {
 
 		function() {
 			var lastMenuChoice = $( "#select-choice-few\\.dotTest-menu li:last a" );
-			ok( lastMenuChoice.hasClass( "ui-button-active" ),
+			assert.hasClasses( lastMenuChoice, "ui-button-active",
 				"previously selected item has the active button class" );
 
 			// close the dialog
@@ -333,8 +334,8 @@ test( "custom select list item links have encoded option text values", function(
 } );
 
 // not testing the positive case here since's it's obviously tested elsewhere
-test( "select elements in the keepNative set shouldn't be enhanced", function() {
-	ok( !$( "#keep-native" ).parent().is( "div.ui-button" ) );
+test( "select elements in the keepNative set shouldn't be enhanced", function( assert ) {
+	assert.lacksClasses( $( "#keep-native" ).parent(), "ui-button" );
 } );
 
 asyncTest( "dialog size select title should match the label", function() {
@@ -526,7 +527,7 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 	] );
 } );
 
-asyncTest( "Custom select passes overlay theme to its dialog", function() {
+asyncTest( "Custom select passes overlay theme to its dialog", function( assert ) {
 
 	expect( 2 );
 
@@ -539,10 +540,9 @@ asyncTest( "Custom select passes overlay theme to its dialog", function() {
 		},
 		function() {
 			dialog = $( "#select-choice-many-overlay-theme-test-dialog" );
-			deepEqual(
-				$( ":mobile-pagecontainer" ).hasClass( "ui-overlay-x" ),
-				true, "Page container has appropriate theme." );
-			deepEqual( dialog.dialog( "option", "overlayTheme" ), "x",
+			assert.hasClasses( $( ":mobile-pagecontainer" ), "ui-overlay-x",
+				"Page container has appropriate theme." );
+			deepEqual( dialog.page( "option", "overlayTheme" ), "x",
 				"Dialog widget overlayTheme option is correct." );
 			dialog.dialog( "close" );
 		},

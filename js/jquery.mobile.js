@@ -26,6 +26,7 @@
 			"./navigation",
 			"./degradeInputs",
 			"./widgets/page.dialog",
+			"./widgets/page.dialog.backcompat",
 			"./widgets/dialog",
 			"./widgets/collapsible",
 			"./widgets/collapsibleSet",

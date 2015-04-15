@@ -237,7 +237,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'></div>" +
 			"</div>" +
-			"<div data-" + $.mobile.ns + "role='content'></div>" +
+			"<div class='ui-content'></div>" +
 			"</div>" )
 			.attr( "id", dialogId );
 		listbox = $( "<div" + themeAttr + overlayThemeAttr +

@@ -37,14 +37,13 @@ $.widget( "mobile.page", {
 	version: "@VERSION",
 
 	options: {
+		classes: {},
 		theme: "a",
 		domCache: false,
 
 		// Deprecated in 1.4 remove in 1.5
 		keepNativeDefault: $.mobile.keepNative,
 
-		// Deprecated in 1.4 remove in 1.5
-		contentTheme: null,
 		enhanceWithin: true,
 		enhanced: false
 	},
@@ -81,29 +80,12 @@ $.widget( "mobile.page", {
 	},
 
 	_enhance: function() {
-		var attrPrefix = "data-" + $.mobile.ns,
-			self = this;
-
 		if ( this.options.role ) {
 			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
 		}
 
-		this.element
-			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-page-theme-" + this.options.theme );
-
-		// Manipulation of content os Deprecated as of 1.4 remove in 1.5
-		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
-			var $this = $( this ),
-				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
-			self.options.contentTheme = theme || self.options.contentTheme || ( self.options.dialog && self.options.theme ) || ( self.element.jqmData( "role" ) === "dialog" && self.options.theme );
-			$this.addClass( "ui-content" );
-			if ( self.options.contentTheme ) {
-				$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
-			}
-			// Add ARIA role
-			$this.attr( "role", "main" ).addClass( "ui-content" );
-		} );
+		this.element.attr( "tabindex", "0" );
+		this._addClass( "ui-page", "ui-page-theme-" + this.options.theme );
 	},
 
 	bindRemove: function( callback ) {
@@ -131,24 +113,23 @@ $.widget( "mobile.page", {
 		}
 	},
 
-	_setOptions: function( o ) {
-		if ( o.theme !== undefined ) {
-			this.element.removeClass( "ui-page-theme-" + this.options.theme ).addClass( "ui-page-theme-" + o.theme );
+	_setOption: function( optionKey, optionValue ) {
+		if ( optionKey === "theme" ) {
+			this._removeClass( null, "ui-page-theme-" + this.options.theme )
+				._addClass( null, "ui-page-theme-" + optionValue );
 		}
-
-		if ( o.contentTheme !== undefined ) {
-			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
-				.addClass( "ui-body-" + o.contentTheme );
-		}
+		return this._superApply( arguments );
 	},
 
 	_handlePageBeforeShow: function( /* e */ ) {
 		this.setContainerBackground();
 	},
+
 	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
 		this.element.closest( ":mobile-pagecontainer" ).pagecontainer( { "theme": "none" } );
 	},
+
 	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {

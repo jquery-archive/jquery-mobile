@@ -28,7 +28,7 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 			ok( /&ui-state=dialog/.test( location.hash ), "ui-state=dialog =~ location.hash", "dialog open" );
 
 			// close the dialog
-			$( ".ui-dialog" ).dialog( "close" );
+			$( ".ui-page-dialog" ).dialog( "close" );
 		},
 
 		function() {
@@ -72,45 +72,7 @@ asyncTest( "Test option data-close-button", function() {
 	] );
 } );
 
-asyncTest( "clicking dialog 'Close' button twice in quick succession does not cause the browser history to retreat by two", function() {
-	var correctLocation;
-
-	expect( 3 );
-
-	$.testHelper.pageSequence( [
-		function() {
-			$.mobile.changePage( $( "#mypage" ) );
-		},
-
-		function() {
-			$.mobile.changePage( $( "#doubleCloseTestPage" ) );
-		},
-
-		function() {
-			correctLocation = location.href;
-			$( "#doubleCloseTestPage a" ).click();
-		},
-
-		function() {
-			$( "#foo-dialog a" ).click();
-			setTimeout( function() {
-				$( "#foo-dialog a" ).click();
-			}, 0 );
-		},
-
-		function( timedOut ) {
-			ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
-		},
-
-		function( timedOut ) {
-			ok( timedOut, "Clicking dialog 'Close' has not resulted in two pagechange events" );
-			ok( location.href === correctLocation, "Location is correct afterwards" );
-			start();
-		}
-	] );
-} );
-
-asyncTest( "dialog element with no theming", function() {
+asyncTest( "dialog element with no theming", function( assert ) {
 	expect( 4 );
 
 	$.testHelper.pageSequence( [
@@ -127,17 +89,21 @@ asyncTest( "dialog element with no theming", function() {
 			var dialog = $( "#dialog-a" );
 
 			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-a" ), "Expected explicit theme ui-page-theme-a" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
+			assert.hasClasses( dialog, "ui-page-theme-a",
+				"Expected explicit theme ui-page-theme-a" );
+			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
+				"Expected default overlay theme ui-overlay-a" );
+			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
 
 			start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme", function() {
+asyncTest( "dialog element with data-theme", function( assert ) {
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
@@ -157,18 +123,23 @@ asyncTest( "dialog element with data-theme", function() {
 			var dialog = $( "#dialog-b" );
 
 			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-e" ), "Expected explicit theme ui-page-theme-e" );
-			ok( !$.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected no overlay theme ui-overlay-b" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
+			assert.hasClasses( dialog, "ui-page-theme-e",
+				"Expected explicit theme ui-page-theme-e" );
+			assert.lacksClasses( $.mobile.pageContainer, "ui-overlay-b",
+				"Expected no overlay theme ui-overlay-b" );
+			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
+				"Expected default overlay theme ui-overlay-a" );
+			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
 
 			start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
+asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
 	expect( 4 );
 
 	$.testHelper.pageSequence( [
@@ -183,11 +154,16 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
 
 		function() {
 			var dialog = $( "#dialog-c" );
+
 			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-e" ), "Expected explicit theme ui-page-theme-e" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected explicit overlay theme ui-overlay-b" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
+			assert.hasClasses( dialog, "ui-page-theme-e",
+				"Expected explicit theme ui-page-theme-e" );
+			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-b",
+				"Expected explicit overlay theme ui-overlay-b" );
+			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
 
 			start();
 		}
@@ -195,7 +171,7 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
 } );
 
 
-asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow", function() {
+asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow", function( assert ) {
 	var pageTheme;
 
 	expect( 1 );
@@ -217,7 +193,9 @@ asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
 
 			$.mobile.activePage
 				.bind( "pagebeforeshow", function() {
-					ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the dialog overlayTheme on pagebeforeshow" );
+					assert.hasClasses( $.mobile.pageContainer, pageTheme,
+						"Page container has the same theme as the dialog overlayTheme on " +
+							"pagebeforeshow" );
 					start();
 				} ).trigger( "pagebeforeshow" );
 		}

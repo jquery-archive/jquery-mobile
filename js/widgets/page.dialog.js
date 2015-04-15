@@ -33,63 +33,83 @@
 
 return $.widget( "mobile.page", $.mobile.page, {
 	options: {
+		classes: {
+			"ui-page-dialog-close-button":
+				"ui-button ui-corner-all ui-button-icon-only",
+			"ui-page-dialog-close-button-icon": "ui-icon-delete ui-icon",
+			"ui-page-dialog-contain": "ui-overlay-shadow ui-corner-all"
+		},
 
 		// Accepts left, right and none
 		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true,
 		dialog: false
 	},
 
 	_create: function() {
+		this._ui = {};
 		this._super();
 		if ( this.options.dialog ) {
-
-			$.extend( this, {
-				_inner: this.element.children(),
-				_headerCloseButton: null
-			} );
-
-			if ( !this.options.enhanced ) {
-				this._setCloseBtn( this.options.closeBtn );
+			if ( this.options.enhanced ) {
+				this._ui.wrapper = this.element.children();
+				if ( this.options.closeBtn !== "none" ) {
+					this._ui.button = this._ui.wrapper
+						.children( ".ui-header" )
+							.children( "a.ui-page-dialog-close-button" );
+					this._ui.icon = this._ui.button
+						.children( ".ui-page-dialog-close-button-icon" );
+					this._toggleButtonClasses( true, this.options.closeBtn );
+				}
+				this._toggleOuterClasses( true );
 			}
 		}
+	},
+
+	_toggleOuterClasses: function( add ) {
+		this._toggleClass( "ui-page-dialog", null, add );
+		this._toggleClass( this._ui.wrapper, "ui-page-dialog-contain", null, add );
+	},
+
+	_toggleButtonClasses: function( add, location ) {
+		this._toggleClass( this._ui.button, "ui-page-dialog-close-button",
+			"ui-button-" + location, add );
+		this._toggleClass( this._ui.icon, "ui-page-dialog-close-button-icon", null, add );
 	},
 
 	_enhance: function() {
 		this._super();
 
-		// Class the markup for dialog styling and wrap interior
 		if ( this.options.dialog ) {
-			this.element.addClass( "ui-dialog" )
-				.wrapInner( $( "<div/>", {
+			this._ui.wrapper = $( "<div>", {
 
-					// ARIA role
-					"role": "dialog",
-					"class": "ui-dialog-contain ui-overlay-shadow" +
-						( this.options.corners ? " ui-corner-all" : "" )
-				} ) );
+				// ARIA role
+				"role": "dialog"
+			} );
+
+			this._ui.wrapper.append( this.element.contents() );
+			this._setCloseButton( this.options.closeBtn, this.options.closeBtnText );
+			this._toggleOuterClasses( true );
+			this.element.append( this._ui.wrapper );
 		}
 	},
 
 	_setOptions: function( options ) {
-		var closeButtonLocation, closeButtonText,
-			currentOpts = this.options;
+		var closeButtonLocation, closeButtonText;
 
-		if ( options.corners !== undefined ) {
-			this._inner.toggleClass( "ui-corner-all", !!options.corners );
-		}
+		this._super( options );
 
 		if ( options.overlayTheme !== undefined ) {
 			if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
-				currentOpts.overlayTheme = options.overlayTheme;
+
+				// Needs the option value to already be set on this.options. This is accomplished
+				// by chaining up above, before handling the overlayTheme change.
 				this._handlePageBeforeShow();
 			}
 		}
 
 		if ( options.closeBtnText !== undefined ) {
-			closeButtonLocation = currentOpts.closeBtn;
+			closeButtonLocation = this.options.closeBtn;
 			closeButtonText = options.closeBtnText;
 		}
 
@@ -98,10 +118,8 @@ return $.widget( "mobile.page", $.mobile.page, {
 		}
 
 		if ( closeButtonLocation ) {
-			this._setCloseBtn( closeButtonLocation, closeButtonText );
+			this._setCloseButton( closeButtonLocation, closeButtonText );
 		}
-
-		this._super( options );
 	},
 
 	_handlePageBeforeShow: function() {
@@ -113,35 +131,46 @@ return $.widget( "mobile.page", $.mobile.page, {
 		}
 	},
 
-	_setCloseBtn: function( location, text ) {
-		var dst,
-			button = this._headerCloseButton;
+	_setCloseButton: function( location, text ) {
+		var destination;
 
 		// Sanitize value
 		location = "left" === location ? "left" : "right" === location ? "right" : "none";
 
-		if ( "none" === location ) {
-			if ( button ) {
-				button.remove();
-				button = null;
-			}
-		} else if ( button ) {
-			button.removeClass( "ui-button-left ui-button-right" ).addClass( "ui-button-" + location );
-			if ( text ) {
-				button.text( text );
-			}
-		} else {
-			dst = this._inner.find( ":jqmData(role='header')" ).first();
-			button = $( "<a></a>", {
-				"href": "#",
-				"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
-			} )
-				.attr( "data-" + $.mobile.ns + "rel", "back" )
-				.text( text || this.options.closeBtnText || "" )
-				.prependTo( dst );
-		}
+		if ( this._ui.button ) {
 
-		this._headerCloseButton = button;
+			if ( "none" === location ) {
+
+				// Remove existing button
+				this._toggleButtonClasses( false, location );
+				this._ui.button.remove();
+				this._ui.button = null;
+				this._ui.icon = null;
+			} else {
+
+				// Update existing button
+				this._removeClass( this._ui.button, null, "ui-button-left ui-button-right" )
+					._addClass( this._ui.button, null, "ui-button-" + location );
+				if ( text ) {
+					this._ui.button.text( text );
+				}
+			}
+		} else if ( "none" !== location ) {
+
+			// Create new button
+			destination = this._ui.wrapper
+				.children( ".ui-header,:jqmData(role='header')" )
+					.first();
+			if ( destination.length > 0 ) {
+				this._ui.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
+					.text( text || this.options.closeBtnText || "" );
+				this._ui.icon = $( "<span>" ).appendTo( this._ui.button );
+
+				this._toggleButtonClasses( true, location );
+
+				this._ui.button.prependTo( destination );
+			}
+		}
 	}
 } );
 
