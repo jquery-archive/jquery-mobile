@@ -588,6 +588,16 @@ $.widget( "mobile.slider", $.extend( {
 			.attr( "aria-disabled", value );
 
 		this.element.toggleClass( "ui-state-disabled", value );
+	},
+	destroy: function ( value ) {
+                var cornersClass = this.options.corners ? "ui-corner-all" : "",
+                    miniClass = this.options.mini ? "ui-mini" : "",
+                    themeClass = this.options.theme === null ? "ui-body-inherit" : "ui-body-" + this.options.theme,
+                    uiClasses = "ui-slider-input ui-shadow-inset " + cornersClass + " " + miniClass + " " + themeClass;
+                this.element.unwrap();
+                this.element.removeClass( uiClasses );
+                this.element.removeAttr( "data-type" );
+                this.element.next().remove();
 	}
 
 }, $.mobile.behaviors.formReset ) );
