@@ -8,8 +8,8 @@
 	<style>
 	.segmented-control { text-align:center; }
 	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
+
 	.map-page { width:100%; height:100%; }
-	
 	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
 	#gmap-marker-link { color:#00a0df; text-decoration:none; }
 
@@ -31,26 +31,21 @@
 	<!-- Google Maps JS assets are loaded at bottom of page for performance -->
 	<script>
 	$( document ).on( "pagecreate", "#map-page", function() {
-		var $mapSwitch = $( "#map-switch" ),
-		    $listSwitch = $( "#list-switch" ),
-			$map = $( "#map-canvas" ),
-	        $list = $( "#list-canvas" ),
-	        $mapPage= $( this );
+		var map = $( "#map-canvas" ),
+	            page = $( this );
 
-	    $mapSwitch.on( "click", function( e ){
-	    	$mapPage.addClass( 'map-page' );
-	       	$map.show();
-	       	$map.gmap();
-	       	$list.hide();
-	    });
-
-	    $listSwitch.on( "click", function( e ){
-	    	$mapPage.removeClass( 'map-page' );
-	       	$list.show();
-			$map.hide();
-	    });
-
-	    $( "#show-more a" ).on( "click", function( e ){
+		$( 'input' ).on( "click", function( event ){
+			var selected = event.target.id,
+			    pageSwitch = event.target.id === "map-switch";
+			
+			page.toggleClass( "map-page", mapPage );
+			map[ pageSwitch ? "show" : "hide" ]();
+			map.gmap();
+			$( "#list-canvas" )[ !mapPage ? "show" : "hide" ]();
+	       	
+	       	});
+	    
+		$( "#show-more a" ).on( "click", function( e ){
 			// Assume we already have a cached geolocation because it's not necessary for this example.
 			var location = location || {};
 			    location.coords = location.coords || {};
