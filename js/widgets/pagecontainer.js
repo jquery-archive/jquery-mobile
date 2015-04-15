@@ -53,14 +53,13 @@ $.widget( "mobile.pagecontainer", {
 		this.setLastScrollEnabled = true;
 
 		this._on( this.window, {
-			// disable an scroll setting when a hashchange has been fired,
-			// this only works because the recording of the scroll position
-			// is delayed for 100ms after the browser might have changed the
-			// position because of the hashchange
+
+			// Disable a scroll setting when a hashchange has been fired, this only works because
+			// the recording of the scroll position is delayed for 100ms after the browser might
+			// have changed the position because of the hashchange
 			navigate: "_disableRecordScroll",
 
-			// bind to scrollstop for the first page, "pagechange" won't be
-			// fired in that case
+			// Bind to scrollstop for the first page, "pagechange" won't be fired in that case
 			scrollstop: "_delayedRecordScroll"
 		} );
 
@@ -72,7 +71,7 @@ $.widget( "mobile.pagecontainer", {
 		// TODO move from page* events to content* events
 		this._on( { pagechange: "_afterContentChange" } );
 
-		// handle initial hashchange from chrome :(
+		// Handle initial hashchange from chrome :(
 		this.window.one( "navigate", $.proxy( function() {
 			this.setLastScrollEnabled = true;
 		}, this ) );
@@ -99,22 +98,23 @@ $.widget( "mobile.pagecontainer", {
 
 	// TODO consider the name here, since it's purpose specific
 	_afterContentChange: function() {
-		// once the page has changed, re-enable the scroll recording
+
+		// Once the page has changed, re-enable the scroll recording
 		this.setLastScrollEnabled = true;
 
-		// remove any binding that previously existed on the get scroll
-		// which may or may not be different than the scroll element
-		// determined for this page previously
+		// Remove any binding that previously existed on the get scroll which may or may not be
+		// different than the scroll element determined for this page previously
 		this._off( this.window, "scrollstop" );
 
-		// determine and bind to the current scoll element which may be the
-		// window or in the case of touch overflow the element touch overflow
+		// Determine and bind to the current scoll element which may be the window or in the case
+		// of touch overflow the element touch overflow
 		this._on( this.window, { scrollstop: "_delayedRecordScroll" } );
 	},
 
 	_recordScroll: function() {
-		// this barrier prevents setting the scroll value based on
-		// the browser scrolling the window based on a hashchange
+
+		// This barrier prevents setting the scroll value based on the browser scrolling the window
+		// based on a hashchange
 		if ( !this.setLastScrollEnabled ) {
 			return;
 		}
@@ -126,8 +126,8 @@ $.widget( "mobile.pagecontainer", {
 			currentScroll = this._getScroll();
 			defaultScroll = this._getDefaultScroll();
 
-			// Set active page's lastScroll prop. If the location we're
-			// scrolling to is less than minScrollBack, let it go.
+			// Set active page's lastScroll prop. If the location we're scrolling to is less than
+			// minScrollBack, let it go.
 			active.lastScroll = currentScroll < defaultScroll ? defaultScroll : currentScroll;
 		}
 	},
@@ -203,22 +203,22 @@ $.widget( "mobile.pagecontainer", {
 
 	go: function( steps ) {
 
-		//if hashlistening is enabled use native history method
+		// If hashlistening is enabled use native history method
 		if ( $.mobile.hashListeningEnabled ) {
 			window.history.go( steps );
 		} else {
 
-			//we are not listening to the hash so handle history internally
+			// We are not listening to the hash so handle history internally
 			var activeIndex = $.mobile.navigate.history.activeIndex,
 				index = activeIndex + parseInt( steps, 10 ),
 				url = $.mobile.navigate.history.stack[ index ].url,
 				direction = ( steps >= 1 ) ? "forward" : "back";
 
-			//update the history object
+			// Update the history object
 			$.mobile.navigate.history.activeIndex = index;
 			$.mobile.navigate.history.previousIndex = activeIndex;
 
-			//change to the new page
+			// Change to the new page
 			this.change( url, { direction: direction, changeHash: false, fromHashChange: true } );
 		}
 	},
@@ -227,7 +227,7 @@ $.widget( "mobile.pagecontainer", {
 	_handleDestination: function( to ) {
 		var history;
 
-		// clean the hash for comparison if it's a url
+		// Clean the hash for comparison if it's a url
 		if ( $.type( to ) === "string" ) {
 			to = $.mobile.path.stripHash( to );
 		}
@@ -279,15 +279,16 @@ $.widget( "mobile.pagecontainer", {
 				this.forward();
 			}
 
-			// prevent changePage call
+			// Prevent changePage call
 			return false;
 		} else {
-			// if the current active page is a dialog and we're navigating
+
+			// If the current active page is a dialog and we're navigating
 			// to a dialog use the dialog objected saved in the stack
 			to = data.pageUrl;
 			active = this._getActiveHistory();
 
-			// make sure to set the role, transition and reversal
+			// Make sure to set the role, transition and reversal
 			// as most of this is lost by the domCache cleaning
 			$.extend( changePageOptions, {
 				role: active.role,
@@ -301,19 +302,20 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_handleNavigate: function( url, data ) {
-		//find first page via hash
+
+		// Find first page via hash
 		// TODO stripping the hash twice with handleUrl
 		var to = $.mobile.path.stripHash( url ),
 			history = this._getHistory(),
 
-			// transition is false if it's the first page, undefined
-			// otherwise (and may be overridden by default)
+			// Transition is false if it's the first page, undefined otherwise (and may be
+			// overridden by default)
 			transition = history.stack.length === 0 ? "none" :
 				this._optionFromHistory( data.direction, "transition" ),
 
-			// default options for the changPage calls made after examining
-			// the current state of the page and the hash, NOTE that the
-			// transition is derived from the previous history entry
+			// Default options for the changPage calls made after examining the current state of
+			// the page and the hash, NOTE that the transition is derived from the previous history
+			// entry
 			changePageOptions = {
 				changeHash: false,
 				fromHashChange: true,
@@ -356,23 +358,26 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_enhance: function( content, role ) {
+
 		// TODO consider supporting a custom callback, and passing in
 		// the settings which includes the role
 		return content.page( { role: role } );
 	},
 
 	_include: function( page, settings ) {
-		// append to page and enhance
+
+		// Append to page and enhance
 		page.appendTo( this.element );
 
-		// use the page widget to enhance
+		// Use the page widget to enhance
 		this._enhance( page, settings.role );
 
-		// remove page on hide
+		// Remove page on hide
 		page.page( "bindRemove" );
 	},
 
 	_find: function( absUrl ) {
+
 		// TODO consider supporting a custom callback
 		var fileUrl = this._createFileUrl( absUrl ),
 			dataUrl = this._createDataUrl( absUrl ),
@@ -417,6 +422,7 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_showLoading: function( delay, theme, msg, textonly ) {
+
 		// This configurable timeout allows cached pages a brief
 		// delay to load without showing a message
 		if ( this._loadMsg ) {
@@ -430,6 +436,7 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_hideLoading: function() {
+
 		// Stop message show timer
 		clearTimeout( this._loadMsg );
 		this._loadMsg = 0;
@@ -439,28 +446,30 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_showError: function() {
-		// make sure to remove the current loading message
+
+		// Make sure to remove the current loading message
 		this._hideLoading();
 
-		// show the error message
+		// Show the error message
 		this._showLoading( 0, $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
 
-		// hide the error message after a delay
+		// Hide the error message after a delay
 		// TODO configuration
 		setTimeout( $.proxy( this, "_hideLoading" ), 1500 );
 	},
 
 	_parse: function( html, fileUrl ) {
+
 		// TODO consider allowing customization of this method. It's very JQM specific
 		var page,
 			all = $( "<div></div>" );
 
-		//workaround to allow scripts to execute when included in page divs
+		// Workaround to allow scripts to execute when included in page divs
 		all.get( 0 ).innerHTML = html;
 
 		page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
-		//if page elem couldn't be found, create one and insert the body element's contents
+		// If page elem couldn't be found, create one and insert the body element's contents
 		if ( !page.length ) {
 			page = $( "<div data-" + this._getNs() + "role='page'>" +
 				( html.split( /<\/?body[^>]*>/gmi )[ 1 ] || "" ) +
@@ -477,7 +486,8 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_setLoadedTitle: function( page, html ) {
-		//page title regexp
+
+		// Page title regexp
 		var newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1;
 
 		if ( newPageTitle && !page.jqmData( "title" ) ) {
@@ -499,10 +509,10 @@ $.widget( "mobile.pagecontainer", {
 			newEvent = $.Event( this.widgetName + name );
 
 		// DEPRECATED
-		// trigger the old deprecated event on the page if it's provided
+		// Trigger the old deprecated event on the page if it's provided
 		( page || this.element ).trigger( deprecatedEvent, data );
 
-		// use the widget trigger method for the new content* event
+		// Use the widget trigger method for the new content* event
 		this._trigger( name, newEvent, data );
 
 		return {
@@ -518,8 +528,8 @@ $.widget( "mobile.pagecontainer", {
 		var fileUrl = this._createFileUrl( absUrl );
 
 		return $.proxy( function( html, textStatus, xhr ) {
-			//pre-parse html to check for a data-url,
-			//use it as the new fileUrl, base path, etc
+
+			// Pre-parse html to check for a data-url, use it as the new fileUrl, base path, etc
 			var content,
 
 				// TODO handle dialogs again
@@ -527,9 +537,8 @@ $.widget( "mobile.pagecontainer", {
 
 				dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
 
-			// data-url must be provided for the base tag so resource requests
-			// can be directed to the correct url. loading into a temprorary
-			// element makes these requests immediately
+			// data-url must be provided for the base tag so resource requests can be directed to
+			// the correct url. loading into a temprorary element makes these requests immediately
 			if ( pageElemRegex.test( html ) &&
 					RegExp.$1 &&
 					dataUrlRegex.test( RegExp.$1 ) &&
@@ -542,7 +551,7 @@ $.widget( "mobile.pagecontainer", {
 				fileUrl = this.window[ 0 ].encodeURIComponent( fileUrl );
 			}
 
-			//dont update the base tag if we are prefetching
+			// Don't update the base tag if we are prefetching
 			if ( settings.prefetch === undefined ) {
 				this._getBase().set( fileUrl );
 			}
@@ -601,6 +610,7 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	load: function( url, options ) {
+
 		// This function uses deferred notifications to let callers
 		// know when the content is done loading, or if an error has occurred.
 		var deferred = ( options && options.deferred ) || $.Deferred(),
@@ -636,20 +646,19 @@ $.widget( "mobile.pagecontainer", {
 		}
 
 		// The absolute version of the URL minus any dialog/subcontent params.
-		// In otherwords the real URL of the content to be loaded.
+		// In other words the real URL of the content to be loaded.
 		fileUrl = this._createFileUrl( absUrl );
 
-		// The version of the Url actually stored in the data-url attribute of
-		// the content. For embedded content, it is just the id of the page. For
-		// content within the same domain as the document base, it is the site
-		// relative path. For cross-domain content (Phone Gap only) the entire
-		// absolute Url is used to load the content.
+		// The version of the Url actually stored in the data-url attribute of the content. For
+		// embedded content, it is just the id of the page. For content within the same domain as
+		// the document base, it is the site relative path. For cross-domain content (PhoneGap
+		// only) the entire absolute Url is used to load the content.
 		dataUrl = this._createDataUrl( absUrl );
 
 		content = this._find( absUrl );
 
-		// If it isn't a reference to the first content and refers to missing
-		// embedded content reject the deferred and return
+		// If it isn't a reference to the first content and refers to missing embedded content
+		// reject the deferred and return
 		if ( content.length === 0 &&
 				$.mobile.path.isEmbeddedPage( fileUrl ) &&
 				!$.mobile.path.isFirstPageUrl( fileUrl ) ) {
@@ -661,16 +670,14 @@ $.widget( "mobile.pagecontainer", {
 		// TODO figure out why we doe this
 		this._getBase().reset();
 
-		// If the content we are interested in is already in the DOM,
-		// and the caller did not indicate that we should force a
-		// reload of the file, we are done. Resolve the deferrred so that
-		// users can bind to .done on the promise
+		// If the content we are interested in is already in the DOM, and the caller did not
+		// indicate that we should force a reload of the file, we are done. Resolve the deferrred
+		// so that users can bind to .done on the promise
 		if ( content.length && !settings.reload ) {
 			this._enhance( content, settings.role );
 			deferred.resolve( absUrl, settings, content );
 
-			//if we are reloading the content make sure we update
-			// the base if its not a prefetch
+			// If we are reloading the content make sure we update the base if its not a prefetch
 			if ( !settings.prefetch ) {
 				this._getBase().set( url );
 			}
@@ -701,8 +708,7 @@ $.widget( "mobile.pagecontainer", {
 			this._showLoading( settings.loadMsgDelay );
 		}
 
-		// Reset base to the default document base.
-		// only reset if we are not prefetching
+		// Reset base to the default document base. Only reset if we are not prefetching.
 		if ( settings.prefetch === undefined ) {
 			this._getBase().reset();
 		}
@@ -729,7 +735,8 @@ $.widget( "mobile.pagecontainer", {
 
 	_loadError: function( absUrl, triggerData, settings, deferred ) {
 		return $.proxy( function( xhr, textStatus, errorThrown ) {
-			//set base back to current path
+
+			// Set base back to current path
 			this._getBase().set( $.mobile.path.get() );
 
 			// Add error info to our triggerData.
@@ -765,9 +772,9 @@ $.widget( "mobile.pagecontainer", {
 	_getTransitionHandler: function( transition ) {
 		transition = $.mobile._maybeDegradeTransition( transition );
 
-		//find the transition handler for the specified transition. If there
-		//isn't one in our transitionHandlers dictionary, use the default one.
-		//call the handler immediately to kick-off the transition.
+		// Find the transition handler for the specified transition. If there isn't one in our
+		// transitionHandlers dictionary, use the default one. call the handler immediately to
+		// kick off the transition.
 		return $.mobile.transitionHandlers[ transition ] || $.mobile.defaultTransitionHandler;
 	},
 
@@ -780,12 +787,12 @@ $.widget( "mobile.pagecontainer", {
 		// TODO decide if these events should in fact be triggered on the container
 		if ( from ) {
 
-			//Check if this is a same page transition and tell the handler in page
+			// Check if this is a same page transition and tell the handler in page
 			if ( to[ 0 ] === from[ 0 ] ) {
 				samePage = true;
 			}
 
-			//trigger before show/hide events
+			// Trigger before show/hide events
 			// TODO deprecate nextPage in favor of next
 			this._triggerWithDeprecated( prefix + "hide", {
 
@@ -832,7 +839,8 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_releaseTransitionLock: function() {
-		//release transition lock so navigation is free again
+
+		// Release transition lock so navigation is free again
 		isPageTransitioning = false;
 		if ( pageTransitionQueue.length > 0 ) {
 			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
@@ -840,16 +848,17 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	_removeActiveLinkClass: function( force ) {
-		//clear out the active button state
+
+		// Clear out the active button state
 		$.mobile.removeActiveLinkClass( force );
 	},
 
 	_loadUrl: function( to, triggerData, settings ) {
-		// preserve the original target as the dataUrl value will be
-		// simplified eg, removing ui-state, and removing query params
-		// from the hash this is so that users who want to use query
-		// params have access to them in the event bindings for the page
-		// life cycle See issue #5085
+
+		// Preserve the original target as the dataUrl value will be simplified eg, removing
+		// ui-state, and removing query params from the hash this is so that users who want to use
+		// query params have access to them in the event bindings for the page life cycle
+		// See issue #5085
 		settings.target = to;
 		settings.deferred = $.Deferred();
 
@@ -858,8 +867,8 @@ $.widget( "mobile.pagecontainer", {
 		settings.deferred.done( $.proxy( function( url, options, content ) {
 			isPageTransitioning = false;
 
-			// store the original absolute url so that it can be provided
-			// to events in the triggerData of the subsequent changePage call
+			// Store the original absolute url so that it can be provided to events in the
+			// triggerData of the subsequent changePage call
 			options.absUrl = triggerData.absUrl;
 
 			this.transition( content, triggerData, options );
@@ -881,17 +890,18 @@ $.widget( "mobile.pagecontainer", {
 			options: settings
 		} );
 
-		// NOTE: preserve the original target as the dataUrl value will be
-		// simplified eg, removing ui-state, and removing query params from
-		// the hash this is so that users who want to use query params have
-		// access to them in the event bindings for the page life cycle
+		// NOTE: preserve the original target as the dataUrl value will be simplified eg, removing
+		// ui-state, and removing query params from the hash this is so that users who want to use
+		// query params have access to them in the event bindings for the page life cycle
 		// See issue #5085
 		if ( $.type( to ) === "string" ) {
-			// if the toPage is a string simply convert it
+
+			// If the toPage is a string simply convert it
 			triggerData.absUrl = $.mobile.path.makeUrlAbsolute( to, this._findBaseWithDefault() );
 		} else {
-			// if the toPage is a jQuery object grab the absolute url stored
-			// in the loadPage callback where it exists
+
+			// If the toPage is a jQuery object grab the absolute url stored in the loadPage
+			// callback where it exists
 			triggerData.absUrl = settings.absUrl;
 		}
 
@@ -908,9 +918,9 @@ $.widget( "mobile.pagecontainer", {
 	},
 
 	change: function( to, options ) {
-		// If we are in the midst of a transition, queue the current request.
-		// We'll call changePage() once we're done with the current transition
-		// to service the request.
+
+		// If we are in the midst of a transition, queue the current request. We'll call
+		// changePage() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
 			pageTransitionQueue.unshift( arguments );
 			return;
@@ -922,25 +932,23 @@ $.widget( "mobile.pagecontainer", {
 		// Make sure we have a fromPage.
 		settings.fromPage = settings.fromPage || this.activePage;
 
-		// if the page beforechange default is prevented return early
+		// If the page beforechange default is prevented return early
 		if ( !this._triggerPageBeforeChange( to, triggerData, settings ) ) {
 			return;
 		}
 
-		// We allow "pagebeforechange" observers to modify the to in
-		// the trigger data to allow for redirects. Make sure our to is
-		// updated. We also need to re-evaluate whether it is a string,
-		// because an object can also be replaced by a string
+		// We allow "pagebeforechange" observers to modify the to in the trigger data to allow for
+		// redirects. Make sure our to is updated. We also need to re-evaluate whether it is a
+		// string, because an object can also be replaced by a string
 		to = triggerData.toPage;
 
-		// If the caller passed us a url, call loadPage()
-		// to make sure it is loaded into the DOM. We'll listen
-		// to the promise object it returns so we know when
-		// it is done loading or if an error occurred.
+		// If the caller passed us a url, call loadPage() to make sure it is loaded into the DOM.
+		// We'll listen to the promise object it returns so we know when it is done loading or if
+		// an error ocurred.
 		if ( $.type( to ) === "string" ) {
-			// Set the isPageTransitioning flag to prevent any requests from
-			// entering this method while we are in the midst of loading a page
-			// or transitioning.
+
+			// Set the isPageTransitioning flag to prevent any requests from entering this method
+			// while we are in the midst of loading a page or transitioning.
 			isPageTransitioning = true;
 
 			this._loadUrl( to, triggerData, settings );
@@ -953,52 +961,52 @@ $.widget( "mobile.pagecontainer", {
 		var fromPage, url, pageUrl, fileUrl, active, activeIsInitialPage, historyDir, pageTitle,
 			isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred, beforeTransition;
 
-		// If we are in the midst of a transition, queue the current request.
-		// We'll call changePage() once we're done with the current transition
-		// to service the request.
+		// If we are in the midst of a transition, queue the current request. We'll call
+		// changePage() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
-			// make sure to only queue the to and settings values so the arguments
-			// work with a call to the change method
+
+			// Make sure to only queue the to and settings values so the arguments work with a call
+			// to the change method
 			pageTransitionQueue.unshift( [ toPage, settings ] );
 			return;
 		}
 
-		// DEPRECATED - this call only, in favor of the before transition
-		// if the page beforechange default is prevented return early
+		// DEPRECATED - this call only, in favor of the before transition if the page beforechange
+		// default is prevented return early
 		if ( !this._triggerPageBeforeChange( toPage, triggerData, settings ) ) {
 			return;
 		}
 
 		triggerData.prevPage = settings.fromPage;
-		// if the (content|page)beforetransition default is prevented return early
-		// Note, we have to check for both the deprecated and new events
+
+		// If the (content|page)beforetransition default is prevented return early. Note, we have
+		// to check for both the deprecated and new events
 		beforeTransition = this._triggerWithDeprecated( "beforetransition", triggerData );
 		if ( beforeTransition.deprecatedEvent.isDefaultPrevented() ||
 				beforeTransition.event.isDefaultPrevented() ) {
 			return;
 		}
 
-		// Set the isPageTransitioning flag to prevent any requests from
-		// entering this method while we are in the midst of loading a page
-		// or transitioning.
+		// Set the isPageTransitioning flag to prevent any requests from entering this method while
+		// we are in the midst of loading a page or transitioning.
 		isPageTransitioning = true;
 
-		// If we are going to the first-page of the application, we need to make
-		// sure settings.dataUrl is set to the application document url. This allows
-		// us to avoid generating a document url with an id hash in the case where the
-		// first-page of the document has an id attribute specified.
+		// If we are going to the first-page of the application, we need to make sure
+		// settings.dataUrl is set to the application document url. This allows us to avoid
+		// generating a document url with an id hash in the case where the first-page of the
+		// document has an id attribute specified.
 		if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
 			settings.dataUrl = $.mobile.path.documentUrl.hrefNoHash;
 		}
 
-		// The caller passed us a real page DOM element. Update our
-		// internal state and then trigger a transition to the page.
+		// The caller passed us a real page DOM element. Update our internal state and then trigger
+		// a transition to the page.
 		fromPage = settings.fromPage;
 		url = ( settings.dataUrl && $.mobile.path.convertUrlToDataUrl( settings.dataUrl ) ) ||
 			toPage.jqmData( "url" );
 
-		// The pageUrl var is usually the same as url, except when url is obscured
-		// as a dialog url. pageUrl always contains the file path
+		// The pageUrl var is usually the same as url, except when url is obscured as a dialog url.
+		// pageUrl always contains the file path
 		pageUrl = url;
 		fileUrl = $.mobile.path.getFilePath( url );
 		active = $.mobile.navigate.history.getActive();
@@ -1009,16 +1017,14 @@ $.widget( "mobile.pagecontainer", {
 			toPage.jqmData( "role" ) === "dialog" ) &&
 			toPage.jqmData( "dialog" ) !== true;
 
-		// By default, we prevent changePage requests when the fromPage and toPage
-		// are the same element, but folks that generate content
-		// manually/dynamically and reuse pages want to be able to transition to
-		// the same page. To allow this, they will need to change the default
-		// value of allowSamePageTransition to true, *OR*, pass it in as an
-		// option when they manually call changePage(). It should be noted that
-		// our default transition animations assume that the formPage and toPage
-		// are different elements, so they may behave unexpectedly. It is up to
-		// the developer that turns on the allowSamePageTransitiona option to
-		// either turn off transition animations, or make sure that an appropriate
+		// By default, we prevent changePage requests when the fromPage and toPage are the same
+		// element, but folks that generate content manually/dynamically and reuse pages want to be
+		// able to transition to the same page. To allow this, they will need to change the default
+		// value of allowSamePageTransition to true, *OR*, pass it in as an option when they
+		// manually call changePage(). It should be noted that our default transition animations
+		// assume that the formPage and toPage are different elements, so they may behave
+		// unexpectedly. It is up to the developer that turns on the allowSamePageTransitiona
+		// option to either turn off transition animations, or make sure that an appropriate
 		// animation transition is used.
 		if ( fromPage && fromPage[ 0 ] === toPage[ 0 ] &&
 				!settings.allowSamePageTransition ) {
@@ -1027,8 +1033,8 @@ $.widget( "mobile.pagecontainer", {
 			this._triggerWithDeprecated( "transition", triggerData );
 			this._triggerWithDeprecated( "change", triggerData );
 
-			// Even if there is no page change to be done, we should keep the
-			// urlHistory in sync with the hash changes
+			// Even if there is no page change to be done, we should keep the urlHistory in sync
+			// with the hash changes
 			if ( settings.fromHashChange ) {
 				$.mobile.navigate.history.direct( { url: url } );
 			}
@@ -1039,10 +1045,9 @@ $.widget( "mobile.pagecontainer", {
 		// We need to make sure the page we are given has already been enhanced.
 		toPage.page( { role: settings.role } );
 
-		// If the changePage request was sent from a hashChange event, check to
-		// see if the page is already within the urlHistory stack. If so, we'll
-		// assume the user hit the forward/back button and will try to match the
-		// transition accordingly.
+		// If the changePage request was sent from a hashChange event, check to see if the page is
+		// already within the urlHistory stack. If so, we'll assume the user hit the forward/back
+		// button and will try to match the transition accordingly.
 		if ( settings.fromHashChange ) {
 			historyDir = settings.direction === "back" ? -1 : 1;
 		}
@@ -1050,40 +1055,39 @@ $.widget( "mobile.pagecontainer", {
 		// We blur the focused element to cause the virtual keyboard to disappear
 		$.ui.safeBlur( $.ui.safeActiveElement( this.document[ 0 ] ) );
 
-		// Record whether we are at a place in history where a dialog used to be -
-		// if so, do not add a new history entry and do not change the hash either
+		// Record whether we are at a place in history where a dialog used to be - if so, do not
+		// add a new history entry and do not change the hash either
 		alreadyThere = false;
 
-		// If we're displaying the page as a dialog, we don't want the url
-		// for the dialog content to be used in the hash. Instead, we want
-		// to append the dialogHashKey to the url of the current page.
+		// If we're displaying the page as a dialog, we don't want the url for the dialog content
+		// to be used in the hash. Instead, we want to append the dialogHashKey to the url of the
+		// current page.
 		if ( isDialog && active ) {
-			// on the initial page load active.url is undefined and in that case
-			// should be an empty string. Moving the undefined -> empty string back
-			// into urlHistory.addNew seemed imprudent given undefined better
-			// represents the url state
 
-			// If we are at a place in history that once belonged to a dialog, reuse
-			// this state without adding to urlHistory and without modifying the
-			// hash. However, if a dialog is already displayed at this point, and
-			// we're about to display another dialog, then we must add another hash
-			// and history entry on top so that one may navigate back to the
-			// original dialog
+			// On the initial page load active.url is undefined and in that case should be an empty
+			// string. Moving the undefined -> empty string back into urlHistory.addNew seemed
+			// imprudent given undefined better represents the url state
+
+			// If we are at a place in history that once belonged to a dialog, reuse this state
+			// without adding to urlHistory and without modifying the hash. However, if a dialog is
+			// already displayed at this point, and we're about to display another dialog, then we
+			// must add another hash and history entry on top so that one may navigate back to the
+			// original dialog.
 			if ( active.url &&
 					active.url.indexOf( $.mobile.dialogHashKey ) > -1 &&
 					this.activePage &&
-					!this.activePage.hasClass( "ui-dialog" ) &&
+					!this.activePage.hasClass( "ui-page-dialog" ) &&
 					$.mobile.navigate.history.activeIndex > 0 ) {
 
 				settings.changeHash = false;
 				alreadyThere = true;
 			}
 
-			// Normally, we tack on a dialog hash key, but if this is the location
-			// of a stale dialog, we reuse the URL from the entry
+			// Normally, we tack on a dialog hash key, but if this is the location of a stale
+			// dialog, we reuse the URL from the entry
 			url = ( active.url || "" );
 
-			// account for absolute urls instead of just relative urls use as hashes
+			// Account for absolute urls instead of just relative urls use as hashes
 			if ( !alreadyThere && url.indexOf( "#" ) > -1 ) {
 				url += $.mobile.dialogHashKey;
 			} else {
@@ -1091,9 +1095,8 @@ $.widget( "mobile.pagecontainer", {
 			}
 		}
 
-		// if title element wasn't found, try the page div data attr too
-		// If this is a deep-link or a reload ( active === undefined ) then just
-		// use pageTitle
+		// If title element wasn't found, try the page div data attr too.
+		// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
 		newPageTitle = ( !active ) ? pageTitle : toPage.jqmData( "title" ) ||
 		toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).text();
 		if ( !!newPageTitle && pageTitle === document.title ) {
@@ -1108,7 +1111,7 @@ $.widget( "mobile.pagecontainer", {
 			( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined ) ||
 			( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
-		//add page to history stack if it's not back or forward
+		// Add page to history stack if it's not back or forward
 		if ( !historyDir && alreadyThere ) {
 			$.mobile.navigate.history.getActive().pageUrl = pageUrl;
 		}
@@ -1116,7 +1119,7 @@ $.widget( "mobile.pagecontainer", {
 		// Set the location hash.
 		if ( url && !settings.fromHashChange ) {
 
-			// rebuilding the hash here since we loose it earlier on
+			// Rebuilding the hash here since we loose it earlier on
 			// TODO preserve the originally passed in path
 			if ( !$.mobile.path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
 				url = "#" + url;
@@ -1138,13 +1141,13 @@ $.widget( "mobile.pagecontainer", {
 			}
 		}
 
-		//set page title
+		// Set page title
 		document.title = pageTitle;
 
-		//set "toPage" as activePage deprecated in 1.4 remove in 1.5
+		// Set "toPage" as activePage deprecated in 1.4 remove in 1.5
 		$.mobile.activePage = toPage;
 
-		//new way to handle activePage
+		// New way to handle activePage
 		this.activePage = toPage;
 
 		// If we're navigating back in the URL history, set reverse accordingly.
@@ -1161,12 +1164,12 @@ $.widget( "mobile.pagecontainer", {
 		cssTransitionDeferred.done( $.proxy( function( name, reverse, $to, $from, alreadyFocused ) {
 			$.mobile.removeActiveLinkClass();
 
-			//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+			// If there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 			if ( settings.duplicateCachedPage ) {
 				settings.duplicateCachedPage.remove();
 			}
 
-			// despite visibility: hidden addresses issue #2965
+			// Despite visibility: hidden addresses issue #2965
 			// https://github.com/jquery/jquery-mobile/issues/2965
 			if ( !alreadyFocused ) {
 				$.mobile.focusPage( toPage );
@@ -1178,7 +1181,7 @@ $.widget( "mobile.pagecontainer", {
 		}, this ) );
 	},
 
-	// determine the current base url
+	// Determine the current base url
 	_findBaseWithDefault: function() {
 		var closestBase = ( this.activePage &&
 			$.mobile.getClosestBaseUrl( this.activePage ) );
@@ -1186,15 +1189,15 @@ $.widget( "mobile.pagecontainer", {
 	}
 } );
 
-// The following handlers should be bound after mobileinit has been triggered
-// the following deferred is resolved in the init file
+// The following handlers should be bound after mobileinit has been triggered.
+// The following deferred is resolved in the init file.
 $.mobile.navreadyDeferred = $.Deferred();
 
-//these variables make all page containers use the same queue and only navigate one at a time
+// These variables make all page containers use the same queue and only navigate one at a time
 // queue to hold simultanious page transitions
 var pageTransitionQueue = [],
 
-	// indicates whether or not page is in process of transitioning
+	// Indicates whether or not page is in process of transitioning
 	isPageTransitioning = false;
 
 return $.mobile.pagecontainer;

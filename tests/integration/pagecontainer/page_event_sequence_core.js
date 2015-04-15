@@ -1,4 +1,4 @@
-( function() {
+( function( QUnit, $ ) {
 
 var eventSequence,
 	eventsList = [
@@ -13,7 +13,6 @@ var eventSequence,
 		"pagehide",
 		"pageshow",
 		"pagechange",
-		"pageinit",
 
 		// Valid as of 1.4.x
 		"pagecontainerbeforechange",
@@ -51,7 +50,7 @@ var eventSequence,
 		} );
 	};
 
-module( "Page event sequence tests", {
+QUnit.module( "Page event sequence tests", {
 	setup: function() {
 		eventSequence = [];
 
@@ -74,7 +73,7 @@ function makeOtherPageUrl( filename ) {
 	} ) );
 }
 
-asyncTest( "Event sequence during navigation to another page", function() {
+QUnit.asyncTest( "Event sequence during navigation to another page", function( assert ) {
 	expect( 1 );
 
 	var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
@@ -108,10 +107,6 @@ asyncTest( "Event sequence during navigation to another page", function() {
 			{ type: "pagebeforecreate", target: "other-page",
 			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 			{ type: "pagecreate", target: "other-page",
-			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
-
-			// Deprecated as of 1.4.0
-			{ type: "pageinit", target: "other-page",
 			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 
 			// Deprecated as of 1.4.0
@@ -176,17 +171,17 @@ asyncTest( "Event sequence during navigation to another page", function() {
 			$( "#go-to-other-page" ).click();
 		},
 		function() {
-			deepEqual( eventSequence, expectedEventSequence, "Event sequence as expected" );
+			assert.deepEqual( eventSequence, expectedEventSequence, "Event sequence as expected" );
 			$( ":mobile-pagecontainer" ).pagecontainer( "back" );
 		},
 		function() {
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "Event sequence during page load failure", function() {
-	expect( 1 );
+QUnit.asyncTest( "Event sequence during page load failure", function( assert ) {
+	assert.expect( 1 );
 
 	var otherPageUrl = makeOtherPageUrl( "page-does-not-exist.html" ),
 		expectedEventSequence = [
@@ -227,17 +222,18 @@ asyncTest( "Event sequence during page load failure", function() {
 			}
 		},
 		function() {
-			deepEqual( eventSequence, expectedEventSequence, "Event sequence as expected" );
-			start();
+			assert.deepEqual( eventSequence, expectedEventSequence, "Event sequence as expected" );
+			QUnit.start();
 		}
 	] );
 } );
-module( "load method" );
-test( "load does not trigger an error when called withput a second param", function() {
-	var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
-		pagecontainer = $( ":mobile-pagecontainer" );
+QUnit.module( "load method" );
+QUnit.test( "load does not trigger an error when called without a second param",
+	function( assert ) {
+		var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
+			pagecontainer = $( ":mobile-pagecontainer" );
 
-	throws( !pagecontainer.pagecontainer( "load", otherPageUrl ) );
-} );
+		assert.throws( !pagecontainer.pagecontainer( "load", otherPageUrl ) );
+	} );
 
-} )();
+} )( QUnit, jQuery );

@@ -7,52 +7,36 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script>
-		$(document).bind('mobileinit',function(){
-			// Expect content to inherit this theme when not explicitly set
-			$.mobile.page.prototype.options.contentTheme = "d";
-		});
-	</script>
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
-		$.testHelper.asyncLoad([
-			[
-				"widgets/dialog",
-				"widgets/page"
-			],
+		$.testHelper.asyncLoad( [
+			[ "widgets/page.dialog" ],
 			[ "init" ],
-			[
-				"dialog_count.js"
-			]
-		]);
+			[ "dialog_count.js" ]
+		] );
 	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 
 	<div id="qunit"></div>
-
-	<div id="qunit-fixture">
-
-		<div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
-			<div  data-nstest-role="header">
-				<h1>Dialog</h1>
-			</div>
-			<div data-nstest-role="content" >
-
-			</div>
-			<div data-nstest-role="footer">
-				footer
-			</div>
+	<pre><code id="console"></code></pre>
+	<div id="foo-dialog" data-nstest-dialog="true" data-nstest-role="dialog" data-nstest-theme="b">
+		<div  data-nstest-role="header">
+			<h1>Dialog</h1>
 		</div>
+		<div data-nstest-role="content" >
 
+		</div>
+		<div data-nstest-role="footer">
+			footer
+		</div>
 	</div>
 
 </body>

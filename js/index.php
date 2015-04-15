@@ -27,6 +27,7 @@ $files = array(
 	'widgets/enhancer.widgetCrawler.js',
 	'widgets/page.js',
 	'widgets/page.dialog.js',
+	'widgets/page.dialog.backcompat.js',
 	'widgets/loader.js',
 	
 	'events/navigate.js',
@@ -51,7 +52,6 @@ $files = array(
 	'transitions/visuals/turn.js',
 	'../external/jquery-ui/accordion.js',
 	'widgets/accordion.js',
-	'widgets/dialog.js',
 	'widgets/collapsible.js',
 	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',

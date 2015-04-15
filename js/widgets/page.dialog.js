@@ -33,115 +33,199 @@
 
 return $.widget( "mobile.page", $.mobile.page, {
 	options: {
+		classes: {
+			"ui-page-dialog-close-button":
+				"ui-button ui-corner-all ui-button-icon-only",
+			"ui-page-dialog-close-button-icon": "ui-icon-delete ui-icon",
+			"ui-page-dialog-contain": "ui-overlay-shadow ui-corner-all"
+		},
 
 		// Accepts left, right and none
 		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true,
 		dialog: false
 	},
 
 	_create: function() {
-		this._super();
-		if ( this.options.dialog ) {
+		this.dialog = {};
 
-			$.extend( this, {
-				_inner: this.element.children(),
-				_headerCloseButton: null
-			} );
-
-			if ( !this.options.enhanced ) {
-				this._setCloseBtn( this.options.closeBtn );
-			}
-		}
+		return this._superApply( arguments );
 	},
 
-	_enhance: function() {
-		this._super();
+	_establishStructure: function() {
+		var returnValue = this._superApply( arguments );
 
-		// Class the markup for dialog styling and wrap interior
 		if ( this.options.dialog ) {
-			this.element.addClass( "ui-dialog" )
-				.wrapInner( $( "<div/>", {
+			if ( this.options.enhanced ) {
+				this.dialog.wrapper = this.element.children( ".ui-page-dialog-contain" ).eq( 0 );
+				if ( this.options.closeBtn !== "none" ) {
+					this.dialog.button = this.dialog.wrapper
+						.children( ".ui-header" )
+							.children( "a.ui-page-dialog-close-button" );
+					this.dialog.icon = this.dialog.button
+						.children( ".ui-page-dialog-close-button-icon" );
+				}
+			} else {
+				this.dialog.wrapper = $( "<div>" );
 
-					// ARIA role
-					"role": "dialog",
-					"class": "ui-dialog-contain ui-overlay-shadow" +
-						( this.options.corners ? " ui-corner-all" : "" )
-				} ) );
+				// Gut the page
+				this.dialog.wrapper.append( this.element.contents() );
+
+				// Establish the button
+				this._setCloseButton( this.options.closeBtn, this.options.closeBtnText );
+			}
 		}
+
+		return returnValue;
+	},
+
+	_setAttributes: function() {
+		var returnValue = this._superApply( arguments );
+
+		if ( this.options.dialog ) {
+			this._addClass( "ui-page-dialog", null );
+			this._addClass( this.dialog.wrapper, "ui-page-dialog-contain", null );
+
+			// Aria role
+			this.dialog.wrapper.attr( "role", "dialog" );
+		}
+
+		if ( this.dialog.button && this.options.enhanced ) {
+			this._toggleButtonClasses( true, this.options.closeBtn );
+		}
+
+		return returnValue;
+	},
+
+	_attachToDOM: function() {
+		var returnValue = this._superApply( arguments );
+
+		if ( this.options.dialog && !this.options.enhanced ) {
+			this.element.append( this.dialog.wrapper );
+		}
+
+		return returnValue;
+	},
+
+	_toggleButtonClasses: function( add, location ) {
+		this._toggleClass( this.dialog.button, "ui-page-dialog-close-button",
+			"ui-button-" + location, add );
+		this._toggleClass( this.dialog.icon, "ui-page-dialog-close-button-icon", null, add );
 	},
 
 	_setOptions: function( options ) {
-		var closeButtonLocation, closeButtonText,
-			currentOpts = this.options;
+		var closeButtonLocation, closeButtonText;
 
-		if ( options.corners !== undefined ) {
-			this._inner.toggleClass( "ui-corner-all", !!options.corners );
+		this._super( options );
+
+		if ( !this.options.dialog ) {
+			return;
 		}
 
 		if ( options.overlayTheme !== undefined ) {
 			if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
-				currentOpts.overlayTheme = options.overlayTheme;
+
+				// Needs the option value to already be set on this.options. This is accomplished
+				// by chaining up above, before handling the overlayTheme change.
 				this._handlePageBeforeShow();
 			}
 		}
 
 		if ( options.closeBtnText !== undefined ) {
-			closeButtonLocation = currentOpts.closeBtn;
+			closeButtonLocation = this.options.closeBtn;
 			closeButtonText = options.closeBtnText;
 		}
 
 		if ( options.closeBtn !== undefined ) {
 			closeButtonLocation = options.closeBtn;
+			closeButtonText = closeButtonText || this.options.closeBtnText;
 		}
 
 		if ( closeButtonLocation ) {
-			this._setCloseBtn( closeButtonLocation, closeButtonText );
+			this._setCloseButton( closeButtonLocation, closeButtonText );
 		}
+	},
 
-		this._super( options );
+	_toggleCloseButtonClickability: function( isClickable ) {
+		if ( this.dialog.button ) {
+			if ( isClickable ) {
+				this.dialog.button.css( "pointer-events", "" );
+				this.dialog.button.removeAttr( "tabindex" );
+			} else {
+				this.dialog.button.css( "pointer-events", "none" );
+				this.dialog.button.attr( "tabindex", -1 );
+			}
+		}
 	},
 
 	_handlePageBeforeShow: function() {
+
+		// Make sure the close button is clickable
+		this._toggleCloseButtonClickability( true );
 		if ( this.options.overlayTheme && this.options.dialog ) {
-			this.removeContainerBackground();
-			this.setContainerBackground( this.options.overlayTheme );
+			this._setContainerSwatch( this.options.overlayTheme );
 		} else {
 			this._super();
 		}
 	},
 
-	_setCloseBtn: function( location, text ) {
-		var dst,
-			button = this._headerCloseButton;
+	_handleButtonClick: function() {
+
+		// Render the close button unclickable after one click
+		this._toggleCloseButtonClickability( false );
+	},
+
+	_setCloseButton: function( location, text ) {
+		var destination;
 
 		// Sanitize value
 		location = "left" === location ? "left" : "right" === location ? "right" : "none";
 
-		if ( "none" === location ) {
-			if ( button ) {
-				button.remove();
-				button = null;
-			}
-		} else if ( button ) {
-			button.removeClass( "ui-button-left ui-button-right" ).addClass( "ui-button-" + location );
-			if ( text ) {
-				button.text( text );
-			}
-		} else {
-			dst = this._inner.find( ":jqmData(role='header')" ).first();
-			button = $( "<a></a>", {
-				"href": "#",
-				"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
-			} )
-				.attr( "data-" + $.mobile.ns + "rel", "back" )
-				.text( text || this.options.closeBtnText || "" )
-				.prependTo( dst );
-		}
+		if ( this.dialog.button ) {
 
-		this._headerCloseButton = button;
+			if ( "none" === location ) {
+
+				// Remove existing button
+				this._toggleButtonClasses( false, location );
+				this._off( this.dialog.button, "click" );
+				this.dialog.button.remove();
+				this.dialog.button = null;
+				this.dialog.icon = null;
+			} else {
+
+				// Update existing button
+				this._removeClass( this.dialog.button, null, "ui-button-left ui-button-right" )
+					._addClass( this.dialog.button, null, "ui-button-" + location );
+				if ( text ) {
+
+					// Get rid of all text nodes without touching other node types before updating
+					// the button's text.
+					this.dialog.button.contents()
+						.filter( function() {
+							return ( this.nodeType === 3 );
+						} )
+						.remove();
+					this.dialog.button.prepend( text );
+				}
+			}
+		} else if ( location !== "none" ) {
+
+			// Create new button
+			destination = this.dialog.wrapper
+				.children( ".ui-header,[data-" + $.mobile.ns + "role='header']" )
+					.first();
+			if ( destination.length ) {
+				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
+					.text( text || this.options.closeBtnText || "" );
+				this.dialog.icon = $( "<span>" ).appendTo( this.dialog.button );
+
+				this._toggleButtonClasses( true, location );
+
+				this.dialog.button.prependTo( destination );
+				this._on( this.dialog.button, { "click": "_handleButtonClick" } );
+			}
+		}
 	}
 } );
 

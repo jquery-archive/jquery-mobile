@@ -983,7 +983,7 @@ $.widget( "mobile.popup", {
 		urlHistory = $.mobile.navigate.history;
 		hashkey = $.mobile.dialogHashKey;
 		activePage = $.mobile.activePage;
-		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
+		currentIsDialog = ( activePage ? activePage.hasClass( "ui-page-dialog" ) : false );
 		this._pageUrl = url = urlHistory.getActive().url;
 		hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog &&
 			( urlHistory.activeIndex > 0 );

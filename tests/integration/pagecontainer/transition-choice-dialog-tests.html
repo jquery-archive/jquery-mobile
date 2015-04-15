@@ -16,16 +16,12 @@
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script>
-		$.testHelper.asyncLoad([
-			[ "widgets/dialog" ],
+		$.testHelper.asyncLoad( [
+			[ "widgets/page.dialog.backcompat" ],
 			[ "init" ],
-			[
-				"transition_choice_dialog_core.js"
-			]
-		]);
+			[ "transition_choice_dialog_core.js" ]
+		] );
 	</script>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 	<div id="qunit"></div>

@@ -1,51 +1,95 @@
 /*
  * mobile dialog unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
-module( "dialog", {
+function jqmDataSelector( expression ) {
+	return "[data-" + $.mobile.ns + expression + "]";
+}
+
+QUnit.module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
 		$.testHelper.navReset( homeWithSearch );
 	}
 } );
 
-asyncTest( "Test option data-close-button", function() {
-	expect( 5 );
+QUnit.asyncTest( "test option overlayTheme", function( assert ) {
+	$.testHelper.pageSequence( [
+
+		function() {
+			$( "#open-overlayTheme-test" ).click();
+		},
+
+		function() {
+			assert.strictEqual( $( ".ui-page-active" ).attr( "id" ), "overlayTheme-test",
+				"overlayTheme test dialog is active" );
+			assert.hasClasses( $( "body" ), "ui-overlay-x",
+				"Page container has swatch specified in the data attribute" );
+
+			$( ".ui-page-active" ).page( "option", "overlayTheme", "y" );
+			assert.hasClasses( $( "body" ), "ui-overlay-y",
+				"Page container has swatch applied via option change" );
+
+			$.mobile.back();
+		},
+
+		QUnit.start
+
+	] );
+} );
+
+QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
+	expect( 7 );
 
 	$.testHelper.pageSequence( [
 		function() {
-			// bring up the dialog
+			// Bring up the dialog
 			$( "#close-button-test-link" ).click();
 		},
 
 		function() {
-			var a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
+			var a,
+				dialog = $( "#close-button-test" );
 
-			$( "#close-button-test" ).page( "option", "closeBtn", "left" );
-			a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
-			ok( a.hasClass( "ui-button-left" ), "The close button has class ui-button-left when the closeBtn option is set to 'left'" );
-			$( "#close-button-test" ).page( "option", "closeBtn", "right" );
-			a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
-			ok( a.hasClass( "ui-button-right" ), "The close button has class ui-button-right when the closeBtn option is set to 'right'" );
+			assert.strictEqual( $( "#close-button-test .ui-header a" ).length, 0,
+				"Initially, the dialog header has no anchor elements (option value 'none')" );
 
+			dialog.page( "option", "closeBtn", "left" );
+			a = $( "#close-button-test .ui-header a" );
+			assert.strictEqual( a.length, 1,
+				"The dialog header has exactly one anchor when the option value is 'left'" );
+			assert.hasClasses( a, "ui-button-left",
+				"The close button has class ui-button-left when the closeBtn option is set " +
+				"to 'left'" );
+
+			dialog.page( "option", {
+				"closeBtn": "right",
+				"closeBtnText": "Custom text"
+			} );
+			a = $( "#close-button-test .ui-header a" );
+			assert.strictEqual( a.length, 1,
+				"The dialog header has exactly one anchor when the option value is 'right'" );
+			assert.hasClasses( a, "ui-button-right",
+				"The close button has class ui-button-right when the closeBtn option is set " +
+				"to 'right'" );
+			assert.strictEqual( a.text(), "Custom text", "Anchor text updated via option" );
+
+			dialog.page( "option", "closeBtn", "none" );
+			assert.strictEqual( $( "#close-button-test .ui-header a" ).length, 0,
+				"Initially, the dialog header has no anchor elements (option value 'none')" );
 		},
 
-		function() {
-			start();
-		}
+		QUnit.start
 	] );
 } );
 
-asyncTest( "clicking dialog 'Close' button twice in quick succession does not cause the browser history to retreat by two", function() {
+QUnit.asyncTest( "Clicking dialog 'Close' button renders it unclickable", function( assert ) {
 	var correctLocation;
 
-	expect( 1 );
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -53,24 +97,35 @@ asyncTest( "clicking dialog 'Close' button twice in quick succession does not ca
 		},
 
 		function() {
-
 			$.mobile.changePage( $( "#doubleCloseTestPage" ) );
 		},
 
 		function() {
-
+			correctLocation = location.href;
 			$( "#doubleCloseTestPage a" ).click();
 		},
 
+		function() {
+			var closeButton = $( "#foo-dialog a" ).click();
+
+			assert.strictEqual( closeButton.css( "pointer-events" ), "none",
+				"Close button has pointer events turned off post-click" );
+			assert.strictEqual( closeButton.attr( "tabindex" ), "-1",
+				"Close button tabindex is set to -1 post-click" );
+		},
+
 		function( timedOut ) {
-			ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
-			start();
-		}
+			assert.ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
+			assert.ok( location.href === correctLocation, "Location is correct afterwards" );
+			$.mobile.back();
+		},
+
+		QUnit.start
 	] );
 } );
 
-asyncTest( "dialog element with no theming", function() {
-	expect( 5 );
+QUnit.asyncTest( "dialog element with no theming", function( assert ) {
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -78,7 +133,7 @@ asyncTest( "dialog element with no theming", function() {
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
 			$( "#link-a" ).click();
 		},
 
@@ -86,50 +141,24 @@ asyncTest( "dialog element with no theming", function() {
 			var dialog = $( "#dialog-a" );
 
 			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-a" ), "Expected explicit theme ui-page-theme-a" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
+			assert.hasClasses( dialog, "ui-page-theme-a",
+				"Expected explicit theme ui-page-theme-a" );
+			assert.hasClasses( $( "body" ), "ui-overlay-a",
+				"Expected default overlay theme ui-overlay-a" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme", function() {
+QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
-	expect( 6 );
-
-	$.testHelper.pageSequence( [
-		function() {
-			$.mobile.changePage( $( "#mypage" ) );
-		},
-
-		function() {
-			//bring up the dialog
-			$( "#link-b" ).click();
-		},
-
-		function() {
-			var dialog = $( "#dialog-b" );
-
-			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-e" ), "Expected explicit theme ui-page-theme-e" );
-			ok( !$.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected no overlay theme ui-overlay-b" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-e" ), "Expect content to inherit from data-theme" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
-
-			start();
-		}
-	] );
-} );
-
-asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
 	expect( 5 );
 
 	$.testHelper.pageSequence( [
@@ -138,50 +167,114 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
+			$( "#link-b" ).click();
+		},
+
+		function() {
+			var dialog = $( "#dialog-b" );
+
+			// Assert dialog theme inheritance (issue 1375):
+			assert.hasClasses( dialog, "ui-page-theme-e",
+				"Expected explicit theme ui-page-theme-e" );
+			assert.lacksClasses( $( "body" ), "ui-overlay-b",
+				"Expected no overlay theme ui-overlay-b" );
+			assert.hasClasses( $( "body" ), "ui-overlay-a",
+				"Expected default overlay theme ui-overlay-a" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
+
+			QUnit.start();
+		}
+	] );
+} );
+
+QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
+	expect( 4 );
+
+	$.testHelper.pageSequence( [
+		function() {
+			$.mobile.changePage( $( "#mypage" ) );
+		},
+
+		function() {
+			// Bring up the dialog
 			$( "#link-c" ).click();
 		},
 
 		function() {
 			var dialog = $( "#dialog-c" );
 			// Assert dialog theme inheritance (issue 1375):
-			ok( dialog.hasClass( "ui-page-theme-e" ), "Expected explicit theme ui-page-theme-e" );
-			ok( $.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected explicit overlay theme ui-overlay-b" );
-			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
-			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
+			assert.hasClasses( dialog, "ui-page-theme-e",
+				"Expected explicit theme ui-page-theme-e" );
+			assert.hasClasses( $( "body" ), "ui-overlay-b",
+				"Expected explicit overlay theme ui-overlay-b" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+				"Expected header to inherit from dialog" );
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow", function() {
-	var pageTheme;
+QUnit.asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
+	function( assert ) {
+		var pageTheme;
 
-	expect( 1 );
+		expect( 1 );
+
+		$.testHelper.pageSequence( [
+			function() {
+				$.mobile.changePage( "#mypage" );
+			},
+
+			function() {
+				// Bring up the dialog
+				$( "#foo-dialog-link" ).click();
+			},
+
+			function() {
+				pageTheme = "ui-overlay-" +
+					$( ".ui-page-active" ).page( "option", "overlayTheme" );
+
+				$.mobile.pageContainer.removeClass( pageTheme );
+
+				$( ".ui-page-active" )
+					.bind( "pagebeforeshow", function() {
+						assert.ok( $.mobile.pageContainer.hasClass( pageTheme ),
+							"Page container has the same theme as the dialog overlayTheme on " +
+								"pagebeforeshow" );
+						QUnit.start();
+					} ).trigger( "pagebeforeshow" );
+			}
+		] );
+	} );
+
+QUnit.asyncTest( "pre-rendered dialog options work", function( assert ) {
+	expect( 3 );
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#mypage" );
+			$( "#open-enhanced-dialog" ).click();
 		},
-
 		function() {
-			//bring up the dialog
-			$( "#foo-dialog-link" ).click();
+			assert.strictEqual( $( ".ui-page-active" ).attr( "id" ), "enhanced-dialog",
+				"enhanced dialog is the current page" );
+
+			$( "#enhanced-dialog" ).page( "option", "closeBtn", "right" );
+			assert.hasClasses( $( "#enhanced-dialog a" ), "ui-button-right",
+				"enhanced dialog button location can be changed" );
+			assert.lacksClasses( $( "#enhanced-dialog a" ), "ui-button-left",
+				"enhanced dialog button does not retain old location" );
+
+			$.mobile.back();
 		},
-
-		function() {
-			pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
-
-			$.mobile.pageContainer.removeClass( pageTheme );
-
-			$.mobile.activePage
-				.bind( "pagebeforeshow", function() {
-					ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the dialog overlayTheme on pagebeforeshow" );
-					start();
-				} ).trigger( "pagebeforeshow" );
-		}
+		QUnit.start
 	] );
 } );
-} )( jQuery );
+
+} )( QUnit, jQuery );
