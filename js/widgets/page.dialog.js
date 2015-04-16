@@ -29,7 +29,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.page", $.mobile.page, {
 	options: {
@@ -49,7 +49,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 			$.extend( this, {
 				_inner: this.element.children(),
 				_headerCloseButton: null
-			});
+			} );
 
 			if ( !this.options.enhanced ) {
 				this._setCloseBtn( this.options.closeBtn );
@@ -66,10 +66,10 @@ return $.widget( "mobile.page", $.mobile.page, {
 				.wrapInner( $( "<div/>", {
 
 					// ARIA role
-					"role" : "dialog",
-					"class" : "ui-dialog-contain ui-overlay-shadow" +
+					"role": "dialog",
+					"class": "ui-dialog-contain ui-overlay-shadow" +
 						( this.options.corners ? " ui-corner-all" : "" )
-				}));
+				} ) );
 		}
 	},
 
@@ -104,7 +104,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 		this._super( options );
 	},
 
-	_handlePageBeforeShow: function () {
+	_handlePageBeforeShow: function() {
 		if ( this.options.overlayTheme && this.options.dialog ) {
 			this.removeContainerBackground();
 			this.setContainerBackground( this.options.overlayTheme );
@@ -133,9 +133,9 @@ return $.widget( "mobile.page", $.mobile.page, {
 		} else {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
 			button = $( "<a></a>", {
-					"href": "#",
-					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
-				})
+				"href": "#",
+				"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
+			} )
 				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
@@ -143,6 +143,6 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 		this._headerCloseButton = button;
 	}
-});
+} );
 
-});
+} );
