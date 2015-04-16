@@ -28,7 +28,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var getAttr = $.mobile.getAttribute;
 
@@ -78,7 +78,8 @@ return $.widget( "mobile.listview", $.extend( {
 	},
 	// TODO: Remove in 1.5
 	_addThumbClasses: function( containers ) {
-		var i, img, len = containers.length;
+		var i, img,
+			len = containers.length;
 		for ( i = 0; i < len; i++ ) {
 			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
 			if ( img.length ) {
@@ -186,7 +187,7 @@ return $.widget( "mobile.listview", $.extend( {
 					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
-					newStartCount = parseInt( value , 10 ) - 1;
+					newStartCount = parseInt( value, 10 ) - 1;
 
 					item.css( "counter-reset", "listnumbering " + newStartCount );
 				}
@@ -216,7 +217,7 @@ return $.widget( "mobile.listview", $.extend( {
 
 		countBubbles.each( function() {
 			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-		});
+		} );
 		if ( countThemeClass ) {
 			countBubbles.not( "[class*='ui-body-']" ).addClass( countThemeClass );
 		}
@@ -231,4 +232,4 @@ return $.widget( "mobile.listview", $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
-});
+} );
