@@ -28,7 +28,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.panel", {
 	version: "@VERSION",
@@ -77,8 +77,8 @@ return $.widget( "mobile.panel", {
 			_page: this._getPage,
 			_panelInner: this._getPanelInner(),
 			_fixedToolbars: this._getFixedToolbars
-		});
-		if ( this.options.display !== "overlay" ){
+		} );
+		if ( this.options.display !== "overlay" ) {
 			this._getWrapper();
 		}
 		this._addPanelClasses();
@@ -117,7 +117,7 @@ return $.widget( "mobile.panel", {
 		self._modal = $( "<div class='" + self.options.classes.modal + "'></div>" )
 			.on( "mousedown", function() {
 				self.close();
-			})
+			} )
 			.appendTo( target );
 	},
 
@@ -176,11 +176,11 @@ return $.widget( "mobile.panel", {
 	_bindCloseEvents: function() {
 		this._on( this._closeLink, {
 			"click": "_handleCloseClick"
-		});
+		} );
 
-		this._on({
+		this._on( {
 			"click a:jqmData(ajax='false')": "_handleCloseClick"
-		});
+		} );
 	},
 
 	_positionPanel: function( scrollToTop ) {
@@ -212,7 +212,7 @@ return $.widget( "mobile.panel", {
 	},
 
 	_bindFixListener: function() {
-		this._on( this.window, { "throttledresize": "_positionPanel" });
+		this._on( this.window, { "throttledresize": "_positionPanel" } );
 	},
 
 	_unbindFixListener: function() {
@@ -234,17 +234,17 @@ return $.widget( "mobile.panel", {
 	_bindUpdateLayout: function() {
 		var self = this;
 
-		self.element.on( "updatelayout", function(/* e */) {
+		self.element.on( "updatelayout", function( /* e */ ) {
 			if ( self._open ) {
 				self._positionPanel();
 			}
-		});
+		} );
 	},
 
 	_bindLinkListeners: function() {
 		this._on( "body", {
 			"click a": "_handleClick"
-		});
+		} );
 
 	},
 
@@ -260,7 +260,7 @@ return $.widget( "mobile.panel", {
 				link.addClass( $.mobile.activeBtnClass );
 				this.element.one( "panelopen panelclose", function() {
 					link.removeClass( $.mobile.activeBtnClass );
-				});
+				} );
 			}
 			this.toggle();
 		}
@@ -291,20 +291,20 @@ return $.widget( "mobile.panel", {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
 					self.close();
 				}
-			})
+			} )
 			// On escape, close? might need to have a target check too...
 			.on( "keyup.panel", function( e ) {
 				if ( e.keyCode === 27 && self._open ) {
 					self.close();
 				}
-			});
+			} );
 		if ( !this._parentPage && this.options.display !== "overlay" ) {
 			this._on( this.document, {
 				"pageshow": function() {
 					this._openedPage = null;
 					this._getWrapper();
 				}
-			});
+			} );
 		}
 		// Clean up open panels after page hide
 		if ( self._parentPage ) {
@@ -312,13 +312,13 @@ return $.widget( "mobile.panel", {
 				if ( self._open ) {
 					self.close( true );
 				}
-			});
+			} );
 		} else {
 			this.document.on( "pagebeforehide", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
-			});
+			} );
 		}
 	},
 
@@ -333,7 +333,7 @@ return $.widget( "mobile.panel", {
 				o = self.options,
 
 				_openPanel = function() {
-					self._off( self.document , "panelclose" );
+					self._off( self.document, "panelclose" );
 					self._page().jqmData( "panel", "open" );
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
@@ -398,7 +398,7 @@ return $.widget( "mobile.panel", {
 			if ( self._page().jqmData( "panel" ) === "open" ) {
 				self._on( self.document, {
 					"panelclose": _openPanel
-				});
+				} );
 			} else {
 				_openPanel();
 			}
@@ -485,8 +485,8 @@ return $.widget( "mobile.panel", {
 
 	_destroy: function() {
 		var otherPanels,
-		o = this.options,
-		multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
+			o = this.options,
+			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
 		if ( o.display !== "overlay" ) {
 
@@ -535,6 +535,6 @@ return $.widget( "mobile.panel", {
 			this._modal.remove();
 		}
 	}
-});
+} );
 
-});
+} );
