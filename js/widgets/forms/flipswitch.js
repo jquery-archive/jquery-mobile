@@ -30,11 +30,11 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var selectorEscapeRegex = /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g;
 
-return $.widget( "mobile.flipswitch", $.extend({
+return $.widget( "mobile.flipswitch", $.extend( {
 	version: "@VERSION",
 
 	options: {
@@ -48,66 +48,66 @@ return $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_create: function() {
-			var labels;
+		var labels;
 
-			this.type = this.element[ 0 ].nodeName.toLowerCase();
+		this.type = this.element[ 0 ].nodeName.toLowerCase();
 
-			if ( !this.options.enhanced ) {
-				this._enhance();
-			} else {
-				$.extend( this, {
-					flipswitch: this.element.parent(),
-					on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
-					off: this.element.find( ".ui-flipswitch-off" ).eq( 0 )
-				});
+		if ( !this.options.enhanced ) {
+			this._enhance();
+		} else {
+			$.extend( this, {
+				flipswitch: this.element.parent(),
+				on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
+				off: this.element.find( ".ui-flipswitch-off" ).eq( 0 )
+			} );
+		}
+
+		this._handleFormReset();
+
+		// Transfer tabindex to "on" element and make input unfocusable
+		this._originalTabIndex = this.element.attr( "tabindex" );
+		if ( this._originalTabIndex != null ) {
+			this.on.attr( "tabindex", this._originalTabIndex );
+		}
+		this.element.attr( "tabindex", "-1" );
+		this._on( {
+			"focus": "_handleInputFocus"
+		} );
+
+		if ( this.element.is( ":disabled" ) ) {
+			this._setOptions( {
+				"disabled": true
+			} );
+		}
+
+		this._on( this.flipswitch, {
+			"click": "_toggle",
+			"swipeleft": "_left",
+			"swiperight": "_right"
+		} );
+
+		this._on( this.on, {
+			"keydown": "_keydown"
+		} );
+
+		this._on( {
+			"change": "refresh"
+		} );
+
+		// On iOS we need to prevent default when the label is clicked, otherwise it drops down
+		// the native select menu. We nevertheless pass the click onto the element like the
+		// native code would.
+		if ( this.element[ 0 ].nodeName.toLowerCase() === "select" ) {
+			labels = this._findLabels();
+			if ( labels.length ) {
+				this._on( labels, {
+					"click": function( event ) {
+						this.element.click();
+						event.preventDefault();
+					}
+				} );
 			}
-
-			this._handleFormReset();
-
-			// Transfer tabindex to "on" element and make input unfocusable
-			this._originalTabIndex = this.element.attr( "tabindex" );
-			if ( this._originalTabIndex != null ) {
-				this.on.attr( "tabindex", this._originalTabIndex );
-			}
-			this.element.attr( "tabindex", "-1" );
-			this._on({
-				"focus" : "_handleInputFocus"
-			});
-
-			if ( this.element.is( ":disabled" ) ) {
-				this._setOptions({
-					"disabled": true
-				});
-			}
-
-			this._on( this.flipswitch, {
-				"click": "_toggle",
-				"swipeleft": "_left",
-				"swiperight": "_right"
-			});
-
-			this._on( this.on, {
-				"keydown": "_keydown"
-			});
-
-			this._on( {
-				"change": "refresh"
-			});
-
-			// On iOS we need to prevent default when the label is clicked, otherwise it drops down
-			// the native select menu. We nevertheless pass the click onto the element like the
-			// native code would.
-			if ( this.element[ 0 ].nodeName.toLowerCase() === "select" ) {
-				labels = this._findLabels();
-				if ( labels.length ) {
-					this._on( labels, {
-						"click": function( event ) {
-							this.element.click();
-							event.preventDefault();
-						}
-					});
-				}
-			}
+		}
 	},
 
 	_handleInputFocus: function() {
@@ -147,44 +147,44 @@ return $.widget( "mobile.flipswitch", $.extend({
 			// The "on" button is an anchor so it's focusable
 			on = $( "<a></a>", {
 				"href": "#"
-			}),
+			} ),
 			off = $( "<span></span>" ),
 			onText = ( this.type === "input" ) ?
 				options.onText : element.find( "option" ).eq( 1 ).text(),
 			offText = ( this.type === "input" ) ?
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
-			on
-				.addClass( "ui-flipswitch-on ui-button ui-shadow ui-button-inherit" )
-				.text( onText );
-			off
-				.addClass( "ui-flipswitch-off" )
-				.text( offText );
+		on
+			.addClass( "ui-flipswitch-on ui-button ui-shadow ui-button-inherit" )
+			.text( onText );
+		off
+			.addClass( "ui-flipswitch-off" )
+			.text( offText );
 
-			flipswitch
-				.addClass( "ui-flipswitch ui-shadow-inset " +
-					"ui-bar-" + theme + " " +
-					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
-					( ( element.is( ":checked" ) ||
-						element
-							.find( "option" )
-							.eq( 1 )
-							.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
-					( element.is(":disabled") ? " ui-state-disabled": "") +
-					( options.corners ? " ui-corner-all": "" ) +
-					( options.mini ? " ui-mini": "" ) )
-				.append( on, off );
+		flipswitch
+			.addClass( "ui-flipswitch ui-shadow-inset " +
+				"ui-bar-" + theme + " " +
+				( options.wrapperClass ? options.wrapperClass : "" ) + " " +
+				( ( element.is( ":checked" ) ||
+				element
+					.find( "option" )
+						.eq( 1 )
+						.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
+				( element.is( ":disabled" ) ? " ui-state-disabled" : "" ) +
+				( options.corners ? " ui-corner-all" : "" ) +
+				( options.mini ? " ui-mini" : "" ) )
+			.append( on, off );
 
-			element
-				.addClass( "ui-flipswitch-input" )
-				.after( flipswitch )
-				.appendTo( flipswitch );
+		element
+			.addClass( "ui-flipswitch-input" )
+			.after( flipswitch )
+			.appendTo( flipswitch );
 
 		$.extend( this, {
 			flipswitch: flipswitch,
 			on: on,
 			off: off
-		});
+		} );
 	},
 
 	_reset: function() {
@@ -196,9 +196,9 @@ return $.widget( "mobile.flipswitch", $.extend({
 			existingDirection = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
 
 		if ( this.type === "select" ) {
-			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right": "_left";
+			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right" : "_left";
 		} else {
-			direction = this.element.prop( "checked" ) ? "_right": "_left";
+			direction = this.element.prop( "checked" ) ? "_right" : "_left";
 		}
 
 		if ( direction !== existingDirection ) {
@@ -292,4 +292,4 @@ return $.widget( "mobile.flipswitch", $.extend({
 
 }, $.mobile.behaviors.formReset ) );
 
-});
+} );
