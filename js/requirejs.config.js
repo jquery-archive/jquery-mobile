@@ -1,4 +1,4 @@
-requirejs.config({
+requirejs.config( {
 	"paths": {
 		// requireJS plugins
 		"text": "../external/requirejs/plugins/text",
@@ -8,4 +8,4 @@ requirejs.config({
 		"jquery-ui": "../external/jquery-ui",
 		"jquery-plugins": "../external/jquery/plugins"
 	}
-});
+} );

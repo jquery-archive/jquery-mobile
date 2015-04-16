@@ -25,13 +25,13 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // Deprecated in 1.4
-$.fn.fieldcontain = function(/* options */) {
+$.fn.fieldcontain = function( /* options */ ) {
 	return this.addClass( "ui-field-contain" );
 };
 
 return $.fn.fieldcontain;
 
-});
+} );

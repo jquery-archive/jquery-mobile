@@ -21,9 +21,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	$.mobile = { version: "@VERSION" };
+$.mobile = { version: "@VERSION" };
 
-	return $.mobile;
-});
+return $.mobile;
+} );
