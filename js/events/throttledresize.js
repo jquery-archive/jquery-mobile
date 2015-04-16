@@ -22,42 +22,42 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	// throttled resize event
-		$.event.special.throttledresize = {
-			setup: function() {
-				$( this ).bind( "resize", handler );
-			},
-			teardown: function() {
-				$( this ).unbind( "resize", handler );
+// throttled resize event
+$.event.special.throttledresize = {
+	setup: function() {
+		$( this ).bind( "resize", handler );
+	},
+	teardown: function() {
+		$( this ).unbind( "resize", handler );
+	}
+};
+
+var throttle = 250,
+	handler = function() {
+		curr = ( new Date() ).getTime();
+		diff = curr - lastCall;
+
+		if ( diff >= throttle ) {
+
+			lastCall = curr;
+			$( this ).trigger( "throttledresize" );
+
+		} else {
+
+			if ( heldCall ) {
+				clearTimeout( heldCall );
 			}
-		};
 
-		var throttle = 250,
-			handler = function() {
-				curr = ( new Date() ).getTime();
-				diff = curr - lastCall;
+			// Promise a held call will still execute
+			heldCall = setTimeout( handler, throttle - diff );
+		}
+	},
+	lastCall = 0,
+	heldCall,
+	curr,
+	diff;
 
-				if ( diff >= throttle ) {
-
-					lastCall = curr;
-					$( this ).trigger( "throttledresize" );
-
-				} else {
-
-					if ( heldCall ) {
-						clearTimeout( heldCall );
-					}
-
-					// Promise a held call will still execute
-					heldCall = setTimeout( handler, throttle - diff );
-				}
-			},
-			lastCall = 0,
-			heldCall,
-			curr,
-			diff;
-
-	return $.event.special.throttledresize;
-});
+return $.event.special.throttledresize;
+} );
