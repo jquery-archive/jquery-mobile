@@ -14,23 +14,23 @@ var fs = require( "fs" ),
 	copyrightMinFile = copyrightBaseName + ".min.txt";
 
 module.exports = function( contents, ext, callback ) {
-	var version = pkg.version.trim();
+var version = pkg.version.trim();
 
-	if ( /^\.min/.test( ext ) ) {
-		copyrightFile = copyrightMinFile;
-	} else {
-		copyrightFile = copyrightRegFile;
-	}
-	fs.readFile( path.join( buildDir, copyrightFile ), "utf8",
-		function( err, copyright ) {
-			if ( err ) {
-				callback( err );
-			} else {
-				contents = copyright.replace( copyrightVersionRegExp, version ) + "\n" + contents;
-				contents = contents.replace( apiVersionRegExp, "\"" + version + "\"" );
+if ( /^\.min/.test( ext ) ) {
+	copyrightFile = copyrightMinFile;
+} else {
+	copyrightFile = copyrightRegFile;
+}
+fs.readFile( path.join( buildDir, copyrightFile ), "utf8",
+	function( err, copyright ) {
+		if ( err ) {
+			callback( err );
+		} else {
+			contents = copyright.replace( copyrightVersionRegExp, version ) + "\n" + contents;
+			contents = contents.replace( apiVersionRegExp, "\"" + version + "\"" );
 
-				callback( null, contents );
-			}
+			callback( null, contents );
 		}
-	);
+	}
+);
 };

@@ -1,42 +1,42 @@
 module.exports = function( grunt ) {
-	var files = require( "../../files.js" )( grunt );
+var files = require( "../../files.js" )( grunt );
 
-	return {
-		dist: {
-			options: {
-				archive: files.distZipOut
-			},
-			files: [
-				{
-					expand: true,
-					cwd: "<%= dist %>",
-					src: files.distZipContent
-				}
-			]
+return {
+	dist: {
+		options: {
+			archive: files.distZipOut
 		},
-		images: {
-			options: {
-				archive: files.imagesZipOut
-			},
-			files: [
-				{
-					expand: true,
-					cwd: "<%= dist %>",
-					src: [ "images/**" ]
-				}
-			]
+		files: [
+			{
+				expand: true,
+				cwd: "<%= dist %>",
+				src: files.distZipContent
+			}
+		]
+	},
+	images: {
+		options: {
+			archive: files.imagesZipOut
 		},
-		"googleCDN": {
-			options: {
-				archive: files.googleCDNZipOut
-			},
-			files: [
-				{
-					expand: true,
-					cwd: "<%= dirs.tmp %>",
-					src: [ "**/*" ]
-				}
-			]
-		}
-	};
+		files: [
+			{
+				expand: true,
+				cwd: "<%= dist %>",
+				src: [ "images/**" ]
+			}
+		]
+	},
+	"googleCDN": {
+		options: {
+			archive: files.googleCDNZipOut
+		},
+		files: [
+			{
+				expand: true,
+				cwd: "<%= dirs.tmp %>",
+				src: [ "**/*" ]
+			}
+		]
+	}
+};
 };
