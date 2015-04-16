@@ -25,7 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var rdivider = /(^|\s)ui-li-divider($|\s)/,
 	rhidden = /(^|\s)ui-screen-hidden($|\s)/;
@@ -36,13 +36,14 @@ return $.widget( "mobile.listview", $.mobile.listview, {
 	},
 
 	_afterListviewRefresh: function() {
-		var items, idx, item, hideDivider = true;
+		var items, idx, item,
+			hideDivider = true;
 
 		this._superApply( arguments );
 
 		if ( this.options.hideDividers ) {
 			items = this._getChildrenByTagName( this.element[ 0 ], "li", "LI" );
-			for ( idx = items.length - 1 ; idx > -1 ; idx-- ) {
+			for ( idx = items.length - 1; idx > -1; idx-- ) {
 				item = items[ idx ];
 				if ( item.className.match( rdivider ) ) {
 					if ( hideDivider ) {
@@ -57,6 +58,6 @@ return $.widget( "mobile.listview", $.mobile.listview, {
 			}
 		}
 	}
-});
+} );
 
-});
+} );
