@@ -26,7 +26,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var rcapitals = /[A-Z]/g,
 	replaceFunction = function( c ) {
@@ -51,11 +51,11 @@ $.extend( $.Widget.prototype, {
 
 		return options;
 	}
-});
+} );
 
 //TODO: Remove in 1.5 for backcompat only
 $.mobile.widget = $.extend( {}, $.Widget, $.mobile.widget );
 
 return $.Widget;
 
-});
+} );

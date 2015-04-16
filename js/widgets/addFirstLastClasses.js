@@ -23,7 +23,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var uiScreenHiddenRegex = /\bui-screen-hidden\b/;
 function noHiddenClass( elements ) {
@@ -71,4 +71,4 @@ $.mobile.behaviors.addFirstLastClasses = {
 
 return $.mobile.behaviors.addFirstLastClasses;
 
-});
+} );
