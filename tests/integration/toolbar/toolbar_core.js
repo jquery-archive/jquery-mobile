@@ -6,7 +6,7 @@ asyncTest( "Back button appears correctly", function() {
 
 	expect( 2 );
 
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#go-to-page2" ).click();
 		},
@@ -20,7 +20,7 @@ asyncTest( "Back button appears correctly", function() {
 		},
 
 		start
-	]);
-});
+	] );
+} );
 
-})( jQuery );
+} )( jQuery );
