@@ -23,10 +23,10 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	/*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas. Dual MIT/BSD license */
-	window.matchMedia = window.matchMedia || (function( doc, undefined ) {
+/*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas. Dual MIT/BSD license */
+window.matchMedia = window.matchMedia || ( function( doc, undefined ) {
 
 		var bool,
 			docElem = doc.documentElement,
@@ -38,9 +38,9 @@
 		div.id = "mq-test-1";
 		div.style.cssText = "position:absolute;top:-100em";
 		fakeBody.style.background = "none";
-		fakeBody.appendChild(div);
+		fakeBody.appendChild( div );
 
-		return function(q){
+		return function( q ) {
 
 			div.innerHTML = "&shy;<style media=\"" + q + "\"> #mq-test-1 { width: 42px; }</style>";
 
@@ -55,13 +55,13 @@
 
 		};
 
-	}( document ));
+	}( document ) );
 
-	// $.mobile.media uses matchMedia to return a boolean.
-	$.mobile.media = function( q ) {
-		return window.matchMedia( q ).matches;
-	};
+// $.mobile.media uses matchMedia to return a boolean.
+$.mobile.media = function( q ) {
+	return window.matchMedia( q ).matches;
+};
 
-	return $.mobile.media;
+return $.mobile.media;
 
-});
+} );
