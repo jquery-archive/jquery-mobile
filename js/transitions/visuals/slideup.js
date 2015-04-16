@@ -25,8 +25,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 $.mobile.transitionFallbacks.slideup = "fade";
 
-});
+} );
