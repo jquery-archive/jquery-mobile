@@ -59,16 +59,16 @@ test( "Style options are updated when the classes option changes", function( ass
 	} );
 
 	assert.deepEqual( testWidget.option(), {
-			create: null,
-			disabled: false,
-			classes: {
-				"test-testwidget": "ui-corner-all"
-			},
-			inline: false,
-			mini: false,
-			shadow: false,
-			corners: true
+		create: null,
+		disabled: false,
+		classes: {
+			"test-testwidget": "ui-corner-all"
 		},
+		inline: false,
+		mini: false,
+		shadow: false,
+		corners: true
+	},
 		"Widget options reflect classes option values" );
 	assert.hasClasses( testWidget.element[ 0 ], "ui-corner-all", "Element has corner class" );
 	assert.lacksClasses( testWidget.element[ 0 ], "ui-button-inline ui-mini ui-shadow",
@@ -76,19 +76,19 @@ test( "Style options are updated when the classes option changes", function( ass
 
 	testWidget.option( "classes.test-testwidget", "ui-button-inline ui-mini" );
 	assert.deepEqual( convertClassValuesToHashes( testWidget.option() ), {
-			create: null,
-			disabled: false,
-			classes: {
-				"test-testwidget": {
-					"ui-button-inline": true,
-					"ui-mini": true
-				}
-			},
-			inline: true,
-			mini: true,
-			shadow: false,
-			corners: false
+		create: null,
+		disabled: false,
+		classes: {
+			"test-testwidget": {
+				"ui-button-inline": true,
+				"ui-mini": true
+			}
 		},
+		inline: true,
+		mini: true,
+		shadow: false,
+		corners: false
+	},
 		"Widget options reflect classes option values" );
 	assert.hasClasses( testWidget.element[ 0 ], "ui-button-inline ui-mini" );
 	assert.lacksClasses( testWidget.element[ 0 ], "ui-shadow ui-corner-all" );
@@ -177,7 +177,7 @@ test( "The classes option is updated when style options change", function( asser
 			corners: false
 		},
 		"After turning off mini and turning on inline classes option value contains 'ui-shadow' " +
-			"and 'ui-button-inline'" );
+		"and 'ui-button-inline'" );
 	assert.hasClasses( testWidget.element[ 0 ], "ui-shadow ui-button-inline",
 		"Element has shadow and mini classes" );
 	assert.lacksClasses( testWidget.element[ 0 ], "ui-mini ui-corner-all",
@@ -226,7 +226,7 @@ module( "wrapperClass", {
 				return this._superApply( arguments );
 			},
 			_enhance: $.noop
-		});
+		} );
 		$.widget( "mobile.testwidget", $.mobile.testwidget, $.mobile.widget.backcompat );
 	},
 	teardown: function() {
@@ -252,4 +252,4 @@ test( "wrapperClass is correctly applied, modified, and removed", function( asse
 		"Class attribute cleared upon destroy()" );
 } );
 
-})( jQuery );
+} )( jQuery );
