@@ -25,27 +25,27 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	$.mobile.SerialTransition = function() {
-		this.init.apply(this, arguments);
-	};
+$.mobile.SerialTransition = function() {
+	this.init.apply( this, arguments );
+};
 
-	$.extend($.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
-		sequential: true,
+$.extend( $.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
+	sequential: true,
 
-		beforeDoneOut: function() {
-			if ( this.$from ) {
-				this.cleanFrom();
-			}
-		},
-
-		beforeStartOut: function( screenHeight, reverseClass, none ) {
-			this.$from.animationComplete($.proxy(function() {
-				this.doneOut( screenHeight, reverseClass, none );
-			}, this ));
+	beforeDoneOut: function() {
+		if ( this.$from ) {
+			this.cleanFrom();
 		}
-	});
+	},
 
-	return $.mobile.SerialTransition;
-});
+	beforeStartOut: function( screenHeight, reverseClass, none ) {
+		this.$from.animationComplete( $.proxy( function() {
+			this.doneOut( screenHeight, reverseClass, none );
+		}, this ) );
+	}
+} );
+
+return $.mobile.SerialTransition;
+} );

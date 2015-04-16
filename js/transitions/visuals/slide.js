@@ -25,7 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // Use the simultaneous transitions handler for slide transitions
 $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
@@ -33,4 +33,4 @@ $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
 // Set the slide transitions's fallback to "fade"
 $.mobile.transitionFallbacks.slide = "fade";
 
-});
+} );
