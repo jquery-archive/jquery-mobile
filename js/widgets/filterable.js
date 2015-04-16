@@ -27,7 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // TODO rename filterCallback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( index, searchValue ) {
@@ -44,7 +44,7 @@ var defaultFilterCallback = function( index, searchValue ) {
 	}
 
 	return ( ( "" + text )
-		.toLowerCase().indexOf( searchValue ) === -1 );
+			.toLowerCase().indexOf( searchValue ) === -1 );
 };
 
 return $.widget( "mobile.filterable", {
@@ -67,7 +67,7 @@ return $.widget( "mobile.filterable", {
 		$.extend( this, {
 			_search: null,
 			_timer: 0
-		});
+		} );
 
 		this._setInput( opts.input );
 		if ( !opts.enhanced ) {
@@ -110,11 +110,11 @@ return $.widget( "mobile.filterable", {
 	_getFilterableItems: function() {
 		var elem = this.element,
 			children = this.options.children,
-			items = !children ? { length: 0 }:
-				$.isFunction( children ) ? children():
-				children.nodeName ? $( children ):
-				children.jquery ? children:
-				this.element.find( children );
+			items = !children ? { length: 0 } :
+				$.isFunction( children ) ? children() :
+					children.nodeName ? $( children ) :
+						children.jquery ? children :
+							this.element.find( children );
 
 		if ( items.length === 0 ) {
 			items = elem.children();
@@ -135,7 +135,7 @@ return $.widget( "mobile.filterable", {
 			length = filterItems.length;
 
 			// Partition the items into those to be hidden and those to be shown
-			for ( idx = 0 ; idx < length ; idx++ ) {
+			for ( idx = 0; idx < length; idx++ ) {
 				dst = ( callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
 				dst.push( filterItems[ idx ] );
 			}
@@ -155,7 +155,7 @@ return $.widget( "mobile.filterable", {
 
 		this._trigger( "filter", null, {
 			items: filterItems
-		});
+		} );
 	},
 
 	// The Default implementation of _refreshChildWidget attempts to call
@@ -164,7 +164,7 @@ return $.widget( "mobile.filterable", {
 		var widget, idx,
 			recognizedWidgets = [ "collapsibleset", "selectmenu", "controlgroup", "listview" ];
 
-		for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
+		for ( idx = recognizedWidgets.length - 1; idx > -1; idx-- ) {
 			widget = recognizedWidgets[ idx ];
 			if ( $.mobile[ widget ] ) {
 				widget = this.element.data( "mobile-" + widget );
@@ -176,7 +176,7 @@ return $.widget( "mobile.filterable", {
 	},
 
 	// TODO: When the input is not internal, do not even store it in this._search
-	_setInput: function ( selector ) {
+	_setInput: function( selector ) {
 		var search = this._search;
 
 		// Stop a pending filter operation
@@ -191,9 +191,9 @@ return $.widget( "mobile.filterable", {
 		}
 
 		if ( selector ) {
-			search = selector.jquery ? selector:
-				selector.nodeName ? $( selector ):
-				this.document.find( selector );
+			search = selector.jquery ? selector :
+				selector.nodeName ? $( selector ) :
+					this.document.find( selector );
 
 			this._on( search, {
 				keydown: "_onKeyDown",
@@ -201,7 +201,7 @@ return $.widget( "mobile.filterable", {
 				keyup: "_onKeyUp",
 				change: "_onKeyUp",
 				input: "_onKeyUp"
-			});
+			} );
 		}
 
 		this._search = search;
@@ -225,8 +225,8 @@ return $.widget( "mobile.filterable", {
 
 	_setOptions: function( options ) {
 		var refilter = !( ( options.filterReveal === undefined ) &&
-				( options.filterCallback === undefined ) &&
-				( options.children === undefined ) );
+		( options.filterCallback === undefined ) &&
+		( options.children === undefined ) );
 
 		this._super( options );
 
@@ -258,6 +258,6 @@ return $.widget( "mobile.filterable", {
 		}
 		this._filterItems( ( ( this._search && this._search.val() ) || "" ).toLowerCase() );
 	}
-});
+} );
 
-});
+} );
