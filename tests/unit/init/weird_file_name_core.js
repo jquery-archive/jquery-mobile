@@ -13,7 +13,7 @@ $( document ).on( "mobileinit", function() {
 		$.each( parsedLocation, function( key, value ) {
 			returnValue[ key ] =
 				value.replace( /weird file name-tests/g, "weird%20file%20name-tests" );
-		});
+		} );
 
 		return returnValue;
 	};
@@ -27,15 +27,15 @@ $( document ).on( "mobileinit", function() {
 
 		return origInitializePage.apply( this, arguments );
 	};
-});
+} );
 
 test( "data-url for initial page is urldecoded", function() {
 	deepEqual(
 		!!$( ":mobile-page" )
 			.attr( "data-" + $.mobile.ns + "url" )
-				.match( /weird%20file%20name/ ),
+			.match( /weird%20file%20name/ ),
 		false,
 		"Value of 'data-url' attribute is not urlencoded" );
-});
+} );
 
-})();
+} )();
