@@ -12,7 +12,7 @@ module.exports = {
 		},
 		files: {
 			"dist/jquery.mobile<%= versionSuffix %>.min.js":
-				path.join( "<%= dist %>", "<%= name %>" ) + "<%= versionSuffix %>.js"
+			path.join( "<%= dist %>", "<%= name %>" ) + "<%= versionSuffix %>.js"
 		}
 	}
 };
