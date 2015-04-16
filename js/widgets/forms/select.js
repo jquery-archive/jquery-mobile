@@ -31,7 +31,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.selectmenu", $.extend( {
 	version: "@VERSION",
@@ -66,12 +66,12 @@ return $.widget( "mobile.selectmenu", $.extend( {
 		return this._setOption( "disabled", value );
 	},
 
-	_focusButton : function() {
+	_focusButton: function() {
 		var self = this;
 
 		setTimeout( function() {
 			self.button.focus();
-		}, 40);
+		}, 40 );
 	},
 
 	_selectOptions: function() {
@@ -87,11 +87,11 @@ return $.widget( "mobile.selectmenu", $.extend( {
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
 		} */
-		if ( !!~this.element[0].className.indexOf( "ui-button-left" ) ) {
+		if ( !!~this.element[ 0 ].className.indexOf( "ui-button-left" ) ) {
 			classes = " ui-button-left";
 		}
 
-		if (  !!~this.element[0].className.indexOf( "ui-button-right" ) ) {
+		if ( !!~this.element[ 0 ].className.indexOf( "ui-button-right" ) ) {
 			classes = " ui-button-right";
 		}
 
@@ -103,9 +103,9 @@ return $.widget( "mobile.selectmenu", $.extend( {
 		}
 
 		this.select = this.element.removeClass( "ui-button-left ui-button-right" ).wrap( "<div class='ui-select" + classes + "'>" );
-		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
+		this.selectId = this.select.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
-		this.label = $( "label[for='"+ $.mobile.path.hashToSelector( this.selectId ) +"']" );
+		this.label = $( "label[for='" + $.mobile.path.hashToSelector( this.selectId ) + "']" );
 		this.isMultiple = this.select[ 0 ].multiple;
 	},
 
@@ -134,7 +134,7 @@ return $.widget( "mobile.selectmenu", $.extend( {
 				.attr( "id", this.buttonId )
 				.addClass( "ui-button" +
 					( options.icon ? ( " ui-icon-" + options.icon + " ui-button-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
+					( options.iconshadow ? " ui-shadow-icon" : "" ) ) : "" ) + /* TODO: Remove in 1.5. */
 					( options.theme ? " ui-button-" + options.theme : "" ) +
 					( options.corners ? " ui-corner-all" : "" ) +
 					( options.shadow ? " ui-shadow" : "" ) );
@@ -165,13 +165,13 @@ return $.widget( "mobile.selectmenu", $.extend( {
 		// Events on native select
 		this._on( this.select, {
 			change: "refresh"
-		});
+		} );
 
 		this._handleFormReset();
 
 		this._on( this.button, {
 			keydown: "_handleKeydown"
-		});
+		} );
 
 		this.build();
 	},
@@ -184,53 +184,53 @@ return $.widget( "mobile.selectmenu", $.extend( {
 			.bind( "vmousedown", function() {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
-			})
+			} )
 			.bind( "focus", function() {
 				self.button.addClass( $.mobile.focusClass );
-			})
+			} )
 			.bind( "blur", function() {
 				self.button.removeClass( $.mobile.focusClass );
-			})
+			} )
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
-			})
+			} )
 			.bind( "vmousemove", function() {
 				// Remove active class on scroll/touchmove
 				self.button.removeClass( $.mobile.activeBtnClass );
-			})
+			} )
 			.bind( "change blur vmouseout", function() {
 				self.button.trigger( "vmouseout" )
 					.removeClass( $.mobile.activeBtnClass );
-			});
+			} );
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+				$.mobile.zoom.disable( true );
 			}
-		});
+		} );
 		self.label.bind( "click focus", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+				$.mobile.zoom.disable( true );
 			}
-		});
+		} );
 		self.select.bind( "focus", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+				$.mobile.zoom.disable( true );
 			}
-		});
+		} );
 		self.button.bind( "mouseup", function() {
 			if ( self.options.preventFocusZoom ) {
-				setTimeout(function() {
+				setTimeout( function() {
 					$.mobile.zoom.enable( true );
 				}, 0 );
 			}
-		});
+		} );
 		self.select.bind( "blur", function() {
 			if ( self.options.preventFocusZoom ) {
 				$.mobile.zoom.enable( true );
 			}
-		});
+		} );
 
 	},
 
@@ -241,9 +241,9 @@ return $.widget( "mobile.selectmenu", $.extend( {
 	selectedIndices: function() {
 		var self = this;
 
-		return this.selected().map(function() {
+		return this.selected().map( function() {
 			return self._selectOptions().index( this );
-		}).get();
+		} ).get();
 	},
 
 	setButtonText: function() {
@@ -252,11 +252,11 @@ return $.widget( "mobile.selectmenu", $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
+		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( ( function() {
 			if ( selected.length ) {
-				text = selected.map(function() {
+				text = selected.map( function() {
 					return $( this ).text();
-				}).get().join( ", " );
+				} ).get().join( ", " );
 			} else {
 				text = self.placeholder;
 			}
@@ -274,7 +274,7 @@ return $.widget( "mobile.selectmenu", $.extend( {
 				.addClass( self.select.attr( "class" ) )
 				.addClass( selected.attr( "class" ) )
 				.removeClass( "ui-screen-hidden" );
-		})());
+		} )() );
 	},
 
 	setButtonCount: function() {
@@ -319,4 +319,4 @@ return $.widget( "mobile.selectmenu", $.extend( {
 	}
 }, $.mobile.behaviors.formReset ) );
 
-});
+} );
