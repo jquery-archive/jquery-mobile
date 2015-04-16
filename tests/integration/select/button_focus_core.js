@@ -4,7 +4,7 @@ function defineTest( testName, clickAction, expectChange ) {
 
 		expect( expectChange ? 6 : 5 );
 
-		$.testHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade( [
 			function() {
 				$( "#button-focus-test-button" ).click();
 			},
@@ -21,7 +21,7 @@ function defineTest( testName, clickAction, expectChange ) {
 				deepEqual( activePage.attr( "id" ), "button-focus-test-dialog", "Dialog is active" );
 				clickAction( activePage );
 			},
-			$.extend({
+			$.extend( {
 				pagecontainerchange: {
 					src: $( document ),
 					event: "pagecontainerchange" + eventNs + "2"
@@ -47,14 +47,14 @@ function defineTest( testName, clickAction, expectChange ) {
 				}
 				start();
 			}
-		]);
-	});
+		] );
+	} );
 }
 
 defineTest( "Selectmenu regains focus when dialog closes without changes", function( dialogPage ) {
-	dialogPage.find( "a" ).first().click();
-});
+dialogPage.find( "a" ).first().click();
+} );
 
 defineTest( "Selectmenu regains focus when dialog closes due to change", function( dialogPage ) {
-	dialogPage.find( "#button-focus-test-menu li" ).eq( 11 ).click();
+dialogPage.find( "#button-focus-test-menu li" ).eq( 11 ).click();
 }, true );
