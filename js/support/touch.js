@@ -23,15 +23,15 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-		var support = {
-			touch: "ontouchend" in document
-		};
+var support = {
+	touch: "ontouchend" in document
+};
 
-		$.mobile.support = $.mobile.support || {};
-		$.extend( $.support, support );
-		$.extend( $.mobile.support, support );
+$.mobile.support = $.mobile.support || {};
+$.extend( $.support, support );
+$.extend( $.mobile.support, support );
 
-		return $.support;
-});
+return $.support;
+} );
