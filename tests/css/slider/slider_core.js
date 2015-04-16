@@ -16,13 +16,13 @@ function testDisjoint( slider ) {
 		trackRectangle.left > inputRectangle.right ||
 		inputRectangle.top > trackRectangle.bottom ||
 		trackRectangle.top > inputRectangle.bottom, true,
-			"input and track rectangles are disjoint" );
+		"input and track rectangles are disjoint" );
 }
 
 test( "mini slider track does not overlap with input", function() {
-	testDisjoint( $( "#test-slider-mini" ) );
+testDisjoint( $( "#test-slider-mini" ) );
 } );
 
 test( "normal slider track does not overlap with input", function() {
-	testDisjoint( $( "#test-slider-normal" ) );
+testDisjoint( $( "#test-slider-normal" ) );
 } );

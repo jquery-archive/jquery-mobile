@@ -5,16 +5,15 @@ function defineTooltipTest( name, slider, hasValue, hasTooltip ) {
 			handle = track.children( ".ui-slider-handle" ),
 			popup = slider.siblings( ".ui-slider-popup" ),
 			assertState = function( condition, popupVisible ) {
-				var expectedHandleText =
-					( hasValue ? ( widget.options.mini ? "" : ( "" + slider.val() ) ) : "" );
+				var expectedHandleText = ( hasValue ? ( widget.options.mini ? "" : ( "" + slider.val() ) ) : "" );
 
 				assert.deepEqual( popup.is( ":visible" ), popupVisible,
 					"Upon " + condition + " popup is " + ( popupVisible ? "" : "not " ) +
-						"visible" );
+					"visible" );
 				if ( popupVisible ) {
 					assert.deepEqual( popup.text(), ( "" + slider.val() ),
 						"Upon " + condition +
-							" the popup reflects the input value (" + slider.val() + ")" );
+						" the popup reflects the input value (" + slider.val() + ")" );
 				}
 				deepEqual( handle.text(), expectedHandleText,
 					"Upon " + condition + " the handle text is " + expectedHandleText );
