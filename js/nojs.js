@@ -25,7 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 $.mobile.nojs = function( target ) {
 	$( ":jqmData(role='nojs')", target ).addClass( "ui-nojs" );
@@ -33,4 +33,4 @@ $.mobile.nojs = function( target ) {
 
 return $.mobile.nojs;
 
-});
+} );

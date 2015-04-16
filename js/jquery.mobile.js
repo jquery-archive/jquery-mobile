@@ -73,5 +73,5 @@
 		factory( jQuery );
 	}
 } )( function() {
-	require( [ "./init" ], function() {} );
-});
+require( [ "./init" ], function() {} );
+} );

@@ -25,34 +25,34 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})(function( $ ) {
+} )( function( $ ) {
 
 $.fn.grid = function( options ) {
-	return this.each(function() {
+	return this.each( function() {
 
 		var $this = $( this ),
-			o = $.extend({
+			o = $.extend( {
 				grid: null
 			}, options ),
 			$kids = $this.children(),
-			gridCols = { solo:1, a:2, b:3, c:4, d:5 },
+			gridCols = { solo: 1, a: 2, b: 3, c: 4, d: 5 },
 			grid = o.grid,
 			iterator,
 			letter;
 
-			if ( !grid ) {
-				if ( $kids.length <= 5 ) {
-					for ( letter in gridCols ) {
-						if ( gridCols[ letter ] === $kids.length ) {
-							grid = letter;
-						}
+		if ( !grid ) {
+			if ( $kids.length <= 5 ) {
+				for ( letter in gridCols ) {
+					if ( gridCols[ letter ] === $kids.length ) {
+						grid = letter;
 					}
-				} else {
-					grid = "a";
-					$this.addClass( "ui-grid-duo" );
 				}
+			} else {
+				grid = "a";
+				$this.addClass( "ui-grid-duo" );
 			}
-			iterator = gridCols[grid];
+		}
+		iterator = gridCols[ grid ];
 
 		$this.addClass( "ui-grid-" + grid );
 
@@ -70,9 +70,9 @@ $.fn.grid = function( options ) {
 		if ( iterator > 4 ) {
 			$kids.filter( ":nth-child(" + iterator + "n+5)" ).addClass( "ui-block-e" );
 		}
-	});
+	} );
 };
 
 return $.fn.grid;
 
-});
+} );
