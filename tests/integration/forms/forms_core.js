@@ -1,7 +1,7 @@
 /*
  * mobile popup unit tests
  */
-(function($){
+( function( $ ) {
 
 asyncTest( "Form resets correctly", function() {
 
@@ -20,7 +20,7 @@ asyncTest( "Form resets correctly", function() {
 			};
 
 		for ( arIdx in arrays ) {
-			for (idx in widgets[ arrays[ arIdx ] ] ) {
+			for ( idx in widgets[ arrays[ arIdx ] ] ) {
 				ret[ arrays[ arIdx ] ].push( widgets[ arrays[ arIdx ] ][ idx ].is( ":checked" ) );
 			}
 		}
@@ -32,7 +32,8 @@ asyncTest( "Form resets correctly", function() {
 		var id = el.attr( "id" ),
 			slider = el.next(),
 			buttonStyle = slider.children().attr( "style" ).split( ";" ),
-			styleItem, style = {};
+			styleItem,
+			style = {};
 
 		// Reconstruct the inline style of the object. The result will be stored in the variable "style"
 		for ( idx in buttonStyle ) {
@@ -60,7 +61,7 @@ asyncTest( "Form resets correctly", function() {
 		ok( wrapper.length === 1, prefix + id + " has a wrapper" );
 		ok( wrapper.hasClass( "ui-select" ), prefix + id + "'s wrapper has class ui-select" );
 		ok( anonySpan.length === 1, prefix + id + "'s wrapper contains a single span element as its first child" );
-		ok( anonySpan.text() === el.children("[value='" + el.val() + "']").text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
+		ok( anonySpan.text() === el.children( "[value='" + el.val() + "']" ).text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}
 
 	function verifyFlipswitch( prefix, el, value ) {
@@ -155,9 +156,11 @@ asyncTest( "Form resets correctly", function() {
 				setTimeout( function() {
 					runTest( e.target, function() {
 						testComplete = true;
-						setTimeout( function() { $( "#goToStartPage" ).click(); } );
-					});
-				});
+						setTimeout( function() {
+							$( "#goToStartPage" ).click();
+						} );
+					} );
+				} );
 			} else if ( e.target.id === "startPage" ) {
 				if ( wentToTestPage ) {
 					if ( testComplete ) {
@@ -168,18 +171,18 @@ asyncTest( "Form resets correctly", function() {
 					setTimeout( maybeGoToTestPage );
 				}
 			}
-		}
+	}
 
 	$( document ).bind( "pageshow", handlePageShow );
 
 	setTimeout( maybeGoToTestPage );
-});
+} );
 
 asyncTest( "form action is honored", function() {
 
 	expect( 1 );
 
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#default-submit" ).click();
 		},
@@ -190,14 +193,14 @@ asyncTest( "form action is honored", function() {
 		},
 
 		start
-	]);
-});
+	] );
+} );
 
 asyncTest( "button's formaction attribute is honored", function() {
 
 	expect( 1 );
 
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#formaction-submit" ).click();
 		},
@@ -208,7 +211,7 @@ asyncTest( "button's formaction attribute is honored", function() {
 		},
 
 		start
-	]);
-});
+	] );
+} );
 
-})( jQuery );
+} )( jQuery );
