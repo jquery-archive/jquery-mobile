@@ -33,13 +33,13 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
 	goToAdjacentItem = function( item, target, direction ) {
 		var adjacent = item[ direction + "All" ]()
 			.not( unfocusableItemSelector )
-			.first();
+				.first();
 
 		// if there's a previous option, focus it
 		if ( adjacent.length ) {
@@ -77,8 +77,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			return;
 		}
 
-		if (event.type === "vclick" ||
-				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
+		if ( event.type === "vclick" ||
+				event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE ) ) {
 
 			this._decideFormat();
 			if ( this.menuType === "overlay" ) {
@@ -93,7 +93,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_handleListFocus: function( e ) {
 		var params = ( e.type === "focusin" ) ?
-			{ tabindex: "0", event: "vmouseover" }:
+			{ tabindex: "0", event: "vmouseover" } :
 			{ tabindex: "-1", event: "vmouseout" };
 
 		$( e.target )
@@ -107,15 +107,15 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// switch logic based on which key was pressed
 		switch ( event.keyCode ) {
-			// up or left arrow keys
+		// up or left arrow keys
 		case 38:
 			goToAdjacentItem( li, target, "prev" );
 			return false;
-			// down or right arrow keys
+		// down or right arrow keys
 		case 40:
 			goToAdjacentItem( li, target, "next" );
 			return false;
-			// If enter or space is pressed, trigger click
+		// If enter or space is pressed, trigger click
 		case 13:
 		case 32:
 			target.trigger( "click" );
@@ -131,7 +131,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			focusButton = $.proxy( function() {
 				this._delay( function() {
 					this._focusButton();
-				});
+				} );
 			}, this );
 
 			if ( data.options && data.options.transition && data.options.transition !== "none" ) {
@@ -199,8 +199,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			this.select.trigger( "change" );
 			this.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
 				.find( "a" ).first().focus();
-		}
-		else {
+		} else {
 			this.close();
 		}
 
@@ -228,24 +227,24 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		themeAttr = o.theme ? ( " data-" + $.mobile.ns + "theme='" + o.theme + "'" ) : "";
 		overlayTheme = o.overlayTheme || o.theme || null;
 		overlayThemeAttr = overlayTheme ? ( " data-" + $.mobile.ns +
-			"overlay-theme='" + overlayTheme + "'" ) : "";
+		"overlay-theme='" + overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( o.dividerTheme && this.element.children( "optgroup" ).length > 0 ) ?
 			( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
 		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu'" +
 			themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
-			"<div class='ui-title'></div>"+
-			"</div>"+
-			"<div data-" + $.mobile.ns + "role='content'></div>"+
+			"<div class='ui-title'></div>" +
+			"</div>" +
+			"<div data-" + $.mobile.ns + "role='content'></div>" +
 			"</div>" )
 			.attr( "id", dialogId );
 		listbox = $( "<div" + themeAttr + overlayThemeAttr +
-				" class='ui-selectmenu'></div>" )
+			" class='ui-selectmenu'></div>" )
 			.attr( "id", popupId )
 			.insertAfter( this.select )
 			.popup();
 		list = $( "<ul class='ui-selectmenu-list' role='listbox' aria-labelledby='" +
-				this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" )
+			this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" )
 			.attr( "id", menuId )
 			.appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
@@ -257,7 +256,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				"text": o.closeText,
 				"href": "#",
 				"class": "ui-button ui-corner-all ui-button-left ui-button-icon-only ui-icon-delete"
-			}).appendTo( header );
+			} ).appendTo( header );
 		}
 
 		$.extend( this, {
@@ -278,7 +277,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			menuPageContent: menuPageContent,
 			menuPageClose: menuPageClose,
 			placeholder: ""
-		});
+		} );
 
 		// Create list from select, update state
 		this.refresh();
@@ -292,12 +291,12 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			this._origTabIndex = ( this.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.select.attr( "tabindex" );
 		}
 		this.select.attr( "tabindex", "-1" );
-		this._on( this.select, { focus : "_handleSelectFocus" } );
+		this._on( this.select, { focus: "_handleSelectFocus" } );
 
 		// Button events
 		this._on( this.button, {
 			vclick: "_handleButtonVclickKeydown"
-		});
+		} );
 
 		// Events for list items
 		this.list.attr( "role", "listbox" );
@@ -306,7 +305,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"focusout": "_handleListFocus",
 			"keydown": "_handleListKeydown",
 			"click li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)": "_handleListItemClick"
-		});
+		} );
 
 		// button refocus ensures proper height calculation
 		// by removing the inline style and ensuring page inclusion
@@ -371,7 +370,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		self.list.find( "li:not(.ui-li-divider)" )
 			.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
 			.attr( "aria-selected", false )
-			.each(function( i ) {
+			.each( function( i ) {
 				var item = $( this );
 				if ( $.inArray( i, indices ) > -1 ) {
 
@@ -391,7 +390,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				} else if ( self.isMultiple ) {
 					item.find( "a" ).removeClass( "ui-checkbox-on" ).addClass( "ui-checkbox-off" );
 				}
-			});
+			} );
 	},
 
 	close: function() {
@@ -449,13 +448,13 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			if ( scrollTop === 0 && buttonOffset > screenHeight ) {
 				self.thisPage.one( "pagehide", function() {
 					$( this ).jqmData( "lastScroll", buttonOffset );
-				});
+				} );
 			}
 
 			self.menuPage.one( {
 				pageshow: $.proxy( this, "_focusMenuItem" ),
 				pagehide: $.proxy( this, "close" )
-			});
+			} );
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
@@ -493,8 +492,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		numOptions = $options.length;
 		select = this.select[ 0 ];
 
-		for ( i = 0; i < numOptions;i++, isPlaceholderItem = false) {
-			option = $options[i];
+		for ( i = 0; i < numOptions; i++, isPlaceholderItem = false ) {
+			option = $options[ i ];
 			$option = $( option );
 
 			// Do not create options based on ui-screen-hidden select options
@@ -569,7 +568,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			fragment.appendChild( item );
 		}
 
-		self.list[0].appendChild( fragment );
+		self.list[ 0 ].appendChild( fragment );
 
 		// Hide header if it's not a multiselect and there's no placeholder
 		if ( !this.isMultiple && !placeholder.length ) {
@@ -594,7 +593,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				// TODO value is undefined at creation
 				"aria-owns": this.menuId
-			});
+			} );
 	},
 
 	_destroy: function() {
@@ -626,6 +625,6 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Chain up
 		this._super();
 	}
-});
+} );
 
-});
+} );
