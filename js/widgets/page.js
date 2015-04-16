@@ -28,7 +28,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 $.mobile.widgets = {};
 
@@ -38,19 +38,19 @@ var originalWidget = $.widget,
 	// so we can later determine whether someone has modified $.mobile.keepNative
 	keepNativeFactoryDefault = $.mobile.keepNative;
 
-$.widget = (function( orig ) {
+$.widget = ( function( orig ) {
 	return function() {
 		var constructor = orig.apply( this, arguments ),
 			name = constructor.prototype.widgetName;
 
 		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
-			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+			constructor.prototype.initSelector : ":jqmData(role='" + name + "')");
 
 		$.mobile.widgets[ name ] = constructor;
 
 		return constructor;
 	};
-})( $.widget );
+} )( $.widget );
 
 // Make sure $.widget still has bridge and extend methods
 $.extend( $.widget, originalWidget );
@@ -58,7 +58,7 @@ $.extend( $.widget, originalWidget );
 // For backcompat remove in 1.5
 $.mobile.document.on( "create", function( event ) {
 	$( event.target ).enhanceWithin();
-});
+} );
 
 $.widget( "mobile.page", {
 	version: "@VERSION",
@@ -96,18 +96,18 @@ $.widget( "mobile.page", {
 		this._on( this.element, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
-		});
+		} );
 
 		if ( this.options.enhance ) {
 			this.element.enhanceWithin();
 		}
 		// Dialog widget is deprecated in 1.4 remove this in 1.5
-		if ( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ) {
+		if ( $.mobile.getAttribute( this.element[ 0 ], "role" ) === "dialog" && $.mobile.dialog ) {
 			this.element.dialog();
 		}
 	},
 
-	_enhance: function () {
+	_enhance: function() {
 		var attrPrefix = "data-" + $.mobile.ns,
 			self = this;
 
@@ -123,14 +123,14 @@ $.widget( "mobile.page", {
 		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
 			var $this = $( this ),
 				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
-				self.options.contentTheme = theme || self.options.contentTheme || ( self.options.dialog && self.options.theme ) || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
-				$this.addClass( "ui-content" );
-				if ( self.options.contentTheme ) {
-					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
-				}
-				// Add ARIA role
-				$this.attr( "role", "main" ).addClass( "ui-content" );
-		});
+			self.options.contentTheme = theme || self.options.contentTheme || ( self.options.dialog && self.options.theme ) || ( self.element.jqmData( "role" ) === "dialog" && self.options.theme );
+			$this.addClass( "ui-content" );
+			if ( self.options.contentTheme ) {
+				$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
+			}
+			// Add ARIA role
+			$this.attr( "role", "main" ).addClass( "ui-content" );
+		} );
 	},
 
 	bindRemove: function( callback ) {
@@ -138,23 +138,23 @@ $.widget( "mobile.page", {
 
 		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
 		if ( !page.data( "mobile-page" ).options.domCache &&
-			page.is( ":jqmData(external-page='true')" ) ) {
+				page.is( ":jqmData(external-page='true')" ) ) {
 
 			// TODO use _on - that is, sort out why it doesn't work in this case
 			page.bind( "pagehide.remove", callback || function( e, data ) {
 
-				//check if this is a same page transition and if so don't remove the page
-				if( !data.samePage ){
-					var $this = $( this ),
-						prEvent = new $.Event( "pageremove" );
+					//check if this is a same page transition and if so don't remove the page
+					if ( !data.samePage ) {
+						var $this = $( this ),
+							prEvent = new $.Event( "pageremove" );
 
-					$this.trigger( prEvent );
+						$this.trigger( prEvent );
 
-					if ( !prEvent.isDefaultPrevented() ) {
-						$this.removeWithDependents();
+						if ( !prEvent.isDefaultPrevented() ) {
+							$this.removeWithDependents();
+						}
 					}
-				}
-			});
+				} );
 		}
 	},
 
@@ -169,12 +169,12 @@ $.widget( "mobile.page", {
 		}
 	},
 
-	_handlePageBeforeShow: function(/* e */) {
+	_handlePageBeforeShow: function( /* e */ ) {
 		this.setContainerBackground();
 	},
 	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
-		this.element.closest( ":mobile-pagecontainer" ).pagecontainer({ "theme": "none" });
+		this.element.closest( ":mobile-pagecontainer" ).pagecontainer( { "theme": "none" } );
 	},
 	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
@@ -202,8 +202,8 @@ $.widget( "mobile.page", {
 			.concat( oldDefault ? [ oldDefault ] : [] )
 			.join( ", " ) );
 	}
-});
+} );
 
 return $.mobile.page;
 
-});
+} );

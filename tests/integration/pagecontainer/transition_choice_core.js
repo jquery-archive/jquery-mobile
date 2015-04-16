@@ -7,24 +7,24 @@ module( "Pagecontainer transition choice", {
 		callSequence = [];
 		origChange = $.mobile.pagecontainer.prototype.change;
 		$.mobile.pagecontainer.prototype.change = function( url, options ) {
-			callSequence.push({
+			callSequence.push( {
 				transition: options.transition,
 				reverse: !!( options.reverse )
-			});
+			} );
 			return origChange.apply( this, arguments );
 		};
 	},
 	teardown: function() {
 		$.mobile.pagecontainer.prototype.change = origChange;
 	}
-});
+} );
 
 asyncTest( "Pagecontainer chooses correct transition", function() {
 	debugger;
 
 	var pageContainer = $( ":mobile-pagecontainer" );
 
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#go-to-b" ).click();
 		},
@@ -65,7 +65,7 @@ asyncTest( "Pagecontainer chooses correct transition", function() {
 
 			start();
 		}
-	]);
-});
+	] );
+} );
 
-})();
+} )();

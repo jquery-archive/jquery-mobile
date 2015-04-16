@@ -40,7 +40,7 @@ var eventSequence,
 			undefined );
 	},
 	recordEvent = function( event, data ) {
-		eventSequence.push({
+		eventSequence.push( {
 			type: event.type,
 			target: event.target.getAttribute( "id" ),
 			data: {
@@ -48,7 +48,7 @@ var eventSequence,
 				nextPage: data && dataItem( data.nextPage ),
 				toPage: data && dataItem( data.toPage )
 			}
-		});
+		} );
 	};
 
 module( "Page event sequence tests", {
@@ -60,7 +60,7 @@ module( "Page event sequence tests", {
 	teardown: function() {
 		$( document ).off( eventsList, recordEvent );
 	}
-});
+} );
 
 function makeOtherPageUrl( filename ) {
 	var path = $.mobile.path,
@@ -71,7 +71,7 @@ function makeOtherPageUrl( filename ) {
 		pathname: parsedUrl.directory + filename,
 		hash: "",
 		search: ""
-	}));
+	} ) );
 }
 
 asyncTest( "Event sequence during navigation to another page", function() {
@@ -82,96 +82,96 @@ asyncTest( "Event sequence during navigation to another page", function() {
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Valid
 			{ type: "pagecontainerbeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforeload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Valid
 			{ type: "pagecontainerbeforeload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pageload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid - page widget events
 			{ type: "pagebeforecreate", target: "other-page",
-				data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
+			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 			{ type: "pagecreate", target: "other-page",
-				data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
+			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pageinit", target: "other-page",
-				data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
+			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerbeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerbeforetransition", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforehide", target: "start-page",
-				data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
 
 			// Valid, but nextPage is deprecated as of 1.4.0
 			{ type: "pagecontainerbeforehide", target: "the-body",
-				data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforeshow", target: "other-page",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerbeforeshow", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagehide", target: "start-page",
-				data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
 
 			// Valid, but nextPage is deprecated as of 1.4.0
 			{ type: "pagecontainerhide", target: "the-body",
-				data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: "other-page", toPage: "other-page" } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pageshow", target: "other-page",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainershow", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainertransition", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerchange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } }
+			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } }
 		];
 
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#go-to-other-page" ).click();
 		},
@@ -182,8 +182,8 @@ asyncTest( "Event sequence during navigation to another page", function() {
 		function() {
 			start();
 		}
-	]);
-});
+	] );
+} );
 
 asyncTest( "Event sequence during page load failure", function() {
 	expect( 1 );
@@ -193,30 +193,30 @@ asyncTest( "Event sequence during page load failure", function() {
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Valid
 			{ type: "pagecontainerbeforechange", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pagebeforeload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Valid
 			{ type: "pagecontainerbeforeload", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Deprecated as of 1.4.0
 			{ type: "pageloadfailed", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } },
 
 			// Valid
 			{ type: "pagecontainerloadfailed", target: "the-body",
-				data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } }
+			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } }
 		];
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "#go-to-nonexistent-page" ).click();
 		},
@@ -230,14 +230,14 @@ asyncTest( "Event sequence during page load failure", function() {
 			deepEqual( eventSequence, expectedEventSequence, "Event sequence as expected" );
 			start();
 		}
-	]);
-});
-module( "load method");
-test( "load does not trigger an error when called withput a second param", function(){
+	] );
+} );
+module( "load method" );
+test( "load does not trigger an error when called withput a second param", function() {
 	var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
 		pagecontainer = $( ":mobile-pagecontainer" );
 
 	throws( !pagecontainer.pagecontainer( "load", otherPageUrl ) );
-});
+} );
 
-})();
+} )();
