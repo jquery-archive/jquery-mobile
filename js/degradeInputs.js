@@ -24,7 +24,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 $.mobile.degradeInputs = {
 	color: false,
@@ -50,7 +50,7 @@ $.mobile.degradeInputsWithin = function( target ) {
 	target = $( target );
 
 	// Degrade inputs to avoid poorly implemented native functionality
-	target.find( "input" ).not( $.mobile.page.prototype.keepNativeSelector() ).each(function() {
+	target.find( "input" ).not( $.mobile.page.prototype.keepNativeSelector() ).each( function() {
 		var element = $( this ),
 			type = this.getAttribute( "type" ),
 			optType = $.mobile.degradeInputs[ type ] || "text",
@@ -65,10 +65,10 @@ $.mobile.degradeInputsWithin = function( target ) {
 
 			element.replaceWith( html.replace( findstr, repstr ) );
 		}
-	});
+	} );
 
 };
 
 return $.mobile.degradeInputs;
 
-});
+} );
