@@ -26,7 +26,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
@@ -34,7 +34,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 		classes: $.extend( $.mobile.table.prototype.options.classes, {
 			reflowTable: "ui-table-reflow",
 			cellLabels: "ui-table-cell-label"
-		})
+		} )
 	},
 
 	_create: function() {
@@ -63,7 +63,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_refresh: function( create ) {
 		this._super( create );
 		if ( !create && this.options.mode === "reflow" ) {
-			this._updateReflow( );
+			this._updateReflow();
 		}
 	},
 
@@ -79,20 +79,20 @@ return $.widget( "mobile.table", $.mobile.table, {
 				contents = $( this ).clone().contents(),
 				iteration, filter;
 
-				if ( hierarchyClass ) {
-					iteration = parseInt( this.getAttribute( "colspan" ), 10 );
-					filter = "";
+			if ( hierarchyClass ) {
+				iteration = parseInt( this.getAttribute( "colspan" ), 10 );
+				filter = "";
 
-					if ( iteration ) {
-						filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
-					}
-
-					table._addLabels( cells.filter( filter ),
-						opts.classes.cellLabels + hierarchyClass, contents );
-				} else {
-					table._addLabels( cells, opts.classes.cellLabels, contents );
+				if ( iteration ) {
+					filter = "td:nth-child(" + iteration + "n + " + ( colstart ) + ")";
 				}
-		});
+
+				table._addLabels( cells.filter( filter ),
+					opts.classes.cellLabels + hierarchyClass, contents );
+			} else {
+				table._addLabels( cells, opts.classes.cellLabels, contents );
+			}
+		} );
 	},
 
 	_addLabels: function( cells, label, contents ) {
@@ -104,6 +104,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 			.not( ":has(b." + label + ")" )
 				.prepend( $( "<b class='" + label + "'></b>" ).append( contents ) );
 	}
-});
+} );
 
-});
+} );

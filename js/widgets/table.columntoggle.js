@@ -29,7 +29,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
@@ -42,7 +42,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 			columnBtn: "ui-table-columntoggle-button",
 			priorityPrefix: "ui-table-priority-",
 			columnToggleTable: "ui-table-columntoggle"
-		})
+		} )
 	},
 
 	_create: function() {
@@ -54,7 +54,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 		$.extend( this, {
 			_menu: null
-		});
+		} );
 
 		if ( this.options.enhanced ) {
 			this._menu = $( this.document[ 0 ].getElementById( this._id() + "-popup" ) ).children().first();
@@ -80,10 +80,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 		// update column toggles on resize
 		this._on( this.window, {
 			throttledresize: "_setToggleState"
-		});
+		} );
 		this._on( this._menu, {
 			"change input": "_menuInputChange"
-		});
+		} );
 	},
 
 	_addToggles: function( menu, keep ) {
@@ -119,21 +119,21 @@ return $.widget( "mobile.table", $.mobile.table, {
 				// that, vice versa, the header is also associated with the checkbox
 				input = ( keep ? inputs.eq( checkboxIndex++ ) :
 					makeInput( ( header.children( "abbr" ).first().attr( "title" ) ||
-							header.text() ) )
+						header.text() ) )
 						.appendTo( container )
 						.first()
-						.checkboxradio( {
-							theme: opts.columnPopupTheme
-						}) )
+							.checkboxradio( {
+								theme: opts.columnPopupTheme
+							} ) )
 
-						// Associate the header with the checkbox
-						.jqmData( "header", header )
-						.jqmData( "cells", cells );
+					// Associate the header with the checkbox
+					.jqmData( "header", header )
+					.jqmData( "cells", cells );
 
 				// Associate the checkbox with the header
 				header.jqmData( "input", input );
 			}
-		});
+		} );
 
 		// set bindings here
 		if ( !keep ) {
@@ -152,7 +152,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 	_unlockCells: function( cells ) {
 		// allow hide/show via CSS only = remove all toggle-locks
-		cells.removeClass( "ui-table-cell-hidden ui-table-cell-visible");
+		cells.removeClass( "ui-table-cell-hidden ui-table-cell-visible" );
 	},
 
 	_enhanceColToggle: function() {
@@ -222,7 +222,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 					// with this column header is currently hidden. Let's record that.
 					hiddenColumns.push( index );
 				}
-			});
+			} );
 
 			// columns not being replaced must be cleared from input toggle-locks
 			this._unlockCells( this.element.find( ".ui-table-cell-hidden, " +
@@ -233,7 +233,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 			// At this point all columns are visible, so uncheck the checkboxes that correspond to
 			// those columns we've found to be hidden
-			for ( index = hiddenColumns.length - 1 ; index > -1 ; index-- ) {
+			for ( index = hiddenColumns.length - 1; index > -1; index-- ) {
 				headers.eq( hiddenColumns[ index ] ).jqmData( "input" )
 					.prop( "checked", false )
 					.checkboxradio( "refresh" )
@@ -248,12 +248,12 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
 			checkbox.checkboxradio( "refresh" );
-		});
+		} );
 	},
 
 	_destroy: function() {
 		this._super();
 	}
-});
+} );
 
-});
+} );
