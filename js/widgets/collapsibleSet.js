@@ -29,7 +29,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
 
@@ -61,7 +61,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 
 		$.extend( this, {
 			_classes: ""
-		});
+		} );
 
 		if ( !opts.enhanced ) {
 			elem.addClass( "ui-collapsible-set " +
@@ -84,8 +84,8 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
 		this.element
 			.children( childCollapsiblesSelector )
-			.filter( ":jqmData(collapsed='false')" )
-			.collapsible( "expand" );
+				.filter( ":jqmData(collapsed='false')" )
+					.collapsible( "expand" );
 	},
 
 	_setOptions: function( options ) {
@@ -124,7 +124,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 			.removeClass( "ui-collapsible-set ui-corner-all " +
 				this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
 			.children( ":mobile-collapsible" )
-			.collapsible( "destroy" );
+				.collapsible( "destroy" );
 	},
 
 	_refresh: function( create ) {
@@ -140,4 +140,4 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
-});
+} );
