@@ -27,7 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.table", {
 	version: "@VERSION",
@@ -54,7 +54,7 @@ return $.widget( "mobile.table", {
 			// allHeaders references headers, plus all THs in the thead, which may
 			// include several rows, or not
 			allHeaders: undefined
-		});
+		} );
 
 		this._refresh( true );
 	},
@@ -92,7 +92,7 @@ return $.widget( "mobile.table", {
 				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
 
 				if ( span ) {
-					for( j = 0; j < span - 1; j++ ) {
+					for ( j = 0; j < span - 1; j++ ) {
 						columnCount++;
 						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
 					}
@@ -103,9 +103,9 @@ return $.widget( "mobile.table", {
 				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
 
 				columnCount++;
-			});
-		});
+			} );
+		} );
 	}
-});
+} );
 
-});
+} );
