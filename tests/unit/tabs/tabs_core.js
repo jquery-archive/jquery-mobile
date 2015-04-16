@@ -15,7 +15,7 @@ module( "Tabs extension", {
 		$.support.dynamicBaseTag = originalBaseSupport;
 		$.mobile.base.set( originalBase );
 	}
-});
+} );
 
 test( "_isLocal() correctly identifies URLs as local/non-local", function() {
 
@@ -27,6 +27,6 @@ test( "_isLocal() correctly identifies URLs as local/non-local", function() {
 	deepEqual( _isLocal( $( "<a href='" + phonyDirectory + "#some-other-id'></a>" )[ 0 ] ), true,
 		"'" + phonyDirectory + "#some-other-id' defined as local" );
 
-});
+} );
 
-})();
+} )();
