@@ -25,9 +25,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // Set the slide transitions's fallback to "fade"
 $.mobile.transitionFallbacks.slidefade = "fade";
 
-});
+} );
