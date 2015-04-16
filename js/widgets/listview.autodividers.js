@@ -25,7 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 function defaultAutodividersSelector( elt ) {
 	// look for the text in the given element
@@ -64,7 +64,7 @@ return $.widget( "mobile.listview", $.mobile.listview, {
 
 		lis = list.children( "li" );
 
-		for ( i = 0; i < lis.length ; i++ ) {
+		for ( i = 0; i < lis.length; i++ ) {
 			li = lis[ i ];
 			dividerText = this.options.autodividersSelector( $( li ) );
 
@@ -78,6 +78,6 @@ return $.widget( "mobile.listview", $.mobile.listview, {
 			lastDividerText = dividerText;
 		}
 	}
-});
+} );
 
-});
+} );
