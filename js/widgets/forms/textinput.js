@@ -30,7 +30,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.textinput", {
 	version: "@VERSION",
@@ -71,9 +71,9 @@ return $.widget( "mobile.textinput", {
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea",
 			isRange = this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ),
-			inputNeedsWrap = ( (this.element.is( "input" ) ||
+			inputNeedsWrap = ( ( this.element.is( "input" ) ||
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
-					!isRange );
+				!isRange );
 
 		if ( this.element.prop( "disabled" ) ) {
 			options.disabled = true;
@@ -85,7 +85,7 @@ return $.widget( "mobile.textinput", {
 			isTextarea: isTextarea,
 			isRange: isRange,
 			inputNeedsWrap: inputNeedsWrap
-		});
+		} );
 
 		this._autoCorrect();
 
@@ -96,14 +96,14 @@ return $.widget( "mobile.textinput", {
 		this._on( {
 			"focus": "_handleFocus",
 			"blur": "_handleBlur"
-		});
+		} );
 
 	},
 
 	refresh: function() {
-		this.setOptions({
-			"disabled" : this.element.is( ":disabled" )
-		});
+		this.setOptions( {
+			"disabled": this.element.is( ":disabled" )
+		} );
 	},
 
 	_enhance: function() {
@@ -168,13 +168,13 @@ return $.widget( "mobile.textinput", {
 		//      have no test for iOS 5 or newer so we're temporarily using
 		//      the touchOverflow support flag for jQM 1.0. Yes, I feel dirty.
 		//      - jblas
-		if ( typeof this.element[0].autocorrect !== "undefined" &&
-			!$.support.touchOverflow ) {
+		if ( typeof this.element[ 0 ].autocorrect !== "undefined" &&
+				!$.support.touchOverflow ) {
 
 			// Set the attribute instead of the property just in case there
 			// is code that attempts to make modifications via HTML.
-			this.element[0].setAttribute( "autocorrect", "off" );
-			this.element[0].setAttribute( "autocomplete", "off" );
+			this.element[ 0 ].setAttribute( "autocorrect", "off" );
+			this.element[ 0 ].setAttribute( "autocomplete", "off" );
 		}
 	},
 
@@ -194,16 +194,16 @@ return $.widget( "mobile.textinput", {
 		this.widget().addClass( $.mobile.focusClass );
 	},
 
-	_setOptions: function ( options ) {
+	_setOptions: function( options ) {
 		var outer = this.widget();
 
 		this._super( options );
 
 		if ( !( options.disabled === undefined &&
-			options.mini === undefined &&
-			options.corners === undefined &&
-			options.theme === undefined &&
-			options.wrapperClass === undefined ) ) {
+				options.mini === undefined &&
+				options.corners === undefined &&
+				options.theme === undefined &&
+				options.wrapperClass === undefined ) ) {
 
 			outer.removeClass( this.classes.join( " " ) );
 			this.classes = this._classesFromOptions();
@@ -224,6 +224,6 @@ return $.widget( "mobile.textinput", {
 		}
 		this.element.removeClass( "ui-input-text " + this.classes.join( " " ) );
 	}
-});
+} );
 
-});
+} );

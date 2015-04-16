@@ -1,3 +1,3 @@
-$( document ).bind("mobileinit", function(){
-  $.mobile.textinput.prototype.options.clearBtnText = "custom value";
-});
+$( document ).bind( "mobileinit", function() {
+	$.mobile.textinput.prototype.options.clearBtnText = "custom value";
+} );
