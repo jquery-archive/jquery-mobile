@@ -24,25 +24,25 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	$.mobile.ConcurrentTransition = function() {
-		this.init.apply(this, arguments);
-	};
+$.mobile.ConcurrentTransition = function() {
+	this.init.apply( this, arguments );
+};
 
-	$.extend($.mobile.ConcurrentTransition.prototype, $.mobile.Transition.prototype, {
-		sequential: false,
+$.extend( $.mobile.ConcurrentTransition.prototype, $.mobile.Transition.prototype, {
+	sequential: false,
 
-		beforeDoneIn: function() {
-			if ( this.$from ) {
-				this.cleanFrom();
-			}
-		},
-
-		beforeStartOut: function( screenHeight, reverseClass, none ) {
-			this.doneOut( screenHeight, reverseClass, none );
+	beforeDoneIn: function() {
+		if ( this.$from ) {
+			this.cleanFrom();
 		}
-	});
+	},
 
-	return $.mobile.ConcurrentTransition;
-});
+	beforeStartOut: function( screenHeight, reverseClass, none ) {
+		this.doneOut( screenHeight, reverseClass, none );
+	}
+} );
+
+return $.mobile.ConcurrentTransition;
+} );
