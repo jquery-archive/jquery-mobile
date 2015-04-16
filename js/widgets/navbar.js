@@ -28,7 +28,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.navbar", {
 	version: "@VERSION",
@@ -47,8 +47,8 @@ return $.widget( "mobile.navbar", {
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
-			.jqmEnhanceable()
-			.grid({ grid: this.options.grid });
+				.jqmEnhanceable()
+				.grid( { grid: this.options.grid } );
 
 		$navbuttons
 			.each( function() {
@@ -63,17 +63,17 @@ return $.widget( "mobile.navbar", {
 					classes += " ui-icon-" + icon + " ui-button-icon-" + iconpos;
 				}
 				$( this ).addClass( classes );
-			});
+			} );
 
 		$navbar.delegate( "a", "vclick", function( /* event */ ) {
 			var activeBtn = $( this );
 
 			if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
 
-				// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
-				// only ui-state-disabled should be present thereafter
-				activeBtn.hasClass( "ui-disabled" ) ||
-				activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
+					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
+					// only ui-state-disabled should be present thereafter
+					activeBtn.hasClass( "ui-disabled" ) ||
+					activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
 
 				$navbuttons.removeClass( $.mobile.activeBtnClass );
 				activeBtn.addClass( $.mobile.activeBtnClass );
@@ -81,15 +81,15 @@ return $.widget( "mobile.navbar", {
 				// The code below is a workaround to fix #1181
 				$( document ).one( "pagehide", function() {
 					activeBtn.removeClass( $.mobile.activeBtnClass );
-				});
+				} );
 			}
-		});
+		} );
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
 			$navbuttons.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
-		});
+		} );
 	}
-});
+} );
 
-});
+} );
