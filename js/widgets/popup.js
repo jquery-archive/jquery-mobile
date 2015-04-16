@@ -44,7 +44,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 function pointInRectangle( x, y, windowCoordinates ) {
 	return ( x >= windowCoordinates.x && x <= windowCoordinates.x + windowCoordinates.cx &&
@@ -133,7 +133,7 @@ $.widget( "mobile.popup", {
 
 		this._on( this.document, {
 			"vmousedown": "_handleDocumentVmousedown"
-		});
+		} );
 
 		// Define instance variables
 		$.extend( this, {
@@ -148,7 +148,7 @@ $.widget( "mobile.popup", {
 			_resizeData: null,
 			_ignoreResizeTo: 0,
 			_orientationchangeInProgress: false
-		});
+		} );
 
 		if ( this._page.length === 0 ) {
 			this._page = $( "body" );
@@ -174,7 +174,7 @@ $.widget( "mobile.popup", {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
 			keyup: $.proxy( this, "_handleWindowKeyUp" )
-		});
+		} );
 		this._on( this.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
@@ -183,7 +183,7 @@ $.widget( "mobile.popup", {
 			wrapperClass = currentOptions.wrapperClass,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
+					this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
 					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
@@ -254,9 +254,9 @@ $.widget( "mobile.popup", {
 
 		if ( this._resizeData ) {
 			if ( windowCoordinates.x === this._resizeData.windowCoordinates.x &&
-				windowCoordinates.y === this._resizeData.windowCoordinates.y &&
-				windowCoordinates.cx === this._resizeData.windowCoordinates.cx &&
-				windowCoordinates.cy === this._resizeData.windowCoordinates.cy ) {
+					windowCoordinates.y === this._resizeData.windowCoordinates.y &&
+					windowCoordinates.cx === this._resizeData.windowCoordinates.cx &&
+					windowCoordinates.cy === this._resizeData.windowCoordinates.cy ) {
 				// timeout not refreshed
 				return false;
 			} else {
@@ -304,11 +304,11 @@ $.widget( "mobile.popup", {
 		this._ignoreResizeTo = this._delay( "_stopIgnoringResizeEvents", 1000 );
 	},
 
-	_handleWindowResize: function(/* theEvent */) {
+	_handleWindowResize: function( /* theEvent */ ) {
 		if ( this._isOpen && this._ignoreResizeTo === 0 ) {
 			if ( isOutOfSight( this._ui.container, getWindowCoordinates( this.window ) ) &&
-				( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
-				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+					( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
+					!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
@@ -318,7 +318,7 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_handleWindowOrientationchange: function(/* theEvent */) {
+	_handleWindowOrientationchange: function( /* theEvent */ ) {
 		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
@@ -434,44 +434,46 @@ $.widget( "mobile.popup", {
 		if ( value !== undefined ) {
 			ar = String( value ).split( "," );
 
-			$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+			$.each( ar, function( idx, val ) {
+				ar[ idx ] = parseInt( val, 10 );
+			} );
 
-			switch( ar.length ) {
-				// All values are to be the same
-				case 1:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
-					}
-					break;
+			switch ( ar.length ) {
+			// All values are to be the same
+			case 1:
+				if ( !isNaN( ar[ 0 ] ) ) {
+					tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
+				}
+				break;
 
-				// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
-				case 2:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.b = ar[ 0 ];
-					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.l = tol.r = ar[ 1 ];
-					}
-					break;
+			// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
+			case 2:
+				if ( !isNaN( ar[ 0 ] ) ) {
+					tol.t = tol.b = ar[ 0 ];
+				}
+				if ( !isNaN( ar[ 1 ] ) ) {
+					tol.l = tol.r = ar[ 1 ];
+				}
+				break;
 
-				// The array contains values in the order top, right, bottom, left
-				case 4:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = ar[ 0 ];
-					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.r = ar[ 1 ];
-					}
-					if ( !isNaN( ar[ 2 ] ) ) {
-						tol.b = ar[ 2 ];
-					}
-					if ( !isNaN( ar[ 3 ] ) ) {
-						tol.l = ar[ 3 ];
-					}
-					break;
+			// The array contains values in the order top, right, bottom, left
+			case 4:
+				if ( !isNaN( ar[ 0 ] ) ) {
+					tol.t = ar[ 0 ];
+				}
+				if ( !isNaN( ar[ 1 ] ) ) {
+					tol.r = ar[ 1 ];
+				}
+				if ( !isNaN( ar[ 2 ] ) ) {
+					tol.b = ar[ 2 ];
+				}
+				if ( !isNaN( ar[ 3 ] ) ) {
+					tol.l = ar[ 3 ];
+				}
+				break;
 
-				default:
-					break;
+			default:
+				break;
 			}
 		}
 
@@ -560,20 +562,20 @@ $.widget( "mobile.popup", {
 			if ( prerequisites === self._prerequisites ) {
 				screenPrerequisite();
 			}
-		});
+		} );
 
 		prerequisites.container.done( function() {
 			if ( prerequisites === self._prerequisites ) {
 				containerPrerequisite();
 			}
-		});
+		} );
 
 		$.when( prerequisites.screen, prerequisites.container ).done( function() {
 			if ( prerequisites === self._prerequisites ) {
 				self._prerequisites = null;
 				whenDone();
 			}
-		});
+		} );
 
 		self._prerequisites = prerequisites;
 	},
@@ -625,7 +627,7 @@ $.widget( "mobile.popup", {
 			} else {
 				try {
 					dst = $( pTo );
-				} catch( err ) {
+				} catch ( err ) {
 					dst = null;
 				}
 				if ( dst ) {
@@ -672,10 +674,10 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_safelyBlur: function( currentElement ){
+	_safelyBlur: function( currentElement ) {
 		if ( currentElement !== this.window[ 0 ] &&
-			currentElement.nodeName.toLowerCase() !== "body" ) {
-				$( currentElement ).blur();
+				currentElement.nodeName.toLowerCase() !== "body" ) {
+			$( currentElement ).blur();
 		}
 	},
 
@@ -720,7 +722,7 @@ $.widget( "mobile.popup", {
 					return true;
 				}
 				return false;
-			}());
+			}() );
 
 		// Count down to triggering "popupafteropen" - we have two prerequisites:
 		// 1. The popup window animation completes (container())
@@ -752,7 +754,7 @@ $.widget( "mobile.popup", {
 			// TODO sort out why this._page isn't working
 			this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
 		}
-		this._animate({
+		this._animate( {
 			additionalCondition: true,
 			transition: openOptions.transition,
 			classToRemove: "",
@@ -760,7 +762,7 @@ $.widget( "mobile.popup", {
 			containerClassToAdd: "in",
 			applyTransition: false,
 			prerequisites: this._prerequisites
-		});
+		} );
 	},
 
 	_closePrerequisiteScreen: function() {
@@ -819,7 +821,7 @@ $.widget( "mobile.popup", {
 			containerClassToAdd: "reverse out",
 			applyTransition: true,
 			prerequisites: this._prerequisites
-		});
+		} );
 	},
 
 	_unenhance: function() {
@@ -938,7 +940,7 @@ $.widget( "mobile.popup", {
 				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( theEvent ) {
 					self.close();
 					theEvent.preventDefault();
-				});
+				} );
 
 			return this;
 		}
@@ -960,7 +962,7 @@ $.widget( "mobile.popup", {
 		// if the current url has no dialog hash key proceed as normal
 		// otherwise, if the page is a dialog simply tack on the hash key
 		if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ) {
-			url = url + (url.indexOf( "#" ) > -1 ? hashkey : "#" + hashkey);
+			url = url + ( url.indexOf( "#" ) > -1 ? hashkey : "#" + hashkey );
 		} else {
 			url = $.mobile.path.parseLocation().hash + hashkey;
 		}
@@ -970,7 +972,7 @@ $.widget( "mobile.popup", {
 			theEvent.preventDefault();
 			self._open( options );
 			self._bindContainerClose();
-		});
+		} );
 
 		this.urlAltered = true;
 		$.mobile.navigate( url, { role: "dialog" } );
@@ -996,7 +998,7 @@ $.widget( "mobile.popup", {
 
 		return this;
 	}
-});
+} );
 
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {
@@ -1014,7 +1016,7 @@ $.mobile.popup.handleLink = function( $link ) {
 			y: offset.top + $link.outerHeight() / 2,
 			transition: $link.jqmData( "transition" ),
 			positionTo: $link.jqmData( "position-to" )
-		});
+		} );
 	}
 
 	//remove after delay
@@ -1029,8 +1031,8 @@ $.mobile.document.on( "pagebeforechange", function( theEvent, data ) {
 		$.mobile.popup.handleLink( data.options.link );
 		theEvent.preventDefault();
 	}
-});
+} );
 
 return $.mobile.popup;
 
-});
+} );

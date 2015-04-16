@@ -1,21 +1,21 @@
 ( function( $ ) {
-	$( "html" ).height( screen.height * 3 );
+$( "html" ).height( screen.height * 3 );
 
-	function scrollDown() {
-		window.scrollTo(0,screen.height );
-	}
+function scrollDown() {
+	window.scrollTo( 0, screen.height );
+}
 
-	function scrollUp() {
-		window.scrollTo(0,0);
-	}
+function scrollUp() {
+	window.scrollTo( 0, 0 );
+}
 
 asyncTest( "Popup repositions when it receives a resize and it's offscreen", function() {
 	var eventNs = ".popupRepositionsUponResize";
-		popup = $( "#test-popup" );
+	popup = $( "#test-popup" );
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
-			popup.popup( "open", { x: 0, y: 0 });
+			popup.popup( "open", { x: 0, y: 0 } );
 		},
 		{
 			popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "1" },
@@ -42,17 +42,17 @@ asyncTest( "Popup repositions when it receives a resize and it's offscreen", fun
 			scrollUp();
 			start();
 		}
-	]);
-});
+	] );
+} );
 
 asyncTest( "Popup does not react when it receives a resize and it's onscreen", function() {
 	var eventNs = ".popupRepositionsUponResize";
-		popup = $( "#test-popup" );
+	popup = $( "#test-popup" );
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
 			scrollDown();
-			popup.popup( "open", { x: 0, y: 0 });
+			popup.popup( "open", { x: 0, y: 0 } );
 		},
 		{
 			popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "1" },
@@ -78,7 +78,7 @@ asyncTest( "Popup does not react when it receives a resize and it's onscreen", f
 			scrollUp();
 			start();
 		}
-	]);
-});
+	] );
+} );
 
-})( jQuery );
+} )( jQuery );

@@ -27,13 +27,13 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
 		"<div class='ui-popup-arrow-guide'></div>" +
 		"<div class='ui-popup-arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
-			"<div class='ui-popup-arrow'></div>" +
+		"<div class='ui-popup-arrow'></div>" +
 		"</div>"
 	);
 
@@ -89,7 +89,9 @@ return $.widget( "mobile.popup", $.mobile.popup, {
 	// distance from the desired point. If a best-distance is passed in, return
 	// the minimum of the one passed in and the one calculated.
 	_tryAnArrow: function( p, dir, desired, s, best ) {
-		var result, r, diff, desiredForArrow = {}, tip = {};
+		var result, r, diff,
+			desiredForArrow = {},
+			tip = {};
 
 		// If the arrow has no wiggle room along the edge of the popup, it cannot
 		// be displayed along the requested edge without it sticking out.
@@ -164,7 +166,7 @@ return $.widget( "mobile.popup", $.mobile.popup, {
 		bgRef = {};
 		state = this._getPlacementState( true );
 		params = {
-			"l": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: 1, tipOffset:  -state.arHalf.cx, arrowOffsetFactor: 0 },
+			"l": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: 1, tipOffset: -state.arHalf.cx, arrowOffsetFactor: 0 },
 			"r": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: -1, tipOffset: state.arHalf.cx + state.contentBox.cx, arrowOffsetFactor: 1 },
 			"b": { fst: "y", snd: "x", prop: "left", dimKey: "cx", oDimKey: "cy", offsetFactor: -1, tipOffset: state.arHalf.cy + state.contentBox.cy, arrowOffsetFactor: 1 },
 			"t": { fst: "y", snd: "x", prop: "left", dimKey: "cx", oDimKey: "cy", offsetFactor: 1, tipOffset: -state.arHalf.cy, arrowOffsetFactor: 0 }
@@ -251,6 +253,6 @@ return $.widget( "mobile.popup", $.mobile.popup, {
 
 		return this._super();
 	}
-});
+} );
 
-});
+} );
