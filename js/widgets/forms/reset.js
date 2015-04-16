@@ -23,7 +23,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 $.mobile.behaviors.formReset = {
 	_handleFormReset: function() {
@@ -31,10 +31,10 @@ $.mobile.behaviors.formReset = {
 			reset: function() {
 				this._delay( "_reset" );
 			}
-		});
+		} );
 	}
 };
 
 return $.mobile.behaviors.formReset;
 
-});
+} );

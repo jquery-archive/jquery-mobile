@@ -41,7 +41,7 @@ $.mobile.widget.theme = {
 				.removeClass( "ui-theme-" + this.options.theme )
 				.addClass( "ui-theme-" + value );
 		}
-		this._superApply ( arguments );
+		this._superApply( arguments );
 	}
 };
 
