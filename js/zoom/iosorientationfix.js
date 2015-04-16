@@ -24,45 +24,45 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-	$.mobile.iosorientationfixEnabled = true;
+$.mobile.iosorientationfixEnabled = true;
 
-	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
-	var ua = navigator.userAgent,
-		zoom,
-		evt, x, y, z, aig;
-	if ( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ) {
-		$.mobile.iosorientationfixEnabled = false;
-		return;
-	}
+// This fix addresses an iOS bug, so return early if the UA claims it's something else.
+var ua = navigator.userAgent,
+	zoom,
+	evt, x, y, z, aig;
+if ( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ) {
+	$.mobile.iosorientationfixEnabled = false;
+	return;
+}
 
-	zoom = $.mobile.zoom;
+zoom = $.mobile.zoom;
 
-	function checkTilt( e ) {
-		evt = e.originalEvent;
-		aig = evt.accelerationIncludingGravity;
+function checkTilt( e ) {
+	evt = e.originalEvent;
+	aig = evt.accelerationIncludingGravity;
 
-		x = Math.abs( aig.x );
-		y = Math.abs( aig.y );
-		z = Math.abs( aig.z );
+	x = Math.abs( aig.x );
+	y = Math.abs( aig.y );
+	z = Math.abs( aig.z );
 
-		// If portrait orientation and in one of the danger zones
-		if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
-				if ( zoom.enabled ) {
-					zoom.disable();
-				}
-		}	else if ( !zoom.enabled ) {
-				zoom.enable();
+	// If portrait orientation and in one of the danger zones
+	if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
+		if ( zoom.enabled ) {
+			zoom.disable();
 		}
+	} else if ( !zoom.enabled ) {
+		zoom.enable();
 	}
+}
 
-	$.mobile.document.on( "mobileinit", function() {
-		if ( $.mobile.iosorientationfixEnabled ) {
-			$.mobile.window
-				.bind( "orientationchange.iosorientationfix", zoom.enable )
-				.bind( "devicemotion.iosorientationfix", checkTilt );
-		}
-	});
+$.mobile.document.on( "mobileinit", function() {
+	if ( $.mobile.iosorientationfixEnabled ) {
+		$.mobile.window
+			.bind( "orientationchange.iosorientationfix", zoom.enable )
+			.bind( "devicemotion.iosorientationfix", checkTilt );
+	}
+} );
 
-});
+} );
