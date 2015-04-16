@@ -29,7 +29,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../links",
 			"../widget",
 			"../support",
 			"../events/navigate",
@@ -86,7 +85,7 @@ function getWindowCoordinates( theWindow ) {
 	};
 }
 
-var popupEnhancer = function() {
+var popupHook = function() {
 
 	// Links within content areas, tests included with page
 	$( this )
@@ -110,12 +109,8 @@ var popupEnhancer = function() {
 		.addClass( "ui-link" );
 };
 
-if ( $.fn.enhance.hooks ) {
-	$.fn.enhance.hooks.push( popupEnhancer );
-} else {
-	$.fn.enhance = $.fn.enhance || $.noop;
-	$.fn.enhance.hooks = [ popupEnhancer ];
-}
+$.fn.enhance = $.fn.enhance || $.noop;
+$.fn.enhance.hooks ? $.fn.enhance.hooks.push( popupHook ) : $.fn.enhance.hooks = [ popupHook ];
 
 $.widget( "mobile.popup", {
 	version: "@VERSION",

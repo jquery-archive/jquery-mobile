@@ -31,8 +31,6 @@
 	}
 } )( function( $ ) {
 
-var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
-
 return $.widget( "mobile.collapsibleset", $.extend( {
 	version: "@VERSION",
 
@@ -43,7 +41,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 	_handleCollapsibleExpand: function( event ) {
 		var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
 
-		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsibleset')" ) ) {
 			closestCollapsible
 				.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 				.collapsible( "collapse" );
@@ -59,7 +57,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 		} );
 
 		this.childCollapsiblesSelector = ":mobile-collapsible, " +
-			( $.mobile.collapsible.initSelector || "[data-" + $.mobile.ns +  "role='collapsible']" );
+			( "[data-" + $.mobile.ns +  "role='collapsible']" );
 
 		if ( !opts.enhanced ) {
 			elem.addClass( "ui-collapsible-set " +

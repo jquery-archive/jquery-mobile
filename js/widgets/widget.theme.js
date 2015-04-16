@@ -12,7 +12,6 @@
 //>>description: Adds Theme option to widgets
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-<<<<<<< HEAD
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -28,15 +27,6 @@
 	}
 } )( function( $ ) {
 
-=======
-define( [ "jquery",
-	"../core",
-	"../widget"
-	], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
-$.mobile.widget = $.mobile.widget || {};
->>>>>>> 4c70025... Enhancer: Fixup tests add ns remove degrde inputs, links, keepNative
 $.mobile.widget.theme = {
 	_create: function() {
 		this._super();
