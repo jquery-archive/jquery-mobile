@@ -21,12 +21,12 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
-		$.extend( $.support, {
-			orientation: "orientation" in window && "onorientationchange" in window
-		});
+$.extend( $.support, {
+	orientation: "orientation" in window && "onorientationchange" in window
+} );
 
-	return $.support;
-});
+return $.support;
+} );
 

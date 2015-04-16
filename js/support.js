@@ -26,7 +26,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // thx Modernizr
 function propExists( prop ) {
@@ -45,7 +45,7 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
 	vendors = [ "Webkit", "Moz", "O" ],
 	webos = "palmGetResource" in window, //only used to rule out scrollTop
-	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
+	operamini = window.operamini && ( {} ).toString.call( window.operamini ) === "[object OperaMini]",
 	bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
 	nokiaLTE7_3;
 
@@ -113,7 +113,7 @@ function cssPointerEventsTest() {
 	element.style.pointerEvents = "x";
 	documentElement.appendChild( element );
 	supports = getComputedStyle &&
-	getComputedStyle( element, "" ).pointerEvents === "auto";
+		getComputedStyle( element, "" ).pointerEvents === "auto";
 	documentElement.removeChild( element );
 	return !!supports;
 }
@@ -126,17 +126,17 @@ function boundingRect() {
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
 $.extend( $.mobile, { browser: {} } );
-$.mobile.browser.oldIE = (function() {
+$.mobile.browser.oldIE = ( function() {
 	var v = 3,
 		div = document.createElement( "div" ),
 		a = div.all || [];
 
 	do {
 		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
-	} while( a[0] );
+	} while ( a[ 0 ] );
 
 	return v > 4 ? v : !v;
-})();
+} )();
 
 function fixedPosition() {
 	var w = window,
@@ -151,19 +151,19 @@ function fixedPosition() {
 		omversion = !!operammobilematch && operammobilematch[ 1 ];
 
 	if (
-		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
-		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
-		// Opera Mini
-		( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ) ||
-		( operammobilematch && omversion < 7458 )	||
-		//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
-		( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
-		// Firefox Mobile before 6.0 -
-		( ffversion && ffversion < 6 ) ||
-		// WebOS less than 3
-		( "palmGetResource" in window && wkversion && wkversion < 534 )	||
-		// MeeGo
-		( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
+			// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
+			( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1 || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
+			// Opera Mini
+			( w.operamini && ( {} ).toString.call( w.operamini ) === "[object OperaMini]" ) ||
+			( operammobilematch && omversion < 7458 ) ||
+			//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+			( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
+			// Firefox Mobile before 6.0 -
+			( ffversion && ffversion < 6 ) ||
+			// WebOS less than 3
+			( "palmGetResource" in window && wkversion && wkversion < 534 ) ||
+			// MeeGo
+			( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
 		return false;
 	}
 
@@ -179,7 +179,7 @@ $.extend( $.support, {
 		"replaceState" in history &&
 		// When running inside a FF iframe, calling replaceState causes an error
 		!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
-		( window.navigator.userAgent.search(/CriOS/) === -1 ),
+		( window.navigator.userAgent.search( /CriOS/ ) === -1 ),
 
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
@@ -187,14 +187,14 @@ $.extend( $.support, {
 	cssTransform3d: transform3dTest(),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	fixedPosition: fixedPosition(),
-	scrollTop: ("pageXOffset" in window ||
+	scrollTop: ( "pageXOffset" in window ||
 		"scrollTop" in document.documentElement ||
-		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
+		"scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
 
 	cssPointerEvents: cssPointerEventsTest(),
 	boundingRect: boundingRect(),
 	inlineSVG: inlineSVG
-});
+} );
 
 fakeBody.remove();
 
@@ -202,39 +202,39 @@ fakeBody.remove();
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort.
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-nokiaLTE7_3 = (function() {
+nokiaLTE7_3 = ( function() {
 
 	var ua = window.navigator.userAgent;
 
 	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
 	return ua.indexOf( "Nokia" ) > -1 &&
-			( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
-			ua.indexOf( "AppleWebKit" ) > -1 &&
-			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
-})();
+		( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
+		ua.indexOf( "AppleWebKit" ) > -1 &&
+		ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
+} )();
 
 // Support conditions that must be met in order to proceed
 // default enhanced qualifications are media query support OR IE 7+
 
 $.mobile.gradeA = function() {
-	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
+	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match( /1\.[0-7+]\.[0-9+]?/ ) !== null );
 };
 
 $.mobile.ajaxBlacklist =
-			// BlackBerry browsers, pre-webkit
-			window.blackberry && !window.WebKitPoint ||
-			// Opera Mini
-			operamini ||
-			// Symbian webkits pre 7.3
-			nokiaLTE7_3;
+	// BlackBerry browsers, pre-webkit
+	window.blackberry && !window.WebKitPoint ||
+	// Opera Mini
+	operamini ||
+	// Symbian webkits pre 7.3
+	nokiaLTE7_3;
 
 // Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
 // to render the stylesheets when they're referenced before this script, as we'd recommend doing.
 // This simply reappends the CSS in place, which for some reason makes it apply
 if ( nokiaLTE7_3 ) {
-	$(function() {
+	$( function() {
 		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
-	});
+	} );
 }
 
 // For ruling out shadows via css
@@ -244,4 +244,4 @@ if ( !$.support.boxShadow ) {
 
 return $.support;
 
-});
+} );
