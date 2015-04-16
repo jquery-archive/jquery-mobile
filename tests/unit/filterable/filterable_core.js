@@ -2,7 +2,7 @@
  * mobile filter unit tests - listview
  */
 
-( function( $ ){
+( function( $ ) {
 
 module( "Filterable tests" );
 
@@ -19,13 +19,13 @@ asyncTest( "filterReveal filterable shows all items when all items match filter 
 			"All items visible when search value matches them all" );
 		start();
 	}, 500 );
-});
+} );
 
 module( "Backwards compatibility tests" );
 
 test( "Listview with filter has hideDividers option set to true", function() {
 	deepEqual( $( "#hidedividers-option-test" ).listview( "option", "hideDividers" ), true );
-});
+} );
 
 test( "Filterable input prevents default on ENTER", function() {
 	var event = $.Event( "keydown" ),
@@ -42,7 +42,7 @@ test( "Filterable input prevents default on ENTER", function() {
 	input.trigger( event );
 
 	deepEqual( event.isDefaultPrevented(), true, "Subsequent keypress default is also prevented" );
-});
+} );
 
 asyncTest( "Working filterable is instantiated on dynamic listview when data-filter='true'", function() {
 	var list = $( "<ul data-nstest-filter='true'><li>Chicago</li><li>Berlin</li><li>Windsor</li></ul>" )
@@ -59,6 +59,6 @@ asyncTest( "Working filterable is instantiated on dynamic listview when data-fil
 		deepEqual( list.children( ".ui-screen-hidden" ).text(), "Berlin", "'Berlin' was hidden" );
 		start();
 	}, 500 );
-});
+} );
 
-})( jQuery );
+} )( jQuery );

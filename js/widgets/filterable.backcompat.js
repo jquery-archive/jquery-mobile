@@ -27,7 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 // Create a function that will replace the _setOptions function of a widget,
 // and will pass the options on to the input of the filterable.
@@ -62,9 +62,9 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 		$.extend( this, {
 			_widget: null
-		});
+		} );
 
-		for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
+		for ( idx = recognizedWidgets.length - 1; idx > -1; idx-- ) {
 			widgetName = recognizedWidgets[ idx ];
 			if ( $.mobile[ widgetName ] ) {
 				if ( this._setWidget( elem.data( "mobile-" + widgetName ) ) ) {
@@ -86,7 +86,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 	_trigger: function( type, event, data ) {
 		if ( this._widget && this._widget.widgetFullName === "mobile-listview" &&
-			type === "beforefilter" ) {
+				type === "beforefilter" ) {
 
 			// Also trigger listviewbeforefilter if this widget is also a listview
 			this._widget._trigger( "beforefilter", event, data );
@@ -142,7 +142,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 					.submit( function( evt ) {
 						evt.preventDefault();
 						selector.blur();
-					})
+					} )
 					.insertBefore( this.element );
 				if ( $.mobile.textinput ) {
 					if ( this.options.filterTheme != null ) {
@@ -206,7 +206,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 			this._search.textinput( "option", textinputOptions );
 		}
 	}
-});
+} );
 
 // Instantiate a filterable on a listview that has the data-filter="true" attribute
 // This is not necessary for static content, because the auto-enhance takes care of instantiating
@@ -224,8 +224,8 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		}
 		return this._super();
 	}
-});
+} );
 
 return $.mobile.filterable;
 
-});
+} );
