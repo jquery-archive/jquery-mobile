@@ -28,7 +28,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 return $.widget( "mobile.dialog", {
 	version: "@VERSION",
@@ -84,23 +84,23 @@ return $.widget( "mobile.dialog", {
 			.wrapInner( $( "<div/>", {
 
 				// ARIA role
-				"role" : "dialog",
-				"class" : "ui-dialog-contain ui-overlay-shadow" +
+				"role": "dialog",
+				"class": "ui-dialog-contain ui-overlay-shadow" +
 					( !!opts.corners ? " ui-corner-all" : "" )
-			}));
+			} ) );
 
 		$.extend( this, {
 			_isCloseable: false,
 			_inner: elem.children(),
 			_headerCloseButton: null
-		});
+		} );
 
 		this._on( elem, {
 			vclick: "_handleVClickSubmit",
 			submit: "_handleVClickSubmit",
 			pagebeforeshow: "_handlePageBeforeShow",
 			pagebeforehide: "_handlePageBeforeHide"
-		});
+		} );
 
 		this._setCloseBtn( opts.closeBtn );
 	},
@@ -156,10 +156,10 @@ return $.widget( "mobile.dialog", {
 		} else {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
 			button = $( "<a></a>", {
-					"role": "button",
-					"href": "#",
-					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
-				})
+				"role": "button",
+				"href": "#",
+				"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
+			} )
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
 			this._on( button, { click: "close" } );
@@ -184,6 +184,6 @@ return $.widget( "mobile.dialog", {
 			}
 		}
 	}
-});
+} );
 
-});
+} );
