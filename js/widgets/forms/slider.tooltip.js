@@ -27,7 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 var popup;
 
@@ -35,7 +35,7 @@ function getPopup() {
 	if ( !popup ) {
 		popup = $( "<div></div>", {
 			"class": "ui-slider-popup ui-shadow ui-corner-all"
-		});
+		} );
 	}
 	return popup.clone();
 }
@@ -53,12 +53,12 @@ return $.widget( "mobile.slider", $.mobile.slider, {
 			_currentValue: null,
 			_popup: null,
 			_popupVisible: false
-		});
+		} );
 
 		this._setOption( "popupEnabled", this.options.popupEnabled );
 
-		this._on( this.handle.add( this.slider ), { "vmousedown" : "_showPopup" } );
-		this._on( this.slider.add( this.document ), { "vmouseup" : "_hidePopup" } );
+		this._on( this.handle.add( this.slider ), { "vmousedown": "_showPopup" } );
+		this._on( this.slider.add( this.document ), { "vmouseup": "_hidePopup" } );
 		this._refresh();
 	},
 
@@ -69,7 +69,7 @@ return $.widget( "mobile.slider", $.mobile.slider, {
 		this._popup.offset( {
 			left: dstOffset.left + ( this.handle.width() - this._popup.width() ) / 2,
 			top: dstOffset.top - this._popup.outerHeight() - 5
-		});
+		} );
 	},
 
 	_setOption: function( key, value ) {
@@ -139,6 +139,6 @@ return $.widget( "mobile.slider", $.mobile.slider, {
 			this._popupVisible = false;
 		}
 	}
-});
+} );
 
-});
+} );
