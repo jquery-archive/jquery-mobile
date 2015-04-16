@@ -73,7 +73,7 @@ if ( $.mobileBackcompat !== false ) {
 
 		_setOption: function( key, value ) {
 			if ( key === "iconPosition" || key === "iconpos" ) {
-				this[ "_set" +  key ]( value );
+				this[ "_set" + key ]( value );
 			}
 			this._superApply( arguments );
 		}

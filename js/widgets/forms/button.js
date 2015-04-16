@@ -32,30 +32,30 @@
 	}
 } )( function( $ ) {
 
-	$.widget( "ui.button", $.ui.button, {
-		initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
+$.widget( "ui.button", $.ui.button, {
+	initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
 		" [data-role='button']",
 
-		options: {
-			enhanced: false,
-			theme: null
-		},
+	options: {
+		enhanced: false,
+		theme: null
+	},
 
-		_enhanced: function() {
-			if ( !this.options.enahnced ) {
-				this._super();
-			} else if ( this.options.icon ) {
-				this.icon = this.element.find( "ui-button-icon" );
-			}
+	_enhanced: function() {
+		if ( !this.options.enahnced ) {
+			this._super();
+		} else if ( this.options.icon ) {
+			this.icon = this.element.find( "ui-button-icon" );
 		}
-	} );
+	}
+} );
 
-	$.widget( "ui.button", $.ui.button, $.mobile.widget.theme );
+$.widget( "ui.button", $.ui.button, $.mobile.widget.theme );
 
-	$.ui.button.prototype.options.classes = {
-		"ui-button": "ui-shadow ui-corner-all"
-	};
+$.ui.button.prototype.options.classes = {
+	"ui-button": "ui-shadow ui-corner-all"
+};
 
-	return $.ui.button;
+return $.ui.button;
 
 } );
