@@ -129,7 +129,7 @@
 
 		], 50)
 	});
-	test( " Rangeslider is enabled/disabled correctly ", function() {
+	test( " Rangeslider is enabled/disabled correctly ", function( assert ) {
 		var rangeslider = $( "#disable-rangeslider" ),
 			inputFirst = $( "#range-disabled-first" ),
 			inputLast = $( "#range-disabled-last" ),
@@ -139,30 +139,33 @@
 		rangeslider.rangeslider( { disabled: true } );
 
 		ok( !!inputFirst.attr( "disabled" ),  "first input is disabled" );
-		ok( inputFirst.hasClass( "mobile-slider-disabled"),
+		assert.hasClasses( inputFirst, "mobile-slider-disabled",
 			"first input gets mobile-slider-disabled" );
 		ok( !!sliderFirst.attr( "aria-disabled" ), "first slider is aria-disabled" );
-		ok( sliderFirst.hasClass( "ui-state-disabled"), "first slider has ui-state-disabled" );
+		assert.hasClasses( "sliderFirst", "ui-state-disabled", 
+			"first slider has ui-state-disabled" );
 		ok( !!inputLast.attr( "disabled" ),  "last input is disabled" );
-		ok( inputLast.hasClass( "mobile-slider-disabled"),
+		assert.hasClasses( inputLast, "mobile-slider-disabled", 
 			"last input gets mobile-slider-disabled" );
 		ok( !!sliderLast.attr( "aria-disabled" ), "last slider is aria-disabled" );
-		ok( sliderLast.hasClass( "ui-state-disabled"), "last slider has ui-state-disabled" );
+		assert.hasClasses( "sliderLast", "ui-state-disabled", "last slider has ui-state-disabled" );
 
 		rangeslider.rangeslider( {disabled: false } );
 
 		deepEqual( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
-		ok( !inputFirst.hasClass( "mobile-slider-disabled"),
-			"first input gets mobile-slider-disabled" );
+		assert.lacksClasses( inputFirst, "mobile-slider-disabled",
+			"first input lacks mobile-slider-disabled" );
 		deepEqual( sliderFirst.attr( "aria-disabled" ), "false",
 			"first slider aria-disabled is false" );
-		ok( !sliderFirst.hasClass( "ui-state-disabled"), "first slider ui-state-disabled removed" );
+		assert.lacksClasses( sliderFirst, "ui-state-disabled",
+			"first slider lacks ui-state-disabled" );
 		deepEqual( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
-		ok( !inputLast.hasClass( "mobile-slider-disabled"),
-			"last input gets mobile-slider-disabled" );
+		assert.lacksClasses( inputLast, "mobile-slider-disabled",
+			"last input lacks mobile-slider-disabled" );
 		deepEqual( sliderLast.attr( "aria-disabled" ), "false",
 			"last slider aria-disabled is false" );
-		ok( !sliderLast.hasClass( "ui-state-disabled"), "last slider ui-state-disabled removed" );
+		assert.lacksClasses( sliderLast, "ui-state-disabled",
+			"last slider lacks ui-state-disabled" );
 	});
 
 })( jQuery );
