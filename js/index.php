@@ -69,6 +69,7 @@ $files = array(
 	'widgets/forms/checkboxradio.js',
 	'widgets/forms/checkboxradio.backcompat.js',
 	'widgets/forms/flipswitch.js',
+	'widgets/forms/flipswitch.backcompat.js',
 	'widgets/forms/slider.js',
 	'widgets/forms/slider.tooltip.js',
 	'widgets/forms/rangeslider.js',
