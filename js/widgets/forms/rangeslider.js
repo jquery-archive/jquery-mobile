@@ -39,10 +39,7 @@
 
 		options: {
 			theme: null,
-			trackTheme: null,
-			corners: true,
-			mini: false,
-			highlight: true
+			trackTheme: null
 		},
 
 		_create: function() {

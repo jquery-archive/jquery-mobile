@@ -45,6 +45,7 @@
 			"./widgets/forms/slider.tooltip",
 			"./widgets/forms/flipswitch",
 			"./widgets/forms/rangeslider",
+			"./widgets/forms/rangeslider.backcompat",
 			"./widgets/forms/textinput",
 			"./widgets/forms/clearButton",
 			"./widgets/forms/autogrow",
