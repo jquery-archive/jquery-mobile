@@ -41,7 +41,8 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		onText: "On",
 		offText: "Off",
 		theme: null,
-		enhanced: false
+		enhanced: false,
+		classes: {}
 	},
 
 	_create: function() {
@@ -126,7 +127,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	},
 
 	_right: function() {
-		this.flipswitch.addClass( "ui-flipswitch-active" );
+		this._addClass( this.flipswitch, "ui-flipswitch-active" );
 		if ( this.type === "select" ) {
 			this.element.get( 0 ).selectedIndex = 1;
 		} else {
@@ -151,16 +152,12 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			offText = ( this.type === "input" ) ?
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
-		on
-			.addClass( "ui-flipswitch-on ui-button ui-shadow ui-button-inherit" )
-			.text( onText );
-		off
-			.addClass( "ui-flipswitch-off" )
-			.text( offText );
+		this._addClass( on, "ui-flipswitch-on", "ui-button ui-shadow ui-button-inherit" );
+		on.text( onText );
+		this._addClass( off, "ui-flipswitch-off" );
+		off.text( offText );
 
-		flipswitch
-			.addClass( "ui-flipswitch ui-shadow-inset " +
-				"ui-bar-" + theme + " " +
+		this._addClass( flipswitch, "ui-flipswitch", "ui-shadow-inset ui-bar-" + theme + " " +
 				( options.wrapperClass ? options.wrapperClass : "" ) + " " +
 				( ( element.is( ":checked" ) ||
 				element
@@ -169,13 +166,12 @@ return $.widget( "mobile.flipswitch", $.extend( {
 						.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
 				( element.is( ":disabled" ) ? " ui-state-disabled" : "" ) +
 				( options.corners ? " ui-corner-all" : "" ) +
-				( options.mini ? " ui-mini" : "" ) )
-			.append( on, off );
+				( options.mini ? " ui-mini" : "" ) );
 
-		element
-			.addClass( "ui-flipswitch-input" )
-			.after( flipswitch )
-			.appendTo( flipswitch );
+		flipswitch.append( on, off );
+
+		this._addClass( "ui-flipswitch-input" );
+		element.after( flipswitch ).appendTo( flipswitch );
 
 		$.extend( this, {
 			flipswitch: flipswitch,
@@ -248,9 +244,8 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			var currentTheme = options.theme ? options.theme : "inherit",
 				newTheme = options.theme ? options.theme : "inherit";
 
-			this.widget()
-				.removeClass( "ui-bar-" + currentTheme )
-				.addClass( "ui-bar-" + newTheme );
+			this._removeClass( this.widget(), null,  "ui-bar-" + currentTheme );
+			this._addClass( this.widget(), null,  "ui-bar-" + newTheme);
 		}
 		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
@@ -259,13 +254,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			this.off.text( options.offText );
 		}
 		if ( options.disabled !== undefined ) {
-			this.widget().toggleClass( "ui-state-disabled", options.disabled );
-		}
-		if ( options.mini !== undefined ) {
-			this.widget().toggleClass( "ui-mini", options.mini );
-		}
-		if ( options.corners !== undefined ) {
-			this.widget().toggleClass( "ui-corner-all", options.corners );
+			this._toggleClass( this.widget(), null, "ui-state-disabled", options.disabled );
 		}
 
 		this._super( options );
@@ -284,7 +273,6 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		this.off.remove();
 		this.element.unwrap();
 		this.flipswitch.remove();
-		this.removeClass( "ui-flipswitch-input" );
 	}
 
 }, $.mobile.behaviors.formReset ) );
