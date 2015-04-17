@@ -142,13 +142,13 @@
 		assert.hasClasses( inputFirst, "mobile-slider-disabled",
 			"first input gets mobile-slider-disabled" );
 		ok( !!sliderFirst.attr( "aria-disabled" ), "first slider is aria-disabled" );
-		assert.hasClasses( "sliderFirst", "ui-state-disabled", 
+		assert.hasClasses( sliderFirst, "ui-state-disabled", 
 			"first slider has ui-state-disabled" );
 		ok( !!inputLast.attr( "disabled" ),  "last input is disabled" );
 		assert.hasClasses( inputLast, "mobile-slider-disabled", 
 			"last input gets mobile-slider-disabled" );
 		ok( !!sliderLast.attr( "aria-disabled" ), "last slider is aria-disabled" );
-		assert.hasClasses( "sliderLast", "ui-state-disabled", "last slider has ui-state-disabled" );
+		assert.hasClasses( sliderLast, "ui-state-disabled", "last slider has ui-state-disabled" );
 
 		rangeslider.rangeslider( {disabled: false } );
 
