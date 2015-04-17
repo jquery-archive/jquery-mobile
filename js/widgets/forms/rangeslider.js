@@ -39,15 +39,15 @@
 
 		options: {
 			theme: null,
-			trackTheme: null
+			trackTheme: null,
+			classes: {}
 		},
 
 		_create: function() {
-			var $el = this.element,
-			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
-			_inputFirst = $el.find( "input" ).first(),
-			_inputLast = $el.find( "input" ).last(),
-			_label = $el.find( "label" ).first(),
+			var rangeslider = this.element,
+			_inputFirst = rangeslider.find( "input" ).first(),
+			_inputLast = rangeslider.find( "input" ).last(),
+			_label = rangeslider.find( "label" ).first(),
 			_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
 				$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
 			_sliderWidgetLast = $.data( _inputLast.get(0), "mobile-slider" ) ||
@@ -55,15 +55,17 @@
 			_sliderFirst = _sliderWidgetFirst.slider,
 			_sliderLast = _sliderWidgetLast.slider,
 			firstHandle = _sliderWidgetFirst.handle,
-			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
+			_sliders = $( "<div />" );
+			this._addClass( _sliders, "ui-rangeslider-sliders" );
+			_sliders.appendTo( rangeslider );
 
-			_inputFirst.addClass( "ui-rangeslider-first" );
-			_inputLast.addClass( "ui-rangeslider-last" );
-			$el.addClass( elClass );
+			this._addClass( _inputFirst, "ui-rangeslider-first" );
+			this._addClass( _inputLast, "ui-rangeslider-last" );
+			this._addClass( "ui-rangeslider" );
 
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
-			_label.insertBefore( $el );
+			_label.insertBefore( rangeslider );
 			firstHandle.prependTo( _sliderLast );
 
 			$.extend( this, {
@@ -280,11 +282,10 @@
 
 		_destroy: function() {
 			this._label.prependTo( this.element );
-			this.element.removeClass( "ui-rangeslider ui-mini" );
 			this._inputFirst.after( this._sliderFirst );
 			this._inputLast.after( this._sliderLast );
 			this._sliders.remove();
-			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
+			this.element.find( "input" ).slider( "destroy" );
 		}
 
 	}, $.mobile.behaviors.formReset ) );

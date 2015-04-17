@@ -17,7 +17,7 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"./widget.backcompat",
+			"../widget.backcompat",
 			"./rangeslider" ], factory );
 	} else {
 
