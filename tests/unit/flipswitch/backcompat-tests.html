@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Flipswitch Test Suite</title>
+	<title>jQuery Mobile Flipswitch Backcompat Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
@@ -17,16 +17,16 @@
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
-		$.mobileBackcompat = false;
-
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
 			[
-				"widgets/forms/flipswitch"
+				"widgets/forms/flipswitch",
+				"widgets/forms/flipswitch.backcompat"
 			],
 			[ "init" ],
 			[
-				"flipswitch_core.js"
+				"flipswitch_core.js",
+				"flipswitch_backcompat.js"
 			]
 		]);
 	</script>
@@ -52,6 +52,21 @@
 				<option>On</option>
 				<option selected>Off</option>
 			</select>
+			<select id="flip-select-mini" data-nstest-mini="true" name="flip-select" data-nstest-role="flipswitch">
+				<option>On</option>
+				<option selected>Off</option>
+			</select>
+			<input type="checkbox" data-nstest-mini="true" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-mini" checked/>
+			<select id="flip-select-corners" data-nstest-role="flipswitch" data-nstest-corners="false">
+		        <option value="off">Off</option>
+		        <option value="on">On</option>
+		    </select>
+		    <input type="checkbox" data-nstest-corners="false" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-corners" checked/>
+		    <select id="flip-select-wrapperclass" data-nstest-role="flipswitch" data-nstest-wrapper-class="select-custom-class">
+		        <option value="off">Off</option>
+		        <option value="on">On</option>
+		    </select>
+		    <input type="checkbox" data-nstest-wrapper-class="checkbox-custom-class" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-wrapperclass" checked/>
 		</div>
 	</div>
 </body>
