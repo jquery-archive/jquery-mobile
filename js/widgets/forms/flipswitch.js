@@ -41,10 +41,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		onText: "On",
 		offText: "Off",
 		theme: null,
-		enhanced: false,
-		wrapperClass: null,
-		corners: true,
-		mini: false
+		enhanced: false
 	},
 
 	_create: function() {
