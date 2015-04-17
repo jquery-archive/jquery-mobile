@@ -44,6 +44,7 @@
 			"./widgets/forms/flipswitch",
 			"./widgets/forms/flipswitch.backcompat",
 			"./widgets/forms/rangeslider",
+			"./widgets/forms/rangeslider.backcompat",
 			"./widgets/forms/textinput",
 			"./widgets/forms/textinput.backcompat",
 			"./widgets/forms/clearButton",
