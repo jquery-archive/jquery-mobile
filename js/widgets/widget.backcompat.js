@@ -76,7 +76,8 @@ if ( $.mobileBackcompat !== false ) {
 					if ( value ) {
 						classArray.push( className );
 					} else {
-						classArray.splice( $.inArray( this._boolOptions[ option ], classArray ), 1 );
+						classArray.splice(
+							$.inArray( this._boolOptions[ option ], classArray ), 1 );
 					}
 					this.option( "classes." + prop, classArray.join( " " ) );
 				}
@@ -90,28 +91,31 @@ if ( $.mobileBackcompat !== false ) {
 
 				if ( prop && typeof original.classes[ prop ] === "string" &&
 						typeof this.options.classes[ prop ] === "string" ) {
-					currentClasses = this.options.classes[ prop ].match( classSplitterRegex ) || [];
+					currentClasses = this.options.classes[ prop ].match( classSplitterRegex ) ||
+						[];
 
-					// If the classes option value has diverged from the default, then its value takes
-					// precedence, causing us to update all the style options to reflect the contents
-					// of the classes option value
+					// If the classes option value has diverged from the default, then its value
+					// takes precedence, causing us to update all the style options to reflect the
+					// contents of the classes option value
 					if ( original.classes[ prop ] !== this.options.classes[ prop ] ) {
 						$.each( this._boolOptions, function( option, className ) {
 							if ( options[ option ] !== undefined ) {
-								options[ option ] = ( $.inArray( className, currentClasses ) !== -1 );
+								options[ option ] =
+									( $.inArray( className, currentClasses ) !== -1 );
 							}
 						} ) ;
 
 					// Otherwise we assume that we're dealing with legacy code and look for style
-					// option values which diverge from the defaults. If we find any that diverge, we
-					// update the classes option value accordingly.
+					// option values which diverge from the defaults. If we find any that diverge,
+					// we update the classes option value accordingly.
 					} else {
 						$.each( this._boolOptions, function( option, className ) {
 							if ( options[ option ] !== original[ option ] ) {
 								if ( options[ option ] ) {
 									currentClasses.push( className );
 								} else {
-									currentClasses.splice( $.inArray( className, currentClasses ), 1 );
+									currentClasses.splice(
+										$.inArray( className, currentClasses ), 1 );
 								}
 							}
 						} );
