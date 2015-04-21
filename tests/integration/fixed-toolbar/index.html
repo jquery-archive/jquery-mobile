@@ -29,13 +29,10 @@
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-
 	<script src="../../swarminject.js"></script>
 </head>
 <body>
-
 	<div id="qunit"></div>
-
 	<div data-nstest-role="page" id="default">
 		<!-- structural classes -->
 		<div data-nstest-role="header" id="classes-test-a"></div>
@@ -44,7 +41,6 @@
 		<div data-nstest-role="footer" id="classes-test-d"></div>
 		<div data-nstest-role="footer" data-nstest-position="fixed" id="classes-test-e"></div>
 		<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" id="classes-test-f"></div>
-
 		<!-- transition classes -->
 		<div data-nstest-role="header" data-nstest-position="fixed" id="classes-test-g"></div>
 		<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-transition="none" id="classes-test-h"></div>
@@ -115,6 +111,17 @@
 			<h1>Toolbar</h1>
 		</div>
 		<div class="ui-content">
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="page-destroy-test-page-1">
+		<div id="headerOnFirstPage" data-nstest-role="header" data-nstest-position="fixed">
+			<h1>title</h1>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="page-destroy-test-page-2">
+		<div data-nstest-role="header" data-nstest-position="fixed">
+			<h1>title</h1>
 		</div>
 	</div>
 </body>
