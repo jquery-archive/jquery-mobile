@@ -279,7 +279,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 		_destroy: function() {
 			var pageClasses, toolbarClasses, hasFixed, header, hasFullscreen,
-				page = this.pagecontainer.pagecontainer( "getActivePage" );
+				page = this.page;
 
 			this._super();
 			if ( this.options.position === "fixed" ) {
