@@ -57,4 +57,12 @@
 
 		$.mobile.zoom.enable( true );
 	});
+	
+	test( "Destroy works properly with external toolbars" , function() {
+		var unEnhanced = $("#external-header").clone(),
+			destroyed = $("#external-header").toolbar().toolbar("destroy");
+
+		ok( $.testHelper.domEqual( destroyed, unEnhanced ),
+			"unEnhanced equals destroyed" );
+	});
 })(jQuery);
