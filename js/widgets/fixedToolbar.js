@@ -54,7 +54,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				this._makeFixed();
 			}
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
+				var $page = ( !!this.page ) ? this.page : ( $( ".ui-page-active" ).length > 0 ) ? $( ".ui-page-active" ) : $( ".ui-page" ).eq( 0 );
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
@@ -279,7 +279,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 		_destroy: function() {
 			var pageClasses, toolbarClasses, hasFixed, header, hasFullscreen,
-				page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
+				page = ( !!this.page ) ? this.page : ( $( ".ui-page-active" ).length > 0 ) ? $( ".ui-page-active" ) : $( ".ui-page" ).eq( 0 );
 
 			this._super();
 			if ( this.options.position === "fixed" ) {
