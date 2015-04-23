@@ -374,5 +374,35 @@
 			}
 		]);
 	});
+	
+	asyncTest( "destroy removes classes from correct page " , function() {
+		expect( 3 );
+		
+		$.testHelper.pageSequence([
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test-page-1" );
+				
+			},
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test-page-2" );
+			},
+			function() {
+				var first = $("#page-destroy-test-page-1"),
+					second = $("#page-destroy-test-page-2");
+					
+				ok( first.hasClass("ui-page-header-fixed") === true , "ui-page-header-fixed class exists on first page before destroy" );
+				
+				var firstHeader = $("#headerOnFirstPage").toolbar("destroy");
+				
+				ok( first.hasClass("ui-page-header-fixed") === false , "ui-page-header-fixed class is removed from first page" );
+				ok( second.hasClass("ui-page-header-fixed") === true , "ui-page-header-fixed class is not removed from second page" );
+				
+				start();
+			},
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
+			}
+		]);
+	});
 
 })(jQuery);
