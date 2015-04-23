@@ -4,56 +4,57 @@
 (function($){
 	$( "html" ).height( screen.height * 3 );
 
-	function scrollDown(){
-		window.scrollTo(0,screen.height );
+	function scrollDown() {
+		window.scrollTo( 0, screen.height );
 	}
 
-	function scrollUp(){
-		window.scrollTo(0,0);
+	function scrollUp() {
+		window.scrollTo( 0, 0 );
 	}
 
-	module( "toolbar", {setup: function() {
-		var startTimeout;
+	module( "toolbar", {
+		setup: function() {
+			var startTimeout;
 
-		// swallow the inital page change
-		stop();
-		$(document).one("pagechange", function() {
-			clearTimeout(startTimeout);
-		});
+			// swallow the inital page change
+			stop();
+			$( document ).one( "pagechange", function() {
+				clearTimeout( startTimeout );
+			});
 
-		startTimeout = setTimeout( start , 1000);
-	}});
+			startTimeout = setTimeout( start , 1000 );
+		}
+	});
 
-	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){
+	asyncTest( "Fixed header and footer transition classes are applied correctly", function() {
 		expect( 5 );
 
-		$.testHelper.sequence([
-			function(){
+		$.testHelper.sequence( [
+			function() {
 				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "hide" );
 				scrollDown();
 			},
 
-			function(){
+			function() {
 				//show first
 				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "show" );
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('slidedown'), 'The slidedown class should be applied by default');
-				ok( !$( '#classes-test-h' ).hasClass('slidedown'), 'The slidedown class should not be applied when the header has a data-transition of "none"');
+				ok( $( '#classes-test-g' ).hasClass( 'slidedown' ), 'The slidedown class should be applied by default' );
+				ok( !$( '#classes-test-h' ).hasClass( 'slidedown' ), 'The slidedown class should not be applied when the header has a data-transition of "none"' );
 
-				ok( !$( '#classes-test-h' ).hasClass('in'), 'The "in" class should not be applied when the header has a data-transition of "none"');
-				ok( $( '#classes-test-i' ).hasClass('slidedown'), 'The "slidedown" class should  be applied when the header has a data-transition of "slide"');
-				ok( $( '#classes-test-j' ).hasClass('slideup'), 'The "slideup" class should  be applied when the footer has a data-transition of "slide"');
+				ok( !$( '#classes-test-h' ).hasClass( 'in' ), 'The "in" class should not be applied when the header has a data-transition of "none"');
+				ok( $( '#classes-test-i' ).hasClass( 'slidedown' ), 'The "slidedown" class should  be applied when the header has a data-transition of "slide"' );
+				ok( $( '#classes-test-j' ).hasClass( 'slideup' ), 'The "slideup" class should  be applied when the footer has a data-transition of "slide"' );
 
 			},
 
-			function(){
+			function() {
 				scrollUp();
 				start();
-				}
-		], 1000);
-
+			}
+		], 1000 );
 	});
 
 
@@ -61,8 +62,8 @@
 
 		expect( 2 );
 
-		$.testHelper.sequence([
-			function(){
+		$.testHelper.sequence( [
+			function() {
 				$( '#classes-test-g' ).toolbar( "show" );
 				scrollDown();
 			},
@@ -70,29 +71,29 @@
 			function() {
 				$( '#classes-test-g' ).toolbar( "hide" );
 
-				ok( $( '#classes-test-g' ).hasClass('out'), 'The out class should be applied when hide is called');
+				ok( $( '#classes-test-g' ).hasClass( 'out' ), 'The out class should be applied when hide is called' );
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar has the ui-fixed-hidden class applied after hide');
+				ok( $( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar has the ui-fixed-hidden class applied after hide' );
 				$( '#classes-test-g' ).toolbar( "show" );
 
 			},
 
-			function(){
+			function() {
 				scrollUp();
 				start();
 			}
 
-		], 700);
+		], 700 );
 	});
 
 	asyncTest( "The show method is working properly", function() {
 
 		expect( 2 );
 
-		$.testHelper.sequence([
-			function(){
+		$.testHelper.sequence( [
+			function() {
 				scrollDown();
 			},
 
@@ -103,36 +104,36 @@
 			function() {
 				$( '#classes-test-g' ).toolbar( "show" );
 
-				ok( $( '#classes-test-g' ).hasClass('in'), 'The in class should be applied when show is called');
+				ok( $( '#classes-test-g' ).hasClass( 'in' ), 'The in class should be applied when show is called' );
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class applied after show');
+				ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class applied after show' );
 
 			},
 
-			function(){
+			function() {
 				scrollUp();
 				start();
 			}
-		], 700);
+		], 700 );
 	});
 
 	asyncTest( "The toggle method is working properly", function() {
 
 		expect( 3 );
 
-		$.testHelper.sequence([
-			function(){
+		$.testHelper.sequence( [
+			function() {
 				scrollDown();
 			},
 
-			function(){
+			function() {
 				$( '#classes-test-g' ).toolbar( "show" );
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+				ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class' );
 			},
 
 			function() {
@@ -140,7 +141,7 @@
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does have the ui-fixed-hidden class');
+				ok( $( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does have the ui-fixed-hidden class' );
 			},
 
 			function() {
@@ -148,36 +149,36 @@
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+				ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class' );
 
 			},
 
-			function(){
+			function() {
 				scrollUp();
 				start();
 			}
 
-		], 500);
+		], 500 );
 	});
 
 	asyncTest( "Fullscreen toolbars add classes to page", function() {
 		expect( 2 );
 
-		$.testHelper.sequence([
+		$.testHelper.sequence( [
 			function(){
 				$.mobile.changePage( "#fullscreen-test-a" );
 			},
 
-			function(){	
+			function(){
 				ok( $('#classes-test-l').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
 				ok( $('#classes-test-m').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
 			},
 
-			function(){
+			function() {
 				scrollUp();
 				start();
 			}
-		], 500);
+		], 500 );
 	});
 
 	asyncTest( "The persistent headers and footers are working properly", function() {
@@ -190,13 +191,13 @@
 			nextpagefooter =  $( "#persist-test-b .ui-footer-fixed" );
 
 
-		$.testHelper.pageSequence([
-			function(){
+		$.testHelper.pageSequence( [
+			function() {
 				ok( nextpageheader.length && nextpagefooter.length, "next page has fixed header and fixed footer" );
 				$.mobile.changePage( "#persist-test-a" );
 			},
 
-			function(){
+			function() {
 				$( "#persist-test-b" )
 					.one( "pagebeforeshow", function(){
 						ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
@@ -222,15 +223,15 @@
 
 		var nextpageheader =  $( "#persist-test-d .ui-header-fixed" );
 
-		$.testHelper.pageSequence([
-			function(){
+		$.testHelper.pageSequence( [
+			function() {
 				ok( nextpageheader.length, "next page has fixed header and fixed footer" );
 				$.mobile.changePage( "#persist-test-c" );
 			},
 
-			function(){
+			function() {
 				$( "#persist-test-d" )
-					.one( "pagebeforeshow", function(){
+					.one( "pagebeforeshow", function() {
 						deepEqual( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
 					});
 
@@ -254,15 +255,15 @@
 
 		var nextpagefooter =  $( "#persist-test-f .ui-footer-fixed" );
 
-		$.testHelper.pageSequence([
-			function(){
+		$.testHelper.pageSequence( [
+			function() {
 				ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
 				$.mobile.changePage( "#persist-test-e" );
 			},
 
-			function(){
+			function() {
 				$( "#persist-test-f" )
-					.one( "pagebeforeshow", function(){
+					.one( "pagebeforeshow", function() {
 						deepEqual( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
 					});
 
@@ -275,11 +276,11 @@
 			},
 
 			start
-		]);
+		] );
 	});
 
 	var asyncTestFooterAndHeader = function( pageSelector, visible ) {
-		$.testHelper.pageSequence([
+		$.testHelper.pageSequence( [
 			function() {
 				$.mobile.changePage( pageSelector );
 			},
@@ -299,7 +300,7 @@
 			},
 
 			start
-		]);
+		] );
 	};
 
 	asyncTest( "data-visible-on-page-show hides toolbars when false", function() {
@@ -347,9 +348,7 @@
 			},
 
 			function() {
-
 				$.mobile.pageContainer.change( "#default" );
-
 			}
 		]);
 	});
@@ -362,8 +361,8 @@
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test" );
 			},
 			function() {
-				var unEnhanced = $("#testDestroyFixedFullscreen").clone(),
-		            destroyed = $("#testDestroyFixedFullscreen").toolbar().toolbar("destroy");
+				var unEnhanced = $( "#testDestroyFixedFullscreen" ).clone(),
+		            destroyed = $( "#testDestroyFixedFullscreen" ).toolbar().toolbar( "destroy" );
 
 		        ok( $.testHelper.domEqual( destroyed, unEnhanced ),
 		        	"unEnhanced equals destroyed" );
@@ -387,15 +386,15 @@
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test-page-2" );
 			},
 			function() {
-				var first = $("#page-destroy-test-page-1"),
-					second = $("#page-destroy-test-page-2");
+				var first = $( "#page-destroy-test-page-1" ),
+					second = $( "#page-destroy-test-page-2" );
 					
-				ok( first.hasClass("ui-page-header-fixed") === true , "ui-page-header-fixed class exists on first page before destroy" );
+				ok( first.hasClass( "ui-page-header-fixed" ) === true , "ui-page-header-fixed class exists on first page before destroy" );
 				
-				var firstHeader = $("#headerOnFirstPage").toolbar("destroy");
+				var firstHeader = $( "#headerOnFirstPage" ).toolbar( "destroy" );
 				
-				ok( first.hasClass("ui-page-header-fixed") === false , "ui-page-header-fixed class is removed from first page" );
-				ok( second.hasClass("ui-page-header-fixed") === true , "ui-page-header-fixed class is not removed from second page" );
+				ok( first.hasClass( "ui-page-header-fixed" ) === false , "ui-page-header-fixed class is removed from first page" );
+				ok( second.hasClass( "ui-page-header-fixed" ) === true , "ui-page-header-fixed class is not removed from second page" );
 				
 				start();
 			},

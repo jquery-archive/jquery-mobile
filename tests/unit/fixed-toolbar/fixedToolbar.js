@@ -6,18 +6,18 @@
 
 	test( "Fixed Header Structural Classes are applied correctly", function(){
 		//footer
-		ok( !$('#classes-test-a').hasClass('ui-header-fixed'), 'An ordinary header should not have fixed classes');
-		ok( $('#classes-test-b').hasClass('ui-header-fixed'), 'An header with data-position=fixed should have ui-header-fixed class');
-		ok( $('#classes-test-c').hasClass('ui-header-fullscreen'), 'An header with data-position=fixed and data-fullscreen should have ui-header-fullscreen class');
+		ok( !$( '#classes-test-a' ).hasClass( 'ui-header-fixed' ), 'An ordinary header should not have fixed classes' );
+		ok( $( '#classes-test-b' ).hasClass( 'ui-header-fixed' ), 'An header with data-position=fixed should have ui-header-fixed class' );
+		ok( $( '#classes-test-c' ).hasClass( 'ui-header-fullscreen' ), 'An header with data-position=fixed and data-fullscreen should have ui-header-fullscreen class' );
 
 		//footer
-		ok( !$('#classes-test-d').hasClass('ui-footer-fixed'), 'An ordinary footer should not have fixed classes');
-		ok( $('#classes-test-e').hasClass('ui-footer-fixed'), 'A footer with data-position=fixed should have ui-footer-fixed class"');
-		ok( $('#classes-test-f').hasClass('ui-footer-fullscreen'), 'A footer with data-position=fixed and data-fullscreen should have ui-footer-fullscreen class');
+		ok( !$( '#classes-test-d' ).hasClass( 'ui-footer-fixed' ), 'An ordinary footer should not have fixed classes' );
+		ok( $( '#classes-test-e' ).hasClass( 'ui-footer-fixed' ), 'A footer with data-position=fixed should have ui-footer-fixed class"' );
+		ok( $( '#classes-test-f' ).hasClass( 'ui-footer-fullscreen' ), 'A footer with data-position=fixed and data-fullscreen should have ui-footer-fullscreen class' );
 
 		//parent
-		ok( $('#classes-test-b').closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" );
-		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
+		ok( $( '#classes-test-b' ).closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" );
+		ok( $( '#classes-test-e' ).closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
 	});
 
 	test( "User zooming is disabled when the header is visible and disablePageZoom is true", function(){
@@ -59,8 +59,8 @@
 	});
 	
 	test( "Destroy works properly with external toolbars" , function() {
-		var unEnhanced = $("#external-header").clone(),
-			destroyed = $("#external-header").toolbar().toolbar("destroy");
+		var unEnhanced = $( "#external-header" ).clone(),
+			destroyed = $( "#external-header" ).toolbar().toolbar( "destroy" );
 
 		ok( $.testHelper.domEqual( destroyed, unEnhanced ),
 			"unEnhanced equals destroyed" );
