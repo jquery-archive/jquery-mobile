@@ -6,21 +6,56 @@
 	<title>Google Maps - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<style>
-	.segmented-control { text-align:center; }
-	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
-	.map-page { width:100%; height:100%; }
+	.segmented-control {
+		text-align: center;
+	}
+
+	.segmented-control .ui-controlgroup {
+		display: inline;
+		margin: .2em 0px;
+	}
+
+	.map-page {
+		width: 100%;
+		height: 100%;
+	}
 	
-	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
-	#gmap-marker-link { color:#00a0df; text-decoration:none; }
+	#map-canvas {
+		width: 100%;
+		height: 100%;
+		margin-top: -30px;
+		padding: 0px!important;
+	}
 
-	.ui-gmap-canvas { width:100%; height:100%; }
-	.ui-gmap-infobox { display:none; }
+	#gmap-marker-link {
+		color: #00a0df;
+		text-decoration: none;
+	}
 
-	#show-more .ui-li-heading { text-align:center; }
-	#show-more .ui-icon { visibility:hidden; }
+	.ui-gmap-canvas {
+		width: 100%;
+		height: 100%;
+	}
 
-	.ui-li-has-count .ui-li-count { border-color:transparent; }
-	.wrap { white-space:normal; }
+	.ui-gmap-infobox {
+		display: none;
+	}
+
+	#show-more .ui-li-heading {
+		text-align: center;
+	}
+
+	#show-more .ui-icon {
+		visibility: hidden;
+	}
+
+	.ui-li-has-count .ui-li-count {
+		border-color: transparent;
+	}
+
+	.wrap {
+		white-space: normal;
+	}
 	</style>
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
@@ -35,7 +70,7 @@
 		    list = $( "#list-canvas" ),
 		    page = $( this );
 
-		$( "#list-switch,#map-switch" ).on( "click", function( event ){
+		$( "#list-switch, #map-switch" ).on( "click", function(){
 			var isMap = this.id === "map-switch";
 
 			page.toggleClass( "map-page", isMap );
