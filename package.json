@@ -26,6 +26,7 @@
 		"async": "0.2.9",
 		"cheerio": "0.12.4",
 		"commitplease": "2.0.0",
+		"download.jqueryui.com": "2.0.25",
 		"css": "2.1.0",
 		"esprima": "1.2.2",
 		"grunt": "0.4.5",
