@@ -16,7 +16,7 @@ test( "Custom init selector", function() {
 
 	$( "#basic-enhance" ).enhance();
 
-	ok( $( "#basic-textinput").textinput( "instance" ),
+	ok( $( "#basic-textinput" ).textinput( "instance" ),
 		"Widgets work with custom initSelectors" );
 } );
 
@@ -27,18 +27,18 @@ test( "enhanceWithin", function() {
 	ok( $( "#enhance-within-input" ).textinput( "instance" ),
 		"enhanceWithin enhance inputs within the container" );
 	strictEqual( !!toolbar.toolbar( "instance" ), false,
-		"enhanceWithin does not enhance the parent element")
+		"enhanceWithin does not enhance the parent element" );
 } );
 
 var hook;
 module( "enhancer: custom hook", {
-	setup: function () {
+	setup: function() {
 		hook = function() {
 			$( this ).find( ".hook-target" ).addClass( "hooked" );
 		};
 		$.fn.enhance.hooks.push( hook );
 	},
-	teardown: function () {
+	teardown: function() {
 		$.fn.enhance.hooks.splice( $.inArray( hook, $.fn.enhance.hooks ), 1 );
 	}
 } );
@@ -52,13 +52,13 @@ test( "custom hook", function( assert ) {
 
 var generator;
 module( "enhancer: custom generator", {
-	setup: function () {
+	setup: function() {
 		generator = $.fn.enhance.initGenerator;
 		$.fn.enhance.initGenerator = function( prototype ) {
 			return "." + prototype.widgetName;
 		};
 	},
-	teardown: function () {
+	teardown: function() {
 		$.fn.enhance.initGenerator = generator;
 	}
 } );

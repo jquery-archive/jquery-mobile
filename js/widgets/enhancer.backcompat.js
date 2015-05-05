@@ -25,7 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 if ( $.mobileBackcompat !== false ) {
 	var originalGenerator = $.fn.enhance.initGenerator,
 		filter = function( elements ) {
@@ -36,7 +36,7 @@ if ( $.mobileBackcompat !== false ) {
 					if ( $( this ).closest( "[data-" + $.mobile.ns + "enhance='false']" ).length ) {
 						elements = elements.not( this );
 					}
-				});
+				} );
 			}
 			return elements;
 		},
@@ -50,4 +50,4 @@ if ( $.mobileBackcompat !== false ) {
 	$.fn.enhance.initGenerator = generator;
 
 }
-});
+} );
