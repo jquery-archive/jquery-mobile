@@ -33,7 +33,7 @@ if ( $.mobileBackcompat !== false ) {
 
 			if ( $.mobile.ignoreContentEnabled ) {
 				elements.each( function() {
-					if ( $( this ).closest( "[data-" + $.mobile.ns + "enhanced='false']" ).length ) {
+					if ( $( this ).closest( "[data-" + $.mobile.ns + "enhance='false']" ).length ) {
 						elements = elements.not( this );
 					}
 				} );
