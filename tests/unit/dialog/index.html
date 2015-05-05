@@ -20,8 +20,7 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/dialog",
-				"widgets/page"
+				"widgets/page.dialog.backcompat"
 			],
 			[ "init" ],
 			[
@@ -40,20 +39,16 @@
 
 	<div id="qunit"></div>
 
-	<div id="qunit-fixture">
-
-		<div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
-			<div  data-nstest-role="header">
-				<h1>Dialog</h1>
-			</div>
-			<div data-nstest-role="content" >
-
-			</div>
-			<div data-nstest-role="footer">
-				footer
-			</div>
+	<div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
+		<div  data-nstest-role="header">
+			<h1>Dialog</h1>
 		</div>
+		<div data-nstest-role="content" >
 
+		</div>
+		<div data-nstest-role="footer">
+			footer
+		</div>
 	</div>
 
 </body>

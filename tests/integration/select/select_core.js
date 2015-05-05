@@ -544,7 +544,7 @@ asyncTest( "Custom select passes overlay theme to its dialog", function( assert 
 				"Page container has appropriate theme." );
 			deepEqual( dialog.page( "option", "overlayTheme" ), "x",
 				"Dialog widget overlayTheme option is correct." );
-			dialog.dialog( "close" );
+			$.mobile.back();
 		},
 		start
 	] );

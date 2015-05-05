@@ -123,11 +123,28 @@ return $.widget( "mobile.page", $.mobile.page, {
 	},
 
 	_handlePageBeforeShow: function() {
+
+		// Make sure the close button is clickable
+		if ( this._ui.button ) {
+			this._ui.button
+				.css( "pointer-events", "" )
+				.removeAttr( "tabindex" );
+		}
 		if ( this.options.overlayTheme && this.options.dialog ) {
 			this.removeContainerBackground();
 			this.setContainerBackground( this.options.overlayTheme );
 		} else {
 			this._super();
+		}
+	},
+
+	_handleButtonClick: function() {
+
+		// Render the close button unclickable after one click
+		if ( this._ui.button ) {
+			this._ui.button
+				.css( "pointer-events", "none" )
+				.attr( "tabindex", -1 );
 		}
 	},
 
@@ -143,6 +160,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 				// Remove existing button
 				this._toggleButtonClasses( false, location );
+				this._off( this._ui.button, "click" );
 				this._ui.button.remove();
 				this._ui.button = null;
 				this._ui.icon = null;
@@ -169,6 +187,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 				this._toggleButtonClasses( true, location );
 
 				this._ui.button.prependTo( destination );
+				this._on( this._ui.button, { "click": "_handleButtonClick" } );
 			}
 		}
 	}

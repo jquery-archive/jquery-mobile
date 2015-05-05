@@ -31,7 +31,23 @@ if ( $.mobileBackcompat !== false ) {
 		options: {
 			corners: true
 		},
-		classProp: "ui-page-dialog-contain"
+
+		classProp: "ui-page-dialog-contain",
+
+		_create: function() {
+
+			// Support for deprecated dialog widget functionality
+			if ( $.mobile.getAttribute( this.element[ 0 ], "role" ) === "dialog" ) {
+
+				// The page container needs to distinguish a dialog widget from a page styled
+				// as a dialog. It does so by looking for the "mobile-dialog" data item on the
+				// page element. Since the dialog is no longer a widget, we need to provide a
+				// dummy hint
+				$.data( this.element[ 0 ], "mobile-dialog", true );
+				this.options.dialog = true;
+			}
+			this._super();
+		}
 	} );
 	$.widget( "mobile.page", $.mobile.page, $.mobile.widget.backcompat );
 }

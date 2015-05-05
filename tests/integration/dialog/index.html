@@ -19,8 +19,7 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/dialog",
-				"widgets/page",
+				"widgets/page.dialog.backcompat",
 				"widgets/toolbar"
 			],
 			[ "init" ],
@@ -43,9 +42,9 @@
 	<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
 		<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog"></a>
 		<a href="#close-button-test" id="close-button-test-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">Go</a>
-		<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">no theme set</a>
-		<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme set</a>
-		<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme & data-nstest-overlay-theme set</a>
+		<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true">no theme set</a>
+		<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true">data-theme set</a>
+		<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true">data-theme & data-nstest-overlay-theme set</a>
 	</div>
 
 	<div id="doubleCloseTestPage" data-nstest-role="page">
@@ -78,7 +77,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="page" id="dialog-a">
+	<div data-nstest-role="page" id="dialog-a" data-nstest-role="dialog">
 		<div data-nstest-role="header" data-nstest-position="inline">
 			<h1> No theme set </h1>
 		</div>
@@ -90,7 +89,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="page" data-nstest-theme="e" id="dialog-b">
+	<div data-nstest-role="dialog" data-nstest-theme="e" id="dialog-b">
 		<div data-nstest-role="header">
 			<h1> data-nstest-theme set </h1>
 		</div>
@@ -102,7 +101,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="page" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
+	<div data-nstest-role="dialog" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
 		<div data-nstest-role="header">
 			<h1> data-nstest-theme & data-nstest-overlay-theme set </h1>
 		</div>

@@ -52,7 +52,6 @@ $files = array(
 	'transitions/visuals/turn.js',
 	'../external/jquery-ui/accordion.js',
 	'widgets/accordion.js',
-	'widgets/dialog.js',
 	'widgets/collapsible.js',
 	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',

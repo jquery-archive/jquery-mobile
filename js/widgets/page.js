@@ -56,6 +56,7 @@ $.widget( "mobile.page", {
 	},
 
 	_create: function() {
+
 		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
@@ -72,10 +73,6 @@ $.widget( "mobile.page", {
 
 		if ( this.options.enhanceWithin ) {
 			this.element.enhanceWithin();
-		}
-		// Dialog widget is deprecated in 1.4 remove this in 1.5
-		if ( $.mobile.getAttribute( this.element[ 0 ], "role" ) === "dialog" && $.mobile.dialog ) {
-			this.element.dialog();
 		}
 	},
 

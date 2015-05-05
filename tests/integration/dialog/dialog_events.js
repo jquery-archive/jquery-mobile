@@ -28,7 +28,7 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 			ok( /&ui-state=dialog/.test( location.hash ), "ui-state=dialog =~ location.hash", "dialog open" );
 
 			// close the dialog
-			$( ".ui-page-dialog" ).dialog( "close" );
+			$.mobile.back();
 		},
 
 		function() {
@@ -39,7 +39,7 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 } );
 
 asyncTest( "Test option data-close-button", function() {
-	expect( 7 );
+	expect( 5 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -51,19 +51,17 @@ asyncTest( "Test option data-close-button", function() {
 			var a = $( "#close-button-test .ui-header a" );
 			deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
 
-			$( "#close-button-test" ).dialog( "option", "closeBtn", "left" );
+			$( "#close-button-test" ).page( "option", "closeBtn", "left" );
 			a = $( "#close-button-test .ui-header a" );
 			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
 			ok( a.hasClass( "ui-button-left" ), "The close button has class ui-button-left when the closeBtn option is set to 'left'" );
-			deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
 
-			$( "#close-button-test" ).dialog( "option", "closeBtn", "right" );
+			$( "#close-button-test" ).page( "option", "closeBtn", "right" );
 			a = $( "#close-button-test .ui-header a" );
 			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
 			ok( a.hasClass( "ui-button-right" ), "The close button has class ui-button-right when the closeBtn option is set to 'right'" );
-			deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
 
-			$( "#close-button-test" ).dialog( "close" );
+			$.mobile.back();
 		},
 
 		function() {
@@ -187,7 +185,7 @@ asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow", func
 		},
 
 		function() {
-			pageTheme = "ui-overlay-" + $.mobile.activePage.dialog( "option", "overlayTheme" );
+			pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
 
 			$.mobile.pageContainer.removeClass( pageTheme );
 

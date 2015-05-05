@@ -23,10 +23,9 @@
 			"jquery",
 			"../../core",
 			"../../navigation",
-			"../dialog",
 			"./select",
 			"../listview",
-			"../page",
+			"../page.dialog.backcompat",
 			"../popup" ], factory );
 	} else {
 
@@ -395,7 +394,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var self = this;
 
 		if ( self.menuType === "page" ) {
-			self.menuPage.dialog( "close" );
+			if ( self.menuPage.hasClass( "ui-page-active" ) ) {
+				$.mobile.back();
+			}
 			self.list.appendTo( self.listbox );
 		} else {
 			self.listbox.popup( "close" );
