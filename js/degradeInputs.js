@@ -27,19 +27,8 @@
 } )( function( $ ) {
 
 $.mobile.degradeInputs = {
-	color: false,
-	date: false,
-	datetime: false,
-	"datetime-local": false,
-	email: false,
-	month: false,
-	number: false,
 	range: "number",
-	search: "text",
-	tel: false,
-	time: false,
-	url: false,
-	week: false
+	search: "text"
 };
 
 // Auto self-init widgets
