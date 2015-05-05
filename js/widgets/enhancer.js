@@ -29,13 +29,13 @@
 var plugin = {
 		enhance: function() {
 
-			// Call the default enhancer function
-			$.fn.enhance.defaultFunction.apply( this, arguments );
-
 			// Loop over and execute any hooks that exist
 			for ( var i = 0; i < $.fn.enhance.hooks.length; i++ ) {
 				$.fn.enhance.hooks[ i ].apply( this, arguments );
 			}
+			// Call the default enhancer function
+			$.fn.enhance.defaultFunction.apply( this, arguments );
+
 			return this;
 		}
 	},

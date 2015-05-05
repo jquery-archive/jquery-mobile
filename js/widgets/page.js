@@ -32,36 +32,6 @@
 	}
 } )( function( $ ) {
 
-$.mobile.widgets = {};
-
-var originalWidget = $.widget,
-
-	// Record the original, non-mobileinit-modified version of $.mobile.keepNative
-	// so we can later determine whether someone has modified $.mobile.keepNative
-	keepNativeFactoryDefault = $.mobile.keepNative;
-
-$.widget = ( function( orig ) {
-	return function() {
-		var constructor = orig.apply( this, arguments ),
-			name = constructor.prototype.widgetName;
-
-		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
-			constructor.prototype.initSelector : ":jqmData(role='" + name + "')");
-
-		$.mobile.widgets[ name ] = constructor;
-
-		return constructor;
-	};
-} )( $.widget );
-
-// Make sure $.widget still has bridge and extend methods
-$.extend( $.widget, originalWidget );
-
-// For backcompat remove in 1.5
-$.mobile.document.on( "create", function( event ) {
-	$( event.target ).enhanceWithin();
-} );
-
 $.widget( "mobile.page", {
 	version: "@VERSION",
 
@@ -182,27 +152,6 @@ $.widget( "mobile.page", {
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
 		this.element.parent().pagecontainer( { "theme": theme || this.options.theme } );
-	},
-	// Deprecated in 1.4 remove in 1.5
-	keepNativeSelector: function() {
-		var options = this.options,
-			keepNative = $.trim( options.keepNative || "" ),
-			globalValue = $.trim( $.mobile.keepNative ),
-			optionValue = $.trim( options.keepNativeDefault ),
-
-			// Check if $.mobile.keepNative has changed from the factory default
-			newDefault = ( keepNativeFactoryDefault === globalValue ?
-				"" : globalValue ),
-
-			// If $.mobile.keepNative has not changed, use options.keepNativeDefault
-			oldDefault = ( newDefault === "" ? optionValue : "" );
-
-		// Concatenate keepNative selectors from all sources where the value has
-		// changed or, if nothing has changed, return the default
-		return ( ( keepNative ? [ keepNative ] : [] )
-			.concat( newDefault ? [ newDefault ] : [] )
-			.concat( oldDefault ? [ oldDefault ] : [] )
-			.join( ", " ) );
 	}
 } );
 
