@@ -1,4 +1,4 @@
-asyncTest( "Option enhance", function() {
+asyncTest( "Option enhanceWithin", function() {
 $.testHelper.pageSequence( [
 	function() {
 		$( "#open-enhance" ).click();

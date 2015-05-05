@@ -7,6 +7,8 @@ module.exports = {
 	},
 	good: {
 		src: [
+
+			// Source
 			"js/widgets/accordion.js",
 			"js/widgets/widget.backcompat.js",
 			"js/widgets/widget.theme.js",
@@ -16,7 +18,14 @@ module.exports = {
 			"js/widgets/forms/checkboxradio.backcompat.js",
 			"js/widgets/controlgroup.js",
 			"js/widgets/controlgroup.backcompat.js",
-			"js/widgets/tabs.ajax.js"
+			"js/widgets/tabs.ajax.js",
+			"js/widgets/enhancer.js",
+			"js/widgets/enhancer.backcompat.js",
+			"js/degradeInputs.js",
+
+			// Tests
+			"tests/unit/degrade-inputs/degradeInputs.js",
+			"tests/unit/enhancer/enhancer.js"
 		]
 	},
 	tests: {

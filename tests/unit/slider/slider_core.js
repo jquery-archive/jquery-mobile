@@ -2,7 +2,7 @@
  * mobile slider unit tests
  */
 ( function( $ ) {
-$.mobile.page.prototype.options.keepNative = "input.should-be-native";
+$.mobile.keepNative = "input.should-be-native";
 
 module( "jquery.mobile.slider.js core" );
 
