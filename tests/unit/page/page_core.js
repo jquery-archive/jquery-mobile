@@ -78,24 +78,8 @@ test( "Binding to pagebeforecreate and returning false prevents classes from bei
 	ok( !$( "#c" ).hasClass( "ui-page" ) );
 } );
 
-test( "links inside an ignored container do not enhance", function() {
-	var $ignored = $( "#ignored-link" ),
-		$enhanced = $( "#enhanced-link" );
 
-	$.mobile.ignoreContentEnabled = true;
-
-	$ignored.parent().trigger( "create" );
-	ok( !$ignored.hasClass( "ui-link" ), "ignored link doesn't have link class" );
-
-	$enhanced.parent().trigger( "create" );
-	ok( $enhanced.hasClass( "ui-link" ), "enhanced link has link class" );
-
-	$.mobile.ignoreContentEnabled = false;
-} );
-
-
-asyncTest( "page container is updated to page theme at pagebeforeshow", function() {
-
+asyncTest( "page container is updated to page theme at pagebeforeshow", function(){
 	expect( 1 );
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
