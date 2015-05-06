@@ -31,15 +31,8 @@
 	}
 } )( function( $ ) {
 
-var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
-
 return $.widget( "mobile.collapsibleset", $.extend( {
 	version: "@VERSION",
-
-	// The initSelector is deprecated as of 1.4.0. In 1.5.0 we will use
-	// :jqmData(role='collapsibleset') which will allow us to get rid of the line
-	// below altogether, because the autoinit will generate such an initSelector
-	initSelector: ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')",
 
 	options: $.extend( {
 		enhanced: false
@@ -48,7 +41,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 	_handleCollapsibleExpand: function( event ) {
 		var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
 
-		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsibleset')" ) ) {
 			closestCollapsible
 				.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 				.collapsible( "collapse" );
@@ -63,11 +56,14 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 			_classes: ""
 		} );
 
+		this.childCollapsiblesSelector = ":mobile-collapsible, " +
+			( "[data-" + $.mobile.ns +  "role='collapsible']" );
+
 		if ( !opts.enhanced ) {
 			elem.addClass( "ui-collapsible-set " +
 				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
 				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
-			this.element.find( $.mobile.collapsible.initSelector ).collapsible();
+			this.element.find( this.childCollapsiblesSelector ).collapsible();
 		}
 
 		this._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
@@ -83,7 +79,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
 		this.element
-			.children( childCollapsiblesSelector )
+			.children( this.childCollapsiblesSelector )
 				.filter( ":jqmData(collapsed='false')" )
 					.collapsible( "expand" );
 	},
@@ -119,7 +115,7 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 	_destroy: function() {
 		var el = this.element;
 
-		this._removeFirstLastClasses( el.children( childCollapsiblesSelector ) );
+		this._removeFirstLastClasses( el.children( this.childCollapsiblesSelector ) );
 		el
 			.removeClass( "ui-collapsible-set ui-corner-all " +
 				this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
@@ -128,9 +124,9 @@ return $.widget( "mobile.collapsibleset", $.extend( {
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( childCollapsiblesSelector );
+		var collapsiblesInSet = this.element.children( this.childCollapsiblesSelector );
 
-		this.element.find( $.mobile.collapsible.initSelector ).not( ".ui-collapsible" ).collapsible();
+		this.element.find( this.childCollapsiblesSelector ).not( ".ui-collapsible" ).collapsible();
 
 		this._addFirstLastClasses( collapsiblesInSet, this._getVisibles( collapsiblesInSet, create ), create );
 	},
