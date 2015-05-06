@@ -36,8 +36,8 @@
              <label for="text-1">Text input:</label>
              <input type="text" name="text-1" id="text-1" value="">
 
-             <label for="text-3">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-3" id="text-3" value="">
+             <label for="text-3">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-3" id="text-3" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -63,17 +63,17 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="number-1">Number: data-clear-button="false"</label>
-             <input type="number" data-clear-button="false" name="number-1" id="number-1" value="">
+             <label for="number-1">Number: data-clear-btn="false"</label>
+             <input type="number" data-clear-btn="false" name="number-1" id="number-1" value="">
 
-             <label for="number-2">Number: data-clear-button="true"</label>
-             <input type="number" data-clear-button="true" name="number-2" id="number-2" value="">
+             <label for="number-2">Number: data-clear-btn="true"</label>
+             <input type="number" data-clear-btn="true" name="number-2" id="number-2" value="">
 
-             <label for="number-3">Number + pattern: data-clear-button="false"</label>
-             <input type="number" data-clear-button="false" name="number-3" pattern="[0-9]*" id="number-3" value="">
+             <label for="number-3">Number + pattern: data-clear-btn="false"</label>
+             <input type="number" data-clear-btn="false" name="number-3" pattern="[0-9]*" id="number-3" value="">
 
-             <label for="number-2">Number + pattern: data-clear-button="true"</label>
-             <input type="number" data-clear-button="true" name="number-4" pattern="[0-9]*" id="number-4" value="">
+             <label for="number-2">Number + pattern: data-clear-btn="true"</label>
+             <input type="number" data-clear-btn="true" name="number-4" pattern="[0-9]*" id="number-4" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -81,11 +81,11 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="date-1">Date: data-clear-button="false"</label>
-             <input type="date" data-clear-button="false" name="date-1" id="date-1" value="">
+             <label for="date-1">Date: data-clear-btn="false"</label>
+             <input type="date" data-clear-btn="false" name="date-1" id="date-1" value="">
 
-             <label for="date-2">Date: data-clear-button="true"</label>
-             <input type="date" data-clear-button="true" name="date-2" id="date-2" value="">
+             <label for="date-2">Date: data-clear-btn="true"</label>
+             <input type="date" data-clear-btn="true" name="date-2" id="date-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -93,11 +93,11 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="month-1">Month: data-clear-button="false"</label>
-            <input type="month" data-clear-button="false" name="month-1" id="month-1" value="">
+            <label for="month-1">Month: data-clear-btn="false"</label>
+            <input type="month" data-clear-btn="false" name="month-1" id="month-1" value="">
 
-            <label for="month-2">Month: data-clear-button="true"</label>
-            <input type="month" data-clear-button="true" name="month-2" id="month-2" value="">
+            <label for="month-2">Month: data-clear-btn="true"</label>
+            <input type="month" data-clear-btn="true" name="month-2" id="month-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -105,11 +105,11 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="week-1">Week: data-clear-button="false"</label>
-            <input type="week" data-clear-button="false" name="week-1" id="week-1" value="">
+            <label for="week-1">Week: data-clear-btn="false"</label>
+            <input type="week" data-clear-btn="false" name="week-1" id="week-1" value="">
 
-            <label for="week-2">Week: data-clear-button="true"</label>
-            <input type="week" data-clear-button="true" name="week-2" id="week-2" value="">
+            <label for="week-2">Week: data-clear-btn="true"</label>
+            <input type="week" data-clear-btn="true" name="week-2" id="week-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -117,11 +117,11 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="time-1">Time: data-clear-button="false"</label>
-            <input type="time" data-clear-button="false" name="time-1" id="time-1" value="">
+            <label for="time-1">Time: data-clear-btn="false"</label>
+            <input type="time" data-clear-btn="false" name="time-1" id="time-1" value="">
 
-            <label for="time-2">Time: data-clear-button="true"</label>
-            <input type="time" data-clear-button="true" name="time-2" id="time-2" value="">
+            <label for="time-2">Time: data-clear-btn="true"</label>
+            <input type="time" data-clear-btn="true" name="time-2" id="time-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -129,17 +129,17 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="datetime-1">Datetime: data-clear-button="false"</label>
-            <input type="datetime" data-clear-button="false" name="datetime-1" id="datetime-1" value="">
+            <label for="datetime-1">Datetime: data-clear-btn="false"</label>
+            <input type="datetime" data-clear-btn="false" name="datetime-1" id="datetime-1" value="">
 
-            <label for="datetime-2">Datetime: data-clear-button="true"</label>
-            <input type="datetime" data-clear-button="true" name="datetime-2" id="datetime-2" value="">
+            <label for="datetime-2">Datetime: data-clear-btn="true"</label>
+            <input type="datetime" data-clear-btn="true" name="datetime-2" id="datetime-2" value="">
 
-            <label for="datetime-3">Datetime-local: data-clear-button="false"</label>
-            <input type="datetime-local" data-clear-button="false" name="datetime-3" id="datetime-3" value="">
+            <label for="datetime-3">Datetime-local: data-clear-btn="false"</label>
+            <input type="datetime-local" data-clear-btn="false" name="datetime-3" id="datetime-3" value="">
 
-            <label for="datetime-4">Datetime-local: data-clear-button="true"</label>
-            <input type="datetime-local" data-clear-button="true" name="datetime-4" id="datetime-4" value="">
+            <label for="datetime-4">Datetime-local: data-clear-btn="true"</label>
+            <input type="datetime-local" data-clear-btn="true" name="datetime-4" id="datetime-4" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -147,11 +147,11 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="tel-1">Tel: data-clear-button="false"</label>
-             <input type="tel" data-clear-button="false" name="tel-1" id="tel-1" value="">
+             <label for="tel-1">Tel: data-clear-btn="false"</label>
+             <input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" value="">
 
-             <label for="tel-2">Tel: data-clear-button="true"</label>
-             <input type="tel" data-clear-button="true" name="tel-2" id="tel-2" value="">
+             <label for="tel-2">Tel: data-clear-btn="true"</label>
+             <input type="tel" data-clear-btn="true" name="tel-2" id="tel-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -159,11 +159,11 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="email-1">Email: data-clear-button="false"</label>
-            <input type="email" data-clear-button="false" name="email-1" id="email-1" value="">
+            <label for="email-1">Email: data-clear-btn="false"</label>
+            <input type="email" data-clear-btn="false" name="email-1" id="email-1" value="">
 
-            <label for="email-2">Email: data-clear-button="true"</label>
-            <input type="email" data-clear-button="true" name="email-2" id="email-2" value="">
+            <label for="email-2">Email: data-clear-btn="true"</label>
+            <input type="email" data-clear-btn="true" name="email-2" id="email-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -171,11 +171,11 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="url-1">Url: data-clear-button="false"</label>
-            <input type="url" data-clear-button="false" name="url-1" id="url-1" value="">
+            <label for="url-1">Url: data-clear-btn="false"</label>
+            <input type="url" data-clear-btn="false" name="url-1" id="url-1" value="">
 
-            <label for="url-2">Url: data-clear-button="true"</label>
-            <input type="url" data-clear-button="true" name="url-2" id="url-2" value="">
+            <label for="url-2">Url: data-clear-btn="true"</label>
+            <input type="url" data-clear-btn="true" name="url-2" id="url-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -183,11 +183,11 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="password-1">Password: data-clear-button="false"</label>
-             <input type="password" data-clear-button="false" name="password-1" id="password-1" value="" autocomplete="off">
+             <label for="password-1">Password: data-clear-btn="false"</label>
+             <input type="password" data-clear-btn="false" name="password-1" id="password-1" value="" autocomplete="off">
 
-             <label for="password-2">Password: data-clear-button="true"</label>
-             <input type="password" data-clear-button="true" name="password-2" id="password-2" value="" autocomplete="off">
+             <label for="password-2">Password: data-clear-btn="true"</label>
+             <input type="password" data-clear-btn="true" name="password-2" id="password-2" value="" autocomplete="off">
         </form>
         </div><!-- /demo-html -->
 
@@ -195,15 +195,15 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="color-1">Color: data-clear-button="false"</label>
-            <input type="color" data-clear-button="false" name="color-1" id="color-1" value="">
+            <label for="color-1">Color: data-clear-btn="false"</label>
+            <input type="color" data-clear-btn="false" name="color-1" id="color-1" value="">
         </form>
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
         <form>
-            <label for="color-2">Color: data-clear-button="true"</label>
-            <input type="color" data-clear-button="true" name="color-2" id="color-2" value="">
+            <label for="color-2">Color: data-clear-btn="true"</label>
+            <input type="color" data-clear-btn="true" name="color-2" id="color-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -211,11 +211,11 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="file-1">File: data-clear-button="false"</label>
-             <input type="file" data-clear-button="false" name="file-1" id="file-1" value="">
+             <label for="file-1">File: data-clear-btn="false"</label>
+             <input type="file" data-clear-btn="false" name="file-1" id="file-1" value="">
 
-             <label for="file-2">File: data-clear-button="true"</label>
-             <input type="file" data-clear-button="true" name="file-2" id="file-2" value="">
+             <label for="file-2">File: data-clear-btn="true"</label>
+             <input type="file" data-clear-btn="true" name="file-2" id="file-2" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -226,8 +226,8 @@
              <label for="text-4">Text input:</label>
              <input type="text" data-mini="true" name="text-4" id="text-4" value="">
 
-             <label for="text-5">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" data-mini="true" name="text-5" id="text-5" value="">
+             <label for="text-5">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" data-mini="true" name="text-5" id="text-5" value="">
 
              <label for="search-4">Search:</label>
              <input type="search" data-mini="true" name="search-4" id="search-4" value="">
@@ -244,8 +244,8 @@
              <label for="text-6">Text input:</label>
              <input type="text" name="text-6" id="text-6" value="" placeholder="Placeholder">
 
-             <label for="text-7">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-7" id="text-7" value="" placeholder="Placeholder">
+             <label for="text-7">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-7" id="text-7" value="" placeholder="Placeholder">
 
              <label for="search-5">Search:</label>
              <input type="search" name="search-5" id="search-5" value="" placeholder="Placeholder">
@@ -262,8 +262,8 @@
              <label for="text-18">Text input:</label>
              <input type="text" name="text-18" id="text-18" value="Value">
 
-             <label for="text-19">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-19" id="text-19" value="Value">
+             <label for="text-19">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-19" id="text-19" value="Value">
 
              <label for="search-11">Search:</label>
              <input type="search" name="search-11" id="search-11" value="Value">
@@ -280,8 +280,8 @@
              <label for="text-8" class="ui-hidden-accessible">Text input:</label>
              <input type="text" name="text-8" id="text-8" value="">
 
-             <label for="text-9" class="ui-hidden-accessible">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-9" id="text-9" value="">
+             <label for="text-9" class="ui-hidden-accessible">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-9" id="text-9" value="">
 
              <label for="search-6" class="ui-hidden-accessible">Search:</label>
              <input type="search" name="search-6" id="search-6" value="">
@@ -298,8 +298,8 @@
              <label for="text-10">Text input:</label>
              <input type="text" disabled="disabled" name="text-10" id="text-10" value="">
 
-             <label for="text-11">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" disabled="disabled" name="text-11" id="text-11" value="">
+             <label for="text-11">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" disabled="disabled" name="text-11" id="text-11" value="">
 
              <label for="search-7">Search:</label>
              <input type="search" disabled="disabled" name="search-7" id="search-7" value="">
@@ -315,7 +315,7 @@
         <form>
             <label for="text-enhanced">Text input:</label>
             <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
-                <input type="text" data-enhanced="true" data-clear-button="true" name="text-enhanced" id="text-enhanced" value="">
+                <input type="text" data-enhanced="true" data-clear-btn="true" name="text-enhanced" id="text-enhanced" value="">
                 <a href="#" class="ui-input-clear ui-button ui-button-icon-only ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text<span class="ui-icon ui-icon-delete"></span></a>
             </div>
 
@@ -340,8 +340,8 @@
             </div>
 
             <div class="ui-field-contain">
-                 <label for="text-13">Text input: data-clear-button="true"</label>
-                 <input type="text" data-clear-button="true" name="text-13" id="text-13" value="">
+                 <label for="text-13">Text input: data-clear-btn="true"</label>
+                 <input type="text" data-clear-btn="true" name="text-13" id="text-13" value="">
             </div>
 
             <div class="ui-field-contain">
@@ -366,8 +366,8 @@
             </div>
 
             <div class="ui-field-contain">
-                 <label for="text-15">Text input: data-clear-button="true"</label>
-                 <input type="text" data-clear-button="true" data-mini="true" name="text-15" id="text-15" value="">
+                 <label for="text-15">Text input: data-clear-btn="true"</label>
+                 <input type="text" data-clear-btn="true" data-mini="true" name="text-15" id="text-15" value="">
             </div>
 
             <div class="ui-field-contain">
