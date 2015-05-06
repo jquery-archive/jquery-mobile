@@ -22,7 +22,9 @@
 		define( [
 			"jquery",
 			"../widget",
-			"../core" ], factory );
+			"../core",
+			"widgets/enhancer",
+			"widgets/enhancer.backcompat" ], factory );
 	} else {
 
 		// Browser globals
