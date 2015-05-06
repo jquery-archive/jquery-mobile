@@ -235,7 +235,7 @@ $( document ).on( "mobileinit", function() {
 
 			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
-				.trigger( "create" );
+				.enhanceWithin();
 
 			this.element.parent().find( "form" ).children( ".ui-button" ).addClass( "ui-hidden-accessible" );
 
