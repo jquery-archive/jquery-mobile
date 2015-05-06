@@ -22,7 +22,7 @@ test( "grids inside an ignored container do not enhance", function() {
 
 	$.mobile.ignoreContentEnabled = true;
 
-	$( "#foo" ).trigger( "create" );
+	$( "#foo" ).enhance();
 
 	ok( !$ignored.hasClass( "ui-grid" ), "ignored list doesn't have the grid theme" );
 	deepEqual( $enhanced.attr( "class" ).indexOf( "ui-grid" ), 0, "enhanced list has the grid theme" );
