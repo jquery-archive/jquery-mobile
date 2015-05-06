@@ -346,7 +346,7 @@
 		<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
 
 <pre><code>
-$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
+$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).enhanceWithin();
 </code></pre>
 
 		<h2>Refreshing form elements</h2>

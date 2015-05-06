@@ -38,7 +38,7 @@
 		<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page <code>div</code> itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p>
 
 		<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
-<pre><code>$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );</code></pre>
+<pre><code>$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).enhanceWithin();</code></pre>
 
 			<pre><code>
 //HTML
