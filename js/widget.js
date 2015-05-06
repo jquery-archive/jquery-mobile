@@ -28,6 +28,6 @@
 	}
 } )( function( $ ) {
 
-return $.Widget;
+return $.mobile.widget = $.mobile.widget || {};
 
 } );
