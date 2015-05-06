@@ -29,7 +29,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../links",
 			"../widget",
 			"../support",
 			"../events/navigate",
@@ -85,6 +84,33 @@ function getWindowCoordinates( theWindow ) {
 		cy: ( theWindow[ 0 ].innerHeight || theWindow.height() )
 	};
 }
+
+var popupHook = function() {
+
+	// Links within content areas, tests included with page
+	$( this )
+		.find( "a" )
+		.jqmEnhanceable()
+		.filter( ":jqmData(rel='popup')[href][href!='']" )
+		.each( function() {
+
+			// Accessibility info for popups
+			var element = this,
+				idref = element.getAttribute( "href" ).substring( 1 );
+
+			if ( idref ) {
+				element.setAttribute( "aria-haspopup", true );
+				element.setAttribute( "aria-owns", idref );
+				element.setAttribute( "aria-expanded", false );
+			}
+		})
+		.end()
+		.not( ".ui-btn, :jqmData(role='none')" )
+		.addClass( "ui-link" );
+};
+
+$.fn.enhance = $.fn.enhance || $.noop;
+$.fn.enhance.hooks ? $.fn.enhance.hooks.push( popupHook ) : $.fn.enhance.hooks = [ popupHook ];
 
 $.widget( "mobile.popup", {
 	version: "@VERSION",
