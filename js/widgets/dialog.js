@@ -46,9 +46,7 @@ return $.widget( "mobile.dialog", {
 	_handlePageBeforeShow: function() {
 		this._isCloseable = true;
 		if ( this.options.overlayTheme ) {
-			this.element
-				.page( "removeContainerBackground" )
-				.page( "setContainerBackground", this.options.overlayTheme );
+			this.element.parent().pagecontainer( "option", "theme", this.options.overlayTheme );
 		}
 	},
 
