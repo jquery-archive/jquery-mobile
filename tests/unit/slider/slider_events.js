@@ -164,7 +164,7 @@ test( "onchange should be called onchange", function() {
 
 test( "slider controls will create when inside a container that receives a 'create' event", function() {
 	ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-slider-track" ).length, "did not have enhancements applied" );
-	ok( $( "#enhancetest" ).trigger( "create" ).find( ".ui-slider-track" ).length, "enhancements applied" );
+	ok( $( "#enhancetest" ).enhance().find( ".ui-slider-track" ).length, "enhancements applied" );
 } );
 
 var createEvent = function( name, target, x, y ) {
