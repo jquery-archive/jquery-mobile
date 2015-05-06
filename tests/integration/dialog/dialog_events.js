@@ -111,7 +111,7 @@ asyncTest( "clicking dialog 'Close' button twice in quick succession does not ca
 } );
 
 asyncTest( "dialog element with no theming", function() {
-	expect( 5 );
+	expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -130,7 +130,6 @@ asyncTest( "dialog element with no theming", function() {
 			ok( dialog.hasClass( "ui-page-theme-a" ), "Expected explicit theme ui-page-theme-a" );
 			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
 			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
 			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
 
 			start();
@@ -142,7 +141,7 @@ asyncTest( "dialog element with data-theme", function() {
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
-	expect( 6 );
+	expect( 5 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -162,7 +161,6 @@ asyncTest( "dialog element with data-theme", function() {
 			ok( !$.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected no overlay theme ui-overlay-b" );
 			ok( $.mobile.pageContainer.hasClass( "ui-overlay-a" ), "Expected default overlay theme ui-overlay-a" );
 			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-e" ), "Expect content to inherit from data-theme" );
 			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
 
 			start();
@@ -171,7 +169,7 @@ asyncTest( "dialog element with data-theme", function() {
 } );
 
 asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
-	expect( 5 );
+	expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -189,7 +187,6 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function() {
 			ok( dialog.hasClass( "ui-page-theme-e" ), "Expected explicit theme ui-page-theme-e" );
 			ok( $.mobile.pageContainer.hasClass( "ui-overlay-b" ), "Expected explicit overlay theme ui-overlay-b" );
 			ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-inherit" ), "Expected header to inherit from dialog" );
-			ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
 			ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-inherit" ), "Expected footer to inherit from dialog" );
 
 			start();
