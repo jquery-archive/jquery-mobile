@@ -8,7 +8,6 @@
  */
 
 //>>group: exclude
-
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -35,7 +34,6 @@
 			"./widgets/listview",
 			"./widgets/listview.autodividers",
 			"./widgets/listview.hidedividers",
-			"./nojs",
 			"./jquery-ui/accordion",
 			"./jquery-ui/checkboxradio",
 			"./jquery-ui/button",
@@ -51,7 +49,6 @@
 			"./widgets/forms/select.custom",
 			"./widgets/forms/select",
 			"./jquery-ui/controlgroup",
-			"./links",
 			"./widgets/toolbar",
 			"./widgets/fixedToolbar",
 			"./widgets/fixedToolbar.backcompat",
