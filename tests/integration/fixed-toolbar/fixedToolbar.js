@@ -333,7 +333,7 @@ asyncTest( "page-retains-fixed-header-on-popup-remove", function() {
 
 			page.append( popup );
 
-			popup.popup( { positionTo: "window" } ).trigger( "create" );
+			popup.popup( { positionTo: "window" } ).enhanceWithin();
 
 			popup.on( "popupafterclose", function() {
 				popup.remove();

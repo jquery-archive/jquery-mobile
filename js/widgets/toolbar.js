@@ -113,7 +113,7 @@ return $.widget( "mobile.toolbar", {
 			.children( "a" )
 				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
 					.attr( "data-" + $.mobile.ns + "role", "button" );
-		this.element.trigger( "create" );
+		this.element.enhanceWithin();
 	},
 	// Deprecated in 1.4. As from 1.5 ui-button-left/right classes have to be present in the markup.
 	_addHeaderButtonClasses: function() {
