@@ -537,10 +537,11 @@ asyncTest( "Top and bottom corners rounded in inset list", 14, function() {
 	] );
 } );
 
-test( "Listview will create when inside a container that receives a 'create' event", function() {
-	ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-listview" ).length, "did not have enhancements applied" );
-	ok( $( "#enhancetest" ).trigger( "create" ).find( ".ui-listview" ).length, "enhancements applied" );
-} );
+
+test( "Listview will create when inside a container that has enhance called on it", function(){
+	ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
+	ok( $("#enhancetest").enhance().find(".ui-listview").length, "enhancements applied" );
+});
 
 module( "Cached Linked List" );
 
