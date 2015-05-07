@@ -17,8 +17,8 @@ button,
 	font-family: sans-serif /*{global-font-family}*/;
 }
 legend,
-.ui-input-text input,
-.ui-input-search input {
+.ui-textinput-text input,
+.ui-textinput-search input {
 	color: inherit;
 	text-shadow: inherit;
 }

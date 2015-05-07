@@ -38,7 +38,7 @@ return $.widget( "mobile.textinput", {
 	initSelector: "input[type='text']," +
 		"input[type='search']," +
 		":jqmData(type='search')," +
-		"input[type='number']," +
+		"input[type='number']:not(:jqmData(type='range'))," +
 		":jqmData(type='number')," +
 		"input[type='password']," +
 		"input[type='email']," +
@@ -56,12 +56,15 @@ return $.widget( "mobile.textinput", {
 		"input[type='file']",
 
 	options: {
+		classes: {
+			"ui-textinput": "ui-corner-all ui-shadow-inset",
+			"ui-textinput-search-icon": "ui-icon ui-alt-icon ui-icon-search"
+		},
+
 		theme: null,
-		corners: true,
-		mini: false,
+
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		wrapperClass: "",
 		enhanced: false
 	},
 
@@ -69,28 +72,27 @@ return $.widget( "mobile.textinput", {
 
 		var options = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea",
-			isRange = this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ),
-			inputNeedsWrap = ( ( this.element.is( "input" ) ||
-				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
-				!isRange );
+			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea";
 
 		if ( this.element.prop( "disabled" ) ) {
 			options.disabled = true;
 		}
 
 		$.extend( this, {
-			classes: this._classesFromOptions(),
 			isSearch: isSearch,
-			isTextarea: isTextarea,
-			isRange: isRange,
-			inputNeedsWrap: inputNeedsWrap
+			isTextarea: isTextarea
 		} );
 
 		this._autoCorrect();
 
 		if ( !options.enhanced ) {
 			this._enhance();
+		} else {
+			this._outer = ( isTextarea ? this.element.parent() : this.element );
+			if ( isSearch ) {
+				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
+			}
+			this._addClasses();
 		}
 
 		this._on( {
@@ -106,60 +108,44 @@ return $.widget( "mobile.textinput", {
 		} );
 	},
 
+	_addClasses: function() {
+		if ( this._searchIcon ) {
+			this._addClass( this._searchIcon, "ui-textinput-search-icon" );
+		}
+		this._addClass( this._outer,
+			"ui-textinput ui-textinput-" + ( this.isSearch ? "search" : "text" ),
+			"ui-body-" + ( this.options.theme ? this.options.theme : "inherit" ) );
+	},
+
 	_enhance: function() {
-		var elementClasses = [];
+		var outer;
 
-		if ( this.isTextarea ) {
-			elementClasses.push( "ui-input-text" );
-		}
-
-		if ( this.isTextarea || this.isRange ) {
-			elementClasses.push( "ui-shadow-inset" );
-		}
-
-		//"search" and "text" input widgets
-		if ( this.inputNeedsWrap ) {
-			this.element.wrap( this._wrap() );
+		if ( !this.isTextarea ) {
+			outer = $( "<div>" );
+			if ( this.isSearch ) {
+				this._searchIcon = $( "<span>" ).prependTo( outer );
+				this._searchIcon.after( "<span> </span>" );
+			}
 		} else {
-			elementClasses = elementClasses.concat( this.classes );
+			outer = this.element;
 		}
 
-		this.element.addClass( elementClasses.join( " " ) );
+		this._outer = outer;
+
+		this._addClasses();
+
+		// Now that we're done building up the wrapper, wrap the input in it
+		if ( !this.isTextarea ) {
+			outer.insertBefore( this.element ).append( this.element );
+		}
 	},
 
 	widget: function() {
-		return ( this.inputNeedsWrap ) ? this.element.parent() : this.element;
-	},
-
-	_classesFromOptions: function() {
-		var options = this.options,
-			classes = [];
-
-		classes.push( "ui-body-" + ( ( options.theme === null ) ? "inherit" : options.theme ) );
-		if ( options.corners ) {
-			classes.push( "ui-corner-all" );
-		}
-		if ( options.mini ) {
-			classes.push( "ui-mini" );
-		}
-		if ( options.disabled ) {
-			classes.push( "ui-state-disabled" );
-		}
-		if ( options.wrapperClass ) {
-			classes.push( options.wrapperClass );
-		}
-
-		return classes;
-	},
-
-	_wrap: function() {
-		return $( "<div class='" +
-			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
-			this.classes.join( " " ) + " " +
-			"ui-shadow-inset'></div>" );
+		return this._outer;
 	},
 
 	_autoCorrect: function() {
+
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
 		//      since the popup they use can't be dismissed by the user. Note
@@ -179,50 +165,48 @@ return $.widget( "mobile.textinput", {
 	},
 
 	_handleBlur: function() {
-		this.widget().removeClass( $.mobile.focusClass );
+		this._removeClass( this._outer, null, "ui-focus" );
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.enable( true );
 		}
 	},
 
 	_handleFocus: function() {
+
 		// In many situations, iOS will zoom into the input upon tap, this
 		// prevents that from happening
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
-		this.widget().addClass( $.mobile.focusClass );
+		this._addClass( this._outer, null, "ui-focus" );
 	},
 
 	_setOptions: function( options ) {
-		var outer = this.widget();
-
-		this._super( options );
-
-		if ( !( options.disabled === undefined &&
-				options.mini === undefined &&
-				options.corners === undefined &&
-				options.theme === undefined &&
-				options.wrapperClass === undefined ) ) {
-
-			outer.removeClass( this.classes.join( " " ) );
-			this.classes = this._classesFromOptions();
-			outer.addClass( this.classes.join( " " ) );
+		if ( options.theme !== undefined ) {
+			this._removeClass( this._outer, null,
+				"ui-body-" + ( this.options.theme === null ? "inherit" : this.options.theme ) );
+			this._addClass( this._outer, null,
+				"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
 		}
 
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
+			this._toggleClass( this._outer, null, "ui-state-disabled", !!options.disabled );
 		}
+		return this._superApply( arguments );
 	},
 
 	_destroy: function() {
 		if ( this.options.enhanced ) {
+			this.classesElementLookup = {};
 			return;
 		}
-		if ( this.inputNeedsWrap ) {
+		if ( this._searchIcon ) {
+			this._searchIcon.remove();
+		}
+		if ( !this.isTextarea ) {
 			this.element.unwrap();
 		}
-		this.element.removeClass( "ui-input-text " + this.classes.join( " " ) );
 	}
 } );
 
