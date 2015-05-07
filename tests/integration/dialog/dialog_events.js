@@ -38,7 +38,7 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 	] );
 } );
 
-asyncTest( "Test option data-close-button", function() {
+asyncTest( "Test option data-close-btn", function( assert ) {
 	expect( 5 );
 
 	$.testHelper.pageSequence( [
@@ -49,17 +49,22 @@ asyncTest( "Test option data-close-button", function() {
 
 		function() {
 			var a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
+			assert.strictEqual( a.length, 0,
+				"Initially, the dialog header has no anchor elements (option value 'none')" );
 
 			$( "#close-button-test" ).page( "option", "closeBtn", "left" );
 			a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
-			ok( a.hasClass( "ui-button-left" ), "The close button has class ui-button-left when the closeBtn option is set to 'left'" );
+			assert.strictEqual( a.length, 1,
+				"The dialog header has exactly one anchor when the option value is 'left'" );
+			asset.hasClasses( a, "ui-button-left",
+				"The close button has class ui-button-left when the closeBtn option is 'left'" );
 
 			$( "#close-button-test" ).page( "option", "closeBtn", "right" );
 			a = $( "#close-button-test .ui-header a" );
-			deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
-			ok( a.hasClass( "ui-button-right" ), "The close button has class ui-button-right when the closeBtn option is set to 'right'" );
+			assert.strictEqual( a.length, 1,
+				"The dialog header has eactly one anchor when the option value is 'right'" );
+			assert.hasClasses( a, "ui-button-right",
+				"The close button has class ui-button-right when the closeBtn option is 'right'" );
 
 			$.mobile.back();
 		},
