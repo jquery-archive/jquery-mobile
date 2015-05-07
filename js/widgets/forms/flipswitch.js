@@ -42,7 +42,10 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		offText: "Off",
 		theme: null,
 		enhanced: false,
-		classes: {}
+		classes: {
+			"ui-flipswitch": "ui-shadow-inset",
+			"ui-flipswitch-on": "ui-shadow"
+		}
 	},
 
 	_create: function() {
@@ -152,21 +155,18 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			offText = ( this.type === "input" ) ?
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
-		this._addClass( on, "ui-flipswitch-on", "ui-button ui-shadow ui-button-inherit" );
+		this._addClass( on, "ui-flipswitch-on", "ui-button ui-button-inherit" );
 		on.text( onText );
 		this._addClass( off, "ui-flipswitch-off" );
 		off.text( offText );
 
-		this._addClass( flipswitch, "ui-flipswitch", "ui-shadow-inset ui-bar-" + theme + " " +
-				( options.wrapperClass ? options.wrapperClass : "" ) + " " +
+		this._addClass( flipswitch, "ui-flipswitch", "ui-bar-" + theme + " " +
 				( ( element.is( ":checked" ) ||
 				element
 					.find( "option" )
 						.eq( 1 )
 						.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
-				( element.is( ":disabled" ) ? " ui-state-disabled" : "" ) +
-				( options.corners ? " ui-corner-all" : "" ) +
-				( options.mini ? " ui-mini" : "" ) );
+				( element.is( ":disabled" ) ? " ui-state-disabled" : "" ) );
 
 		flipswitch.append( on, off );
 
@@ -240,12 +240,14 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	},
 
 	_setOptions: function( options ) {
+		var flipswitch = this.widget();
+		
 		if ( options.theme !== undefined ) {
 			var currentTheme = options.theme ? options.theme : "inherit",
 				newTheme = options.theme ? options.theme : "inherit";
 
-			this._removeClass( this.widget(), null,  "ui-bar-" + currentTheme );
-			this._addClass( this.widget(), null,  "ui-bar-" + newTheme);
+			this._removeClass( flipswitch, null,  "ui-bar-" + currentTheme );
+			this._addClass( flipswitch, null,  "ui-bar-" + newTheme);
 		}
 		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
@@ -254,7 +256,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			this.off.text( options.offText );
 		}
 		if ( options.disabled !== undefined ) {
-			this._toggleClass( this.widget(), null, "ui-state-disabled", options.disabled );
+			this._toggleClass( flipswitch, null, "ui-state-disabled", options.disabled );
 		}
 
 		this._super( options );
