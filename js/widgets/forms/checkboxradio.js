@@ -33,8 +33,6 @@
 } )( function( $ ) {
 
 $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
-	initSelector: "input[type='radio'],input[type='checkbox']:not(:jqmData(role='flipswitch'))",
-
 	options: {
 		enhanced: false,
 		theme: "inherit"
@@ -46,6 +44,15 @@ $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
 		} else if ( this.options.icon ) {
 			this.icon = this.element.find( "ui-button-icon" );
 		}
+	},
+
+	_themeElements: function() {
+		return [
+			{
+				element: this.widget(),
+				prefix: "ui-button-"
+			}
+		];
 	}
 } );
 

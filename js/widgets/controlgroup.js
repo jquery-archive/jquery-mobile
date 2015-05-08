@@ -58,6 +58,15 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		if ( !this.options.enhanced ) {
 			this._super();
 		}
+	},
+
+	_themeElements: function() {
+		return [
+			{
+				element: this.widget(),
+				prefix: "ui-theme-"
+			}
+		];
 	}
 } );
 

@@ -33,6 +33,25 @@
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "mobile.textinput", $.mobile.textinput, {
+		initSelector: "input[type='text']," +
+			"input[type='search']," +
+			":jqmData(type='search')," +
+			"input[type='number']:not(:jqmData(type='range'))," +
+			":jqmData(type='number')," +
+			"input[type='password']," +
+			"input[type='email']," +
+			"input[type='url']," +
+			"input[type='tel']," +
+			"textarea," +
+			"input[type='time']," +
+			"input[type='date']," +
+			"input[type='month']," +
+			"input[type='week']," +
+			"input[type='datetime']," +
+			"input[type='datetime-local']," +
+			"input[type='color']," +
+			"input:not([type])," +
+			"input[type='file']",
 		options: {
 			corners: true,
 			mini: false,

@@ -29,17 +29,22 @@
 
 $.mobile.widget.theme = {
 	_create: function() {
+		var that = this;
 		this._super();
 		if ( !this.options.enhanced && this.options.theme ) {
-			this.widget().addClass( "ui-theme-" + this.options.theme );
+			$.each( this._themeElements(), function( i, toTheme ) {
+				that._addClass( toTheme.element, null, toTheme.prefix + that.options.theme );
+			} );
 		}
 	},
 
 	_setOption: function( key, value ) {
+		var that = this;
 		if ( key === "theme" && this.options.theme ) {
-			this.widget()
-				.removeClass( "ui-theme-" + this.options.theme )
-				.addClass( "ui-theme-" + value );
+			$.each( this._themeElements(), function( i, toTheme ) {
+				that._removeClass( toTheme.element, null, toTheme.prefix + that.options.theme )
+					._addClass( toTheme.element, null, toTheme.prefix + value );
+			} );
 		}
 		this._superApply( arguments );
 	}
