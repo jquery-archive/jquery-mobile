@@ -43,7 +43,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		theme: null,
 		enhanced: false,
 		classes: {
-			"ui-flipswitch": "ui-shadow-inset",
+			"ui-flipswitch": "ui-shadow-inset ui-corner-all",
 			"ui-flipswitch-on": "ui-shadow"
 		}
 	},
@@ -240,14 +240,12 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		var flipswitch = this.widget();
-		
 		if ( options.theme !== undefined ) {
 			var currentTheme = options.theme ? options.theme : "inherit",
 				newTheme = options.theme ? options.theme : "inherit";
 
-			this._removeClass( flipswitch, null,  "ui-bar-" + currentTheme );
-			this._addClass( flipswitch, null,  "ui-bar-" + newTheme);
+			this._removeClass( this.flipswitch, null,  "ui-bar-" + currentTheme );
+			this._addClass( this.flipswitch, null,  "ui-bar-" + newTheme);
 		}
 		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
@@ -256,7 +254,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 			this.off.text( options.offText );
 		}
 		if ( options.disabled !== undefined ) {
-			this._toggleClass( flipswitch, null, "ui-state-disabled", options.disabled );
+			this._toggleClass( this.flipswitch, null, "ui-state-disabled", options.disabled );
 		}
 
 		this._super( options );
