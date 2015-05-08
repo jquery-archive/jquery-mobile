@@ -31,7 +31,7 @@
         
         <div data-demo-html="true" data-demo-js="#script">
             <ul data-role="listview" data-inset="true">
-                <li data-role="list-divider" data-theme="b"><h1>Seperate Page Sublists</h1></li>
+                <li data-role="list-divider" data-theme="b"><h1>Separate Page Sublists</h1></li>
                 <li data-role="list-divider"><h1>Nested list page generated from markup requires plugin</h1></li>
                 <li>
                     Infiniti

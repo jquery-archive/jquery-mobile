@@ -118,7 +118,7 @@
 
 				<p>jQuery Mobile uses grunticon to generate SVG icons with PNG fallbacks and the style sheets for these. By default the library uses inline SVGs but falls back to individual PNGs if inline SVG is not supported.</p>
 
-				<p>However, you can further optimize for a wider variety of devices by using a loader script for selecting the approriate style sheet. This reduces data transfer and the length of the style sheet.</p>
+				<p>However, you can further optimize for a wider variety of devices by using a loader script for selecting the appropriate style sheet. This reduces data transfer and the length of the style sheet.</p>
 
 				<p>To use the grunticon loader place the script in the "View Source" button below in the head of your page before all other stylesheets or scripts. In the script you will see a call to the grunticon function at the bottom which is being passed an array of three stylesheet URLs. You will want to change this to match your setup or to point at the corresponding style sheets on the CDN.</p>
 

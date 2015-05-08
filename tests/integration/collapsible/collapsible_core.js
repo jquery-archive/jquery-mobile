@@ -2,7 +2,7 @@
  * mobile collapsible unit tests
  */
 
-// TODO split out into seperate test files
+// TODO split out into separate test files
 (function( $ ){
 	function testExpandCollapse( selector ) {
 		var collapsible = $( selector );

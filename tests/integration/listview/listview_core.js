@@ -2,7 +2,7 @@
  * mobile listview unit tests
  */
 
-// TODO split out into seperate test files
+// TODO split out into separate test files
 (function($){
 	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
 		insetVal = $.mobile.listview.prototype.options.inset;

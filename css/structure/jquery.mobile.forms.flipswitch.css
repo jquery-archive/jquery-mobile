@@ -64,7 +64,7 @@
 	padding: 1px;
 	text-indent: 1em; /* Override this to center text if you use a label other than "off" */
 }
-/* Override field container CSS to prevent the flipswitch from becomming full width */
+/* Override field container CSS to prevent the flipswitch from becoming full width */
 html .ui-field-contain > label + .ui-flipswitch,
 html .ui-popup .ui-field-contain > label + .ui-flipswitch {
 	display: inline-block;

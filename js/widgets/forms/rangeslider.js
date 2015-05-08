@@ -191,7 +191,7 @@ define( [ "jquery",
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {
-				//this prevents min from being greater then max
+				//this prevents min from being greater than max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
 				this._trigger( "normalize" );
 			} else if ( min > max ) {
