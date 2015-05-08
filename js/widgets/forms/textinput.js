@@ -32,7 +32,7 @@
 	}
 } )( function( $ ) {
 
-return $.widget( "mobile.textinput", {
+$.widget( "mobile.textinput", {
 	version: "@VERSION",
 
 	initSelector: "input[type='text']," +
@@ -61,7 +61,7 @@ return $.widget( "mobile.textinput", {
 			"ui-textinput-search-icon": "ui-icon ui-alt-icon ui-icon-search"
 		},
 
-		theme: null,
+		theme: "inherit",
 
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
@@ -92,7 +92,13 @@ return $.widget( "mobile.textinput", {
 			if ( isSearch ) {
 				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
 			}
-			this._addClasses();
+		}
+
+		this._addClass( this._outer,
+			"ui-textinput ui-textinput-" + ( this.isSearch ? "search" : "text" ) );
+
+		if ( this._searchIcon ) {
+			this._addClass( this._searchIcon, "ui-textinput-search-icon" );
 		}
 
 		this._on( {
@@ -108,13 +114,13 @@ return $.widget( "mobile.textinput", {
 		} );
 	},
 
-	_addClasses: function() {
-		if ( this._searchIcon ) {
-			this._addClass( this._searchIcon, "ui-textinput-search-icon" );
-		}
-		this._addClass( this._outer,
-			"ui-textinput ui-textinput-" + ( this.isSearch ? "search" : "text" ),
-			"ui-body-" + ( this.options.theme ? this.options.theme : "inherit" ) );
+	_themeElements: function() {
+		return [
+			{
+				element: this._outer,
+				prefix: "ui-body-"
+			}
+		];
 	},
 
 	_enhance: function() {
@@ -130,8 +136,6 @@ return $.widget( "mobile.textinput", {
 		}
 
 		this._outer = outer;
-
-		this._addClasses();
 
 		// Now that we're done building up the wrapper, wrap the input in it
 		if ( !this.isTextarea ) {
@@ -181,13 +185,6 @@ return $.widget( "mobile.textinput", {
 	},
 
 	_setOptions: function( options ) {
-		if ( options.theme !== undefined ) {
-			this._removeClass( this._outer, null,
-				"ui-body-" + ( this.options.theme === null ? "inherit" : this.options.theme ) );
-			this._addClass( this._outer, null,
-				"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
-		}
-
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
 			this._toggleClass( this._outer, null, "ui-state-disabled", !!options.disabled );
@@ -208,5 +205,7 @@ return $.widget( "mobile.textinput", {
 		}
 	}
 } );
+
+return $.widget( "mobile.textinput", $.mobile.textinput, $.mobile.widget.theme );
 
 } );

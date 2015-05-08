@@ -35,6 +35,7 @@
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.checkboxradio", $.ui.checkboxradio, {
+		initSelector: "input[type='radio'],input[type='checkbox']:not(:jqmData(role='flipswitch'))",
 		options: {
 
 			// Unimplemented until its decided if this will move to ui widget

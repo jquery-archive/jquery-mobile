@@ -35,6 +35,8 @@
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.button", $.ui.button, {
+		initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
+		" [data-role='button']",
 		options: {
 			iconpos: "left",
 			mini: false,

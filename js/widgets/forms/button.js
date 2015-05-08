@@ -33,9 +33,6 @@
 } )( function( $ ) {
 
 $.widget( "ui.button", $.ui.button, {
-	initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
-		" [data-role='button']",
-
 	options: {
 		enhanced: false,
 		theme: null
@@ -47,6 +44,15 @@ $.widget( "ui.button", $.ui.button, {
 		} else if ( this.options.icon ) {
 			this.icon = this.element.find( "ui-button-icon" );
 		}
+	},
+
+	_themeElements: function() {
+		return [
+			{
+				element: this.widget(),
+				prefix: "ui-button-"
+			}
+		];
 	}
 } );
 
