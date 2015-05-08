@@ -36,10 +36,10 @@ module( "enhancer: custom hook", {
 		hook = function() {
 			$( this ).find( ".hook-target" ).addClass( "hooked" );
 		};
-		$.fn.enhance.hooks.push( hook );
+		$.enhance.hooks.push( hook );
 	},
 	teardown: function() {
-		$.fn.enhance.hooks.splice( $.inArray( hook, $.fn.enhance.hooks ), 1 );
+		$.enhance.hooks.splice( $.inArray( hook, $.enhance.hooks ), 1 );
 	}
 } );
 
@@ -54,12 +54,12 @@ var generator;
 module( "enhancer: custom generator", {
 	setup: function() {
 		generator = $.fn.enhance.initGenerator;
-		$.fn.enhance.initGenerator = function( prototype ) {
+		$.enhance.initGenerator = function( prototype ) {
 			return "." + prototype.widgetName;
 		};
 	},
 	teardown: function() {
-		$.fn.enhance.initGenerator = generator;
+		$.enhance.initGenerator = generator;
 	}
 } );
 
@@ -71,4 +71,36 @@ test( "custom generator", function( assert ) {
 	ok( $( ".flipswitch" ).flipswitch( "instance" ), "custom generator works with flipswitch" );
 	ok( $( ".textinput" ).textinput( "instance" ),
 		"custom generator overrides custom initSelectors" );
+} );
+
+module( "enhancer: multiple widgets" );
+
+test( "enhancer - define multiple widgets", function() {
+	expect( 2 );
+
+	$( "#enhance-multiple" ).enhance();
+	ok( $( "#enhancer-multiple" ).is( ":ui-button" ),
+		"Widget with multiple roles calls first widget" );
+	ok( $( "#enhancer-multiple" ).is( ":mobile-toolbar" ),
+		"Widget with multiple roles calls second widget" );
+} );
+
+test( "$.fn.enhanceRoles", function() {
+	expect( 1 );
+	var roles = $( "#enhancer-multiple" ).enhanceRoles();
+
+	deepEqual( [ "button", "toolbar" ], roles, "enhanceRoles returns array of roles" );
+} );
+
+test( "$.fn.enhanceOptions", function() {
+	expect( 1 );
+	var options = $( "#enhancer-options" ).enhanceOptions();
+	var expected = {
+		optionbaz: "boo",
+		optionBar: "foo",
+		optionFoo: "bar",
+		role: "button toolbar"
+	};
+
+	deepEqual( options, expected, "enhanceOptions returns options object" );
 } );

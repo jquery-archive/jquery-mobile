@@ -24,7 +24,8 @@
 			"../widget",
 			"../core",
 			"widgets/enhancer",
-			"widgets/enhancer.backcompat" ], factory );
+			"widgets/enhancer.backcompat",
+			"widgets/enhancer.widgetCrawler" ], factory );
 	} else {
 
 		// Browser globals
