@@ -18,8 +18,8 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"jquery-ui/widget",
-			"widgets/enhancer" ], factory );
+			"widgets/enhancer",
+			"widgets/enhancer.widgetCrawler" ], factory );
 	} else {
 
 		// Browser globals
@@ -27,8 +27,7 @@
 	}
 } )( function( $ ) {
 if ( $.mobileBackcompat !== false ) {
-	var originalGenerator = $.fn.enhance.initGenerator,
-		filter = function( elements ) {
+	var filter = function( elements ) {
 			elements = elements.not( $.mobile.keepNative );
 
 			if ( $.mobile.ignoreContentEnabled ) {
@@ -40,14 +39,16 @@ if ( $.mobileBackcompat !== false ) {
 			}
 			return elements;
 		},
-		generator = function( prototype, ns ) {
+		generator = function( prototype ) {
 			return prototype.initSelector ||
-				$[ prototype.namespace ][ prototype.widgetName ].prototype.initSelector ||
-				originalGenerator( prototype, ns );
+				$[ prototype.namespace ][ prototype.widgetName ].prototype.initSelector || false;
 		};
 
-	$.fn.enhance._filter = filter;
-	$.fn.enhance.initGenerator = generator;
+	$.enhance._filter = filter;
+	$.enhance.defaultProp = function() {
+		return "data-" + $.mobile.ns + "role";
+	};
+	$.enhance.initGenerator = generator;
 
 }
 } );

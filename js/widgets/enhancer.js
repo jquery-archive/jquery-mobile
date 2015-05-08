@@ -17,8 +17,7 @@
 
 		// AMD. Register as an anonymous module.
 		define( [
-			"jquery",
-			"jquery-ui/widget" ], factory );
+			"jquery" ], factory );
 	} else {
 
 		// Browser globals
@@ -26,90 +25,154 @@
 	}
 } )( function( $ ) {
 
-var plugin = {
-		enhance: function() {
+var installed = false;
 
-			// Loop over and execute any hooks that exist
-			for ( var i = 0; i < $.fn.enhance.hooks.length; i++ ) {
-				$.fn.enhance.hooks[ i ].apply( this, arguments );
-			}
-
-			// Call the default enhancer function
-			$.fn.enhance.defaultFunction.apply( this, arguments );
-
-			return this;
-		}
+$.fn.extend( {
+	enhance: function() {
+		return $.enhance.enhance( this );
 	},
-	getNamespace = function() {
-		return $.fn.enhance.ns || $.mobile.ns || "";
-	};
+	enhanceWithin: function() {
+		this.children().enhance();
+		return this;
+	},
+	enhanceOptions: function() {
+		return $.enhance.getOptions( this );
+	},
+	enhanceRoles: function() {
+		return $.enhance.getRoles( this );
+	}
+} );
+$.enhance = $.enhance || {};
+$.extend( $.enhance, {
 
-// Generate the init selector to be used by a widget
-plugin.enhance.initGenerator = function( prototype, ns ) {
-	return "[data-" + ns + "role='" + prototype.widgetName + "']";
-};
+	enhance: function( elem ) {
+		var i,
+			enhancables = elem.addBack().find( "[" + $.enhance.defaultProp() + "]" );
 
-// Check if the enhancer has already been defined if it has copy its hooks if not
-// define an empty array
-plugin.enhance.hooks = ( $.fn.enhance && $.fn.enhance.hooks ) ? $.fn.enhance.hooks : [];
-plugin.enhance._filter = $.fn.enhance ? $.fn.enhance._filter || false : false;
+		if ( $.enhance._filter ) {
+			enhancables = $.enhance._filter( enhancables );
+		}
 
-// Default function
-plugin.enhance.defaultFunction = function() {
-	var that = this.addBack();
+		// Check if the widget factory exists and if it
+		// does make sure the options extension is installed
+		$.enhance._installWidget();
 
-	// Enhance widgets
-	function crawlChildren( _childConstructors ) {
+		// Loop over and execute any hooks that exist
+		for ( i = 0; i < $.enhance.hooks.length; i++ ) {
+			$.enhance.hooks[ i ].call( elem, enhancables );
+		}
 
-		$.each( _childConstructors, function( index, constructor ) {
-			var prototype = constructor.prototype,
-				found = that.find(
-					plugin.enhance.initGenerator( prototype, getNamespace() )
-				);
+		// Call the default enhancer function
+		$.enhance.defaultFunction.call( elem, enhancables );
 
-			if ( plugin.enhance._filter ) {
-				found = plugin.enhance._filter( found );
-			}
-			found[ prototype.widgetName ]();
-			if ( constructor._childConstructors && constructor._childConstructors.length > 0 ) {
-				crawlChildren( constructor._childConstructors );
+		return elem;
+	},
+
+	// Check if the enhancer has already been defined if it has copy its hooks if not
+	// define an empty array
+	hooks: $.enhance.hooks || [],
+
+	_filter: $.enhance._filter || false,
+
+	defaultProp: $.enhance.defaultProp || function() { return "data-role"; },
+
+	defaultFunction: function( enhancables ) {
+		enhancables.each( function() {
+			var i,
+				roles = $( this ).enhanceRoles();
+
+			for ( i = 0; i < roles.length; i++ ) {
+				if ( $.fn[ roles[ i ] ] ) {
+					$( this )[ roles[ i ] ]();
+				}
 			}
 		} );
-	}
-	crawlChildren( $.Widget._childConstructors );
-};
+	},
 
-// This is for backcompat remove in 1.6
-plugin.enhanceWithin = function() {
-	return this.children().enhance();
-};
+	cache: true,
 
-$.extend( $.fn, plugin );
+	roleCache: {},
 
-$.extend( $.Widget.prototype, {
-	_getCreateOptions: function() {
-		var option, value,
-
-			// Get all data at once avoid multiple lookups http://jsperf.com/jqm-data-bulk
-			data = this.element.data(),
-			options = {},
-			ns = getNamespace().replace( "-", "" );
-
-		// Translate data-attributes to options
-		for ( option in this.options ) {
-			value = data[ ns + (
-				!ns ?
-				option :
-				option.charAt( 0 ).toUpperCase() + option.slice( 1 )
-			) ];
-			if ( value !== undefined ) {
-				options[ option ] = value;
-			}
+	getRoles: function( element ) {
+		if ( !element.length ) {
+			return [];
 		}
 
+		var role,
+
+			// Look for cached roles
+			roles = $.enhance.roleCache[ !!element[ 0 ].id ? element[ 0 ].id : undefined ];
+
+		// We already have done this return the roles
+		if ( roles ) {
+			return roles;
+		}
+
+		// This is our first time get the attribute and parse it
+		role = element.attr( $.enhance.defaultProp() );
+		roles = role ? role.match( /\S+/g ) : [];
+
+		// Caches the array of roles for next time
+		$.enhance.roleCache[ element[ 0 ].id ] = roles;
+
+		// Return the roles
+		return roles;
+	},
+
+	optionCache: {},
+
+	getOptions: function( element ) {
+		var options = $.enhance.optionCache[ !!element[ 0 ].id ? element[ 0 ].id : undefined ],
+			ns;
+
+		// Been there done that return what we already found
+		if ( !!options ) {
+			return options;
+		}
+
+		// This is the first time lets compile the options object
+		options = {};
+		ns = ( $.mobile.ns || "" ).replace( "-", "" );
+
+		$.each( $( element ).data(), function( option, value ) {
+			option = option.replace( ns, "" );
+
+			option = option.charAt( 0 ).toLowerCase() + option.slice( 1 );
+			options[ option ] = value;
+		} );
+
+		// Cache the options for next time
+		$.enhance.optionCache[ element[ 0 ].id ] = options;
+
+		// Return the options
 		return options;
+	},
+
+	_installWidget: function() {
+		if ( $.Widget && !installed ) {
+			$.extend( $.Widget.prototype, {
+				_getCreateOptions: function( options ) {
+					var option, value,
+						dataOptions = this.element.enhanceOptions();
+
+					options = options || {};
+
+					// Translate data-attributes to options
+					for ( option in this.options ) {
+						value = dataOptions[ option ];
+						if ( value !== undefined ) {
+							options[ option ] = value;
+						}
+					}
+					return options;
+				}
+			} );
+			installed = true;
+		}
 	}
 } );
 
-return plugin;
+$.enhance._installWidget();
+
+return $.enhance;
 } );
