@@ -21,12 +21,6 @@ test( "checkbox based flipswitch is active", function( assert ) {
 test( "select based flipswitch is active", function( assert ) {
 	assert.hasClasses( $( "#flip-select-second-option" ).parent(), "ui-flipswitch-active" );
 } );
-test( "checkbox based flipswitch is mini", function( assert ) {
-	assert.hasClasses( $( "#flip-checkbox-mini" ).parent(), "ui-mini" );
-} );
-test( "select based flipswitch is mini", function( assert ) {
-	assert.hasClasses( $( "#flip-select-mini" ).parent(), "ui-mini" );
-} );
 test( "checkbox based flipswitch should have theme inherit", function( assert ) {
 	assert.hasClasses( $( "#flip-checkbox-active" ).parent(), "ui-bar-inherit" );
 } );
