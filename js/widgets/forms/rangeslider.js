@@ -55,7 +55,7 @@
 			_sliderFirst = _sliderWidgetFirst.slider,
 			_sliderLast = _sliderWidgetLast.slider,
 			firstHandle = _sliderWidgetFirst.handle,
-			_sliders = $( "<div />" );
+			_sliders = $( "<div>" );
 			this._addClass( _sliders, "ui-rangeslider-sliders" );
 			_sliders.appendTo( rangeslider );
 

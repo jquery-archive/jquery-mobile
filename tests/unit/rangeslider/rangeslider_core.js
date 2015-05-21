@@ -152,17 +152,17 @@
 
 		rangeslider.rangeslider( {disabled: false } );
 
-		deepEqual( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
+		equal( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
 		assert.lacksClasses( inputFirst, "mobile-slider-disabled",
 			"first input lacks mobile-slider-disabled" );
-		deepEqual( sliderFirst.attr( "aria-disabled" ), "false",
+		equal( sliderFirst.attr( "aria-disabled" ), "false",
 			"first slider aria-disabled is false" );
 		assert.lacksClasses( sliderFirst, "ui-state-disabled",
 			"first slider lacks ui-state-disabled" );
-		deepEqual( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
+		equal( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
 		assert.lacksClasses( inputLast, "mobile-slider-disabled",
 			"last input lacks mobile-slider-disabled" );
-		deepEqual( sliderLast.attr( "aria-disabled" ), "false",
+		equal( sliderLast.attr( "aria-disabled" ), "false",
 			"last slider aria-disabled is false" );
 		assert.lacksClasses( sliderLast, "ui-state-disabled",
 			"last slider lacks ui-state-disabled" );
