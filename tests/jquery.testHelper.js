@@ -35,6 +35,10 @@ $.testHelper = {
 		loadSeq( seq, 0 );
 	},
 
+	mockOriginalEvent: function( options ) {
+		$.Event.prototype.originalEvent = $.extend( {}, { preventDefault: $.noop }, options );
+	},
+
 	excludeFileProtocol: function( callback ) {
 		var message = "Tests require script reload and cannot be run via file: protocol";
 

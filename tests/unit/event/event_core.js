@@ -21,11 +21,6 @@ module( libName, {
 			$( "#qunit-fixture" ).unbind();
 		} );
 
-		//NOTE unmock
-		Math.abs = absFn;
-		$.Event.prototype.originalEvent = originalEventFn;
-		$.Event.prototype.preventDefault = preventDefaultFn;
-
 		// make sure the event objects respond to touches to simulate
 		// the collections existence in non touch enabled test browsers
 		$.Event.prototype.touches = [ { pageX: 1, pageY: 1 } ];
@@ -36,6 +31,11 @@ module( libName, {
 	},
 	teardown: function() {
 		$.mobile.pageContainer = originalPageContainer;
+
+		// NOTE unmock
+		Math.abs = absFn;
+		$.Event.prototype.originalEvent = originalEventFn;
+		$.Event.prototype.preventDefault = preventDefaultFn;
 	}
 } );
 
@@ -149,9 +149,9 @@ var forceTouchSupport = function() {
 	} );
 
 	//mock originalEvent information
-	$.Event.prototype.originalEvent = {
+	$.testHelper.mockOriginalEvent( {
 		touches: [ { 'pageX': 0 }, { 'pageY': 0 } ]
-	};
+	} );
 };
 
 asyncTest( "long press fires tap hold after taphold duration", function() {
@@ -412,12 +412,12 @@ var swipeTimedTest = function( opts ) {
 		};
 
 	//NOTE bypass the trigger source check
-	$.Event.prototype.originalEvent = {
+	$.testHelper.mockOriginalEvent( {
 		touches: [ {
 			clientX: 0,
 			clientY: 0
 		} ]
-	};
+	} );
 
 	qunitFixture.trigger( "touchstart" );
 
@@ -488,22 +488,22 @@ asyncTest( "scrolling prevented when coordinate change > 10", function() {
 	};
 
 	//NOTE bypass the trigger source check
-	$.Event.prototype.originalEvent = {
+	$.testHelper.mockOriginalEvent( {
 		touches: [ {
 			clientX: 0,
 			clientY: 0
 		} ]
-	};
+	} );
 
 	$( "#qunit-fixture" ).trigger( "touchstart" );
 
 	//NOTE bypass the trigger source check
-	$.Event.prototype.originalEvent = {
+	$.testHelper.mockOriginalEvent( {
 		touches: [ {
 			clientX: 200,
 			clientY: 0
 		} ]
-	};
+	} );
 
 	$( "#qunit-fixture" ).trigger( "touchmove" );
 } );

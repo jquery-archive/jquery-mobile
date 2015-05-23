@@ -231,9 +231,13 @@ asyncTest( "should be able to open a second panel", function() {
 
 module( "dismissable panel", {
 	setup: function() {
-		$.Event.prototype.originalEvent = {
+		this.originalOriginalEvent = $.Event.prototype.originalEvent;
+		$.testHelper.mockOriginalEvent( {
 			touches: [ { 'pageX': 0 }, { 'pageY': 0 } ]
-		};
+		} );
+	},
+	teardown: function() {
+		$.Event.prototype.originalEvent = this.originalOriginalEvent;
 	}
 } );
 
