@@ -14,6 +14,7 @@ $.testHelper.sequence( [
 	function() {
 		target.trigger( $.extend( $.Event( pointer.down ), {
 			originalEvent: {
+				preventDefault: $.noop,
 				touches: false
 			},
 			pageX: 206,
@@ -28,6 +29,7 @@ $.testHelper.sequence( [
 			return event;
 		} )( $.extend( $.Event( pointer.move ), {
 			originalEvent: {
+				preventDefault: $.noop,
 				touches: false
 			},
 			pageX: 206,
@@ -42,6 +44,7 @@ $.testHelper.sequence( [
 			return event;
 		} )( $.extend( $.Event( pointer.move ), {
 			originalEvent: {
+				preventDefault: $.noop,
 				touches: false
 			},
 			pageX: 170,
@@ -56,6 +59,7 @@ $.testHelper.sequence( [
 			return event;
 		} )( $.extend( $.Event( pointer.up ), {
 			originalEvent: {
+				preventDefault: $.noop,
 				touches: false
 			},
 			pageX: 170,
