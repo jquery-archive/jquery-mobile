@@ -138,8 +138,9 @@ define( [
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			this.window.unbind( "scroll", this.fakeFixLoader );
-			this.window.unbind( "scroll", this.checkLoaderPosition );
+			this.window
+				.unbind( "scroll", this.fakeFixLoader )
+				.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
