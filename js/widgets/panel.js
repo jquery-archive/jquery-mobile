@@ -189,11 +189,11 @@ $.widget( "mobile.panel", {
 	},
 
 	_bindFixListener: function() {
-		this._on( $( window ), { "throttledresize": "_positionPanel" });
+		this._on( this.window, { "throttledresize": "_positionPanel" });
 	},
 
 	_unbindFixListener: function() {
-		this._off( $( window ), "throttledresize" );
+		this._off( this.window, "throttledresize" );
 	},
 
 	_unfixPanel: function() {
