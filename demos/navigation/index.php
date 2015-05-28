@@ -74,7 +74,7 @@ $( window ).on( "navigate", function( event, data ){
 	alterContent( data.state.url );
 });</code></pre>
 
-		<h2>Event Example <a href="http://api.jquerymobile.com/navigate/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h2>
+		<h2>Event Example <a href="http://api.jquerymobile.com/navigate/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h2>
 
 		<p>jQuery Mobile provides the <code>navigate</code> event as a wrapper for both <code>hashchange</code> and <code>popstate</code>. That is, where a binding to both events would be required to support browsers with and without <code>popstate</code> only one binding to <code>navigate</code> is necessary. In this example, altering the hash will trigger the <code>popstate</code> or <code>hashchange</code> event depending on the browser, but only a single <code>navigate</code> binding is necessary. Make sure to use the back button after alterting the hash to see that the event is fired in both cases.</p>
 
@@ -95,7 +95,7 @@ $( "#event-example" ).click(function( event ) {
 
     <a href="#" id="event-example" class="ui-shadow ui-btn ui-corner-all">Event Example</a>
 
-		<h2>Method Example <a href="http://api.jquerymobile.com/jQuery.mobile.navigate/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h2>
+		<h2>Method Example <a href="http://api.jquerymobile.com/jQuery.mobile.navigate/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h2>
 
     <p>jQuery Mobile provides the <code>$.mobile.navigate</code> method as a means to track history and receive additional information along with <code>navigate</code> events. In this example, when the method example link is clicked, the url will be changed twice. The first time will it will store additional aribitrary information along with the URL and hash stored by the method. The second time it will simply change the url and store the URL and hash. When the browser moves backward through history the <code>navigate</code> event is triggered as in the event example above <em>but</em> along with it comes information about the direction of history traversal, the url, the hash, and the arbitrary data stored with the first call to the navigate method.</p>
 

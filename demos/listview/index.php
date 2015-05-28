@@ -31,7 +31,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
@@ -157,7 +157,7 @@
 
 		<h2>Icons: Standard</h2>
 
-		<p>The default icon for each list item containing a link is <code>carat-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
+		<p>The default icon for each list item containing a link is <code>caret-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
 
 			<div data-demo-html="true" data-demo-css="#custom-icon">
                 <ul data-role="listview" data-inset="true">

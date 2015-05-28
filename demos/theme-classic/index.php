@@ -176,9 +176,9 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
-		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">are</button>
-		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">We</a>
+		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">are</button>
+		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
 			<li>I</li>

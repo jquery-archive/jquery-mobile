@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Radio inputs are used to provide a list of options where only a single option can be selected. Radio buttons are enhanced by the checkboxradio widget.</p>
 

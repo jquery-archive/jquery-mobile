@@ -183,10 +183,10 @@
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-bullets">bullets</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-calendar">calendar</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">camera</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-d">carat-d</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l">carat-l</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-r">carat-r</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-u">carat-u</button>
+						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-d">caret-d</button>
+						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-l">caret-l</button>
+						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-r">caret-r</button>
+						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-u">caret-u</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check">check</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-clock">clock</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-cloud">cloud</button>

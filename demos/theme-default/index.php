@@ -52,7 +52,7 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
 		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
 		<div data-role="navbar">
@@ -109,9 +109,9 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
-		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">are</button>
-		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">We</a>
+		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">are</button>
+		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true">
 			<li>I</li>

@@ -39,7 +39,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Toolbar <a href="http://api.jquerymobile.com/toolbar/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Toolbar <a href="http://api.jquerymobile.com/toolbar/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>The toolbar widget is used to enhance headers and footers.</p>
 
@@ -141,7 +141,7 @@
 			<div data-role="footer">
 				<h2>Footer</h2>
 				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-power">Quit</a>
-				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">Next</a>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-caret-r">Next</a>
 			</div>
 		</div>
 

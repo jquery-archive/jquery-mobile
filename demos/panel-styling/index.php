@@ -144,7 +144,7 @@
 
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
-        <a href="#demo-page" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>
+        <a href="#demo-page" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-caret-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
 
