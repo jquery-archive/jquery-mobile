@@ -167,7 +167,7 @@
 
     <div data-role="header" data-position="fixed" data-theme="b">
         <h1>Inbox</h1>
-        <a href="#demo-intro" data-rel="back" data-icon="carat-l" data-iconpos="notext">Back</a>
+        <a href="#demo-intro" data-rel="back" data-icon="caret-l" data-iconpos="notext">Back</a>
         <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
 

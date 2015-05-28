@@ -37,7 +37,7 @@
         <br>
         <br>
 
-        <a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+        <a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-caret-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
 
         <br>
         <br>

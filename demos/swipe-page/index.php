@@ -79,8 +79,8 @@
 
 <div id="_footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 	<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
-    	<a href="#" class="prev ui-btn ui-btn-icon-notext ui-icon-carat-l">Previous</a>
-    	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-carat-r">Next</a>
+    	<a href="#" class="prev ui-btn ui-btn-icon-notext ui-icon-caret-l">Previous</a>
+    	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-caret-r">Next</a>
     </div>
 
 	<a href="#" data-rel="popup" class="trivia-btn ui-btn ui-btn-right ui-btn-icon-left ui-icon-info ui-mini ui-corner-all">Trivia</a>

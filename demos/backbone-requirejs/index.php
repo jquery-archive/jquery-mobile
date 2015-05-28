@@ -38,7 +38,7 @@
       </p>
       <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.</p>
 
-	   <a href="backbone-require.html" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-icon-right ui-icon-carat-r">View example page</a>
+	   <a href="backbone-require.html" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-icon-right ui-icon-caret-r">View example page</a>
 
       <h2>jQuery Mobile configuration</h2>
 

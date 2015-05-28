@@ -59,7 +59,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Flip switch <a href="http://api.jquerymobile.com/flipswitch/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Flip switch <a href="http://api.jquerymobile.com/flipswitch/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>

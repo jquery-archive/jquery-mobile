@@ -21,7 +21,7 @@
 </head>
 <body>
     <div data-role="header" data-position="fixed" data-theme="a">
-		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-caret-l">Back</a>
         <h1>Fixed external header</h1>
     </div><!-- /header -->
 <?php } ?>

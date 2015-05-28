@@ -36,7 +36,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Tabs <a href="http://api.jquerymobile.com/tabs/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Tabs <a href="http://api.jquerymobile.com/tabs/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>The jQuery mobile tabs widget is actually just an extension of the jQuery ui tabs widget and takes all the same options and methods.</p>
 		<h2>Use navbar for tabs</h2>

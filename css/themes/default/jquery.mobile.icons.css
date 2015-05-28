@@ -47,16 +47,16 @@
 .ui-icon-camera:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20style%3D%22fill%3A%23FFFFFF%3B%22%20d%3D%22M12%2C2.5H9.908c-0.206-0.581-0.756-1-1.408-1h-3c-0.652%2C0-1.202%2C0.419-1.408%2C1H2c-1.104%2C0-2%2C0.896-2%2C2%20v6c0%2C1.104%2C0.896%2C2%2C2%2C2h10c1.104%2C0%2C2-0.896%2C2-2v-6C14%2C3.396%2C13.104%2C2.5%2C12%2C2.5z%20M7%2C10.5c-1.657%2C0-3-1.344-3-3c0-1.657%2C1.343-3%2C3-3%20s3%2C1.343%2C3%2C3C10%2C9.156%2C8.657%2C10.5%2C7%2C10.5z%20M7%2C5.5c-1.104%2C0-2%2C0.896-2%2C2c0%2C1.104%2C0.896%2C2%2C2%2C2c1.104%2C0%2C2-0.896%2C2-2%20C9%2C6.396%2C8.104%2C5.5%2C7%2C5.5z%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-icon-carat-d:after {
+.ui-icon-caret-d:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2211.949%2C3.404%207%2C8.354%202.05%2C3.404%20-0.071%2C5.525%207%2C12.596%2014.07%2C5.525%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-icon-carat-l:after {
+.ui-icon-caret-l:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2210.596%2C11.949%205.646%2C7%2010.596%2C2.05%208.475%2C-0.071%201.404%2C7%208.475%2C14.07%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-icon-carat-r:after {
+.ui-icon-caret-r:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%223.404%2C2.051%208.354%2C7%203.404%2C11.95%205.525%2C14.07%2012.596%2C7%205.525%2C-0.071%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-icon-carat-u:after {
+.ui-icon-caret-u:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%222.051%2C10.596%207%2C5.646%2011.95%2C10.596%2014.07%2C8.475%207%2C1.404%20-0.071%2C8.475%20%22%2F%3E%3C%2Fsvg%3E");
 }
 .ui-icon-check:after,
@@ -217,20 +217,20 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-camera:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20d%3D%22M12%2C2.5H9.908c-0.206-0.581-0.756-1-1.408-1h-3c-0.652%2C0-1.202%2C0.419-1.408%2C1H2c-1.104%2C0-2%2C0.896-2%2C2v6c0%2C1.104%2C0.896%2C2%2C2%2C2%20h10c1.104%2C0%2C2-0.896%2C2-2v-6C14%2C3.396%2C13.104%2C2.5%2C12%2C2.5z%20M7%2C10.5c-1.657%2C0-3-1.344-3-3c0-1.657%2C1.343-3%2C3-3s3%2C1.343%2C3%2C3%20C10%2C9.156%2C8.657%2C10.5%2C7%2C10.5z%20M7%2C5.5c-1.104%2C0-2%2C0.896-2%2C2c0%2C1.104%2C0.896%2C2%2C2%2C2c1.104%2C0%2C2-0.896%2C2-2C9%2C6.396%2C8.104%2C5.5%2C7%2C5.5z%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-alt-icon.ui-icon-carat-d:after,
-.ui-alt-icon .ui-icon-carat-d:after {
+.ui-alt-icon.ui-icon-caret-d:after,
+.ui-alt-icon .ui-icon-caret-d:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20points%3D%2211.949%2C3.404%207%2C8.354%202.05%2C3.404%20-0.071%2C5.525%207%2C12.596%2014.07%2C5.525%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-alt-icon.ui-icon-carat-l:after,
-.ui-alt-icon .ui-icon-carat-l:after {
+.ui-alt-icon.ui-icon-caret-l:after,
+.ui-alt-icon .ui-icon-caret-l:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20points%3D%2210.596%2C11.949%205.646%2C7%2010.596%2C2.05%208.475%2C-0.071%201.404%2C7%208.475%2C14.07%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-alt-icon.ui-icon-carat-r:after,
-.ui-alt-icon .ui-icon-carat-r:after {
+.ui-alt-icon.ui-icon-caret-r:after,
+.ui-alt-icon .ui-icon-caret-r:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20points%3D%223.404%2C2.051%208.354%2C7%203.404%2C11.95%205.525%2C14.07%2012.596%2C7%205.525%2C-0.071%20%22%2F%3E%3C%2Fsvg%3E");
 }
-.ui-alt-icon.ui-icon-carat-u:after,
-.ui-alt-icon .ui-icon-carat-u:after {
+.ui-alt-icon.ui-icon-caret-u:after,
+.ui-alt-icon .ui-icon-caret-u:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20points%3D%222.051%2C10.596%207%2C5.646%2011.95%2C10.596%2014.07%2C8.475%207%2C1.404%20-0.071%2C8.475%20%22%2F%3E%3C%2Fsvg%3E");
 }
 .ui-alt-icon.ui-icon-check:after,
@@ -406,17 +406,17 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 .ui-nosvg .ui-icon-camera:after {
 	background-image: url("images/icons-png/camera-white.png");
 }
-.ui-nosvg .ui-icon-carat-d:after {
-	background-image: url("images/icons-png/carat-d-white.png");
+.ui-nosvg .ui-icon-caret-d:after {
+	background-image: url("images/icons-png/caret-d-white.png");
 }
-.ui-nosvg .ui-icon-carat-l:after {
-	background-image: url("images/icons-png/carat-l-white.png");
+.ui-nosvg .ui-icon-caret-l:after {
+	background-image: url("images/icons-png/caret-l-white.png");
 }
-.ui-nosvg .ui-icon-carat-r:after {
-	background-image: url("images/icons-png/carat-r-white.png");
+.ui-nosvg .ui-icon-caret-r:after {
+	background-image: url("images/icons-png/caret-r-white.png");
 }
-.ui-nosvg .ui-icon-carat-u:after {
-	background-image: url("images/icons-png/carat-u-white.png");
+.ui-nosvg .ui-icon-caret-u:after {
+	background-image: url("images/icons-png/caret-u-white.png");
 }
 .ui-nosvg .ui-icon-check:after,
 html.ui-nosvg .ui-btn.ui-checkbox-on:after {
@@ -575,21 +575,21 @@ html.ui-nosvg .ui-btn.ui-checkbox-on:after {
 .ui-nosvg .ui-alt-icon .ui-icon-camera:after {
 	background-image: url("images/icons-png/camera-black.png");
 }
-.ui-nosvg .ui-alt-icon.ui-icon-carat-d:after,
-.ui-nosvg .ui-alt-icon .ui-icon-carat-d:after {
-	background-image: url("images/icons-png/carat-d-black.png");
+.ui-nosvg .ui-alt-icon.ui-icon-caret-d:after,
+.ui-nosvg .ui-alt-icon .ui-icon-caret-d:after {
+	background-image: url("images/icons-png/caret-d-black.png");
 }
-.ui-nosvg .ui-alt-icon.ui-icon-carat-l:after,
-.ui-nosvg .ui-alt-icon .ui-icon-carat-l:after {
-	background-image: url("images/icons-png/carat-l-black.png");
+.ui-nosvg .ui-alt-icon.ui-icon-caret-l:after,
+.ui-nosvg .ui-alt-icon .ui-icon-caret-l:after {
+	background-image: url("images/icons-png/caret-l-black.png");
 }
-.ui-nosvg .ui-alt-icon.ui-icon-carat-r:after,
-.ui-nosvg .ui-alt-icon .ui-icon-carat-r:after {
-	background-image: url("images/icons-png/carat-r-black.png");
+.ui-nosvg .ui-alt-icon.ui-icon-caret-r:after,
+.ui-nosvg .ui-alt-icon .ui-icon-caret-r:after {
+	background-image: url("images/icons-png/caret-r-black.png");
 }
-.ui-nosvg .ui-alt-icon.ui-icon-carat-u:after,
-.ui-nosvg .ui-alt-icon .ui-icon-carat-u:after {
-	background-image: url("images/icons-png/carat-u-black.png");
+.ui-nosvg .ui-alt-icon.ui-icon-caret-u:after,
+.ui-nosvg .ui-alt-icon .ui-icon-caret-u:after {
+	background-image: url("images/icons-png/caret-u-black.png");
 }
 .ui-nosvg .ui-alt-icon.ui-icon-check:after,
 .ui-nosvg .ui-alt-icon .ui-icon-check:after,

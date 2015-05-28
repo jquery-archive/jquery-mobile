@@ -34,7 +34,7 @@
 	<div data-role="page" class="jqm-demos">
 
 		<div data-role="header" data-position="fixed">
-			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-caret-l">Back</a>
 			<h1>2,146 Songs</h1>
 			<div class="ui-bar ui-bar-b">
 				<form action="#" method="get">

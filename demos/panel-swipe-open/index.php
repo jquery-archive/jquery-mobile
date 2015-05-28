@@ -65,7 +65,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>
+        <a href="#demo-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-caret-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -86,8 +86,8 @@
 
     <div data-role="header" data-theme="b">
         <h1>Swipe left or right</h1>
-		<a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
-		<a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+		<a href="#left-panel" data-icon="caret-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+		<a href="#right-panel" data-icon="caret-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content">

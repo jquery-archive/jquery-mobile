@@ -233,7 +233,7 @@ $( document ).on( "mobileinit", function() {
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
 
-			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
+			form.append( "<button type='submit' data-icon='caret-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
 
