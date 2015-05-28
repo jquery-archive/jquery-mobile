@@ -33,7 +33,11 @@ $.mobile.widget.theme = {
 		this._super();
 		if ( !this.options.enhanced && this.options.theme ) {
 			$.each( this._themeElements(), function( i, toTheme ) {
-				that._addClass( toTheme.element, null, toTheme.prefix + that.options.theme );
+				that._addClass(
+					toTheme.element,
+					null,
+					toTheme.prefix + that.options[ toTheme.option || "theme" ]
+				);
 			} );
 		}
 	},
@@ -42,7 +46,11 @@ $.mobile.widget.theme = {
 		var that = this;
 		if ( key === "theme" && this.options.theme ) {
 			$.each( this._themeElements(), function( i, toTheme ) {
-				that._removeClass( toTheme.element, null, toTheme.prefix + that.options.theme )
+				that._removeClass(
+						toTheme.element,
+						null,
+						toTheme.prefix + that.options[ toTheme.option || "theme" ]
+					)
 					._addClass( toTheme.element, null, toTheme.prefix + value );
 			} );
 		}
