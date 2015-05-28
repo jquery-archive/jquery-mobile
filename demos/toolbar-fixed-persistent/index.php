@@ -61,7 +61,7 @@
 
 			<h2>Improving page load with persistent toolbars</h2>
 
-			<p>By combining this technique with a little bit of server side logic you can reduce the file size for each page load significantly by not sending anything except the actual page container back when the request is from ajax. this not only reduces file size but makes the actual processing of the page quicker also. To see an example of this technique see <a href="../toolbar-fixed-persistent-optimized/" data-ajax="false">Ajax optimized persistent toolbars</a></p>
+			<p>By combining this technique with a little bit of server side logic you can reduce the file size for each page load significantly by not sending anything except the actual page container back when the request is from ajax. this not only reduces file size but makes the actual processing of the page quicker also. To see an example of this technique see <a href="../external-widgets/" data-ajax="false">External Widgets</a></p>
 
 			<h3>A note about transitions</h3>
 
