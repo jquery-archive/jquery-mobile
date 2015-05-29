@@ -187,7 +187,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	refresh: function() {
 		var direction,
 			existingDirection = this.flipswitch
-									.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
+										.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
 
 		if ( this.type === "select" ) {
 			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right" : "_left";
@@ -242,7 +242,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined ) {
-			var currentTheme = options.theme ? options.theme : "inherit",
+			var currentTheme = this.options.theme ? this.options.theme : "inherit",
 				newTheme = options.theme ? options.theme : "inherit";
 
 			this._removeClass( this.flipswitch, null,  "ui-bar-" + currentTheme );
