@@ -39,15 +39,13 @@
 
 		options: {
 			theme: null,
-			trackTheme: null,
-			classes: {}
+			trackTheme: null
 		},
 
 		_create: function() {
-			var rangeslider = this.element,
-			_inputFirst = rangeslider.find( "input" ).first(),
-			_inputLast = rangeslider.find( "input" ).last(),
-			_label = rangeslider.find( "label" ).first(),
+			var _inputFirst = this.element.find( "input" ).first(),
+			_inputLast = this.element.find( "input" ).last(),
+			_label = this.element.find( "label" ).first(),
 			_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
 				$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
 			_sliderWidgetLast = $.data( _inputLast.get(0), "mobile-slider" ) ||
@@ -57,7 +55,7 @@
 			firstHandle = _sliderWidgetFirst.handle,
 			_sliders = $( "<div>" );
 			this._addClass( _sliders, "ui-rangeslider-sliders" );
-			_sliders.appendTo( rangeslider );
+			_sliders.appendTo( this.element );
 
 			this._addClass( _inputFirst, "ui-rangeslider-first" );
 			this._addClass( _inputLast, "ui-rangeslider-last" );
@@ -65,7 +63,7 @@
 
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
-			_label.insertBefore( rangeslider );
+			_label.insertBefore( this.element );
 			firstHandle.prependTo( _sliderLast );
 
 			$.extend( this, {
