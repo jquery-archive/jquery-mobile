@@ -13,11 +13,12 @@
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
+		$.mobileBackcompat = false;
+
 		$.testHelper.asyncLoad([
 			[
 				"widgets/forms/slider",
-				"widgets/forms/rangeslider",
-				"widgets/forms/rangeslider.backcompat"
+				"widgets/forms/rangeslider"
 			],
 			[ "rangeslider_core.js" ],
 			[ "init" ]
@@ -28,7 +29,6 @@
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 
