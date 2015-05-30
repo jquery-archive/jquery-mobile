@@ -32,7 +32,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 	return $.widget( "mobile.rangeslider", $.extend( {
 		version: "@VERSION",
@@ -48,7 +48,7 @@
 			_label = this.element.find( "label" ).first(),
 			_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
 				$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
-			_sliderWidgetLast = $.data( _inputLast.get(0), "mobile-slider" ) ||
+			_sliderWidgetLast = $.data( _inputLast.get( 0 ), "mobile-slider" ) ||
 				$.data( _inputLast.slider().get( 0 ), "mobile-slider" ),
 			_sliderFirst = _sliderWidgetFirst.slider,
 			_sliderLast = _sliderWidgetLast.slider,
@@ -76,7 +76,7 @@
 				_sliderTarget: false,
 				_sliders: _sliders,
 				_proxy: false
-			});
+			} );
 
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
@@ -86,30 +86,33 @@
 				"slidebeforechange": "_change",
 				"blur": "_change",
 				"keyup": "_change"
-			});
-			this._on({
+			} );
+			this._on( {
 				"mousedown":"_change"
-			});
+			} );
 			this._on( this.element.closest( "form" ), {
 				"reset":"_handleReset"
-			});
+			} );
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
-			});
+			} );
 		},
 		_handleReset: function() {
 			var self = this;
-			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
+
+			// We must wait for the stack to unwind before updating
+			// otherwise sliders will not have updated yet
 			setTimeout( function() {
 				self._updateHighlight();
-			},0);
+			}, 0 );
 		},
 
 		_dragFirstHandle: function( event ) {
-			//if the first handle is dragged send the event to the first slider
-			$.data( this._inputFirst.get(0), "mobile-slider" ).dragging = true;
-			$.data( this._inputFirst.get(0), "mobile-slider" ).refresh( event );
-			$.data( this._inputFirst.get(0), "mobile-slider" )._trigger( "start" );
+
+			// If the first handle is dragged send the event to the first slider
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" ).dragging = true;
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" ).refresh( event );
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" )._trigger( "start" );
 			return false;
 		},
 
@@ -118,11 +121,12 @@
 				otherSlider = ( first ) ? this._inputLast : this._inputFirst;
 
 			this._sliderTarget = false;
-			//if the drag was initiated on an extreme and the other handle is focused send the events to
-			//the closest handle
+
+			// If the drag was initiated on an extreme and the other handle is
+			// focused send the events to the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
-				$.data( otherSlider.get(0), "mobile-slider" ).dragging = true;
-				$.data( otherSlider.get(0), "mobile-slider" ).refresh( event );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).dragging = true;
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).refresh( event );
 				return false;
 			}
 		},
@@ -131,15 +135,17 @@
 			var first = $( event.target ).is( this._inputFirst );
 
 			this._proxy = false;
-			//this stops dragging of the handle and brings the active track to the front
-			//this makes clicks on the track go the the last handle used
+
+			// This stops dragging of the handle and brings the active track to the front
+			// this makes clicks on the track go the the last handle used
 			this.element.find( "input" ).trigger( "vmouseup" );
 			this._sliderFirst.css( "z-index", first ? 1 : "" );
 		},
 
 		_slidebeforestart: function( event ) {
 			this._sliderTarget = false;
-			//if the track is the target remember this and the original value
+
+			// If the track is the target remember this and the original value
 			if ( $( event.originalEvent.target ).hasClass( "ui-slider-track" ) ) {
 				this._sliderTarget = true;
 				this._targetVal = $( event.target ).val();
@@ -179,14 +185,14 @@
 				this.options.disabled = true;
 			}
 
-			$el.find( "input" ).slider({
+			$el.find( "input" ).slider( {
 				theme: o.theme,
 				trackTheme: o.trackTheme,
 				disabled: o.disabled,
 				corners: o.corners,
 				mini: o.mini,
 				highlight: o.highlight
-			}).slider( "refresh" );
+			} ).slider( "refresh" );
 			this._updateHighlight();
 		},
 
@@ -203,35 +209,40 @@
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
-			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ) {
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" &&
+				!$( event.target ).hasClass( "ui-slider-handle" ) ) ) {
 				thisSlider.blur();
 			} else if ( event.type === "mousedown" ) {
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {
-				//this prevents min from being greater then max
-				thisSlider.val( first ? max: min ).slider( "refresh" );
+
+				// This prevents min from being greater then max
+				thisSlider.val( first ? max : min ).slider( "refresh" );
 				this._trigger( "normalize" );
 			} else if ( min > max ) {
-				//this makes it so clicks on the target on either extreme go to the closest handle
+
+				// This makes it so clicks on the target on either extreme go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
 
-				//You must wait for the stack to unwind so first slider is updated before updating second
+				// You must wait for the stack to unwind so
+				// first slider is updated before updating second
 				setTimeout( function() {
-					otherSlider.val( first ? min: max ).slider( "refresh" );
-					$.data( otherSlider.get(0), "mobile-slider" ).handle.focus();
+					otherSlider.val( first ? min : max ).slider( "refresh" );
+					$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.focus();
 					self._sliderFirst.css( "z-index", first ? "" : 1 );
 					self._trigger( "normalize" );
 				}, 0 );
 				this._proxy = ( first ) ? "first" : "last";
 			}
-			//fixes issue where when both _sliders are at min they cannot be adjusted
+
+			// Fixes issue where when both _sliders are at min they cannot be adjusted
 			if ( min === max ) {
-				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", 1 );
-				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", 0 );
+				$.data( thisSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", 0 );
 			} else {
-				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
-				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", "" );
+				$.data( thisSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", "" );
 			}
 
 			this._updateHighlight();
@@ -242,14 +253,16 @@
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
-				max = parseInt( $.data( this._inputLast.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
-				width = (max - min);
+			var min = parseInt( $.data( this._inputFirst.get( 0 ), "mobile-slider" )
+									.handle.get( 0 ).style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get( 0 ), "mobile-slider" )
+									.handle.get( 0 ).style.left, 10 ),
+				width = ( max - min );
 
-			this.element.find( ".ui-slider-bg" ).css({
+			this.element.find( ".ui-slider-bg" ).css( {
 				"margin-left": min + "%",
 				"width": width + "%"
-			});
+			} );
 		},
 
 		_setTheme: function( value ) {
@@ -288,4 +301,4 @@
 
 	}, $.mobile.behaviors.formReset ) );
 
-});
+} );

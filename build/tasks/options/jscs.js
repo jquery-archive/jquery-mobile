@@ -14,6 +14,9 @@ module.exports = {
 			"js/widgets/forms/button.backcompat.js",
 			"js/widgets/forms/checkboxradio.js",
 			"js/widgets/forms/checkboxradio.backcompat.js",
+			"js/widgets/forms/rangeslider.js",
+			"js/widgets/forms/rangeslider.backcompat.js",
+			"js/tests/unit/rangeslider/*.js",
 			"js/widgets/controlgroup.js",
 			"js/widgets/controlgroup.backcompat.js",
 			"js/widgets/tabs.ajax.js"

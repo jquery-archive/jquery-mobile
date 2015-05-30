@@ -24,7 +24,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( $ ) {
+} )( function( $ ) {
 
 if ( $.mobileBackcompat !== false ) {
 
