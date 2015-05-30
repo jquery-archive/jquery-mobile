@@ -187,7 +187,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	refresh: function() {
 		var direction,
 			existingDirection = this.flipswitch
-										.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
+				.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
 
 		if ( this.type === "select" ) {
 			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right" : "_left";
