@@ -6,7 +6,7 @@
 }
 .ui-textinput-text input,
 .ui-textinput-search input,
-textarea.ui-input-text {
+textarea.ui-textinput-text {
 	padding: .4em;
 	line-height: 1.4em;
 	display: block;
