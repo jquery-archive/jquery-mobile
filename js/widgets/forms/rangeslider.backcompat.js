@@ -40,7 +40,7 @@ if ( $.mobileBackcompat !== false ) {
 			this._super();
 
 			if ( this.options.mini !== undefined ) {
-				this.element.toggleClass( "ui-mini",  !!this.options.mini );
+				this._toggleClass( "ui-mini", null, !!this.options.mini );
 			}
 		}
 	} );

@@ -161,14 +161,6 @@
 				this._setTrackTheme( options.trackTheme );
 			}
 
-			if ( options.mini !== undefined ) {
-				this._setMini( options.mini );
-			}
-
-			if ( options.highlight !== undefined ) {
-				this._setHighlight( options.highlight );
-			}
-
 			if ( options.disabled !== undefined ) {
 				this._setDisabled( options.disabled );
 			}
@@ -273,17 +265,6 @@
 		_setTrackTheme: function( value ) {
 			this._inputFirst.slider( "option", "trackTheme", value );
 			this._inputLast.slider( "option", "trackTheme", value );
-		},
-
-		_setMini: function( value ) {
-			this._inputFirst.slider( "option", "mini", value );
-			this._inputLast.slider( "option", "mini", value );
-			this.element.toggleClass( "ui-mini", !!value );
-		},
-
-		_setHighlight: function( value ) {
-			this._inputFirst.slider( "option", "highlight", value );
-			this._inputLast.slider( "option", "highlight", value );
 		},
 
 		_setDisabled: function( value ) {
