@@ -124,7 +124,6 @@ return $.widget( "mobile.textinput", {
 			outer = $( "<div>" );
 			if ( this.isSearch ) {
 				this._searchIcon = $( "<span>" ).prependTo( outer );
-				this._searchIcon.after( "<span> </span>" );
 			}
 		} else {
 			outer = this.element;
