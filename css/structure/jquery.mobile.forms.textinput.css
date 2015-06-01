@@ -6,7 +6,7 @@
 }
 .ui-textinput-text input,
 .ui-textinput-search input,
-textarea.ui-input-text {
+textarea.ui-textinput-text {
 	padding: .4em;
 	line-height: 1.4em;
 	display: block;
@@ -69,13 +69,13 @@ textarea.ui-mini {
 }
 .ui-textinput-search .ui-textinput-search-icon {
 	position: absolute;
+	bottom: auto;
 	left: .3125em;
 	top: 50%;
-	margin-top: -7px;
+	margin-top: -11px;
+	background-color: transparent;
 	background-position: center center;
 	background-repeat: no-repeat;
-	width: 14px;
-	height: 14px;
 	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
