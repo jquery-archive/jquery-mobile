@@ -71,6 +71,7 @@ $files = array(
 	'widgets/forms/flipswitch.js',
 	'widgets/forms/flipswitch.backcompat.js',
 	'widgets/forms/slider.js',
+	'widgets/forms/slider.backcompat.js',
 	'widgets/forms/slider.tooltip.js',
 	'widgets/forms/rangeslider.js',
 	'widgets/forms/rangeslider.backcompat.js',

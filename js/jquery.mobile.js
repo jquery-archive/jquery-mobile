@@ -40,6 +40,7 @@
 			"./widgets/forms/checkboxradio",
 			"./widgets/forms/checkboxradio.backcompat",
 			"./widgets/forms/slider",
+			"./widgets/forms/slider.backcompat",
 			"./widgets/forms/slider.tooltip",
 			"./widgets/forms/flipswitch",
 			"./widgets/forms/flipswitch.backcompat",

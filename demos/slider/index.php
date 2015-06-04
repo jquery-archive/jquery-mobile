@@ -43,7 +43,7 @@ $( document ).on( "pagecreate", function() {
 
 		<h1>Slider <a href="http://api.jquerymobile.com/slider/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
-		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a> or <a href="../slider-flipswitch/">flip switches</a>.
+		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a>.
 			</p>
 
                 <h2>Basic slider</h2>
