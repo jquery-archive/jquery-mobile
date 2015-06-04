@@ -439,7 +439,7 @@ $( function() {
 if ( document.readyState === "complete" ) {
 	pageIsFullyLoaded();
 } else {
-	$.mobile.window.load( pageIsFullyLoaded );
+	$.mobile.window.on( "load", pageIsFullyLoaded );
 }
 
 $.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() {
