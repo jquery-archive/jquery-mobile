@@ -30,14 +30,6 @@ test( "empty string value results defaults to slider min value", function() {
 	deepEqual( slider.val( '' ).slider( 'refresh' ).val(), slider.attr( 'min' ), "val is equal to min attr" );
 } );
 
-test( "flip toggle switch title should be current selected value attr", function() {
-	var slider = $( "#slider-switch" );
-
-	deepEqual( slider.siblings( ".ui-slider-switch" ).find( "a" ).attr( 'title' ),
-		$( slider.find( "option" )[ slider[ 0 ].selectedIndex ] ).text(),
-		"verify that the link title is set to the selected option text" );
-} );
-
 test( "data-highlight works properly", function() {
 	var $highlighted = $( "#background-slider" ),
 		$unhighlighted = $( "#no-background-slider" );
