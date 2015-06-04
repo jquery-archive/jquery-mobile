@@ -178,7 +178,7 @@ $( function() {
 	// window load event
 	// hide iOS browser chrome on load if hideUrlBar is true this is as fall back incase we were too early before
 	if ( $.mobile.hideUrlBar ) {
-		$window.load( $.mobile.silentScroll );
+		$window.on( "load", $.mobile.silentScroll );
 	}
 
 	if ( !$.support.cssPointerEvents ) {
