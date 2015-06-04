@@ -342,7 +342,7 @@ return $.widget( "mobile.slider", $.extend( {
 			miniClass = this.options.mini ? " ui-mini" : "",
 			left, width, data, tol,
 			pxStep, percent,
-			control, isInput, optionElements, min, max, step,
+			control, isInput, min, max, step,
 			newval, valModStep, alignValue, percentPerStep,
 			handlePercent, aPercent, bPercent,
 			valueChanged;
@@ -364,11 +364,9 @@ return $.widget( "mobile.slider", $.extend( {
 		this.handle.addClass( "ui-button" + themeClass + " ui-shadow" );
 
 		control = this.element;
-		isInput = true;
-		optionElements = isInput ? [] : control.find( "option" );
-		min = isInput ? parseFloat( control.attr( "min" ) ) : 0;
-		max = isInput ? parseFloat( control.attr( "max" ) ) : optionElements.length - 1;
-		step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
+		min = parseFloat( control.attr( "min" ) );
+		max = parseFloat( control.attr( "max" ) );
+		step = ( parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			data = val;
@@ -390,7 +388,7 @@ return $.widget( "mobile.slider", $.extend( {
 			}
 		} else {
 			if ( val == null ) {
-				val = isInput ? parseFloat( control.val() || 0 ) : control[ 0 ].selectedIndex;
+				val = parseFloat( control.val() || 0 ) ;
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
@@ -417,7 +415,7 @@ return $.widget( "mobile.slider", $.extend( {
 		if ( typeof pxStep === "undefined" ) {
 			pxStep = width / ( ( max - min ) / step );
 		}
-		if ( pxStep > 1 && isInput ) {
+		if ( pxStep > 1 ) {
 			percent = ( newval - min ) * percentPerStep * ( 1 / step );
 		}
 		if ( percent < 0 ) {
@@ -438,11 +436,11 @@ return $.widget( "mobile.slider", $.extend( {
 
 		this.handle.css( "left", percent + "%" );
 
-		this.handle[ 0 ].setAttribute( "aria-valuenow", isInput ? newval : optionElements.eq( newval ).attr( "value" ) );
+		this.handle[ 0 ].setAttribute( "aria-valuenow",  newval );
 
-		this.handle[ 0 ].setAttribute( "aria-valuetext", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
+		this.handle[ 0 ].setAttribute( "aria-valuetext", newval );
 
-		this.handle[ 0 ].setAttribute( "title", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
+		this.handle[ 0 ].setAttribute( "title", newval );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
@@ -464,13 +462,9 @@ return $.widget( "mobile.slider", $.extend( {
 			valueChanged = false;
 
 			// update control"s value
-			if ( isInput ) {
-				valueChanged = parseFloat( control.val() ) !== newval;
-				control.val( newval );
-			} else {
-				valueChanged = control[ 0 ].selectedIndex !== newval;
-				control[ 0 ].selectedIndex = newval;
-			}
+			valueChanged = parseFloat( control.val() ) !== newval;
+			control.val( newval );
+
 			if ( this._trigger( "beforechange", val ) === false ) {
 				return false;
 			}
