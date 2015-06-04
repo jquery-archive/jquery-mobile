@@ -32,7 +32,7 @@
 if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
 // Markup inside the body of this if-statement is only sent with HTTP requests
 </code></pre>
-	<a href="info.php" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right" data-ajax="false">Open Demo</a>
+	<a href="info.php" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right" data-ajax="false">Open Demo</a>
 	<div data-demo-html="./info.php?source=true" data-demo-js="./shared-widget-init.js"></div>
 	</div><!-- /content -->
 
