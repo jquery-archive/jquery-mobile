@@ -53,7 +53,6 @@ $files = array(
 	'widgets/collapsible.js',
 	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',
-	'fieldContain.js',
 	'grid.js',
 	'widgets/navbar.js',
 	'widgets/listview.js',
