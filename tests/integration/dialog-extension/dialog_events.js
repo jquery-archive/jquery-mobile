@@ -42,7 +42,7 @@ asyncTest( "Test option data-close-btn", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			// bring up the dialog
+			// Bring up the dialog
 			$( "#close-button-test-link" ).click();
 		},
 
@@ -129,7 +129,7 @@ asyncTest( "dialog element with no theming", function( assert ) {
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
 			$( "#link-a" ).click();
 		},
 
@@ -163,7 +163,7 @@ asyncTest( "dialog element with data-theme", function( assert ) {
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
 			$( "#link-b" ).click();
 		},
 
@@ -196,7 +196,7 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
 			$( "#link-c" ).click();
 		},
 
@@ -228,7 +228,7 @@ asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
 		},
 
 		function() {
-			//bring up the dialog
+			// Bring up the dialog
 			$( "#foo-dialog-link" ).click();
 		},
 

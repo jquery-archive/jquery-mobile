@@ -21,14 +21,16 @@ asyncTest( "dialog sized select should alter the value of its parent select", fu
 		},
 
 		function() {
-			ok( $.mobile.activePage.is( "#dialog-select-parent-cache-test" ), "cached page appears" );
-			selectButton = $( "#cached-page-select" ).siblings( 'a' );
+			ok( $.mobile.activePage.is( "#dialog-select-parent-cache-test" ),
+				"cached page appears" );
+			selectButton = $( "#cached-page-select" ).siblings( "a" );
 			selectButton.click();
 		},
 
 		function() {
 			assert.hasClasses( $.mobile.activePage, "ui-page-dialog", "the dialog came up" );
-			var option = $.mobile.activePage.find( "li a" ).not( ":contains('" + selectButton.text() + "')" ).last();
+			var option = $.mobile.activePage.find( "li a" )
+				.not( ":contains('" + selectButton.text() + "')" ).last();
 			value = $.trim( option.text() );
 			option.click();
 		},
@@ -42,7 +44,7 @@ asyncTest( "dialog sized select should alter the value of its parent select", fu
 } );
 
 // https://github.com/jquery/jquery-mobile/issues/2181
-asyncTest( "dialog sized select should prevent the removal of its parent page from the dom", function() {
+asyncTest( "dialog sized select should prevent the removal of its parent page", function() {
 	var selectButton, parentPageId;
 
 	expect( 2 );
@@ -55,14 +57,15 @@ asyncTest( "dialog sized select should prevent the removal of its parent page fr
 		},
 
 		function() {
-			selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
-			parentPageId = $.mobile.activePage.attr( 'id' );
+			selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( "a" );
+			parentPageId = $.mobile.activePage.attr( "id" );
 			deepEqual( $( "#" + parentPageId ).length, 1, "establish the parent page exists" );
 			selectButton.click();
 		},
 
 		function() {
-			deepEqual( $( "#" + parentPageId ).length, 1, "make sure parent page is still there after opening the dialog" );
+			deepEqual( $( "#" + parentPageId ).length, 1,
+				"make sure parent page is still there after opening the dialog" );
 			$.mobile.activePage.find( "li a" ).last().click();
 		},
 
@@ -82,7 +85,7 @@ asyncTest( "dialog sized select shouldn't rebind its parent page remove handler 
 			},
 
 			function() {
-				$.mobile.activePage.find( "#domcache-page-select" ).siblings( 'a' ).click();
+				$.mobile.activePage.find( "#domcache-page-select" ).siblings( "a" ).click();
 			},
 
 			function() {
@@ -114,21 +117,24 @@ asyncTest( "menupage is removed when the parent page is removed", function() {
 		},
 
 		function() {
-			// for performance reason we don't initially create the menu dialog now
+
+			// For performance reasons we don't initially create the menu dialog now
 			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount );
 
-			// manually trigger dialog opening
-			$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).open();
+			// Manually trigger dialog opening
+			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).open();
 		},
 
 		function() {
-			// check if dialog was successfully  created
+
+			// Check if dialog was successfully  created
 			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount + 1 );
-			$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).close();
+			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).close();
 		},
 
 		function() {
-			// navigate to parent(initial) page
+
+			// Navigate to parent(initial) page
 			window.history.back();
 		},
 

@@ -46,6 +46,13 @@ module.exports = {
 			// Tests
 			"tests/unit/textinput/settings.js",
 			"tests/unit/textinput/textinput_core.js",
+			"tests/integration/dialog/dialog_events.js",
+			"tests/integration/navigation/navigation_core.js",
+			"tests/integration/select/select_cached.js",
+			"tests/integration/select/select_core.js",
+			"tests/unit/dialog/dialog_count.js",
+			"tests/unit/init/init_dialog.js",
+			"tests/unit/pagecontainer/pagecontainer_core.js",
 			"tests/unit/degrade-inputs/degradeInputs.js",
 			"tests/unit/enhancer/enhancer.js",
 			"tests/integration/popup/popup_core.js",

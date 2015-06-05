@@ -40,20 +40,23 @@ module( libName, {
 	}
 } );
 
-asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function( assert ) {
+asyncTest( "placeholder correctly gets ui-screen-hidden after rebuilding", function( assert ) {
 	expect( 3 );
 
 	$.testHelper.sequence( [
 		function() {
-			// bring up the optgroup menu
-			ok( $( "#optgroup-and-placeholder-container a" ).length > 0, "there is in fact a button in the page" );
+
+			// Bring up the optgroup menu
+			ok( $( "#optgroup-and-placeholder-container a" ).length > 0,
+				"there is in fact a button in the page" );
 			assert.hasClasses( $( "#optgroup-and-placeholder-menu li.ui-li-divider" ).first(),
 				"ui-bar-b", "Optgroup header has swatch b" );
 			$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 		},
 
 		function() {
-			//select the first menu item
+
+			// Select the first menu item
 			$( "#optgroup-and-placeholder-menu li:not(.ui-screen-hidden) a:first" ).click();
 		},
 
@@ -65,25 +68,31 @@ asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding",
 	], 1000 );
 } );
 
-asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function() {
+asyncTest( "firing a click at least 400ms later on the select screen closes it", function() {
 	expect( 3 );
 
 	var prefix = ".firingAClick";
 	$.testHelper.detailedEventCascade( [
 		function() {
-			// bring up the smaller choice menu
-			ok( $( "#select-choice-few-container a" ).length > 0, "there is in fact a button in the page" );
+
+			// Bring up the smaller choice menu
+			ok( $( "#select-choice-few-container a" ).length > 0,
+				"there is in fact a button in the page" );
 			$( "#select-choice-few-container a" ).trigger( "click" );
 		},
 
 		{
-			popupafteropen: { src: $( "#select-choice-few\\.dotTest-listbox" ), event: "popupafteropen" + prefix },
+			popupafteropen: {
+				src: $( "#select-choice-few\\.dotTest-listbox" ),
+				event: "popupafteropen" + prefix
+			},
 			timeout: { length: 1000 }
 		},
 
 		function( result ) {
 			deepEqual( result.popupafteropen.timedOut, false, "Did receive 'popupafteropen'" );
-			//select the first menu item
+
+			// Select the first menu item
 			$( "#select-choice-few\\.dotTest-menu a:first" ).click();
 		},
 
@@ -92,7 +101,9 @@ asyncTest( "firing a click at least 400 ms later on the select screen overlay do
 		},
 
 		function() {
-			deepEqual( $( "#select-choice-few\\.dotTest-menu" ).parent().parent( ".ui-popup-hidden" ).length, 1 );
+			deepEqual( $( "#select-choice-few\\.dotTest-menu" )
+				.parent()
+				.parent( ".ui-popup-hidden" ).length, 1 );
 			start();
 		}
 	] );
@@ -109,15 +120,16 @@ asyncTest( "a large select menu should use the default dialog transition", funct
 
 			old = $.mobile.defaultTransitionHandler.prototype.transition;
 
-			//set to something else
+			// Set to something else
 			$.mobile.defaultTransitionHandler.prototype.transition = function() {
-				// check that the instantiated transition handlers transition name
-				// property matches the default transition
+
+				// Check that the instantiated transition handlers transition name property matches
+				// the default transition
 				deepEqual( this.name, $.mobile.defaultDialogTransition );
 				return old.apply( this, arguments );
 			};
 
-			// bring up the dialog
+			// Bring up the dialog
 			select.trigger( "click" );
 		},
 
@@ -127,7 +139,7 @@ asyncTest( "a large select menu should use the default dialog transition", funct
 	] );
 } );
 
-asyncTest( "selecting an item from a dialog sized custom select menu leaves no dialog hash key", function() {
+asyncTest( "selecting an item from a large custom select leaves no dialog hash key", function() {
 	var dialogHashKey = "ui-state=dialog";
 
 	$.testHelper.pageSequence( [
@@ -160,7 +172,8 @@ asyncTest( "dialog sized select menu opened many times remains a dialog", functi
 			},
 
 			function() {
-				ok( location.hash.indexOf( dialogHashKey ) > -1, "hash should have the dialog hash key" );
+				ok( location.hash.indexOf( dialogHashKey ) > -1,
+					"hash should have the dialog hash key" );
 				closeDialog();
 			}
 		],
@@ -180,6 +193,7 @@ module( "Non native menus", {
 } );
 
 asyncTest( "a large select option should not overflow", function() {
+
 	// https://github.com/jquery/jquery-mobile/issues/1338
 	var menu;
 
@@ -187,14 +201,16 @@ asyncTest( "a large select option should not overflow", function() {
 		resetHash,
 
 		function() {
-			// bring up the dialog
+
+			// Bring up the dialog
 			$( "#select-long-option-label" ).siblings( "a" ).trigger( "click" );
 		},
 
 		function() {
 			menu = $( "#select-long-option-label-menu.ui-selectmenu-list" );
 
-			equal( menu.outerWidth( true ), menu.find( "li:nth-child(2) a" ).outerWidth( true ), "a element should not overflow" );
+			equal( menu.outerWidth( true ), menu.find( "li:nth-child(2) a" ).outerWidth( true ),
+				"a element should not overflow" );
 			start();
 		}
 	], 500 );
@@ -207,13 +223,16 @@ asyncTest( "focus is transferred to a menu item when the menu is opened", functi
 		resetHash,
 
 		function() {
-			// bring up the dialog
+
+			// Bring up the dialog
 			$( "#select-choice-menu-focus-test a:first" ).trigger( "click" );
 		},
 
 		function() {
-			ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0,
-				"item in open select menu (" + $( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
+			ok( $( document.activeElement )
+				.parents( "#select-choice-menu-focus-test-menu" ).length > 0,
+				"item in open select menu (" +
+					$( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
 			$( ".ui-popup-screen:not(.ui-screen-hidden)" ).trigger( "click" );
 		},
 
@@ -239,6 +258,7 @@ asyncTest( "using custom refocuses the button after close", function() {
 		},
 
 		function() {
+
 			// NOTE this is called twice per triggered click
 			button.focus( function() {
 				triggered = true;
@@ -259,8 +279,10 @@ asyncTest( "selected items are highlighted", function( assert ) {
 		resetHash,
 
 		function() {
-			// bring up the smaller choice menu
-			ok( $( "#select-choice-few-container a" ).length > 0, "there is in fact a button in the page" );
+
+			// Bring up the smaller choice menu
+			ok( $( "#select-choice-few-container a" ).length > 0,
+				"there is in fact a button in the page" );
 			$( "#select-choice-few-container a" ).trigger( "click" );
 		},
 
@@ -273,7 +295,8 @@ asyncTest( "selected items are highlighted", function( assert ) {
 		},
 
 		function() {
-			// bring up the menu again
+
+			// Bring up the menu again
 			$( "#select-choice-few-container a" ).trigger( "click" );
 		},
 
@@ -282,7 +305,7 @@ asyncTest( "selected items are highlighted", function( assert ) {
 			assert.hasClasses( lastMenuChoice, "ui-button-active",
 				"previously selected item has the active button class" );
 
-			// close the dialog
+			// Close the dialog
 			lastMenuChoice.click();
 		},
 
@@ -298,20 +321,24 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 	$.testHelper.sequence( [
 		resetHash,
 
-		// bring up the dialog
+		// Bring up the dialog
 		function() {
 			button.click();
 		},
 
 		function() {
-			deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
+			deepEqual(
+				$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
+				"default" );
 			$( ".ui-popup-screen.in" ).click();
 		},
 
 		function() {
-			select.find( "option" ).remove(); //remove the loading message
-			select.append( '<option value="1">' + text + '</option>' );
-			select.selectmenu( 'refresh' );
+
+			// Remove the loading message
+			select.find( "option" ).remove();
+			select.append( "<option value='1'>" + text + "</option>" );
+			select.selectmenu( "refresh" );
 		},
 
 		function() {
@@ -319,7 +346,8 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 		},
 
 		function() {
-			deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
+			deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
+				text );
 			$( ".ui-popup-screen.in" ).click();
 		},
 
@@ -327,13 +355,13 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 	], 500 );
 } );
 
-// issue #2547
+// Issue #2547
 test( "custom select list item links have encoded option text values", function() {
-	$( "#encoded-option" ).data( 'mobile-selectmenu' )._buildList();
+	$( "#encoded-option" ).data( "mobile-selectmenu" )._buildList();
 	deepEqual( window.encodedValueIsDefined, undefined );
 } );
 
-// not testing the positive case here since's it's obviously tested elsewhere
+// Not testing the positive case here since's it's obviously tested elsewhere
 test( "select elements in the keepNative set shouldn't be enhanced", function( assert ) {
 	assert.lacksClasses( $( "#keep-native" ).parent(), "ui-button" );
 } );
@@ -377,35 +405,47 @@ asyncTest( "dialog size select title should match the placeholder when there's n
 		] );
 	} );
 
-asyncTest( "dialog size select title should match the label when changed after the dialog markup is added to the DOM", function() {
-	var $select = $( "#select-choice-many-1\\.dotTest" ),
-		$label = $select.parent().siblings( "label" ),
-		$button = $select.siblings( "a" );
+asyncTest( "dialog size select title should match the label when changed after the dialog " +
+	"markup is added to the DOM", function() {
+		var $select = $( "#select-choice-many-1\\.dotTest" ),
+			$label = $select.parent().siblings( "label" ),
+			$button = $select.siblings( "a" );
 
-	$.testHelper.detailedEventCascade( [
-		function() {
-			$label.text( "foo" );
-			$button.click();
-		},
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$label.text( "foo" );
+				$button.click();
+			},
 
-		{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
+			{
+				pagechange: {
+					src: $.mobile.pageContainer,
+					event: "pagechange.dialogSizeSelectTitleMod1"
+				}
+			},
 
-		function() {
-			deepEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
-			window.history.back();
-		},
+			function() {
+				deepEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
+				window.history.back();
+			},
 
-		{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
+			{
+				pagechange: {
+					src: $.mobile.pageContainer,
+					event: "pagechange.dialogSizeSelectTitleMod2"
+				}
+			},
 
-		start
-	] );
-} );
+			start
+		] );
+	} );
 
 asyncTest( "destroying a select menu leaves no traces", function() {
 	$.testHelper.pageSequence( [
 		function() {
 			$.mobile.changePage( "#destroyTest" );
 		},
+
 		// Check if two chunks of DOM are identical
 		function() {
 			var unenhancedSelect = $(
@@ -421,8 +461,10 @@ asyncTest( "destroying a select menu leaves no traces", function() {
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
-			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+			deepEqual( $( "#destroyTest" ).children().length, 0,
+				"After adding/enhancing/destroying/removing the select menu, the page is empty" );
+			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
+				"DOM for select after enhancement/destruction is equal to unenhanced select DOM" );
 		},
 		function() {
 			$.mobile.back();
@@ -482,13 +524,17 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the popup-sized select menu, the page is empty" );
-			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+			deepEqual( $( "#destroyTest" ).children().length, 0,
+				"After adding, enhancing, opening, destroying, and removing the popup-sized " +
+				"select menu, the page is empty" );
+			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
+				"DOM for select after enhancement/destruction is equal to unenhanced select DOM" );
 
-			// Add a bunch of options to make sure the menu ends up larger than
-			// the screen, thus requiring a dialog
+			// Add a bunch of options to make sure the menu ends up larger than the screen, thus
+			// requiring a dialog
 			for ( idx = 3; idx < 60; idx++ ) {
-				unenhancedSelect.append( "<option value='option" + idx + "'>Option " + idx + "</option>" );
+				unenhancedSelect.append( "<option value='option" + idx + "'>Option " + idx +
+					"</option>" );
 			}
 			unenhancedSelectClone = unenhancedSelect.clone();
 			$( "#destroyTest" ).append( unenhancedSelectClone );
@@ -501,6 +547,7 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 		},
 
 		function() {
+
 			// Close the dialog
 			$.mobile.activePage.find( "a:first" ).click();
 		},
@@ -513,9 +560,14 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, the page is empty" );
-			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
-			deepEqual( $( "#" + id + "-dialog" ).length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, no dialog page is left behind" );
+			deepEqual( $( "#destroyTest" ).children().length, 0,
+				"After adding, enhancing, opening, destroying, and removing the dialog-sized " +
+				"select menu, the page is empty" );
+			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
+				"DOM for select after enhancement/destruction is equal to unenhanced select DOM" );
+			deepEqual( $( "#" + id + "-dialog" ).length, 0,
+				"After adding, enhancing, opening, destroying, and removing the dialog-sized " +
+				"select menu, no dialog page is left behind" );
 			$.mobile.back();
 		},
 

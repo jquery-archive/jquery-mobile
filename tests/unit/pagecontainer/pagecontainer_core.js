@@ -5,7 +5,7 @@ deepEqual(
 		_createDataUrl: $.mobile.pagecontainer.prototype._createDataUrl,
 		_getInitialContent: $.mobile.pagecontainer.prototype._getInitialContent,
 		element: $( "body" ),
-		_getNs: $.mobile.pagecontainer.prototype._getNs,
+		_getNs: $.mobile.pagecontainer.prototype._getNs
 
 	}, "Raison d'être.html" )[ 0 ],
 	$( ".weird-data-url" )[ 0 ],
@@ -77,7 +77,7 @@ test( "Recognize dialog via presence of the data key, not the ui-page-dialog cla
 			return {};
 		},
 		back: $.noop,
-		forward: $.noop,
+		forward: $.noop
 	}, {}, {
 		pageUrl: "xyzzy.html"
 	} ), false, "page is recognized as page even when the ui-page-dialog class is present" );

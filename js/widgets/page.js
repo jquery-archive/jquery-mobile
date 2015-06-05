@@ -88,14 +88,14 @@ $.widget( "mobile.page", {
 	bindRemove: function( callback ) {
 		var page = this.element;
 
-		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
+		// When dom caching is not enabled or the page is embedded bind to remove the page on hide
 		if ( !page.data( "mobile-page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
 			// TODO use _on - that is, sort out why it doesn't work in this case
 			page.bind( "pagehide.remove", callback || function( e, data ) {
 
-					//check if this is a same page transition and if so don't remove the page
+					// Check if this is a same page transition and if so don't remove the page
 					if ( !data.samePage ) {
 						var $this = $( this ),
 							prEvent = new $.Event( "pageremove" );
@@ -128,7 +128,7 @@ $.widget( "mobile.page", {
 	},
 
 	// Deprecated in 1.4 remove in 1.5
-	// set the page container background to the page theme
+	// Set the page container background to the page theme
 	setContainerBackground: function( theme ) {
 		this.element.parent().pagecontainer( { "theme": theme || this.options.theme } );
 	}

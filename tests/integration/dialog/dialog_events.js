@@ -17,22 +17,25 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 
 	$.testHelper.pageSequence( [
 		function() {
-			//bring up the dialog
+
+			// Bring up the dialog
 			$( "#foo-dialog-link" ).click();
 		},
 
 		function() {
 			var fooDialog = $( "#foo-dialog" );
 
-			// make sure the dialog came up
-			ok( /&ui-state=dialog/.test( location.hash ), "ui-state=dialog =~ location.hash", "dialog open" );
+			// Make sure the dialog came up
+			ok( /&ui-state=dialog/.test( location.hash ),
+				"ui-state=dialog =~ location.hash", "dialog open" );
 
-			// close the dialog
+			// Close the dialog
 			$.mobile.back();
 		},
 
 		function() {
-			ok( !( /&ui-state=dialog/.test( location.hash ) ), "ui-state=dialog !~ location.hash" );
+			ok( !( /&ui-state=dialog/.test( location.hash ) ),
+				"ui-state=dialog !~ location.hash" );
 			start();
 		}
 	] );
@@ -43,7 +46,8 @@ asyncTest( "Test option data-close-btn", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			// bring up the dialog
+
+			// Bring up the dialog
 			$( "#close-button-test-link" ).click();
 		},
 
@@ -84,7 +88,8 @@ asyncTest( "dialog element with no theming", function( assert ) {
 		},
 
 		function() {
-			//bring up the dialog
+
+			// Bring up the dialog
 			$( "#link-a" ).click();
 		},
 
@@ -107,6 +112,7 @@ asyncTest( "dialog element with no theming", function( assert ) {
 } );
 
 asyncTest( "dialog element with data-theme", function( assert ) {
+
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
@@ -118,7 +124,8 @@ asyncTest( "dialog element with data-theme", function( assert ) {
 		},
 
 		function() {
-			//bring up the dialog
+
+			// Bring up the dialog
 			$( "#link-b" ).click();
 		},
 
@@ -151,7 +158,8 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 		},
 
 		function() {
-			//bring up the dialog
+
+			// Bring up the dialog
 			$( "#link-c" ).click();
 		},
 
@@ -173,7 +181,6 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 	] );
 } );
 
-
 asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow", function( assert ) {
 	var pageTheme;
 
@@ -185,7 +192,8 @@ asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow", func
 		},
 
 		function() {
-			//bring up the dialog
+
+			// Bring up the dialog
 			$( "#foo-dialog-link" ).click();
 		},
 
