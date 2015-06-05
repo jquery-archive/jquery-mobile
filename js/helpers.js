@@ -69,21 +69,23 @@ define( [ "jquery", "./ns", "jquery-ui/jquery.ui.core" ], function( jQuery ) {
 		// Place to store various widget extensions
 		behaviors: {},
 
-		// Direct focus to the page title, or otherwise first focusable element
+		// Custom logic for giving focus to a page
 		focusPage: function( page ) {
-			var autofocus = page.find( "[autofocus]" ),
-				pageTitle = page.find( ".ui-title:eq(0)" );
 
-			if ( autofocus.length ) {
-				autofocus.focus();
-				return;
+			// First, look for an element explicitly marked for page focus
+			var focusElement = page.find( "[autofocus]" );
+
+			// If we do not find an element with the "autofocus" attribute, look for the page title
+			if ( !focusElement.length ) {
+				focusElement = page.find( ".ui-title:eq(0)" );
 			}
 
-			if ( pageTitle.length ) {
-				pageTitle.focus();
-			} else{
-				page.focus();
+			// Finally, fall back to focusing the page itself
+			if ( !focusElement.length ) {
+				focusElement = page;
 			}
+
+			focusElement.focus();
 		},
 
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
