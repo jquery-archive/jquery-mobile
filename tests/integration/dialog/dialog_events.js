@@ -60,7 +60,7 @@ asyncTest( "Test option data-close-btn", function( assert ) {
 			a = $( "#close-button-test .ui-header a" );
 			assert.strictEqual( a.length, 1,
 				"The dialog header has exactly one anchor when the option value is 'left'" );
-			asset.hasClasses( a, "ui-button-left",
+			assert.hasClasses( a, "ui-button-left",
 				"The close button has class ui-button-left when the closeBtn option is 'left'" );
 
 			$( "#close-button-test" ).page( "option", "closeBtn", "right" );
