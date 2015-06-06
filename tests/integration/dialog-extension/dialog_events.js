@@ -260,9 +260,9 @@ asyncTest( "pre-rendered dialog options work", function( assert ) {
 				"enhanced dialog is the current page" );
 
 			$( "#enhanced-dialog" ).page( "option", "closeBtn", "right" );
-			assert.hasClasses( $( "#enhanced-dialog a" )[ 0 ], "ui-button-right",
+			assert.hasClasses( $( "#enhanced-dialog a" ), "ui-button-right",
 				"enhanced dialog button location can be changed" );
-			assert.lacksClasses( $( "#enhanced-dialog a" )[ 0 ], "ui-button-left",
+			assert.lacksClasses( $( "#enhanced-dialog a" ), "ui-button-left",
 				"enhanced dialog button does not retain old location" );
 
 			$( "#enhanced-dialog" ).page( "option", "corners", false );
