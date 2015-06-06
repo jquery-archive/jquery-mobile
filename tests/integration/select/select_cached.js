@@ -5,6 +5,10 @@
 ( function( $ ) {
 var resetHash;
 
+function jqmDataSelector( expression ) {
+	return "[data-" + $.mobile.ns + expression + "]";
+}
+
 resetHash = function( timeout ) {
 	$.testHelper.openPage( location.hash.indexOf( "#default" ) >= 0 ? "#" : "#default" );
 };
@@ -59,12 +63,12 @@ asyncTest( "dialog sized select should prevent the removal of its parent page", 
 		function() {
 			selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( "a" );
 			parentPageId = $.mobile.activePage.attr( "id" );
-			deepEqual( $( "#" + parentPageId ).length, 1, "establish the parent page exists" );
+			strictEqual( $( "#" + parentPageId ).length, 1, "establish the parent page exists" );
 			selectButton.click();
 		},
 
 		function() {
-			deepEqual( $( "#" + parentPageId ).length, 1,
+			strictEqual( $( "#" + parentPageId ).length, 1,
 				"make sure parent page is still there after opening the dialog" );
 			$.mobile.activePage.find( "li a" ).last().click();
 		},
@@ -108,7 +112,7 @@ asyncTest( "dialog sized select shouldn't rebind its parent page remove handler 
 	} );
 
 asyncTest( "menupage is removed when the parent page is removed", function() {
-	var dialogCount = $( ":jqmData(role='dialog')" ).length;
+	var dialogCount = $( jqmDataSelector( "role='dialog'" ) ).length;
 	$.testHelper.pageSequence( [
 		resetHash,
 
@@ -119,7 +123,7 @@ asyncTest( "menupage is removed when the parent page is removed", function() {
 		function() {
 
 			// For performance reasons we don't initially create the menu dialog now
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount );
+			strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
 
 			// Manually trigger dialog opening
 			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).open();
@@ -128,7 +132,7 @@ asyncTest( "menupage is removed when the parent page is removed", function() {
 		function() {
 
 			// Check if dialog was successfully  created
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount + 1 );
+			strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount + 1 );
 			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).close();
 		},
 
@@ -139,7 +143,7 @@ asyncTest( "menupage is removed when the parent page is removed", function() {
 		},
 
 		function() {
-			deepEqual( $( ":jqmData(role='dialog')" ).length, dialogCount );
+			strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
 			start();
 		}
 	] );

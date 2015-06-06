@@ -20,7 +20,7 @@ closeDialog = function( timeout ) {
 var homeWithSearch = $.mobile.path.parseUrl( location.pathname ).pathname + location.search;
 
 test( "No tags are accidentally injected during list building", function() {
-	deepEqual( $( "#encoding-test-menu > li:first-child > a > script" ).length, 0,
+	strictEqual( $( "#encoding-test-menu > li:first-child > a > script" ).length, 0,
 		"No script tag has ended up inside the anchor" );
 } );
 
@@ -90,7 +90,7 @@ asyncTest( "firing a click at least 400ms later on the select screen closes it",
 		},
 
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Did receive 'popupafteropen'" );
+			strictEqual( result.popupafteropen.timedOut, false, "Did receive 'popupafteropen'" );
 
 			// Select the first menu item
 			$( "#select-choice-few\\.dotTest-menu a:first" ).click();
@@ -101,7 +101,7 @@ asyncTest( "firing a click at least 400ms later on the select screen closes it",
 		},
 
 		function() {
-			deepEqual( $( "#select-choice-few\\.dotTest-menu" )
+			strictEqual( $( "#select-choice-few\\.dotTest-menu" )
 				.parent()
 				.parent( ".ui-popup-hidden" ).length, 1 );
 			start();
@@ -125,7 +125,7 @@ asyncTest( "a large select menu should use the default dialog transition", funct
 
 				// Check that the instantiated transition handlers transition name property matches
 				// the default transition
-				deepEqual( this.name, $.mobile.defaultDialogTransition );
+				strictEqual( this.name, $.mobile.defaultDialogTransition );
 				return old.apply( this, arguments );
 			};
 
@@ -155,7 +155,7 @@ asyncTest( "selecting an item from a large custom select leaves no dialog hash k
 		},
 
 		function() {
-			deepEqual( location.hash.indexOf( dialogHashKey ), -1 );
+			strictEqual( location.hash.indexOf( dialogHashKey ), -1 );
 			start();
 		}
 	] );
@@ -327,7 +327,7 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 		},
 
 		function() {
-			deepEqual(
+			strictEqual(
 				$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
 				"default" );
 			$( ".ui-popup-screen.in" ).click();
@@ -346,7 +346,7 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 		},
 
 		function() {
-			deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
+			strictEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
 				text );
 			$( ".ui-popup-screen.in" ).click();
 		},
@@ -358,7 +358,7 @@ asyncTest( "adding options and refreshing a custom select changes the options li
 // Issue #2547
 test( "custom select list item links have encoded option text values", function() {
 	$( "#encoded-option" ).data( "mobile-selectmenu" )._buildList();
-	deepEqual( window.encodedValueIsDefined, undefined );
+	strictEqual( window.encodedValueIsDefined, undefined );
 } );
 
 // Not testing the positive case here since's it's obviously tested elsewhere
@@ -377,7 +377,7 @@ asyncTest( "dialog size select title should match the label", function() {
 		},
 
 		function() {
-			deepEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
+			strictEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
 			window.history.back();
 		},
 
@@ -397,7 +397,7 @@ asyncTest( "dialog size select title should match the placeholder when there's n
 			},
 
 			function() {
-				deepEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
+				strictEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
 				window.history.back();
 			},
 
@@ -425,7 +425,7 @@ asyncTest( "dialog size select title should match the label when changed after t
 			},
 
 			function() {
-				deepEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
+				strictEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
 				window.history.back();
 			},
 
@@ -461,7 +461,7 @@ asyncTest( "destroying a select menu leaves no traces", function() {
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0,
+			strictEqual( $( "#destroyTest" ).children().length, 0,
 				"After adding/enhancing/destroying/removing the select menu, the page is empty" );
 			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
 				"DOM for select after enhancement/destruction is equal to unenhanced select DOM" );
@@ -508,7 +508,7 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 		},
 
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+			strictEqual( result.popupafteropen.timedOut, false, "Popup did open" );
 			$( "#" + id + "-listbox" ).popup( "close" );
 		},
 
@@ -519,12 +519,12 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 		function( result ) {
 			var idx;
 
-			deepEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+			strictEqual( result.popupafterclose.timedOut, false, "Popup did close" );
 
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0,
+			strictEqual( $( "#destroyTest" ).children().length, 0,
 				"After adding, enhancing, opening, destroying, and removing the popup-sized " +
 				"select menu, the page is empty" );
 			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
@@ -560,12 +560,12 @@ asyncTest( "destroying a custom select menu leaves no traces", function() {
 			unenhancedSelectClone.selectmenu( "destroy" );
 			unenhancedSelectClone.remove();
 
-			deepEqual( $( "#destroyTest" ).children().length, 0,
+			strictEqual( $( "#destroyTest" ).children().length, 0,
 				"After adding, enhancing, opening, destroying, and removing the dialog-sized " +
 				"select menu, the page is empty" );
 			ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ),
 				"DOM for select after enhancement/destruction is equal to unenhanced select DOM" );
-			deepEqual( $( "#" + id + "-dialog" ).length, 0,
+			strictEqual( $( "#" + id + "-dialog" ).length, 0,
 				"After adding, enhancing, opening, destroying, and removing the dialog-sized " +
 				"select menu, no dialog page is left behind" );
 			$.mobile.back();
@@ -594,7 +594,7 @@ asyncTest( "Custom select passes overlay theme to its dialog", function( assert 
 			dialog = $( "#select-choice-many-overlay-theme-test-dialog" );
 			assert.hasClasses( $( ":mobile-pagecontainer" ), "ui-overlay-x",
 				"Page container has appropriate theme." );
-			deepEqual( dialog.page( "option", "overlayTheme" ), "x",
+			strictEqual( dialog.page( "option", "overlayTheme" ), "x",
 				"Dialog widget overlayTheme option is correct." );
 			$.mobile.back();
 		},
@@ -667,7 +667,7 @@ function testChangeAfterClose( select, ns, openEvent, closeEvent, tail ) {
 				}
 			} );
 
-			deepEqual( closeComesBeforeChange, true,
+			strictEqual( closeComesBeforeChange, true,
 				"close event is triggered before change event" );
 			tail();
 		}

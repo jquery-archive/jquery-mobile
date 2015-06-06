@@ -5,6 +5,10 @@
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
+function jqmDataSelector( expression ) {
+	return "[data-" + $.mobile.ns + expression + "]";
+}
+
 module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
@@ -101,9 +105,9 @@ asyncTest( "dialog element with no theming", function( assert ) {
 				"Expected explicit theme ui-page-theme-a" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			start();
@@ -139,9 +143,9 @@ asyncTest( "dialog element with data-theme", function( assert ) {
 				"Expected no overlay theme ui-overlay-b" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			start();
@@ -171,9 +175,9 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 				"Expected explicit theme ui-page-theme-e" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-b",
 				"Expected explicit overlay theme ui-overlay-b" );
-			assert.hasClasses( dialog.find( ":jqmData(role=header)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( ":jqmData(role=footer)" ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			start();

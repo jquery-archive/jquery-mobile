@@ -32,7 +32,7 @@ test( "Absolute link with hash works", function() {
 
 	$.mobile.document.off( "click", theClickHandler );
 
-	deepEqual( defaultIsPrevented, false,
+	strictEqual( defaultIsPrevented, false,
 		"Default is not prevented when clicking on external link with hash" );
 } );
 
@@ -64,10 +64,10 @@ test( "Absolute link with hash works", function() {
 				$( "#goToPercentPage" ).click();
 			},
 			function() {
-				deepEqual( $.mobile.activePage.children( "#percentPageChild" ).length, 1,
+				strictEqual( $.mobile.activePage.children( "#percentPageChild" ).length, 1,
 					"Active page is the one loaded from the directory with a percent symbol" );
 
-				deepEqual(
+				strictEqual(
 					goUrl.lastIndexOf( endingString ),
 					goUrl.length - endingString.length,
 					"Location ends in '" + endingString + "'" );
@@ -111,7 +111,7 @@ asyncTest( "window.history.back() from external to internal page", function() {
 		},
 
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "external-test",
+			strictEqual( $.mobile.activePage.attr( "id" ), "external-test",
 				"successful navigation to external page." );
 			window.history.back();
 		},
@@ -131,7 +131,8 @@ asyncTest( "external empty page does not result in any contents", function() {
 		},
 
 		function() {
-			deepEqual( $.mobile.activePage.contents().length, 0, "A blank page has no contents" );
+			strictEqual( $.mobile.activePage.contents().length, 0,
+				"A blank page has no contents" );
 			$.mobile.back();
 		},
 
@@ -149,13 +150,13 @@ asyncTest( "external page is removed from the DOM after pagehide", function() {
 
 		// Page is pulled and displayed in the dom
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 			window.history.back();
 		},
 
 		// external-test is *NOT* cached in the dom after transitioning away
 		function( timedOut ) {
-			deepEqual( $( "#external-test" ).length, 0 );
+			strictEqual( $( "#external-test" ).length, 0 );
 			start();
 		}
 	] );
@@ -178,13 +179,13 @@ asyncTest( "preventDefault on pageremove prevents external page from being remov
 
 		// Page is pulled and displayed in the dom
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 			window.history.back();
 		},
 
 		// external-test *IS* cached in the dom after transitioning away
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 
 			// Switch back to the page again!
 			$.mobile.changePage( "external.html" );
@@ -192,7 +193,7 @@ asyncTest( "preventDefault on pageremove prevents external page from being remov
 
 		// Page is still present and displayed in the dom
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 
 			// Now turn off our removal prevention.
 			preventRemoval = false;
@@ -202,7 +203,7 @@ asyncTest( "preventDefault on pageremove prevents external page from being remov
 
 		// external-test is *NOT* cached in the dom after transitioning away
 		function() {
-			deepEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
+			strictEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
 			$( document ).unbind( "pageremove", removeCallback );
 			start();
 		}
@@ -217,13 +218,13 @@ asyncTest( "external page is cached in the DOM after pagehide", function() {
 
 		// Page is pulled and displayed in the dom
 		function() {
-			deepEqual( $( "#external-test-cached" ).length, 1 );
+			strictEqual( $( "#external-test-cached" ).length, 1 );
 			window.history.back();
 		},
 
 		// External test page is cached in the dom after transitioning away
 		function() {
-			deepEqual( $( "#external-test-cached" ).length, 1 );
+			strictEqual( $( "#external-test-cached" ).length, 1 );
 			start();
 		}
 	] );
@@ -238,13 +239,13 @@ asyncTest( "external page is cached after pagehide when option is set globally",
 
 		// Page is pulled and displayed in the dom
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 			window.history.back();
 		},
 
 		// External test page is cached in the dom after transitioning away
 		function() {
-			deepEqual( $( "#external-test" ).length, 1 );
+			strictEqual( $( "#external-test" ).length, 1 );
 			$.mobile.page.prototype.options.domCache = false;
 			$( "#external-test" ).remove();
 			start();
@@ -263,7 +264,7 @@ asyncTest( "page last scroll distance is remembered when navigating to/from page
 			// Wait for the initial scroll to 0
 			setTimeout( function() {
 				window.scrollTo( 0, 300 );
-				deepEqual( $( window ).scrollTop(), 300, "scrollTop is 300 after setting it" );
+				strictEqual( $( window ).scrollTop(), 300, "scrollTop is 300 after setting it" );
 			}, 300 );
 
 			// Wait for the scrollstop to fire and for the scroll to be recorded 100 ms afterward
@@ -279,7 +280,7 @@ asyncTest( "page last scroll distance is remembered when navigating to/from page
 
 			// Give the silentScroll function some time to kick in.
 			setTimeout( function() {
-				deepEqual( $( window ).scrollTop(), 300,
+				strictEqual( $( window ).scrollTop(), 300,
 					"scrollTop is 300 after returning to the page" );
 				$( "body" ).height( "" );
 				start();
@@ -343,7 +344,7 @@ asyncTest( "anchors with no href attribute will do nothing when clicked", functi
 	$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 	setTimeout( function() {
-		deepEqual( fired, false, "hash shouldn't change after click" );
+		strictEqual( fired, false, "hash shouldn't change after click" );
 		$( window ).unbind( "hashchange.temp" );
 		start();
 	}, 500 );
@@ -352,7 +353,7 @@ asyncTest( "anchors with no href attribute will do nothing when clicked", functi
 test( "urlHistory is working properly", function() {
 
 	// urlHistory
-	deepEqual( $.type( $.mobile.navigate.history.stack ), "array",
+	strictEqual( $.type( $.mobile.navigate.history.stack ), "array",
 		"urlHistory.stack is an array" );
 
 	// Preload the stack
@@ -361,37 +362,37 @@ test( "urlHistory is working properly", function() {
 	$.mobile.navigate.history.stack[ 2 ] = { url: "shizoo", transition: "shizaah" };
 
 	// Active index
-	deepEqual( $.mobile.navigate.history.activeIndex, 0, "urlHistory.activeIndex is 0" );
+	strictEqual( $.mobile.navigate.history.activeIndex, 0, "urlHistory.activeIndex is 0" );
 
 	// getActive
-	deepEqual( $.type( $.mobile.navigate.history.getActive() ), "object",
+	strictEqual( $.type( $.mobile.navigate.history.getActive() ), "object",
 		"active item is an object" );
-	deepEqual( $.mobile.navigate.history.getActive().url, "foo", "active item has url foo" );
-	deepEqual( $.mobile.navigate.history.getActive().transition, "bar",
+	strictEqual( $.mobile.navigate.history.getActive().url, "foo", "active item has url foo" );
+	strictEqual( $.mobile.navigate.history.getActive().transition, "bar",
 		"active item has transition bar" );
 
 	// Get prev / next
-	deepEqual( $.mobile.navigate.history.getPrev(), undefined,
+	strictEqual( $.mobile.navigate.history.getPrev(), undefined,
 		"urlHistory.getPrev() is undefined when active index is 0" );
 	$.mobile.navigate.history.activeIndex = 1;
-	deepEqual( $.mobile.navigate.history.getPrev().url, "foo",
+	strictEqual( $.mobile.navigate.history.getPrev().url, "foo",
 		"urlHistory.getPrev() has url foo when active index is 1" );
 	$.mobile.navigate.history.activeIndex = 0;
-	deepEqual( $.mobile.navigate.history.getNext().url, "baz",
+	strictEqual( $.mobile.navigate.history.getNext().url, "baz",
 		"urlHistory.getNext() has url baz when active index is 0" );
 
 	// Add new
 	$.mobile.navigate.history.activeIndex = 2;
 	$.mobile.navigate.history.add( "test" );
-	deepEqual( $.mobile.navigate.history.stack.length, 4,
+	strictEqual( $.mobile.navigate.history.stack.length, 4,
 		"urlHistory.addNew() adds an item after the active index" );
-	deepEqual( $.mobile.navigate.history.activeIndex, 3,
+	strictEqual( $.mobile.navigate.history.activeIndex, 3,
 		"urlHistory.addNew() moves the activeIndex to the newly added item" );
 
 	// clearForward
 	$.mobile.navigate.history.activeIndex = 0;
 	$.mobile.navigate.history.clearForward();
-	deepEqual( $.mobile.navigate.history.stack.length, 1,
+	strictEqual( $.mobile.navigate.history.stack.length, 1,
 		"urlHistory.clearForward() clears the url stack after the active index" );
 } );
 
@@ -492,7 +493,7 @@ asyncTest( "last entry chosen amongst multiple identical url history stack entri
 				// [wherever this test starts] -> #dup-history-first -> #dup-history-second ->
 				// #dup-history-first -> #dup-history-second -> dialog --close/back button-->
 				// [first #dup-history-second-entry]
-				deepEqual( $.mobile.navigate.history.activeIndex, 3 + stackLength,
+				strictEqual( $.mobile.navigate.history.activeIndex, 3 + stackLength,
 					"should be the fourth page in the stack" );
 				start();
 			} ] );
@@ -625,7 +626,7 @@ asyncTest( "going back from a stale dialog history entry does not cause the base
 					// Make sure the base href is unchanged from the recorded value, and back up to
 					// the start page
 					function() {
-						deepEqual( $( "base" ).attr( "href" ), baseHRef,
+						strictEqual( $( "base" ).attr( "href" ), baseHRef,
 							"href of base tag is unchanged" );
 
 						// Return to start page
@@ -750,7 +751,7 @@ asyncTest( "loading a relative file path after an embedded page works", function
 		function() {
 
 			// Data attribute intentionally left without namespace
-			deepEqual( $( ".ui-page-active" ).data( "other" ), "for testing",
+			strictEqual( $( ".ui-page-active" ).data( "other" ), "for testing",
 				"should be relative ajax loaded page" );
 			start();
 		} ] );
@@ -767,7 +768,7 @@ asyncTest( "Page title updates properly when clicking back to previous page", fu
 		},
 
 		function() {
-			deepEqual( document.title, "jQuery Mobile Navigation Test Suite" );
+			strictEqual( document.title, "jQuery Mobile Navigation Test Suite" );
 			start();
 		}
 	] );
@@ -786,12 +787,12 @@ asyncTest( "Page title updates properly when clicking a link back to first page"
 		},
 
 		function() {
-			deepEqual( document.title, "Title Tag" );
+			strictEqual( document.title, "Title Tag" );
 			$.mobile.activePage.find( "#title-check-link" ).click();
 		},
 
 		function() {
-			deepEqual( document.title, title );
+			strictEqual( document.title, title );
 			start();
 		}
 	] );
@@ -808,7 +809,7 @@ asyncTest( "Page title updates properly from title tag when loading an external 
 		},
 
 		function() {
-			deepEqual( document.title, "Title Tag" );
+			strictEqual( document.title, "Title Tag" );
 			start();
 		}
 	] );
@@ -826,7 +827,7 @@ asyncTest( "Page title updates properly from data-title attr  when loading an ex
 			},
 
 			function() {
-				deepEqual( document.title, "Title Attr" );
+				strictEqual( document.title, "Title Attr" );
 				start();
 			}
 		] );
@@ -844,7 +845,7 @@ asyncTest( "Page title updates properly from heading text in header when loading
 			},
 
 			function() {
-				deepEqual( document.title, "Title Heading" );
+				strictEqual( document.title, "Title Heading" );
 				start();
 			}
 		] );
@@ -966,7 +967,7 @@ asyncTest( "query param link from a dialog to itself should be a not add another
 			},
 
 			function() {
-				deepEqual( location.hash || location.href, firstDialogLoc,
+				strictEqual( location.hash || location.href, firstDialogLoc,
 					"additional dialog hash key not added" );
 				start();
 			}
@@ -1023,7 +1024,7 @@ asyncTest( "refresh of a dialog url should not duplicate page", function() {
 
 		// Open our test page
 		function() {
-			deepEqual( $( ".foo-class" ).length, 1,
+			strictEqual( $( ".foo-class" ).length, 1,
 				"should only have one instance of foo-class in the document" );
 			location.hash = "#foo&ui-state=dialog";
 		},
@@ -1035,7 +1036,7 @@ asyncTest( "refresh of a dialog url should not duplicate page", function() {
 				report: "hash should match what was loaded"
 			} );
 
-			deepEqual( $( ".foo-class" ).length, 1,
+			strictEqual( $( ".foo-class" ).length, 1,
 				"should only have one instance of foo-class in the document" );
 			start();
 		}
@@ -1338,13 +1339,13 @@ asyncTest( "navigate to non-existent internal page throws pagechangefailed", fun
 		function() {
 
 			// Make sure a pagechangefailed event was triggered.
-			deepEqual( pagechangefailed, true, "pagechangefailed dispatched" );
+			strictEqual( pagechangefailed, true, "pagechangefailed dispatched" );
 
 			// Make sure we didn't navigate away from #foo.
 			ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "did not navigate away from #foo" );
 
 			// Now make sure opening the page didn't result in page duplication.
-			deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
+			strictEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 			$( document ).unbind( "pagechangefailed", pageChangeFailedCB );
 
@@ -1403,7 +1404,7 @@ asyncTest( "first page gets reloaded if pruned from the DOM", function() {
 			ok( $.mobile.firstPage[ 0 ].id, "first page has an id" );
 
 			// Make sure there is only one first page in the DOM.
-			deepEqual( $( ".first-page" ).length, 1,
+			strictEqual( $( ".first-page" ).length, 1,
 				"only one instance of the first page in the DOM" );
 
 			// Navigate to any page except the first page of the application.
@@ -1420,7 +1421,8 @@ asyncTest( "first page gets reloaded if pruned from the DOM", function() {
 
 			// Make sure the first page was actually pruned from the document.
 			ok( $.mobile.firstPage.parent().length === 0, "first page was pruned from the DOM" );
-			deepEqual( $( ".first-page" ).length, 0, "no instance of the first page in the DOM" );
+			strictEqual( $( ".first-page" ).length, 0,
+				"no instance of the first page in the DOM" );
 
 			// Remove our hideCallback.
 			$( document ).unbind( "pagehide", hideCallback );
@@ -1433,7 +1435,8 @@ asyncTest( "first page gets reloaded if pruned from the DOM", function() {
 			var firstPage = $( ".first-page" );
 
 			// We should only have one first page in the document at any time!
-			deepEqual( firstPage.length, 1, "single instance of first page recreated in the DOM" );
+			strictEqual( firstPage.length, 1,
+				"single instance of first page recreated in the DOM" );
 
 			// Make sure the first page in the DOM is actually a different DOM element than the
 			// original one we started with.
