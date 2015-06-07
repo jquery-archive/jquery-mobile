@@ -48,16 +48,16 @@ return $.widget( "mobile.page", $.mobile.page, {
 	},
 
 	_create: function() {
-		this._ui = {};
+		this.dialog = {};
 		this._super();
 		if ( this.options.dialog ) {
 			if ( this.options.enhanced ) {
-				this._ui.wrapper = this.element.children();
+				this.dialog.wrapper = this.element.children();
 				if ( this.options.closeBtn !== "none" ) {
-					this._ui.button = this._ui.wrapper
+					this.dialog.button = this.dialog.wrapper
 						.children( ".ui-header" )
 							.children( "a.ui-page-dialog-close-button" );
-					this._ui.icon = this._ui.button
+					this.dialog.icon = this.dialog.button
 						.children( ".ui-page-dialog-close-button-icon" );
 					this._toggleButtonClasses( true, this.options.closeBtn );
 				}
@@ -68,29 +68,29 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 	_toggleOuterClasses: function( add ) {
 		this._toggleClass( "ui-page-dialog", null, add );
-		this._toggleClass( this._ui.wrapper, "ui-page-dialog-contain", null, add );
+		this._toggleClass( this.dialog.wrapper, "ui-page-dialog-contain", null, add );
 	},
 
 	_toggleButtonClasses: function( add, location ) {
-		this._toggleClass( this._ui.button, "ui-page-dialog-close-button",
+		this._toggleClass( this.dialog.button, "ui-page-dialog-close-button",
 			"ui-button-" + location, add );
-		this._toggleClass( this._ui.icon, "ui-page-dialog-close-button-icon", null, add );
+		this._toggleClass( this.dialog.icon, "ui-page-dialog-close-button-icon", null, add );
 	},
 
 	_enhance: function() {
 		this._super();
 
 		if ( this.options.dialog ) {
-			this._ui.wrapper = $( "<div>", {
+			this.dialog.wrapper = $( "<div>", {
 
 				// ARIA role
 				"role": "dialog"
 			} );
 
-			this._ui.wrapper.append( this.element.contents() );
+			this.dialog.wrapper.append( this.element.contents() );
 			this._setCloseButton( this.options.closeBtn, this.options.closeBtnText );
 			this._toggleOuterClasses( true );
-			this.element.append( this._ui.wrapper );
+			this.element.append( this.dialog.wrapper );
 		}
 	},
 
@@ -125,8 +125,8 @@ return $.widget( "mobile.page", $.mobile.page, {
 	_handlePageBeforeShow: function() {
 
 		// Make sure the close button is clickable
-		if ( this._ui.button ) {
-			this._ui.button
+		if ( this.dialog.button ) {
+			this.dialog.button
 				.css( "pointer-events", "" )
 				.removeAttr( "tabindex" );
 		}
@@ -141,8 +141,8 @@ return $.widget( "mobile.page", $.mobile.page, {
 	_handleButtonClick: function() {
 
 		// Render the close button unclickable after one click
-		if ( this._ui.button ) {
-			this._ui.button
+		if ( this.dialog.button ) {
+			this.dialog.button
 				.css( "pointer-events", "none" )
 				.attr( "tabindex", -1 );
 		}
@@ -154,40 +154,40 @@ return $.widget( "mobile.page", $.mobile.page, {
 		// Sanitize value
 		location = "left" === location ? "left" : "right" === location ? "right" : "none";
 
-		if ( this._ui.button ) {
+		if ( this.dialog.button ) {
 
 			if ( "none" === location ) {
 
 				// Remove existing button
 				this._toggleButtonClasses( false, location );
-				this._off( this._ui.button, "click" );
-				this._ui.button.remove();
-				this._ui.button = null;
-				this._ui.icon = null;
+				this._off( this.dialog.button, "click" );
+				this.dialog.button.remove();
+				this.dialog.button = null;
+				this.dialog.icon = null;
 			} else {
 
 				// Update existing button
-				this._removeClass( this._ui.button, null, "ui-button-left ui-button-right" )
-					._addClass( this._ui.button, null, "ui-button-" + location );
+				this._removeClass( this.dialog.button, null, "ui-button-left ui-button-right" )
+					._addClass( this.dialog.button, null, "ui-button-" + location );
 				if ( text ) {
-					this._ui.button.text( text );
+					this.dialog.button.text( text );
 				}
 			}
 		} else if ( "none" !== location ) {
 
 			// Create new button
-			destination = this._ui.wrapper
+			destination = this.dialog.wrapper
 				.children( ".ui-header,:jqmData(role='header')" )
 					.first();
 			if ( destination.length > 0 ) {
-				this._ui.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
+				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
 					.text( text || this.options.closeBtnText || "" );
-				this._ui.icon = $( "<span>" ).appendTo( this._ui.button );
+				this.dialog.icon = $( "<span>" ).appendTo( this.dialog.button );
 
 				this._toggleButtonClasses( true, location );
 
-				this._ui.button.prependTo( destination );
-				this._on( this._ui.button, { "click": "_handleButtonClick" } );
+				this.dialog.button.prependTo( destination );
+				this._on( this.dialog.button, { "click": "_handleButtonClick" } );
 			}
 		}
 	}
