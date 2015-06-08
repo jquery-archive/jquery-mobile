@@ -41,18 +41,8 @@ $.widget( "mobile.page", {
 		theme: "a",
 		domCache: false,
 
-		// Deprecated in 1.4 remove in 1.5
-		keepNativeDefault: $.mobile.keepNative,
-
 		enhanceWithin: true,
 		enhanced: false
-	},
-
-	// DEPRECATED for > 1.4
-	// TODO remove at 1.5
-	_createWidget: function() {
-		$.Widget.prototype._createWidget.apply( this, arguments );
-		this._trigger( "init" );
 	},
 
 	_create: function() {
@@ -67,7 +57,7 @@ $.widget( "mobile.page", {
 		}
 
 		this._on( this.element, {
-			pagebeforehide: "removeContainerBackground",
+			pagebeforehide: "_handlePageBeforeHide",
 			pagebeforeshow: "_handlePageBeforeShow"
 		} );
 
@@ -119,18 +109,19 @@ $.widget( "mobile.page", {
 	},
 
 	_handlePageBeforeShow: function( /* e */ ) {
-		this.setContainerBackground();
+		this._setContainerSwatch( this.options.theme );
 	},
 
-	// Deprecated in 1.4 remove in 1.5
-	removeContainerBackground: function() {
-		this.element.closest( ":mobile-pagecontainer" ).pagecontainer( { "theme": "none" } );
+	_handlePageBeforeHide: function() {
+		this._setContainerSwatch( "none" );
 	},
 
-	// Deprecated in 1.4 remove in 1.5
-	// Set the page container background to the page theme
-	setContainerBackground: function( theme ) {
-		this.element.parent().pagecontainer( { "theme": theme || this.options.theme } );
+	_setContainerSwatch: function( swatch ) {
+		var pagecontainer = this.element.parent().pagecontainer( "instance" );
+
+		if ( pagecontainer ) {
+			pagecontainer.option( "theme", swatch );
+		}
 	}
 } );
 

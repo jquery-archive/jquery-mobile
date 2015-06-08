@@ -131,8 +131,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 				.removeAttr( "tabindex" );
 		}
 		if ( this.options.overlayTheme && this.options.dialog ) {
-			this.removeContainerBackground();
-			this.setContainerBackground( this.options.overlayTheme );
+			this._setContainerSwatch( this.options.overlayTheme );
 		} else {
 			this._super();
 		}

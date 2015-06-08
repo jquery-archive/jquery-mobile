@@ -13,7 +13,6 @@ var eventSequence,
 		"pagehide",
 		"pageshow",
 		"pagechange",
-		"pageinit",
 
 		// Valid as of 1.4.x
 		"pagecontainerbeforechange",
@@ -108,10 +107,6 @@ asyncTest( "Event sequence during navigation to another page", function() {
 			{ type: "pagebeforecreate", target: "other-page",
 			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 			{ type: "pagecreate", target: "other-page",
-			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
-
-			// Deprecated as of 1.4.0
-			{ type: "pageinit", target: "other-page",
 			data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
 
 			// Deprecated as of 1.4.0
