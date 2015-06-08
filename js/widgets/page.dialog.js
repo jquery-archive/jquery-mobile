@@ -122,14 +122,22 @@ return $.widget( "mobile.page", $.mobile.page, {
 		}
 	},
 
+	_toggleCloseButtonClickability: function( isClickable ) {
+		if ( this.dialog.button ) {
+			if ( isClickable ) {
+				this.dialog.button.css( "pointer-events", "" );
+				this.dialog.button.removeAttr( "tabindex" );
+			} else {
+				this.dialog.button.css( "pointer-events", "none" );
+				this.dialog.button.attr( "tabindex", -1 );
+			}
+		}
+	},
+
 	_handlePageBeforeShow: function() {
 
 		// Make sure the close button is clickable
-		if ( this.dialog.button ) {
-			this.dialog.button
-				.css( "pointer-events", "" )
-				.removeAttr( "tabindex" );
-		}
+		this._toggleCloseButtonClickability( true );
 		if ( this.options.overlayTheme && this.options.dialog ) {
 			this._setContainerSwatch( this.options.overlayTheme );
 		} else {
@@ -140,11 +148,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 	_handleButtonClick: function() {
 
 		// Render the close button unclickable after one click
-		if ( this.dialog.button ) {
-			this.dialog.button
-				.css( "pointer-events", "none" )
-				.attr( "tabindex", -1 );
-		}
+		this._toggleCloseButtonClickability( false );
 	},
 
 	_setCloseButton: function( location, text ) {
@@ -172,13 +176,13 @@ return $.widget( "mobile.page", $.mobile.page, {
 					this.dialog.button.text( text );
 				}
 			}
-		} else if ( "none" !== location ) {
+		} else if ( location !== "none" ) {
 
 			// Create new button
 			destination = this.dialog.wrapper
-				.children( ".ui-header,:jqmData(role='header')" )
+				.children( ".ui-header,[data-" + $.mobile.ns + "role='header']" )
 					.first();
-			if ( destination.length > 0 ) {
+			if ( destination.length ) {
 				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
 					.text( text || this.options.closeBtnText || "" );
 				this.dialog.icon = $( "<span>" ).appendTo( this.dialog.button );

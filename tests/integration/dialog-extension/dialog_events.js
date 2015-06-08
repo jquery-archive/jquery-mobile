@@ -24,12 +24,12 @@ asyncTest( "test option overlayTheme", function( assert ) {
 		},
 
 		function() {
-			assert.strictEqual( $.mobile.activePage.attr( "id" ), "overlayTheme-test",
+			assert.strictEqual( $( ".ui-page-active" ).attr( "id" ), "overlayTheme-test",
 				"overlayTheme test dialog is active" );
 			assert.hasClasses( $( "body" ), "ui-overlay-x",
 				"Page container has swatch specified in the data attribute" );
 
-			$.mobile.activePage.page( "option", "overlayTheme", "y" );
+			$( ".ui-page-active" ).page( "option", "overlayTheme", "y" );
 			assert.hasClasses( $( "body" ), "ui-overlay-y",
 				"Page container has swatch applied via option change" );
 
@@ -237,11 +237,11 @@ asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
 		},
 
 		function() {
-			pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
+			pageTheme = "ui-overlay-" + $( ".ui-page-active" ).page( "option", "overlayTheme" );
 
 			$.mobile.pageContainer.removeClass( pageTheme );
 
-			$.mobile.activePage
+			$( ".ui-page-active" )
 				.bind( "pagebeforeshow", function() {
 					ok( $.mobile.pageContainer.hasClass( pageTheme ),
 						"Page container has the same theme as the dialog overlayTheme on " +
@@ -260,7 +260,7 @@ asyncTest( "pre-rendered dialog options work", function( assert ) {
 			$( "#open-enhanced-dialog" ).click();
 		},
 		function() {
-			assert.strictEqual( $.mobile.activePage.attr( "id" ), "enhanced-dialog",
+			assert.strictEqual( $( ".ui-page-active" ).attr( "id" ), "enhanced-dialog",
 				"enhanced dialog is the current page" );
 
 			$( "#enhanced-dialog" ).page( "option", "closeBtn", "right" );

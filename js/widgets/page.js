@@ -22,6 +22,7 @@
 		define( [
 			"jquery",
 			"../widget",
+			"./widget.theme",
 			"../core",
 			"widgets/enhancer",
 			"widgets/enhancer.backcompat",
@@ -37,7 +38,6 @@ $.widget( "mobile.page", {
 	version: "@VERSION",
 
 	options: {
-		classes: {},
 		theme: "a",
 		domCache: false,
 
@@ -100,12 +100,11 @@ $.widget( "mobile.page", {
 		}
 	},
 
-	_setOption: function( optionKey, optionValue ) {
-		if ( optionKey === "theme" ) {
-			this._removeClass( null, "ui-page-theme-" + this.options.theme )
-				._addClass( null, "ui-page-theme-" + optionValue );
-		}
-		return this._superApply( arguments );
+	_themeElements: function() {
+		return [ {
+			element: this.element,
+			prefix: "ui-page-theme-"
+		} ];
 	},
 
 	_handlePageBeforeShow: function( /* e */ ) {
@@ -124,6 +123,8 @@ $.widget( "mobile.page", {
 		}
 	}
 } );
+
+$.widget( "mobile.page", $.mobile.page, $.mobile.widget.theme );
 
 return $.mobile.page;
 
