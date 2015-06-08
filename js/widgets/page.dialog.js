@@ -52,7 +52,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 		this._super();
 		if ( this.options.dialog ) {
 			if ( this.options.enhanced ) {
-				this.dialog.wrapper = this.element.children();
+				this.dialog.wrapper = this.element.children( ".ui-page-dialog-contain" ).eq( 0 );
 				if ( this.options.closeBtn !== "none" ) {
 					this.dialog.button = this.dialog.wrapper
 						.children( ".ui-header" )
