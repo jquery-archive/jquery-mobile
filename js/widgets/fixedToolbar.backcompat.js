@@ -1,17 +1,37 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Backcompat features fo fixed toolbars
+/*!
+ * jQuery Mobile Fixed Toolbar @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Toolbars: Fixed
 //>>group: Widgets
+//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+//>>docs: http://api.jquerymobile.com/toolbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
+//>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./fixedToolbar" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-//>>excludeEnd("jqmBuildExclude");
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./fixedToolbar" ], factory );
+	} else {
 
-( function( $, undefined ) {
+		// Browser globals
+		factory( jQuery );
+	}
+} )( function( $ ) {
 
 if ( $.mobileBackcompat !== false ) {
 
-	$.widget( "mobile.toolbar", $.mobile.toolbar, {
+	return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		options: {
 			hideDuringFocus: "input, textarea, select"
@@ -71,8 +91,4 @@ if ( $.mobileBackcompat !== false ) {
 	} );
 
 }
-
-} )( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );
