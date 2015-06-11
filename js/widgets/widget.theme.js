@@ -31,29 +31,29 @@ $.mobile.widget.theme = {
 	_create: function() {
 		var that = this;
 		this._super();
-		if ( !this.options.enhanced && this.options.theme ) {
-			$.each( this._themeElements(), function( i, toTheme ) {
-				that._addClass(
-					toTheme.element,
-					null,
-					toTheme.prefix + that.options[ toTheme.option || "theme" ]
-				);
-			} );
-		}
+		$.each( this._themeElements(), function( i, toTheme ) {
+			that._addClass(
+				toTheme.element,
+				null,
+				toTheme.prefix + that.options[ toTheme.option || "theme" ]
+			);
+		} );
 	},
 
 	_setOption: function( key, value ) {
 		var that = this;
-		if ( key === "theme" && this.options.theme ) {
-			$.each( this._themeElements(), function( i, toTheme ) {
+		$.each( this._themeElements(), function( i, toTheme ) {
+			var themeOption = ( toTheme.option || "theme" );
+
+			if ( themeOption === key ) {
 				that._removeClass(
-						toTheme.element,
-						null,
-						toTheme.prefix + that.options[ toTheme.option || "theme" ]
-					)
-					._addClass( toTheme.element, null, toTheme.prefix + value );
-			} );
-		}
+					toTheme.element,
+					null,
+					toTheme.prefix + that.options[ toTheme.option || "theme" ]
+				)
+				._addClass( toTheme.element, null, toTheme.prefix + value );
+			}
+		} );
 		this._superApply( arguments );
 	}
 };
