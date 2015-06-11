@@ -21,7 +21,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../widget.theme",
 			"../widget.backcompat",
 			"./textinput" ], factory );
 	} else {
