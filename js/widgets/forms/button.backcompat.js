@@ -23,6 +23,7 @@
 			"jquery",
 			"../../core",
 			"../../widget",
+			"../widget.backcompat",
 			"./button" ], factory );
 	} else {
 
@@ -78,9 +79,7 @@ if ( $.mobileBackcompat !== false ) {
 			this._superApply( arguments );
 		}
 	} );
-	$.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
+	return $.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
 }
-
-return $.ui.button;
 
 } );
