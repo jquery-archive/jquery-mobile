@@ -20,7 +20,6 @@
 			[ "widgets/page" ],
 			[
 				"widgets/forms/button",
-				"widgets/forms/button.backcompat",
 				"navigation"
 			],
 			[ "init" ],
@@ -38,7 +37,7 @@
 	<div data-nstest-role="page" data-nstest-theme="a">
 		<div data-nstest-role="content" data-nstest-theme="b">
 				<form>
-					<input type="reset" value="Reset" id="reset-button"></input>
+					<input data-nstest-role="button" type="reset" value="Reset" id="reset-button"></input>
 				</form>
 		</div>
 	</div>
