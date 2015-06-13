@@ -43,23 +43,19 @@ return $.widget( "mobile.slider", $.extend( {
 	options: {
 		theme: null,
 		trackTheme: null,
-		corners: true,
-		mini: false,
-		highlight: false
+		classes: {
+			"ui-slider-track": "ui-shadow-inset ui-corner-all"
+		}
 	},
 
 	_create: function() {
 
 		// TODO: Each of these should have comments explain what they're for
-		var self = this,
-			control = this.element,
+		var control = this.element,
 			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme" ),
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
-			cornerClass = ( this.options.corners || control.jqmData( "corners" ) ) ? " ui-corner-all" : "",
-			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
-			selectClass = "",
 			controlID = control.attr( "id" ),
 			$label = $( "[for='" + controlID + "']" ),
 			labelID = $label.attr( "id" ) || controlID + "-label",
@@ -70,23 +66,14 @@ return $.widget( "mobile.slider", $.extend( {
 			handle = $( domHandle ),
 			domSlider = document.createElement( "div" ),
 			slider = $( domSlider ),
-			valuebg = this.options.highlight ? ( function() {
-				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
-				return $( bg ).prependTo( slider );
-			} )() : false,
-			options,
-			wrapper,
-			j, length,
-			i, optionsCount, origTabIndex,
-			side, activeClass, sliderImg;
+			wrapper;
 
 		$label.attr( "id", labelID );
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [ "ui-slider-track ui-shadow-inset ", trackThemeClass, cornerClass, miniClass ].join( "" );
-		domHandle.className = "ui-slider-handle";
+		this._addClass( slider, "ui-slider-track", trackThemeClass );
+		this._addClass( handle, "ui-slider-handle" );
 		domSlider.appendChild( domHandle );
 
 		handle.attr( {
@@ -107,7 +94,6 @@ return $.widget( "mobile.slider", $.extend( {
 			step: step,
 			max: max,
 			min: min,
-			valuebg: valuebg,
 			isRangeslider: isRangeslider,
 			dragging: false,
 			beforeStart: null,
@@ -116,7 +102,7 @@ return $.widget( "mobile.slider", $.extend( {
 		} );
 
 		// monitor the input for updated values
-		control.addClass("ui-slider-input" );
+		this._addClass( "ui-slider-input" );
 
 		this._on( control, {
 			"change": "_controlChange",
@@ -137,8 +123,7 @@ return $.widget( "mobile.slider", $.extend( {
 
 		// wrap in a div for styling purposes
 		if ( !isRangeslider ) {
-			wrapper = "<div class='ui-slider" +
-				( this.options.mini ? " ui-mini" : "" ) + "'></div>";
+			wrapper = "<div class='ui-slider'></div>";
 
 			control.add( slider ).wrapAll( wrapper );
 		}
@@ -166,18 +151,6 @@ return $.widget( "mobile.slider", $.extend( {
 			this._setTrackTheme( options.trackTheme );
 		}
 
-		if ( options.corners !== undefined ) {
-			this._setCorners( options.corners );
-		}
-
-		if ( options.mini !== undefined ) {
-			this._setMini( options.mini );
-		}
-
-		if ( options.highlight !== undefined ) {
-			this._setHighlight( options.highlight );
-		}
-
 		if ( options.disabled !== undefined ) {
 			this._setDisabled( options.disabled );
 		}
@@ -185,7 +158,9 @@ return $.widget( "mobile.slider", $.extend( {
 	},
 
 	_controlChange: function( event ) {
-		// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+
+		// If the user dragged the handle, the "change" event was triggered from
+		// inside refresh(); don't call refresh() again
 		if ( this._trigger( "controlchange", event ) === false ) {
 			return false;
 		}
@@ -194,7 +169,9 @@ return $.widget( "mobile.slider", $.extend( {
 		}
 	},
 
-	_controlKeyup: function( /* event */ ) { // necessary?
+	_controlKeyup: function( /* event */ ) {
+
+		// necessary?
 		this.refresh( this._value(), true, true );
 	},
 
@@ -234,7 +211,9 @@ return $.widget( "mobile.slider", $.extend( {
 
 			if ( !this._keySliding ) {
 				this._keySliding = true;
-				this.handle.addClass( "ui-state-active" ); /* TODO: We don't use this class for styling. Do we need to add it? */
+
+				// TODO: We don't use this class for styling. Do we need it?
+				this._addClass( this.handle, null, "ui-state-active" );
 			}
 
 			break;
@@ -259,19 +238,21 @@ return $.widget( "mobile.slider", $.extend( {
 			this.refresh( index - this.step );
 			break;
 		}
-	}, // remove active mark
+	},
 
 	_handleKeyup: function( /* event */ ) {
 		if ( this._keySliding ) {
 			this._keySliding = false;
-			this.handle.removeClass( "ui-state-active" ); /* See comment above. */
+			this._removeClass( this.handle, null, "ui-state-active" ); /* See comment above. */
 		}
 	},
 
 	_sliderVMouseDown: function( event ) {
+
 		// NOTE: we don't do this in refresh because we still want to
 		//       support programmatic alteration of disabled inputs
-		if ( this.options.disabled || !( event.which === 1 || event.which === 0 || event.which === undefined ) ) {
+		if ( this.options.disabled || !( event.which === 1 ||
+			event.which === 0 || event.which === undefined ) ) {
 			return false;
 		}
 		if ( this._trigger( "beforestart", event ) === false ) {
@@ -296,6 +277,7 @@ return $.widget( "mobile.slider", $.extend( {
 	},
 
 	_preventDocumentDrag: function( event ) {
+
 		// NOTE: we don't do this in refresh because we still want to
 		//       support programmatic alteration of disabled inputs
 		if ( this._trigger( "drag", event ) === false ) {
@@ -303,7 +285,8 @@ return $.widget( "mobile.slider", $.extend( {
 		}
 		if ( this.dragging && !this.options.disabled ) {
 
-			// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
+			// this.mouseMoved must be updated before refresh() because it will be
+			// used in the control "change" event
 			this.mouseMoved = true;
 
 			this.refresh( event );
@@ -329,6 +312,7 @@ return $.widget( "mobile.slider", $.extend( {
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
+
 		// NOTE: we don't return here because we want to support programmatic
 		//       alteration of the input value, which should still update the slider
 
@@ -338,38 +322,31 @@ return $.widget( "mobile.slider", $.extend( {
 			themeClass = theme ? " ui-button-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
-			cornerClass = this.options.corners ? " ui-corner-all" : "",
-			miniClass = this.options.mini ? " ui-mini" : "",
 			left, width, data, tol,
 			pxStep, percent,
-			control, isInput, min, max, step,
+			control, min, max, step,
 			newval, valModStep, alignValue, percentPerStep,
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[ 0 ].className = [ "ui-slider-track ui-shadow-inset", trackThemeClass, cornerClass, miniClass ].join( "" );
+		this._addClass( $( self.slider[ 0 ] ), "ui-slider-track", trackThemeClass );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
 
 		// set the stored value for comparison later
 		this.value = this._value();
-		if ( this.options.highlight && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
-			this.valuebg = ( function() {
-				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
-				return $( bg ).prependTo( self.slider );
-			} )();
-		}
-		this.handle.addClass( "ui-button" + themeClass + " ui-shadow" );
+		this._addClass( this.handle, null, "ui-button" + themeClass + " ui-shadow" );
 
 		control = this.element;
 		min = parseFloat( control.attr( "min" ) );
 		max = parseFloat( control.attr( "max" ) );
-		step = ( parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
+		step = ( parseFloat( control.attr( "step" ) ) > 0 ) ?
+				parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			data = val;
+
 			// a slight tolerance helped get to the ends of the slider
 			tol = 8;
 
@@ -408,6 +385,7 @@ return $.widget( "mobile.slider", $.extend( {
 		}
 
 		percentPerStep = 100 / ( ( max - min ) / step );
+
 		// Since JavaScript has problems with large floats, round
 		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
 		newval = parseFloat( alignValue.toFixed( 5 ) );
@@ -474,61 +452,33 @@ return $.widget( "mobile.slider", $.extend( {
 		}
 	},
 
-	_setHighlight: function( value ) {
-		value = !!value;
-		if ( value ) {
-			this.options.highlight = !!value;
-			this.refresh();
-		} else if ( this.valuebg ) {
-			this.valuebg.remove();
-			this.valuebg = false;
-		}
-	},
-
 	_setTheme: function( value ) {
-		this.handle
-			.removeClass( "ui-button-" + this.options.theme )
-			.addClass( "ui-button-" + value );
+		this._removeClass( this.handle, null, "ui-button-" + this.options.theme );
+		this._addClass( this.handle, null, "ui-button-" + value );
 
 		var currentTheme = this.options.theme ? this.options.theme : "inherit",
 			newTheme = value ? value : "inherit";
 
-		this.control
-			.removeClass( "ui-body-" + currentTheme )
-			.addClass( "ui-body-" + newTheme );
+		this._removeClass( this.control, null, "ui-body-" + currentTheme );
+		this._addClass( this.control, null, "ui-body-" + newTheme );
 	},
 
 	_setTrackTheme: function( value ) {
 		var currentTrackTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
 			newTrackTheme = value ? value : "inherit";
 
-		this.slider
-			.removeClass( "ui-body-" + currentTrackTheme )
-			.addClass( "ui-body-" + newTrackTheme );
-	},
-
-	_setMini: function( value ) {
-		value = !!value;
-		if ( !this.isRangeslider ) {
-			this.slider.parent().toggleClass( "ui-mini", value );
-			this.element.toggleClass( "ui-mini", value );
-		}
-		this.slider.toggleClass( "ui-mini", value );
-	},
-
-	_setCorners: function( value ) {
-		this.slider.toggleClass( "ui-corner-all", value );
-		this.control.toggleClass( "ui-corner-all", value );
+		this._removeClass( this.slider, null, "ui-body-" + currentTrackTheme );
+		this._addClass( this.slider, null, "ui-body-" + newTrackTheme );
 	},
 
 	_setDisabled: function( value ) {
 		value = !!value;
 		this.element.prop( "disabled", value );
-		this.slider
-			.toggleClass( "ui-state-disabled", value )
-			.attr( "aria-disabled", value );
 
-		this.element.toggleClass( "ui-state-disabled", value );
+		this._toggleClass( this.slider, null, "ui-state-disabled", value );
+		this.slider.attr( "aria-disabled", value );
+
+		this._toggleClass( null, "ui-state-disabled", value );
 	}
 
 }, $.mobile.behaviors.formReset ) );

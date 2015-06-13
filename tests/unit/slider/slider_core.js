@@ -30,15 +30,6 @@ test( "empty string value results defaults to slider min value", function() {
 	deepEqual( slider.val( '' ).slider( 'refresh' ).val(), slider.attr( 'min' ), "val is equal to min attr" );
 } );
 
-test( "data-highlight works properly", function() {
-	var $highlighted = $( "#background-slider" ),
-		$unhighlighted = $( "#no-background-slider" );
-
-	deepEqual( $highlighted.siblings( ".ui-slider-track" ).find( ".ui-slider-bg" ).length, 1,
-		"highlighted slider should have a div for the track bg" );
-	deepEqual( $unhighlighted.siblings( ".ui-slider-track" ).find( ".ui-slider-bg" ).length, 0,
-		"unhighlighted slider _not_ should have a div for the track bg" );
-} );
 
 test( "labels that have id keep that id", function() {
 	var label = $( "[for=label-id-slider]" );
@@ -69,7 +60,7 @@ test( "slider tooltip", function() {
 	deepEqual( tooltip.is( ":visible" ), false, "is initially hidden" );
 } );
 
-test( "slider is enabled/disabled correctly", function() {
+test( "slider is enabled/disabled correctly", function( assert ) {
 	var slider = $( "#disable-test" ),
 		track = slider.siblings( "div" );
 
@@ -78,9 +69,11 @@ test( "slider is enabled/disabled correctly", function() {
 			prefix + "'aria-disabled' is " + expectedDisabled );
 		deepEqual( !!slider.attr( "disabled" ), expectedDisabled,
 			prefix + "'disabled' property is " + expectedDisabled );
-		deepEqual( track.hasClass( "ui-state-disabled" ), expectedDisabled,
-			prefix + "track class 'ui-state-disabled' is " +
-			( expectedDisabled ? "on" : "off" ) );
+		if ( expectedDisabled ) {
+			assert.hasClasses( track, "ui-state-disabled" );
+		} else {
+			assert.lacksClasses( track, "ui-state-disabled" );
+		}
 	};
 
 	testDisabled( "Initially: ", false );
@@ -99,12 +92,12 @@ test( "slider tooltip & button values should match after input value changes", f
 	ok( slider.val() === sliderHandle.text(), "slider text should match handle text" );
 } );
 
-test( "slider input is disabled correctly", function() {
+test( "slider input is disabled correctly", function( assert ) {
 	var slider = $( "#disable-input-test" );
 
 	slider.slider( "disable" );
 
-	ok( slider.hasClass( "ui-state-disabled" ), "disabling slider also disables the input" );
+	assert.hasClasses( slider, "ui-state-disabled" );
 } );
 
 } )( jQuery );
