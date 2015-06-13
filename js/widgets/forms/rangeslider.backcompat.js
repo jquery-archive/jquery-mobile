@@ -34,7 +34,15 @@ if ( $.mobileBackcompat !== false ) {
 			mini: false,
 			highlight: true
 		},
-		classProp: "ui-rangeslider"
+		classProp: "ui-rangeslider",
+
+		refresh: function() {
+			this._super();
+
+			this.element.find( "input" ).slider( {
+				highlight: this.options.highlight
+			} ).slider( "refresh" );
+		}
 	} );
 
 	$.widget( "mobile.rangeslider", $.mobile.rangeslider, $.mobile.widget.backcompat );
