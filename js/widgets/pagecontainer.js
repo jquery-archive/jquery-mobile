@@ -5,6 +5,7 @@
 define( [
 	"jquery",
 	"../core",
+	"../helpers",
 	"../navigation/path",
 	"../navigation/base",
 	"../events/navigate",
@@ -932,11 +933,8 @@ define( [
 		},
 
 		transition: function( toPage, triggerData, settings ) {
-			var fromPage, url, pageUrl, fileUrl,
-				active, activeIsInitialPage,
-				historyDir, pageTitle, isDialog,
-				alreadyThere, newPageTitle,
-				params,	cssTransitionDeferred,
+			var fromPage, url, pageUrl, fileUrl, active, activeIsInitialPage, historyDir,
+				pageTitle, isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred,
 				beforeTransition;
 
 			// If we are in the midst of a transition, queue the current request.
@@ -1033,22 +1031,8 @@ define( [
 				historyDir = settings.direction === "back" ? -1 : 1;
 			}
 
-			// Kill the keyboard.
-			// XXX_jblas: We need to stop crawling the entire document to kill focus.
-			//            Instead, we should be tracking focus with a delegate()
-			//            handler so we already have the element in hand at this
-			//            point.
-			// Wrap this in a try/catch block since IE9 throw "Unspecified error" if
-			// document.activeElement is undefined when we are in an IFrame.
-			try {
-				if ( document.activeElement &&
-					document.activeElement.nodeName.toLowerCase() !== "body" ) {
-
-					$( document.activeElement ).blur();
-				} else {
-					$( "input:focus, textarea:focus, select:focus" ).blur();
-				}
-			} catch( e ) {}
+			// We blur the focused element to cause the virtual keyboard to disappear
+			$.mobile.safelyBlur( this.document[ 0 ] );
 
 			// Record whether we are at a place in history where a dialog used to be -
 			// if so, do not add a new history entry and do not change the hash either
