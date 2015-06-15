@@ -25,6 +25,7 @@
 			"../../widget",
 			"./textinput",
 			"../../vmouse",
+			"../widget.theme",
 			"./reset" ], factory );
 	} else {
 
@@ -33,7 +34,7 @@
 	}
 } )( function( $ ) {
 
-return $.widget( "mobile.slider", $.extend( {
+$.widget( "mobile.slider", $.extend( {
 	version: "@VERSION",
 
 	initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
@@ -41,8 +42,8 @@ return $.widget( "mobile.slider", $.extend( {
 	widgetEventPrefix: "slide",
 
 	options: {
-		theme: null,
-		trackTheme: null,
+		theme: "inherit",
+		trackTheme: "inherit",
 		classes: {
 			"ui-slider-track": "ui-shadow-inset ui-corner-all",
 			"ui-slider-input": "ui-shadow-inset ui-corner-all"
@@ -53,8 +54,6 @@ return $.widget( "mobile.slider", $.extend( {
 
 		// TODO: Each of these should have comments explain what they're for
 		var control = this.element,
-			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme" ),
-			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
 			controlID = control.attr( "id" ),
@@ -73,7 +72,7 @@ return $.widget( "mobile.slider", $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		this._addClass( slider, "ui-slider-track", trackThemeClass );
+		this._addClass( slider, "ui-slider-track" );
 		this._addClass( handle, "ui-slider-handle" );
 		domSlider.appendChild( domHandle );
 
@@ -103,8 +102,6 @@ return $.widget( "mobile.slider", $.extend( {
 		} );
 
 		// monitor the input for updated values
-		this.options.classes[ "ui-slider-input" ] += this.options.theme ?
-			" ui-body-" + this.options.theme : " ui-body-inherit";
 		this._addClass( "ui-slider-input" );
 
 		this._on( control, {
@@ -146,14 +143,6 @@ return $.widget( "mobile.slider", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		if ( options.theme !== undefined ) {
-			this._setTheme( options.theme );
-		}
-
-		if ( options.trackTheme !== undefined ) {
-			this._setTrackTheme( options.trackTheme );
-		}
-
 		if ( options.disabled !== undefined ) {
 			this._setDisabled( options.disabled );
 		}
@@ -320,11 +309,6 @@ return $.widget( "mobile.slider", $.extend( {
 		//       alteration of the input value, which should still update the slider
 
 		var self = this,
-			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme" ),
-			theme = this.options.theme || parentTheme,
-			themeClass = theme ? "ui-button-" + theme : "",
-			trackTheme = this.options.trackTheme || parentTheme,
-			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			left, width, data, tol,
 			pxStep, percent,
 			control, min, max, step,
@@ -332,14 +316,14 @@ return $.widget( "mobile.slider", $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		this._addClass( self.slider, "ui-slider-track", trackThemeClass );
+		this._addClass( self.slider, "ui-slider-track" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
 
 		// set the stored value for comparison later
 		this.value = this._value();
-		this._addClass( this.handle, null, "ui-button " + themeClass + " ui-shadow" );
+		this._addClass( this.handle, null, "ui-button ui-shadow" );
 
 		control = this.element;
 		min = parseFloat( control.attr( "min" ) );
@@ -455,23 +439,26 @@ return $.widget( "mobile.slider", $.extend( {
 		}
 	},
 
-	_setTheme: function( value ) {
-		this._removeClass( this.handle, null, "ui-button-" + this.options.theme );
-		this._addClass( this.handle, null, "ui-button-" + value );
-
-		var currentTheme = this.options.theme ? this.options.theme : "inherit",
-			newTheme = value ? value : "inherit";
-
-		this._removeClass( this.control, null, "ui-body-" + currentTheme );
-		this._addClass( this.control, null, "ui-body-" + newTheme );
-	},
-
-	_setTrackTheme: function( value ) {
-		var currentTrackTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
-			newTrackTheme = value ? value : "inherit";
-
-		this._removeClass( this.slider, null, "ui-body-" + currentTrackTheme );
-		this._addClass( this.slider, null, "ui-body-" + newTrackTheme );
+	_themeElements: function() {
+		return [
+			{
+				element: this.handle,
+				prefix: "ui-button-"
+			},
+			{
+				element: this.control,
+				prefix: "ui-body-"
+			},
+			{
+				element: this.slider,
+				prefix: "ui-body-",
+				option: "trackTheme"
+			},
+			{
+				element: this.element,
+				prefix: "ui-body-"
+			}
+		];
 	},
 
 	_setDisabled: function( value ) {
@@ -485,5 +472,7 @@ return $.widget( "mobile.slider", $.extend( {
 	}
 
 }, $.mobile.behaviors.formReset ) );
+
+return $.widget( "mobile.slider", $.mobile.slider, $.mobile.widget.theme );
 
 } );
