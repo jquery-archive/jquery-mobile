@@ -53,6 +53,10 @@ if ( $.mobileBackcompat !== false ) {
 			if ( this.options.highlight ) {
 				this._setHighlight( this.options.highlight );
 			}
+
+			if ( this.options.corners !== undefined ) {
+				this._setCorners( this.options.corners );
+			}
 		},
 
 		_setHighlight: function( value ) {
@@ -63,6 +67,11 @@ if ( $.mobileBackcompat !== false ) {
 				this.valuebg.remove();
 				this.valuebg = false;
 			}
+		},
+
+		_setCorners: function( value ) {
+			this._toggleClass( this.slider, null, "ui-corner-all", value );
+			this._toggleClass( this.element, null, "ui-corner-all", value );
 		}
 	} );
 

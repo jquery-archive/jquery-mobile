@@ -15,4 +15,10 @@ test( "data-highlight works properly", function() {
 		"unhighlighted slider _not_ should have a div for the track bg" );
 } );
 
+test( "backcompat tests", function(assert) {
+	assert.hasClasses( $( "#mini-option-test" ).siblings( ".ui-slider-track" ), "ui-mini" );
+	assert.lacksClasses( $( "#corners-option-test" ).siblings( ".ui-slider-track" ), 
+		"ui-corner-all" );
+} );
+
 } )( jQuery );

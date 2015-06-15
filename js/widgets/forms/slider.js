@@ -44,7 +44,8 @@ return $.widget( "mobile.slider", $.extend( {
 		theme: null,
 		trackTheme: null,
 		classes: {
-			"ui-slider-track": "ui-shadow-inset ui-corner-all"
+			"ui-slider-track": "ui-shadow-inset ui-corner-all",
+			"ui-slider-input": "ui-shadow-inset ui-corner-all"
 		}
 	},
 
@@ -102,6 +103,8 @@ return $.widget( "mobile.slider", $.extend( {
 		} );
 
 		// monitor the input for updated values
+		this.options.classes[ "ui-slider-input" ] += this.options.theme ?
+			" ui-body-" + this.options.theme : " ui-body-inherit";
 		this._addClass( "ui-slider-input" );
 
 		this._on( control, {
@@ -319,7 +322,7 @@ return $.widget( "mobile.slider", $.extend( {
 		var self = this,
 			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme" ),
 			theme = this.options.theme || parentTheme,
-			themeClass = theme ? " ui-button-" + theme : "",
+			themeClass = theme ? "ui-button-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			left, width, data, tol,
@@ -329,14 +332,14 @@ return $.widget( "mobile.slider", $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		this._addClass( $( self.slider[ 0 ] ), "ui-slider-track", trackThemeClass );
+		this._addClass( self.slider, "ui-slider-track", trackThemeClass );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
 
 		// set the stored value for comparison later
 		this.value = this._value();
-		this._addClass( this.handle, null, "ui-button" + themeClass + " ui-shadow" );
+		this._addClass( this.handle, null, "ui-button " + themeClass + " ui-shadow" );
 
 		control = this.element;
 		min = parseFloat( control.attr( "min" ) );
