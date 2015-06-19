@@ -45,7 +45,10 @@ define([
         home: function() {
 
             // Programatically changes to the categories page
-            $.mobile.changePage( "#categories" , { reverse: false, changeHash: false } );
+            $( "body" ).pagecontainer( "change", "#categories", {
+				reverse: false,
+				changeHash: false
+			});
 
         },
 
@@ -65,7 +68,10 @@ define([
                 currentView.collection.fetch().done( function() {
 
                     // Programatically changes to the current categories page
-                    $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
+                    $( "body" ).pagecontainer( "change", "#" + type, {
+						reverse: false,
+						changeHash: false
+					});
     
                 } );
 
@@ -75,7 +81,10 @@ define([
             else {
 
                 // Programatically changes to the current categories page
-                $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
+                $( "body" ).pagecontainer( "change", "#" + type, {
+					reverse: false,
+					changeHash: false
+				});
 
             }
 

@@ -4,6 +4,7 @@
 
 (function($){
 	var libName = "forms.select",
+		pageContainer = $( "body" ),
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler.prototype.transition,
 		originalGetEncodedText = $.fn.getEncodedText,
@@ -386,14 +387,14 @@
 				$button.click();
 			},
 
-			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
+			{ pagechange: { src: pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
 
 			function() {
 				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
 
-			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
+			{ pagechange: { src: pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
 
 			start
 		]);
@@ -401,7 +402,7 @@
 
 	asyncTest( "destroying a select menu leaves no traces", function() {
 		$.testHelper.pageSequence( [
-			function() { $.mobile.changePage( "#destroyTest" ); },
+			function() { pageContainer.pagecontainer( "change", "#destroyTest" ); },
 			// Check if two chunks of DOM are identical
 			function() {
 				var unenhancedSelect = $(
@@ -440,11 +441,11 @@
 				"</select>");
 		$.testHelper.detailedEventCascade( [
 			function() {
-				$.mobile.changePage( "#destroyTest" );
+				pageContainer.pagecontainer( "change", "#destroyTest" );
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "0" }
+				pagechange: { src: pageContainer, event: "pagechange" + prefix + "0" }
 			},
 
 			function() {
@@ -491,7 +492,7 @@
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "3" }
+				pagechange: { src: pageContainer, event: "pagechange" + prefix + "3" }
 			},
 
 			function() {
@@ -500,7 +501,7 @@
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "4" }
+				pagechange: { src: pageContainer, event: "pagechange" + prefix + "4" }
 			},
 
 			function() {
@@ -514,7 +515,7 @@
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "5" }
+				pagechange: { src: pageContainer, event: "pagechange" + prefix + "5" }
 			},
 
 			start

@@ -212,13 +212,14 @@
 				}, 10000);
 
 				// bind the recursive call to the event
-				( self.eventTarget || $.mobile.pageContainer ).one(event, function( event, data ) {
-					clearTimeout( warnTimer );
+				( self.eventTarget || $( "body" ) )
+					.one(event, function( event, data ) {
+						clearTimeout( warnTimer );
 
-					// Let the current stack unwind before we fire off the next item in the sequence.
-					// TODO setTimeout(self.pageSequence, 0, sequence);
-					setTimeout(function(){ self.eventCascade(sequence, false, data ); }, 0);
-				});
+						// Let the current stack unwind before we start the next step.
+						// TODO setTimeout(self.pageSequence, 0, sequence);
+						setTimeout(function(){ self.eventCascade(sequence, false, data ); }, 0);
+					});
 			}
 
 			// invoke the function which should, in some fashion,

@@ -110,7 +110,7 @@
 
 				ok( check.indexOf("radio1=1") >= 0, "the radio was checked" );
 
-				// if the changepage in the previous function failed don't go back
+				// if the page change in the previous function failed don't go back
 				if( !timeout ){
 					window.history.back();
 				}
@@ -136,7 +136,7 @@
 
 				ok( check.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
 				ok( check.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
-				// if the changepage in the previous function failed don't go back
+				// if the page change in the previous function failed don't go back
 				if( !timeout ){
 					window.history.back();
 				}

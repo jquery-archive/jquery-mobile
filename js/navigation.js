@@ -56,24 +56,6 @@ define( [
 		return ele;
 	}
 
-	$.mobile.loadPage = function( url, opts ) {
-		var container;
-
-		opts = opts || {};
-		container = ( opts.pageContainer || $.mobile.pageContainer );
-
-		// create the deferred that will be supplied to loadPage callers
-		// and resolved by the content widget's load method
-		opts.deferred = $.Deferred();
-
-		// Preferring to allow exceptions for uninitialized opts.pageContainer
-		// widgets so we know if we need to force init here for users
-		container.pagecontainer( "load", url, opts );
-
-		// provide the deferred
-		return opts.deferred.promise();
-	};
-
 	//define vars for interal use
 
 	/* internal utility functions */
@@ -94,7 +76,7 @@ define( [
 			nav.app.backHistory ) {
 			nav.app.backHistory();
 		} else {
-			$.mobile.pageContainer.pagecontainer( "back" );
+			$( "body" ).pagecontainer( "back" );
 		}
 	};
 
@@ -104,24 +86,6 @@ define( [
 	};
 
 	// Exposed $.mobile methods
-
-	$.mobile.changePage = function( to, options ) {
-		$.mobile.pageContainer.pagecontainer( "change", to, options );
-	};
-
-	$.mobile.changePage.defaults = {
-		transition: undefined,
-		reverse: false,
-		changeHash: true,
-		fromHashChange: false,
-		role: undefined, // By default we rely on the role defined by the @data-role attribute.
-		duplicateCachedPage: undefined,
-		pageContainer: undefined,
-		showLoadMsg: true, //loading message shows by default when pages are being fetched during changePage
-		dataUrl: undefined,
-		fromPage: undefined,
-		allowSamePageTransition: false
-	};
 
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
@@ -212,7 +176,8 @@ define( [
 			if ( !event.isDefaultPrevented() ) {
 				formData = getAjaxFormData( $( this ) );
 				if ( formData ) {
-					$.mobile.changePage( formData.url, formData.options );
+					$( "body" ).pagecontainer( "change", formData.url,
+						formData.options );
 					event.preventDefault();
 				}
 			}
@@ -376,7 +341,12 @@ define( [
 			//this may need to be more specific as we use data-rel more
 			role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, link: $link } );
+			$( "body" ).pagecontainer( "change", href, {
+				transition: transition,
+				reverse: reverse,
+				role: role,
+				link: $link
+			});
 			event.preventDefault();
 		});
 
@@ -390,13 +360,16 @@ define( [
 				if ( url && $.inArray( url, urls ) === -1 ) {
 					urls.push( url );
 
-					$.mobile.loadPage( url, { role: $link.attr( "data-" + $.mobile.ns + "rel" ),prefetch: true } );
+					$( "body" ).pagecontainer( "load", url, {
+						role: $link.attr( "data-" + $.mobile.ns + "rel" ),
+						prefetch: true
+					});
 				}
 			});
 		});
 
 		// TODO ensure that the navigate binding in the content widget happens at the right time
-		$.mobile.pageContainer.pagecontainer();
+		$( "body" ).pagecontainer();
 
 		//set page min-heights to be device specific
 		$.mobile.document.bind( "pageshow", function() {

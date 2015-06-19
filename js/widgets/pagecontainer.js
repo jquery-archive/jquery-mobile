@@ -19,12 +19,30 @@ define( [
 
 	$.widget( "mobile.pagecontainer", {
 		options: {
-			theme: "a"
+			theme: "a",
+			changeOptions: {
+				transition: undefined,
+				reverse: false,
+				changeHash: true,
+				fromHashChange: false,
+				duplicateCachedPage: undefined,
+
+				//loading message shows by default when pages are being fetched during change()
+				showLoadMsg: true,
+				dataUrl: undefined,
+				fromPage: undefined,
+				allowSamePageTransition: false
+			}
 		},
 
 		initSelector: false,
 
 		_create: function() {
+
+			// Maintain a global array of pagecontainers
+			$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
+				.concat( [ this.element ] );
+
 			this._trigger( "beforecreate" );
 			this.setLastScrollEnabled = true;
 
@@ -259,7 +277,7 @@ define( [
 					this.forward();
 				}
 
-				// prevent changePage call
+				// prevent change() call
 				return false;
 			} else {
 				// if the current active page is a dialog and we're navigating
@@ -319,11 +337,7 @@ define( [
 				}
 			}
 
-			this._changeContent( this._handleDestination( to ), changePageOptions );
-		},
-
-		_changeContent: function( to, opts ) {
-			$.mobile.changePage( to, opts );
+			this.change( this._handleDestination( to ), changePageOptions );
 		},
 
 		_getBase: function() {
@@ -817,7 +831,7 @@ define( [
 			//release transition lock so navigation is free again
 			isPageTransitioning = false;
 			if ( pageTransitionQueue.length > 0 ) {
-				$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
+				this.change.apply( this, pageTransitionQueue.pop() );
 			}
 		},
 
@@ -841,7 +855,7 @@ define( [
 				isPageTransitioning = false;
 
 				// store the original absolute url so that it can be provided
-				// to events in the triggerData of the subsequent changePage call
+				// to events in the triggerData of the subsequent change() call
 				options.absUrl = triggerData.absUrl;
 
 				this.transition( content, triggerData, options );
@@ -873,7 +887,7 @@ define( [
 				triggerData.absUrl = $.mobile.path.makeUrlAbsolute( to, this._findBaseWithDefault() );
 			} else {
 				// if the toPage is a jQuery object grab the absolute url stored
-				// in the loadPage callback where it exists
+				// in the load() callback where it exists
 				triggerData.absUrl = settings.absUrl;
 			}
 
@@ -891,14 +905,14 @@ define( [
 
 		change: function( to, options ) {
 			// If we are in the midst of a transition, queue the current request.
-			// We'll call changePage() once we're done with the current transition
+			// We'll call change() once we're done with the current transition
 			// to service the request.
 			if ( isPageTransitioning ) {
 				pageTransitionQueue.unshift( arguments );
 				return;
 			}
 
-			var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
+			var settings = $.extend( {}, this.options.changeOptions, options ),
 				triggerData = {};
 
 			// Make sure we have a fromPage.
@@ -915,7 +929,7 @@ define( [
 			// because an object can also be replaced by a string
 			to = triggerData.toPage;
 
-			// If the caller passed us a url, call loadPage()
+			// If the caller passed us a url, call load()
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
 			// it is done loading or if an error occurred.
@@ -940,7 +954,7 @@ define( [
 				beforeTransition;
 
 			// If we are in the midst of a transition, queue the current request.
-			// We'll call changePage() once we're done with the current transition
+			// We'll call change() once we're done with the current transition
 			// to service the request.
 			if ( isPageTransitioning ) {
 				// make sure to only queue the to and settings values so the arguments
@@ -995,12 +1009,12 @@ define( [
 				toPage.jqmData( "role" ) === "dialog" ) &&
 				toPage.jqmData( "dialog" ) !== true;
 
-			// By default, we prevent changePage requests when the fromPage and toPage
+			// By default, we prevent change() requests when the fromPage and toPage
 			// are the same element, but folks that generate content
 			// manually/dynamically and reuse pages want to be able to transition to
 			// the same page. To allow this, they will need to change the default
 			// value of allowSamePageTransition to true, *OR*, pass it in as an
-			// option when they manually call changePage(). It should be noted that
+			// option when they manually call change(). It should be noted that
 			// our default transition animations assume that the formPage and toPage
 			// are different elements, so they may behave unexpectedly. It is up to
 			// the developer that turns on the allowSamePageTransitiona option to
@@ -1025,7 +1039,7 @@ define( [
 			// We need to make sure the page we are given has already been enhanced.
 			toPage.page({ role: settings.role });
 
-			// If the changePage request was sent from a hashChange event, check to
+			// If the change() request was sent from a hashChange event, check to
 			// see if the page is already within the urlHistory stack. If so, we'll
 			// assume the user hit the forward/back button and will try to match the
 			// transition accordingly.
@@ -1183,6 +1197,19 @@ define( [
 			var closestBase = ( this.activePage &&
 			$.mobile.getClosestBaseUrl( this.activePage ) );
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
+		},
+
+		_destroy: function() {
+			var myIndex;
+
+			if ( $.mobile.pagecontainers ) {
+				myIndex = $.inArray( this.element, $.mobile.pagecontainers );
+				if ( myIndex >= 0 ) {
+					$.mobile.pagecontainers.splice( myIndex, 1 );
+				}
+			}
+
+			this._super();
 		}
 	});
 

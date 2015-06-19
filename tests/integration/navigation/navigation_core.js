@@ -4,7 +4,8 @@ $.testHelper.delayStart();
  */
 (function($){
 	// TODO move siteDirectory over to the nav path helper
-	var changePageFn = $.mobile.changePage,
+	var pageContainer,
+		changePageFn = $.mobile.pagecontainer.prototype.change,
 		originalTitle = document.title,
 		originalLinkBinding = $.mobile.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
@@ -15,6 +16,10 @@ $.testHelper.delayStart();
 		navigateTestRoot = function(){
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
+
+	$( document ).one( "pagecontainercreate", function( event ) {
+		pageContainer = $( event.target );
+	});
 
 	test( "Absolute link with hash works", function() {
 		var defaultIsPrevented,
@@ -89,7 +94,7 @@ $.testHelper.delayStart();
 		teardown: function() {
 			$.Event.prototype.which = undefined;
 			$.mobile.linkBindingEnabled = originalLinkBinding;
-			$.mobile.changePage = changePageFn;
+			$.mobile.pagecontainer.prototype.change = changePageFn;
 			document.title = originalTitle;
 		}
 	});
@@ -122,7 +127,7 @@ $.testHelper.delayStart();
 	asyncTest( "external empty page does not result in any contents", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "blank.html" );
+				pageContainer.pagecontainer( "change", "blank.html" );
 			},
 
 			function() {
@@ -139,7 +144,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -168,7 +173,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -182,7 +187,7 @@ $.testHelper.delayStart();
 				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
-				$.mobile.changePage( "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is still present and displayed in the dom
@@ -207,7 +212,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "cached-external.html" );
+				pageContainer.pagecontainer( "change", "cached-external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -228,7 +233,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				$.mobile.page.prototype.options.domCache = true;
-				$.mobile.changePage( "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -250,7 +255,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
-				$.mobile.changePage( "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			function(){
@@ -281,16 +286,16 @@ $.testHelper.delayStart();
 		]);
 	});
 
-	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
+	asyncTest( "forms with data attribute ajax set to false will not call change()", function(){
 		var called = false;
 		var newChangePage = function(){
 			called = true;
 		};
 
 		$.testHelper.sequence([
-			// avoid initial page load triggering changePage early
+			// avoid initial page load triggering change() early
 			function(){
-				$.mobile.changePage = newChangePage;
+				$.mobile.pagecontainer.prototype.change = newChangePage;
 
 				$('#non-ajax-form').one('submit', function(event){
 					ok(true, 'submit callbacks are fired');
@@ -304,16 +309,16 @@ $.testHelper.delayStart();
 			}], 1000);
 	});
 
-	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changePage", function(){
+	asyncTest( "forms with data-ajax absent/set to anything but false call change()", function() {
 		var called = 0,
 				newChangePage = function(){
 					called++;
 				};
 
 		$.testHelper.sequence([
-			// avoid initial page load triggering changePage early
+			// avoid initial page load triggering change() early
 			function(){
-				$.mobile.changePage = newChangePage;
+				$.mobile.pagecontainer.prototype.change = newChangePage;
 				$('#ajax-form, #rand-ajax-form').submit();
 			},
 
@@ -462,7 +467,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// setup
 			function(){
-				$.mobile.changePage("#skip-dialog-first");
+				pageContainer.pagecontainer( "change", "#skip-dialog-first" );
 			},
 
 			// transition to the dialog
@@ -854,13 +859,14 @@ $.testHelper.delayStart();
 		]);
 	});
 
- 	asyncTest( "query data passed as a string to changePage is appended to URL", function(){
+ 	asyncTest( "query data passed as a string to change() is appended to URL", function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.mobile.changePage( "form-tests/changepage-data.html", {
-					data: "foo=1&bar=2"
-				});
+				pageContainer
+					.pagecontainer( "change", "form-tests/changepage-data.html", {
+						data: "foo=1&bar=2"
+					});
 			},
 
 			function(){
@@ -874,16 +880,17 @@ $.testHelper.delayStart();
 		]);
 	});
 
-	asyncTest( "query data passed as an object to changePage is appended to URL", function(){
+	asyncTest( "query data passed as an object to change() is appended to URL", function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.mobile.changePage( "form-tests/changepage-data.html", {
-					data: {
-						foo: 3,
-						bar: 4
-					}
-				});
+				$.mobile
+					.pageContainer.pagecontainer( "change", "form-tests/changepage-data.html", {
+						data: {
+							foo: 3,
+							bar: 4
+						}
+					});
 			},
 
 			function(){
@@ -1143,7 +1150,7 @@ $.testHelper.delayStart();
 				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
 
 				// Now navigate to an hash that contains just a dialogHashKey.
-				$.mobile.changePage("#" + $.mobile.dialogHashKey);
+				pageContainer.pagecontainer( "change", "#" + $.mobile.dialogHashKey );
 			},
 
 			function(){
@@ -1304,7 +1311,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#link-hijacking-test" );
+				pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 			},
 
 			function() {
@@ -1346,7 +1353,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#link-hijacking-test" );
+				pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 			},
 
 			function() {
@@ -1370,7 +1377,8 @@ $.testHelper.delayStart();
 	asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
+				pageContainer
+					.pagecontainer( "change", "data-url-tests/parentheses.html?foo=(bar)" );
 			},
 
 			function() {
@@ -1392,7 +1400,8 @@ $.testHelper.delayStart();
 	asyncTest( "loading an embedded page with query params works", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );
+				pageContainer
+					.pagecontainer( "change", "#bar?baz=bak", { dataUrl: false } );
 			},
 
 			function() {
@@ -1406,7 +1415,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is accessed correctly even if it has a space in the url", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( " external.html" );
+				pageContainer.pagecontainer( "change", " external.html" );
 			},
 			function(){
 				equal( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
@@ -1432,7 +1441,7 @@ $.testHelper.delayStart();
 			equal( data.absUrl, absHomeUrl + "#bar" );
 		});
 
-		$.mobile.changePage( "#bar" );
+		pageContainer.pagecontainer( "change", "#bar" );
 
 		requestPath = "/theres/no/way/this/page/exists.html";
 
@@ -1441,6 +1450,6 @@ $.testHelper.delayStart();
 			start();
 		});
 
-		$.mobile.changePage( requestPath );
+		pageContainer.pagecontainer( "change", requestPath );
 	});
 })(jQuery);

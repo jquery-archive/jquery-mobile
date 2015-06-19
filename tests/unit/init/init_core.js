@@ -107,7 +107,7 @@ define([
 					function() {
 						var firstPage = findFirstPage();
 
-						deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
+						deepEqual( $( "body" )[0], firstPage.parent()[ 0 ] );
 					}
 				).then( start );
 			});

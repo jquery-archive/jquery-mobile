@@ -2,7 +2,8 @@
  * mobile navigation unit tests
  */
 (function($){
-	var transitioning = "ui-mobile-viewport-transitioning",
+	var pageContainer,
+		transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
@@ -53,7 +54,7 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-
+			pageContainer = $( "body" );
 
 			// disable this option so we can test transitions regardless of window width
 			disableMaxTransWidth();
@@ -97,12 +98,12 @@
 	Our default transition handler now has either one or two animationComplete calls - two if there are two pages in play (from and to)
 	To is required, so each async function must call start() onToComplete, not onFromComplete.
 	*/
-	asyncTest( "changePage applies perspective class to mobile viewport for flip", function(){
+	asyncTest( "change() applies perspective class to mobile viewport for flip", function(){
 		expect(1);
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#foo");
+				pageContainer.pagecontainer( "change", "#foo" );
 			},
 
 			function() {
@@ -116,11 +117,11 @@
 		]);
 	});
 
-	asyncTest( "changePage applies transition class to mobile viewport for default transition", function(){
+	asyncTest( "change() sets default transition class on mobile viewport", function() {
 		expect(1);
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#baz");
+				pageContainer.pagecontainer( "change", "#baz" );
 			},
 
 			function() {
@@ -160,13 +161,13 @@
 		$("#default-trans > a").click();
 	});
 
-	asyncTest( "changePage queues requests", function(){
+	asyncTest( "change() queues requests", function(){
 		expect(4)
 		var firstPage = $("#foo"),
 			secondPage = $("#bar");
 
-		$.mobile.changePage(firstPage);
-		$.mobile.changePage(secondPage);
+		pageContainer.pagecontainer( "change", firstPage );
+		pageContainer.pagecontainer( "change", secondPage );
 
 		onToComplete(function(){
 			ok(isTransitioningIn(firstPage), "first page begins transition");
@@ -204,7 +205,8 @@
 			start();
 		}, 5000);
 
-		$.mobile.changePage( $(".ui-page:not(.ui-page-active)").first() );
+		pageContainer
+			.pagecontainer( "change", $(".ui-page:not(.ui-page-active)").first() );
 
 	}
 
