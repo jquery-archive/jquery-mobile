@@ -77,6 +77,23 @@ $.widget( "mobile.panel", {
 		this._bindSwipeEvents();
 	},
 
+	_setOptions: function( newOptions ) {
+		if ( newOptions.dismissible !== undefined ) {
+			if ( newOptions.dismissible && !this._modal ) {
+				this._createModal();
+				this._bindSwipeEvents( this._modal );
+				if ( this.element.hasClass( this.options.classes.panelOpen ) ) {
+					this._displayModal();
+				}
+			} else if ( !newOptions.dismissible && this._modal ) {
+				this._modal.remove();
+				this._modal = null;
+			}
+		}
+
+		return this._superApply( arguments );
+	},
+
 	_getPanelInner: function() {
 		var panelInner = this.element.find( "." + this.options.classes.panelInner );
 
@@ -93,7 +110,7 @@ $.widget( "mobile.panel", {
 
 		self._modal = $( "<div class='" + self.options.classes.modal + "'></div>" )
 			.on( "mousedown", function() {
-				self.close();
+				self._close();
 			})
 			.appendTo( target );
 	},
@@ -245,17 +262,18 @@ $.widget( "mobile.panel", {
 
 	_handleSwipe: function( event ) {
 		if ( !event.isDefaultPrevented() ) {
-			this.close();
+			this._close();
 		}
 	},
 
-	_bindSwipeEvents: function() {
+	_bindSwipeEvents: function( target ) {
 		var handler = {};
 
 		// Close the panel on swipe if the swipe event's default is not prevented
 		if ( this.options.swipeClose ) {
 			handler[ "swipe" + this.options.position ] = "_handleSwipe";
-			this._on( ( this._modal ? this.element.add( this._modal ) : this.element ), handler );
+			this._on( ( target ? target :
+				( this._modal ? this.element.add( this._modal ) : this.element ) ), handler );
 		}
 	},
 
@@ -272,7 +290,7 @@ $.widget( "mobile.panel", {
 			// On escape, close? might need to have a target check too...
 			.on( "keyup.panel", function( e ) {
 				if ( e.keyCode === 27 && self._open ) {
-					self.close();
+					self._close();
 				}
 			});
 		if ( !this._parentPage && this.options.display !== "overlay" ) {
@@ -303,6 +321,14 @@ $.widget( "mobile.panel", {
 	_open: false,
 	_pageContentOpenClasses: null,
 	_modalOpenClasses: null,
+
+	_displayModal: function() {
+		if ( this._modal ) {
+			this._modal
+				.addClass( this._modalOpenClasses )
+				.height( Math.max( this._modal.height(), this.document.height() ) );
+		}
+	},
 
 	open: function( immediate ) {
 		if ( !this._open ) {
@@ -345,11 +371,7 @@ $.widget( "mobile.panel", {
 					}
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-					if ( self._modal ) {
-						self._modal
-							.addClass( self._modalOpenClasses )
-							.height( Math.max( self._modal.height(), self.document.height() ) );
-					}
+					self._displayModal();
 				},
 				complete = function() {
 
@@ -384,7 +406,10 @@ $.widget( "mobile.panel", {
 		}
 	},
 
-	close: function( immediate ) {
+	_close: function( immediate, ignoreDismissible ) {
+		if ( !ignoreDismissible && !this.options.dismissible ) {
+			return;
+		}
 		if ( this._open ) {
 			var self = this,
 
@@ -454,6 +479,10 @@ $.widget( "mobile.panel", {
 
 			self._open = false;
 		}
+	},
+
+	close: function( immediate ) {
+		this._close( immediate, true );
 	},
 
 	toggle: function() {
