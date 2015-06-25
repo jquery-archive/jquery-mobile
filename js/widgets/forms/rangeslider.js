@@ -236,7 +236,7 @@
 
 			this._updateHighlight();
 
-			if ( min >= max ) {
+			if ( min > max ) {
 				return false;
 			}
 		},

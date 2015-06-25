@@ -138,4 +138,17 @@
 		assert.lacksClasses( sliderLast, "ui-state-disabled" );
 	} );
 
+	test( "moving slider handles to same spot fires change event", function() {
+		var rangeslider = $( "#change-proximity-rangeslider" ),
+			handleFirst = rangeslider.find( ".ui-slider-handle" ).first(),
+			sliderFirst = $( "#rangeslider-proximity-first" );
+
+		
+		$( sliderFirst ).on( "change", function() {
+			equal( 2, $( this ).val(), "values should be equal on change when handles meet" );
+		} );
+		$.Event.prototype.keyCode = $.mobile.keyCode[ "UP" ];
+		handleFirst.trigger( "keydown" );
+	} );
+
 } )( jQuery );
