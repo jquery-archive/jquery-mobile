@@ -66,5 +66,11 @@
 		deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ) ), -1,
 			"tabindex is set to -1" );
 	});
+	test( "checkbox based flipswitch is destroyed without error", function(assert) {
+		throws( $( "#flip-checkbox" ).flipswitch( "destroy" ) , "should be destroyed without any error" );
+	});
+	test( "select based flipswitch is destroyed without error", function() {
+		throws( $( "#flip-select" ).flipswitch( "destroy" ), "should be destroyed without any error" );
+	});
 
 })( jQuery );

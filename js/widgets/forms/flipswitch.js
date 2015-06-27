@@ -267,8 +267,8 @@ $.widget( "mobile.flipswitch", $.extend({
 		this.on.remove();
 		this.off.remove();
 		this.element.unwrap();
+		this.element.removeClass( "ui-flipswitch-input" );
 		this.flipswitch.remove();
-		this.removeClass( "ui-flipswitch-input" );
 	}
 
 }, $.mobile.behaviors.formReset ) );
