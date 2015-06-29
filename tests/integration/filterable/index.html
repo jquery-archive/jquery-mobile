@@ -11,8 +11,7 @@
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
-	<script type="text/javascript">
-		// redirects from push-state-tests.html
+	<script>
 		$( document ).bind( 'mobileinit', function(){
 			$.testHelper.setPushState();
 		});
@@ -28,9 +27,12 @@
 				"widgets/toolbar",
 				"widgets/collapsible",
 				"widgets/forms/button",
+				"widgets/forms/button.backcompat",
 				"widgets/controlgroup",
+				"widgets/controlgroup.backcompat",
 				"widgets/forms/select",
-				"widgets/forms/checkboxradio"
+				"widgets/forms/checkboxradio",
+				"widgets/forms/checkboxradio.backcompat"
 			],
 			[ "init" ],
 			[ "filterable_core.js" ]
