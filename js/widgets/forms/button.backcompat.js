@@ -23,8 +23,8 @@
 			"jquery",
 			"../../core",
 			"../../widget",
-			"./button",
-			"../widget.backcompat" ], factory );
+			"../widget.backcompat",
+			"./button" ], factory );
 	} else {
 
 		// Browser globals
