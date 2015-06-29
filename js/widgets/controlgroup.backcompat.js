@@ -21,11 +21,11 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../widget",
-			"widget.theme",
+			"jquery-ui/widget",
+			"./widget.theme",
 			"jquery-ui/controlgroup",
-			"controlgroup",
-			"widget.backcompat" ], factory );
+			"./controlgroup",
+			"./widget.backcompat" ], factory );
 	} else {
 
 		// Browser globals
