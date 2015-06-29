@@ -14,13 +14,14 @@
 		"tools"
 	],
 	"dependencies": {
-		"jquery": ">=1.11.1",
+		"jquery": ">=1.8.0",
 		"jquery-ui": "arschmitz/jquery-ui#button-fixup"
 	},
 	"devDependencies": {
 		"requirejs": "2.1.2",
 		"qunit": "1.17.1",
 		"qunit-assert-classes": "0.1.7",
+		"jquery-1.11.3": "jquery#1.11.3",
 		"jshint": "2.4.0"
 	}
 }
