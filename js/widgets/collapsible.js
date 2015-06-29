@@ -21,13 +21,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-
-			// Deprecated as of 1.4.0 and will be removed in 1.5.0
-			// We only need this dependency so we get the $.widget shim from page, so we
-			// can use $.mobile.collapsible.initSelector in collapsibleset. As of 1.5.0
-			// we will assume that all children of the collapsibleset are to be turned
-			// into collapsibles.
-			"./page",
 			"../core",
 			"../widget" ], factory );
 	} else {
