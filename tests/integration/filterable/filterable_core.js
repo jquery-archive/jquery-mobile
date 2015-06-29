@@ -6,6 +6,7 @@
 module( "Filter Widget Core Functions" );
 
 asyncTest( "Filter hides/shows results when the user enters information", function() {
+	$( "body" ).enhance();
 	var input = $( "#filtered-listview-input" ),
 		listview = $( "#filtered-listview" );
 
