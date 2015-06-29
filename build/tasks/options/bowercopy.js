@@ -4,6 +4,7 @@ return {
 
 		// Bower components folder will be removed afterwards
 		clean: true,
+		ignore: [ "jquery" ],
 		destPrefix: "external"
 	},
 	tests: {
@@ -22,9 +23,9 @@ return {
 			"requirejs/require.js": "requirejs/require.js"
 		}
 	},
-	jquery: {
+	"jquery": {
 		files: {
-			"jquery/": "jquery/dist/"
+			"jquery/": "jquery-1.11.3/dist/"
 		}
 	},
 	"jquery-ui": {
