@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Button @VERSION
+ * jQuery UI Button button-fixup
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -38,21 +38,24 @@
 }( function( $ ) {
 
 $.widget( "ui.button", {
-	version: "@VERSION",
+	version: "button-fixup",
 	defaultElement: "<button>",
 	options: {
 		classes: {
 			"ui-button": "ui-corner-all"
 		},
 		disabled: null,
-		showLabel: true,
-		label: null,
 		icon: null,
-		iconPosition: "beginning"
+		iconPosition: "beginning",
+		label: null,
+		showLabel: true
 	},
 
 	_getCreateOptions: function() {
 		var disabled,
+
+			// This is to support cases like in jQuery Mobile where the base widget does have
+			// an implementation of _getCreateOptions
 			options = this._super() || {};
 
 		this.isInput = this.element.is( "input" );
@@ -202,13 +205,27 @@ $.widget( "ui.button", {
 		this.element[ /^(?:end|bottom)/.test( iconPosition ) ? "append" : "prepend" ]( this.icon );
 	},
 
+	_setOptions: function( options ) {
+		var newShowLabel = options.showLabel === undefined ?
+				this.options.showLabel :
+				options.showLabel,
+			newIcon = options.icon === undefined ? this.options.icon : options.icon;
+
+		if ( !newShowLabel && !newIcon ) {
+			options.showLabel = true;
+		}
+		this._super( options );
+	},
+
 	_setOption: function( key, value ) {
 		if ( key === "icon" ) {
 			if ( value ) {
 				this._updateIcon( key, value );
-			} else {
+			} else if ( this.icon ) {
 				this.icon.remove();
-				this.iconSpace.remove();
+				if ( this.iconSpace ) {
+					this.iconSpace.remove();
+				}
 			}
 		}
 
@@ -218,12 +235,8 @@ $.widget( "ui.button", {
 
 		// Make sure we can't end up with a button that has neither text nor icon
 		if ( key === "showLabel" ) {
-			if ( this.options.icon || value ) {
 				this._toggleClass( this._classes( "ui-button-icon-only" ), null, !value );
 				this._updateTooltip();
-			} else {
-				value = true;
-			}
 		}
 
 		if ( key === "label" ) {
@@ -260,7 +273,7 @@ $.widget( "ui.button", {
 			this.element[ 0 ].disabled : this.element.hasClass( "ui-button-disabled" );
 
 		if ( isDisabled !== this.options.disabled ) {
-			this._setOptions( { "disabled": isDisabled } );
+			this._setOptions( { disabled: isDisabled } );
 		}
 
 		this._updateTooltip();
@@ -295,8 +308,7 @@ if ( $.uiBackCompat !== false ) {
 					this.options.icon = this.options.icons.secondary;
 					this.options.iconPosition = "end";
 				}
-			}
-			if ( this.options.icon ) {
+			} else if ( this.options.icon ) {
 				this.options.icons.primary = this.options.icon;
 			}
 			this._super();
@@ -325,42 +337,44 @@ if ( $.uiBackCompat !== false ) {
 			this._superApply( arguments );
 		}
 	} );
+
 	$.fn.button = ( function( orig ) {
 		return function() {
-			if ( this.length && this[ 0 ].tagName === "INPUT" &&
-					( this.attr( "type" ) === "checkbox" || this.attr( "type" ) === "radio" ) ) {
-				if ( $.ui.checkboxradio ) {
-					if ( arguments.length === 0 ) {
-						return this.checkboxradio( {
-							"icon": false
-						} );
-					} else {
-						return this.checkboxradio.apply( this, arguments );
-					}
-				} else {
-					$.error( "Checkboxradio widget missing" );
-				}
-			} else {
+			if ( !this.length || ( this.length && this[ 0 ].tagName !== "INPUT" ) ||
+					( this.length && this[ 0 ].tagName === "INPUT" && (
+						this.attr( "type" ) !== "checkbox" && this.attr( "type" ) !== "radio"
+					) ) ) {
 				return orig.apply( this, arguments );
 			}
+			if ( !$.ui.checkboxradio ) {
+				$.error( "Checkboxradio widget missing" );
+			}
+			if ( arguments.length === 0 ) {
+				return this.checkboxradio( {
+					"icon": false
+				} );
+			}
+			return this.checkboxradio.apply( this, arguments );
 		};
 	} )( $.fn.button );
+
 	$.fn.buttonset = function() {
-		if ( $.ui.controlgroup ) {
-			if ( arguments[ 0 ] === "option" && arguments[ 1 ] === "items" && arguments[ 2 ] ) {
-				return this.controlgroup.apply( this,
-					[ arguments[ 0 ], "items.button", arguments[ 2 ] ] );
-			} else if ( typeof arguments[ 0 ] === "object" && arguments[ 0 ].items ) {
-				arguments[ 0 ].items = {
-					button: arguments[ 0 ].items
-				};
-			} else if ( arguments[ 0 ] === "option" && arguments[ 1 ] === "items" ) {
-				return this.controlgroup.apply( this, [ arguments[ 0 ], "items.button" ] );
-			}
-			return this.controlgroup.apply( this, arguments );
-		} else {
+		if ( !$.ui.controlgroup ) {
 			$.error( "Controlgroup widget missing" );
 		}
+		if ( arguments[ 0 ] === "option" && arguments[ 1 ] === "items" && arguments[ 2 ] ) {
+			return this.controlgroup.apply( this,
+				[ arguments[ 0 ], "items.button", arguments[ 2 ] ] );
+		}
+		if ( arguments[ 0 ] === "option" && arguments[ 1 ] === "items" ) {
+			return this.controlgroup.apply( this, [ arguments[ 0 ], "items.button" ] );
+		}
+		if ( typeof arguments[ 0 ] === "object" && arguments[ 0 ].items ) {
+			arguments[ 0 ].items = {
+				button: arguments[ 0 ].items
+			};
+		}
+		return this.controlgroup.apply( this, arguments );
 	};
 }
 
