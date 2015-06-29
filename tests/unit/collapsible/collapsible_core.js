@@ -1,6 +1,11 @@
 test( "Pre-rendered nested collapsibles are enhanced correctly", function() {
-var outerWidget = $( "#outer" ).collapsible().data( "mobile-collapsible" ),
-	innerWidget = $( "#inner" ).collapsible().data( "mobile-collapsible" );
+
+//This Test previously was actually testing auto page enhancment unintentionally
+// we use enhance to not worry about each widget
+$( 'body' ).enhance();
+
+var outerWidget = $( "#outer" ).data( "mobile-collapsible" ),
+	innerWidget = $( "#inner" ).data( "mobile-collapsible" );
 
 deepEqual( outerWidget._ui.heading.length, 1, "Outer heading consists of one element" );
 deepEqual( outerWidget._ui.heading[ 0 ], $( "#outer-heading" )[ 0 ],

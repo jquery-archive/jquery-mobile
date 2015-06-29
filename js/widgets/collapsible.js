@@ -27,7 +27,6 @@
 			// can use $.mobile.collapsible.initSelector in collapsibleset. As of 1.5.0
 			// we will assume that all children of the collapsibleset are to be turned
 			// into collapsibles.
-			"./page",
 			"../core",
 			"../widget" ], factory );
 	} else {
