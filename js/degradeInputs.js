@@ -58,6 +58,6 @@ var hook = function() {
 	$.mobile.degradeInputsWithin( this.addBack() );
 };
 
-( $.enhance = $.extend( $.enhance, $.extend( { hooks: [] }, $.enhance ) ) ).hooks.push( hook );
+( $.enhance = $.extend( $.enhance, $.extend( { hooks: [] }, $.enhance ) ) ).hooks.unshift( hook );
 return $.mobile.degradeInputsWithin;
 } );
