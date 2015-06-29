@@ -7,18 +7,18 @@
 function testExpandCollapse( selector ) {
 	var collapsible = $( selector );
 	deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed" );
-	deepEqual( collapsible.find( "a span" ).text(),
+	deepEqual( collapsible.find( "a .ui-collapsible-heading-status" ).text(),
 		$.mobile.collapsible.defaults.expandCueText,
 		"expand cue text should be set to default" );
 	$( selector + " >:header a" ).first().click();
 	deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), false, selector + " should be expanded after click" );
-	deepEqual( collapsible.find( "a span" ).text(),
+	deepEqual( collapsible.find( "a .ui-collapsible-heading-status" ).text(),
 		$.mobile.collapsible.defaults.collapseCueText,
 		"collapse cue text should be set to default" );
 
 	collapsible.collapsible( "option", "expandedIcon", "arrow-up" );
-	deepEqual( $( selector + ">:header a" ).hasClass( "ui-icon-arrow-up" ), true, selector + " when expanded and after setting expanded icon to 'arrow-up' should have class ui-icon-arrow-up." );
-	deepEqual( $( selector + ">:header a" ).hasClass( "ui-icon-minus" ), false, selector + " when expanded and after setting expanded icon to 'arrow-up' should not have class ui-icon-minus." );
+	deepEqual( $( selector + ">:header a .ui-icon" ).hasClass( "ui-icon-arrow-up" ), true, selector + " when expanded and after setting expanded icon to 'arrow-up' should have class ui-icon-arrow-up." );
+	deepEqual( $( selector + ">:header a .ui-icon" ).hasClass( "ui-icon-minus" ), false, selector + " when expanded and after setting expanded icon to 'arrow-up' should not have class ui-icon-minus." );
 
 	$( selector + " >:header a" ).first().click();
 	deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed" );
@@ -74,18 +74,6 @@ test( "Corners and inset", function() {
 
 test( "Corners and inset for pre-rendered", function() {
 	testCornersAndInset( "#pre-rendered-collapsible", "collapsible" );
-} );
-
-test( "iconpos option accepts arbitrary values", function() {
-	var collapsible = $( "#collapsible-iconpos-test" );
-
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-xyzzy" ), true,
-		"Initially anchor has class ui-icon-xyzzy" );
-	collapsible.collapsible( "option", "iconpos", "gnurbles" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-xyzzy" ), false,
-		"After setting iconpos option anchor no longer has class ui-icon-xyzzy" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-gnurbles" ), true,
-		"After setting iconpos option anchor has class ui-icon-gnurbles" );
 } );
 
 module( "Collapsible set", {} );
@@ -215,47 +203,35 @@ test( "expandedIcon behavior when collapsedIcon set to false", function() {
 	collapsible.collapsible( "option", "collapsedIcon", false );
 	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 		false, "Turning off collapsedIcon makes expanded icon disappear" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-beginning" ),
-		false, "Turning off collapsedIcon makes iconpos class disappear" );
 	collapsible.collapsible( "option", "collapsedIcon", "plus" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
+	deepEqual( collapsible.find( "a .ui-icon" ).hasClass( "ui-icon-minus" ),
 		true, "Turning on collapsedIcon makes expanded icon reappear" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-beginning" ),
-		true, "Turning on collapsedIcon makes iconpos class reappear" );
-} );
-
-test( "iconpos behavior when collapsedIcon set to false", function() {
-	var collapsible = $( "#collapsible-collapsed-icon-false-iconpos" );
-	collapsible.collapsible( "option", "collapsedIcon", false );
-	collapsible.collapsible( "option", "iconpos", "top" );
-	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-top" ),
-		false, "Setting iconpos while collapsedIcon is off has no effect" );
 } );
 
 test( "Collapsible with custom icons", function() {
 	var collapsibles = $( "#collapsible-with-custom-icons" ).find( ".ui-collapsible" );
 
-	ok( collapsibles.eq( 0 ).find( ".ui-button" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus" );
-	ok( collapsibles.eq( 1 ).find( ".ui-button" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus" );
-	ok( collapsibles.eq( 2 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r" );
-	ok( collapsibles.eq( 3 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d" );
+	ok( collapsibles.eq( 0 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus" );
+	ok( collapsibles.eq( 1 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus" );
+	ok( collapsibles.eq( 2 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r" );
+	ok( collapsibles.eq( 3 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d" );
 
 	// issue #4801: BEGIN
-	ok( collapsibles.eq( 4 ).find( ".ui-button" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info" );
+	ok( collapsibles.eq( 4 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info" );
 	collapsibles.eq( 4 ).trigger( "expand" );
-	ok( collapsibles.eq( 4 ).find( ".ui-button" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click" );
+	ok( collapsibles.eq( 4 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click" );
 	// issue #4801: END
 } );
 
 test( "Collapsible sets with custom icons", function() {
 	var collapsibles = $( "#collapsible-set-with-custom-icons" ).find( ".ui-collapsible" );
 
-	ok( collapsibles.eq( 0 ).find( ".ui-button" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus" );
-	ok( collapsibles.eq( 1 ).find( ".ui-button" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus" );
-	ok( collapsibles.eq( 2 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r" );
-	ok( collapsibles.eq( 3 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r" );
-	ok( collapsibles.eq( 4 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l" );
-	ok( collapsibles.eq( 5 ).find( ".ui-button" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u" );
+	ok( collapsibles.eq( 0 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus" );
+	ok( collapsibles.eq( 1 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus" );
+	ok( collapsibles.eq( 2 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r" );
+	ok( collapsibles.eq( 3 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r" );
+	ok( collapsibles.eq( 4 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l" );
+	ok( collapsibles.eq( 5 ).find( ".ui-button .ui-icon" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u" );
 } );
 
 module( "Theming", {} );
@@ -332,9 +308,9 @@ test( "collapsedIcon", function() {
 		null, "Option not set on inheriting child collapsible" );
 	deepEqual( $( "#explicit" ).collapsible( "option", "collapsedIcon" ),
 		"plus", "Option not set on explicitly assigned child collapsible" );
-	deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-forward" ),
+	deepEqual( $( "#inherits" ).find( "a .ui-icon" ).hasClass( "ui-icon-forward" ),
 		true, "Inheriting collapsible has collapsedIcon 'forward'" );
-	deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-plus" ),
+	deepEqual( $( "#explicit" ).find( "a .ui-icon" ).hasClass( "ui-icon-plus" ),
 		true, "Explicitly assigned collapsible has collapsedIcon 'plus'" );
 } );
 test( "expandedIcon", function() {
@@ -346,10 +322,10 @@ test( "expandedIcon", function() {
 		"minus",
 		"Option not set on explicitly assigned child collapsible" );
 	$( "#inherits" ).collapsible( "expand" );
-	deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-back" ),
+	deepEqual( $( "#inherits" ).find( "a .ui-icon" ).hasClass( "ui-icon-back" ),
 		true, "Inheriting collapsible has expandedIcon 'back'" );
 	$( "#explicit" ).collapsible( "expand" );
-	deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-minus" ),
+	deepEqual( $( "#explicit" ).find( "a .ui-icon" ).hasClass( "ui-icon-minus" ),
 		true, "Explicitly assigned collapsible has expandedIcon 'minus'" );
 } );
 test( "iconpos", function() {
@@ -360,10 +336,6 @@ test( "iconpos", function() {
 	deepEqual( $( "#explicit" ).collapsible( "option", "iconpos" ),
 		"beginning",
 		"Option not set on explicitly assigned child collapsible" );
-	deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-end" ),
-		true, "Inheriting collapsible has iconpos 'end'" );
-	deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-beginning" ),
-		true, "Explicitly assigned collapsible has iconpos 'beginning'" );
 } );
 test( "mini", function() {
 	$( "#inherit-test" ).collapsibleset( "option", "mini", "true" );
