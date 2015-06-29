@@ -111,11 +111,30 @@
 
             <p>The default icon positioning of collapsible headings can be overridden by using the <code>data-iconpos</code> attribute. In the below case, <code>data-iconpos="right"</code>.</p>
 
-            <div data-role="collapsible" data-iconpos="right">
-                <h3>I'm a header</h3>
-                <p><code>data-iconpos="right"</code></p>
+            <div data-demo-html="true">
+                <div data-role="collapsible" data-iconpos="right">
+                    <h3>I'm a header</h3>
+                    <p><code>data-iconpos="right"</code></p>
+                </div>
             </div>
-
+            <div data-demo-html="true">
+                <div data-role="collapsible" data-iconpos="top">
+                    <h3>I'm a header</h3>
+                    <p><code>data-iconpos="right"</code></p>
+                </div>
+            </div>
+            <div data-demo-html="true">
+                <div data-role="collapsible" data-iconpos="bottom">
+                    <h3>I'm a header</h3>
+                    <p><code>data-iconpos="right"</code></p>
+                </div>
+            </div>
+            <div data-demo-html="true">
+                <div data-role="collapsible" data-iconpos="left">
+                    <h3>I'm a header</h3>
+                    <p><code>data-iconpos="right"</code></p>
+                </div>
+            </div>
         <h2>Legend</h2>
 
         <p>For forms, use a <code>fieldset</code> and <code>legend</code> for the collapsible.</p>
@@ -225,8 +244,9 @@
 				<div data-demo-html="true">
 					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
 						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-plus">
-							Heading
+							<a href="#" class="ui-collapsible-heading-toggle ui-button">
+                            <span class="ui-icon ui-icon-plus"></span>
+							 Heading
 							<div class="ui-collapsible-heading-status"> click to expand contents</div>
 							</a>
 						</h4>

@@ -97,3 +97,6 @@
 .ui-collapsible-set .ui-collapsible.ui-first-child {
 	margin-top: 0;
 }
+.ui-collapsible-icon-right {
+	float: right;
+}
