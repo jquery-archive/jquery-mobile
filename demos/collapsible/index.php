@@ -225,8 +225,10 @@
 				<div data-demo-html="true">
 					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
 						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-plus">
-							Heading
+							<a href="#" class="ui-collapsible-heading-toggle ui-button">
+                            <span class="ui-icon ui-icon-plus"></span>
+
+							 Heading
 							<div class="ui-collapsible-heading-status"> click to expand contents</div>
 							</a>
 						</h4>

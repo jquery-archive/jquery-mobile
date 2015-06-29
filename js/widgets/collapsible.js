@@ -138,7 +138,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_enhance: function( elem, ui ) {
-		var iconclass,
+		var iconclass, method,
 			opts = this._renderedOptions,
 			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 
@@ -174,11 +174,18 @@ $.widget( "mobile.collapsible", {
 			.find( "a" )
 				.first()
 					.addClass( "ui-button " +
-						( iconclass ? iconclass + " " : "" ) +
-						( iconclass ? iconposClass( opts.iconpos ) +
-						" " : "" ) +
 						this._themeClassFromOption( "ui-button-", opts.theme ) + " " +
 						( opts.mini ? "ui-mini " : "" ) );
+
+		ui.icon = $( "<span class='ui-icon " + ( iconclass ? iconclass + " " : "" ) + "'></span>" );
+
+		method = this.options.iconpos === "right" ? "append" : "prepend";
+
+		ui.anchor[ method ]( "<span class='ui-icon-space'> </span>" )[ method ]( ui.icon );
+
+		if ( this.options.iconpos === "right" ) {
+			ui.icon.addClass( "ui-collapsible-icon-right" );
+		}
 
 		//drop heading in before content
 		ui.heading.insertBefore( ui.content );
@@ -245,7 +252,7 @@ $.widget( "mobile.collapsible", {
 				opts.expandedIcon === undefined ) ) {
 
 			// Remove all current icon-related classes
-			anchor.removeClass( [ iconposClass( currentOpts.iconpos ) ]
+			ui.icon.removeClass( [ iconposClass( currentOpts.iconpos ) ]
 				.concat( ( currentOpts.expandedIcon ?
 					[ "ui-icon-" + currentOpts.expandedIcon ] : [] ) )
 				.concat( ( currentOpts.collapsedIcon ?
@@ -254,7 +261,7 @@ $.widget( "mobile.collapsible", {
 
 			// Add new classes if an icon is supposed to be present
 			if ( hasIcon ) {
-				anchor.addClass(
+				ui.icon.addClass(
 					[ iconposClass( opts.iconpos !== undefined ?
 						opts.iconpos : currentOpts.iconpos ) ]
 						.concat( isCollapsed ?
@@ -314,11 +321,17 @@ $.widget( "mobile.collapsible", {
 		ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 			.find( "a" ).first()
-				.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
-
-				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
 				.removeClass( $.mobile.activeBtnClass );
+		ui.heading
+			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+			.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+
+		if ( ui.icon ) {
+			ui.icon.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
+
+			// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
+			.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) );
+		}
 
 		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 		ui.content
