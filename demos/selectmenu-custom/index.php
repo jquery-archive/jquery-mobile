@@ -46,7 +46,7 @@
                 <div data-demo-html="true">
                     <div class="ui-field-contain">
                         <label for="select-custom-20">Long list:</label>
-                        <select name="select-custom-20" id="select-custom-20" data-native-menu="false">
+                        <select name="select-custom-20" id="select-custom-20" data-native-menu="false" tabindex="-1">
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
