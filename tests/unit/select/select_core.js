@@ -22,9 +22,10 @@ module( "Custom select" );
 test( "Custom select is enhanced correctly", function() {
 	var popup = $( "#enhance-test-listbox" );
 
-	deepEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
-	deepEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
-	deepEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+	strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
+	strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2", "Tabindex is correctly copied from select" );
+	strictEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
+	strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
 
 } );
 
