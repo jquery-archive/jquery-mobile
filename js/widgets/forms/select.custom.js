@@ -55,6 +55,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_create: function() {
 		var o = this.options;
 
+		this._origTabIndex = ( this.element.attr( "tabindex" ) === undefined ) ? false : this.element.attr( "tabindex" );
+
 		// Custom selects cannot exist inside popups, so revert the "nativeMenu"
 		// option to true if a parent is a popup
 		o.nativeMenu = o.nativeMenu || ( this.element.parents( ":jqmData(role='popup'),:mobile-popup" ).length > 0 );
@@ -282,14 +284,6 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Create list from select, update state
 		this.refresh();
 
-		if ( this._origTabIndex === undefined ) {
-			// Map undefined to false, because this._origTabIndex === undefined
-			// indicates that we have not yet checked whether the select has
-			// originally had a tabindex attribute, whereas false indicates that
-			// we have checked the select for such an attribute, and have found
-			// none present.
-			this._origTabIndex = ( this.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.select.attr( "tabindex" );
-		}
 		this.select.attr( "tabindex", "-1" );
 		this._on( this.select, { focus: "_handleSelectFocus" } );
 
@@ -582,9 +576,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_button: function() {
-		return this.options.nativeMenu ?
-			this._super() :
-			$( "<a>", {
+		var attributes = {
 				"href": "#",
 				"role": "button",
 				// TODO value is undefined at creation
@@ -593,7 +585,12 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				// TODO value is undefined at creation
 				"aria-owns": this.menuId
-			} );
+			};
+
+		if ( this._origTabIndex ) {
+			attributes.tabindex = this._origTabIndex;
+		}
+		return this.options.nativeMenu ? this._super() : $( "<a>", attributes );
 	},
 
 	_destroy: function() {
