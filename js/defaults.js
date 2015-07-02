@@ -29,12 +29,6 @@
 
 return $.extend( $.mobile, {
 
-	// Deprecated and no longer used in 1.4 remove in 1.5
-	// Define the url parameter used for referencing widget-generated sub-pages.
-	// Translates to example.html&ui-page=subpageIdentifier
-	// hash segment before &ui-page= is used to make Ajax request
-	subPageUrlKey: "ui-page",
-
 	hideUrlBar: true,
 
 	// Keepnative Selector
