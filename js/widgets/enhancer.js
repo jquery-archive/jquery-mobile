@@ -74,7 +74,7 @@ $.extend( $.enhance, {
 
 	_filter: $.enhance._filter || false,
 
-	defaultProp: $.enhance.defaultProp || function() { return "data-role"; },
+	defaultProp: $.enhance.defaultProp || function() { return "data-ui-role"; },
 
 	defaultFunction: function( enhancables ) {
 		enhancables.each( function() {
@@ -132,7 +132,7 @@ $.extend( $.enhance, {
 
 		// This is the first time lets compile the options object
 		options = {};
-		ns = ( $.mobile.ns || "" ).replace( "-", "" );
+		ns = ( $.mobile.ns || "ui-" ).replace( "-", "" );
 
 		$.each( $( element ).data(), function( option, value ) {
 			option = option.replace( ns, "" );
