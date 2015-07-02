@@ -18,13 +18,10 @@
 .ui-mobile fieldset {
 	min-width: 0;
 }
-@-moz-document url-prefix() {
-	.ui-mobile fieldset {
-		display: table-column;
-		vertical-align: middle;
-	}
+.ui-mobile fieldset {
+	display: table-column;
+	vertical-align: middle;
 }
-
 /* Viewport */
 .ui-mobile-viewport {
 	margin: 0;
@@ -250,7 +247,6 @@ div.ui-mobile-viewport {
 	white-space: nowrap !important;
 }
 .ui-mini {
-	font-size: 13px;
 	line-height: 1.7;
 }
 .ui-mini .ui-button {
@@ -259,10 +255,13 @@ div.ui-mobile-viewport {
 /* Make buttons in toolbars default to mini and inline. */
 .ui-header .ui-button,
 .ui-footer .ui-button {
-	font-size: 13px;
 	display: inline-block;
 	vertical-align: middle;
 }
+
+.ui-mini,
+.ui-header .ui-button,
+.ui-footer .ui-button,
 .ui-header .ui-controlgroup .ui-button-icon-only,
 .ui-footer .ui-controlgroup .ui-button-icon-only,
 .ui-header .ui-button-left,
@@ -273,7 +272,7 @@ div.ui-mobile-viewport {
 .ui-mini .ui-button-icon-only,
 .ui-header .ui-button-icon-only,
 .ui-footer .ui-button-icon-only {
-	font-size: 16px;	
+	font-size: 16px;
 	padding: 0;
 }
 .ui-button-inline {

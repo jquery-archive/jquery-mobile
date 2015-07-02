@@ -30,6 +30,7 @@ grunt.registerTask( "build:js", [
 ] );
 grunt.registerTask( "build:css", [
 	"cssbuild",
+	"csslint",
 	"cssmin"
 ] );
 grunt.registerTask( "build:demos", [

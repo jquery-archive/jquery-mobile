@@ -1,0 +1,20 @@
+{
+	"adjoining-classes": false,
+	"box-model": false,
+	"box-sizing": false,
+	"compatible-vendor-prefixes": false,
+	"duplicate-background-images": false,
+	"import": false,
+	"important": false,
+	"outline-none": false,
+	"overqualified-elements": false,
+	"text-indent": false,
+
+	// These are not ideal but needed for current theme
+	"qualified-headings": false,
+	"regex-selectors": false,
+	"unqualified-attributes": false,
+	"universal-selector": false,
+	"unique-headings": false,
+	"vendor-prefix": false
+}
