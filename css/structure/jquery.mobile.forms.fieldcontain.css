@@ -7,6 +7,7 @@
 	padding: .8em 0;
 }
 .ui-field-contain > label ~ [class*="ui-"],
+.ui-field-contain > legend ~ [class*="ui-"]
 .ui-field-contain .ui-controlgroup-controls {
 	margin: 0;
 }
@@ -29,13 +30,26 @@
 		clear: both;
 	}
 	.ui-field-contain > label,
+	.ui-field-contain > legend,
 	.ui-field-contain .ui-controlgroup-label,
 	.ui-field-contain > .ui-rangeslider > label {
 		float: left;
 		width: 20%;
 		margin: .5em 2% 0 0;
 	}
+
+	.ui-field-contain > legend {
+		padding: 0;
+	}
+
+	.ui-field-contain > label.ui-button {
+		width: auto;
+		float: none;
+		margin: .5em 0;
+	}
+
 	.ui-popup .ui-field-contain > label,
+	.ui-popup .ui-field-contain > legend,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,
 	.ui-popup .ui-field-contain > .ui-rangeslider > label {
 		float: none;
@@ -43,6 +57,7 @@
 		margin: 0 0 .4em;
 	}
 	.ui-field-contain > label ~ [class*="ui-"],
+	.ui-field-contain > legend ~ [class*="ui-"],
 	.ui-field-contain .ui-controlgroup-controls {
 		float: left;
 		width: 78%;
@@ -50,7 +65,13 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
+
+	.ui-field-contain > legend ~ [class*="ui-"] {
+		margin: 0;
+	}
+
 	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
+	.ui-popup .ui-field-contain > legend ~ [class*="ui-"],
 	.ui-popup .ui-field-contain .ui-controlgroup-controls {
 		float: none;
 		width: 100%;
