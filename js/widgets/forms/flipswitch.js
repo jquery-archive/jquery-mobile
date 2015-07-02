@@ -51,6 +51,7 @@ return $.widget( "mobile.flipswitch", $.extend( {
 	_create: function() {
 		var labels;
 
+		this._originalTabIndex = this.element.attr( "tabindex" );
 		this.type = this.element[ 0 ].nodeName.toLowerCase();
 
 		if ( !this.options.enhanced ) {
@@ -65,11 +66,6 @@ return $.widget( "mobile.flipswitch", $.extend( {
 
 		this._handleFormReset();
 
-		// Transfer tabindex to "on" element and make input unfocusable
-		this._originalTabIndex = this.element.attr( "tabindex" );
-		if ( this._originalTabIndex != null ) {
-			this.on.attr( "tabindex", this._originalTabIndex );
-		}
 		this.element.attr( "tabindex", "-1" );
 		this._on( {
 			"focus": "_handleInputFocus"
@@ -143,12 +139,11 @@ return $.widget( "mobile.flipswitch", $.extend( {
 		var flipswitch = $( "<div>" ),
 			options = this.options,
 			element = this.element,
+			tabindex = this._originalTabIndex || 0,
 			theme = options.theme ? options.theme : "inherit",
 
 			// The "on" button is an anchor so it's focusable
-			on = $( "<a></a>", {
-				"href": "#"
-			} ),
+			on = $( "<span tabindex='" + tabindex + "'></span>" ),
 			off = $( "<span></span>" ),
 			onText = ( this.type === "input" ) ?
 				options.onText : element.find( "option" ).eq( 1 ).text(),
