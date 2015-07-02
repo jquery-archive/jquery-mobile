@@ -54,13 +54,10 @@ $.mobile.degradeInputsWithin = function( target ) {
 
 };
 
-var degradeHook = function() {
+var hook = function() {
 	$.mobile.degradeInputsWithin( this.addBack() );
 };
 
-$.fn.enhance = $.fn.enhance || $.noop;
-$.fn.enhance.hooks ? $.fn.enhance.hooks.push( degradeHook ) : $.fn.enhance.hooks = [ degradeHook ];
-
+( $.enhance = $.extend( $.enhance, $.extend( { hooks: [] }, $.enhance ) ) ).hooks.push( hook );
 return $.mobile.degradeInputsWithin;
-
 } );
