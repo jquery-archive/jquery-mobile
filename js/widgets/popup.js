@@ -86,7 +86,7 @@ function getWindowCoordinates( theWindow ) {
 	};
 }
 
-var popupHook = function() {
+var hook = function() {
 
 	// Links within content areas, tests included with page
 	$( this )
@@ -110,8 +110,7 @@ var popupHook = function() {
 		.addClass( "ui-link" );
 };
 
-$.fn.enhance = $.fn.enhance || $.noop;
-$.fn.enhance.hooks ? $.fn.enhance.hooks.push( popupHook ) : $.fn.enhance.hooks = [ popupHook ];
+( $.enhance = $.extend( $.enhance, $.extend( { hooks: [] }, $.enhance ) ) ).hooks.push( hook );
 
 $.widget( "mobile.popup", {
 	version: "@VERSION",
