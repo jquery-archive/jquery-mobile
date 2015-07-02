@@ -94,7 +94,7 @@ div.ui-mobile-viewport {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	border:0;
+	border-width: 0;
 }
 .ui-loader-default {
 	background: none;
