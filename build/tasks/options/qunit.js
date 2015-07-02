@@ -4,7 +4,7 @@ var path = require( "path" );
 module.exports = function( grunt ) {
 return {
 	options: {
-		timeout: 30000,
+		timeout: 60000,
 		"--web-security": "no",
 		coverage: {
 			baseUrl: ".",
