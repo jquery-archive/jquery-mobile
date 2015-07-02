@@ -55,6 +55,27 @@
 
 			<div data-demo-html="true">
 				<div class="ui-field-contain">
+					<label for="checkbox-a">Checkbox:</label>
+					<input type="checkbox" name="checkbox-a" id="checkbox-a">
+				</div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+				<div class="ui-field-contain">
+					<legend>Checkbox legend:</legend>
+					<label for="checkbox-b">Checkbox with legend:</label>
+					<input type="checkbox" name="checkbox-b" id="checkbox-b">
+				</div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+				<div class="ui-field-contain">
+					<button>Button</button>
+				</div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+				<div class="ui-field-contain">
 					<label for="select-native-1">Native select:</label>
 					<select name="select-native-1" id="select-native-1">
 						<option value="small">One</option>
