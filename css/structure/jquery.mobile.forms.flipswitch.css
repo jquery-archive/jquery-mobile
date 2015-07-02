@@ -77,3 +77,9 @@ html .ui-popup .ui-field-contain > label + .ui-flipswitch {
 .ui-popup .ui-field-contain .ui-flipswitch.ui-flipswitch-active {
 	width: 1.875em;
 }
+
+/* This is super ugly but there does not seem to be a better way with current theme */
+.ui-flipswitch-active .ui-btn {
+	color: inherit !important;
+	text-shadow: inherit !important;
+}
