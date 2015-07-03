@@ -200,7 +200,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 			scroll = $win.scrollTop(),
 			elHeight = $el.height(),
 			pHeight = ( !!this.page ) ? $el.closest( ".ui-page" ).height() : $( ".ui-page-active" ).height(),
-			viewportHeight = $.mobile.getScreenHeight();
+			viewportHeight = this.window.height();
 
 		return !notransition &&
 			( this.options.transition && this.options.transition !== "none" &&

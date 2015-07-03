@@ -164,7 +164,7 @@ $.extend( $.mobile.Transition.prototype, {
 		//      it is today. So we wait until transition is invoked to gather the following
 		var none,
 			reverseClass = this.reverse ? " reverse" : "",
-			screenHeight = $.mobile.getScreenHeight(),
+			screenHeight = $( window ).height(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false &&
 				$.mobile.window.width() > $.mobile.maxTransitionWidth;
 

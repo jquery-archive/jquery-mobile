@@ -187,7 +187,7 @@ return $.widget( "mobile.panel", {
 		var heightWithMargins, heightWithoutMargins,
 			self = this,
 			panelInnerHeight = self._panelInner.outerHeight(),
-			expand = panelInnerHeight > $.mobile.getScreenHeight();
+			expand = panelInnerHeight > this.window.height();
 
 		if ( expand || !self.options.positionFixed ) {
 			if ( expand ) {

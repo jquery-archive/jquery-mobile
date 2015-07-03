@@ -208,7 +208,7 @@ $.extend( $.mobile, {
 			pageOuterHeight = page.outerHeight( true );
 
 		height = compensateToolbars( page,
-			( typeof height === "number" ) ? height : $.mobile.getScreenHeight() );
+			( typeof height === "number" ) ? height : $( window ).height() );
 
 		// Remove any previous min-height setting
 		page.css( "min-height", "" );
