@@ -1039,7 +1039,7 @@ asyncTest( "handling of active button state when navigating", 1, function() {
 		},
 
 		function() {
-			ok( !$( "#active-state-page1 a" ).hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+			ok( !$( "#active-state-page1 a" ).hasClass( "ui-button-active" ), "No button should not have class ui-button-active" );
 			start();
 		}
 	] );
@@ -1123,7 +1123,7 @@ asyncTest( "disabling link binding disables navigation via links and highlightin
 		},
 
 		function( timeout ) {
-			ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebutton class" );
+			ok( !$.mobile.activePage.find( "a" ).hasClass( "ui-button-active" ), "vlick handler doesn't add the activebutton class" );
 			ok( timeout, "no page change was fired" );
 			start();
 		}
@@ -1150,7 +1150,7 @@ asyncTest( "handling of button active state when navigating by clicking back but
 		},
 
 		function() {
-			ok( !$( "#active-state-page2 a" ).hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+			ok( !$( "#active-state-page2 a" ).hasClass( "ui-button-active" ), "No button should not have class ui-button-active" );
 			start();
 		}
 	] );
@@ -1406,15 +1406,15 @@ asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function
 
 		function() {
 			// force the active button class
-			$hijacked.addClass( $.mobile.activeBtnClass );
+			$hijacked.addClass( "ui-button-active" );
 			$hijacked.trigger( 'vclick' );
-			ok( $hijacked.hasClass( $.mobile.activeBtnClass ), "active button class is added to the link per normal" );
+			ok( $hijacked.hasClass( "ui-button-active" ), "active button class is added to the link per normal" );
 
 			$disabledByParent.trigger( 'vclick' );
-			ok( !$disabledByParent.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+			ok( !$disabledByParent.hasClass( "ui-button-active" ), "active button class is never added to the link" );
 
 			$disabledByAttr.trigger( 'vclick' );
-			ok( !$disabledByAttr.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+			ok( !$disabledByAttr.hasClass( "ui-button-active" ), "active button class is never added to the link" );
 
 			$.mobile.ignoreContentEnabled = false;
 			start();

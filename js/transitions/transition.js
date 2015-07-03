@@ -57,7 +57,7 @@ $.extend( $.mobile.Transition.prototype, {
 
 	cleanFrom: function() {
 		this.$from
-			.removeClass( $.mobile.activePageClass + " out in reverse " + this.name )
+			.removeClass( "ui-page-active out in reverse " + this.name )
 			.height( "" );
 	},
 
@@ -79,7 +79,7 @@ $.extend( $.mobile.Transition.prototype, {
 			this.scrollPage();
 		}
 		if ( !this.sequential ) {
-			this.$to.addClass( $.mobile.activePageClass );
+			this.$to.addClass( "ui-page-active" );
 		}
 		this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
 	},
@@ -113,7 +113,7 @@ $.extend( $.mobile.Transition.prototype, {
 
 	startIn: function( screenHeight, reverseClass, none, preventFocus ) {
 		this.hideIn( function() {
-			this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
+			this.$to.addClass( "ui-page-active" + this.toPreClass );
 
 			// Send focus to page as it is now display: block
 			if ( !preventFocus ) {

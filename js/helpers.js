@@ -120,10 +120,10 @@ $.extend( $.mobile, {
 	},
 	removeActiveLinkClass: function( forceRemoval ) {
 		if ( !!$.mobile.activeClickedLink &&
-				( !$.mobile.activeClickedLink.closest( "." + $.mobile.activePageClass ).length ||
+				( !$.mobile.activeClickedLink.closest( ".ui-page-active" ).length ||
 				forceRemoval ) ) {
 
-			$.mobile.activeClickedLink.removeClass( $.mobile.activeBtnClass );
+			$.mobile.activeClickedLink.removeClass( "ui-button-active" );
 		}
 		$.mobile.activeClickedLink = null;
 	},
@@ -203,7 +203,7 @@ $.extend( $.mobile, {
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	resetActivePageHeight: function( height ) {
-		var page = $( "." + $.mobile.activePageClass ),
+		var page = $( ".ui-page-active" ),
 			pageHeight = page.height(),
 			pageOuterHeight = page.outerHeight( true );
 

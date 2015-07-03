@@ -1043,7 +1043,7 @@ $.mobile.popup.handleLink = function( $link ) {
 
 	//remove after delay
 	setTimeout( function() {
-		$link.removeClass( $.mobile.activeBtnClass );
+		$link.removeClass( "ui-button-active" );
 	}, 300 );
 };
 

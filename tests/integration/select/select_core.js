@@ -265,7 +265,7 @@ asyncTest( "selected items are highlighted", function() {
 
 		function() {
 			var firstMenuChoice = $( "#select-choice-few\\.dotTest-menu li:first a" );
-			ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
+			ok( firstMenuChoice.hasClass( "ui-button-active" ),
 				"default menu choice has the active button class" );
 
 			$( "#select-choice-few\\.dotTest-menu a:last" ).click();
@@ -278,7 +278,7 @@ asyncTest( "selected items are highlighted", function() {
 
 		function() {
 			var lastMenuChoice = $( "#select-choice-few\\.dotTest-menu li:last a" );
-			ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
+			ok( lastMenuChoice.hasClass( "ui-button-active" ),
 				"previously selected item has the active button class" );
 
 			// close the dialog

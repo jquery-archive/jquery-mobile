@@ -65,7 +65,7 @@ asyncTest( "classes modified by open", function() {
 			$modal = getModalFromPanel( $panel ),
 			$openButton = $page.find( "a[href='\\#panel-test-open']" );
 
-		ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
+		ok( !$openButton.hasClass( "ui-button-active" ), "button doesn't have active class" );
 
 		ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
 		ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
@@ -110,7 +110,7 @@ asyncTest( "classes modified by close", function() {
 	$panel.one( "panelopen", function( event ) {
 		$panel.panel( "close" );
 	} ).one( "panelclose", function( event ) {
-		ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
+		ok( !$openButton.hasClass( "ui-button-active" ), "button doesn't have active class" );
 		ok( !$panel.hasClass( defaults.classes.panelOpen ), "panel not open class" );
 
 		ok( !$modal.hasClass( defaults.classes.modalOpen ), "modal without open class" );

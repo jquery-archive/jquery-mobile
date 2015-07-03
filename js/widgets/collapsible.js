@@ -89,7 +89,7 @@ $.widget( "mobile.collapsible", {
 
 		this._on( ui.heading, {
 			"tap": function() {
-				ui.heading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+				ui.heading.find( "a" ).first().addClass( "ui-button-active" );
 			},
 
 			"click": function( event ) {
@@ -319,7 +319,7 @@ $.widget( "mobile.collapsible", {
 
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
-				.removeClass( $.mobile.activeBtnClass );
+				.removeClass( "ui-button-active" );
 
 		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 		ui.content
