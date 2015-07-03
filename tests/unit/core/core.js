@@ -2,7 +2,7 @@
  * mobile core unit tests
  */
 
-( function( $ ) {
+( function( $, QUnit ) {
 var libName = "core",
 	setGradeA = function( value, version ) {
 		$.support.mediaquery = value;
@@ -11,7 +11,7 @@ var libName = "core",
 	extendFn = $.extend,
 	ns = $.mobile.ns;
 
-module( libName, {
+QUnit.module( libName, {
 	setup: function() {
 		$.mobile.ns = ns;
 
@@ -27,7 +27,7 @@ module( libName, {
 } );
 
 $.testHelper.excludeFileProtocol( function() {
-	asyncTest( "grade A browser either supports media queries or is IE 7+", function() {
+	QUnit.asyncTest( "grade A browser either supports media queries or is IE 7+", function( assert ) {
 		setGradeA( false, 6 );
 		$.testHelper.deferredSequence( [
 			function() {
@@ -35,7 +35,7 @@ $.testHelper.excludeFileProtocol( function() {
 			},
 
 			function() {
-				ok( !$.mobile.gradeA() );
+				assert.ok( !$.mobile.gradeA() );
 			},
 
 			function() {
@@ -44,8 +44,8 @@ $.testHelper.excludeFileProtocol( function() {
 			},
 
 			function() {
-				ok( $.mobile.gradeA() );
-				start();
+				assert.ok( $.mobile.gradeA() );
+				QUnit.start();
 			}
 		] );
 	} );
@@ -58,21 +58,21 @@ function clearNSNormalizeDictionary() {
 	}
 }
 
-test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function() {
+QUnit.test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function( assert ) {
 	// Start with a fresh namespace property cache, just in case
 	// the previous test mucked with namespaces.
 	clearNSNormalizeDictionary();
 
-	equal( $.mobile.nsNormalize( "foo" ), "nstestFoo", "appends ns and initcaps" );
-	equal( $.mobile.nsNormalize( "fooBar" ), "nstestFooBar", "leaves capped strings intact" );
-	equal( $.mobile.nsNormalize( "foo-bar" ), "nstestFooBar", "changes dashed strings" );
-	equal( $.mobile.nsNormalize( "foo-bar-bak" ), "nstestFooBarBak", "changes multiple dashed strings" );
+	assert.equal( $.mobile.nsNormalize( "foo" ), "nstestFoo", "appends ns and initcaps" );
+	assert.equal( $.mobile.nsNormalize( "fooBar" ), "nstestFooBar", "leaves capped strings intact" );
+	assert.equal( $.mobile.nsNormalize( "foo-bar" ), "nstestFooBar", "changes dashed strings" );
+	assert.equal( $.mobile.nsNormalize( "foo-bar-bak" ), "nstestFooBarBak", "changes multiple dashed strings" );
 
 	// Reset the namespace property cache for the next test.
 	clearNSNormalizeDictionary();
 } );
 
-test( "$.mobile.nsNormalize works properly with an empty namespace", function() {
+QUnit.test( "$.mobile.nsNormalize works properly with an empty namespace", function( assert ) {
 	var realNs = $.mobile.ns;
 
 	$.mobile.ns = "";
@@ -81,10 +81,10 @@ test( "$.mobile.nsNormalize works properly with an empty namespace", function() 
 	// the previous test mucked with namespaces.
 	clearNSNormalizeDictionary();
 
-	equal( $.mobile.nsNormalize( "foo" ), "foo", "leaves uncapped and undashed" );
-	equal( $.mobile.nsNormalize( "fooBar" ), "fooBar", "leaves capped strings intact" );
-	equal( $.mobile.nsNormalize( "foo-bar" ), "fooBar", "changes dashed strings" );
-	equal( $.mobile.nsNormalize( "foo-bar-bak" ), "fooBarBak", "changes multiple dashed strings" );
+	assert.equal( $.mobile.nsNormalize( "foo" ), "foo", "leaves uncapped and undashed" );
+	assert.equal( $.mobile.nsNormalize( "fooBar" ), "fooBar", "leaves capped strings intact" );
+	assert.equal( $.mobile.nsNormalize( "foo-bar" ), "fooBar", "changes dashed strings" );
+	assert.equal( $.mobile.nsNormalize( "foo-bar-bak" ), "fooBarBak", "changes multiple dashed strings" );
 
 	$.mobile.ns = realNs;
 
@@ -93,100 +93,100 @@ test( "$.mobile.nsNormalize works properly with an empty namespace", function() 
 } );
 
 //data tests
-test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function() {
+QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function( assert ) {
 	var data;
 
-	deepEqual( $( "body" ).jqmData( "foo", true ), $( "body" ), "setting data returns the element" );
+	assert.deepEqual( $( "body" ).jqmData( "foo", true ), $( "body" ), "setting data returns the element" );
 
-	deepEqual( $( "body" ).jqmData( "foo" ), true, "getting data returns the right value" );
+	assert.deepEqual( $( "body" ).jqmData( "foo" ), true, "getting data returns the right value" );
 
-	deepEqual( $( "body" ).data( $.mobile.nsNormalize( "foo" ) ), true, "data was set using namespace" );
+	assert.deepEqual( $( "body" ).data( $.mobile.nsNormalize( "foo" ) ), true, "data was set using namespace" );
 
-	deepEqual( $( "body" ).jqmData( "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
+	assert.deepEqual( $( "body" ).jqmData( "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
 
 	data = $.extend( {}, $( "body" ).data() );
 	delete data[ $.expando ]; //discard the expando for that test
-	deepEqual( data.nstestFoo, true, "passing .data() no arguments returns a hash with all set properties" );
+	assert.deepEqual( data.nstestFoo, true, "passing .data() no arguments returns a hash with all set properties" );
 
-	deepEqual( $( "body" ).jqmData(), undefined, "passing no arguments returns undefined" );
+	assert.deepEqual( $( "body" ).jqmData(), undefined, "passing no arguments returns undefined" );
 
-	deepEqual( $( "body" ).jqmData( undefined ), undefined, "passing a single undefined argument returns undefined" );
+	assert.deepEqual( $( "body" ).jqmData( undefined ), undefined, "passing a single undefined argument returns undefined" );
 
-	deepEqual( $( "body" ).jqmData( undefined, undefined ), undefined, "passing 2 undefined arguments returns undefined" );
+	assert.deepEqual( $( "body" ).jqmData( undefined, undefined ), undefined, "passing 2 undefined arguments returns undefined" );
 
-	deepEqual( $( "body" ).jqmRemoveData( "foo" ), $( "body" ), "jqmRemoveData returns the element" );
+	assert.deepEqual( $( "body" ).jqmRemoveData( "foo" ), $( "body" ), "jqmRemoveData returns the element" );
 
-	deepEqual( $( "body" ).jqmData( "foo" ), undefined, "jqmRemoveData properly removes namespaced data" );
-
-} );
-
-
-test( "$.jqmData and $.jqmRemoveData methods are working properly", function() {
-	deepEqual( $.jqmData( document.body, "foo", true ), true, "setting data returns the value" );
-
-	deepEqual( $.jqmData( document.body, "foo" ), true, "getting data returns the right value" );
-
-	deepEqual( $.data( document.body, $.mobile.nsNormalize( "foo" ) ), true, "data was set using namespace" );
-
-	deepEqual( $.jqmData( document.body, "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
-
-	deepEqual( $.jqmData( document.body ), undefined, "passing no arguments returns undefined" );
-
-	deepEqual( $.jqmData( document.body, undefined ), undefined, "passing a single undefined argument returns undefined" );
-
-	deepEqual( $.jqmData( document.body, undefined, undefined ), undefined, "passing 2 undefined arguments returns undefined" );
-
-	deepEqual( $.jqmRemoveData( document.body, "foo" ), undefined, "jqmRemoveData returns the undefined value" );
-
-	deepEqual( $( "body" ).jqmData( "foo" ), undefined, "jqmRemoveData properly removes namespaced data" );
+	assert.deepEqual( $( "body" ).jqmData( "foo" ), undefined, "jqmRemoveData properly removes namespaced data" );
 
 } );
 
-test( "addDependents works properly", function() {
-	deepEqual( $( "#parent" ).jqmData( 'dependents' ), undefined );
+
+QUnit.test( "$.jqmData and $.jqmRemoveData methods are working properly", function( assert ) {
+	assert.deepEqual( $.jqmData( document.body, "foo", true ), true, "setting data returns the value" );
+
+	assert.deepEqual( $.jqmData( document.body, "foo" ), true, "getting data returns the right value" );
+
+	assert.deepEqual( $.data( document.body, $.mobile.nsNormalize( "foo" ) ), true, "data was set using namespace" );
+
+	assert.deepEqual( $.jqmData( document.body, "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
+
+	assert.deepEqual( $.jqmData( document.body ), undefined, "passing no arguments returns undefined" );
+
+	assert.deepEqual( $.jqmData( document.body, undefined ), undefined, "passing a single undefined argument returns undefined" );
+
+	assert.deepEqual( $.jqmData( document.body, undefined, undefined ), undefined, "passing 2 undefined arguments returns undefined" );
+
+	assert.deepEqual( $.jqmRemoveData( document.body, "foo" ), undefined, "jqmRemoveData returns the undefined value" );
+
+	assert.deepEqual( $( "body" ).jqmData( "foo" ), undefined, "jqmRemoveData properly removes namespaced data" );
+
+} );
+
+QUnit.test( "addDependents works properly", function( assert ) {
+	assert.deepEqual( $( "#parent" ).jqmData( 'dependents' ), undefined );
 	$( "#parent" ).addDependents( $( "#dependent" ) );
-	deepEqual( $( "#parent" ).jqmData( 'dependents' ).length, 1 );
+	assert.deepEqual( $( "#parent" ).jqmData( 'dependents' ).length, 1 );
 } );
 
-test( "removeWithDependents removes the parent element and ", function() {
+QUnit.test( "removeWithDependents removes the parent element and ", function( assert ) {
 	$( "#parent" ).addDependents( $( "#dependent" ) );
-	deepEqual( $( "#parent, #dependent" ).length, 2 );
+	assert.deepEqual( $( "#parent, #dependent" ).length, 2 );
 	$( "#parent" ).removeWithDependents();
-	deepEqual( $( "#parent, #dependent" ).length, 0 );
+	assert.deepEqual( $( "#parent, #dependent" ).length, 0 );
 } );
 
-test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
-	deepEqual( $( "#encoded" ).text(), "foo>" );
-	deepEqual( $( "#encoded" ).getEncodedText(), "foo&gt;" );
-	deepEqual( $( "#unencoded" ).getEncodedText(), "var foo;" );
+QUnit.test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function( assert ) {
+	assert.deepEqual( $( "#encoded" ).text(), "foo>" );
+	assert.deepEqual( $( "#encoded" ).getEncodedText(), "foo&gt;" );
+	assert.deepEqual( $( "#unencoded" ).getEncodedText(), "var foo;" );
 } );
 
-test( "closestPageData returns the parent's page data", function() {
+QUnit.test( "closestPageData returns the parent's page data", function( assert ) {
 	var pageChild = $( "#page-child" );
 
 	$( "#parent-page" ).data( "mobile-page", { foo: "bar" } );
-	deepEqual( $.mobile.closestPageData( pageChild ).foo, "bar" );
+	assert.deepEqual( $.mobile.closestPageData( pageChild ).foo, "bar" );
 } );
 
-test( "closestPageData returns the parent dialog's page data", function() {
+QUnit.test( "closestPageData returns the parent dialog's page data", function( assert ) {
 	var dialogChild = $( "#dialog-child" );
 
 	$( "#parent-dialog" ).data( "mobile-page", { foo: "bar" } );
-	deepEqual( $.mobile.closestPageData( dialogChild ).foo, "bar" );
+	assert.deepEqual( $.mobile.closestPageData( dialogChild ).foo, "bar" );
 } );
 
-test( "test that $.fn.jqmHijackable works", function() {
+QUnit.test( "test that $.fn.jqmHijackable works", function( assert ) {
 	$.mobile.ignoreContentEnabled = true;
 
-	deepEqual( $( "#hijacked-link" ).jqmHijackable().length, 1,
+	assert.deepEqual( $( "#hijacked-link" ).jqmHijackable().length, 1,
 		"a link without any association to data-ajax=false should be included" );
 
-	deepEqual( $( "#unhijacked-link-by-parent" ).jqmHijackable().length, 0,
+	assert.deepEqual( $( "#unhijacked-link-by-parent" ).jqmHijackable().length, 0,
 		"a link with a data-ajax=false parent should be excluded" );
 
-	deepEqual( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
+	assert.deepEqual( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
 		"a link with data-ajax=false should be excluded" );
 
 	$.mobile.ignoreContentEnabled = false;
 } );
-} )( jQuery );
+} )( jQuery, QUnit );
