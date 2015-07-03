@@ -78,13 +78,27 @@
 .jqm-demos .jqm-content > h3,
 .jqm-demos .jqm-content > p,
 .jqm-demos .jqm-content > ul li,
-.jqm-demos .jqm-content > a {
+.jqm-demos .jqm-content > a,
+.jqm-demos-intro h1,
+.jqm-demos-intro p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
-.jqm-demos .jqm-content > h1 {
+.jqm-demos .jqm-content > h1,
+.jqm-demos-intro > h1 {
 	font-size: 2.4em;
 	margin: 0 0 .625em;
+}
+.jqm-demos-intro {
+	width:65%;
+	padding:2%;
+	display: inline-block;
+	vertical-align: top;
+}
+.jqm-demos-hero {
+	width: 190px;
+	float: left;
+	margin-right: 2em;
 }
 .jqm-demos .jqm-content > h2 {
 	color: #3eb249;
@@ -100,7 +114,8 @@
 	font-size: 1.4em;
 	margin: 0 0 1em;
 }
-.jqm-demos .jqm-content > p {
+.jqm-demos .jqm-content > p,
+.jqm-demos-intro > p {
 	font-size: 1.2em;
 	line-height: 1.5;
 }
@@ -132,12 +147,6 @@
 }
 
 /* Homepage */
-.jqm-home > .jqm-content > img {
-	width: 400px;
-	max-width: 100%;
-	display: block;
-	margin: 2.5em 0;
-}
 .jqm-home .ui-grid-a {
 	margin: 2.5em -.5em -.5em;
 }
@@ -313,15 +322,22 @@
 	color: #fff;
 }
 
+.jqm-3rd-party {
+	background: rgba(62, 178, 73, .2);
+}
+
+.jqm-3rd-party:after {
+	content: "* 3rd Party Demo";
+	position: absolute;
+	top: .2em;
+	right: .2em;
+	font-size: .8em;
+}
+
 @media (min-width: 60em) {
 	.jqm-demos .jqm-header h2 {
-		padding: 1em 0 .7em;
 		margin: 0 1em 0 3%;
 		text-align: left;
-	}
-	.jqm-demos .jqm-header h2 img {
-		width: 275px;
-		height: 78px;
 	}
 	.jqm-demos .jqm-header p {
 		bottom: auto;
@@ -427,7 +443,7 @@
 }
 @media (min-width: 35em) {
 	.jqm-block-content {
-		min-height: 18em;
+		min-height: 10em;
 	}
 }
 
