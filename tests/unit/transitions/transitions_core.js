@@ -116,9 +116,9 @@ module( "Transition startIn", {
 } );
 
 test( "sets active page class on the dom element", function() {
-	ok( !$to.hasClass( $.mobile.activePageClass ) );
+	ok( !$to.hasClass( "ui-page-active" ) );
 	instance.startIn();
-	ok( $to.hasClass( $.mobile.activePageClass ) );
+	ok( $to.hasClass( "ui-page-active" ) );
 } );
 
 test( "sets the height", function() {

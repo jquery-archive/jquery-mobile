@@ -73,7 +73,7 @@ return $.widget( "mobile.slider", $.extend( {
 			slider = $( domSlider ),
 			valuebg = this.options.highlight && !isToggleSwitch ? ( function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
+				bg.className = "ui-slider-bg ui-button-active";
 				return $( bg ).prependTo( slider );
 			} )() : false,
 			options,
@@ -146,7 +146,7 @@ return $.widget( "mobile.slider", $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				activeClass = !i ? "" : " " + $.mobile.activeBtnClass;
+				activeClass = !i ? "" : " ui-button-active";
 				sliderImg = document.createElement( "span" );
 
 				sliderImg.className = [ "ui-slider-label ui-slider-label-", side, activeClass ].join( "" );
@@ -428,7 +428,7 @@ return $.widget( "mobile.slider", $.extend( {
 		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 			this.valuebg = ( function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
+				bg.className = "ui-slider-bg ui-button-active";
 				return $( bg ).prependTo( self.slider );
 			} )();
 		}

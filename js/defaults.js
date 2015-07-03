@@ -40,18 +40,6 @@ return $.extend( $.mobile, {
 	// Keepnative Selector
 	keepNative: ":jqmData(role='none'), :jqmData(role='nojs')",
 
-	// Deprecated in 1.4 remove in 1.5
-	// Class assigned to page currently in view, and during transitions
-	activePageClass: "ui-page-active",
-
-	// Deprecated in 1.4 remove in 1.5
-	// Class used for "active" button state, from CSS framework
-	activeBtnClass: "ui-button-active",
-
-	// Deprecated in 1.4 remove in 1.5
-	// Class used for "focus" form element state, from CSS framework
-	focusClass: "ui-focus",
-
 	// Automatically handle clicks and form submissions through Ajax, when same-domain
 	ajaxEnabled: true,
 

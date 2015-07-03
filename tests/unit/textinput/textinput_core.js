@@ -30,10 +30,10 @@ test( "focus/blur adds resp. removes focus class", function( assert ) {
 		textarea = $( "#focus-class-test-for-textarea" ),
 		testFocusBlur = function( widget ) {
 			widget.blur();
-			assert.lacksClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+			assert.lacksClasses( widget.textinput( "widget" )[ 0 ], "ui-focus",
 				widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
 			widget.focus();
-			assert.hasClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+			assert.hasClasses( widget.textinput( "widget" )[ 0 ], "ui-focus",
 				widget.attr( "id" ) + ": focus class is present when the widget is focused." );
 		};
 
