@@ -122,7 +122,7 @@ return $.widget( "mobile.panel", {
 	},
 
 	_getPage: function() {
-		var page = this._openedPage || this._parentPage || $( "." + $.mobile.activePageClass );
+		var page = this._openedPage || this._parentPage || $( ".ui-page-active" );
 
 		return page;
 	},
@@ -257,9 +257,9 @@ return $.widget( "mobile.panel", {
 			e.preventDefault();
 			link = $( e.target );
 			if ( link.hasClass( "ui-button" ) ) {
-				link.addClass( $.mobile.activeBtnClass );
+				link.addClass( "ui-button-active" );
 				this.element.one( "panelopen panelclose", function() {
-					link.removeClass( $.mobile.activeBtnClass );
+					link.removeClass( "ui-button-active" );
 				} );
 			}
 			this.toggle();

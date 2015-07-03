@@ -61,7 +61,7 @@ return $.widget( "mobile.loader", {
 
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	fakeFixLoader: function() {
-		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+		var activeBtn = $( ".ui-button-active" ).first();
 
 		this.element
 			.css( {

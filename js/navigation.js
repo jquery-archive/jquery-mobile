@@ -283,7 +283,7 @@ $.mobile._registerInternalEvents = function() {
 					theButton.hasClass( "ui-disabled" ) ) ) ) {
 			$.mobile.removeActiveLinkClass( true );
 			$.mobile.activeClickedLink = theButton;
-			$.mobile.activeClickedLink.addClass( $.mobile.activeBtnClass );
+			$.mobile.activeClickedLink.addClass( "ui-button-active" );
 		}
 	} );
 

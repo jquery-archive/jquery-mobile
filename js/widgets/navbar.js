@@ -73,21 +73,21 @@ return $.widget( "mobile.navbar", {
 					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
 					// only ui-state-disabled should be present thereafter
 					activeBtn.hasClass( "ui-disabled" ) ||
-					activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
+					activeBtn.hasClass( "ui-button-active" ) ) ) {
 
-				$navbuttons.removeClass( $.mobile.activeBtnClass );
-				activeBtn.addClass( $.mobile.activeBtnClass );
+				$navbuttons.removeClass( "ui-button-active" );
+				activeBtn.addClass( "ui-button-active" );
 
 				// The code below is a workaround to fix #1181
 				$( document ).one( "pagehide", function() {
-					activeBtn.removeClass( $.mobile.activeBtnClass );
+					activeBtn.removeClass( "ui-button-active" );
 				} );
 			}
 		} );
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbuttons.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+			$navbuttons.filter( ".ui-state-persist" ).addClass( "ui-button-active" );
 		} );
 	}
 } );
