@@ -30,7 +30,7 @@
 
 // generate the handlers from the above
 var defaultGetMaxScrollForTransition = function() {
-	return $.mobile.getScreenHeight() * 3;
+	return $( window ).height() * 3;
 };
 
 //transition handler dictionary for 3rd party transitions

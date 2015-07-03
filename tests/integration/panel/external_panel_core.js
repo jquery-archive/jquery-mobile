@@ -68,7 +68,7 @@ $.testHelper.detailedEventCascade( [
 			"Successfully changed to page '#panel-stretch-page'" );
 
 		// Make the page scroll
-		$( "#panel-stretch-page .ui-content" ).height( $.mobile.getScreenHeight() * 3 );
+		$( "#panel-stretch-page .ui-content" ).height( $( window ).height() * 3 );
 
 		stretchTestPanel.panel( "open" );
 	},

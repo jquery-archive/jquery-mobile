@@ -75,7 +75,7 @@ return $.widget( "mobile.loader", {
 	checkLoaderPosition: function() {
 		var offset = this.element.offset(),
 			scrollTop = this.window.scrollTop(),
-			screenHeight = $.mobile.getScreenHeight();
+			screenHeight = this.window.height();
 
 		if ( offset.top < scrollTop || ( offset.top - scrollTop ) > screenHeight ) {
 			this.element.addClass( "ui-loader-fakefix" );
