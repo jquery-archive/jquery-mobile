@@ -117,6 +117,8 @@ test( "The classes option is updated when style options change", function( asser
 		"ui-button-inline ui-mini ui-shadow ui-corner-all",
 		"Element lacks all classes" );
 
+	// Intentionally setting the option twice here to ensure that the resulting class gets deduped
+	testWidget.option( "shadow", true );
 	testWidget.option( "shadow", true );
 	assert.deepEqual( testWidget.option(),
 		{
