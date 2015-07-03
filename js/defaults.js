@@ -67,10 +67,6 @@ return $.extend( $.mobile, {
 	// Set maximum window width for transitions to apply - 'false' for no limit
 	maxTransitionWidth: false,
 
-	// Minimum scroll distance that will be remembered when returning to a page
-	// Deprecated remove in 1.5
-	minScrollBack: 0,
-
 	// Set default dialog transition - 'none' for no transitions
 	defaultDialogTransition: "pop",
 

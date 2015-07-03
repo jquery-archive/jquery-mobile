@@ -120,16 +120,15 @@ $.widget( "mobile.pagecontainer", {
 		}
 
 		var active = this._getActiveHistory(),
-			currentScroll, minScroll, defaultScroll;
+			currentScroll, defaultScroll;
 
 		if ( active ) {
 			currentScroll = this._getScroll();
-			minScroll = this._getMinScroll();
 			defaultScroll = this._getDefaultScroll();
 
 			// Set active page's lastScroll prop. If the location we're
 			// scrolling to is less than minScrollBack, let it go.
-			active.lastScroll = currentScroll < minScroll ? defaultScroll : currentScroll;
+			active.lastScroll = currentScroll < defaultScroll ? defaultScroll : currentScroll;
 		}
 	},
 
@@ -139,10 +138,6 @@ $.widget( "mobile.pagecontainer", {
 
 	_getScroll: function() {
 		return this.window.scrollTop();
-	},
-
-	_getMinScroll: function() {
-		return $.mobile.minScrollBack;
 	},
 
 	_getDefaultScroll: function() {
