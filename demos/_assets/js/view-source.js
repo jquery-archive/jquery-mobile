@@ -220,7 +220,7 @@ $( document )
 	.on( "popupbeforeposition", ".jqm-view-source", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
-			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
+			maxHeight = $( window ).height() - 60 - ( x * 42 );
 
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
 
