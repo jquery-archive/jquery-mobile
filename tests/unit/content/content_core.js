@@ -246,14 +246,9 @@ test( "prefers default scroll when current scroll < default scroll", function() 
 		return active;
 	};
 
-	// min scroll
-	proto._getMinScroll = function() {
-		return 50;
-	};
-
 	// current scroll
 	proto._getScroll = function() {
-		return 25;
+		return 0;
 	};
 
 	// default scroll
