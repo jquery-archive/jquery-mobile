@@ -69,7 +69,9 @@ if ( $.mobileBackcompat !== false ) {
 				classArray = classes.match( classSplitterRegex ) || [];
 
 				if ( value ) {
-					classArray.push( optionClass );
+					if ( $.inArray( optionClass, classArray ) === -1 ) {
+						classArray.push( optionClass );
+					}
 				} else {
 					classArray.splice( $.inArray( optionClass, classArray ), 1 );
 				}
