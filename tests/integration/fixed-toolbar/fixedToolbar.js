@@ -486,7 +486,6 @@ asyncTest( "destroy removes classes from correct page ", function() {
 						deepEqual( callSequence, expectedCallSequence,
 							"Calls to addClass() and removeClass() made by stale " +
 							"animationComplete() handler are not present" );
-						console.log( "hide/show: " + toolbar.attr( "class" ) );
 
 						// Conclude test after having gone back to the main page
 						$.testHelper.pageSequence( [ function() {
@@ -535,7 +534,6 @@ asyncTest( "destroy removes classes from correct page ", function() {
 						deepEqual( callSequence, expectedCallSequence,
 							"Calls to addClass() and removeClass() made by stale " +
 							"animationComplete() handler are not present" );
-						console.log( "show/hide: " + toolbar.attr( "class" ) );
 
 						// Conclude test after having gone back to the main page
 						$.testHelper.pageSequence( [ function() {
