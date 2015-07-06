@@ -92,7 +92,7 @@ $.widget( "mobile.filterable", {
 	},
 
 	_filterItems: function( val ) {
-		var idx, callback, length, dst,
+		var idx, callback, length, dst, noFilter,
 			show = [],
 			hide = [],
 			opts = this.options,
@@ -104,7 +104,8 @@ $.widget( "mobile.filterable", {
 
 			// Partition the items into those to be hidden and those to be shown
 			for ( idx = 0 ; idx < length ; idx++ ) {
-				dst = ( callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
+				noFilter = ( $.mobile.getAttribute( filterItems[ idx ], "no-filter" ) );
+				dst = ( !noFilter && callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
 				dst.push( filterItems[ idx ] );
 			}
 		}
