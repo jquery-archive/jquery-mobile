@@ -49,7 +49,13 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 	_create: function() {
 		this.dialog = {};
-		this._super();
+
+		return this._superApply( arguments );
+	},
+
+	_establishStructure: function() {
+		var returnValue = this._superApply( arguments );
+
 		if ( this.options.dialog ) {
 			if ( this.options.enhanced ) {
 				this.dialog.wrapper = this.element.children( ".ui-page-dialog-contain" ).eq( 0 );
@@ -59,39 +65,54 @@ return $.widget( "mobile.page", $.mobile.page, {
 							.children( "a.ui-page-dialog-close-button" );
 					this.dialog.icon = this.dialog.button
 						.children( ".ui-page-dialog-close-button-icon" );
-					this._toggleButtonClasses( true, this.options.closeBtn );
 				}
-				this._toggleOuterClasses( true );
+			} else {
+				this.dialog.wrapper = $( "<div>", {
+
+					// ARIA role
+					"role": "dialog"
+				} );
+
+				// Gut the page
+				this.dialog.wrapper.append( this.element.contents() );
+
+				// Establish the button
+				this._setCloseButton( this.options.closeBtn, this.options.closeBtnText );
 			}
 		}
+
+		return returnValue;
 	},
 
-	_toggleOuterClasses: function( add ) {
-		this._toggleClass( "ui-page-dialog", null, add );
-		this._toggleClass( this.dialog.wrapper, "ui-page-dialog-contain", null, add );
+	_setAttributes: function() {
+		var returnValue = this._superApply( arguments );
+
+		if ( this.options.dialog ) {
+			this._addClass( "ui-page-dialog", null );
+			this._addClass( this.dialog.wrapper, "ui-page-dialog-contain", null );
+		}
+
+		if ( this.dialog.button && this.options.enhanced ) {
+			this._toggleButtonClasses( true, this.options.closeBtn );
+		}
+
+		return returnValue;
+	},
+
+	_attachToDOM: function() {
+		var returnValue = this._superApply( arguments );
+
+		if ( this.options.dialog ) {
+			this.element.append( this.dialog.wrapper );
+		}
+
+		return returnValue;
 	},
 
 	_toggleButtonClasses: function( add, location ) {
 		this._toggleClass( this.dialog.button, "ui-page-dialog-close-button",
 			"ui-button-" + location, add );
 		this._toggleClass( this.dialog.icon, "ui-page-dialog-close-button-icon", null, add );
-	},
-
-	_enhance: function() {
-		this._super();
-
-		if ( this.options.dialog ) {
-			this.dialog.wrapper = $( "<div>", {
-
-				// ARIA role
-				"role": "dialog"
-			} );
-
-			this.dialog.wrapper.append( this.element.contents() );
-			this._setCloseButton( this.options.closeBtn, this.options.closeBtnText );
-			this._toggleOuterClasses( true );
-			this.element.append( this.dialog.wrapper );
-		}
 	},
 
 	_setOptions: function( options ) {
@@ -115,6 +136,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 		if ( options.closeBtn !== undefined ) {
 			closeButtonLocation = options.closeBtn;
+			closeButtonText = closeButtonText || this.options.closeBtnText;
 		}
 
 		if ( closeButtonLocation ) {

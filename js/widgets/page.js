@@ -52,27 +52,42 @@ $.widget( "mobile.page", {
 			return false;
 		}
 
-		if ( !this.options.enhanced ) {
-			this._enhance();
-		}
-
-		this._on( this.element, {
-			pagebeforehide: "_handlePageBeforeHide",
-			pagebeforeshow: "_handlePageBeforeShow"
-		} );
+		this
+			._establishStructure()
+			._setAttributes()
+			._attachToDOM()
+			._addHandlers();
 
 		if ( this.options.enhanceWithin ) {
 			this.element.enhanceWithin();
 		}
 	},
 
-	_enhance: function() {
+	_establishStructure: function() {
+		return this;
+	},
+
+	_setAttributes: function() {
 		if ( this.options.role ) {
 			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
 		}
-
 		this.element.attr( "tabindex", "0" );
 		this._addClass( "ui-page", "ui-page-theme-" + this.options.theme );
+
+		return this;
+	},
+
+	_attachToDOM: function() {
+		return this;
+	},
+
+	_addHandlers: function() {
+		this._on( this.element, {
+			pagebeforehide: "_handlePageBeforeHide",
+			pagebeforeshow: "_handlePageBeforeShow"
+		} );
+
+		return this;
 	},
 
 	bindRemove: function( callback ) {
