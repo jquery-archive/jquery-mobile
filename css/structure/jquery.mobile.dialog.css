@@ -9,22 +9,22 @@
 	position: relative;
 	top: -1em;
 }
-.ui-dialog-contain > .ui-header, 
-.ui-dialog-contain > .ui-content, 
-.ui-dialog-contain > .ui-footer { 
+.ui-dialog-contain > .ui-header,
+.ui-dialog-contain > .ui-content,
+.ui-dialog-contain > .ui-footer {
 	display: block;
-	position: relative; 
+	position: relative;
 	width: auto;
 	margin: 0;
 }
 .ui-dialog-contain > .ui-header {
 	overflow: hidden;
-	z-index: 10; 
+	z-index: 10;
 	padding: 0;
 	border-top-width: 0;
 }
 .ui-dialog-contain > .ui-footer {
-	z-index: 10; 
-	padding: 0 1em; 
+	z-index: 10;
+	padding: 0 1em;
 	border-bottom-width: 0;
 }
