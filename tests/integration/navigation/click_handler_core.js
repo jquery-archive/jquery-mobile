@@ -5,10 +5,10 @@ var button = $( "#reset-button" ).click();
 
 expect( 2 );
 
-deepEqual( button.hasClass( $.mobile.activeBtnClass ), true, "When clicked, reset button gets active class" );
+deepEqual( button.hasClass( "ui-button-active" ), true, "When clicked, reset button gets active class" );
 
 setTimeout( function() {
-	deepEqual( button.hasClass( $.mobile.activeBtnClass ), false, "Active class is removed after a while" );
+	deepEqual( button.hasClass( "ui-button-active" ), false, "Active class is removed after a while" );
 	start();
 }, 700 );
 } );

@@ -362,7 +362,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		self.setButtonCount();
 
 		self.list.find( "li:not(.ui-li-divider)" )
-			.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
+			.find( "a" ).removeClass( "ui-button-active" ).end()
 			.attr( "aria-selected", false )
 			.each( function( i ) {
 				var item = $( this );
@@ -376,9 +376,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 						item.find( "a" ).removeClass( "ui-checkbox-off" ).addClass( "ui-checkbox-on" );
 					} else {
 						if ( item.hasClass( "ui-screen-hidden" ) ) {
-							item.next().find( "a" ).addClass( $.mobile.activeBtnClass );
+							item.next().find( "a" ).addClass( "ui-button-active" );
 						} else {
-							item.find( "a" ).addClass( $.mobile.activeBtnClass );
+							item.find( "a" ).addClass( "ui-button-active" );
 						}
 					}
 				} else if ( self.isMultiple ) {
@@ -411,7 +411,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_focusMenuItem: function() {
-		var selector = this.list.find( "a." + $.mobile.activeBtnClass );
+		var selector = this.list.find( "a.ui-button-active" );
 		if ( selector.length === 0 ) {
 			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-button" );
 		}
