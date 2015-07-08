@@ -77,7 +77,7 @@
 }
 
 /* Fix for Windows Phone issue #6349: unset the transition for transforms in case of fixed toolbars. */
-@media screen and ( max-device-width: 768px ) {
+@media screen and (max-device-width: 768px) {
 	.ui-page-header-fixed .ui-panel-animate.ui-panel-wrapper,
 	.ui-page-footer-fixed .ui-panel-animate.ui-panel-wrapper,
 	.ui-panel-animate.ui-panel-fixed-toolbar {
@@ -229,7 +229,7 @@
 		margin-left: 17em;
 	}
 	.ui-responsive-panel .ui-panel-page-content-open {
-		width: auto;	
+		width: auto;
 	}
 	.ui-responsive-panel .ui-panel-dismiss-display-push,
 	.ui-responsive-panel.ui-page-active ~ .ui-panel-dismiss-display-push {
