@@ -14,7 +14,7 @@
 	z-index: 1099;
 }
 .ui-popup-screen.in {
-	opacity: 0.5;
+	opacity: .5;
 	filter: Alpha(Opacity=50);
 }
 .ui-popup-screen.out {
@@ -117,7 +117,7 @@
 }
 .ui-popup > .ui-button-left,
 .ui-popup > .ui-button-right {
-	position: absolute; 
+	position: absolute;
 	top: -11px;
 	margin: 0;
 	z-index: 1101;
