@@ -55,7 +55,7 @@
   display: none;
 }
 .ui-page .ui-footer-fixed.ui-fixed-hidden {
-  display: block
+  display: block;
 }
 
 .ui-page-header-fullscreen .ui-fixed-hidden,
@@ -67,7 +67,7 @@
 	clip: rect(1px,1px,1px,1px);
 }
 .ui-header-fixed .ui-button,
-.ui-footer-fixed .ui-button { 
+.ui-footer-fixed .ui-button {
 	z-index: 10;
 }
 /* workarounds for other widgets */
