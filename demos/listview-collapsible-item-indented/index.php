@@ -13,16 +13,16 @@
 	<script src="../../js/"></script>
 	<style id="collapsible-list-item-style">
 		/* Basic settings */
-		.ui-li-static.ui-collapsible {
+		.ui-listview-item-static.ui-collapsible {
 			padding: 0;
 		}
 
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading {
 			margin: 0;
 		}
 
-		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content {
 			padding-top: 0;
 			padding-bottom: 0;
 			padding-right: 0;
@@ -30,30 +30,30 @@
 		}
 
 		/* collapse vertical borders */
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
-		.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-button {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
+		.ui-listview-item-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-button {
 			border-bottom-width: 0;
 		}
 
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-button,
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-button,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading > a.ui-button {
 			border-top-width: 0;
 		}
 
 		/* Remove right borders */
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-button,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-listview-item-static,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-button,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content {
 			border-right-width: 0;
 		}
 
 		/* Remove left borders */
 		/* Here, we need class ui-listview-outer to identify the outermost listview */
-		.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
-		.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+		.ui-listview-outer > .ui-listview-item-static.ui-collapsible .ui-listview-item-static.ui-collapsible.ui-collapsible,
+		.ui-listview-outer > .ui-listview-item-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content {
 			border-left-width: 0;
 		}
 	</style>

@@ -27,7 +27,7 @@
 	}
 } )( function( $ ) {
 
-var rdivider = /(^|\s)ui-li-divider($|\s)/,
+var rdivider = /(^|\s)ui-listview-item-divider($|\s)/,
 	rhidden = /(^|\s)ui-screen-hidden($|\s)/;
 
 return $.widget( "mobile.listview", $.mobile.listview, {

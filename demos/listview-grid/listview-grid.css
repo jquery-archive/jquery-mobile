@@ -2,7 +2,7 @@
 .my-page .ui-listview li .ui-button p {
 	color: #c0c0c0;
 }
-.my-page .ui-listview li .ui-button .ui-li-aside {
+.my-page .ui-listview li .ui-button .ui-listview-item-aside {
 	color: #eee;
 }
 
@@ -23,7 +23,7 @@
 		box-sizing: border-box;
 		height: 100%;
 	}
-	.my-page .ui-listview li.ui-li-has-thumb .ui-li-thumb {
+	.my-page .ui-listview li.ui-listview-item-has-thumbnail .ui-listview-item-thumbnail {
 		height: auto; /* To keep aspect ratio. */
 		max-width: 100%;
 		max-height: none;
@@ -31,7 +31,7 @@
 	/* Make all list items and anchors inherit the border-radius from the UL. */
 	.my-page .ui-listview li,
 	.my-page .ui-listview li .ui-button,
-	.my-page .ui-listview .ui-li-thumb {
+	.my-page .ui-listview .ui-listview-item-thumbnail {
 		-webkit-border-radius: inherit;
 		border-radius: inherit;
 	}
@@ -63,19 +63,18 @@
 		bottom: 0;
 	}
 	/* Semi transparent background and different position if there is a thumb. The button has overflow hidden so we don't need to set border-radius. */
-	.ui-listview .ui-li-has-thumb h2,
-	.ui-listview .ui-li-has-thumb p {
+	.ui-listview .ui-listview-item-has-thumbnail h2,
+	.ui-listview .ui-listview-item-has-thumbnail p {
 		background: #111;
 		background: rgba(0,0,0,.8);
 	}
-	.ui-listview .ui-li-has-thumb h2 {
+	.ui-listview .ui-listview-item-has-thumbnail h2 {
 		bottom: 35%;
 	}
-	.ui-listview .ui-li-has-thumb p {
+	.ui-listview .ui-listview-item-has-thumbnail p {
 		min-height: 35%;
 	}
-	/* ui-li-aside has class .ui-li-desc as well so we have to override some things. */
-	.my-page .ui-listview .ui-li-aside {
+	.my-page .ui-listview .ui-listview-item-aside {
 		padding: .125em .625em;
 		width: auto;
 		min-height: 0;

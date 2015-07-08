@@ -205,7 +205,7 @@
 }
 .jqm-demos .jqm-list .ui-button,
 .jqm-demos .jqm-list .ui-button:visited,
-.jqm-demos .jqm-list .ui-li-divider {
+.jqm-demos .jqm-list .ui-listview-item-divider {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	text-shadow: none !important;
@@ -217,7 +217,7 @@
 .jqm-demos .jqm-list .ui-button.ui-button-active {
 	color: #fff;
 }
-.jqm-demos .jqm-list .ui-li-divider {
+.jqm-demos .jqm-list .ui-listview-item-divider {
 	color: #3eb249;
 }
 
@@ -225,7 +225,7 @@
 .jqm-navmenu-panel .ui-listview > li .ui-collapsible-heading {
 	margin: 0;
 }
-.jqm-navmenu-panel .ui-collapsible.ui-li-static {
+.jqm-navmenu-panel .ui-collapsible.ui-listview-item-static {
 	padding: 0;
 	border: none !important;
 }

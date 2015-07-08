@@ -152,9 +152,9 @@ return $.widget( "mobile.selectmenu", $.extend( {
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
 			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-body-inherit" )
+				.addClass( "ui-listview-item-count-bubble ui-body-inherit" )
 				.hide()
-				.appendTo( button.addClass( "ui-li-has-count" ) );
+				.appendTo( button.addClass( "ui-listview-item-has-count" ) );
 		}
 
 		// Disable if specified
@@ -252,29 +252,30 @@ return $.widget( "mobile.selectmenu", $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( ( function() {
-			if ( selected.length ) {
-				text = selected.map( function() {
-					return $( this ).text();
-				} ).get().join( ", " );
-			} else {
-				text = self.placeholder;
-			}
+		this.button.children( "span" ).not( ".ui-listview-item-count-bubble" ).remove().end().end()
+			.prepend( ( function() {
+				if ( selected.length ) {
+					text = selected.map( function() {
+						return $( this ).text();
+					} ).get().join( ", " );
+				} else {
+					text = self.placeholder;
+				}
 
-			if ( text ) {
-				span.text( text );
-			} else {
+				if ( text ) {
+					span.text( text );
+				} else {
 
-				// Set the contents to &nbsp; which we write as &#160; to be XHTML compliant - see gh-6699
-				span.html( "&#160;" );
-			}
+					// Set the contents to &nbsp; which we write as &#160; to be XHTML compliant - see gh-6699
+					span.html( "&#160;" );
+				}
 
-			// TODO possibly aggregate multiple select option classes
-			return span
-				.addClass( self.select.attr( "class" ) )
-				.addClass( selected.attr( "class" ) )
-				.removeClass( "ui-screen-hidden" );
-		} )() );
+				// TODO possibly aggregate multiple select option classes
+				return span
+					.addClass( self.select.attr( "class" ) )
+					.addClass( selected.attr( "class" ) )
+					.removeClass( "ui-screen-hidden" );
+			} )() );
 	},
 
 	setButtonCount: function() {

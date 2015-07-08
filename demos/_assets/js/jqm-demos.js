@@ -153,7 +153,8 @@ $( document ).one( "pagecreate", ".jqm-demos", function( event ) {
 
 		$( this )
 			.find( "a" )
-			.append( "<span class='jqm-search-results-keywords ui-li-desc'>" + text + "</span>" );
+			.append( "<span class='jqm-search-results-keywords ui-listview-item-description'>" +
+				text + "</span>" );
 	});
 });
 

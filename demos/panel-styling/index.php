@@ -36,7 +36,7 @@
 	    .ui-listview > li .ui-collapsible-heading {
 	      margin: 0;
 	    }
-	    .ui-collapsible.ui-li-static {
+	    .ui-collapsible.ui-listview-item-static {
 	      padding: 0;
 	      border: none !important;
 	    }

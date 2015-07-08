@@ -130,7 +130,7 @@ $(document).bind('pagecreate', function () {
 
 	$('#add-gary-button').bind('click', function () {
 		var gary = $('<li><a href="#">Gary</a></li>');
-		$('#refreshable-dividers').find('li.ui-li-divider:contains(I)').before(gary);
+		$('#refreshable-dividers').find('li.ui-listview-item-divider:contains(I)').before(gary);
 		$('#refreshable-dividers').listview('refresh');
 	});
 
