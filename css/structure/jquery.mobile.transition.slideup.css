@@ -42,27 +42,39 @@
 }
 
 @-webkit-keyframes slideinfrombottom {
-    from { -webkit-transform: translateY(100%); }
-    to { -webkit-transform: translateY(0); }
+	from { -webkit-transform: translateY(100%);
+	}
+	to { -webkit-transform: translateY(0);
+	}
 }
 @-moz-keyframes slideinfrombottom {
-    from { -moz-transform: translateY(100%); }
-    to { -moz-transform: translateY(0); }
+	from { -moz-transform: translateY(100%);
+	}
+	to { -moz-transform: translateY(0);
+	}
 }
 @keyframes slideinfrombottom {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+	from { transform: translateY(100%);
+	}
+	to { transform: translateY(0);
+	}
 }
 
 @-webkit-keyframes slideouttobottom {
-    from { -webkit-transform: translateY(0); }
-    to { -webkit-transform: translateY(100%); }
+	from { -webkit-transform: translateY(0);
+	}
+	to { -webkit-transform: translateY(100%);
+	}
 }
 @-moz-keyframes slideouttobottom {
-    from { -moz-transform: translateY(0); }
-    to { -moz-transform: translateY(100%); }
+	from { -moz-transform: translateY(0);
+	}
+	to { -moz-transform: translateY(100%);
+	}
 }
 @keyframes slideouttobottom {
-    from { transform: translateY(0); }
-    to { transform: translateY(100%); }
+	from { transform: translateY(0);
+	}
+	to { transform: translateY(100%);
+	}
 }
