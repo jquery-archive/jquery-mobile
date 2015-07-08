@@ -3,8 +3,8 @@ textarea.ui-textinput-text.ui-textinput-autogrow {
 }
 
 .ui-textinput-autogrow-resize {
-	-webkit-transition: height 0.25s;
-	-o-transition: height 0.25s;
-	-moz-transition: height 0.25s;
-	transition: height 0.25s;
+	-webkit-transition: height .25s;
+	-o-transition: height .25s;
+	-moz-transition: height .25s;
+	transition: height .25s;
 }
