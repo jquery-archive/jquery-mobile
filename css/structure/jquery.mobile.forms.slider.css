@@ -2,7 +2,7 @@ div.ui-slider {
 	height: 30px;
 	margin: .5em 0;
 	padding: 0;
-	-ms-touch-action: pan-y pinch-zoom double-tap-zoom;
+	touch-action: pan-y;
 }
 div.ui-slider:before,
 div.ui-slider:after {
@@ -26,7 +26,6 @@ input.ui-slider-input {
 	border-style: solid;
 	outline: 0;
 	text-align: center;
-	vertical-align: text-bottom;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
