@@ -100,7 +100,7 @@ li.ui-block-e {
 }
 .ui-grid-solo > .ui-block-a {
 	width: 100%;
-	float: none; 
+	float: none;
 }
 
 /* preset breakpoint to switch to stacked grid styles below 35em (560px) */
@@ -110,7 +110,7 @@ li.ui-block-e {
 	.ui-responsive > .ui-block-c,
 	.ui-responsive > .ui-block-d,
 	.ui-responsive > .ui-block-e {
-		width: 100%; 
-		float: none; 
+		width: 100%;
+		float: none;
 	}
 }
