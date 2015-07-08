@@ -71,6 +71,6 @@
 	z-index: 10;
 }
 /* workarounds for other widgets */
-.ui-toolbar-android-2x-fixed .ui-li-has-thumb {
+.ui-toolbar-android-2x-fixed .ui-listview-item-has-thumbnail {
 	-webkit-transform: translate3d(0,0,0);
 }

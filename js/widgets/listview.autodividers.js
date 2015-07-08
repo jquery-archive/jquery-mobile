@@ -27,15 +27,18 @@
 	}
 } )( function( $ ) {
 
+var dividerClassRegex = /\bui-listview-item-divider\b/;
+
 function defaultAutodividersSelector( elt ) {
-	// look for the text in the given element
+
+	// Look for the text in the given element
 	var text = $.trim( elt.text() ) || null;
 
 	if ( !text ) {
 		return null;
 	}
 
-	// create the text for the divider (first uppercased letter)
+	// Create the text for the divider (first uppercased letter)
 	text = text.slice( 0, 1 ).toUpperCase();
 
 	return text;
@@ -50,33 +53,81 @@ return $.widget( "mobile.listview", $.mobile.listview, {
 	_beforeListviewRefresh: function() {
 		if ( this.options.autodividers ) {
 			this._replaceDividers();
-			this._superApply( arguments );
 		}
+		return this._superApply( arguments );
 	},
 
 	_replaceDividers: function() {
-		var i, lis, li, dividerText,
-			lastDividerText = null,
-			list = this.element,
-			divider;
+		var existingDivider, existingDividerText, lastDividerText,
+			items = this._getChildrenByTagName( this.element[ 0 ], "li", "LI" );
 
-		list.children( "li:jqmData(role='list-divider')" ).remove();
+		items.each( $.proxy( function( index, item ) {
+			var divider, dividerText;
 
-		lis = list.children( "li" );
+			item = $( item );
 
-		for ( i = 0; i < lis.length; i++ ) {
-			li = lis[ i ];
-			dividerText = this.options.autodividersSelector( $( li ) );
+			// This tests whether the item is a divider - first we check the class name, and second
+			// we check the slower way, via the data attribute
+			if ( ( item[ 0 ].className && item[ 0 ].className.match( dividerClassRegex ) ) ||
+					item[ 0 ].getAttribute( "data-" + $.mobile.ns + "role" ) === "list-divider" ) {
 
-			if ( dividerText && lastDividerText !== dividerText ) {
-				divider = document.createElement( "li" );
-				divider.appendChild( document.createTextNode( dividerText ) );
-				divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
-				li.parentNode.insertBefore( divider, li );
+				// The last item can't be a divider
+				if ( index === items.length - 1 ) {
+					item.remove();
+					return false;
+				}
+
+				// If the previous item was a divider, remove it
+				if ( existingDivider ) {
+					existingDivider.remove();
+				}
+
+				// The current item becomes the previous divider
+				existingDivider = item;
+				existingDividerText = item.text();
+
+				// If we've found a divider for a heading that already has a divider, remove it to
+				// coalesce two adjacent groups with identical headings
+				if ( existingDividerText === lastDividerText ) {
+					existingDivider.remove();
+					existingDivider = null;
+					existingDividerText = null;
+				}
+			} else {
+				dividerText = this.options.autodividersSelector( item );
+
+				// If this item is preceded by a suitable divider reuse it
+				if ( existingDivider ) {
+					if ( existingDividerText === dividerText ) {
+
+						// We prevent the generation of a divider below by setting the
+						// lastDividerText here
+						lastDividerText = existingDividerText;
+					} else {
+
+						// The preceding item is not a suitable divider
+						existingDivider.remove();
+					}
+
+					// We only keep a reference to an existing divider for one iteration, because
+					// the item immediately succeeding an existing divider will inform us as to
+					// whether the divider we've found is suitable for the current group
+					existingDivider = null;
+					existingDividerText = null;
+				}
+
+				// If we haven't found a suitable divider and a new group has started, generate a
+				// new divider
+				if ( dividerText && lastDividerText !== dividerText ) {
+					divider = document.createElement( "li" );
+					divider.appendChild( document.createTextNode( dividerText ) );
+					divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
+					item.before( divider );
+				}
+
+				lastDividerText = dividerText;
 			}
-
-			lastDividerText = dividerText;
-		}
+		}, this ) );
 	}
 } );
 

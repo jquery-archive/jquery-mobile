@@ -34,7 +34,7 @@
 	}
 } )( function( $ ) {
 
-var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
+var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-listview-item-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
 	goToAdjacentItem = function( item, target, direction ) {
 		var adjacent = item[ direction + "All" ]()
 			.not( unfocusableItemSelector )
@@ -200,7 +200,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// We need to grab the clicked item the hard way, because the list may have been rebuilt
 		if ( this.isMultiple ) {
 			this.select.trigger( "change" );
-			this.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
+			this.list.find( "li:not(.ui-listview-item-divider)" ).eq( newIndex )
 				.find( "a" ).first().focus();
 		} else {
 			this.close();
@@ -299,7 +299,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"focusin": "_handleListFocus",
 			"focusout": "_handleListFocus",
 			"keydown": "_handleListKeydown",
-			"click li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)": "_handleListItemClick"
+			"click li:not(.ui-disabled,.ui-state-disabled,.ui-listview-item-divider)": "_handleListItemClick"
 		} );
 
 		// Button refocus ensures proper height calculation by removing the inline style and
@@ -361,7 +361,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		self.setButtonText();
 		self.setButtonCount();
 
-		self.list.find( "li:not(.ui-li-divider)" )
+		self.list.find( "li:not(.ui-listview-item-divider)" )
 			.find( "a" ).removeClass( "ui-button-active" ).end()
 			.attr( "aria-selected", false )
 			.each( function( i ) {

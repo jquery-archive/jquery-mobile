@@ -50,7 +50,8 @@ QUnit.asyncTest( "placeholder correctly gets ui-screen-hidden after rebuilding",
 				// Bring up the optgroup menu
 				ok( $( "#optgroup-and-placeholder-container a" ).length > 0,
 					"there is in fact a button in the page" );
-				assert.hasClasses( $( "#optgroup-and-placeholder-menu li.ui-li-divider" ).first(),
+				assert.hasClasses(
+					$( "#optgroup-and-placeholder-menu li.ui-listview-item-divider" ).first(),
 					"ui-bar-b", "Optgroup header has swatch b" );
 				$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 			},

@@ -12,20 +12,20 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="collapsible-list-item-style-flat">
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading {
 			margin: 0;
 		}
 
-		.ui-li-static.ui-collapsible {
+		.ui-listview-item-static.ui-collapsible {
 			padding: 0;
 		}
 
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading > .ui-button {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading > .ui-button {
 			border-top-width: 0;
 		}
 
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading.ui-collapsible-heading-collapsed > .ui-button,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-heading.ui-collapsible-heading-collapsed > .ui-button,
+		.ui-listview-item-static.ui-collapsible > .ui-collapsible-content {
 			border-bottom-width: 0;
 		}
 	</style>

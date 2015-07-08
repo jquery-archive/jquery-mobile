@@ -54,24 +54,25 @@
 	display: block;
 }
 
-/* ui-li-count is styled in the listview CSS. We set padding and offset here because select supports icon position while listview doesn't. */
-.ui-select .ui-li-has-count.ui-button {
+/* ui-listview-item-count is styled in the listview CSS. We set padding and offset here because
+   select supports icon position while listview doesn't. */
+.ui-select .ui-listview-item-has-count.ui-button {
 	padding-right: 2.8125em;
 }
-.ui-select .ui-li-has-count.ui-icon-end {
+.ui-select .ui-listview-item-has-count.ui-icon-end {
 	padding-right: 4.6875em;
 }
-.ui-select .ui-icon-end .ui-li-count {
+.ui-select .ui-icon-end .ui-listview-item-count-bubble {
 	right: 3.2em;
 }
 
 /* Count indicator position must be different for mini version. */
-.ui-select.ui-mini .ui-btn-icon-right .ui-li-count {
+.ui-select.ui-mini .ui-btn-icon-right .ui-listview-item-count-bubble {
 	right: 2.5em;
 }
 
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
-.ui-select .ui-button > span:not(.ui-li-count) {
+.ui-select .ui-button > span:not(.ui-listview-item-count-bubble) {
 	display: block;
 	text-overflow: ellipsis;
 	overflow: hidden !important;
@@ -133,7 +134,7 @@
 	border-bottom-width: 0;
 }
 
-.ui-selectmenu .ui-button.ui-li-divider {
+.ui-selectmenu .ui-button.ui-listview-item-divider {
 	cursor: default;
 }
 

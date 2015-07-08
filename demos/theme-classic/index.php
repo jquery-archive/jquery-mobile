@@ -182,15 +182,15 @@
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
 			<li>I</li>
-			<li data-role="list-divider" data-theme="b">Divider<span class="ui-li-count">3</span></li>
+			<li data-role="list-divider" data-theme="b">Divider<span class="ui-listview-item-count-bubble">3</span></li>
 			<li>am</li>
-			<li>static<span class="ui-li-count">6</span></li>
+			<li>static<span class="ui-listview-item-count-bubble">6</span></li>
 		</ul>
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
 			<li><a href="#">We</a></li>
 			<li data-role="list-divider" data-theme="b">Divider</li>
-			<li><a href="#">have<span class="ui-li-count">4</span></a></li>
+			<li><a href="#">have<span class="ui-listview-item-count-bubble">4</span></a></li>
 			<li><a href="#">links</a></li>
 		</ul>
 

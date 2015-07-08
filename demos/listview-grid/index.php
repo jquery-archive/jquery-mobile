@@ -35,7 +35,7 @@
 
         <p>In this demo there are two breakpoints. At the first breakpoint we swap from the regular stacked layout to a three column grid layout with tiles. At the second we switch from three to four columns.</p>
 
-        <p>The list items have a thumbail. In the grid layout those will get the same size as the tile. One list item doesn't hold an image to demonstrate how you can take advantage of class <code>ui-li-has-thumb</code> to adjust the style.</p>
+        <p>The list items have a thumbail. In the grid layout those will get the same size as the tile. One list item doesn't hold an image to demonstrate how you can take advantage of class <code>ui-listview-item-has-thumbnail</code> to adjust the style.</p>
 
         <a href="listview-grid.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
 
@@ -67,51 +67,51 @@
 
         <ul data-role="listview" data-inset="true">
         	<li><a href="#">
-            	<img src="../_assets/img/apple.png" class="ui-li-thumb">
+				<img src="../_assets/img/apple.png" class="ui-listview-item-thumbnail">
             	<h2>iOS 6.1</h2>
                 <p>Apple released iOS 6.1</p>
-                <p class="ui-li-aside">iOS</p>
+                <p class="ui-listview-item-aside">iOS</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/blackberry_10.png" class="ui-li-thumb">
+				<img src="../_assets/img/blackberry_10.png" class="ui-listview-item-thumbnail">
             	<h2>BlackBerry 10</h2>
                 <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
-                <p class="ui-li-aside">BlackBerry</p>
+                <p class="ui-listview-item-aside">BlackBerry</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/lumia_800.png" class="ui-li-thumb">
+				<img src="../_assets/img/lumia_800.png" class="ui-listview-item-thumbnail">
             	<h2>WP 7.8</h2>
                 <p>Nokia rolls out WP 7.8 to Lumia 800</p>
-                <p class="ui-li-aside">Windows Phone</p>
+                <p class="ui-listview-item-aside">Windows Phone</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/galaxy_express.png" class="ui-li-thumb">
+				<img src="../_assets/img/galaxy_express.png" class="ui-listview-item-thumbnail">
             	<h2>Galaxy</h2>
                 <p>New Samsung Galaxy Express</p>
-                <p class="ui-li-aside">Samsung</p>
+                <p class="ui-listview-item-aside">Samsung</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/nexus_7.png" class="ui-li-thumb">
+				<img src="../_assets/img/nexus_7.png" class="ui-listview-item-thumbnail">
             	<h2>Nexus 7</h2>
                 <p>Rumours about new full HD Nexus 7</p>
-                <p class="ui-li-aside">Android</p>
+                <p class="ui-listview-item-aside">Android</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/firefox_os.png" class="ui-li-thumb">
+				<img src="../_assets/img/firefox_os.png" class="ui-listview-item-thumbnail">
             	<h2>Firefox OS</h2>
                 <p>ZTE to launch Firefox OS smartphone at MWC</p>
-                <p class="ui-li-aside">Firefox</p>
+                <p class="ui-listview-item-aside">Firefox</p>
             </a></li>
         	<li><a href="#">
-            	<img src="../_assets/img/tizen.png" class="ui-li-thumb">
+				<img src="../_assets/img/tizen.png" class="ui-listview-item-thumbnail">
             	<h2>Tizen</h2>
                 <p>First Samsung phones with Tizen can be expected in 2013</p>
-                <p class="ui-li-aside">Tizen</p>
+                <p class="ui-listview-item-aside">Tizen</p>
             </a></li>
         	<li><a href="#">
             	<h2>Symbian</h2>
                 <p>Nokia confirms the end of Symbian</p>
-                <p class="ui-li-aside">Symbian</p>
+                <p class="ui-listview-item-aside">Symbian</p>
             </a></li>
         </ul>
 

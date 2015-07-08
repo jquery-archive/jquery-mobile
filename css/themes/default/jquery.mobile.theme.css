@@ -94,7 +94,7 @@ label.ui-button {
 /* Flipswitch */
 .ui-flipswitch.ui-corner-all,
 /* Count bubble */
-.ui-li-count {
+.ui-listview-item-count-bubble {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }

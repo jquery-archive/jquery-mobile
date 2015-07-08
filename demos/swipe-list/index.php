@@ -115,10 +115,10 @@
 			border-bottom-width: 1px;
 		}
 		/* Hide the delete button on touch devices */
-		ul.touch li.ui-li-has-alt a.delete {
+		ul.touch li.ui-listview-item-has-alternate a.delete {
 			display: none;
 		}
-		ul.touch li.ui-li-has-alt a.ui-button {
+		ul.touch li.ui-listview-item-has-alternate a.ui-button {
 			margin-right:0;
 		}
 		/* Styling for the popup */
@@ -179,7 +179,7 @@
                     <h3>Avery Walker</h3>
                     <p class="topic"><strong>Re: Dinner Tonight</strong></p>
                     <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
-                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>4:48</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -188,7 +188,7 @@
                     <h3>Amazon.com</h3>
                     <p class="topic"><strong>4-for-3 Books for Kids</strong></p>
                     <p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
-                    <p class="ui-li-aside"><strong>4:37</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>4:37</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -197,7 +197,7 @@
                     <h3>Mike Taylor</h3>
                     <p class="topic"><strong>Re: This weekend in Maine</strong></p>
                     <p>Hey little buddy, sorry but I can't make it up to vacationland this weekend. Maybe next weekend?</p>
-                    <p class="ui-li-aside"><strong>3:24</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>3:24</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -206,7 +206,7 @@
                     <h3>Redfin</h3>
                     <p class="topic"><strong>Redfin listing updates for today</strong></p>
                     <p>There are 3 updates for the home on your watchlist: 1 updated MLS listing and 2 homes under contract.</p>
-                    <p class="ui-li-aside"><strong>2:52</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>2:52</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -215,7 +215,7 @@
                     <h3>Angela Smith</h3>
                     <p class="topic"><strong>Link Request</strong></p>
                     <p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
-                    <p class="ui-li-aside"><strong>1:24</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>1:24</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -224,7 +224,7 @@
                     <h3>Stephen Weber</h3>
                     <p class="topic"><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
                     <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
-                    <p class="ui-li-aside"><strong>11:24</strong>AM</p>
+                    <p class="ui-listview-item-aside"><strong>11:24</strong>AM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -233,7 +233,7 @@
                     <h3>jQuery Team</h3>
                     <p class="topic"><strong>Boston Conference Planning</strong></p>
                     <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                    <p class="ui-listview-item-aside"><strong>9:18</strong>AM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -242,7 +242,7 @@
                     <h3>Avery Walker</h3>
                     <p class="topic"><strong>Re: Dinner Tonight</strong></p>
                     <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
-                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>4:48</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -251,7 +251,7 @@
                     <h3>Amazon.com</h3>
                     <p class="topic"><strong>4-for-3 Books for Kids</strong></p>
                     <p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
-                    <p class="ui-li-aside"><strong>4:37</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>4:37</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -260,7 +260,7 @@
                     <h3>Mike Taylor</h3>
                     <p class="topic"><strong>Re: This weekend in Maine</strong></p>
                     <p>Hey little buddy, sorry but I can't make it up to vacationland this weekend. Maybe next weekend?</p>
-                    <p class="ui-li-aside"><strong>3:24</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>3:24</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -269,7 +269,7 @@
                     <h3>Redfin</h3>
                     <p class="topic"><strong>Redfin listing updates for today</strong></p>
                     <p>There are 3 updates for the home on your watchlist: 1 updated MLS listing and 2 homes under contract.</p>
-                    <p class="ui-li-aside"><strong>2:52</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>2:52</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -278,7 +278,7 @@
                     <h3>Angela Smith</h3>
                     <p class="topic"><strong>Link Request</strong></p>
                     <p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
-                    <p class="ui-li-aside"><strong>1:24</strong>PM</p>
+                    <p class="ui-listview-item-aside"><strong>1:24</strong>PM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -287,7 +287,7 @@
                     <h3>Stephen Weber</h3>
                     <p class="topic"><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
                     <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
-                    <p class="ui-li-aside"><strong>11:24</strong>AM</p>
+                    <p class="ui-listview-item-aside"><strong>11:24</strong>AM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
@@ -296,7 +296,7 @@
                     <h3>jQuery Team</h3>
                     <p class="topic"><strong>Boston Conference Planning</strong></p>
                     <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                    <p class="ui-listview-item-aside"><strong>9:18</strong>AM</p>
                 </a>
                 <a href="#" class="delete">Delete</a>
             </li>
