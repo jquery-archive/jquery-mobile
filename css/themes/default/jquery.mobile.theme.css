@@ -609,5 +609,5 @@ button[disabled],
 .ui-noboxshadow .ui-button:focus,
 .ui-noboxshadow .ui-focus {
 	outline-width: 1px;
-	outline-style: auto;
+	outline-style: inherit;
 }
