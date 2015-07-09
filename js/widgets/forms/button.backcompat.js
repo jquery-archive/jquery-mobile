@@ -49,9 +49,9 @@ if ( $.mobileBackcompat !== false ) {
 
 		_create: function() {
 			if ( this.options.iconPosition !== $.ui.button.prototype.options.iconPosition ) {
-				this._seticonpos( this.options.iconPosition );
+				this._seticonPosition( this.options.iconPosition );
 			} else if ( this.options.iconpos !== $.ui.button.prototype.options.iconpos ) {
-				this._seticonPosition( this.options.iconpos );
+				this._seticonpos( this.options.iconpos );
 			}
 			this._super();
 		},
