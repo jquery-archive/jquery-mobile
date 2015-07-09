@@ -129,31 +129,16 @@
 
 		<div data-demo-html="true">
 			<form>
-				<input type="button" data-icon="delete" value="Left (default)">
-				<input type="button" data-icon="delete" data-iconpos="right" value="Right">
-				<input type="button" data-icon="delete" data-iconpos="top" value="Top">
-				<input type="button" data-icon="delete" data-iconpos="bottom" value="Bottom">
-				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
-				<div class="ui-input-button ui-button ui-icon-delete">
-					Enhanced - Left
-					<input type="button" data-enhanced="true" value="Enhanced - Left">
-				</div>
-				<div class="ui-input-button ui-button ui-icon-delete">
-					Enhanced - Right
-					<input type="button" data-enhanced="true" value="Enhanced - Right">
-				</div>
-				<div class="ui-input-button ui-button ui-icon-delete">
-					Enhanced - Top
-					<input type="button" data-enhanced="true" value="Enhanced - Top">
-				</div>
-				<div class="ui-input-button ui-button ui-icon-delete">
-					Enhanced - Bottom
-					<input type="button" data-enhanced="true" value="Enhanced - Bottom">
-				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-only">
-					Enhanced - Icon only
-					<input type="button" data-enhanced="true" value="Enhanced - Icon only">
-				</div>
+				<button data-role="button" data-icon="ui-icon-delete">Left (default)</button>
+				<button data-role="button" data-icon="ui-icon-delete" data-icon-position="end">Right</button>
+				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="top">Top</button>
+				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="bottom">Bottom</button>
+				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="notext">Icon only</button>
+				<button data-role="button" data-enhanced="true">Enhanced - Left</button>
+				<button data-role="button" data-enhanced="true">Enhanced - Right</button>
+				<button data-role="button" data-enhanced="true">Enhanced - Top</button>
+				<button data-role="button" data-enhanced="true">Enhanced - Bottom</button>
+				<button data-role="button" data-enhanced="true">Enhanced - Icon only</button>
 			</form>
 		</div><!--/demo-html -->
 
