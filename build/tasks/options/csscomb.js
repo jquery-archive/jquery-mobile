@@ -3,9 +3,9 @@ module.exports = {
 		options: {
 			config: ".csscomb.json"
 		},
-		files: [{
+		files: [ {
             expand: true,
-            src: [ 'css/structure/*.css' ]
-        }]
+            src: [ "css/structure/*.css" ]
+        } ]
 	}
 };
