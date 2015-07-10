@@ -67,11 +67,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 						.children( ".ui-page-dialog-close-button-icon" );
 				}
 			} else {
-				this.dialog.wrapper = $( "<div>", {
-
-					// ARIA role
-					"role": "dialog"
-				} );
+				this.dialog.wrapper = $( "<div>" );
 
 				// Gut the page
 				this.dialog.wrapper.append( this.element.contents() );
@@ -90,6 +86,9 @@ return $.widget( "mobile.page", $.mobile.page, {
 		if ( this.options.dialog ) {
 			this._addClass( "ui-page-dialog", null );
 			this._addClass( this.dialog.wrapper, "ui-page-dialog-contain", null );
+
+			// Aria role
+			this.dialog.wrapper.attr( "role", "dialog" );
 		}
 
 		if ( this.dialog.button && this.options.enhanced ) {

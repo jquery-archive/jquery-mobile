@@ -52,20 +52,17 @@ $.widget( "mobile.page", {
 			return false;
 		}
 
-		this
-			._establishStructure()
-			._setAttributes()
-			._attachToDOM()
-			._addHandlers();
+		this._establishStructure();
+		this._setAttributes();
+		this._attachToDOM();
+		this._addHandlers();
 
 		if ( this.options.enhanceWithin ) {
 			this.element.enhanceWithin();
 		}
 	},
 
-	_establishStructure: function() {
-		return this;
-	},
+	_establishStructure: $.noop,
 
 	_setAttributes: function() {
 		if ( this.options.role ) {
@@ -73,21 +70,15 @@ $.widget( "mobile.page", {
 		}
 		this.element.attr( "tabindex", "0" );
 		this._addClass( "ui-page", "ui-page-theme-" + this.options.theme );
-
-		return this;
 	},
 
-	_attachToDOM: function() {
-		return this;
-	},
+	_attachToDOM: $.noop,
 
 	_addHandlers: function() {
 		this._on( this.element, {
 			pagebeforehide: "_handlePageBeforeHide",
 			pagebeforeshow: "_handlePageBeforeShow"
 		} );
-
-		return this;
 	},
 
 	bindRemove: function( callback ) {
