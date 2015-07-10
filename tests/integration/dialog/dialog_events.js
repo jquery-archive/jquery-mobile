@@ -16,35 +16,6 @@ module( "dialog", {
 	}
 } );
 
-asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function() {
-	expect( 2 );
-
-	$.testHelper.pageSequence( [
-		function() {
-
-			// Bring up the dialog
-			$( "#foo-dialog-link" ).click();
-		},
-
-		function() {
-			var fooDialog = $( "#foo-dialog" );
-
-			// Make sure the dialog came up
-			ok( /&ui-state=dialog/.test( location.hash ),
-				"ui-state=dialog =~ location.hash", "dialog open" );
-
-			// Close the dialog
-			$.mobile.back();
-		},
-
-		function() {
-			ok( !( /&ui-state=dialog/.test( location.hash ) ),
-				"ui-state=dialog !~ location.hash" );
-			start();
-		}
-	] );
-} );
-
 asyncTest( "Test option data-close-btn", function( assert ) {
 	expect( 5 );
 

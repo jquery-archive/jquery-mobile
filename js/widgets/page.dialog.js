@@ -119,6 +119,10 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 		this._super( options );
 
+		if ( !this.options.dialog ) {
+			return;
+		}
+
 		if ( options.overlayTheme !== undefined ) {
 			if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
 

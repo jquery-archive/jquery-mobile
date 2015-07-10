@@ -253,7 +253,7 @@ asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
 } );
 
 asyncTest( "pre-rendered dialog options work", function( assert ) {
-	expect( 4 );
+	expect( 3 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -268,10 +268,6 @@ asyncTest( "pre-rendered dialog options work", function( assert ) {
 				"enhanced dialog button location can be changed" );
 			assert.lacksClasses( $( "#enhanced-dialog a" ), "ui-button-left",
 				"enhanced dialog button does not retain old location" );
-
-			$( "#enhanced-dialog" ).page( "option", "corners", false );
-			assert.lacksClasses( $( "#enhanced-dialog .ui-page-dialog-contain" ),
-				"ui-corner-all", "Corner class absent after option was turned off" );
 
 			$.mobile.back();
 		},

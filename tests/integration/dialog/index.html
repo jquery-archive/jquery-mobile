@@ -20,7 +20,7 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/page.dialog.backcompat",
+				"widgets/page.dialog",
 				"widgets/toolbar"
 			],
 			[ "init" ],
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 
-	<div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
+	<div id="foo-dialog" data-nstest-dialog="true" data-nstest-theme="b">
 		<div  data-nstest-role="header" data-nstest-position="inline">
 			<h1>Dialog</h1>
 		</div>
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 
-	<div id="close-button-test" data-nstest-role="dialog" data-nstest-theme="b" data-nstest-close-btn="none">
+	<div id="close-button-test" data-nstest-dialog="true" data-nstest-theme="b" data-nstest-close-btn="none">
 		<div  data-nstest-role="header" data-nstest-position="inline">
 			<h1>Dialog</h1>
 		</div>
@@ -78,7 +78,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="page" id="dialog-a" data-nstest-role="dialog">
+	<div data-nstest-role="page" id="dialog-a" data-nstest-dialog="true">
 		<div data-nstest-role="header" data-nstest-position="inline">
 			<h1> No theme set </h1>
 		</div>
@@ -90,7 +90,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="dialog" data-nstest-theme="e" id="dialog-b">
+	<div data-nstest-dialog="true" data-nstest-theme="e" id="dialog-b">
 		<div data-nstest-role="header">
 			<h1> data-nstest-theme set </h1>
 		</div>
@@ -102,7 +102,7 @@
 		</div>
 	</div>
 
-	<div data-nstest-role="dialog" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
+	<div data-nstest-dialog="true" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
 		<div data-nstest-role="header">
 			<h1> data-nstest-theme & data-nstest-overlay-theme set </h1>
 		</div>
