@@ -101,7 +101,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 	_attachToDOM: function() {
 		var returnValue = this._superApply( arguments );
 
-		if ( this.options.dialog ) {
+		if ( this.options.dialog && !this.options.enhanced ) {
 			this.element.append( this.dialog.wrapper );
 		}
 
