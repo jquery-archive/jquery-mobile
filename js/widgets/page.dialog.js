@@ -198,7 +198,15 @@ return $.widget( "mobile.page", $.mobile.page, {
 				this._removeClass( this.dialog.button, null, "ui-button-left ui-button-right" )
 					._addClass( this.dialog.button, null, "ui-button-" + location );
 				if ( text ) {
-					this.dialog.button.text( text );
+
+					// Get rid of all text nodes without touching other node types before updating
+					// the button's text.
+					this.dialog.button.contents()
+						.filter( function() {
+							return ( this.nodeType === 3 );
+						} )
+						.remove();
+					this.dialog.button.prepend( text );
 				}
 			}
 		} else if ( location !== "none" ) {
