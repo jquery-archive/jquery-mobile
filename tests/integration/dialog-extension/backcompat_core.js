@@ -45,62 +45,75 @@ function testClassPresence( assert, dialog, prefix, optionName, newOptionValue, 
 			prefix + ": option corners is " + expectedResult );
 }
 
-asyncTest( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
-	var option = "corners",
-		dialogOn = $( "#corners-option-test" ),
-		dialogOff = $( "#corners-option-test-false" );
+function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
+	asyncTest( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
+		var option = "corners",
+			dialogOn = $( "#" + prerenderedIdPrefix + "corners-option-test" ),
+			dialogOff = $( "#" + prerenderedIdPrefix + "corners-option-test-false" );
 
-	$.testHelper.pageSequence( [
-		function() {
-			$( "body" ).pagecontainer( "change", dialogOn );
-		},
-		function() {
-			testClassPresence( assert, dialogOn, "Initially", option, undefined, true );
-			testClassPresence( assert, dialogOn, "Turn off option", option, false, false );
-			testClassPresence( assert, dialogOn, "Turn option back on", option, true, true );
-			$.mobile.back();
-		},
-		function() {
-			$( "body" ).pagecontainer( "change", dialogOff );
-		},
-		function() {
-			testClassPresence( assert, dialogOff, "Initially", option, undefined, false );
-			testClassPresence( assert, dialogOff, "Turn on option", option, true, true );
-			testClassPresence( assert, dialogOff, "Turn option back off", option, false, false );
-			$.mobile.back();
-		},
-		start
-	] );
-} );
+		$.testHelper.pageSequence( [
+			function() {
+				$( "body" ).pagecontainer( "change", dialogOn );
+			},
+			function() {
+				testClassPresence( assert, dialogOn, messagePrefix + ": Initially",
+					option, undefined, true );
+				testClassPresence( assert, dialogOn, messagePrefix + ": Turn off option",
+					option, false, false );
+				testClassPresence( assert, dialogOn, messagePrefix + ": Turn option back on",
+					option, true, true );
+				$.mobile.back();
+			},
+			function() {
+				$( "body" ).pagecontainer( "change", dialogOff );
+			},
+			function() {
+				testClassPresence( assert, dialogOff, messagePrefix + ": Initially",
+					option, undefined, false );
+				testClassPresence( assert, dialogOff, messagePrefix + ": Turn on option",
+					option, true, true );
+				testClassPresence( assert, dialogOff, messagePrefix + ": Turn option back off",
+					option, false, false );
+				$.mobile.back();
+			},
+			start
+		] );
+	} );
 
-asyncTest( "Class ui-corner-all is synchronized to option corners", function( assert ) {
-	var option = "classes.ui-page-dialog-contain",
-		dialogOn = $( "#corners-via-class-test" ),
-		dialogOff = $( "#corners-via-class-test-false" );
+	asyncTest( "Class ui-corner-all is synchronized to option corners", function( assert ) {
+		var option = "classes.ui-page-dialog-contain",
+			dialogOn = $( "#" + prerenderedIdPrefix + "corners-via-class-test" ),
+			dialogOff = $( "#" + prerenderedIdPrefix + "corners-via-class-test-false" );
 
-	$.testHelper.pageSequence( [
-		function() {
-			$( "body" ).pagecontainer( "change", dialogOn );
-		},
-		function() {
-			testClassPresence( assert, dialogOn, "Initially", option, undefined, true );
-			testClassPresence( assert, dialogOn, "Turn off option", option,
-				"ui-overlay-shadow", false );
-			testClassPresence( assert, dialogOn, "Turn option back on", option,
-				"ui-overlay-shadow ui-corner-all", true );
-			$.mobile.back();
-		},
-		function() {
-			$( "body" ).pagecontainer( "change", dialogOff );
-		},
-		function() {
-			testClassPresence( assert, dialogOff, "Initially", option, undefined, false );
-			testClassPresence( assert, dialogOff, "Turn on option", option,
-				"ui-overlay-shadow ui-corner-all", true );
-			testClassPresence( assert, dialogOff, "Turn option back off", option,
-				"ui-overlay-shadow", false );
-			$.mobile.back();
-		},
-		start
-	] );
-} );
+		$.testHelper.pageSequence( [
+			function() {
+				$( "body" ).pagecontainer( "change", dialogOn );
+			},
+			function() {
+				testClassPresence( assert, dialogOn, messagePrefix + ": Initially", option,
+					undefined, true );
+				testClassPresence( assert, dialogOn, messagePrefix + ": Turn off option", option,
+					"ui-overlay-shadow", false );
+				testClassPresence( assert, dialogOn, messagePrefix + ": Turn option back on",
+					option, "ui-overlay-shadow ui-corner-all", true );
+				$.mobile.back();
+			},
+			function() {
+				$( "body" ).pagecontainer( "change", dialogOff );
+			},
+			function() {
+				testClassPresence( assert, dialogOff, messagePrefix + ": Initially", option,
+					undefined, false );
+				testClassPresence( assert, dialogOff, messagePrefix + ": Turn on option", option,
+					"ui-overlay-shadow ui-corner-all", true );
+				testClassPresence( assert, dialogOff, messagePrefix + ": Turn option back off",
+					option, "ui-overlay-shadow", false );
+				$.mobile.back();
+			},
+			start
+		] );
+	} );
+}
+
+genOptionSyncTests( "", "Normal" );
+genOptionSyncTests( "enhanced-", "Pre-rendered" );
