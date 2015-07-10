@@ -69,7 +69,7 @@ $.widget( "mobile.page", {
 			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
 		}
 		this.element.attr( "tabindex", "0" );
-		this._addClass( "ui-page", "ui-page-theme-" + this.options.theme );
+		this._addClass( "ui-page" );
 	},
 
 	_attachToDOM: $.noop,
