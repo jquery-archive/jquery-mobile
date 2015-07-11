@@ -104,7 +104,7 @@ $.widget( "mobile.filterable", {
 
 			// Partition the items into those to be hidden and those to be shown
 			for ( idx = 0 ; idx < length ; idx++ ) {
-				noFilter = ( $.mobile.getAttribute( filterItems[ idx ], "no-filter" ) );
+				noFilter = $.mobile.getAttribute( filterItems[ idx ], "no-filter" ) === true;
 				dst = ( !noFilter && callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
 				dst.push( filterItems[ idx ] );
 			}
