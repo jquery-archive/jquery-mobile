@@ -4,7 +4,7 @@ $.testHelper.pageSequence( [
 		$( "#open-enhance" ).click();
 	},
 	function() {
-		deepEqual( !!$( "#enhance-header" ).toolbar( "instance" ), true,
+		strictEqual( !!$( "#enhance-header" ).toolbar( "instance" ), true,
 			"Page with option enhance contains a toolbar widget" );
 		$.mobile.back();
 	},
@@ -12,7 +12,7 @@ $.testHelper.pageSequence( [
 		$( "#open-no-enhance" ).click();
 	},
 	function() {
-		deepEqual( !!$( "#no-enhance-header" ).toolbar( "instance" ), false,
+		strictEqual( !!$( "#no-enhance-header" ).toolbar( "instance" ), false,
 			"Page with option enhance turned off contains no toolbar widget" );
 		$.mobile.back();
 	},
