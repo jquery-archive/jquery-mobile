@@ -220,7 +220,7 @@ div.ui-mobile-viewport {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;
-	line-height: 1.375;
+	line-height: 1.5;
 	display: block;
 	position: relative;
 	text-align: center;
@@ -242,11 +242,9 @@ div.ui-mobile-viewport {
 	text-indent: -9999px;
 	white-space: nowrap !important;
 }
-.ui-mini {
-	line-height: 1.7;
-}
 .ui-mini .ui-button {
 	font-size: inherit;
+	line-height: inherit;
 }
 /* Make buttons in toolbars default to mini and inline. */
 .ui-header .ui-button,
@@ -254,7 +252,6 @@ div.ui-mobile-viewport {
 	display: inline-block;
 	vertical-align: middle;
 }
-
 .ui-mini,
 .ui-header .ui-button,
 .ui-footer .ui-button,
@@ -263,6 +260,7 @@ div.ui-mobile-viewport {
 .ui-header .ui-button-left,
 .ui-header .ui-button-right {
 	font-size: 13px;
+	line-height: 1.8462;
 }
 .ui-mini.ui-button-icon-only,
 .ui-mini .ui-button-icon-only,
@@ -283,7 +281,7 @@ div.ui-mobile-viewport {
 	display: inline-block;
 	width: 22px;
 	height: 22px;
-	line-height: 1;
+	line-height: inherit;
 	vertical-align: middle;
 	position: relative;
 	bottom: 2px;
