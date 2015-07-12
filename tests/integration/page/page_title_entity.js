@@ -8,9 +8,11 @@ asyncTest( "Entity in page title", function() {
 		},
 
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "title-test", "Title test page is active" );
+			deepEqual( $.mobile.activePage.attr( "id" ), "title-test",
+				"Title test page is active" );
 			deepEqual( document.title.length > 0, true, "Document title is not empty" );
-			deepEqual( !!document.title.match( /&([a-zA-Z]+|#([0-9]+|[xX][0-9a-fA-F]+));/ ), false, "Document title contains no character references" );
+			deepEqual( !!document.title.match( /&([a-zA-Z]+|#([0-9]+|[xX][0-9a-fA-F]+));/ ), false,
+				"Document title contains no character references" );
 			$.mobile.back();
 		},
 
