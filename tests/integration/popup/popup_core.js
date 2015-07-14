@@ -410,7 +410,7 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		{
-			focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
+			focus: { src: popup.find( "a" ).first(), event: "focus.popupFocusedAfterOpen2" }
 		},
 
 		function( result ) {
