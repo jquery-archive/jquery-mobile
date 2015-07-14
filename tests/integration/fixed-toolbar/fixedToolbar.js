@@ -412,13 +412,16 @@ asyncTest( "destroy removes classes from correct page ", function() {
 // Create a scope for holding variables for this module
 ( function() {
 
-	var callSequence, recordCalls, toolbar, testPageClone,
+	var callSequence, recordCalls, toolbar, testPageClone, testPage,
 		originalAddClass = $.fn.addClass,
-		originalRemoveClass = $.fn.removeClass,
-		testPage = $( "#stale-animation-test-page" ).remove();
+		originalRemoveClass = $.fn.removeClass;
 
 	module( "stale animation is ignored", {
 		setup: function() {
+			if ( !testPage ) {
+				testPage = $( "#stale-animation-test-page" ).remove();
+			}
+
 			recordCalls = false;
 			callSequence = [];
 			testPageClone = testPage.clone();
