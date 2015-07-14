@@ -45,7 +45,7 @@ if ( $.mobileBackcompat !== false ) {
 			if ( this.options.highlight && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 				this.valuebg = ( function( slider ) {
 					var bg = document.createElement( "div" );
-					bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
+					bg.className = "ui-slider-bg " + "ui-button-active";
 					return $( bg ).prependTo( slider );
 				} )( this.slider );
 			}
