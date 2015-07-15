@@ -274,9 +274,6 @@ div.ui-mobile-viewport {
 	vertical-align: middle;
 	margin-right: .625em;
 }
-.ui-controlgroup-horizontal .ui-checkboxradio-label {
-	padding: .7em 1em;
-}
 .ui-icon {
 	display: inline-block;
 	width: 22px;
@@ -337,9 +334,7 @@ div.ui-mobile-viewport {
 
 /* Button elements and input buttons */
 button.ui-button,
-input.ui-button,
-.ui-controlgroup-controls button.ui-button-icon-only,
-.ui-controlgroup-controls input.ui-button-icon-only {
+input.ui-button {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -358,9 +353,7 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 }
 button.ui-button-icon-only,
-input.ui-button-icon-only,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
-.ui-controlgroup-horizontal .ui-controlgroup-controls input.ui-button {
+input.ui-button-icon-only {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;

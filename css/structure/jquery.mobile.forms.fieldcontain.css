@@ -7,8 +7,8 @@
 	padding: .8em 0;
 }
 .ui-field-contain > label ~ [class*="ui-"],
-.ui-field-contain > legend ~ [class*="ui-"]
-.ui-field-contain .ui-controlgroup-controls {
+.ui-field-contain > legend ~ [class*="ui-"],
+.ui-field-contain .ui-controlgroup {
 	margin: 0;
 }
 .ui-field-contain:last-child {
@@ -58,7 +58,7 @@
 	}
 	.ui-field-contain > label ~ [class*="ui-"],
 	.ui-field-contain > legend ~ [class*="ui-"],
-	.ui-field-contain .ui-controlgroup-controls {
+	.ui-field-contain .ui-controlgroup {
 		float: left;
 		width: 78%;
 		-webkit-box-sizing: border-box;
@@ -72,7 +72,7 @@
 
 	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
 	.ui-popup .ui-field-contain > legend ~ [class*="ui-"],
-	.ui-popup .ui-field-contain .ui-controlgroup-controls {
+	.ui-popup .ui-field-contain .ui-controlgroup {
 		float: none;
 		width: 100%;
 	}
