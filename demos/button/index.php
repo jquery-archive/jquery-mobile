@@ -124,18 +124,6 @@
 			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - Bottom<span class="ui-button-icon ui-icon ui-icon-arrow-d ui-widget-icon-block"></span></button>
 		</div><!--/demo-html -->
 
-		<h2>Icon shadow</h2>
-
-		<div data-demo-html="true">
-			<form>
-				<input type="button" data-theme="b" data-icon="delete" data-iconshadow="true" value="Input">
-				<div class="ui-input-button ui-button ui-button-b ui-icon-delete ui-shadow-icon">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
-			</form>
-		</div><!--/demo-html -->
-
 		<h2>Disabled</h2>
 
 		<div data-demo-html="true">
