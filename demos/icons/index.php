@@ -14,7 +14,6 @@
 	<style id="custom-icon">
         .ui-icon-myicon {
 			background-image: url("../_assets/img/glyphish-icons/21-skull.png");
-			/* Make your icon fit */
 			background-size: 18px 18px;
 		}
     </style>
@@ -39,127 +38,127 @@
 
         <p>The text in the buttons below show the name of the icon used in that button.</p>
 
-        <p>In widgets where you set the icon with a <code>data-icon</code> attribute you use the name of the icon as value. For example: <code>data-icon="arrow-r"</code>.</p>
-
-        <p>To add an icon to link buttons and <code>button</code> elements, use the name prefixed with <code>ui-icon-</code> as class. For example: <code>ui-icon-arrow-r</code>. See also <a href="../button/">Button</a>.</p>
+        <p>You can set the icon with a <code>data-icon</code> attribute, using the name of the icon as value. For example: <code>data-icon="ui-icon-arrow-r"</code>.</p>
 
         <div data-demo-html="true">
-            <button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-action"></span> action</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-alert"></span> alert</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-d"></span> arrow-d</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-d-l"></span> arrow-d-l</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-d-r"></span> arrow-d-r</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-l"></span> arrow-l</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-r"></span> arrow-r</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-u"></span> arrow-u</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-u-l"></span> arrow-u-l</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-u-r"></span> arrow-u-r</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-audio"></span> audio</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-back"></span> back</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-bars"></span> bars</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-bullets"></span> bullets</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-calendar"></span> calendar</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-camera"></span> camera</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-caret-d"></span> caret-d</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-caret-l"></span> caret-l</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-caret-r"></span> caret-r</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-caret-u"></span> caret-u</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-check"></span> check</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-clock"></span> clock</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-cloud"></span> cloud</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-comment"></span> comment</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-delete"></span> delete</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-edit"></span> edit</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-eye"></span> eye</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-forbidden"></span> forbidden</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-forward"></span> forward</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-gear"></span> gear</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-grid"></span> grid</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-heart"></span> heart</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-home"></span> home</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-info"></span> info</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-location"></span> location</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-lock"></span> lock</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-mail"></span> mail</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-minus"></span> minus</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-navigation"></span> navigation</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-phone"></span> phone</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-plus"></span> plus</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-power"></span> power</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-recycle"></span> recycle</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-refresh"></span> refresh</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-search"></span> search</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-shop"></span> shop</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-star"></span> star</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-tag"></span> tag</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-user"></span> user</button>
-			<button class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-video"></span> video</button>
+            <button data-icon="ui-icon-action">ui-icon-action</button>
+			<button data-icon="ui-icon-alert">ui-icon-alert</button>
+			<button data-icon="ui-icon-arrow-d">ui-icon-arrow-d</button>
+			<button data-icon="ui-icon-arrow-d-l">ui-icon-arrow-d-l</button>
+			<button data-icon="ui-icon-arrow-d-r">ui-icon-arrow-d-r</button>
+			<button data-icon="ui-icon-arrow-l">ui-icon-arrow-l</button>
+			<button data-icon="ui-icon-arrow-r">ui-icon-arrow-r</button>
+			<button data-icon="ui-icon-arrow-u">ui-icon-arrow-u</button>
+			<button data-icon="ui-icon-arrow-u-l">ui-icon-arrow-u-l</button>
+			<button data-icon="ui-icon-arrow-u-r">ui-icon-arrow-u-r</button>
+			<button data-icon="ui-icon-audio">ui-icon-audio</button>
+			<button data-icon="ui-icon-back">ui-icon-back</button>
+			<button data-icon="ui-icon-bars">ui-icon-bars</button>
+			<button data-icon="ui-icon-bullets">ui-icon-bullets</button>
+			<button data-icon="ui-icon-calendar">ui-icon-calendar</button>
+			<button data-icon="ui-icon-camera">ui-icon-camera</button>
+			<button data-icon="ui-icon-caret-d">ui-icon-caret-d</button>
+			<button data-icon="ui-icon-caret-l">ui-icon-caret-l</button>
+			<button data-icon="ui-icon-caret-r">ui-icon-caret-r</button>
+			<button data-icon="ui-icon-caret-u">ui-icon-caret-u</button>
+			<button data-icon="ui-icon-check">ui-icon-check</button>
+			<button data-icon="ui-icon-clock">ui-icon-clock</button>
+			<button data-icon="ui-icon-cloud">ui-icon-cloud</button>
+			<button data-icon="ui-icon-comment">ui-icon-comment</button>
+			<button data-icon="ui-icon-delete">ui-icon-delete</button>
+			<button data-icon="ui-icon-edit">ui-icon-edit</button>
+			<button data-icon="ui-icon-eye">ui-icon-eye</button>
+			<button data-icon="ui-icon-forbidden">ui-icon-forbidden</button>
+			<button data-icon="ui-icon-forward">ui-icon-forward</button>
+			<button data-icon="ui-icon-gear">ui-icon-gear</button>
+			<button data-icon="ui-icon-grid">ui-icon-grid</button>
+			<button data-icon="ui-icon-heart">ui-icon-heart</button>
+			<button data-icon="ui-icon-home">ui-icon-home</button>
+			<button data-icon="ui-icon-info">ui-icon-info</button>
+			<button data-icon="ui-icon-location">ui-icon-location</button>
+			<button data-icon="ui-icon-lock">ui-icon-lock</button>
+			<button data-icon="ui-icon-mail">ui-icon-mail</button>
+			<button data-icon="ui-icon-minus">ui-icon-minus</button>
+			<button data-icon="ui-icon-navigation">ui-icon-navigation</button>
+			<button data-icon="ui-icon-phone">ui-icon-phone</button>
+			<button data-icon="ui-icon-plus">ui-icon-plus</button>
+			<button data-icon="ui-icon-power">ui-icon-power</button>
+			<button data-icon="ui-icon-recycle">ui-icon-recycle</button>
+			<button data-icon="ui-icon-refresh">ui-icon-refresh</button>
+			<button data-icon="ui-icon-search">ui-icon-search</button>
+			<button data-icon="ui-icon-shop">ui-icon-shop</button>
+			<button data-icon="ui-icon-star">ui-icon-star</button>
+			<button data-icon="ui-icon-tag">ui-icon-tag</button>
+			<button data-icon="ui-icon-user">ui-icon-user</button>
+			<button data-icon="ui-icon-video">ui-icon-video</button>
         </div><!--/demo-html -->
 
         <h2>Custom Icons</h2>
 
-		<p>Icons are displayed as background image of <code>:after</code> pseudo elements. Target the pseudo element to set a custom icon.</p>
+		<p>Icons are displayed as background image of a <code>span</code>code> element and have a background size of 18x18px. The example below shows the custom CSS that you would need to use to add your own icons.</p>
 
         <div data-demo-html="true" data-demo-css="#custom-icon">
-			<button class="ui-button ui-shadow ui-corner-all">myicon <span class="ui-icon ui-icon-myicon"></span></button>
+			<button data-icon="ui-icon-myicon">myicon</button>
 		</div>
 
 		<p>You can safely use SVG icons. The framework contains a SVG support test and adds class <code>ui-nosvg</code> to the <code>html</code> element on platforms that don't support SVG. Use this class in your CSS to provide a PNG image as fallback.</p>
 
 <pre><code>
-.ui-icon-myicon:after {
+.ui-icon-myicon {
 	background-image: url("iconimg.svg");
 }
 /* Fallback */
-.ui-nosvg .ui-icon-myicon:after {
+.ui-nosvg .ui-icon-myicon {
 	background-image: url("iconimg.png");
 }
 </code></pre>
-
+		
 		<h2>Icon positioning</h2>
 
-		<p>By default, icons in <code>input</code> buttons are placed to the left of the button text. This default may be overridden using the <code>data-iconpos</code> attribute to set the icon position to "right", "top", or "bottom". In case of link buttons or <code>button</code> elements you have to add an icon position class (<code>ui-button-icon-[value]</code>).</p>
+		<p>In case of link buttons and <code>button</code> elements there are four possible icon positions; "beginning" (left), "end" (right), "top", and "bottom". By default the icon is placed at the beginning, but this can be overridden by using the <code>data-iconpos</code> attribute.</p>
 
+		<h3>Block buttons</h3>
+		
 		<div data-demo-html="true">
-			<a href="index.php" class="ui-button ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-l"></span> Left</a>
-			<a href="index.php" class="ui-button ui-shadow ui-corner-all">Right <span class="ui-icon ui-icon-arrow-r"></span></a>
-			<a href="index.php" class="ui-button ui-shadow ui-corner-all">Top<span class="ui-icon ui-icon-arrow-u ui-icon-display-block"></span></a>
-			<a href="index.php" class="ui-button ui-shadow ui-corner-all">Bottom<span class="ui-icon ui-icon-arrow-d ui-icon-display-block"></span></a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-l">Beginning</a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
 		
-		<p>Mini buttons</p>
+		<h3>Mini buttons</h3>
 		
 		<div data-demo-html="true">
-			<a href="index.php" class="ui-button ui-mini ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-l"></span> Left</a>
-			<a href="index.php" class="ui-button ui-mini ui-shadow ui-corner-all">Right <span class="ui-icon ui-icon-arrow-r"></span></a>
-			<a href="index.php" class="ui-button ui-mini ui-shadow ui-corner-all">Top<span class="ui-icon ui-icon-arrow-u ui-icon-display-block"></span></a>
-			<a href="index.php" class="ui-button ui-mini ui-shadow ui-corner-all">Bottom<span class="ui-icon ui-icon-arrow-d ui-icon-display-block"></span></a>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-l">Beginning</a>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
 		
-		<p>Inline buttons</p>
+		<h3>Inline buttons</h3>
 		
 		<div data-demo-html="true">
-			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-l"></span> Left</a>
-			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all">Right <span class="ui-icon ui-icon-arrow-r"></span></a>
-			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all">Top<span class="ui-icon ui-icon-arrow-u ui-icon-display-block"></span></a>
-			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all">Bottom<span class="ui-icon ui-icon-arrow-d ui-icon-display-block"></span></a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-l">Beginning</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
 
-		<p>Inline mini buttons</p>
+		<h3>Inline mini buttons</h3>
 		
 		<div data-demo-html="true">
-			<a href="index.php" class="ui-button ui-button-inline ui-mini ui-shadow ui-corner-all"><span class="ui-icon ui-icon-arrow-l"></span> Left</a>
-			<a href="index.php" class="ui-button ui-button-inline ui-mini ui-shadow ui-corner-all">Right <span class="ui-icon ui-icon-arrow-r"></span></a>
-			<a href="index.php" class="ui-button ui-button-inline ui-mini ui-shadow ui-corner-all">Top<span class="ui-icon ui-icon-arrow-u ui-icon-display-block"></span></a>
-			<a href="index.php" class="ui-button ui-button-inline ui-mini ui-shadow ui-corner-all">Bottom<span class="ui-icon ui-icon-arrow-d ui-icon-display-block"></span></a>
+			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-l">Beginning</a>
+			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
+			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
+			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
 
 		<h2>Icon-only</h2>
 
-		<p>Use "notext" as value for icon position if you want to create an icon-only button.</p>
+		<p>Add <code>data-show-label="false"</code> if you want to create an icon-only button.</p>
 
         <div data-demo-html="true">
-            <a href="index.php" class="ui-button ui-shadow ui-corner-all ui-button-icon-only">Delete<span class="ui-icon ui-icon-delete"></span></a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
         </div><!--/demo-html -->
 
         <h2>Icon shadow</h2>
@@ -178,18 +177,16 @@
         <p>The semi-transparent dark circle behind the icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. If you prefer to not have this disc, it can be removed by adding the class <code>ui-nodisc-icon</code> to the element or its container.</p>
 
         <div data-demo-html="true">
-			<a href="index.php" class="ui-nodisc-icon ui-button ui-shadow ui-corner-all">No disc<span class="ui-icon ui-icon-delete"></span></a>
-			<a href="index.php" class="ui-nodisc-icon ui-button ui-shadow ui-corner-all ui-button-b">No disc<span class="ui-icon ui-icon-delete"></span></a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-plus" class="ui-nodisc-icon">No disc</a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-minus" data-theme="b" class="ui-nodisc-icon">No disc</a>
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
 
 		<div data-demo-html="true">
 			<div class="ui-nodisc-icon"><!-- Class added to the wrapper -->
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-b ui-button-inline">Delete<span class="ui-icon ui-icon-delete"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-b ui-button-inline">Plus<span class="ui-icon ui-icon-plus"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-b ui-button-inline">Minus<span class="ui-icon ui-icon-minus"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-b ui-button-inline">Check<span class="ui-icon ui-icon-check"></span></a>
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus">No disc</a>
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b">No disc</a>
 			</div>
 		</div><!--/demo-html -->
 
@@ -198,31 +195,34 @@
         <p>Icons are white by default but you can switch to black icons by adding the <code>ui-alt-icon</code> class to the element or its container. This also changes the color that is used for the discs.</p>
 
         <div data-demo-html="true">
-        	<a href="index.php" class="ui-alt-icon ui-button ui-shadow ui-corner-all">Alt icon<span class="ui-icon ui-icon-delete"></span></a>
-			<a href="index.php" class="ui-alt-icon ui-button ui-shadow ui-corner-all ui-button-b">Alt icon<span class="ui-icon ui-icon-delete"></span></a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-plus" class="ui-alt-icon">Alt icon</a>
+			<a href="index.php" data-role="button" data-icon="ui-icon-minus" data-theme="b" class="ui-alt-icon">Alt icon</a>
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
 
 		<div data-demo-html="true" class="ui-alt-icon">
-		<div class="ui-alt-icon"><!-- Class added to the wrapper -->
-			<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Delete<span class="ui-icon ui-icon-delete"></span></a>
-			<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Plus<span class="ui-icon ui-icon-plus"></span></a>
-			<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Minus<span class="ui-icon ui-icon-minus"></span></a>
-			<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Check<span class="ui-icon ui-icon-check"></span></a>
-		</div>
+			<div class="ui-alt-icon"><!-- Class added to the wrapper -->
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus">Alt icon</a>
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b">Alt icon</a>
+			</div>
 		</div><!--/demo-html -->
 
 		<h2>Combining alt and nodisc</h2>
 
+		<div data-demo-html="true">
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus" data-show-label="false" class="ui-nodisc-icon ui-alt-icon">Alt icon without disc</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b" data-show-label="false" class="ui-nodisc-icon ui-alt-icon">Alt icon without disc</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus" data-show-label="false" class="ui-nodisc-icon ui-alt-icon">Alt icon without disc</a>
+			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b" data-show-label="false" class="ui-nodisc-icon">No disc</a>
+		</div><!--/demo-html -->
+		
 		<p>Example of the classes being applied to a wrapper.</p>
 
 		<div data-demo-html="true">
 			<div class="ui-nodisc-icon ui-alt-icon"><!-- Classes added to the wrapper -->
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Delete<span class="ui-icon ui-icon-delete"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Plus<span class="ui-icon ui-icon-plus"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Minus<span class="ui-icon ui-icon-minus"></span></a>
-				<a href="#" class="ui-button ui-shadow ui-corner-all ui-button-icon-only ui-button-inline">Check<span class="ui-icon ui-icon-check"></span></a>
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus" data-show-label="false">Alt icon without disc</a>
+				<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b" data-show-label="false">Alt icon without disc</a>
 			</div>
 		</div><!--/demo-html -->
 
@@ -246,6 +246,24 @@
             </div>
         </div><!--/demo-html -->
 
+		<h2>CSS only buttons with icons</h2>
+		
+		<p>Examples of buttons with icons that don't use the Button widget.</p>
+		
+		<div data-demo-html="true">
+			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b">Link <span class="ui-button-icon ui-icon ui-icon-delete"></span></a>
+			<button data-role="none" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b">Button <span class="ui-button-icon ui-icon ui-icon-delete"></span></button>
+        </div><!--/demo-html -->
+		
+		<h2>Enhanced buttons with icons</h2>
+		
+		<p>Examples of buttons with icons that do use the Button widget, but are pre-enhanced.</p>
+		
+		<div data-demo-html="true">
+			<a href="index.php" data-role="button" data-enhanced="true" data-inline="true" data-theme="b" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b ui-widget">Link<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-delete"></span></a>
+			<button data-role="button" data-enhanced="true" data-inline="true" data-theme="b" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b ui-widget">Button<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-delete"></span></button>
+        </div><!--/demo-html -->
+		
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
