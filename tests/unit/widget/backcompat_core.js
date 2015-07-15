@@ -4,19 +4,15 @@
 // deepEquals. We convert to hash because order does not matter in a hash, just as it does not
 // matter in a class string.
 function convertClassValuesToHashes( options ) {
-	var classKey, classArray, classIndex;
+	var classKey;
 
 	if ( options.classes ) {
 		for ( classKey in options.classes ) {
 			if ( typeof options.classes[ classKey ] === "string" ) {
-				classArray = options.classes[ classKey ] ?
-					options.classes[ classKey ].split( " " ) : [];
 
 				// Overwrite the string-typed class value with a hash
-				options.classes[ classKey ] = {};
-				for ( classIndex in classArray ) {
-					options.classes[ classKey ][ classArray[ classIndex ] ] = true;
-				}
+				options.classes[ classKey ] =
+					$.testHelper.classStringToHash( options.classes[ classKey ] );
 			}
 		}
 	}

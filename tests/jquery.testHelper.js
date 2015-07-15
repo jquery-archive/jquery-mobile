@@ -35,6 +35,16 @@ $.testHelper = {
 		loadSeq( seq, 0 );
 	},
 
+	classStringToHash: function( classString ) {
+		var returnValue = {};
+
+		$.each( classString.match( /\S+/g ) || [], function( index, value ) {
+			returnValue[ value ] = true;
+		} );
+
+		return returnValue;
+	},
+
 	mockOriginalEvent: function( options ) {
 		$.Event.prototype.originalEvent = $.extend( {}, { preventDefault: $.noop }, options );
 	},
