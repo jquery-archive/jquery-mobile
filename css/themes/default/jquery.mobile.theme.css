@@ -193,14 +193,6 @@ html .ui-alt-icon .ui-radio-off .ui-icon {
 	background-color: transparent;
 }
 
-/* Icon shadow */
-.ui-shadow-icon.ui-button .ui-icon,
-.ui-shadow-icon .ui-button .ui-icon {
-	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
-	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3) /*{global-icon-shadow}*/;
-	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
-}
-
 /* Checkbox and radio */
 .ui-checkboxradio-label .ui-checkboxradio-icon {
 	filter: Alpha(Opacity=30);
