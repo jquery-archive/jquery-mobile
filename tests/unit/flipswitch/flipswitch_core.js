@@ -56,6 +56,7 @@ QUnit.test( "checkbox based flipswitch is destroyed without error", function( as
 	assert.ok( $.testHelper.domEqual( flipCheckboxContainer, emptyContainer ),
 		"flipswitch destroyed/removed properly" );
 } );
+
 QUnit.test( "select based flipswitch is destroyed without error", function( assert ) {
 	var emptyContainer = $( "destroy-test-container" ),
 		flipSelectContainer = $( "destroy-test-container-select" ),
