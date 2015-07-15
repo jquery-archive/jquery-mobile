@@ -77,11 +77,11 @@
 	});
 	test( "select based flipswitch is destroyed without error", function() {
 		var emptyContainer = $( "destroy-test-container" ),
-			flipCheckboxContainer = $( "destroy-test-container-select" ),
-			flipCheckbox = $( "#flip-select-destroy" );
+			flipSelectContainer = $( "destroy-test-container-select" ),
+			flipSelect = $( "#flip-select-destroy" );
 
-			flipCheckbox.flipswitch( "destroy" );
-		ok( $.testHelper.domEqual( flipCheckboxContainer, emptyContainer ),
+			flipSelect.flipswitch( "destroy" );
+		ok( $.testHelper.domEqual( flipSelectContainer, emptyContainer ),
 			"flipswitch destroyed/removed properly" );
 	});
 
