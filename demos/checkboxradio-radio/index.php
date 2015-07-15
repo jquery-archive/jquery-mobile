@@ -43,31 +43,13 @@
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Vertical group</h2>
-
-		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
-
-		<div data-demo-html="true">
-			<form>
-					<fieldset data-role="controlgroup">
-					<legend>Vertical:</legend>
-					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
-					<label for="radio-choice-v-2a">One</label>
-					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
-					<label for="radio-choice-v-2b">Two</label>
-					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
-					<label for="radio-choice-v-2c">Three</label>
-				</fieldset>
-			</form>
-		</div><!--/demo-html -->
-
 		<h2>Horizontal group</h2>
 
-		<p>To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
+		<p>To visually integrate multiple radio buttons into a horizontally grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the container.</p>
 
 		<div data-demo-html="true">
 			<form>
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Horizontal:</legend>
 					<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
 					<label for="radio-choice-h-2a">One</label>
@@ -79,14 +61,32 @@
 			</form>
 		</div><!--/demo-html -->
 
+		<h2>Vertical group</h2>
+
+		<p>To make a vertical button set, add the <code>data-direction="vertical"</code> to the <code>fieldset</code>.</p>
+
+		<div data-demo-html="true">
+			<form>
+					<fieldset data-role="controlgroup" data-direction="vertical">
+					<legend>Vertical:</legend>
+					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+					<label for="radio-choice-v-2a">One</label>
+					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+					<label for="radio-choice-v-2b">Two</label>
+					<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+					<label for="radio-choice-v-2c">Three</label>
+				</fieldset>
+			</form>
+		</div><!--/demo-html -->
+		
 		<h2>Mini size</h2>
 
-		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>ui-mini</code> class to the element to create a mini version. </p>
+		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the controlgroup to create a mini version.</p>
 
 		<div data-demo-html="true">
 			<form>
 				<fieldset data-role="controlgroup" data-mini="true">
-					<legend>Vertical, icon right, mini sized:</legend>
+					<legend>Mini sized:</legend>
 					<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6a" value="on" checked="checked">
 					<label for="radio-choice-v-6a">One</label>
 					<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6b" value="off">
@@ -99,7 +99,7 @@
 
 		<h2>Theme</h2>
 
-		<p>To set the theme, add the <code>data-theme</code> attribute to the controlgroup or each of the individual checkbox inputs.</p>
+		<p>To set the theme, add the <code>data-theme</code> attribute to the controlgroup or each of the individual radio inputs.</p>
 
 		<div data-demo-html="true">
 			<form>
@@ -135,7 +135,17 @@
 				<input type="radio" name="radio-enhanced" id="radio-enhanced" data-enhanced="true">
 			</div>
 		</div><!--/demo-html -->
-
+		
+		<div data-demo-html="true">
+			<form>
+				<label class="ui-radio-label ui-corner-all ui-button ui-widget ui-button-inherit">
+					<span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span>
+					<span class="ui-checkboxradio-icon-space"> </span>
+					<input type="radio" data-enhanced="true" name="radio-enhanced" class="ui-checkboxradio ui-helper-hidden-accessible">I agree
+				</label>
+			</form>			
+		</div><!--/demo-html -->
+		
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
