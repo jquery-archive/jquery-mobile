@@ -32,8 +32,8 @@
 
 		<div data-demo-html="true">
 			<a href="#" data-role="button">Anchor</a>
+			<button>Button</button>
 			<form>
-				<button>Button</button>
 				<input type="button" value="Input type button">
 				<input type="submit" value="Input type submit">
 				<input type="reset" value="Input type reset">
@@ -44,102 +44,84 @@
 
 		<div data-demo-html="true">
 			<form>
-				<label>Label
-					<input type="button" data-enhanced="true" value="Input value" class="ui-input-button ui-button ui-corner-all ui-shadow">
+				<label>Input label
+					<input type="button" data-enhanced="true" value="Input value" class="ui-button ui-corner-all ui-shadow ui-widget">
 				</label>
 			</form>
+			<button data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Button text</button>
+			<a href="inde.php" data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Link text</a>
 		</div><!--/demo-html -->
 
 		<h2>Corners</h2>
 
 		<div data-demo-html="true">
-			<form>
-				<input type="button" value="Has corners by default">
-				<input type="button" data-corners="false" value="Unset corners">
-				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-corner-all">
-            </form>
+			<button>Has corners by default</button>
+			<button data-corners="false">Unset corners</button>
+			<button data-enhanced="true" class="ui-button ui-corner-all ui-shadow ui-widget">Enhanced</button>
 		</div><!--/demo-html -->
 
 		<h2>Shadow</h2>
 
 		<div data-demo-html="true">
-			<form>
-				<input type="button" value="Has shadow by default">
-				<input type="button" data-shadow="false" value="Unset shadow">
-				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-shadow">
-			</form>
+			<button>Has shadow by default</button>
+			<button data-shadow="false">Unset shadow</button>
+			<button data-enhanced="true" class="ui-button ui-corner-all ui-shadow ui-widget">Enhanced</button>
 		</div><!--/demo-html -->
 
 		<h2>Inline</h2>
 
 		<div data-demo-html="true">
-			<form>
-				<input type="button" data-inline="true" value="Input">
-				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-button-inline">
-			</form>
-		</div><!--/demo-html -->
-
-		<h2>Theme</h2>
-
-		<div data-demo-html="true">
-			<form>
-				<input type="button" value="Input - Inherit">
-				<input type="button" data-theme="a" value="Input - Theme swatch A">
-				<input type="button" data-theme="b" value="Input - Theme swatch B">
-				<div class="ui-input-button ui-button">
-					Enhanced - Inherit
-					<input type="button" data-enhanced="true" value="Enhanced - Inherit">
-				</div>
-				<div class="ui-input-button ui-button ui-button-a">
-					Enhanced - Theme swatch A
-					<input type="button" data-enhanced="true" value="Enhanced - Theme swatch A">
-				</div>
-				<div class="ui-input-button ui-button ui-button-b">
-					Enhanced - Theme swatch B
-					<input type="button" data-enhanced="true" value="Enhanced - Theme swatch B">
-				</div>
-			</form>
+			<button data-inline="true">Inline</button>
+			<button data-enhanced="true" class="ui-button ui-button-inline ui-corner-all ui-shadow ui-widget">Enhanced</button>
 		</div><!--/demo-html -->
 
 		<h2>Mini</h2>
 
 		<div data-demo-html="true">
-			<form>
-				<input type="button" data-mini="true" value="Input">
-				<div class="ui-input-button ui-button ui-mini">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
-			</form>
+			<button data-mini="true">Mini</button>
+			<button data-enhanced="true" class="ui-button ui-mini ui-corner-all ui-shadow ui-widget">Enhanced</button>
+		</div><!--/demo-html -->
+		
+		<h2>Mini inline</h2>
+
+		<div data-demo-html="true">
+			<button data-mini="true" data-inline="true">Mini</button>
+			<button data-enhanced="true" class="ui-button ui-mini ui-button-inline ui-corner-all ui-shadow ui-widget">Enhanced</button>
+		</div><!--/demo-html -->
+		
+		<h2>Theme</h2>
+
+		<div data-demo-html="true">
+			<button>Inherit</button>
+			<button data-theme="a">Theme swatch A</button>
+			<button data-theme="b">Theme swatch B</button>
+				
+			<button data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - Inherit</button>
+			<button data-enhanced="true" class="ui-button ui-button-a ui-shadow ui-corner-all ui-widget">Enhanced - Theme swatch A</button>
+			<button data-enhanced="true" class="ui-button ui-button-b ui-shadow ui-corner-all ui-widget">Enhanced - Theme swatch B</button>
 		</div><!--/demo-html -->
 
 		<h2>Icons</h2>
+		
+		<p>Link buttons and <code>button</code> elements can contain icons. The use of icons in <code>input</code> buttons is no longer supported.</p>
 
 		<div data-demo-html="true">
-			<form>
-				<input type="button" data-icon="delete" value="Input">
-				<div class="ui-input-button ui-button ui-icon-delete">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
-			</form>
+			<button data-icon="ui-icon-delete">Button</button>
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-delete"></span><span class="ui-button-icon-space"> </span>Enhanced</button>
 		</div><!--/demo-html -->
 
 		<h2>Icon position</h2>
 
 		<div data-demo-html="true">
-			<form>
-				<button data-role="button" data-icon="ui-icon-delete">Left (default)</button>
-				<button data-role="button" data-icon="ui-icon-delete" data-icon-position="end">Right</button>
-				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="top">Top</button>
-				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="bottom">Bottom</button>
-				<button data-role="button" data-icon="ui-icon-delete" data-iconpos="notext">Icon only</button>
-				<button data-role="button" data-enhanced="true">Enhanced - Left</button>
-				<button data-role="button" data-enhanced="true">Enhanced - Right</button>
-				<button data-role="button" data-enhanced="true">Enhanced - Top</button>
-				<button data-role="button" data-enhanced="true">Enhanced - Bottom</button>
-				<button data-role="button" data-enhanced="true">Enhanced - Icon only</button>
-			</form>
+			<button data-icon="ui-icon-arrow-l">Beginning</button>
+			<button data-icon="ui-icon-arrow-r" data-icon-position="end">End</button>
+			<button data-icon="ui-icon-arrow-u" data-icon-position="top">Top</button>
+			<button data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</button>
+			
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-arrow-l"></span><span class="ui-button-icon-space"> </span>Enhanced - Beginning</button>
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - End<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-arrow-r"></span></button>
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-arrow-u ui-widget-icon-block"></span>Enhanced - Top</button>
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - Bottom<span class="ui-button-icon ui-icon ui-icon-arrow-d ui-widget-icon-block"></span></button>
 		</div><!--/demo-html -->
 
 		<h2>Icon shadow</h2>
@@ -159,21 +141,20 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" disabled value="Input button with disabled attribute">
-				<div class="ui-input-button ui-button ui-state-disabled">
-					Enhanced
-					<input type="button" disabled data-enhanced="true" value="Enhanced">
-				</div>
+				<input type="button" disabled value="Enhanced input button with disabled attribute" class="ui-button ui-shadow ui-corner-all ui-widget ui-button-disabled ui-state-disabled">
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Native inputs</h2>
+		<h2>Native inputs and button</h2>
 
 		<div data-demo-html="true">
 			<form>
-				<input type="button" data-role="none" value="Button">
+				<input type="button" data-role="none" value="Input button">
 				<input type="submit" data-role="none" value="Submit">
 				<input type="reset" data-role="none" value="Reset">
 			</form>
+			<br>
+			<button data-role="none">Button</button>
 		</div><!--/demo-html -->
 
 	</div><!-- /content -->
