@@ -51,13 +51,31 @@
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Vertical group</h2>
+		<h2>Horizontal group</h2>
 
-		<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the <code>fieldset</code>.</p>
+		<p>Checkboxes can be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the <code>fieldset</code>.</p>
 
 		<div data-demo-html="true">
 			<form>
 				<fieldset data-role="controlgroup">
+					<legend>Horizontal:</legend>
+					<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
+					<label for="checkbox-h-2a">B</label>
+					<input type="checkbox" name="checkbox-h-2b" id="checkbox-h-2b">
+					<label for="checkbox-h-2b"><span style="font-style:italic;font-weight:normal;">I</span></label>
+					<input type="checkbox" name="checkbox-h-2c" id="checkbox-h-2c">
+					<label for="checkbox-h-2c"><span style="text-decoration:underline;font-weight:normal;">U</span></label>
+				</fieldset>
+			</form>
+		</div><!--/demo-html -->
+		
+		<h2>Vertical group</h2>
+
+		<p>To make a vertical button set, add <code>data-direction="vertical"</code> to the <code>fieldset</code>.</p>
+
+		<div data-demo-html="true">
+			<form>
+				<fieldset data-role="controlgroup" data-direction="vertical">
 					<legend>Vertical:</legend>
 					<input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
 					<label for="checkbox-v-2a">One</label>
@@ -69,27 +87,9 @@
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Horizontal group</h2>
-
-		<p>Checkboxes can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
-
-		<div data-demo-html="true">
-			<form>
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Horizontal:</legend>
-					<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
-					<label for="checkbox-h-2a">One</label>
-					<input type="checkbox" name="checkbox-h-2b" id="checkbox-h-2b">
-					<label for="checkbox-h-2b">Two</label>
-					<input type="checkbox" name="checkbox-h-2c" id="checkbox-h-2c">
-					<label for="checkbox-h-2c">Three</label>
-				</fieldset>
-			</form>
-		</div><!--/demo-html -->
-
 		<h2>Theme</h2>
 
-		<p>To set the theme, add the <code>data-theme</code> attribute on the <code>fieldset</code> to the individual checkbox inputs.</p>
+		<p>To set the theme, add the <code>data-theme</code> attribute to the <code>fieldset</code> or to the individual checkbox inputs.</p>
 
 		<div data-demo-html="true">
 			<form>
@@ -117,10 +117,13 @@
 		<h2>Enhanced</h2>
 
 		<div data-demo-html="true">
-			<div class="ui-checkbox">
-				<label for="checkbox-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-checkbox-off">I agree</label>
-				<input type="checkbox" name="checkbox-enhanced" id="checkbox-enhanced" data-enhanced="true">
-			</div>
+			<form>
+				<label class="ui-checkboxradio-label ui-corner-all ui-button ui-widget ui-button-inherit">
+					<span class="ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-blank"></span>
+					<span class="ui-checkboxradio-icon-space"> </span>
+					<input type="checkbox" data-enhanced="true" name="checkbox-enhanced" class="ui-checkboxradio ui-helper-hidden-accessible">I agree
+				</label>
+			</form>			
 		</div><!--/demo-html -->
 
 	</div><!-- /content -->
