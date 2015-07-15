@@ -381,6 +381,15 @@ input.ui-button-icon-only,
 }
 
 /* Accessible content hiding */
+.ui-hidden-accessible,
+.ui-helper-hidden-accessible {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+
 /* Used for hiding elements by the filterable widget. You can also use this class to hide list items or buttons in controlgroups; this ensures correct corner styling. */
 .ui-screen-hidden {
 	display: none !important;

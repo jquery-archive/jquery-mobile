@@ -151,3 +151,8 @@ div.ui-slider-switch.ui-mini {
 .ui-field-contain div.ui-slider-switch {
 	margin: 0;
 }
+.ui-field-contain div.ui-slider-switch,
+html .ui-popup .ui-field-contain div.ui-slider-switch {
+	display: inline-block;
+	width: 5.8em;
+}
