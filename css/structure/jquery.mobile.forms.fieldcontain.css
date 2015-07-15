@@ -50,9 +50,6 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
-	/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
-	.ui-hide-label > label ~ [class*="ui-"],
-	.ui-hide-label .ui-controlgroup-controls,
 	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
 	.ui-popup .ui-field-contain .ui-controlgroup-controls {
 		float: none;
