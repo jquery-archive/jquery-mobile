@@ -41,22 +41,23 @@
 
         <div data-demo-html="true">
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#">No icon</a>
+                <a href="#" data-icon="ui-icon-delete">Left</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Right</a>
             </div>
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
             </div>
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
             </div>
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
+			
             <form>
                 <div data-role="controlgroup">
                     <a href="#" class="ui-button ui-button-icon-only">Home<span class="ui-icon ui-icon-home"></span></a>
@@ -74,15 +75,17 @@
 
 
 		<h2>Controlgroup vertical</h2>
+			
+		<p>To have a controlgroup with a vertical layout, add <code>data-direction="vertical"</code> to the container.</p>
 
         <div data-demo-html="true">
             <div data-role="controlgroup" data-direction="vertical">
-                <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#">No icon</a>
+                <a href="#" data-icon="ui-icon-delete">Left</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Right</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
         </div><!--/demo-html -->
 
@@ -90,28 +93,29 @@
 
         <div data-demo-html="true">
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#">No icon</a>
+                <a href="#" data-icon="ui-icon-delete">Left</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Right</a>
             </div>
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
             </div>
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
             </div>
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
+			
             <form>
                 <div data-role="controlgroup" data-mini="true">
                     <a href="#" class="ui-button ui-button-icon-only">Home<span class="ui-icon ui-icon-home"></span></a>
                     <button data-icon="ui-icon-search">Search</button>
-                    <label for="select-more-2a" class="ui-hidden-accessible">More</label>
-                    <select name="select-more-2a" id="select-more-2a">
+                    <label for="select-more-1a" class="ui-hidden-accessible">More</label>
+                    <select name="select-more-1a" id="select-more-1a">
                         <option value="">Select&hellip;</option>
                         <option value="#">One</option>
                         <option value="#">Two</option>
@@ -123,12 +127,12 @@
 
         <div data-demo-html="true">
             <div data-role="controlgroup" data-direction="vertical" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#">No icon</a>
+                <a href="#" data-icon="ui-icon-delete">Left</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Right</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="top">Top</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="bottom">Bottom</a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
         </div><!--/demo-html -->
 
@@ -354,6 +358,29 @@
             </form>
         </div><!--/demo-html -->
 
+		<h2>Controlgroup theming</h2>
+
+        <div data-demo-html="true">
+            <div data-role="controlgroup" data-theme="b">
+                <a href="#">One</a>
+                <a href="#" data-icon="ui-icon-delete">Two</a>
+                <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Three</a>
+                <a href="#" data-icon="ui-icon-delete" data-show-label="false">Four</a>
+            </div>
+			
+            <form>
+                <fieldset data-role="controlgroup" data-theme="b">
+                    <input type="checkbox" name="checkbox-h-7a" id="checkbox-h-7a">
+                    <label for="checkbox-h-7a">One</label>
+                    <input type="checkbox" name="checkbox-h-7b" id="checkbox-h-7b">
+                    <label for="checkbox-h-7b">Two</label>
+                    <input type="checkbox" name="checkbox-h-7c" id="checkbox-h-7c">
+                    <label for="checkbox-h-7c">Three</label>
+                </fieldset>
+            </form>
+        </div><!--/demo-html -->
+			
+			
 		<h2>Pre-rendered markup</h2>
             
 		<p>You can supply pre-rendered markup for any controlgroup to save startup time. The example below illustrates the markup you have to provide for a pre-rendered controlgroup. Note that the widgets inside the controlgroup need not necessarily be pre-rendered.</p>
