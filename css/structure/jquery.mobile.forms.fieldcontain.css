@@ -50,6 +50,11 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
+	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
+	.ui-popup .ui-field-contain .ui-controlgroup-controls {
+		float: none;
+		width: 100%;
+	}
 	.ui-field-contain > label ~ .ui-button-inline {
 		width: auto;
 		margin-right: .625em;
