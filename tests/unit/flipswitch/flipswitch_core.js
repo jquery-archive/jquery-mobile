@@ -47,4 +47,23 @@ QUnit.test( "select based flipswitch", function( assert ) {
 		"is untabbable - tabindex is set to -1" );
 } );
 
+QUnit.test( "checkbox based flipswitch is destroyed without error", function( assert ) {
+	var emptyContainer = $( "destroy-test-container" ),
+		flipCheckboxContainer = $( "destroy-test-container-checkbox" ),
+		flipCheckbox = $( "#flip-checkbox-destroy" );
+
+		flipCheckbox.flipswitch( "destroy"  );
+	assert.ok( $.testHelper.domEqual( flipCheckboxContainer, emptyContainer ),
+		"flipswitch destroyed/removed properly" );
+} );
+QUnit.test( "select based flipswitch is destroyed without error", function( assert ) {
+	var emptyContainer = $( "destroy-test-container" ),
+		flipSelectContainer = $( "destroy-test-container-select" ),
+		flipSelect = $( "#flip-select-destroy" );
+
+		flipSelect.flipswitch( "destroy" );
+	assert.ok( $.testHelper.domEqual( flipSelectContainer, emptyContainer ),
+		"flipswitch destroyed/removed properly" );
+} );
+
 } )( QUnit, jQuery );
