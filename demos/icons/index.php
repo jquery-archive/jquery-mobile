@@ -161,17 +161,6 @@
 			<a href="index.php" data-role="button" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
         </div><!--/demo-html -->
 
-        <h2>Icon shadow</h2>
-
-        <p>Set <code>data-iconshadow="true"</code> to enable icon shadow for <code>input</code> buttons, or add class <code>ui-shadow-icon</code> to your <a href="../button/">button</a>.</p>
-
-        <p><strong>Note: Icon shadow (option <code>iconShadow</code> in the button widget and class <code>ui-shadow-icon</code>) is deprecated as of jQuery Mobile 1.4.0 and will be removed in 1.5.0.</strong></p>
-
-        <div data-demo-html="true">
-			<a href="index.php" class="ui-shadow-icon ui-button ui-shadow ui-corner-all">Icon shadow<span class="ui-icon ui-icon-delete"></span></a>
-			<a href="index.php" class="ui-shadow-icon ui-button ui-shadow ui-corner-all ui-button-b">Icon shadow<span class="ui-icon ui-icon-delete"></span></a>
-        </div><!--/demo-html -->
-
         <h2>Removing the disc</h2>
 
         <p>The semi-transparent dark circle behind the icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. If you prefer to not have this disc, it can be removed by adding the class <code>ui-nodisc-icon</code> to the element or its container.</p>
