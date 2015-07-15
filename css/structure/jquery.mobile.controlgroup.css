@@ -2,7 +2,6 @@
     margin: .5em 0;
 }
 
-.ui-field-contain .ui-controlgroup,
 .ui-controlgroup .ui-button {
     margin: 0;
 }
@@ -30,6 +29,8 @@
 .ui-controlgroup-vertical > .ui-button,
 .ui-controlgroup-vertical > li > .ui-button {
     display: block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
