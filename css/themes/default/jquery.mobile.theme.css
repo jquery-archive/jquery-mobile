@@ -100,7 +100,8 @@ label.ui-button {
 }
 
 /* Controlgroups */
-.ui-button.ui-corner-top, .ui-accordion-header.ui-corner-top {
+.ui-button.ui-corner-top,
+.ui-accordion-header.ui-corner-top {
 	-webkit-border-top-left-radius:        .3125em /*{global-radii-buttons}*/;
 	border-top-left-radius:                .3125em /*{global-radii-buttons}*/;
 	-webkit-border-top-right-radius:       .3125em /*{global-radii-buttons}*/;
@@ -112,7 +113,8 @@ label.ui-button {
 	-webkit-border-bottom-right-radius:    .3125em /*{global-radii-buttons}*/;
 	border-bottom-right-radius:            .3125em /*{global-radii-buttons}*/;
 }
-.ui-button.ui-corner-bottom, .ui-accordion-content.ui-corner-bottom {
+.ui-button.ui-corner-bottom,
+.ui-accordion-content.ui-corner-bottom {
 	-webkit-border-bottom-right-radius:    .3125em /*{global-radii-buttons}*/;
 	border-bottom-right-radius:            .3125em /*{global-radii-buttons}*/;
 	-webkit-border-bottom-left-radius:     .3125em /*{global-radii-buttons}*/;
