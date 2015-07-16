@@ -611,3 +611,22 @@ button[disabled],
 	outline-width: 1px;
 	outline-style: inherit;
 }
+
+.ui-accordion-header {
+	background: #e6e6e6;
+	border: 1px solid #d3d3d3;
+	color: #555555;
+}
+
+.ui-accordion-content {
+	border: 1px solid #aaaaaa;
+	background: #ffffff;
+	color: #222222;
+}
+
+.ui-accordion-header-active,
+.ui-accordion-header.ui-state-active  {
+	border: 1px solid #aaaaaa;
+	background: #ffffff;
+	color: #212121;
+}
