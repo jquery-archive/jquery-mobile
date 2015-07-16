@@ -31,7 +31,32 @@
 
 $.widget( "ui.accordion", $.ui.accordion, {
 	options: {
-		theme: null
+		theme: null,
+		icons: {
+			activeHeader: "ui-icon-caret-d",
+			header: "ui-icon-caret-r"
+		}
+	},
+	_themeElements: function() {
+		return [
+			{
+				element: this.widget(),
+				prefix: "ui-body-"
+			}
+		];
+	},
+	_create: function() {
+		this._super();
+
+		// We need to refresh on page show so that the height can be calculated
+		// when the widget is not hidden
+		this._on( this.document, {
+			"pagecontainershow": function( event, ui ) {
+				if ( ui.toPage[ 0 ] === this.element.closest( ".ui-page" )[ 0 ] ) {
+					this.refresh();
+				}
+			}
+		} );
 	}
 } );
 
