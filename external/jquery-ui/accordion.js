@@ -47,8 +47,8 @@ return $.widget( "ui.accordion", {
 		header: "> li > :first-child, > :not(li):even",
 		heightStyle: "auto",
 		icons: {
-			activeHeader: "ui-icon-triangle-1-s",
-			header: "ui-icon-triangle-1-e"
+			activeHeader: "ui-icon-caret-d",
+			header: "ui-icon-caret-r"
 		},
 
 		// callbacks
@@ -364,6 +364,7 @@ return $.widget( "ui.accordion", {
 					maxHeight = Math.max( maxHeight, $( this ).css( "height", "" ).height() );
 				} )
 				.height( maxHeight );
+
 		}
 	},
 

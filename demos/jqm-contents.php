@@ -1,5 +1,6 @@
 <li data-filtertext="demos homepage" data-icon="home"><a href=".././">Home</a></li>
 <li data-filtertext="introduction overview getting started"><a href="../intro/" data-ajax="false">Introduction</a></li>
+<li data-filtertext="accordion"><a href="../accordion/" data-ajax="false">Accordion</a></li>
 <li data-filtertext="form button widget input button submit reset anchor link button element buttonmarkup buttons"><a href="../button/" data-ajax="false">Button widget</a></li>
 <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="caret-d" data-expanded-icon="caret-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
 	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
@@ -288,5 +289,3 @@
 		</ul>
 	</div>
 </li>
-
-
