@@ -322,16 +322,24 @@
 	color: #fff;
 }
 
-.jqm-3rd-party {
-	background: rgba(62, 178, 73, .2);
+.ui-listview > li.jqm-3rd-party {
+	background: rgba(51, 136, 204, .1);
+	overflow: hidden;
 }
 
 .jqm-3rd-party:after {
-	content: "* 3rd Party Demo";
-	position: absolute;
-	top: .2em;
-	right: .2em;
-	font-size: .8em;
+	content: "3rd Party";
+  padding: .3em 3em;
+  background: #3388cc;
+  color: #fff;
+  position: absolute;
+  top: 1em;
+  right: -3em;
+  font-size: .7em;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+
 }
 
 @media (min-width: 60em) {
