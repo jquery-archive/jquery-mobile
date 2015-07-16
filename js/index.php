@@ -60,7 +60,6 @@ $files = array(
 	'widgets/listview.hidedividers.js',
 	'nojs.js',
 	'widgets/forms/reset.js',
-	'../external/jquery-ui/accordion.js',
 	'../external/jquery-ui/button.js',
 	'widgets/forms/button.js',
 	'widgets/forms/button.backcompat.js',

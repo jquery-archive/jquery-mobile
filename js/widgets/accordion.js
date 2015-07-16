@@ -31,7 +31,19 @@
 
 $.widget( "ui.accordion", $.ui.accordion, {
 	options: {
-		theme: null
+		theme: null,
+		icons: {
+			activeHeader: "ui-icon-caret-d",
+			header: "ui-icon-caret-r"
+		}
+	},
+	_themeElements: function() {
+		return [
+			{
+				element: this.widget(),
+				prefix: "ui-body-"
+			}
+		];
 	}
 } );
 
