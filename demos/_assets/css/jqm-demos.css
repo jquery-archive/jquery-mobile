@@ -267,25 +267,25 @@
 	box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
 }
 .jqm-list .jqm-search-results-keywords {
-    padding: .46857em 0 0;
-    font-size: .8em;
-    font-weight: 300;
-    color: #999;
-    display: block;
+	padding: .46857em 0 0;
+	font-size: .8em;
+	font-weight: 300;
+	color: #999;
+	display: block;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
 .ui-button-active .jqm-search-results-keywords {
-    color: #fff;
+	color: #fff;
 }
 .jqm-search-results-highlight {
-    color: #3388cc;
-    font-weight: 400;
+	color: #3388cc;
+	font-weight: 400;
 }
 .ui-button-active .jqm-search-results-highlight {
-    color: #fff;
-    font-weight: 300;
+	color: #fff;
+	font-weight: 300;
 }
 
 /* API docs links */
@@ -329,13 +329,13 @@
 
 .jqm-3rd-party:after {
 	content: "3rd Party";
-  padding: .3em 3em;
-  background: #3388cc;
-  color: #fff;
-  position: absolute;
-  top: 1em;
-  right: -3em;
-  font-size: .7em;
+	padding: .3em 3em;
+	background: #3388cc;
+	color: #fff;
+	position: absolute;
+	top: 1em;
+	right: -3em;
+	font-size: .7em;
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
@@ -404,7 +404,7 @@
 		padding-right: 3%;
 		float: right;
 	}
-    .jqm-demos .jqm-content.jqm-fullwidth {
+	.jqm-demos .jqm-content.jqm-fullwidth {
 		width: auto;
 		padding-left: 15%;
 		padding-right: 15%;
@@ -483,10 +483,10 @@
 	border-bottom-left-radius: inherit;
 }
 .jqm-view-source .ui-collapsible-content::-webkit-scrollbar {
-    width: 5px;
+	width: 5px;
 }
 .jqm-view-source .ui-collapsible-content::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 .jqm-view-source .ui-collapsible-content::-webkit-scrollbar-thumb {
 	background: #435A5F;
