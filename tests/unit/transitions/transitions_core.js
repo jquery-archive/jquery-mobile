@@ -1,24 +1,25 @@
 /*
  * Transitions unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
+
 var instance, proto, $to, $from;
 
-module( "Transition cleanFrom" );
+QUnit.module( "Transition cleanFrom" );
 
-test( "cleanFrom removes transition classes", function() {
+QUnit.test( "cleanFrom removes transition classes", function( assert ) {
 	var $from = $( "<div>" ),
 		transition = new $.mobile.Transition( "foo", false, $(), $from );
 
 	$from.addClass( "out in reverse foo" );
 	transition.cleanFrom();
-	ok( !$from.hasClass( "out" ) );
-	ok( !$from.hasClass( "in" ) );
-	ok( !$from.hasClass( "reverse" ) );
-	ok( !$from.hasClass( "foo" ) );
+	assert.ok( !$from.hasClass( "out" ) );
+	assert.ok( !$from.hasClass( "in" ) );
+	assert.ok( !$from.hasClass( "reverse" ) );
+	assert.ok( !$from.hasClass( "foo" ) );
 } );
 
-module( "Transition scrollPage", {
+QUnit.module( "Transition scrollPage", {
 	setup: function() {
 		instance = new $.mobile.Transition();
 	},
@@ -29,21 +30,21 @@ module( "Transition scrollPage", {
 	}
 } );
 
-test( "moves the page to the toScroll position", function() {
+QUnit.test( "moves the page to the toScroll position", function( assert ) {
 	$( "body" ).height( 5000 );
 	instance.toScroll = 100;
 	instance.scrollPage();
-	equal( $( window ).scrollTop(), 100, "page has been scrolled" );
+	assert.equal( $( window ).scrollTop(), 100, "page has been scrolled" );
 } );
 
-test( "disables scrollstart for a short duration", function() {
+QUnit.test( "disables scrollstart for a short duration", function( assert ) {
 	instance.toScroll = 0;
 	instance.scrollPage();
-	equal( $.event.special.scrollstart.enabled, false, "scrollstart is disabled" );
+	assert.equal( $.event.special.scrollstart.enabled, false, "scrollstart is disabled" );
 } );
 
 
-module( "Transition doneIn", {
+QUnit.module( "Transition doneIn", {
 	setup: function() {
 		$to = $( "<div>" );
 		instance = new $.mobile.Transition( "foo", "reverse", $to, "from" );
@@ -51,17 +52,17 @@ module( "Transition doneIn", {
 	}
 } );
 
-test( "removes classes from the destination 'page'", function() {
+QUnit.test( "removes classes from the destination 'page'", function( assert ) {
 	$to.addClass( "out in reverse foo" );
 	instance.doneIn();
-	ok( !$to.hasClass( "out" ) );
-	ok( !$to.hasClass( "in" ) );
-	ok( !$to.hasClass( "reverse" ) );
-	ok( !$to.hasClass( "foo" ) );
+	assert.ok( !$to.hasClass( "out" ) );
+	assert.ok( !$to.hasClass( "in" ) );
+	assert.ok( !$to.hasClass( "reverse" ) );
+	assert.ok( !$to.hasClass( "foo" ) );
 } );
 
-test( "scrolls the page", function() {
-	expect( 1 );
+QUnit.test( "scrolls the page", function( assert ) {
+	assert.expect( 1 );
 
 	// ensure the two values are different to trigger the method call
 	window.scrollTo( 0, 0 );
@@ -69,27 +70,27 @@ test( "scrolls the page", function() {
 
 	// stub to capture call
 	instance.scrollPage = function() {
-		ok( true, "scrollPage called" );
+		assert.ok( true, "scrollPage called" );
 	};
 
 	instance.doneIn();
 } );
 
-asyncTest( "resolves the transition deferred with the requisite data", function() {
-	expect( 4 );
+QUnit.asyncTest( "resolves the transition deferred with the requisite data", function( assert ) {
+	assert.expect( 4 );
 
 	$.when( instance.deferred ).then( function( name, reverse, to, from ) {
-		equal( name, "foo" );
-		equal( reverse, "reverse" );
-		equal( to, $to );
-		equal( from, "from" );
-		start();
+		assert.equal( name, "foo" );
+		assert.equal( reverse, "reverse" );
+		assert.equal( to, $to );
+		assert.equal( from, "from" );
+		QUnit.start();
 	} );
 
 	instance.doneIn();
 } );
 
-module( "Transition hideIn", {
+QUnit.module( "Transition hideIn", {
 	setup: function() {
 		$to = $( "<div>" );
 		instance = new $.mobile.Transition( "foo", "reverse", $to, "from" );
@@ -97,57 +98,57 @@ module( "Transition hideIn", {
 	}
 } );
 
-test( "sets the z-index on the to element to prevent flickering in phonegap", function() {
-	expect( 3 );
-	equal( $to.css( "z-index" ), "" );
+QUnit.test( "sets the z-index on the to element to prevent flickering in phonegap", function( assert ) {
+	assert.expect( 3 );
+	assert.equal( $to.css( "z-index" ), "" );
 
 	instance.hideIn( function() {
-		equal( $to.css( "z-index" ), "-10" );
+		assert.equal( $to.css( "z-index" ), "-10" );
 	} );
 
-	equal( $to.css( "z-index" ), "" );
+	assert.equal( $to.css( "z-index" ), "" );
 } );
 
-module( "Transition startIn", {
+QUnit.module( "Transition startIn", {
 	setup: function() {
 		$to = $( "<div>" );
 		instance = new $.mobile.Transition( "foo", "reverse", $to, "from" );
 	}
 } );
 
-test( "sets active page class on the dom element", function() {
-	ok( !$to.hasClass( "ui-page-active" ) );
+QUnit.test( "sets active page class on the dom element", function( assert ) {
+	assert.ok( !$to.hasClass( "ui-page-active" ) );
 	instance.startIn();
-	ok( $to.hasClass( "ui-page-active" ) );
+	assert.ok( $to.hasClass( "ui-page-active" ) );
 } );
 
-test( "sets the height", function() {
+QUnit.test( "sets the height", function( assert ) {
 	$to.height( 10 );
-	equal( $to.height(), 10 );
+	assert.equal( $to.height(), 10 );
 	instance.toScroll = 5;
 	instance.startIn( 10 );
-	equal( $to.height(), 15, "height is toScroll + screenheight" );
+	assert.equal( $to.height(), 15, "height is toScroll + screenheight" );
 } );
 
-test( "adds the reverse class and the transition name", function() {
-	ok( !$to.hasClass( "foo" ) );
+QUnit.test( "adds the reverse class and the transition name", function( assert ) {
+	assert.ok( !$to.hasClass( "foo" ) );
 
 	instance.name = "bar";
 	instance.startIn( 0, "foo" );
 
-	ok( $to.hasClass( "foo" ), "has class 'foo'" );
-	ok( $to.hasClass( "bar" ), "has class 'bar'" );
+	assert.ok( $to.hasClass( "foo" ), "has class 'foo'" );
+	assert.ok( $to.hasClass( "bar" ), "has class 'bar'" );
 } );
 
-module( "Transition transition", {
+QUnit.module( "Transition transition", {
 	setup: function() {
 		$to = $from = $( "<div>" );
 		instance = new $.mobile.Transition( "foo", "reverse", $to, $from );
 	}
 } );
 
-asyncTest( "runs in and out methods in order", function() {
-	expect( 4 );
+QUnit.asyncTest( "runs in and out methods in order", function( assert ) {
+	assert.expect( 4 );
 
 	var counter = 0, defaults;
 
@@ -165,38 +166,38 @@ asyncTest( "runs in and out methods in order", function() {
 	};
 
 	instance.startOut = function() {
-		equal( counter, 0, "startOut is first" );
+		assert.equal( counter, 0, "startOut is first" );
 		counter++;
 
 		defaults.startOut.apply( this, arguments );
 	};
 
 	instance.doneOut = function() {
-		equal( counter, 1, "doneOut is second" );
+		assert.equal( counter, 1, "doneOut is second" );
 		counter++;
 
 		defaults.doneOut.apply( this, arguments );
 	};
 
 	instance.startIn = function() {
-		equal( counter, 2, "startIn is first" );
+		assert.equal( counter, 2, "startIn is first" );
 		counter++;
 
 		defaults.startIn.apply( this, arguments );
 	};
 
 	instance.doneIn = function() {
-		equal( counter, 3, "doneIn is fourth" );
+		assert.equal( counter, 3, "doneIn is fourth" );
 		counter++;
 
 		defaults.doneIn.apply( this, arguments );
-		start();
+		QUnit.start();
 	};
 
 	instance.transition();
 } );
 
-test( "transition respects getMaxScrollForTransition", function() {
+QUnit.test( "transition respects getMaxScrollForTransition", function( assert ) {
 	var transition, valuePassedToNone,
 		original = {
 			maxScroll: $.mobile.getMaxScrollForTransition,
@@ -226,13 +227,14 @@ test( "transition respects getMaxScrollForTransition", function() {
 
 	( new $.mobile.Transition( "slide", false, $( [] ), $( [] ) ) ).transition();
 
-	deepEqual( startOutCalled, false, "startOut was not called" );
-	deepEqual( doneOutCalled, true, "doneOut was called" );
-	deepEqual( valuePassedToNone, true, "The value passed to none was true" );
+	assert.deepEqual( startOutCalled, false, "startOut was not called" );
+	assert.deepEqual( doneOutCalled, true, "doneOut was called" );
+	assert.deepEqual( valuePassedToNone, true, "The value passed to none was true" );
 
 	$.mobile.getMaxScrollForTransition = original.maxScroll;
 	$.mobile.Transition.prototype.startOut = original.startOut;
 	$.mobile.Transition.prototype.doneOut = original.doneOut;
 	$.mobile.defaultHomeScroll = original.defaultHomeScroll;
 } );
-} )( jQuery );
+
+} )( QUnit, jQuery );
