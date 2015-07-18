@@ -2,13 +2,14 @@
  * mobile slider unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
+
 var onChangeCnt = 0;
 window.onChangeCounter = function() {
 	onChangeCnt++;
 };
 
-module( "jquery.mobile.slider.js events", {
+QUnit.module( "jquery.mobile.slider.js events", {
 	setup: function() {
 
 		// force the value to be an increment of 10 when we aren't testing the rounding
@@ -16,125 +17,125 @@ module( "jquery.mobile.slider.js events", {
 	}
 } );
 
-var keypressTest = function( opts ) {
+var keypressTest = function( assert, opts ) {
 	var slider = $( opts.selector ),
 		val = window.parseFloat( slider.val() ),
 		handle = slider.siblings( ".ui-slider-track" ).find( ".ui-slider-handle" );
 
-	expect( opts.keyCodes.length );
+	assert.expect( opts.keyCodes.length );
 
 	$.each( opts.keyCodes, function( i, elem ) {
 
 		// stub the keycode value and trigger the keypress
-		$.Event.prototype.keyCode = $.mobile.keyCode[ elem ];
-		handle.trigger( "keydown" );
+		handle.trigger( createEvent( "keydown", handle, 0, 0, elem ) );
 
-		val += opts.increment;
-		deepEqual( val, window.parseFloat( slider.val(), 10 ),
+		assert.deepEqual( val, window.parseFloat( slider.val(), 10 ),
 			"new value is " + opts.increment + " different" );
 	} );
 };
 
-test( "slider should move right with up, right, and page up keypress", function() {
-	keypressTest( {
+QUnit.test( "slider should move right with up, right, and page up keypress", function( assert ) {
+	keypressTest( assert, {
 		selector: "#range-slider-up",
 		keyCodes: [ "UP", "RIGHT", "PAGE_UP" ],
 		increment: 1
 	} );
 } );
 
-test( "slider should move left with down, left, and page down keypress", function() {
-	keypressTest( {
+QUnit.test( "slider should move left with down, left, and page down keypress", function( assert ) {
+	keypressTest( assert, {
 		selector: "#range-slider-down",
 		keyCodes: [ "DOWN", "LEFT", "PAGE_DOWN" ],
 		increment: -1
 	} );
 } );
 
-test( "slider should move to range minimum on end keypress", function() {
+QUnit.test( "slider should move to range minimum on end keypress", function( assert ) {
 	var selector = "#range-slider-end",
 		initialVal = window.parseFloat( $( selector ).val(), 10 ),
 		max = window.parseFloat( $( selector ).attr( "max" ), 10 );
 
-	keypressTest( {
+	keypressTest( assert, {
 		selector: selector,
 		keyCodes: [ "END" ],
 		increment: max - initialVal
 	} );
 } );
 
-test( "slider should move to range minimum on end keypress", function() {
+QUnit.test( "slider should move to range minimum on end keypress", function( assert ) {
 	var selector = "#range-slider-home",
 		initialVal = window.parseFloat( $( selector ).val(), 10 );
 
-	keypressTest( {
+	keypressTest( assert, {
 		selector: selector,
 		keyCodes: [ "HOME" ],
 		increment: 0 - initialVal
 	} );
 } );
 
-test( "slider should move positive by steps on keypress", function() {
-	keypressTest( {
+QUnit.test( "slider should move positive by steps on keypress", function( assert ) {
+	keypressTest( assert, {
 		selector: "#stepped",
 		keyCodes: [ "RIGHT" ],
 		increment: 10
 	} );
 } );
 
-test( "slider should move negative by steps on keypress", function() {
-	keypressTest( {
+QUnit.test( "slider should move negative by steps on keypress", function( assert ) {
+	keypressTest( assert, {
 		selector: "#stepped",
 		keyCodes: [ "LEFT" ],
 		increment: -10
 	} );
 } );
 
-test( "slider should validate input value on blur", function() {
+QUnit.test( "slider should validate input value on blur", function( assert ) {
 	var slider = $( "#range-slider-up" );
 	slider.focus();
 	slider.val( 200 );
-	deepEqual( slider.val(), "200" );
+	assert.deepEqual( slider.val(), "200" );
 	slider.blur();
-	deepEqual( slider.val(), slider.attr( "max" ) );
+	assert.deepEqual( slider.val(), slider.attr( "max" ) );
 } );
 
-test( "slider should not validate input on keyup", function() {
+QUnit.test( "slider should not validate input on keyup", function( assert ) {
 	var slider = $( "#range-slider-up" );
 	slider.focus();
 	slider.val( 200 );
-	deepEqual( slider.val(), "200" );
+	assert.deepEqual( slider.val(), "200" );
 	slider.keyup();
-	deepEqual( slider.val(), "200" );
+	assert.deepEqual( slider.val(), "200" );
 } );
 
-test( "input type should degrade to number when slider is created", function() {
-	deepEqual( $( "#range-slider-up" ).attr( "type" ), "number" );
+QUnit.test( "input type should degrade to number when slider is created", function( assert ) {
+	assert.deepEqual( $( "#range-slider-up" ).attr( "type" ), "number" );
 } );
 
-test( "onchange should not be called on create", function() {
-	equal( onChangeCnt, 0, "onChange should not have been called" );
+QUnit.test( "onchange should not be called on create", function( assert ) {
+	assert.equal( onChangeCnt, 0, "onChange should not have been called" );
 } );
 
-test( "onchange should be called onchange", function() {
+QUnit.test( "onchange should be called onchange", function( assert ) {
 	onChangeCnt = 0;
 	$( "#onchange" ).slider( "refresh", 50 );
-	equal( onChangeCnt, 1, "onChange should have been called once" );
+	assert.equal( onChangeCnt, 1, "onChange should have been called once" );
 } );
 
-test( "slider controls will create when inside a container that receives a 'create' event",
-	function() {
-		ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-slider-track" ).length,
+QUnit.test( "slider controls will create when inside a container that receives a 'create' event",
+	function( assert ) {
+		assert.ok(
+			!$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-slider-track" ).length,
 			"did not have enhancements applied" );
-		ok( $( "#enhancetest" ).enhance().find( ".ui-slider-track" ).length,
+		assert.ok( $( "#enhancetest" ).enhance().find( ".ui-slider-track" ).length,
 			"enhancements applied" );
 } );
 
-var createEvent = function( name, target, x, y ) {
+var createEvent = function( name, target, x, y, key ) {
 	var event = $.Event( name );
 	event.target = target;
 	event.pageX = x;
 	event.pageY = y;
+	event.keyCode = key;
 	return event;
 };
 
@@ -152,15 +153,15 @@ var assertLeftCSS = function( obj, opts ) {
 		compare = parseInt( opts.pixels.replace( "px", "" ), 10 );
 
 		// check that the pixel value provided is within a given threshold; default is 0px
-		ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold,
+		assert.ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold,
 			opts.message );
 	} else {
-		equal( css, opts.percent, opts.message );
+		assert.equal( css, opts.percent, opts.message );
 	}
 };
 
-asyncTest( "drag should start only when clicked with left button", function() {
-	expect( 5 );
+QUnit.asyncTest( "drag should start only when clicked with left button", function( assert ) {
+	assert.expect( 5 );
 
 	var control = $( "#mousedown-which-events" ),
 		widget = control.data( "mobile-slider" ),
@@ -179,7 +180,7 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "0" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false,
+			assert.deepEqual( result.slidestart.timedOut, false,
 				"slider did emit 'slidestart' event upon 0 button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 1;
@@ -189,7 +190,7 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false,
+			assert.deepEqual( result.slidestart.timedOut, false,
 				"slider did emit 'slidestart' event upon left button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = undefined;
@@ -199,7 +200,7 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false,
+			assert.deepEqual( result.slidestart.timedOut, false,
 				"slider did emit 'slidestart' event upon undefined button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 2;
@@ -209,7 +210,7 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "2" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, true,
+			assert.deepEqual( result.slidestart.timedOut, true,
 				"slider did not emit 'slidestart' event upon middle button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 3;
@@ -219,38 +220,39 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "3" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, true,
+			assert.deepEqual( result.slidestart.timedOut, true,
 				"slider did not emit 'slidestart' event upon right button press" );
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
-	var control = $( "#start-stop-events" ),
-		widget = control.data( "mobile-slider" ),
-		slider = widget.slider;
+QUnit.asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events",
+	function( assert ) {
+		var control = $( "#start-stop-events" ),
+			widget = control.data( "mobile-slider" ),
+			slider = widget.slider;
 
-	$.testHelper.eventCascade( [
-		function() {
+		$.testHelper.eventCascade( [
+			function() {
 
-			// trigger the slider grab event
-			slider.trigger( "mousedown" );
-		},
+				// trigger the slider grab event
+				slider.trigger( "mousedown" );
+			},
 
-		"slidestart", function( timeout ) {
-			ok( !timeout, "slidestart fired" );
-			slider.trigger( "mouseup" );
-		},
+			"slidestart", function( timeout ) {
+				assert.ok( !timeout, "slidestart fired" );
+				slider.trigger( "mouseup" );
+			},
 
-		"slidestop", function( timeout ) {
-			ok( !timeout, "slidestop fired" );
-			start();
-		}
-	], 500 );
+			"slidestop", function( timeout ) {
+				assert.ok( !timeout, "slidestop fired" );
+				QUnit.start();
+			}
+		], 500 );
 } );
 
-test( "mouse move only triggers the change event when the value changes", function() {
+QUnit.test( "mouse move only triggers the change event when the value changes", function( assert ) {
 	var control = $( "#slider-change-event" ),
 		widget = control.data( "mobile-slider" ),
 		slider = widget.slider,
@@ -273,7 +275,7 @@ test( "mouse move only triggers the change event when the value changes", functi
 
 	control.unbind( "change", changeFunc );
 
-	strictEqual( actualChanges, changeCount, "change events match actual changes in value" );
+	assert.strictEqual( actualChanges, changeCount, "change events match actual changes in value" );
 } );
 
 // NOTE this test isn't run because the event data isn't easily accessible
@@ -283,7 +285,7 @@ test( "mouse move only triggers the change event when the value changes", functi
 if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 			return ( l < r );
 		}, "1.8" ) ) {
-	test( "slider should detach event", function() {
+	QUnit.test( "slider should detach event", function( assert ) {
 		var slider = $( "#remove-events-slider" ),
 			doc = $( document ),
 			vmouseupLength,
@@ -298,10 +300,10 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 
 		slider.remove();
 
-		equal( getDocumentEventsLength( "vmouseup" ), ( vmouseupLength - 1 ),
+		assert.equal( getDocumentEventsLength( "vmouseup" ), ( vmouseupLength - 1 ),
 			"vmouseup event was removed" );
-		equal( getDocumentEventsLength( "vmousemove" ), ( vmousemoveLength - 1 ),
+		assert.equal( getDocumentEventsLength( "vmousemove" ), ( vmousemoveLength - 1 ),
 			"vmousemove event was removed" );
 	} );
 }
-} )( jQuery );
+} )( QUnit, jQuery );
