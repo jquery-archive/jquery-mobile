@@ -1,4 +1,4 @@
-( function() {
+( function( QUnit, $ ) {
 
 $( document ).on( "mobileinit", function() {
 	var origParseLocation = $.mobile.path.parseLocation,
@@ -29,8 +29,8 @@ $( document ).on( "mobileinit", function() {
 	};
 } );
 
-test( "data-url for initial page is urldecoded", function() {
-	deepEqual(
+QUnit.test( "data-url for initial page is urldecoded", function( assert ) {
+	assert.deepEqual(
 		!!$( ":mobile-page" )
 			.attr( "data-" + $.mobile.ns + "url" )
 			.match( /weird%20file%20name/ ),
@@ -38,4 +38,4 @@ test( "data-url for initial page is urldecoded", function() {
 		"Value of 'data-url' attribute is not urlencoded" );
 } );
 
-} )();
+} )( QUnit, jQuery );

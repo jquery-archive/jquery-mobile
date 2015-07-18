@@ -11,4 +11,4 @@ $( document ).one( "mobileinit", function() {
 	$.mobile.loader.prototype.options.text = "mobileinit";
 	$.mobile.loader.prototype.options.textVisible = true;
 } );
-} )
+} );

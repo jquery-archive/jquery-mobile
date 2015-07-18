@@ -1,12 +1,10 @@
 /*
  * mobile init tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 
-
-test( "page element is generated when not present in initial markup", function() {
-	ok( $( ".ui-page" ).length, 1 );
+QUnit.test( "page element is generated when not present in initial markup", function( assert ) {
+	assert.ok( $( ".ui-page" ).length, 1 );
 } );
 
-
-} )( jQuery );
+} )( QUnit, jQuery );

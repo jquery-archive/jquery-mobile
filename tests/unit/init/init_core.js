@@ -25,7 +25,7 @@ require( [
 		};
 
 
-	module( libName, {
+	QUnit.module( libName, {
 		setup: function() {
 			$.mobile.ns = shared.ns;
 			// NOTE reset for gradeA tests
@@ -41,39 +41,39 @@ require( [
 	} );
 
 	// NOTE for the following two tests see index html for the binding
-	test( "mobile.page is available when mobile init is fired", function() {
-		ok( shared.page !== undefined, "$.mobile.page is defined" );
+	QUnit.test( "mobile.page is available when mobile init is fired", function( assert ) {
+		assert.ok( shared.page !== undefined, "$.mobile.page is defined" );
 	} );
 
 	$.testHelper.excludeFileProtocol( function() {
-		asyncTest( "loading the init library triggers mobilinit on the document", function() {
+		QUnit.asyncTest( "loading the init library triggers mobilinit on the document", function( assert ) {
 			var initFired = false;
-			expect( 1 );
+			assert.expect( 1 );
 
 			$( window.document ).one( 'mobileinit', function( event ) {
 				initFired = true;
 			} );
 
 			$.testHelper.reloadModule( libName ).then( function() {
-				ok( initFired, "init fired" );
+				assert.ok( initFired, "init fired" );
 			} ).then( start );
 		} );
 
-		asyncTest( "enhancements are skipped when the browser is not grade A", function() {
+		QUnit.asyncTest( "enhancements are skipped when the browser is not grade A", function( assert ) {
 			setGradeA( false );
 			$.testHelper.reloadModule( libName ).then( function() {
 				//NOTE easiest way to check for enhancements, not the most obvious
-				ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
+				assert.ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
 			} ).then( start );
 
 		} );
 
-		asyncTest( "enhancements are added when the browser is grade A", function() {
-			expect( 1 );
+		QUnit.asyncTest( "enhancements are added when the browser is grade A", function( assert ) {
+			assert.expect( 1 );
 			setGradeA( true );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
-					ok( $( "html" ).hasClass( "ui-mobile" ), "html elem has class mobile" );
+					assert.ok( $( "html" ).hasClass( "ui-mobile" ), "html elem has class mobile" );
 				}
 			).then( start );
 		} );
@@ -82,52 +82,52 @@ require( [
 			return $( ":jqmData(role='page')" ).first();
 		};
 
-		asyncTest( "active page and start page should be set to the fist page in the selected set", function() {
-			expect( 2 );
+		QUnit.asyncTest( "active page and start page should be set to the fist page in the selected set", function( assert ) {
+			assert.expect( 2 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
 					var firstPage = findFirstPage();
 
-					deepEqual( $.mobile.firstPage[ 0 ], firstPage[ 0 ] );
-					deepEqual( $.mobile.activePage[ 0 ], firstPage[ 0 ] );
+					assert.deepEqual( $.mobile.firstPage[ 0 ], firstPage[ 0 ] );
+					assert.deepEqual( $.mobile.activePage[ 0 ], firstPage[ 0 ] );
 				}
 			).then( start );
 		} );
 
-		asyncTest( "mobile viewport class is defined on the first page's parent", function() {
-			expect( 1 );
+		QUnit.asyncTest( "mobile viewport class is defined on the first page's parent", function( assert ) {
+			assert.expect( 1 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
 					var firstPage = findFirstPage();
 
-					ok( firstPage.parent().hasClass( "ui-mobile-viewport" ), "first page has viewport" );
+					assert.ok( firstPage.parent().hasClass( "ui-mobile-viewport" ), "first page has viewport" );
 				}
 			).then( start );
 		} );
 
-		asyncTest( "mobile page container is the first page's parent", function() {
-			expect( 1 );
+		QUnit.asyncTest( "mobile page container is the first page's parent", function( assert ) {
+			assert.expect( 1 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
 					var firstPage = findFirstPage();
 
-					deepEqual( $.mobile.pageContainer[ 0 ], firstPage.parent()[ 0 ] );
+					assert.deepEqual( $.mobile.pageContainer[ 0 ], firstPage.parent()[ 0 ] );
 				}
 			).then( start );
 		} );
 
-		test( "pages without a data-url attribute have it set to their id", function() {
-			deepEqual( $( "#foo" ).jqmData( 'url' ), "foo" );
+		QUnit.test( "pages without a data-url attribute have it set to their id", function( assert ) {
+			assert.deepEqual( $( "#foo" ).jqmData( 'url' ), "foo" );
 		} );
 
-		test( "pages with a data-url attribute are left with the original value", function() {
-			deepEqual( $( "#bar" ).jqmData( 'url' ), "bak" );
+		QUnit.test( "pages with a data-url attribute are left with the original value", function( assert ) {
+			assert.deepEqual( $( "#bar" ).jqmData( 'url' ), "bak" );
 		} );
 
 		// NOTE the next two tests work on timeouts that assume a page will be
 		// created within 2 seconds it'd be great to get these using a more
 		// reliable callback or event
-		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function() {
+		QUnit.asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function( assert ) {
 
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
 
@@ -139,13 +139,13 @@ require( [
 
 			reloadCoreNSandInit().then(
 				function() {
-					deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
+					assert.deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
 				}
 			).then( start );
 		} );
 
 
-		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function() {
+		QUnit.asyncTest( "page does not initialize at domready when autoinitialize option is false ", function( assert ) {
 			$( document ).one( "mobileinit", function() {
 				$.mobile.autoInitializePage = false;
 			} );
@@ -157,7 +157,7 @@ require( [
 
 			reloadCoreNSandInit().then(
 				function() {
-					deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
+					assert.deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
 
 					$( document ).bind( "mobileinit", function() {
 						$.mobile.autoInitializePage = true;
