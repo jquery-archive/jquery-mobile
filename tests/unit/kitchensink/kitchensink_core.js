@@ -1,20 +1,20 @@
 /*
  * Kitchen Sink Tests
  */
-( function( $ ) {
-module( "Kitchen Sink" );
+( function( QUnit, $ ) {
+QUnit.module( "Kitchen Sink" );
 
-test( "Nothing on the page has a class that contains `undefined`.", function() {
+QUnit.test( "Nothing on the page has a class that contains `undefined`.", function( assert ) {
 	var undefClass = $( ".ui-page" ).find( "[class*='undefined']" );
 
-	ok( undefClass.length == 0 );
+	assert.ok( undefClass.length == 0 );
 } );
 
-module( "Widget Create" );
+QUnit.module( "Widget Create" );
 
 // required as part of the deprecation of init for #3602
-test( "all widget create events fire before page create", function() {
+QUnit.test( "all widget create events fire before page create", function( assert ) {
 	// see preinit.js
-	ok( window.createTests.pageCreateTimed );
+	assert.ok( window.createTests.pageCreateTimed );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
