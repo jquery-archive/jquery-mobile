@@ -2,7 +2,7 @@
  * mobile event unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
 var libName = "jquery.mobile.events.js",
 	components = [ "events/touch.js", "events/throttledresize.js", "events/scroll.js",
 		"events/orientationchange.js" ],
@@ -13,7 +13,7 @@ var libName = "jquery.mobile.events.js",
 	events = ( "touchstart touchmove touchend tap taphold " +
 	"swipe swipeleft swiperight scrollstart scrollstop orientationchange" ).split( " " );
 
-module( libName, {
+QUnit.module( libName, {
 	setup: function() {
 
 		// ensure bindings are removed
@@ -40,10 +40,10 @@ module( libName, {
 } );
 
 $.testHelper.excludeFileProtocol( function() {
-	test( "new events defined on the jquery object", function() {
+	QUnit.test( "new events defined on the jquery object", function( assert ) {
 		$.each( events, function( i, name ) {
 			delete $.fn[ name ];
-			deepEqual( $.fn[ name ], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
+			assert.deepEqual( $.fn[ name ], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
 		} );
 
 		$.each( components, function( index, value ) {
@@ -51,28 +51,28 @@ $.testHelper.excludeFileProtocol( function() {
 		} );
 
 		$.each( events, function( i, name ) {
-			ok( $.fn[ name ] !== undefined, name + " should NOT be undefined" );
+			assert.ok( $.fn[ name ] !== undefined, name + " should NOT be undefined" );
 		} );
 	} );
 } );
 
-asyncTest( "defined event functions bind a closure when passed", function() {
-	expect( 1 );
+QUnit.asyncTest( "defined event functions bind a closure when passed", function( assert ) {
+	assert.expect( 1 );
 
 	$( '#qunit-fixture' ).bind( events[ 0 ], function() {
-		ok( true, "event fired" );
-		start();
+		assert.ok( true, "event fired" );
+		QUnit.start();
 	} );
 
 	$( '#qunit-fixture' ).trigger( events[ 0 ] );
 } );
 
-asyncTest( "defined event functions trigger the event with no arguments", function() {
-	expect( 1 );
+QUnit.asyncTest( "defined event functions trigger the event with no arguments", function( assert ) {
+	assert.expect( 1 );
 
 	$( '#qunit-fixture' ).bind( 'touchstart', function() {
-		ok( true, "event fired" );
-		start();
+		assert.ok( true, "event fired" );
+		QUnit.start();
 	} );
 
 	$( '#qunit-fixture' ).touchstart();
@@ -80,50 +80,50 @@ asyncTest( "defined event functions trigger the event with no arguments", functi
 
 // jQuery < 1.8
 if ( $.attrFn ) {
-	test( "defining event functions sets the attrFn to true", function() {
+	QUnit.test( "defining event functions sets the attrFn to true", function( assert ) {
 		$.each( events, function( index, name ) {
-			ok( $.attrFn[ name ], "attribute function is true" );
+			assert.ok( $.attrFn[ name ], "attribute function is true" );
 		} );
 	} );
 }
 
 
-test( "scrollstart enabled defaults to true", function() {
+QUnit.test( "scrollstart enabled defaults to true", function( assert ) {
 	$.event.special.scrollstart.enabled = false;
 	$.each( components, function( index, value ) {
 		$.testHelper.reloadLib( value );
 	} );
-	ok( $.event.special.scrollstart.enabled, "scrollstart enabled" );
+	assert.ok( $.event.special.scrollstart.enabled, "scrollstart enabled" );
 } );
 
-asyncTest( "scrollstart setup binds a function that returns when its disabled", function() {
-	expect( 1 );
+QUnit.asyncTest( "scrollstart setup binds a function that returns when its disabled", function( assert ) {
+	assert.expect( 1 );
 	$.event.special.scrollstart.enabled = false;
 
 	$( "#qunit-fixture" ).bind( "scrollstart", function() {
-		ok( false, "scrollstart fired" );
+		assert.ok( false, "scrollstart fired" );
 	} );
 
 	$( "#qunit-fixture" ).bind( "touchmove", function() {
-		ok( true, "touchmove fired" );
-		start();
+		assert.ok( true, "touchmove fired" );
+		QUnit.start();
 	} );
 
 	$( "#qunit-fixture" ).trigger( "touchmove" );
 } );
 
-asyncTest( "scrollstart setup binds a function that triggers scroll start when enabled", function() {
+QUnit.asyncTest( "scrollstart setup binds a function that triggers scroll start when enabled", function( assert ) {
 	$.event.special.scrollstart.enabled = true;
 
 	$( "#qunit-fixture" ).bind( "scrollstart", function() {
-		ok( true, "scrollstart fired" );
-		start();
+		assert.ok( true, "scrollstart fired" );
+		QUnit.start();
 	} );
 
 	$( "#qunit-fixture" ).trigger( "touchmove" );
 } );
 
-asyncTest( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function() {
+QUnit.asyncTest( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function( assert ) {
 	var triggered = false;
 	$.event.special.scrollstart.enabled = true;
 
@@ -131,13 +131,13 @@ asyncTest( "scrollstart setup binds a function that triggers scroll stop after 5
 		triggered = true;
 	} );
 
-	ok( !triggered, "not triggered" );
+	assert.ok( !triggered, "not triggered" );
 
 	$( "#qunit-fixture" ).trigger( "touchmove" );
 
 	setTimeout( function() {
-		ok( triggered, "triggered" );
-		start();
+		assert.ok( triggered, "triggered" );
+		QUnit.start();
 	}, 50 );
 } );
 
@@ -154,7 +154,7 @@ var forceTouchSupport = function() {
 	} );
 };
 
-asyncTest( "long press fires tap hold after taphold duration", function() {
+QUnit.asyncTest( "long press fires tap hold after taphold duration", function( assert ) {
 	var taphold = false,
 		target = undefined;
 
@@ -168,15 +168,15 @@ asyncTest( "long press fires tap hold after taphold duration", function() {
 	$( "#qunit-fixture" ).trigger( "vmousedown" );
 
 	setTimeout( function() {
-		ok( !taphold, "taphold not fired" );
-		deepEqual( target, undefined, "taphold target should be #qunit-fixture" );
+		assert.ok( !taphold, "taphold not fired" );
+		assert.deepEqual( target, undefined, "taphold target should be #qunit-fixture" );
 	}, $.event.special.tap.tapholdThreshold - 10 );
 
 
 	setTimeout( function() {
-		ok( taphold, "taphold fired" );
-		equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
-		start();
+		assert.ok( taphold, "taphold fired" );
+		assert.equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
+		QUnit.start();
 	}, $.event.special.tap.tapholdThreshold + 10 );
 } );
 
@@ -188,8 +188,8 @@ var mockAbs = function( value ) {
 	};
 };
 
-asyncTest( "move prevents taphold", function() {
-	expect( 1 );
+QUnit.asyncTest( "move prevents taphold", function( assert ) {
+	assert.expect( 1 );
 	var taphold = false;
 
 	forceTouchSupport();
@@ -197,7 +197,7 @@ asyncTest( "move prevents taphold", function() {
 
 	//NOTE record taphold event
 	$( "#qunit-fixture" ).bind( "taphold", function() {
-		ok( false, "taphold fired" );
+		assert.ok( false, "taphold fired" );
 		taphold = true;
 	} );
 
@@ -212,16 +212,16 @@ asyncTest( "move prevents taphold", function() {
 	//NOTE verify that the taphold hasn't been fired
 	//		 with the normal timing
 	setTimeout( function() {
-		ok( !taphold, "taphold not fired" );
-		start();
+		assert.ok( !taphold, "taphold not fired" );
+		QUnit.start();
 	}, 751 );
 } );
 
-asyncTest( "tap event fired without movement", function() {
-	expect( 1 );
+QUnit.asyncTest( "tap event fired without movement", function( assert ) {
+	assert.expect( 1 );
 	var tap = false,
 		checkTap = function() {
-			ok( true, "tap fired" );
+			assert.ok( true, "tap fired" );
 		};
 
 	forceTouchSupport();
@@ -234,18 +234,18 @@ asyncTest( "tap event fired without movement", function() {
 	$( "#qunit-fixture" ).trigger( "vclick" );
 
 	setTimeout( function() {
-		start();
+		QUnit.start();
 	}, 400 );
 } );
 
-asyncTest( "tap event not fired when there is movement", function() {
-	expect( 1 );
+QUnit.asyncTest( "tap event not fired when there is movement", function( assert ) {
+	assert.expect( 1 );
 	var tap = false;
 	forceTouchSupport();
 
 	//NOTE record tap event
 	$( "#qunit-fixture" ).bind( "tap", function() {
-		ok( false, "tap fired" );
+		assert.ok( false, "tap fired" );
 		tap = true;
 	} );
 
@@ -262,21 +262,21 @@ asyncTest( "tap event not fired when there is movement", function() {
 	}, 20 );
 
 	setTimeout( function() {
-		ok( !tap, "not tapped" );
-		start();
+		assert.ok( !tap, "not tapped" );
+		QUnit.start();
 	}, 40 );
 } );
 
-asyncTest( "tap event propagates up DOM tree", function() {
+QUnit.asyncTest( "tap event propagates up DOM tree", function( assert ) {
 	var tap = 0,
 		$qf = $( "#qunit-fixture" ),
 		$doc = $( document ),
 		docTapCB = function() {
-			deepEqual( ++tap, 2, "document tap callback called once after #qunit-fixture callback" );
+			assert.deepEqual( ++tap, 2, "document tap callback called once after #qunit-fixture callback" );
 		};
 
 	$qf.bind( "tap", function() {
-		deepEqual( ++tap, 1, "#qunit-fixture tap callback called once" );
+		assert.deepEqual( ++tap, 1, "#qunit-fixture tap callback called once" );
 	} );
 
 	$doc.bind( "tap", docTapCB );
@@ -287,27 +287,27 @@ asyncTest( "tap event propagates up DOM tree", function() {
 
 	// tap binding should be triggered twice, once for
 	// #qunit-fixture, and a second time for document.
-	deepEqual( tap, 2, "final tap callback count is 2" );
+	assert.deepEqual( tap, 2, "final tap callback count is 2" );
 
 	$doc.unbind( "tap", docTapCB );
 
-	start();
+	QUnit.start();
 } );
 
-asyncTest( "stopPropagation() prevents tap from propagating up DOM tree", function() {
+QUnit.asyncTest( "stopPropagation() prevents tap from propagating up DOM tree", function( assert ) {
 	var tap = 0,
 		$qf = $( "#qunit-fixture" ),
 		$doc = $( document ),
 		docTapCB = function() {
-			ok( false, "tap should NOT be triggered on document" );
+			assert.ok( false, "tap should NOT be triggered on document" );
 		};
 
 	$qf.bind( "tap", function( e ) {
-		deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
+		assert.deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
 		e.stopPropagation();
 	} )
 		.bind( "tap", function( e ) {
-			deepEqual( ++tap, 2, "tap callback 2 triggered once on #qunit-fixture" );
+			assert.deepEqual( ++tap, 2, "tap callback 2 triggered once on #qunit-fixture" );
 		} );
 
 	$doc.bind( "tap", docTapCB );
@@ -317,29 +317,29 @@ asyncTest( "stopPropagation() prevents tap from propagating up DOM tree", functi
 		.trigger( "vclick" );
 
 	// tap binding should be triggered twice.
-	deepEqual( tap, 2, "final tap count is 2" );
+	assert.deepEqual( tap, 2, "final tap count is 2" );
 
 	$doc.unbind( "tap", docTapCB );
 
-	start();
+	QUnit.start();
 } );
 
-asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of 2nd handler", function() {
+QUnit.asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of 2nd handler", function( assert ) {
 	var tap = 0,
 		$cf = $( "#qunit-fixture" ),
 		$doc = $( document ),
 		docTapCB = function() {
-			ok( false, "tap should NOT be triggered on document" );
+			assert.ok( false, "tap should NOT be triggered on document" );
 		};
 
 	// Bind 2 tap callbacks on qunit-fixture. Only the first
 	// one should ever be called.
 	$cf.bind( "tap", function( e ) {
-		deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
+		assert.deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
 		e.stopImmediatePropagation();
 	} )
 		.bind( "tap", function( e ) {
-			ok( false, "tap callback 2 should NOT be triggered on #qunit-fixture" );
+			assert.ok( false, "tap callback 2 should NOT be triggered on #qunit-fixture" );
 		} );
 
 	$doc.bind( "tap", docTapCB );
@@ -349,14 +349,14 @@ asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of
 		.trigger( "vclick" );
 
 	// tap binding should be triggered once.
-	deepEqual( tap, 1, "final tap count is 1" );
+	assert.deepEqual( tap, 1, "final tap count is 1" );
 
 	$doc.unbind( "tap", docTapCB );
 
-	start();
+	QUnit.start();
 } );
 
-var swipeTimedTest = function( opts ) {
+var swipeTimedTest = function( assert, opts ) {
 	var newHandlerCount, origHandlerCount,
 		origHandleSwipe = $.event.special.swipe.handleSwipe,
 		handleSwipeAlwaysOnInner = true,
@@ -431,15 +431,15 @@ var swipeTimedTest = function( opts ) {
 	}, opts.timeout + 100 );
 
 	setTimeout( function() {
-		deepEqual( swipe, opts.expected, "swipe expected" );
-		deepEqual( bubble, opts.expected, "swipe bubbles when present" );
-		deepEqual( handleSwipeAlwaysOnInner, true, "handleSwipe is always called on the inner element" );
+		assert.deepEqual( swipe, opts.expected, "swipe expected" );
+		assert.deepEqual( bubble, opts.expected, "swipe bubbles when present" );
+		assert.deepEqual( handleSwipeAlwaysOnInner, true, "handleSwipe is always called on the inner element" );
 
 		// Make sure swipe handlers are removed in case swipe never fired
 		qunitFixture.off( "swipe" );
 		$( "body" ).off( "swipe" );
 
-		deepEqual( {
+		assert.deepEqual( {
 			body: getHandlerCount( body[ 0 ] ),
 			qunitFixture: getHandlerCount( qunitFixture[ 0 ] )
 		}, origHandlerCount, "exactly the swipe-related event handlers are removed." );
@@ -447,35 +447,35 @@ var swipeTimedTest = function( opts ) {
 		// Remove dummy event handler
 		body.add( qunitFixture )
 			.off( "touchstart touchmove touchend", dummyFunction );
-		start();
+		QUnit.start();
 	}, opts.timeout + 200 );
 
-	stop();
+	QUnit.stop();
 };
 
 // This test is commented out until we can fix the rest of the file to not destroy prototypes
 // The test no longer works because of false assumpitions and cant be fixed with current abuse
 // of prototype changes
 /*
-test( "swipe fired when coordinate change in less than a second", function(){
-	swipeTimedTest({ timeout: 10, coordChange: 35, expected: true });
+QUnit.test( "swipe fired when coordinate change in less than a second", function( assert ){
+	swipeTimedTest( assert,{ timeout: 10, coordChange: 35, expected: true });
 });
 */
 
-test( "swipe not fired when coordinate change takes more than a second", function() {
-	swipeTimedTest( { timeout: 1000, coordChange: 35, expected: false } );
+QUnit.test( "swipe not fired when coordinate change takes more than a second", function( assert ) {
+	swipeTimedTest( assert, { timeout: 1000, coordChange: 35, expected: false } );
 } );
 
-test( "swipe not fired when coordinate change <= 30", function() {
-	swipeTimedTest( { timeout: 1000, coordChange: 30, expected: false } );
+QUnit.test( "swipe not fired when coordinate change <= 30", function( assert ) {
+	swipeTimedTest( assert, { timeout: 1000, coordChange: 30, expected: false } );
 } );
 
-test( "swipe not fired when coordinate change >= 75", function() {
-	swipeTimedTest( { timeout: 1000, coordChange: 75, expected: false } );
+QUnit.test( "swipe not fired when coordinate change >= 75", function( assert ) {
+	swipeTimedTest( assert, { timeout: 1000, coordChange: 75, expected: false } );
 } );
 
-asyncTest( "scrolling prevented when coordinate change > 10", function() {
-	expect( 1 );
+QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( assert ) {
+	assert.expect( 1 );
 
 	forceTouchSupport();
 
@@ -483,8 +483,8 @@ asyncTest( "scrolling prevented when coordinate change > 10", function() {
 	$( "#qunit-fixture" ).bind( 'swipe', function() {} );
 
 	$.Event.prototype.preventDefault = function() {
-		ok( true, "prevent default called" );
-		start();
+		assert.ok( true, "prevent default called" );
+		QUnit.start();
 	};
 
 	//NOTE bypass the trigger source check
@@ -508,7 +508,7 @@ asyncTest( "scrolling prevented when coordinate change > 10", function() {
 	$( "#qunit-fixture" ).trigger( "touchmove" );
 } );
 
-test( "Swipe get cords returns proper values", function() {
+QUnit.test( "Swipe get cords returns proper values", function( assert ) {
 	var location,
 		event = {
 			pageX: 100,
@@ -518,50 +518,50 @@ test( "Swipe get cords returns proper values", function() {
 		};
 
 	location = $.event.special.swipe.getLocation( event );
-	ok( location.x === 300 && location.y === 300, "client values returned under normal conditions" );
+	assert.ok( location.x === 300 && location.y === 300, "client values returned under normal conditions" );
 	event.pageX = 1000;
 	event.pageY = 1000;
 	location = $.event.special.swipe.getLocation( event );
-	ok( location.x > 300 && location.y > 300, "Fixes android bogus values" );
+	assert.ok( location.x > 300 && location.y > 300, "Fixes android bogus values" );
 	event.pageX = 0;
 	event.pageY = 0;
 	location = $.event.special.swipe.getLocation( event );
-	ok( location.x <= 300 && location.y <= 300, "Fixes ios client values based on page" );
+	assert.ok( location.x <= 300 && location.y <= 300, "Fixes ios client values based on page" );
 
 
 } );
 
-var nativeSupportTest = function( opts ) {
+var nativeSupportTest = function( assert, opts ) {
 	$.support.orientation = opts.orientationSupport;
-	deepEqual( $.event.special.orientationchange[ opts.method ](), opts.returnValue );
+	assert.deepEqual( $.event.special.orientationchange[ opts.method ](), opts.returnValue );
 };
 
-test( "orientation change setup should do nothing when natively supported", function() {
-	nativeSupportTest( {
+QUnit.test( "orientation change setup should do nothing when natively supported", function( assert ) {
+	nativeSupportTest( assert, {
 		method: 'setup',
 		orientationSupport: true,
 		returnValue: false
 	} );
 } );
 
-test( "orientation change setup should bind resize when not supported natively", function() {
-	nativeSupportTest( {
+QUnit.test( "orientation change setup should bind resize when not supported natively", function( assert ) {
+	nativeSupportTest( assert, {
 		method: 'setup',
 		orientationSupport: false,
 		returnValue: undefined //NOTE result of bind function call
 	} );
 } );
 
-test( "orientation change teardown should do nothing when natively supported", function() {
-	nativeSupportTest( {
+QUnit.test( "orientation change teardown should do nothing when natively supported", function( assert ) {
+	nativeSupportTest( assert, {
 		method: 'teardown',
 		orientationSupport: true,
 		returnValue: false
 	} );
 } );
 
-test( "orientation change teardown should unbind resize when not supported natively", function() {
-	nativeSupportTest( {
+QUnit.test( "orientation change teardown should unbind resize when not supported natively", function( assert ) {
+	nativeSupportTest( assert, {
 		method: 'teardown',
 		orientationSupport: false,
 		returnValue: undefined //NOTE result of unbind function call
@@ -570,16 +570,16 @@ test( "orientation change teardown should unbind resize when not supported nativ
 
 /* The following 4 tests are async so that the throttled event triggers don't interfere with subsequent tests */
 
-asyncTest( "throttledresize event proxies resize events", function() {
+QUnit.asyncTest( "throttledresize event proxies resize events", function( assert ) {
 	$( window ).one( "throttledresize", function() {
-		ok( true, "throttledresize called" );
-		start();
+		assert.ok( true, "throttledresize called" );
+		QUnit.start();
 	} );
 
 	$( window ).trigger( "resize" );
 } );
 
-asyncTest( "throttledresize event prevents resize events from firing more frequently than one per 250ms", function() {
+QUnit.asyncTest( "throttledresize event prevents resize events from firing more frequently than one per 250ms", function( assert ) {
 	var called = 0;
 
 	$( window ).bind( "throttledresize", function() {
@@ -595,31 +595,31 @@ asyncTest( "throttledresize event prevents resize events from firing more freque
 
 		// verify that only one throttled resize was called after 250ms
 		function() {
-			deepEqual( called, 1 );
+			assert.deepEqual( called, 1 );
 		},
 
 		function() {
-			start();
+			QUnit.start();
 		}
 	], 400 );
 } );
 
-asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function() {
+QUnit.asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function( assert ) {
 	var called = 0;
 
-	expect( 2 );
+	assert.expect( 2 );
 
 	$.testHelper.eventSequence( "throttledresize", [
 		// ignore the first call
 		$.noop,
 
 		function() {
-			ok( true, "second throttled resize should run" );
+			assert.ok( true, "second throttled resize should run" );
 		},
 
 		function( timedOut ) {
-			ok( timedOut, "third throttled resize should not run" );
-			start();
+			assert.ok( timedOut, "third throttled resize should not run" );
+			QUnit.start();
 		}
 	] );
 
@@ -629,9 +629,9 @@ asyncTest( "throttledresize event promises that a held call will execute only on
 		.trigger( "resize" );
 } );
 
-asyncTest( "mousedown mouseup and click events should add a which when its not defined", function() {
+QUnit.asyncTest( "mousedown mouseup and click events should add a which when its not defined", function( assert ) {
 	var whichDefined = function( event ) {
-		deepEqual( event.which, 1 );
+		assert.deepEqual( event.which, 1 );
 	};
 
 	$( document ).bind( "vclick", whichDefined );
@@ -641,10 +641,10 @@ asyncTest( "mousedown mouseup and click events should add a which when its not d
 	$( document ).trigger( "mousedown" );
 
 	$( document ).bind( "vmouseup", function( event ) {
-		deepEqual( event.which, 1 );
-		start();
+		assert.deepEqual( event.which, 1 );
+		QUnit.start();
 	} );
 
 	$( document ).trigger( "mouseup" );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
