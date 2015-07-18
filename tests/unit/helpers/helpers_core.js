@@ -1,6 +1,7 @@
-module( "resetActivePageHeight()" );
+( function( QUnit ) {
 
-( function() {
+QUnit.module( "resetActivePageHeight()" );
+
 var index,
 	toolbars = {
 		external: {
@@ -713,7 +714,7 @@ var index,
 			return;
 		}
 
-		test( "Scenario " + flags, function() {
+		QUnit.test( "Scenario " + flags, function( assert ) {
 			var currentPage, externalHeader, externalFooter, internalHeader, internalFooter;
 
 			// Add external header, if needed
@@ -745,7 +746,7 @@ var index,
 
 			$.mobile.resetActivePageHeight( 425 );
 
-			deepEqual( currentPage.height(), expectedResult[ flags ], "Page height correct" );
+			assert.deepEqual( currentPage.height(), expectedResult[ flags ], "Page height correct" );
 
 			if ( externalHeader ) {
 				externalHeader.remove();
@@ -760,4 +761,4 @@ var index,
 for ( index = 0; index < 4096; index++ ) {
 	createTestScenario( index );
 }
-} )();
+} )( QUnit );
