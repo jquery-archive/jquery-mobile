@@ -1,5 +1,7 @@
-test( "_find() can handle weird data-url attributes", function() {
-	deepEqual(
+( function( QUnit, $ ) {
+
+QUnit.test( "_find() can handle weird data-url attributes", function( assert ) {
+	assert.deepEqual(
 		$.mobile.pagecontainer.prototype._find.call( {
 			_createFileUrl: $.mobile.pagecontainer.prototype._createFileUrl,
 			_createDataUrl: $.mobile.pagecontainer.prototype._createDataUrl,
@@ -15,7 +17,7 @@ test( "_find() can handle weird data-url attributes", function() {
 ( function() {
 var triggerData,
 	originalLoad = $.mobile.pagecontainer.prototype._triggerWithDeprecated;
-module( "load method", {
+QUnit.module( "load method", {
 	setup: function() {
 		$.mobile.pagecontainer.prototype._triggerWithDeprecated = function( eventName, data ) {
 			triggerData = data;
@@ -36,14 +38,16 @@ module( "load method", {
 		$.mobile.pagecontainer.prototype._triggerWithDeprecated = originalLoad;
 	}
 } );
-test( "load does not trigger an error when called withput a second param", function() {
+QUnit.test( "load does not trigger an error when called withput a second param",
+	function( assert ) {
 	var pagecontainer = $( ":mobile-pagecontainer" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html" );
-	ok( "no error triggered when load method called without options" );
+	assert.ok( "no error triggered when load method called without options" );
 } );
 
-test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence", function() {
+QUnit.test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence",
+	function( assert ) {
 	var pagecontainer = $( ":mobile-pagecontainer" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html", {
@@ -51,24 +55,25 @@ test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedenc
 		reloadPage: false
 	} );
 
-	strictEqual( triggerData.options.reload, true,
+	assert.strictEqual( triggerData.options.reload, true,
 		"The value of option 'reload' is not affected by the value of option 'reloadPage'" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html", {
 		reloadPage: true
 	} );
 
-	strictEqual( triggerData.options.reload, true,
+	assert.strictEqual( triggerData.options.reload, true,
 		"The value of option 'reloadPage' is copied to the value of option 'reload' if the " +
 		"latter is absent from the options hash" );
 } );
 
-module( "_handleDialog()" );
+QUnit.module( "_handleDialog()" );
 
-test( "Recognize dialog via presence of the data key, not the ui-page-dialog class", function() {
+QUnit.test( "Recognize dialog via presence of the data key, not the ui-page-dialog class",
+	function( assert ) {
 	var getActiveHistoryCalled = false;
 
-	strictEqual( $.mobile.pagecontainer.prototype._handleDialog.call( {
+	assert.strictEqual( $.mobile.pagecontainer.prototype._handleDialog.call( {
 		getActivePage: function() {
 			return $( "<div class='ui-page-dialog'></div>" );
 		},
@@ -82,8 +87,10 @@ test( "Recognize dialog via presence of the data key, not the ui-page-dialog cla
 		pageUrl: "xyzzy.html"
 	} ), false, "page is recognized as page even when the ui-page-dialog class is present" );
 
-	strictEqual( getActiveHistoryCalled, false,
+	assert.strictEqual( getActiveHistoryCalled, false,
 		"_getActiveHistory() should not have been called" );
 } );
 
 } )();
+
+} )( QUnit, jQuery );
