@@ -1,4 +1,4 @@
-( function( $ ) {
+( function( QUnit, $ ) {
 
 // Convert the values of the keys under option classes to hashes so they may be compared via
 // deepEquals. We convert to hash because order does not matter in a hash, just as it does not
@@ -20,7 +20,7 @@ function convertClassValuesToHashes( options ) {
 	return options;
 }
 
-module( "Synchronization of classes option and style options", {
+QUnit.module( "Synchronization of classes option and style options", {
 	setup: function() {
 		$.widget( "mobile.testwidget", {
 			options: {
@@ -47,7 +47,7 @@ module( "Synchronization of classes option and style options", {
 	}
 } );
 
-test( "Style options are updated when the classes option changes", function( assert ) {
+QUnit.test( "Style options are updated when the classes option changes", function( assert ) {
 	var testWidget = $.mobile.testwidget( {
 		classes: {
 			"test-testwidget": "ui-corner-all"
@@ -90,7 +90,7 @@ test( "Style options are updated when the classes option changes", function( ass
 	assert.lacksClasses( testWidget.element[ 0 ], "ui-shadow ui-corner-all" );
 } );
 
-test( "The classes option is updated when style options change", function( assert ) {
+QUnit.test( "The classes option is updated when style options change", function( assert ) {
 	var testWidget = $.mobile.testwidget( {
 		inline: false,
 		shadow: false
@@ -182,7 +182,7 @@ test( "The classes option is updated when style options change", function( asser
 		"Element lacks all other classes" );
 } );
 
-test( "The classes option is updated correctly when an option is turned on", function( assert ) {
+QUnit.test( "The classes option is updated correctly when an option is turned on", function( assert ) {
 	var testWidget = $.mobile.testwidget( {
 		corners: true
 	} );
@@ -209,7 +209,7 @@ test( "The classes option is updated correctly when an option is turned on", fun
 	assert.lacksClasses( testWidget.element[ 0 ], "ui-mini", "Element lacks ui-mini class" );
 } );
 
-module( "wrapperClass", {
+QUnit.module( "wrapperClass", {
 	setup: function() {
 		$.widget( "mobile.testwidget", {
 			options: {
@@ -233,7 +233,7 @@ module( "wrapperClass", {
 	}
 } );
 
-test( "wrapperClass is correctly applied, modified, and removed", function( assert ) {
+QUnit.test( "wrapperClass is correctly applied, modified, and removed", function( assert ) {
 	var testWidget = $.mobile.testwidget( {
 			wrapperClass: "abc"
 		} ),
@@ -250,4 +250,4 @@ test( "wrapperClass is correctly applied, modified, and removed", function( asse
 		"Class attribute cleared upon destroy()" );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
