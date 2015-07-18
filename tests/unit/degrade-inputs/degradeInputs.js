@@ -2,65 +2,65 @@
  * degradeInputs unit tests
  */
 
-( function( $ ) {
-module( "jquery.mobile.degradeInputs.js" );
+( function( QUnit, $ ) {
+QUnit.module( "jquery.mobile.degradeInputs.js" );
 
-test( "degradeInputs works on page init", function() {
-	expect( 3 );
+QUnit.test( "degradeInputs works on page init", function( assert ) {
+	assert.expect( 3 );
 
-	strictEqual( $( "#degrade-range" ).attr( "type" ), "number",
+	assert.strictEqual( $( "#degrade-range" ).attr( "type" ), "number",
 		"Range inputs are degrade to type number" );
-	strictEqual( $( "#degrade-search" ).attr( "type" ), "text",
+	assert.strictEqual( $( "#degrade-search" ).attr( "type" ), "text",
 		"Search inputs degrade to type text" );
-	strictEqual( $( "#degrade-color" ).attr( "type" ), "color",
+	assert.strictEqual( $( "#degrade-color" ).attr( "type" ), "color",
 		"setting an input type to false cause no degradation of that type" );
 } );
 
-test( "degradeInputs works on page enhance", function() {
-	expect( 6 );
+QUnit.test( "degradeInputs works on page enhance", function( assert ) {
+	assert.expect( 6 );
 
-	strictEqual( $( "#enhance-degrade-range" ).attr( "type" ), "range",
+	assert.strictEqual( $( "#enhance-degrade-range" ).attr( "type" ), "range",
 		"Range inputs not in a page are ignored on inital page load" );
-	strictEqual( $( "#enhance-degrade-search" ).attr( "type" ), "search",
+	assert.strictEqual( $( "#enhance-degrade-search" ).attr( "type" ), "search",
 		"Search inputs not in a page are ignored on inital page load" );
-	strictEqual( $( "#enhance-degrade-color" ).attr( "type" ), "color",
+	assert.strictEqual( $( "#enhance-degrade-color" ).attr( "type" ), "color",
 		"setting an input type to false cause no degradation of that type" );
 
 	$( "#enhance-container" ).enhance();
-	strictEqual( $( "#enhance-degrade-range" ).attr( "type" ), "number",
+	assert.strictEqual( $( "#enhance-degrade-range" ).attr( "type" ), "number",
 		"Range inputs are degrade to type number" );
-	strictEqual( $( "#enhance-degrade-search" ).attr( "type" ), "text",
+	assert.strictEqual( $( "#enhance-degrade-search" ).attr( "type" ), "text",
 		"Search inputs degrade to type text" );
-	strictEqual( $( "#enhance-degrade-color" ).attr( "type" ), "color",
+	assert.strictEqual( $( "#enhance-degrade-color" ).attr( "type" ), "color",
 		"setting an input type to false cause no degradation of that type" );
 } );
 
-test( "degradeInputsWithin", function() {
-	expect( 6 );
+QUnit.test( "degradeInputsWithin", function( assert ) {
+	assert.expect( 6 );
 
-	strictEqual( $( "#degrade-within-range" ).attr( "type" ), "range",
+	assert.strictEqual( $( "#degrade-within-range" ).attr( "type" ), "range",
 		"Range inputs not in a page are ignored on inital page load" );
-	strictEqual( $( "#degrade-within-search" ).attr( "type" ), "search",
+	assert.strictEqual( $( "#degrade-within-search" ).attr( "type" ), "search",
 		"Search inputs not in a page are ignored on inital page load" );
-	strictEqual( $( "#degrade-within-color" ).attr( "type" ), "color",
+	assert.strictEqual( $( "#degrade-within-color" ).attr( "type" ), "color",
 		"setting an input type to false cause no degradation of that type" );
 
 	$.mobile.degradeInputsWithin( $( "#degrade-within-container" ) );
-	strictEqual( $( "#degrade-within-range" ).attr( "type" ), "number",
+	assert.strictEqual( $( "#degrade-within-range" ).attr( "type" ), "number",
 		"Range inputs are degrade to type number" );
-	strictEqual( $( "#degrade-within-search" ).attr( "type" ), "text",
+	assert.strictEqual( $( "#degrade-within-search" ).attr( "type" ), "text",
 		"Search inputs degrade to type text" );
-	strictEqual( $( "#degrade-within-color" ).attr( "type" ), "color",
+	assert.strictEqual( $( "#degrade-within-color" ).attr( "type" ), "color",
 		"setting an input type to false cause no degradation of that type" );
 } );
 
-test( "keepNative elements should not be degraded", function() {
-	expect( 1 );
+QUnit.test( "keepNative elements should not be degraded", function( assert ) {
+	assert.expect( 1 );
 
-	strictEqual( $( "input#not-to-be-degraded" ).attr( "type" ), "range" );
+	assert.strictEqual( $( "input#not-to-be-degraded" ).attr( "type" ), "range" );
 } );
 
-module( "degradeInputs - custom value", {
+QUnit.module( "degradeInputs - custom value", {
 	setup: function() {
 		$.mobile.degradeInputs.range = "custom";
 	},
@@ -69,13 +69,13 @@ module( "degradeInputs - custom value", {
 	}
 } );
 
-test( "degradeInputs - custom values", function() {
-	expect( 1 );
+QUnit.test( "degradeInputs - custom values", function( assert ) {
+	assert.expect( 1 );
 
 	$.mobile.degradeInputs.range = "custom";
 	$.mobile.degradeInputsWithin( $( "#custom-degrade" ) );
-	strictEqual( $( "#custom-range-type" ).attr( "type" ), "custom",
+	assert.strictEqual( $( "#custom-range-type" ).attr( "type" ), "custom",
 		"degradeInputs with custom types works" );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
