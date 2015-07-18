@@ -1,4 +1,6 @@
-asyncTest( "resetActivePageHeight() will be called when page is initialized late", function() {
+( function( QUnit, $ ) {
+
+QUnit.asyncTest( "resetActivePageHeight() will be called when page is initialized late", function( assert ) {
 var resetActivePageHeightCallCount = 0;
 
 $( document ).on( "mobileinit", function() {
@@ -9,17 +11,18 @@ $( document ).on( "mobileinit", function() {
 			resetActivePageHeightCallCount++;
 			return original.apply( this, arguments );
 		};
-	} )( $.mobile.resetActivePageHeight );
+	} )( QUnit, $.mobile.resetActivePageHeight );
 } );
 
 require( [ "jquery", "./init" ], function() {
 	setTimeout( function() {
 		$.mobile.initializePage();
 
-		deepEqual( resetActivePageHeightCallCount, 1,
+		assert.deepEqual( resetActivePageHeightCallCount, 1,
 			"$.mobile.resetActivePageHeight() was called from delayed initializePage()" );
-		start();
+		QUnit.start();
 	}, 5000 );
 } );
-
 } );
+
+} )( jQuery );
