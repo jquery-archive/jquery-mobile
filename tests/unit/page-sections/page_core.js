@@ -1,28 +1,28 @@
 /*
  * mobile page unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var libName = 'jquery.mobile.page.sections';
 
-module( libName );
+QUnit.module( libName );
 
-test( "nested header anchors aren't altered", function() {
-	ok( !$( '.ui-header > div > a' ).hasClass( 'ui-button' ) );
+QUnit.test( "nested header anchors aren't altered", function( assert ) {
+	assert.ok( !$( '.ui-header > div > a' ).hasClass( 'ui-button' ) );
 } );
 
-test( "nested footer anchors aren't altered", function() {
-	ok( !$( '.ui-footer > div > a' ).hasClass( 'ui-button' ) );
+QUnit.test( "nested footer anchors aren't altered", function( assert ) {
+	assert.ok( !$( '.ui-footer > div > a' ).hasClass( 'ui-button' ) );
 } );
 
-test( "nested bar anchors aren't styled", function() {
-	ok( !$( '.ui-bar > div > a' ).hasClass( 'ui-button' ) );
+QUnit.test( "nested bar anchors aren't styled", function( assert ) {
+	assert.ok( !$( '.ui-bar > div > a' ).hasClass( 'ui-button' ) );
 } );
 
-test( "no auto-generated back button exists on first page", function() {
-	ok( !$( ".ui-header > :jqmData(rel='back')" ).length );
+QUnit.test( "no auto-generated back button exists on first page", function( assert ) {
+	assert.ok( !$( ".ui-header > :jqmData(rel='back')" ).length );
 } );
 
-test( "sections inside an ignored container do not enhance", function() {
+QUnit.test( "sections inside an ignored container do not enhance", function( assert ) {
 	var $ignored = $( "#ignored-header" ),
 		$enhanced = $( "#enhanced-header" );
 
@@ -33,15 +33,15 @@ test( "sections inside an ignored container do not enhance", function() {
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page();
 
-	ok( !$ignored.hasClass( "ui-toolbar-header" ), "ignored header has no class" );
+	assert.ok( !$ignored.hasClass( "ui-toolbar-header" ), "ignored header has no class" );
 
 	$enhanced
 		.parent()
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page();
 
-	ok( $enhanced.hasClass( "ui-toolbar-header" ), "enhanced header has classes" );
+	assert.ok( $enhanced.hasClass( "ui-toolbar-header" ), "enhanced header has classes" );
 
 	$.mobile.ignoreContentEnabled = false;
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
