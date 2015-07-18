@@ -1,8 +1,9 @@
 /*
  * mobile textinput unit tests
  */
-( function( $ ) {
-module( "jquery.mobile.forms.textinput.js" );
+( function( QUnit, $ ) {
+
+QUnit.module( "jquery.mobile.forms.textinput.js" );
 
 // NOTE this test isn't run because the event data isn't easily accessible
 // and with the advent of the widget _on method we are actually testing the
@@ -11,7 +12,7 @@ module( "jquery.mobile.forms.textinput.js" );
 if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 			return ( l < r );
 		}, "1.8" ) ) {
-	test( "input is cleaned up on destroy", function() {
+	QUnit.test( "input is cleaned up on destroy", function( assert ) {
 		var input = $( "#destroycorrectly" ),
 			win = $( window ),
 			loadLen;
@@ -20,12 +21,12 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 
 		input.remove();
 
-		equal( win.data( "events" ).load.length, ( loadLen - 1 ),
+		assert.equal( win.data( "events" ).load.length, ( loadLen - 1 ),
 			"window load event was not removed" );
 	} );
 }
 
-test( "focus/blur adds resp. removes focus class", function( assert ) {
+QUnit.test( "focus/blur adds resp. removes focus class", function( assert ) {
 	var input = $( "#focus-class-test-for-input" ),
 		textarea = $( "#focus-class-test-for-textarea" ),
 		testFocusBlur = function( widget ) {
@@ -41,47 +42,47 @@ test( "focus/blur adds resp. removes focus class", function( assert ) {
 	testFocusBlur( textarea );
 } );
 
-test( "inputs without type specified are enhanced", function( assert ) {
+QUnit.test( "inputs without type specified are enhanced", function( assert ) {
 	assert.hasClasses( $( "#typeless-input" ).parent()[ 0 ], "ui-textinput-text",
 		"Input is enhanced" );
 } );
 
 // not testing the positive case here since's it's obviously tested elsewhere
-test( "textarea in the keepNative set shouldn't be enhanced", function( assert ) {
+QUnit.test( "textarea in the keepNative set shouldn't be enhanced", function( assert ) {
 	assert.lacksClasses( $( "textarea.should-be-native" )[ 0 ], "ui-textinput-text",
 		"Class ui-textinput-text not present" );
 } );
 
-asyncTest( "textarea should autogrow on document ready", function() {
+QUnit.asyncTest( "textarea should autogrow on document ready", function( assert ) {
 	var test = $( "#init-autogrow" );
 
 	setTimeout( function() {
-		ok( $( "#reference-autogrow" )[ 0 ].clientHeight < test[ 0 ].clientHeight,
+		assert.ok( $( "#reference-autogrow" )[ 0 ].clientHeight < test[ 0 ].clientHeight,
 			"the height is greater than the reference text area with no content" );
-		ok( test[ 0 ].clientHeight > 100,
+		assert.ok( test[ 0 ].clientHeight > 100,
 			"autogrow text area's height is greater than any style padding" );
-		start();
+		QUnit.start();
 	}, 400 );
 } );
 
-asyncTest( "textarea should autogrow when text is added via the keyboard", function() {
+QUnit.asyncTest( "textarea should autogrow when text is added via the keyboard", function( assert ) {
 	var test = $( "#keyup-autogrow" ),
 		originalHeight = test[ 0 ].clientHeight;
 
 	test.keyup( function() {
 		setTimeout( function() {
-			ok( test[ 0 ].clientHeight > originalHeight,
+			assert.ok( test[ 0 ].clientHeight > originalHeight,
 				"the height is greater than original with no content" );
-			ok( test[ 0 ].clientHeight > 100,
+			assert.ok( test[ 0 ].clientHeight > 100,
 				"autogrow text area's height is greater any style/padding" );
-			start();
+			QUnit.start();
 		}, 400 );
 	} );
 
 	test.val( "foo\n\n\n\n\n\n\n\n\n\n\n\n\n\n" ).trigger( "keyup" );
 } );
 
-asyncTest( "text area should auto grow when the parent page is loaded via ajax", function() {
+QUnit.asyncTest( "text area should auto grow when the parent page is loaded via ajax", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
 			$( "#external" ).click();
@@ -89,56 +90,56 @@ asyncTest( "text area should auto grow when the parent page is loaded via ajax",
 
 		function() {
 			setTimeout( function() {
-				ok( $.mobile.activePage.find( "textarea" )[ 0 ].clientHeight > 100,
+				assert.ok( $.mobile.activePage.find( "textarea" )[ 0 ].clientHeight > 100,
 					"text area's height has grown" );
 				window.history.back();
 			}, 1000 );
 		},
 
 		function() {
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
 // NOTE init binding to alter the setting is in settings.js
-test( "'clear text' button for search inputs should use configured text", function() {
-	strictEqual( $( "#search-input" )
+QUnit.test( "'clear text' button for search inputs should use configured text", function( assert ) {
+	assert.strictEqual( $( "#search-input" )
 		.closest( ".ui-textinput-search" )
 			.find( ".ui-textinput-clear-button" )
 				.attr( "title" ), "custom value" );
 } );
 
-test( "data-clear-btn adds clear button to text inputs", function( assert ) {
-	ok( $( "#text-input-clear-btn" ).next()
+QUnit.test( "data-clear-btn adds clear button to text inputs", function( assert ) {
+	assert.ok( $( "#text-input-clear-btn" ).next()
 		.is( 'a[tabindex="-1"][aria-hidden="true"]' ),
 		"correctly marked up clear button is present" );
 	assert.hasClasses( $( "#text-input-clear-btn" ).next()[ 0 ],
 		"ui-textinput-clear-button", "clear button has class ui-textinput-clear-button" );
 } );
 
-test( "data-clear-btn does not add clear button to textarea", function( assert ) {
+QUnit.test( "data-clear-btn does not add clear button to textarea", function( assert ) {
 	assert.lacksClasses( $( "#textarea-clear-btn" ).next()[ 0 ],
 		"ui-textinput-clear-button",
 		"data-clear-btn does not add clear button to textarea" );
 } );
 
-test( "data-clear-btn does not add clear button to textarea", function() {
-	deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
+QUnit.test( "data-clear-btn does not add clear button to textarea", function( assert ) {
+	assert.deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
 		"No anchors have been inserted as children of the data-clear-btn textarea element" );
 } );
 
-test( "data-clear-btn does not add clear button to slider input", function( assert ) {
+QUnit.test( "data-clear-btn does not add clear button to slider input", function( assert ) {
 	assert.lacksClasses( $( "#slider-input" ).next(), "ui-textinput-clear-button",
 		"data-clear-btn does not add clear button to slider input" );
 } );
 
-test( "data-clear-btn does not add clear button to slider input", function() {
-	deepEqual( $( "#slider-input" ).children( "a" ).length, 0,
+QUnit.test( "data-clear-btn does not add clear button to slider input", function( assert ) {
+	assert.deepEqual( $( "#slider-input" ).children( "a" ).length, 0,
 		"No anchors have been inserted as children of the data-clear-btn input element" );
 } );
 
-test( "data-clear-btn does not add native clear button to input button (IE10)", function() {
+QUnit.test( "data-clear-btn does not add native clear button to input button (IE10)", function( assert ) {
 
 	// Get an input element, initial height, and reserve d for height difference
 	var e = $( "input[data-clear-btn='true']" ),
@@ -151,27 +152,27 @@ test( "data-clear-btn does not add native clear button to input button (IE10)", 
 	try {
 		document.styleSheets[ 0 ].addRule( ".msClear::-ms-clear", "height: 100px" );
 	} catch ( o ) {
-		ok( true, "browser does not have the native feature for a test" );
+		assert.ok( true, "browser does not have the native feature for a test" );
 		return true;
 	}
 
 	// If the pseudo-element exists, our height should be much larger
 	d = e.height() > h;
 
-	ok( !d, "native clear button is still visible" );
+	assert.ok( !d, "native clear button is still visible" );
 } );
 
-test( "clearBtn option works at runtime", function( assert ) {
+QUnit.test( "clearBtn option works at runtime", function( assert ) {
 	var input = $( "#test-clear-btn-option" );
 
-	deepEqual( input.siblings( "a" ).length, 0,
+	assert.deepEqual( input.siblings( "a" ).length, 0,
 		"input initially has no clear button" );
 	assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 		"wrapper does not initially have class 'ui-textinput-has-clear-button'" );
 
 	input.textinput( "option", "clearBtn", true );
 
-	deepEqual( input.siblings( "a" ).length, 1,
+	assert.deepEqual( input.siblings( "a" ).length, 1,
 		"turning on clearBtn option causes an anchor to be added" );
 	assert.hasClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 		"turning on clearBtn option causes 'ui-textinput-has-clear-button' to be " +
@@ -179,28 +180,28 @@ test( "clearBtn option works at runtime", function( assert ) {
 
 	input.textinput( "option", "clearBtn", false );
 
-	deepEqual( input.siblings( "a" ).length, 0,
+	assert.deepEqual( input.siblings( "a" ).length, 0,
 		"turning off clearBtn removes clear button anchor" );
 	assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 		"turning off clearBtn removes wrapper class 'ui-textinput-has-clear-button'" );
 } );
 
-test( "cannot inject script via clearBtnText option", function() {
-	deepEqual( !!$.clearBtnTextScriptInjected, false,
+QUnit.test( "cannot inject script via clearBtnText option", function( assert ) {
+	assert.deepEqual( !!$.clearBtnTextScriptInjected, false,
 		"no script was injected via clearBtnText option" );
 } );
 
-test( "textinput is destroyed correctly", function() {
+QUnit.test( "textinput is destroyed correctly", function( assert ) {
 	var originalDOM = $( "#destroy-test-container" ).clone(),
 		entry = $( "#destroy-test" );
 
 	entry.textinput().textinput( "destroy" );
 
-	deepEqual( $.testHelper.domEqual( originalDOM, $( "#destroy-test-container" ) ), true,
+	assert.deepEqual( $.testHelper.domEqual( originalDOM, $( "#destroy-test-container" ) ), true,
 		"Original DOM is restored after textinput destruction" );
 } );
 
-test( "textinput is disabled/enabled correctly", function( assert ) {
+QUnit.test( "textinput is disabled/enabled correctly", function( assert ) {
 	var textinput = $( "#disable-test" );
 
 	assert.lacksClasses( textinput.parent()[ 0 ], "ui-state-disabled",
@@ -215,4 +216,5 @@ test( "textinput is disabled/enabled correctly", function( assert ) {
 	assert.deepEqual( textinput.prop( "disabled" ), true,
 		"After disabling, the 'disabled' prop is true" );
 } );
-} )( jQuery );
+
+} )( QUnit, jQuery );
