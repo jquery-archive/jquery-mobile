@@ -1,10 +1,10 @@
-( function() {
+( function( QUnit ) {
 
 var originalBase,
 	originalBaseSupport,
 	phonyDirectory = "/foo/bar/baz/";
 
-module( "Tabs extension", {
+QUnit.module( "Tabs extension", {
 	setup: function() {
 		originalBaseSupport = $.support.dynamicBaseTag;
 		$.support.dynamicBaseTag = true;
@@ -17,16 +17,16 @@ module( "Tabs extension", {
 	}
 } );
 
-test( "_isLocal() correctly identifies URLs as local/non-local", function() {
+QUnit.test( "_isLocal() correctly identifies URLs as local/non-local", function( assert ) {
 
 	var _isLocal = $.ui.tabs.prototype._isLocal;
 
-	deepEqual( _isLocal( $( "<a href='#some-id'></a>" )[ 0 ] ), true,
+	assert.deepEqual( _isLocal( $( "<a href='#some-id'></a>" )[ 0 ] ), true,
 		"'#some-id' identified as local" );
 
-	deepEqual( _isLocal( $( "<a href='" + phonyDirectory + "#some-other-id'></a>" )[ 0 ] ), true,
+	assert.deepEqual( _isLocal( $( "<a href='" + phonyDirectory + "#some-other-id'></a>" )[ 0 ] ), true,
 		"'" + phonyDirectory + "#some-other-id' defined as local" );
 
 } );
 
-} )();
+} )( QUnit );
