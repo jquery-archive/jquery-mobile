@@ -2,114 +2,118 @@
  * mobile support unit tests
  */
 
-$.testHelper.excludeFileProtocol( function() {
-	var prependToFn = $.fn.prependTo,
+( function( QUnit, $ ) {
+
+$.testHelper.excludeFileProtocol(function(){
+	var	prependToFn = $.fn.prependTo,
 		moduleName = "support";
 
-	module( moduleName, {
-		teardown: function() {
+	QUnit.module(moduleName, {
+		teardown: function(){
 			//NOTE undo any mocking
 			$.fn.prependTo = prependToFn;
 		}
-	} );
+	});
 
 	// NOTE following two tests have debatable value as they only
 	//      prevent property name changes and improper attribute checks
-	asyncTest( "detects functionality from basic affirmative properties and attributes", function() {
+	QUnit.asyncTest( "detects functionality from basic affirmative properties and attributes", function( assert ){
 		// TODO expose properties for less brittle tests
-		$.extend( window, {
+		$.extend(window, {
 			WebKitTransitionEvent: true,
-		} );
+		});
 
-		window.history.pushState = function() {};
-		window.history.replaceState = function() {};
+		window.history.pushState = function(){};
+		window.history.replaceState = function(){};
 
-		$.mobile.media = function() {
-			return true;
-		};
+		$.mobile.media = function(){ return true; };
 
 		$.testHelper.reloadModule( moduleName ).done( function() {
-			ok( $.support.cssTransitions, "css transitions are supported" );
-			ok( $.support.pushState, "push state is supported" );
-			ok( $.support.mediaquery, "media queries are supported" );
-			start();
-		} );
-	} );
+			assert.ok($.support.cssTransitions, "css transitions are supported" );
+			assert.ok($.support.pushState, "push state is supported" );
+			assert.ok($.support.mediaquery, "media queries are supported" );
+			QUnit.start();
+		});
+	});
 
-	asyncTest( "detects orientation change", function() {
-		$.extend( window, {
+	QUnit.asyncTest( "detects orientation change", function( assert ) {
+		$.extend(window, {
 			orientation: true,
 			onorientationchange: true
-		} );
+		});
 
 		$.testHelper.reloadModule( "support/orientation" ).done( function() {
-			ok( $.support.orientation, "orientation is supported" );
-			start();
-		} );
-	} );
+			assert.ok($.support.orientation, "orientation is supported" );
+			QUnit.start();
+		});
+	});
 
-	asyncTest( "detects touch", function() {
+	QUnit.asyncTest( "detects touch", function( assert ) {
 		document.ontouchend = true;
 
 		$.testHelper.reloadModule( "support/touch" ).done( function() {
-			ok( $.mobile.support.touch, "touch is supported" );
-			ok( $.support.touch, "touch is supported" );
-			start();
-		} );
-	} );
+			assert.ok( $.mobile.support.touch, "touch is supported" );
+			assert.ok( $.support.touch, "touch is supported" );
+			QUnit.start();
+		});
+	});
 
-	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function() {
-		delete window[ "orientation" ];
+	QUnit.asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function( assert ){
+		delete window["orientation"];
 
 		$.testHelper.reloadModule( "support/orientation" ).done( function() {
-			ok( !$.support.orientation, "orientation is not supported" );
-			start();
-		} );
-	} );
+			assert.ok(!$.support.orientation, "orientation is not supported" );
+			QUnit.start();
+		});
+	});
 
 	// NOTE mocks prependTo to simulate base href updates or lack thereof
-	var mockBaseCheck = function( url ) {
+	var mockBaseCheck = function( url ){
 		var prependToFn = $.fn.prependTo;
 
-		$.fn.prependTo = function( selector ) {
-			var result = prependToFn.call( this, selector );
-			if ( this[ 0 ].href && this[ 0 ].href.indexOf( "testurl" ) != -1 )
-				result = [ { href: url } ];
+		$.fn.prependTo = function( selector ){
+			var result = prependToFn.call(this, selector);
+			if(this[0].href && this[0].href.indexOf("testurl") != -1)
+				result = [{href: url}];
 			return result;
 		};
 	};
 
-	asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", function() {
-		mockBaseCheck( 'testurl' );
+	QUnit.asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", function( assert ){
+		mockBaseCheck('testurl');
 		$.testHelper.reloadModule( moduleName ).done( function() {
-			ok( !$.support.dynamicBaseTag );
-			start();
-		} );
-	} );
+			assert.ok(!$.support.dynamicBaseTag);
+			QUnit.start();
+		});
+	});
 
-	asyncTest( "jQM's IE browser check properly detects IE versions", function() {
-		expect( 1 );
+	QUnit.asyncTest( "jQM's IE browser check properly detects IE versions", function( assert ){
+		assert.expect( 1 );
 		if ( !$.browser ) {
-			ok( true, "Cannot perform test because $.browser has been removed" );
-			start();
+			assert.ok( true, "Cannot perform test because $.browser has been removed" );
+			QUnit.start();
 			return;
 		}
 		$.testHelper.reloadModule( moduleName ).done( function() {
-			//here we're just comparing our version to what the conditional compilation finds
-			var ie = !!$.browser.msie, //get a boolean
-				version = parseInt( $.browser.version, 10 ),
-				jqmdetectedver = $.mobile.browser.oldIE;
+		//here we're just comparing our version to what the conditional compilation finds
+		 var ie 			= !!$.browser.msie, //get a boolean
+		 	 version 		= parseInt( $.browser.version, 10),
+		 	 jqmdetectedver = $.mobile.browser.oldIE;
 
-			if ( ie ) {
-				deepEqual( version, jqmdetectedver, "It's IE and the version is correct" );
-			} else {
-				deepEqual( ie, jqmdetectedver, "It's not IE" );
-			}
-			start();
-		} );
-	} );
+		 	if( ie ){
+		 		assert.deepEqual(version, jqmdetectedver, "It's IE and the version is correct");
+		 	}
+		 	else{
+		 		assert.deepEqual(ie, jqmdetectedver, "It's not IE");
+		 	}
+			QUnit.start();
+		});
+	});
 
 
 	//TODO propExists testing, refactor propExists into mockable method
 	//TODO scrollTop testing, refactor scrollTop logic into mockable method
-} );
+});
+
+} )( QUnit, jQuery );
+
