@@ -1,13 +1,15 @@
-test( "Rangeslider widget works correctly", function() {
+( function( QUnit, $ ) {
+
+QUnit.test( "Rangeslider widget works correctly", function( assert ) {
 var rangeslider = $( "#plain" ).rangeslider(),
 	handles = rangeslider.parent().find( ".ui-slider-handle" ),
 	track = handles.closest( ".ui-slider-track" ),
 	offset = handles.offset();
 
-deepEqual( rangeslider.rangeslider( "widget" ).hasClass( "ui-rangeslider" ), true,
+assert.deepEqual( rangeslider.rangeslider( "widget" ).hasClass( "ui-rangeslider" ), true,
 	"Has class ui-rangeslider" );
-equal( handles.length, 2, "Contains two handle elements" );
-equal( track.length, 1, "Contains one track element" );
+assert.equal( handles.length, 2, "Contains two handle elements" );
+assert.equal( track.length, 1, "Contains one track element" );
 
 function moveHandle( handle, xPos ) {
 	var trackWidth, trackX,
@@ -30,11 +32,13 @@ function moveHandle( handle, xPos ) {
 // "events/touch" module is artificially loaded in that environment.
 trackWidth = track.width();
 trackX = track.offset().left;
-ok( trackWidth > 0, "Track has a non-zero width" );
+assert.ok( trackWidth > 0, "Track has a non-zero width" );
 
 moveHandle( handles.eq( 0 ), trackX + trackWidth * 0.2 );
 moveHandle( handles.eq( 1 ), trackX + trackWidth * 0.8 );
-ok( handles.eq( 0 ).offset().left > 0, "Lower handle responds to user interaction" );
-ok( handles.eq( 1 ).offset().left > handles.eq( 0 ).offset().left,
+assert.ok( handles.eq( 0 ).offset().left > 0, "Lower handle responds to user interaction" );
+assert.ok( handles.eq( 1 ).offset().left > handles.eq( 0 ).offset().left,
 	"Upper handle responds to user interaction" );
 } );
+
+} )( QUnit, jQuery );
