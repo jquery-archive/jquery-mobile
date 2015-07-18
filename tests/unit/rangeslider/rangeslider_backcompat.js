@@ -1,11 +1,12 @@
 /*
  * mobile slider unit tests
  */
-( function( $ ) {
-	module( "jquery.mobile.rangeslider.js core" );
+( function( QUnit, $ ) {
 
-	test( "Highlight has correct margin and width", function() {
-		expect( 2 );
+	QUnit.module( "jquery.mobile.rangeslider.js core" );
+
+	QUnit.test( "Highlight has correct margin and width", function( assert ) {
+		assert.expect( 2 );
 		var rangeslider = $( "#rangeslider-highlight" ),
 			rangeFirst = $( "#rangeslider-highlight-first" ),
 			rangeLast = $( "#rangeslider-highlight-last" ),
@@ -23,14 +24,14 @@
 		if ( cssMarginLeft.indexOf( "%" ) > -1 ) {
 			bgMarginLeft = ( rangeFirst.val() / range * 100 ) + "%";
 
-			deepEqual( cssMarginLeft, bgMarginLeft, "Highlight has correct left margin" );
+			assert.deepEqual( cssMarginLeft, bgMarginLeft, "Highlight has correct left margin" );
 		} else {
 			var intMarginLeft = parseFloat( cssMarginLeft.replace( "px", "" ) );
 
 			bgMarginLeft = Math.round( rangeFirst.val() / range * width );
 
 			// Take a rounding difference of max 2px into account
-			ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
+			assert.ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
 		}
 
 		cssWidth = bg.css( "width" );
@@ -38,12 +39,12 @@
 		bgWidth = Math.round( ( rangeLast.val() - rangeFirst.val() ) / range * width );
 
 		// Take a rounding difference of max 2px into account
-		ok( -2 >= ( intWidth - bgWidth ) <= 2, "Highlight has correct width" );
+		assert.ok( -2 >= ( intWidth - bgWidth ) <= 2, "Highlight has correct width" );
 	} );
 
-	test( "Rangeslider backcompat tests", function( assert ) {
+	QUnit.test( "Rangeslider backcompat tests", function( assert ) {
 		assert.hasClasses( $( "#mini-rangeslider" ), "ui-mini" );
 		assert.lacksClasses( $( "#nocorners-rangeslider" ), "ui-corner-all" );
 	} );
 
-} )( jQuery );
+} )( QUnit, jQuery );
