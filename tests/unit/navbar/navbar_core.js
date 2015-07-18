@@ -1,22 +1,22 @@
 /*
  * mobile navbar unit tests
  */
-( function( $ ) {
-test( "navbar button gets active button class when clicked", function() {
+( function( QUnit, $ ) {
+QUnit.test( "navbar button gets active button class when clicked", function( assert ) {
 	var link = $( "#disabled-button-click a:not(.ui-disabled)" ).first();
 
 	link.click();
-	ok( link.hasClass( "ui-button-active" ), "link has active button class" );
+	assert.ok( link.hasClass( "ui-button-active" ), "link has active button class" );
 } );
 
-test( "disabled navbar button doesn't add active button class when clicked", function() {
+QUnit.test( "disabled navbar button doesn't add active button class when clicked", function( assert ) {
 	var link = $( "#disabled-button-click a.ui-disabled" ).first();
 
 	link.click();
-	ok( !link.hasClass( "ui-button-active" ), "link doesn't have active button class" );
+	assert.ok( !link.hasClass( "ui-button-active" ), "link doesn't have active button class" );
 } );
 
-test( "grids inside an ignored container do not enhance", function() {
+QUnit.test( "grids inside an ignored container do not enhance", function( assert ) {
 	var $ignored = $( "#ignored-grid" ),
 		$enhanced = $( "#enhanced-grid" );
 
@@ -24,19 +24,19 @@ test( "grids inside an ignored container do not enhance", function() {
 
 	$( "#foo" ).enhance();
 
-	ok( !$ignored.hasClass( "ui-grid" ), "ignored list doesn't have the grid theme" );
-	deepEqual( $enhanced.attr( "class" ).indexOf( "ui-grid" ), 0, "enhanced list has the grid theme" );
+	assert.ok( !$ignored.hasClass( "ui-grid" ), "ignored list doesn't have the grid theme" );
+	assert.deepEqual( $enhanced.attr( "class" ).indexOf( "ui-grid" ), 0, "enhanced list has the grid theme" );
 	$.mobile.ignoreContentEnabled = false;
 } );
 
-test( "classes are correctly assigned", function() {
+QUnit.test( "classes are correctly assigned", function( assert ) {
 	var $ul = $( '#enhanced-classes' ),
 		r = $ul.find( "li" ).eq( 0 ).find( "a" ),
 		d = $ul.find( "li" ).eq( 1 ).find( "a" ),
 		u = $ul.find( "li" ).eq( 2 ).find( "a" );
 
-	ok( r.hasClass( "ui-icon-arrow-r" ) && !r.hasClass( "ui-icon-arrow-d" ) && !r.hasClass( "ui-icon-arrow-u" ), "first item only has class of arrow-r" );
-	ok( !d.hasClass( "ui-icon-arrow-r" ) && d.hasClass( "ui-icon-arrow-d" ) && !d.hasClass( "ui-icon-arrow-u" ), "second item only has class of arrow-d" );
-	ok( !u.hasClass( "ui-icon-arrow-r" ) && !u.hasClass( "ui-icon-arrow-d" ) && u.hasClass( "ui-icon-arrow-u" ), "third item only has class of arrow-u" );
+	assert.ok( r.hasClass( "ui-icon-arrow-r" ) && !r.hasClass( "ui-icon-arrow-d" ) && !r.hasClass( "ui-icon-arrow-u" ), "first item only has class of arrow-r" );
+	assert.ok( !d.hasClass( "ui-icon-arrow-r" ) && d.hasClass( "ui-icon-arrow-d" ) && !d.hasClass( "ui-icon-arrow-u" ), "second item only has class of arrow-d" );
+	assert.ok( !u.hasClass( "ui-icon-arrow-r" ) && !u.hasClass( "ui-icon-arrow-d" ) && u.hasClass( "ui-icon-arrow-u" ), "third item only has class of arrow-u" );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
