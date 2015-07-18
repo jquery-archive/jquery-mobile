@@ -1,11 +1,11 @@
 /*
  * mobile page unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var libName = 'jquery.mobile.page',
 	themedefault = $.mobile.page.prototype.options.theme;
 
-module( libName );
+QUnit.module( libName );
 
 var eventStack = [],
 	etargets = [],
@@ -23,64 +23,64 @@ $( document ).on( "pagebeforecreate", "#c", function( e ) {
 	return false;
 } );
 
-test( "pagecreate event fires when page is created", function() {
-	ok( eventStack[ 0 ] === "pagecreate" || eventStack[ 1 ] === "pagecreate" );
+QUnit.test( "pagecreate event fires when page is created", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagecreate" || eventStack[ 1 ] === "pagecreate" );
 } );
 
-test( "pagebeforecreate event fires when page is created", function() {
-	ok( eventStack[ 0 ] === "pagebeforecreate" || eventStack[ 1 ] === "pagebeforecreate" );
+QUnit.test( "pagebeforecreate event fires when page is created", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagebeforecreate" || eventStack[ 1 ] === "pagebeforecreate" );
 } );
 
-test( "pagebeforecreate fires before pagecreate", function() {
-	ok( eventStack[ 0 ] === "pagebeforecreate" );
+QUnit.test( "pagebeforecreate fires before pagecreate", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagebeforecreate" );
 } );
 
-test( "target of pagebeforecreate event was div #a", function() {
-	ok( $( etargets[ 0 ] ).is( "#a" ) );
+QUnit.test( "target of pagebeforecreate event was div #a", function( assert ) {
+	assert.ok( $( etargets[ 0 ] ).is( "#a" ) );
 } );
 
-test( "target of pagecreate event was div #a", function() {
-	ok( $( etargets[ 0 ] ).is( "#a" ) );
+QUnit.test( "target of pagecreate event was div #a", function( assert ) {
+	assert.ok( $( etargets[ 0 ] ).is( "#a" ) );
 } );
 
-test( "page element has ui-page class", function() {
-	ok( $( "#a" ).hasClass( "ui-page" ) );
+QUnit.test( "page element has ui-page class", function( assert ) {
+	assert.ok( $( "#a" ).hasClass( "ui-page" ) );
 } );
 
-test( "page element has default page theme class when not overidden", function() {
-	ok( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ) );
+QUnit.test( "page element has default page theme class when not overidden", function( assert ) {
+	assert.ok( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ) );
 } );
 
-test( "setting option 'theme' on page updates classes correctly", function() {
+QUnit.test( "setting option 'theme' on page updates classes correctly", function( assert ) {
 	$( "#a" ).page( "option", "theme", "x" );
-	deepEqual( $( "#a" ).hasClass( "ui-page-theme-x" ), true, "After setting option 'theme' to 'x', the page has the new theme class" );
-	deepEqual( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ), false, "After setting option 'theme', the page does not have default theme class" );
+	assert.deepEqual( $( "#a" ).hasClass( "ui-page-theme-x" ), true, "After setting option 'theme' to 'x', the page has the new theme class" );
+	assert.deepEqual( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ), false, "After setting option 'theme', the page does not have default theme class" );
 	$( "#a" ).page( "option", "theme", themedefault );
 } );
 
-test( "B page has non-default theme matching its data-theme attr", function() {
+QUnit.test( "B page has non-default theme matching its data-theme attr", function( assert ) {
 	$( "#b" ).page();
 	var btheme = $( "#b" ).jqmData( "theme" );
-	ok( $( "#b" ).hasClass( "ui-page-theme-" + btheme ) );
+	assert.ok( $( "#b" ).hasClass( "ui-page-theme-" + btheme ) );
 } );
 
-test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing", function() {
+QUnit.test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing", function( assert ) {
 	$( "#c" ).page();
 
-	ok( cEvents[ 0 ] === "pagebeforecreate" );
-	ok( !cTargets[ 1 ] );
+	assert.ok( cEvents[ 0 ] === "pagebeforecreate" );
+	assert.ok( !cTargets[ 1 ] );
 } );
 
-test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page", function() {
+QUnit.test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page", function( assert ) {
 	$( "#c" ).page();
 
-	ok( !$( "#c" ).hasClass( "ui-body-" + themedefault ) );
-	ok( !$( "#c" ).hasClass( "ui-page" ) );
+	assert.ok( !$( "#c" ).hasClass( "ui-body-" + themedefault ) );
+	assert.ok( !$( "#c" ).hasClass( "ui-page" ) );
 } );
 
 
-asyncTest( "page container is updated to page theme at pagebeforeshow", function(){
-	expect( 1 );
+QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ){
+	assert.expect( 1 );
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
@@ -88,16 +88,16 @@ asyncTest( "page container is updated to page theme at pagebeforeshow", function
 
 	$.mobile.activePage
 		.bind( "pagebeforeshow", function() {
-			ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
-			start();
+			assert.ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
+			QUnit.start();
 		} )
 		.trigger( "pagebeforeshow" );
 
 } );
 
-asyncTest( "page container is updated to page theme at pagebeforeshow", function() {
+QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ) {
 
-	expect( 1 );
+	assert.expect( 1 );
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
@@ -105,8 +105,8 @@ asyncTest( "page container is updated to page theme at pagebeforeshow", function
 
 	$.mobile.activePage
 		.bind( "pagebeforehide", function() {
-			ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
-			start();
+			assert.ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
+			QUnit.start();
 		} )
 		.trigger( "pagebeforehide" );
 
@@ -114,4 +114,4 @@ asyncTest( "page container is updated to page theme at pagebeforeshow", function
 
 
 
-} )( jQuery );
+} )( QUnit, jQuery );
