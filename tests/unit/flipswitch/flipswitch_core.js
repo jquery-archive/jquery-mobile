@@ -1,9 +1,9 @@
 /*
  * mobile flipswitch unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 
-test( "checkbox based flipswitch", function( assert ) {
+QUnit.test( "checkbox based flipswitch", function( assert ) {
 	assert.hasClasses( $( "#flip-checkbox" ).parent(), "ui-flipswitch", "is enhanced" );
 	assert.hasClasses( $( "#flip-checkbox-disabled" ).parent(), "ui-state-disabled",
 		"is disabled" );
@@ -22,11 +22,11 @@ test( "checkbox based flipswitch", function( assert ) {
 	$( "#flip-checkbox" ).trigger( "swiperight" );
 	assert.hasClasses( $( "#flip-checkbox" ).parent(), "ui-flipswitch-active",
 		"is active after right swipe" );
-	deepEqual( parseInt( $( "#flip-checkbox" ).attr( "tabindex" ) ), -1,
+	assert.deepEqual( parseInt( $( "#flip-checkbox" ).attr( "tabindex" ) ), -1,
 		"is untabbable - tabindex is set to -1" );
 } );
 
-test( "select based flipswitch", function( assert ) {
+QUnit.test( "select based flipswitch", function( assert ) {
 	assert.hasClasses( $( "#flip-select" ).parent(), "ui-flipswitch", "is enhanced" );
 	assert.hasClasses( $( "#flip-select-disabled" ).parent(), "ui-state-disabled",
 		"is diabled" );
@@ -43,8 +43,8 @@ test( "select based flipswitch", function( assert ) {
 	$( "#flip-select" ).trigger( "swiperight" );
 	assert.hasClasses( $( "#flip-select" ).parent(), "ui-flipswitch-active",
 		"is active after right swipe" );
-	deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ) ), -1,
+	assert.deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ) ), -1,
 		"is untabbable - tabindex is set to -1" );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
