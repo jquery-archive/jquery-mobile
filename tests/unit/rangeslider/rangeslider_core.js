@@ -1,17 +1,18 @@
 /*
  * mobile slider unit tests
  */
-( function( $ ) {
-	module( "jquery.mobile.rangeslider.js core" );
+( function( QUnit, $ ) {
 
-	test( "First input value is always lower than last input value and vice versa", function() {
-		expect( 2 );
+	QUnit.module( "jquery.mobile.rangeslider.js core" );
+
+	QUnit.test( "First input value is always lower than last input value and vice versa", function( assert ) {
+		assert.expect( 2 );
 		var	rangeFirst = $( "#rangeslider-minmax-first" ),
 			rangeLast = $( "#rangeslider-minmax-last" );
 
 		// Try to set first input val (30) higher than last input val (70)
 		rangeFirst.val( parseInt( rangeFirst.val(), 10 ) +  60 ).slider( "refresh" );
-		equal( rangeFirst.val(), rangeLast.val(),
+		assert.equal( rangeFirst.val(), rangeLast.val(),
 			"First input value is equal to last input value" );
 
 		// Set first input value back to 30
@@ -20,7 +21,7 @@
 		// Try to set last input val (70) lower than first input val (30)
 		rangeLast.val( parseInt( rangeLast.val(), 10 ) -  60 ).slider( "refresh" );
 
-		equal( rangeLast.val(), rangeFirst.val(),
+		assert.equal( rangeLast.val(), rangeFirst.val(),
 			"Last input value is equal to first input value" );
 	} );
 
@@ -32,8 +33,8 @@
 		return event;
 	};
 
-	test( "Clicking on the extreams updates the correct input", function() {
-		expect( 2 );
+	QUnit.test( "Clicking on the extreams updates the correct input", function( assert ) {
+		assert.expect( 2 );
 		var rangeslider = $( "#rangeslider-extreams" ),
 			rangeFirst = $( "#rangeslider-extreams-first" ),
 			rangeLast = $( "#rangeslider-extreams-last" ),
@@ -49,7 +50,7 @@
 						trackOffset.top + 7 ) ).trigger( "mouseup" );
 
 		// Check if first input value (45) has decreased
-		ok(
+		assert.ok(
 			$( rangeFirst ).on( "change", function() {
 				rangeLast.val() < 45;
 			} ),
@@ -64,7 +65,7 @@
 						trackOffset.top + 7 ) ).trigger( "mouseup" );
 
 		// Check if last input value (55) has increased
-		ok(
+		assert.ok(
 			$( rangeLast ).on( "change", function() {
 				rangeLast.val() > 55;
 			} ),
@@ -72,7 +73,7 @@
 		);
 	} );
 
-	asyncTest( "fire slidestart and slidestop on both handles", function() {
+	QUnit.asyncTest( "fire slidestart and slidestop on both handles", function( assert ) {
 		var rangeslider = $( "#rangeslider-startstop" ),
 			widget = rangeslider.data( "mobile-rangeslider" ),
 			sliders = widget._sliders,
@@ -85,28 +86,28 @@
 			},
 
 			"slidestart", function( timeout ) {
-				ok( !timeout, "slidestart on first handle fired" );
+				assert.ok( !timeout, "slidestart on first handle fired" );
 				handleFirst.mouseup();
 			},
 
 			"slidestop", function( timeout ) {
-				ok( !timeout, "slidestop on first handle fired" );
+				assert.ok( !timeout, "slidestop on first handle fired" );
 				handleLast.mousedown();
 			},
 
 			"slidestart", function( timeout ) {
-				ok( !timeout, "slidestart on last handle fired" );
+				assert.ok( !timeout, "slidestart on last handle fired" );
 				handleLast.mouseup();
 			},
 
 			"slidestop", function( timeout ) {
-				ok( !timeout, "slidestop on last handle fired" );
-				start();
+				assert.ok( !timeout, "slidestop on last handle fired" );
+				QUnit.start();
 			}
 
 		], 50 );
 	} );
-	test( " Rangeslider is enabled/disabled correctly ", function( assert ) {
+	QUnit.test( " Rangeslider is enabled/disabled correctly ", function( assert ) {
 		var rangeslider = $( "#disable-rangeslider" ),
 			inputFirst = $( "#range-disabled-first" ),
 			inputLast = $( "#range-disabled-last" ),
@@ -115,40 +116,40 @@
 
 		rangeslider.rangeslider( { disabled: true } );
 
-		ok( !!inputFirst.attr( "disabled" ),  "first input is disabled" );
+		assert.ok( !!inputFirst.attr( "disabled" ),  "first input is disabled" );
 		assert.hasClasses( inputFirst, "mobile-slider-disabled" );
-		ok( !!sliderFirst.attr( "aria-disabled" ), "first slider is aria-disabled" );
+		assert.ok( !!sliderFirst.attr( "aria-disabled" ), "first slider is aria-disabled" );
 		assert.hasClasses( sliderFirst, "ui-state-disabled" );
-		ok( !!inputLast.attr( "disabled" ),  "last input is disabled" );
+		assert.ok( !!inputLast.attr( "disabled" ),  "last input is disabled" );
 		assert.hasClasses( inputLast, "mobile-slider-disabled" );
-		ok( !!sliderLast.attr( "aria-disabled" ), "last slider is aria-disabled" );
+		assert.ok( !!sliderLast.attr( "aria-disabled" ), "last slider is aria-disabled" );
 		assert.hasClasses( sliderLast, "ui-state-disabled" );
 
 		rangeslider.rangeslider( { disabled: false } );
 
-		equal( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
+		assert.equal( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
 		assert.lacksClasses( inputFirst, "mobile-slider-disabled" );
-		equal( sliderFirst.attr( "aria-disabled" ), "false",
+		assert.equal( sliderFirst.attr( "aria-disabled" ), "false",
 			"first slider aria-disabled is false" );
 		assert.lacksClasses( sliderFirst, "ui-state-disabled" );
-		equal( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
+		assert.equal( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
 		assert.lacksClasses( inputLast, "mobile-slider-disabled" );
-		equal( sliderLast.attr( "aria-disabled" ), "false",
+		assert.equal( sliderLast.attr( "aria-disabled" ), "false",
 			"last slider aria-disabled is false" );
 		assert.lacksClasses( sliderLast, "ui-state-disabled" );
 	} );
 
-	test( "moving slider handles to same spot fires change event", function() {
+	QUnit.test( "moving slider handles to same spot fires change event", function( assert ) {
 		var rangeslider = $( "#change-proximity-rangeslider" ),
 			handleFirst = rangeslider.find( ".ui-slider-handle" ).first(),
 			sliderFirst = $( "#rangeslider-proximity-first" );
 
-		
+
 		$( sliderFirst ).on( "change", function() {
-			equal( 2, $( this ).val(), "values should be equal on change when handles meet" );
+			assert.equal( 2, $( this ).val(), "values should be equal on change when handles meet" );
 		} );
 		$.Event.prototype.keyCode = $.mobile.keyCode[ "UP" ];
 		handleFirst.trigger( "keydown" );
 	} );
 
-} )( jQuery );
+} )( QUnit, jQuery );
