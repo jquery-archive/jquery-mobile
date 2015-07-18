@@ -3,8 +3,8 @@ $.testHelper.delayStart();
 /*
  * mobile init tests
  */
-( function( $ ) {
-module( "jquery.mobile.loader", {
+( function( QUnit, $ ) {
+QUnit.module( "jquery.mobile.loader", {
 	setup: function() {
 		// NOTE reset for gradeA tests
 		$( 'html' ).removeClass( 'ui-mobile' );
@@ -29,72 +29,72 @@ $( document ).one( "mobileinit", function() {
 	$.mobile.loader.prototype.options.textVisible = true;
 } );
 
-test( "prototype options are used for mobile loader", function() {
+QUnit.test( "prototype options are used for mobile loader", function( assert ) {
 	$.mobile.loading( 'show' );
 
-	deepEqual( $( '.ui-loader' ).text(), "mobileinit", "prototype options set the text and make it visible" );
+	assert.deepEqual( $( '.ui-loader' ).text(), "mobileinit", "prototype options set the text and make it visible" );
 } );
 
-test( "showing the loader does not show the text when the loading message is false", function() {
+QUnit.test( "showing the loader does not show the text when the loading message is false", function( assert ) {
 	$.mobile.loading( "option", "text", false ).loader( "show" );
 
-	deepEqual( $( ".ui-loader h1" ).text(), "", "no loading message present" );
+	assert.deepEqual( $( ".ui-loader h1" ).text(), "", "no loading message present" );
 } );
 
-test( "showing the loader does not hide the text when the loading message is true", function() {
+QUnit.test( "showing the loader does not hide the text when the loading message is true", function( assert ) {
 	$.mobile.loading( "option", "textVisible", true ).loader( "show" );
 
-	ok( $( ".ui-loader" ).hasClass( "ui-loader-verbose" ), "displaying text" );
+	assert.ok( $( ".ui-loader" ).hasClass( "ui-loader-verbose" ), "displaying text" );
 } );
 
-test( "hiding the loader doesn't add the dialog to the page when loading message is false", function() {
+QUnit.test( "hiding the loader doesn't add the dialog to the page when loading message is false", function( assert ) {
 	$.mobile.loading( "option", "text", true ).loader( "show" ).loader( "hide" );
 
-	deepEqual( $( ".ui-loading" ).length, 0, "page should not be in the loading state" );
+	assert.deepEqual( $( ".ui-loading" ).length, 0, "page should not be in the loading state" );
 } );
 
-test( "showing the loader adds the dialog to the page when text option is true", function() {
+QUnit.test( "showing the loader adds the dialog to the page when text option is true", function( assert ) {
 	$.mobile.loading( "option", "text", true ).loader( "show" );
 
-	deepEqual( $( ".ui-loading" ).length, 1, "page should be in the loading state" );
+	assert.deepEqual( $( ".ui-loading" ).length, 1, "page should be in the loading state" );
 } );
 
-test( "page loading should contain custom loading message", function() {
+QUnit.test( "page loading should contain custom loading message", function( assert ) {
 	$.mobile.loading( "option", "text", "foo" ).loader( "show" );
 
-	deepEqual( $( ".ui-loader h1" ).text(), "foo" );
+	assert.deepEqual( $( ".ui-loader h1" ).text(), "foo" );
 } );
 
-test( "page loading should contain custom loading message when set at runtime", function() {
+QUnit.test( "page loading should contain custom loading message when set at runtime", function( assert ) {
 	$.mobile.loading( "option", "text", "bar" ).loader( "show" );
 
-	deepEqual( $( ".ui-loader h1" ).text(), "bar" );
+	assert.deepEqual( $( ".ui-loader h1" ).text(), "bar" );
 } );
 
-test( "page loading should contain custom loading message when used in param object", function() {
+QUnit.test( "page loading should contain custom loading message when used in param object", function( assert ) {
 	$.mobile.loading( "show", { text: "bak" } );
-	deepEqual( $( ".ui-loader h1" ).text(), "bak", "loader has custom message 'bak'" );
+	assert.deepEqual( $( ".ui-loader h1" ).text(), "bak", "loader has custom message 'bak'" );
 } );
 
-test( "page loading should contain different theme when used in param object", function() {
+QUnit.test( "page loading should contain different theme when used in param object", function( assert ) {
 	$.mobile.loading( "show", { theme: "l" } );
-	ok( $( ".ui-loader" ).hasClass( "ui-body-l" ), "loader has theme l" );
+	assert.ok( $( ".ui-loader" ).hasClass( "ui-body-l" ), "loader has theme l" );
 } );
 
-test( "page loading should contain new html when provided, prefers passed param", function() {
+QUnit.test( "page loading should contain new html when provided, prefers passed param", function( assert ) {
 	$.mobile.loading( "show", { html: "<div class=\"foo\"></div>" } );
 
-	deepEqual( $( ".ui-loader > div.foo" ).length, 1, "loader has custom html" );
+	assert.deepEqual( $( ".ui-loader > div.foo" ).length, 1, "loader has custom html" );
 } );
 
-test( "page loading should always contain text when passed as the second arg", function() {
+QUnit.test( "page loading should always contain text when passed as the second arg", function( assert ) {
 	// simulate error call in navigation ajax error callback
 	$.mobile.loading( "option", "textVisible", true ).loader( "show", "e", "foo serious", true );
 
-	deepEqual( $( ".ui-loader" ).text(), "foo serious", "loader has message regardless of global setting" );
+	assert.deepEqual( $( ".ui-loader" ).text(), "foo serious", "loader has message regardless of global setting" );
 } );
 
-test( "page loading should always contain text when passed as an object prop", function() {
+QUnit.test( "page loading should always contain text when passed as an object prop", function( assert ) {
 	$.mobile
 		.loading( "option", "textVisible", false )
 
@@ -105,17 +105,17 @@ test( "page loading should always contain text when passed as an object prop", f
 			textonly: true
 		} );
 
-	deepEqual( $( ".ui-loader" ).text(), "foo serious second", "loader has message regardless of global setting" );
+	assert.deepEqual( $( ".ui-loader" ).text(), "foo serious second", "loader has message regardless of global setting" );
 } );
 
-test( "page loading should not contain text when default is used and visible prop is false", function() {
+QUnit.test( "page loading should not contain text when default is used and visible prop is false", function( assert ) {
 	$.mobile
 		.loading( "option", "textVisible", false )
 
 		// simulate error call in navigation ajax error callback
 		.loader( "show", { theme: "e", textonly: true } );
 
-	ok( $( ".ui-loader" ).hasClass( "ui-loader-default" ), "loader text is hidden" );
+	assert.ok( $( ".ui-loader" ).hasClass( "ui-loader-default" ), "loader text is hidden" );
 
 	$.mobile
 		.loading( "hide" )
@@ -123,16 +123,16 @@ test( "page loading should not contain text when default is used and visible pro
 		// simulate error call in navigation ajax error callback
 		.loader( "show", "e", undefined, true );
 
-	ok( $( ".ui-loader" ).hasClass( "ui-loader-default" ), "loader text is hidden" );
+	assert.ok( $( ".ui-loader" ).hasClass( "ui-loader-default" ), "loader text is hidden" );
 } );
 
-test( "test the loading config object precedence", function() {
+QUnit.test( "test the loading config object precedence", function( assert ) {
 	$.mobile
 		.loading( "option", "text", "fozzle" )
 		.loader( "option", "theme", "x" )
 		.loader( "show" );
 
-	ok( $( ".ui-loader" ).hasClass( "ui-body-x" ), "has theme x" );
-	deepEqual( $( ".ui-loader h1" ).text(), "fozzle", "has text fozzle in loading config object" );
+	assert.ok( $( ".ui-loader" ).hasClass( "ui-body-x" ), "has theme x" );
+	assert.deepEqual( $( ".ui-loader h1" ).text(), "fozzle", "has text fozzle in loading config object" );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
