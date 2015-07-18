@@ -1,10 +1,14 @@
-test( "Loader attaches to DOM when running individually", function() {
+( function( QUnit, $ ) {
+
+QUnit.test( "Loader attaches to DOM when running individually", function( assert ) {
 var loader = $.mobile.loading( "show" );
 
-deepEqual( $.contains( document, loader[ 0 ] ), true,
+assert.deepEqual( $.contains( document, loader[ 0 ] ), true,
 	"Document contains the loader after it is shown" );
 
-deepEqual( loader.is( ":visible" ), true, "Loader is visible when shown" );
+assert.deepEqual( loader.is( ":visible" ), true, "Loader is visible when shown" );
 
 $.mobile.loading( "hide" );
 } );
+
+} )( QUnit, jQuery );
