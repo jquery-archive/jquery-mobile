@@ -1,37 +1,39 @@
-module( "enhancer: basic" );
+( function( QUnit, $ ) {
 
-test( "Basic widget enhancement", function() {
-	expect( 2 );
+QUnit.module( "enhancer: basic" );
+
+QUnit.test( "Basic widget enhancement", function( assert ) {
+	assert.expect( 2 );
 
 	$( "#basic-enhance" ).enhance();
 
-	ok( $( "#basic-toolbar" ).toolbar( "instance" ),
+	assert.ok( $( "#basic-toolbar" ).toolbar( "instance" ),
 		"widgets loaded before enhancer are enhanced" );
-	ok( $( "#basic-flipswitch" ).flipswitch( "instance" ),
+	assert.ok( $( "#basic-flipswitch" ).flipswitch( "instance" ),
 		"widgets loaded after enhancer are enhanced" );
 } );
 
-test( "Custom init selector", function() {
-	expect( 1 );
+QUnit.test( "Custom init selector", function( assert ) {
+	assert.expect( 1 );
 
 	$( "#basic-enhance" ).enhance();
 
-	ok( $( "#basic-textinput" ).textinput( "instance" ),
+	assert.ok( $( "#basic-textinput" ).textinput( "instance" ),
 		"Widgets work with custom initSelectors" );
 } );
 
-test( "enhanceWithin", function() {
-	expect( 2 );
+QUnit.test( "enhanceWithin", function( assert ) {
+	assert.expect( 2 );
 	var toolbar = $( "#enhance-within-target" ).enhanceWithin();
 
-	ok( $( "#enhance-within-input" ).textinput( "instance" ),
+	assert.ok( $( "#enhance-within-input" ).textinput( "instance" ),
 		"enhanceWithin enhance inputs within the container" );
-	strictEqual( !!toolbar.toolbar( "instance" ), false,
+	assert.strictEqual( !!toolbar.toolbar( "instance" ), false,
 		"enhanceWithin does not enhance the parent element" );
 } );
 
 var hook;
-module( "enhancer: custom hook", {
+QUnit.module( "enhancer: custom hook", {
 	setup: function() {
 		hook = function() {
 			$( this ).find( ".hook-target" ).addClass( "hooked" );
@@ -43,15 +45,15 @@ module( "enhancer: custom hook", {
 	}
 } );
 
-test( "custom hook", function( assert ) {
-	expect( 1 );
+QUnit.test( "custom hook", function( assert ) {
+	assert.expect( 1 );
 
 	$( "#hooks" ).enhance();
 	assert.hasClasses( $( ".hook-target" ), "hooked" );
 } );
 
 var generator;
-module( "enhancer: custom generator", {
+QUnit.module( "enhancer: custom generator", {
 	setup: function() {
 		generator = $.fn.enhance.initGenerator;
 		$.enhance.initGenerator = function( prototype ) {
@@ -63,37 +65,39 @@ module( "enhancer: custom generator", {
 	}
 } );
 
-test( "custom generator", function( assert ) {
-	expect( 3 );
+QUnit.test( "custom generator", function( assert ) {
+	assert.expect( 3 );
 
 	$( "#custom-generator" ).enhance();
-	ok( $( ".toolbar" ).toolbar( "instance" ), "custom generator works with toolbar" );
-	ok( $( ".flipswitch" ).flipswitch( "instance" ), "custom generator works with flipswitch" );
-	ok( $( ".textinput" ).textinput( "instance" ),
+	assert.ok( $( ".toolbar" ).toolbar( "instance" ),
+		"custom generator works with toolbar" );
+	assert.ok( $( ".flipswitch" ).flipswitch( "instance" ),
+		"custom generator works with flipswitch" );
+	assert.ok( $( ".textinput" ).textinput( "instance" ),
 		"custom generator overrides custom initSelectors" );
 } );
 
-module( "enhancer: multiple widgets" );
+QUnit.module( "enhancer: multiple widgets" );
 
-test( "enhancer - define multiple widgets", function() {
-	expect( 2 );
+QUnit.test( "enhancer - define multiple widgets", function( assert ) {
+	assert.expect( 2 );
 
 	$( "#enhance-multiple" ).enhance();
-	ok( $( "#enhancer-multiple" ).is( ":ui-button" ),
+	assert.ok( $( "#enhancer-multiple" ).is( ":ui-button" ),
 		"Widget with multiple roles calls first widget" );
-	ok( $( "#enhancer-multiple" ).is( ":mobile-toolbar" ),
+	assert.ok( $( "#enhancer-multiple" ).is( ":mobile-toolbar" ),
 		"Widget with multiple roles calls second widget" );
 } );
 
-test( "$.fn.enhanceRoles", function() {
-	expect( 1 );
+QUnit.test( "$.fn.enhanceRoles", function( assert ) {
+	assert.expect( 1 );
 	var roles = $( "#enhancer-multiple" ).enhanceRoles();
 
-	deepEqual( [ "button", "toolbar" ], roles, "enhanceRoles returns array of roles" );
+	assert.deepEqual( [ "button", "toolbar" ], roles, "enhanceRoles returns array of roles" );
 } );
 
-test( "$.fn.enhanceOptions", function() {
-	expect( 1 );
+QUnit.test( "$.fn.enhanceOptions", function( assert ) {
+	assert.expect( 1 );
 	var options = $( "#enhancer-options" ).enhanceOptions();
 	var expected = {
 		optionbaz: "boo",
@@ -102,5 +106,7 @@ test( "$.fn.enhanceOptions", function() {
 		role: "button toolbar"
 	};
 
-	deepEqual( options, expected, "enhanceOptions returns options object" );
+	assert.deepEqual( options, expected, "enhanceOptions returns options object" );
 } );
+
+} )( QUnit, jQuery );
