@@ -1,13 +1,15 @@
-test( "Slider widget works correctly", function() {
+( function( QUnit, $ ) {
+
+QUnit.test( "Slider widget works correctly", function( assert ) {
 var trackWidth, trackX,
 	slider = $( "#plain" ).slider(),
 	handle = slider.parent().find( ".ui-slider-handle" ),
 	track = handle.closest( ".ui-slider-track" ),
 	offset = handle.offset();
 
-deepEqual( slider.slider( "widget" ).hasClass( "ui-slider-input" ), true,
+assert.deepEqual( slider.slider( "widget" ).hasClass( "ui-slider-input" ), true,
 	"Has class ui-slider-input" );
-equal( handle.length, 1, "Slider contains a handle element" );
+assert.equal( handle.length, 1, "Slider contains a handle element" );
 
 function moveHandle( handle, xPos ) {
 	var down = $.Event( "mousedown" ),
@@ -29,8 +31,10 @@ function moveHandle( handle, xPos ) {
 // "events/touch" module is artificially loaded in that environment.
 trackWidth = track.width();
 trackX = track.offset().left;
-ok( trackWidth > 0, "Track has a non-zero width" );
+assert.ok( trackWidth > 0, "Track has a non-zero width" );
 
 moveHandle( handle, trackX + trackWidth * 0.5 );
-ok( handle.offset().left > 0, "Handle responds to user interaction" );
+assert.ok( handle.offset().left > 0, "Handle responds to user interaction" );
 } );
+
+} )( QUnit, jQuery );

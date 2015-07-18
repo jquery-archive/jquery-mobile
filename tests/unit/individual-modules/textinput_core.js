@@ -1,4 +1,6 @@
-test( "Textinput widget works correctly", function( assert ) {
+( function( QUnit, $ ) {
+
+QUnit.test( "Textinput widget works correctly", function( assert ) {
 var plainText = $( "#plain-text" ).textinput(),
 	searchText = $( "#search-text" ).textinput(),
 	textarea = $( "#textarea" ).textinput();
@@ -12,3 +14,5 @@ assert.hasClasses( searchText.textinput( "widget" )[ 0 ], "ui-textinput-has-clea
 assert.hasClasses( textarea.textinput( "widget" )[ 0 ], "ui-textinput-text",
 	"Textarea widget has class ui-textinput-text" );
 } );
+
+} )( QUnit, jQuery );
