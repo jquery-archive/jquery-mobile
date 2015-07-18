@@ -2,36 +2,36 @@
  * mobile select unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
 
-module( "Native select" );
+QUnit.module( "Native select" );
 
-test( "Native select does not blur synchronously in response to change", function() {
+QUnit.test( "Native select does not blur synchronously in response to change", function( assert ) {
 	var selectmenu = $( "#blur-test" );
 
 	selectmenu.focus();
 
 	selectmenu.trigger( "change" );
 
-	deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
+	assert.deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
 		"Native select is focused after triggering 'change'" );
 } );
 
-module( "Custom select" );
+QUnit.module( "Custom select" );
 
-test( "Custom select is enhanced correctly", function() {
+QUnit.test( "Custom select is enhanced correctly", function( assert ) {
 	var popup = $( "#enhance-test-listbox" );
 
-	strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
-	strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2", "Tabindex is correctly copied from select" );
-	strictEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
-	strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+	assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
+	assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2", "Tabindex is correctly copied from select" );
+	assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
+	assert.strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
 
 } );
 
-module( "Custom select Multiple" );
+QUnit.module( "Custom select Multiple" );
 
-test( "Custom select multiple is cleared correctly", function() {
+QUnit.test( "Custom select multiple is cleared correctly", function( assert ) {
 	var popup = $( "#enhance-test-listbox" );
 	$( "#enhance-test" )
 		.find( "option" )
@@ -39,13 +39,13 @@ test( "Custom select multiple is cleared correctly", function() {
 			.prop( "selected", false )
 		.end()
 		.selectmenu( "refresh" );
-	deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
+	assert.deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
 		"Checkboxes should not have ui-checkbox-on class" );
 } );
 
-module( "Custom select Multiple Inline" ) ;
+QUnit.module( "Custom select Multiple Inline" ) ;
 
-test( "Custom select multiple inline width is adjusted correctly", function() {
+QUnit.test( "Custom select multiple inline width is adjusted correctly", function( assert ) {
 	var selectMenu = $( "#width-test" ),
 		parent = selectMenu.parent(),
 		widths = [ 100, 250, 500, 1000 ],
@@ -65,13 +65,13 @@ test( "Custom select multiple inline width is adjusted correctly", function() {
 		}
 	} );
 
-	strictEqual( finalResult, 4,
+	assert.strictEqual( finalResult, 4,
 		"select menu width should not exceed parent's width" );
 } );
 
-module( "Native select" );
+QUnit.module( "Native select" );
 
-test( "Select menu ID", function() {
-	ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
+QUnit.test( "Select menu ID", function( assert ) {
+	assert.ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
 } );
-} )( jQuery );
+} )( QUnit, jQuery );
