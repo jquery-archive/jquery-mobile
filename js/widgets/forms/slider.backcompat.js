@@ -42,20 +42,23 @@ if ( $.mobileBackcompat !== false ) {
 				this._addClass( this.slider, "ui-mini", null );
 			}
 
-			if ( this.options.highlight && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
-				this.valuebg = ( function( slider ) {
-					var bg = document.createElement( "div" );
-					bg.className = "ui-slider-bg " + "ui-button-active";
-					return $( bg ).prependTo( slider );
-				} )( this.slider );
-			}
-
 			if ( this.options.highlight ) {
 				this._setHighlight( this.options.highlight );
 			}
 
 			if ( this.options.corners !== undefined ) {
 				this._setCorners( this.options.corners );
+			}
+		},
+
+		refresh: function( val, isfromControl, preventInputUpdate ) {
+			this._super( val, isfromControl, preventInputUpdate );
+			if ( this.options.highlight && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
+				this.valuebg = ( function( slider ) {
+					var bg = document.createElement( "div" );
+					bg.className = "ui-slider-bg " + "ui-button-active";
+					return $( bg ).prependTo( slider );
+				} )( this.slider );
 			}
 		},
 
