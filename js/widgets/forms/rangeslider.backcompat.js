@@ -34,7 +34,23 @@ if ( $.mobileBackcompat !== false ) {
 			mini: false,
 			highlight: true
 		},
-		classProp: "ui-rangeslider"
+		classProp: "ui-rangeslider",
+		_create: function() {
+			this._super();
+
+			this.element.find( "input" ).slider( {
+				mini: this.options.mini,
+				highlight: this.options.highlight
+			} ).slider( "refresh" );
+
+			this._updateHighlight();
+
+			if ( this.options.mini ) {
+				this._addClass( "ui-mini", null );
+				this._addClass( this._sliderFirst, "ui-mini", null );
+				this._addClass( this._sliderLast, "ui-mini", null );
+			}
+		}
 	} );
 
 	$.widget( "mobile.rangeslider", $.mobile.rangeslider, $.mobile.widget.backcompat );
