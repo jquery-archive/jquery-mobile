@@ -101,47 +101,45 @@
 
 		<h2>Buttons in toolbars</h2>
 
-		<p>The framework automatically enhances links in toolbars as buttons with inline and mini style, but this has been deprecated in version 1.4. The same goes for positioning the first two buttons in a header left and right if they are immediate child of the header. The demos below prepare you for the next version.</p>
-
 		<h3>Header button position classes</h3>
 
-		<p>You can use the <code>ui-button-left</code> and <code>ui-button-right</code> classes to position buttons in the header.</p>
+		<p>You can use the <code>ui-toolbar-header-button-left</code> and <code>ui-toolbar-header-button-right</code> classes to position buttons in the header.</p>
 
 		<div data-demo-html="true">
 			<div data-role="header">
-				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all">Cancel<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" class="ui-toolbar-header-button-left ui-button ui-button-inline ui-mini ui-corner-all">Cancel <span class="ui-icon ui-icon-delete"></span></a>
 			<h1>My App</h1>
-				<button class="ui-button-right ui-button ui-button-b ui-button-inline ui-mini ui-corner-all">Save<span class="ui-icon ui-icon-check"></span></button>
+				<button class="ui-toolbar-header-button-right ui-button ui-button-b ui-button-inline ui-mini ui-corner-all">Save <span class="ui-icon ui-icon-check"></span></button>
 			</div>
 		</div><!-- /demo-html -->
 
 		<div data-demo-html="true">
 			<div data-role="header">
 			<h1>Page Title</h1>
-				<a href="#" class="ui-button-right ui-button ui-button-inline ui-mini ui-corner-all">Options<span class="ui-icon ui-icon-gear"></span></a>
+				<a href="#" class="ui-toolbar-header-button-right ui-button ui-button-inline ui-mini ui-corner-all">Options <span class="ui-icon ui-icon-gear"></span></a>
 			</div>
 		</div><!-- /demo-html -->
 
 		<h3>Buttons in headers without a heading</h3>
 
-		<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the height and display correctly.</p>
+		<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-toolbar-title"</code> so that the bar can get the height and display correctly.</p>
 
 		<div data-demo-html="true">
 			<div data-role="header">
-				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all">View<span class="ui-icon ui-icon-grid"></span></a>
-				<span class="ui-title"></span>
+				<a href="#" class="ui-toolbar-header-button-left ui-button ui-button-inline ui-mini ui-corner-all">View <span class="ui-icon ui-icon-grid"></span></a>
+				<span class="ui-toolbar-title"></span>
 			</div>
 		</div><!-- /demo-html -->
 
 		<h3>Buttons in footers</h3>
 
-		<p>The classes <code>ui-button-left</code> and <code>ui-button-right</code> were not meant to be used in footers, because they do not account for the possible presence of text, navbars, and and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
+		<p>The classes <code>ui-toolbar-header-button-left</code> and <code>ui-toolbar-header-button-right</code> were not meant to be used in footers, because they do not account for the possible presence of text, navbars, and and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
 
 		<div data-demo-html="true" data-demo-css="#footer-abs-buttons">
 			<div data-role="footer">
 				<h2>Footer</h2>
-				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-left">Quit<span class="ui-icon ui-icon-power"></span></a>
-				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-right">Next<span class="ui-icon ui-icon-caret-r"></span></a>
+				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-left">Quit <span class="ui-icon ui-icon-power"></span></a>
+				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-right">Next <span class="ui-icon ui-icon-caret-r"></span></a>
 			</div>
 		</div>
 
@@ -174,9 +172,9 @@
 		<div data-demo-html="true">
 			<div data-role="header">
 				<div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-button-left">
-					<a href="#" class="ui-button">Add<span class="ui-icon ui-icon-plus"></span></a>
-					<a href="#" class="ui-button">Up<span class="ui-icon ui-icon-arrow-u"></span></a>
-					<a href="#" class="ui-button">Down<span class="ui-icon ui-icon-arrow-d"></span></a>
+					<a href="#" class="ui-button">Add <span class="ui-icon ui-icon-plus"></span></a>
+					<a href="#" class="ui-button">Up <span class="ui-icon ui-icon-arrow-u"></span></a>
+					<a href="#" class="ui-button">Down <span class="ui-icon ui-icon-arrow-d"></span></a>
 				</div>
 				<h6>My header</h6>
 			</div>

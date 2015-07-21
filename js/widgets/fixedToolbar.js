@@ -37,7 +37,7 @@
 
 return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	options: {
-		position: null,
+		position:null,
 		visibleOnPageShow: true,
 		disablePageZoom: true,
 		transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
@@ -58,81 +58,82 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		}
 	},
 
-		_create: function() {
-			this._super();
-			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				this.pagecontainer = this.element.closest( ".ui-mobile-viewport" );
-				this._makeFixed();
-			}
-		},
+	_create: function() {
+		this._super();
+		if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
+			this.pagecontainer = this.element.closest( ".ui-mobile-viewport" );
+			this._makeFixed();
+		}
+	},
 
-		_makeFixed: function() {
-			this._addClass( "ui-toolbar-" + this.role + "-fixed" );
-			this.updatePagePadding();
-			this._addTransitionClass();
-			this._bindPageEvents();
-			this._bindToggleHandlers();
-		},
+	_makeFixed: function() {
+		this._addClass( "ui-toolbar-" + this.role + "-fixed" );
+		this.updatePagePadding();
+		this._addTransitionClass();
+		this._bindPageEvents();
+		this._bindToggleHandlers();
+	},
 
-		_setOptions: function( o ) {
-			if ( o.position === "fixed" && this.options.position !== "fixed" ) {
-				this._makeFixed();
-			}
-			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				var pageActive = $( ".ui-page-active" );
-				var currentPage = !!this.page ? 
-					this.page : 
-					pageActive.length ? 
-					pageActive : 
-					$( ".ui-page" ).eq(0);
+	_setOptions: function( o ) {
+		if ( o.position === "fixed" && this.options.position !== "fixed" ) {
+			this._makeFixed();
+		}
+		if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
+			var pageActive = $( ".ui-page-active" ),
+				currentPage = !!this.page ?
+				this.page :
+				pageActive.length ?
+				pageActive :
+				$( ".ui-page" ).eq( 0 );
+			if ( o.fullscreen !== undefined ) {
+				if ( o.fullscreen ) {
+					this._addClass( "ui-toolbar-" + this.role + "-fullscreen" );
+					this._addClass( currentPage,
+						"ui-toolbar-page-" + this.role + "-fullscreen" );
+				} else {
 
-				if ( o.fullscreen !== undefined) {
-					if ( o.fullscreen ) {
-						this._addClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
-					}
 					// If not fullscreen, add class to page to set top or bottom padding
-					else {
-						this._removeClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._removeClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fixed" );
-					}
+					this._removeClass( "ui-toolbar-" + this.role + "-fullscreen" );
+					this._removeClass( currentPage,
+						"ui-toolbar-page-" + this.role + "-fullscreen" );
+					this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fixed" );
 				}
 			}
-			this._super(o);
-		},
+		}
+		this._super( o );
+	},
 
-		_addTransitionClass: function() {
-			var transitionClass = this.options.transition;
+	_addTransitionClass: function() {
+		var transitionClass = this.options.transition;
 
-			if ( transitionClass && transitionClass !== "none" ) {
-				// use appropriate slide for header or footer
-				if ( transitionClass === "slide" ) {
-					transitionClass = this.role === "header" ?
-					"slidedown" :
-					"slideup";
-				}
+		if ( transitionClass && transitionClass !== "none" ) {
 
-				this._addClass( null, transitionClass );
+			// use appropriate slide for header or footer
+			if ( transitionClass === "slide" ) {
+				transitionClass = this.role === "header" ? "slidedown" : "slideup";
 			}
+
+			this._addClass( null, transitionClass );
+		}
 	},
 
 	_bindPageEvents: function() {
 		var page = ( !!this.page ) ? this.element.closest( ".ui-page" ) : this.document;
+
 		//page event bindings
 		// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 		// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 		this._on( page, {
 			"pagebeforeshow": "_handlePageBeforeShow",
-			"webkitAnimationStart": "_handleAnimationStart",
-			"animationstart": "_handleAnimationStart",
+			"webkitAnimationStart":"_handleAnimationStart",
+			"animationstart":"_handleAnimationStart",
 			"updatelayout": "_handleAnimationStart",
 			"pageshow": "_handlePageShow",
 			"pagebeforehide": "_handlePageBeforeHide"
 		} );
 	},
 
-	_handlePageBeforeShow: function() {
+	_handlePageBeforeShow: function( ) {
 		var o = this.options;
 		if ( o.disablePageZoom ) {
 			$.mobile.zoom.disable( true );
@@ -169,8 +170,12 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		if ( o.trackPersistentToolbars ) {
 			thisFooter = $( ".ui-footer-fixed:jqmData(id)", this.page );
 			thisHeader = $( ".ui-header-fixed:jqmData(id)", this.page );
-			nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $();
-			nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
+			nextFooter = thisFooter.length && ui.nextPage &&
+				$( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')",
+				ui.nextPage ) || $();
+			nextHeader = thisHeader.length && ui.nextPage &&
+				$( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')",
+				ui.nextPage ) || $();
 
 			if ( nextFooter.length || nextHeader.length ) {
 
@@ -181,123 +186,80 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 					nextFooter.appendTo( this );
 				} );
 			}
-		},
+		}
+	},
 
-		_visible: true,
+	_visible: true,
 
-		// This will set the content element's top or bottom padding equal to the toolbar's height
-		updatePagePadding: function( tbPage ) {
-			var $el = this.element,
-				header = ( this.role ==="header" ),
-				pos = parseFloat( $el.css( header ? "top" : "bottom" ) );
+	// This will set the content element's top or bottom padding equal to the toolbar's height
+	updatePagePadding: function( tbPage ) {
+		var $el = this.element,
+			header = ( this.role === "header" ),
+			pos = parseFloat( $el.css( header ? "top" : "bottom" ) );
 
-			// This behavior only applies to "fixed", not "fullscreen"
-			if ( this.options.fullscreen ) { return; }
-			// tbPage argument can be a Page object or an event, if coming from throttled resize.
-			tbPage = ( tbPage && tbPage.type === undefined && tbPage ) || this.page || $el.closest( ".ui-page" );
-			tbPage = ( !!this.page )? this.page: ".ui-page-active";
-			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
-		},
+		// This behavior only applies to "fixed", not "fullscreen"
+		if ( this.options.fullscreen ) { return; }
 
-		_useTransition: function( notransition ) {
-			var $win = this.window,
-				$el = this.element,
-				scroll = $win.scrollTop(),
-				elHeight = $el.height(),
-				pHeight = ( !!this.page )? $el.closest( ".ui-page" ).height():$(".ui-page-active").height(),
-				viewportHeight = $.mobile.getScreenHeight();
+		// tbPage argument can be a Page object or an event, if coming from throttled resize.
+		tbPage = ( tbPage && tbPage.type === undefined && tbPage ) ||
+			this.page || $el.closest( ".ui-page" );
+		tbPage = ( !!this.page ) ? this.page : ".ui-page-active";
+		$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
+	},
 
-			return !notransition &&
-				( this.options.transition && this.options.transition !== "none" &&
-				(
-					( this.role === "header" && !this.options.fullscreen && scroll > elHeight ) ||
-					( this.role === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-				) || this.options.fullscreen
-				);
-		},
+	_useTransition: function( notransition ) {
+		var $win = this.window,
+			$el = this.element,
+			scroll = $win.scrollTop(),
+			elHeight = $el.height(),
+			pHeight = ( !!this.page ) ? $el.closest( ".ui-page" ).height() :
+				$( ".ui-page-active" ).height(),
+			viewportHeight = $.mobile.getScreenHeight();
 
-		show: function( notransition ) {
-			var self = this;
+		return !notransition &&
+			( this.options.transition && this.options.transition !== "none" &&
+			(
+				( this.role === "header" && !this.options.fullscreen && scroll > elHeight ) ||
+				( this.role === "footer" && !this.options.fullscreen &&
+					scroll + viewportHeight < pHeight - elHeight )
+			) || this.options.fullscreen
+			);
+	},
 
-			if ( this._useTransition( notransition ) ) {
-				this._removeClass( null, "out" );
-				this._removeClass( "ui-toolbar-fixed-hidden" );
-				this._addClass( null, "in" );
-				this.element.animationComplete( function() {
-					self._removeClass( null, "in" );
-				} );
-			}
-			else {
-				this._removeClass( "ui-toolbar-fixed-hidden" );
-			}
-			this._visible = true;
-		},
+	show: function( notransition ) {
+		var self = this;
 
-		hide: function( notransition ) {
-			var self = this,
-			
-				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
-				outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
-
-			if ( this._useTransition( notransition ) ) {
-				this._addClass( null, outClass );
-				this._removeClass( null, "in" );
-				this.element.animationComplete( function() {
-					self._addClass( "ui-toolbar-fixed-hidden" );
-					self._removeClass( null, outClass );
-				} );
-			}
-			else {
-				this._addClass( "ui-toolbar-fixed-hidden" );
-				this._removeClass( null, outClass );
-			}
-			this._visible = false;
-		},
-
-		toggle: function() {
-			this[ this._visible ? "hide" : "show" ]();
-		},
-
-		_bindToggleHandlers: function() {
-			var self = this,
-				o = self.options,
-				delayShow, delayHide,
-				isVisible = true,
-				page = ( !!this.page )? this.page: $(".ui-page");
-
-			// tap toggle
-			page
-				.bind( "vclick", function( e ) {
-					if ( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ) {
-						self.toggle();
-					}
-				}, this ) );
+		if ( this._useTransition( notransition ) ) {
+			this._animationInProgress = "show";
+			this._removeClass( null, "out" );
+			this._removeClass( "ui-toolbar-fixed-hidden" );
+			this._addClass( null, "in" );
+			this.element.animationComplete( function() {
+				self._removeClass( null, "in" );
+			} );
 		} else {
-			$el.removeClass( hideClass );
+			this._removeClass( "ui-toolbar-fixed-hidden" );
 		}
 		this._visible = true;
 	},
 
 	hide: function( notransition ) {
-		var hideClass = "ui-fixed-hidden",
-			$el = this.element,
+		var self = this,
+
 			// if it's a slide transition, our new transitions need the reverse class as well to slide outward
-			outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
+			outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 		if ( this._useTransition( notransition ) ) {
 			this._animationInProgress = "hide";
-			$el
-				.addClass( outclass )
-				.removeClass( "in" )
-				.animationComplete( $.proxy( function() {
-					if ( this._animationInProgress === "hide" ) {
-						this._animationInProgress = false;
-
-						$el.addClass( hideClass ).removeClass( outclass );
-					}
-				}, this ) );
+			this._addClass( null, outClass );
+			this._removeClass( null, "in" );
+			this.element.animationComplete( function() {
+				self._addClass( "ui-toolbar-fixed-hidden" );
+				self._removeClass( null, outClass );
+			} );
 		} else {
-			$el.addClass( hideClass ).removeClass( outclass );
+			this._addClass( "ui-toolbar-fixed-hidden" );
+			this._removeClass( null, outClass );
 		}
 		this._visible = false;
 	},
@@ -331,40 +293,28 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 	_destroy: function() {
 		var pageClasses, toolbarClasses, hasFixed, header, hasFullscreen,
-			page = ( !!this.page ) ? this.page : ( $( ".ui-page-active" ).length > 0 ) ? $( ".ui-page-active" ) : $( ".ui-page" ).eq( 0 );
+			page = this.pagecontainer.pagecontainer( "getActivePage" );
 
 		this._super();
 		if ( this.options.position === "fixed" ) {
-			hasFixed = $( "body>.ui-" + this.role + "-fixed" )
-					.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
-					.not( this.element ).length > 0;
-			hasFullscreen = $( "body>.ui-" + this.role + "-fixed" )
-					.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
-					.not( this.element ).length > 0;
-			toolbarClasses = "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
+			hasFixed = $(  "body>.ui-" + this.role + "-fixed" )
+						.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
+						.not( this.element ).length > 0;
+			hasFullscreen = $(  "body>.ui-" + this.role + "-fixed" )
+						.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
+						.not( this.element ).length > 0;
+			toolbarClasses =  "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
 				" ui-footer-fullscreen fade slidedown slideup ui-fixed-hidden";
-			this.element.removeClass( toolbarClasses );
+			this._removeClass( toolbarClasses );
 			if ( !hasFullscreen ) {
 				pageClasses = "ui-page-" + this.role + "-fullscreen";
 			}
-		},
-
-		_destroy: function() {
-			var hasFixed, header,
-				page = this.pagecontainer.pagecontainer( "getActivePage" );
-
-			this._super();
-			if ( this.options.position === "fixed" ) {
-				hasFixed = $(  "body>.ui-" + this.role + "-fixed" )
-							.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
-							.not( this.element ).length > 0;
-
-				if ( !hasFixed ) {
-					header = this.role === "header";
-					page.css( "padding-" + ( header ? "top" : "bottom" ), "" );
-				}
+			if ( !hasFixed ) {
+				header = this.role === "header";
+				pageClasses += " ui-page-" + this.role + "-fixed";
+				page.css( "padding-" + ( header ? "top" : "bottom" ), "" );
 			}
-			page.removeClass( pageClasses );
+			this._removeClass( page, pageClasses );
 		}
 	}
 
