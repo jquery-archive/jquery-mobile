@@ -37,7 +37,8 @@ if ( $.mobileBackcompat !== false ) {
 		_create: function() {
 
 			// Support for deprecated dialog widget functionality
-			if ( $.mobile.getAttribute( this.element[ 0 ], "role" ) === "dialog" ) {
+			if ( $.mobile.getAttribute( this.element[ 0 ], "role" ) === "dialog" ||
+				this.options.role === "dialog" ) {
 
 				// The page container needs to distinguish a dialog widget from a page styled
 				// as a dialog. It does so by looking for the "mobile-dialog" data item on the
