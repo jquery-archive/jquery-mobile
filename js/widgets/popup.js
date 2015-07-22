@@ -104,10 +104,7 @@ var hook = function() {
 				element.setAttribute( "aria-owns", idref );
 				element.setAttribute( "aria-expanded", false );
 			}
-		})
-		.end()
-		.not( ".ui-btn, :jqmData(role='none')" )
-		.addClass( "ui-link" );
+		});
 };
 
 ( $.enhance = $.extend( $.enhance, $.extend( { hooks: [] }, $.enhance ) ) ).hooks.push( hook );
