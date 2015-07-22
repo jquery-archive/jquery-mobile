@@ -69,8 +69,10 @@ QUnit.test( "custom generator", function( assert ) {
 	assert.expect( 3 );
 
 	$( "#custom-generator" ).enhance();
-	assert.ok( $( ".toolbar" ).toolbar( "instance" ), "custom generator works with toolbar" );
-	assert.ok( $( ".flipswitch" ).flipswitch( "instance" ), "custom generator works with flipswitch" );
+	assert.ok( $( ".toolbar" ).toolbar( "instance" ),
+		"custom generator works with toolbar" );
+	assert.ok( $( ".flipswitch" ).flipswitch( "instance" ),
+		"custom generator works with flipswitch" );
 	assert.ok( $( ".textinput" ).textinput( "instance" ),
 		"custom generator overrides custom initSelectors" );
 } );
