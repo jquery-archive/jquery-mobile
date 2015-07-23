@@ -55,10 +55,8 @@ return $.widget( "mobile.textinput", $.mobile.textinput, {
 		// Attach to the various you-have-become-visible notifications that the
 		// various framework elements emit.
 		// TODO: Remove all but the updatelayout handler once #6426 is fixed.
+		this._handleShow( "create" );
 		this._on( true, this.document, {
-
-			// TODO: Move to non-deprecated event
-			"pageshow": "_handleShow",
 			"popupbeforeposition": "_handleShow",
 			"updatelayout": "_handleShow",
 			"panelopen": "_handleShow"
@@ -73,10 +71,10 @@ return $.widget( "mobile.textinput", $.mobile.textinput, {
 	// content has become visible, but the collapsible is still collapsed, so
 	// the autogrow textarea is still not visible.
 	_handleShow: function( event ) {
-		if ( $.contains( event.target, this.element[ 0 ] ) &&
-				this.element.is( ":visible" ) ) {
+		if ( event === "create" || ( $.contains( event.target, this.element[ 0 ] ) &&
+				this.element.is( ":visible" ) ) ) {
 
-			if ( event.type !== "popupbeforeposition" ) {
+			if ( event !== "create" && event.type !== "popupbeforeposition" ) {
 				this._addClass( "ui-textinput-autogrow-resize" );
 				this.element
 					.animationComplete(
