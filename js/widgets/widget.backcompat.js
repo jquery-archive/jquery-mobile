@@ -97,8 +97,7 @@ if ( $.mobileBackcompat !== false ) {
 				prop = this.classProp,
 				that = this;
 
-			if ( prop && typeof original.classes[ prop ] === "string" &&
-					typeof this.options.classes[ prop ] === "string" ) {
+			if ( prop && typeof this.options.classes[ prop ] === "string" ) {
 				currentClasses = this.options.classes[ prop ].match( classSplitterRegex ) || [];
 
 				// If the classes option value has diverged from the default, then its value takes
