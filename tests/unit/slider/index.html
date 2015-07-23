@@ -8,7 +8,6 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
@@ -36,114 +35,114 @@
 
 	<div id="qunit"></div>
 
-	<div id="foo" data-nstest-role="page">
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="slider-1" data-nstest-role="slider" id="range-slider-up" value="0" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
+	<div id="foo" data-ui-role="page">
+		<div data-ui-role="fieldcontain">
+			<input data-ui-role="slider" type="number" data-ui-role="slider" name="slider-1" data-ui-role="slider" id="range-slider-up" value="0" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="slider-1" data-nstest-role="slider" class="textinput-test" value="0" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
-		</div>
-
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="slider-1"data-nstest-role="slider" id="range-slider-down" value="10" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-1" data-ui-role="slider" class="textinput-test" value="0" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="background-slider" data-nstest-role="slider" id="background-slider" value="10" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" data-nstest-highlight="true"/>
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-1"data-ui-role="slider" id="range-slider-down" value="10" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="no-background-slider" data-nstest-role="slider" id="no-background-slider" value="10" min="0" max="100"	data-nstest-theme="b" data-nstest-track-theme="a"/>
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="background-slider" data-ui-role="slider" id="background-slider" value="10" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" data-ui-highlight="true"/>
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="slider-1" data-nstest-role="slider" id="range-slider-home" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="no-background-slider" data-ui-role="slider" id="no-background-slider" value="10" min="0" max="100"	data-ui-theme="b" data-ui-track-theme="a"/>
 		</div>
 
-		<div data-nstest-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-1" data-ui-role="slider" id="range-slider-home" value="75" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
 			<label for="slider-1">Input slider:</label>
-			<input type="range" name="slider-1" data-nstest-role="slider" id="range-slider-end" value="15" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+			<input type="number" data-ui-role="slider" name="slider-1" data-ui-role="slider" id="range-slider-end" value="15" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="stepped" data-nstest-role="slider" id="stepped" value="15" min="0" max="100" step="10"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="stepped" data-ui-role="slider" id="stepped" value="15" min="0" max="100" step="10"  data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<select name="slider" id="slider-switch" data-nstest-role="slider">
+		<div data-ui-role="fieldcontain">
+			<select name="slider" id="slider-switch" data-ui-role="slider">
 				<option value="off">Off</option>
 				<option value="on">On</option>
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain">
-			<input type="range" name="onchange" id="onchange" data-nstest-role="slider" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-nstest-theme="b" data-nstest-track-theme="a" />
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="onchange" id="onchange" data-ui-role="slider" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-ui-theme="b" data-ui-track-theme="a" />
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="slider">Input slider:</label>
-			<input type="range" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
+			<input type="number" data-ui-role="slider" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="step-slider">Input slider:</label>
-			<input type="range" name="step-slider" data-nstest-role="slider" id="step-slider" value="25" min="0" max="100" step="20"/>
+			<input type="number" data-ui-role="slider" name="step-slider" data-ui-role="slider" id="step-slider" value="25" min="0" max="100" step="20"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="empty-string-val-slider">Input slider:</label>
-			<input type="range" name="empty-string-val-slider" data-nstest-role="slider" id="empty-string-val-slider" value="25" min="10" max="100" step="20"/>
+			<input type="number" data-ui-role="slider" name="empty-string-val-slider" data-ui-role="slider" id="empty-string-val-slider" value="25" min="10" max="100" step="20"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label id="label-id" for="label-id-slider">Input slider:</label>
-			<input type="range" name="slider" data-nstest-role="slider" id="label-id-slider" value="25" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="slider" data-ui-role="slider" id="label-id-slider" value="25" min="0" max="100"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="mousedown-which-events">Input slider:</label>
-			<input type="range" name="slider" data-nstest-role="slider" id="mousedown-which-events" value="25" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="slider" data-ui-role="slider" id="mousedown-which-events" value="25" min="0" max="100"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="start-stop-events">Input slider:</label>
-			<input type="range" name="slider" data-nstest-role="slider" id="start-stop-events" value="25" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="slider" data-ui-role="slider" id="start-stop-events" value="25" min="0" max="100"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="mouseup-refresh">Input slider:</label>
-			<input type="range" name="slider" data-nstest-role="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="slider" data-ui-role="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
 		</div>
 
-		<div data-role="fieldcontain">
+		<div data-ui-role="fieldcontain">
 			<label for="remove-events-slider">Input slider:</label>
-			<input type="range" name="remove-events-slider" data-nstest-role="slider" id="remove-events-slider" value="25" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="remove-events-slider" data-ui-role="slider" id="remove-events-slider" value="25" min="0" max="100"/>
 		</div>
 
 		<label>Input slider:
-			<input type="range" name="disable-test" data-nstest-role="slider" id="disable-test" value="17" min="0" max="100"/>
+			<input type="number" data-ui-role="slider" name="disable-test" data-ui-role="slider" id="disable-test" value="17" min="0" max="100"/>
 		</label>
 
 		<label>Tooltip slider:
-			<input type="range" name="tooltip-test" data-nstest-role="slider" id="tooltip-test" value="17" min="0" max="100" data-nstest-popup-enabled="true"/>
+			<input type="number" data-ui-role="slider" name="tooltip-test" data-ui-role="slider" id="tooltip-test" value="17" min="0" max="100" data-ui-popup-enabled="true"/>
 		</label>
 
 		<label>Tooltip w/ Button value:
-			<input type="range" name="tooltip-test-both" data-nstest-role="slider" id="tooltip-test-both" value="17" min="0" max="100" data-nstest-popup-enabled="true" data-nstest-show-value="true"/>
+			<input type="number" data-ui-role="slider" name="tooltip-test-both" data-ui-role="slider" id="tooltip-test-both" value="17" min="0" max="100" data-ui-popup-enabled="true" data-ui-show-value="true"/>
 		</label>
 
 		<label>Input slider:
-			<input type="range" name="disable-input-test" data-nstest-role="slider" id="disable-input-test" value="17" min="0" max="100" />
+			<input type="number" data-ui-role="slider" name="disable-input-test" data-ui-role="slider" id="disable-input-test" value="17" min="0" max="100" />
 		</label>
 
-		<div data-role="fieldcontain">
-			<input type="range" name="slider-change-event" data-nstest-role="slider" id="slider-change-event" value="2" min="0" max="4" step="1" />
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-change-event" data-ui-role="slider" id="slider-change-event" value="2" min="0" max="4" step="1" />
 		</div>
 
 	</div>
 
 	<div id="enhancetest">
-		<input type="range" name="slider-enhancetest" data-nstest-role="slider" id="range-slider-enhancetest" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		<input type="number" data-ui-role="slider" name="slider-enhancetest" data-ui-role="slider" id="range-slider-enhancetest" value="75" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
 	</div>
 
 </body>

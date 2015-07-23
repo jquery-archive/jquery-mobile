@@ -2,14 +2,8 @@
  * mobile slider unit tests
  */
 ( function( $ ) {
-$.mobile.keepNative = "input.should-be-native";
 
 module( "jquery.mobile.slider.js core" );
-
-// not testing the positive case here since's it's obviously tested elsewhere
-test( "slider elements in the keepNative set shouldn't be enhanced", function() {
-	deepEqual( $( "input.should-be-native" ).siblings( ".ui-slider-track" ).length, 0 );
-} );
 
 test( "refresh should force val to nearest step", function() {
 	var slider = $( "#step-slider" ),
