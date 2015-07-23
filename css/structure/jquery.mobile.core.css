@@ -44,7 +44,7 @@ div.ui-mobile-viewport {
 	width: 100%;
 	min-height: 100%;
 	position: absolute;
-	display: none;
+	visibility: hidden;
 	border: 0;
 }
 /* On ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
@@ -52,7 +52,7 @@ div.ui-mobile-viewport {
 	outline: none;
 }
 .ui-mobile .ui-page-active {
-	display: block;
+	visibility: visible;
 	overflow: visible;
 	overflow-x: hidden;
 }
