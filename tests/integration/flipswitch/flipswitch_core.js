@@ -11,7 +11,7 @@ var testFocusTransfer = function( element ) {
 		},
 		{
 			focus: {
-				src: element.siblings( "a" ),
+				src: element.siblings( "span" ),
 				event: "focus.TransfersFocus1"
 			}
 		},
