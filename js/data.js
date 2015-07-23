@@ -36,7 +36,7 @@ $.extend( $.mobile, {
 
 	// Namespace used framework-wide for data-attrs. Default is no namespace
 
-	ns: "",
+	ns: $.mobileBackcompat === false ? "ui-" : "",
 
 	// Retrieve an attribute from an element and perform some massaging of the value
 
