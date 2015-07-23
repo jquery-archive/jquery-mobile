@@ -65,7 +65,8 @@ QUnit.asyncTest( "textarea should autogrow on document ready", function( assert 
 	}, 400 );
 } );
 
-QUnit.asyncTest( "textarea should autogrow when text is added via the keyboard", function( assert ) {
+QUnit.asyncTest( "textarea should autogrow when text is added via the keyboard",
+	function( assert ) {
 	var test = $( "#keyup-autogrow" ),
 		originalHeight = test[ 0 ].clientHeight;
 
@@ -82,7 +83,8 @@ QUnit.asyncTest( "textarea should autogrow when text is added via the keyboard",
 	test.val( "foo\n\n\n\n\n\n\n\n\n\n\n\n\n\n" ).trigger( "keyup" );
 } );
 
-QUnit.asyncTest( "text area should auto grow when the parent page is loaded via ajax", function( assert ) {
+QUnit.asyncTest( "text area should auto grow when the parent page is loaded via ajax",
+	function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
 			$( "#external" ).click();
@@ -103,7 +105,8 @@ QUnit.asyncTest( "text area should auto grow when the parent page is loaded via 
 } );
 
 // NOTE init binding to alter the setting is in settings.js
-QUnit.test( "'clear text' button for search inputs should use configured text", function( assert ) {
+QUnit.test( "'clear text' button for search inputs should use configured text",
+	function( assert ) {
 	assert.strictEqual( $( "#search-input" )
 		.closest( ".ui-textinput-search" )
 			.find( ".ui-textinput-clear-button" )
@@ -139,7 +142,8 @@ QUnit.test( "data-clear-btn does not add clear button to slider input", function
 		"No anchors have been inserted as children of the data-clear-btn input element" );
 } );
 
-QUnit.test( "data-clear-btn does not add native clear button to input button (IE10)", function( assert ) {
+QUnit.test( "data-clear-btn does not add native clear button to input button (IE10)",
+	function( assert ) {
 
 	// Get an input element, initial height, and reserve d for height difference
 	var e = $( "input[data-clear-btn='true']" ),
