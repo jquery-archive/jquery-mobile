@@ -13,7 +13,7 @@ $( document ).on( "mobileinit", function() {
 			resetActivePageHeightCallCount++;
 			return original.apply( this, arguments );
 		};
-	} )( QUnit, $.mobile.resetActivePageHeight );
+	} )( $.mobile.resetActivePageHeight );
 } );
 
 require( [ "jquery", "./init" ]
@@ -35,4 +35,4 @@ require( [ "jquery", "./init" ]
 } );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
