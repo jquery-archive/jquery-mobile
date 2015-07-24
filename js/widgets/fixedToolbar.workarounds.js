@@ -102,11 +102,12 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		} } );
 	},
 
-	//this addresses issue #4250 Persistent footer instability in v1.1 with long select lists in Android 2.3.3
-	//and issue #3748 Android 2.x: Page transitions broken when fixed toolbars used
-	//the absolutely positioned thumbnail in a list view causes problems with fixed position buttons above in a nav bar
-	//setting the li's to -webkit-transform:translate3d(0,0,0); solves this problem to avoide potential issues in other
-	//platforms we scope this with the class ui-android-2x-fix
+	// This addresses issue #4250 Persistent footer instability in v1.1 with long select lists
+	// in Android 2.3.3 and issue #3748 Android 2.x: Page transitions broken when fixed toolbars
+	// used the absolutely positioned thumbnail in a list view causes problems with fixed position
+	// buttons above in a nav bar setting the li's to -webkit-transform:translate3d(0,0,0); solves
+	// this problem to avoide potential issues in other platforms we scope this with the class
+	// ui-android-2x-fix
 	_bindListThumbWorkaround: function() {
 		var pageActive = $( ".ui-page-active" ),
 			currentPage = !!this.page ? this.page : pageActive.length ?
@@ -114,11 +115,11 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		this._addClass( currentPage, "ui-toolbar-android-2x-fix" );
 	},
 
-	//this addresses issues #4337 Fixed header problem after scrolling content on iOS and Android
-	//and device bugs project issue #1 Form elements can lose click hit area in position: fixed containers.
-	//this also addresses not on fixed toolbars page in docs
-	//adding 1px of padding to the bottom then removing it causes a "redraw"
-	//which positions the toolbars correctly (they will always be visually correct)
+	// This addresses issues #4337 Fixed header problem after scrolling content on iOS and Android
+	// and device bugs project issue #1 Form elements can lose click hit area in
+	// position: fixed containers. This also addresses not on fixed toolbars page in docs
+	// adding 1px of padding to the bottom then removing it causes a "redraw"
+	// which positions the toolbars correctly (they will always be visually correct)
 	_triggerRedraw: function() {
 		var paddingBottom = parseFloat( $( ".ui-page-active" ).css( "padding-bottom" ) );
 

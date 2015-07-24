@@ -9,7 +9,9 @@
 
 //>>label: Toolbars: Fixed
 //>>group: Widgets
-//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+//>>description: Behavior for "fixed" headers and footers - be sure to also include the
+//>> item 'Browser specific workarounds for "fixed" headers and footers' when supporting
+//>> Android 2.x or iOS 5
 //>>docs: http://api.jquerymobile.com/toolbar/
 //>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css

@@ -9,7 +9,9 @@
 
 //>>label: Toolbars: Fixed
 //>>group: Widgets
-//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+//>>description: Behavior for "fixed" headers and footers - be sure to also include the item
+//>> 'Browser specific workarounds for "fixed" headers and footers' when supporting
+//>> Android 2.x or iOS 5
 //>>docs: http://api.jquerymobile.com/toolbar/
 //>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
@@ -40,18 +42,23 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		position:null,
 		visibleOnPageShow: true,
 		disablePageZoom: true,
-		transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
+
+		// Can be none, fade, slide (slide maps to slideup or slidedown)
+		transition: "slide",
 		fullscreen: false,
 		tapToggle: true,
-		tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
+		tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, " +
+			".ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
 		updatePagePadding: true,
 
 		// Browser detection! Weeee, here we go...
-		// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
-		// Some tests exist, but they currently return false results in critical devices and browsers, which could lead to a broken experience.
-		// Testing fixed positioning is also pretty obtrusive to page load, requiring injected elements and scrolling the window
-		// The following function serves to rule out some popular browsers with known fixed-positioning issues
-		// This is a plugin option like any other, so feel free to improve or overwrite it
+		// Unfortunately, position:fixed is costly, not to mention probably impossible,
+		// to feature-detect accurately. Some tests exist, but they currently return false results
+		// in critical devices and browsers, which could lead to a broken experience. Testing fixed
+		// positioning is also pretty obtrusive to page load, requiring injected elements and
+		// scrolling the window. The following function serves to rule out some popular browsers
+		// with known fixed-positioning issues. This is a plugin option like any other, so feel
+		// free to improve or overwrite it
 		supportBlacklist: function() {
 			return !$.support.fixedPosition;
 		}
@@ -155,14 +162,11 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		}
 	},
 
-	_handlePageBeforeHide: function( e, ui ) {
-		var o = this.options,
-			thisFooter, thisHeader, nextFooter, nextHeader;
-
-		if ( o.disablePageZoom ) {
+	_handlePageBeforeHide: function() {
+		if ( this.options.disablePageZoom ) {
 			$.mobile.zoom.enable( true );
 		}
-		if ( o.updatePagePadding ) {
+		if ( this.options.updatePagePadding ) {
 			this._off( this.window, "throttledresize" );
 		}
 
@@ -225,7 +229,8 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	hide: function( notransition ) {
 		var self = this,
 
-			// if it's a slide transition, our new transitions need the reverse class as well to slide outward
+			// if it's a slide transition, our new transitions need the
+			// reverse class as well to slide outward
 			outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 		if ( this._useTransition( notransition ) ) {
