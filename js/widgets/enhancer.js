@@ -76,8 +76,8 @@ $.extend( $.enhance, {
 
 	defaultProp: $.enhance.defaultProp || function() { return "data-ui-role"; },
 
-	defaultFunction: function( enhancables ) {
-		enhancables.each( function() {
+	defaultFunction: function( enhanceables ) {
+		enhanceables.each( function() {
 			var i,
 				roles = $( this ).enhanceRoles();
 
