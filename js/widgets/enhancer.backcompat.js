@@ -32,7 +32,8 @@ if ( $.mobileBackcompat !== false ) {
 
 			if ( $.mobile.ignoreContentEnabled ) {
 				elements.each( function() {
-					if ( $( this ).closest( "[data-" + $.mobile.ns + "enhance='false']" ).length ) {
+					if ( $( this )
+							.closest( "[data-" + $.mobile.ns + "enhance='false']" ).length ) {
 						elements = elements.not( this );
 					}
 				} );
@@ -51,4 +52,7 @@ if ( $.mobileBackcompat !== false ) {
 	$.enhance.initGenerator = generator;
 
 }
+
+return $.enhance;
+
 } );

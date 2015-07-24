@@ -59,5 +59,8 @@ var widgetCrawler = function( elements, _childConstructors ) {
 		widgetCrawler( this.addBack(), $.Widget._childConstructors );
 	};
 
-return $.enhance.hooks.push( widgetHook );
+$.enhance.hooks.push( widgetHook );
+
+return $.enhance;
+
 } );
