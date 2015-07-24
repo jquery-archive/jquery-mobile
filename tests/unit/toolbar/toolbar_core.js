@@ -1,7 +1,9 @@
 /*
  * Mobile Fixed Toolbar unit tests
  */
-( function( QUnit, $ ) {
+
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 	QUnit.config.autostart = false;
 
 	QUnit.module( "toolbar" );
@@ -99,4 +101,4 @@
 			"headers match after destroy" );
 	 } );
 
-} )( QUnit, jQuery );
+} );

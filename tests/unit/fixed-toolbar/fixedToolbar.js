@@ -1,7 +1,11 @@
 /*
  * Mobile Fixed Toolbar unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 	QUnit.module( "jquery.mobile.toolbar.js" );
 
 	var pageActiveFixedHeader = $( ".ui-page-active .ui-toolbar-header-fixed" );
@@ -84,4 +88,4 @@
 
 			$.mobile.zoom.enable( true );
 	} );
-} )( QUnit, jQuery );
+} );
