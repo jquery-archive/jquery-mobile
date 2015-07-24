@@ -1,4 +1,17 @@
-( function( QUnit ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"qunit"
+		], factory );
+	} else {
+
+		// Browser globals
+		factory( QUnit );
+	}
+}( function( QUnit ) {
+
 	function inArray( haystack, needle ) {
 		for ( var i = 0; i < haystack.length; i++ ) {
 			if (
@@ -12,7 +25,7 @@
 	}
 
 	function check( element, search ) {
-		var i, classAttribute, elementClassArray, classArray,
+		var i, classAttribute, elementClassArray,
 			missing = [],
 			found = [];
 
@@ -24,7 +37,7 @@
 		classAttribute = element.getAttribute( "class" );
 
 		if ( classAttribute ) {
-			elementClassArray = classAttribute.match( /\S+/g ) || [];
+			elementClassArray = splitClasses( classAttribute );
 			if ( search instanceof RegExp ) {
 				if ( inArray( elementClassArray, search ) ) {
 					found.push( search );
@@ -32,17 +45,16 @@
 					missing.push( search );
 				}
 			} else {
-				classArray = search.match( /\S+/g );
-				for( i = 0; i < classArray.length; i++ ) {
-					if ( !inArray( elementClassArray, classArray[ i ] ) ) {
-						missing.push( classArray[ i ] );
+				for( i = 0; i < search.length; i++ ) {
+					if ( !inArray( elementClassArray, search[ i ] ) ) {
+						missing.push( search[ i ] );
 					} else {
-						found.push( classArray[ i ] );
+						found.push( search[ i ] );
 					}
 				}
 			}
 		} else {
-			missing = classArray;
+			missing = search;
 		}
 
 		return {
@@ -53,28 +65,40 @@
 		};
 	}
 
+	function splitClasses( classes ) {
+		return classes.match( /\S+/g ) || [];
+	}
+
+	function pluralize( message, classes ) {
+		return message + ( classes.length > 1 ? "es" : "" );
+	}
+
 	QUnit.extend( QUnit.assert, {
 		hasClasses: function( element, classes, message ) {
-			var results = check( element, classes );
+			var classArray = splitClasses( classes ),
+				results = check( element, classArray );
 
-			message = message || "Element must have classes";
+			message = message || pluralize( "Element must have class", classArray );
 
 			this.push( !results.missing.length, results.found.join( " " ), classes, message );
 		},
 		lacksClasses: function( element, classes, message ) {
-			var results = check( element, classes );
+			var classArray = splitClasses( classes ),
+				results = check( element, classArray );
 
-			message = message || "Element must not have classes";
+			message = message || pluralize( "Element must not have class", classArray );
 
 			this.push( !results.found.length, results.found.join( " " ), classes, message );
 		},
 		hasClassesStrict: function( element, classes, message ) {
-			var result, results = check( element, classes );
+			var result,
+				classArray = splitClasses( classes ),
+				results = check( element, classArray );
 
-			message = message || "Element must only have classes";
+			message = message || pluralize( "Element must only have class", classArray );
 
 			result =  !results.missing.length && results.element.getAttribute( "class" ) &&
-				( results.element.getAttribute( "class" ).match( /\S+/g ) || [] ).length ===
+				splitClasses( results.element.getAttribute( "class" ) ).length ===
 				results.found.length;
 
 			this.push( result, results.found.join( " " ), classes, message );
@@ -120,6 +144,26 @@
 			message = message || "Element must not have class containing '" + partialClass + "'";
 
 			this.push( results.missing.length, results.missing.join( " " ), partialClass, message );
+		},
+		lacksAllClasses: function( element, message ) {
+			element = element.jquery ? element[ 0 ] : element;
+
+			var classAttribute = element.getAttribute( "class" ) || "",
+				classes = splitClasses( classAttribute );
+
+			message = message || "Element must not have any classes";
+
+			this.push( !classes.length, !classes.length, true, message );
+		},
+		hasSomeClass: function( element, message ) {
+			element = element.jquery ? element[ 0 ] : element;
+
+			var classAttribute = element.getAttribute( "class" ) || "",
+				classes = splitClasses( classAttribute );
+
+			message = message || "Element must have a class";
+
+			this.push( classes.length, classes.length, true, message );
 		}
 	});
-})( QUnit );
+} ) );
