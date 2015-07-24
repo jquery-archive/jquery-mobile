@@ -330,7 +330,7 @@
 </div><!-- /page -->
 
 	<div id="pre-rendered-page" data-role="page">
-		<div data-role="header" data-add-back-button="true">
+		<div data-role="header" data-add-back-btn="true">
 		<h1>Pre-rendered popup demo</h1>
 		</div>
 		<div role="main" class="ui-content">
