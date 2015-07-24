@@ -46,9 +46,6 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		// Can be none, fade, slide (slide maps to slideup or slidedown)
 		transition: "slide",
 		fullscreen: false,
-		tapToggle: true,
-		tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, " +
-			".ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
 		updatePagePadding: true,
 
 		// Browser detection! Weeee, here we go...
@@ -77,7 +74,6 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		this.updatePagePadding();
 		this._addTransitionClass();
 		this._bindPageEvents();
-		this._bindToggleHandlers();
 	},
 
 	_setOptions: function( o ) {
@@ -246,27 +242,6 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 			this._removeClass( null, outClass );
 		}
 		this._visible = false;
-	},
-
-	toggle: function() {
-		this[ this._visible ? "hide" : "show" ]();
-	},
-
-	_bindToggleHandlers: function() {
-		this._attachToggleHandlersToPage( ( !!this.page ) ? this.page : $( ".ui-page" ) );
-	},
-
-	_attachToggleHandlersToPage: function( page ) {
-		var self = this,
-			o = self.options;
-
-		// tap toggle
-		page
-			.bind( "vclick", function( e ) {
-				if ( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ) {
-					self.toggle();
-				}
-			} );
 	},
 
 	_setRelative: function() {

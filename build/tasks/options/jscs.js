@@ -38,6 +38,7 @@ module.exports = {
 			"js/widgets/toolbar.js",
 			"js/widgets/fixedToolbar.js",
 			"js/widgets/fixedToolbar.backcompat.js",
+			"js/widgets/fixedToolbar.tapToggle.js",
 			"js/widgets/fixedToolbar.workarounds.js",
 			"js/widgets/enhancer.js",
 			"js/widgets/enhancer.backcompat.js",

@@ -36,7 +36,8 @@ if ( $.mobileBackcompat !== false ) {
 	return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		options: {
-			hideDuringFocus: "input, textarea, select"
+			hideDuringFocus: "input, textarea, select",
+			tapToggle: true
 		},
 
 		_hideDuringFocusData: {
