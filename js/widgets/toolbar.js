@@ -25,6 +25,7 @@
 			"../widget",
 			"../core",
 			"../navigation",
+			"./widget.theme",
 			"../zoom" ], factory );
 	} else {
 
@@ -33,57 +34,47 @@
 	}
 } )( function( $ ) {
 
-	return $.widget( "mobile.toolbar", {
-		version: "@VERSION",
+$.widget( "mobile.toolbar", {
+	version: "@VERSION",
 
-		initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
+	initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
 
-		options: {
-			theme: null,
-			addBackBtn: false,
-			backBtnTheme: null,
-			backBtnText: "Back"
-		},
+	options: {
+		theme: "inherit",
+		addBackBtn: false,
+		backBtnTheme: null,
+		backBtnText: "Back"
+	},
 
-		_create: function() {
-			var leftbutton, rightbutton,
-				role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
-				page = this.element.closest( ".ui-page" );
-			if ( page.length === 0 ) {
-				page = false;
-				this._on( this.document, {
-					"pageshow": "refresh"
-				} );
-			}
-			$.extend( this, {
-				role: role,
-				page: page,
-				leftbutton: leftbutton,
-				rightbutton: rightbutton
+	_create: function() {
+		var leftbutton, rightbutton,
+			role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
+			page = this.element.closest( ".ui-page" );
+		if ( page.length === 0 ) {
+			page = false;
+			this._on( this.document, {
+				"pageshow": "refresh"
 			} );
-			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" );
-			this._addClass( "ui-toolbar-" + role );
-			this.refresh();
-			this._setOptions( this.options );
-		},
-		_setOptions: function( o ) {
-			if ( o.addBackBtn !== undefined ) {
-				this._updateBackButton();
-			}
-			if ( o.backBtnTheme != null ) {
-				this._addClass( this.backButton, null, "ui-button ui-button-" + o.backBtnTheme );
-			}
-			if ( o.backBtnText !== undefined ) {
-				this.element
-					.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
-			}
-			if ( o.theme !== undefined ) {
-				var currentTheme = this.options.theme ? this.options.theme : "inherit",
-					newTheme = o.theme ? o.theme : "inherit";
-
-				this._removeClass( this.element, null, "ui-bar-" + currentTheme );
-				this._addClass( this.element, null, "ui-bar-" + newTheme );
-			}
+		}
+		$.extend( this, {
+			role: role,
+			page: page,
+			leftbutton: leftbutton,
+			rightbutton: rightbutton
+		} );
+		this.element.attr( "role", role === "header" ? "banner" : "contentinfo" );
+		this._addClass( "ui-toolbar-" + role );
+		this.refresh();
+		this._setOptions( this.options );
+	},
+	_setOptions: function( o ) {
+		if ( o.addBackBtn ) {
+			this._updateBackButton();
+		}
+		if ( o.backBtnText !== undefined ) {
+			this.element
+				.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
+		}
 
 		this._super( o );
 	},
@@ -138,7 +129,7 @@
 			if ( !backButton.attached ) {
 				this.backButton = backButton.element = ( backButton.element ||
 					$( "<a role='button' href='#' " +
-						"class='ui-button ui-corner-all ui-shadow ui-button-left " +
+						"class='ui-button ui-corner-all ui-shadow ui-toolbar-header-button-left " +
 							( theme ? "ui-button-" + theme + " " : "" ) +
 							"ui-toolbar-back-button ui-icon-carat-l ui-icon-beginning' " +
 						"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
@@ -178,6 +169,25 @@
 
 		currentTheme = this.options.theme ? this.options.theme : "inherit";
 		this.element.removeAttr( "role" );
+	},
+	_themeElements: function() {
+		var elements = [
+			{
+				element: this.element,
+				prefix: "ui-bar-"
+			}
+		];
+		if ( this.options.addBackBtn && this.backButton !== undefined ) {
+			elements.push( {
+				element: this.backButton,
+				prefix: "ui-button-",
+				option: "backBtnTheme"
+			} );
+		}
+		return elements;
 	}
 } );
+
+return $.widget( "mobile.toolbar", $.mobile.toolbar, $.mobile.widget.theme );
+
 } );
