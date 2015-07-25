@@ -2,7 +2,8 @@
  * DegradeInputs unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 QUnit.module( "jquery.mobile.degradeInputs.js" );
 
 QUnit.test( "degradeInputs works on page init", function( assert ) {
@@ -78,4 +79,4 @@ QUnit.test( "degradeInputs - custom values", function( assert ) {
 		"degradeInputs with custom types works" );
 } );
 
-} )( QUnit, jQuery );
+} );
