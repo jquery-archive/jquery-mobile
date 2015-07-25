@@ -1,4 +1,4 @@
-( function( QUnit ) {
+define( [ "jquery" ], function( $ ) {
 
 QUnit.module( "resetActivePageHeight()" );
 
@@ -761,4 +761,5 @@ var index,
 for ( index = 0; index < 4096; index++ ) {
 	createTestScenario( index );
 }
-} )( QUnit );
+
+} );
