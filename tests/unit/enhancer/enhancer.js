@@ -1,4 +1,8 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit"
+	"jquery"
+	], function( QUnit, $ ) {
+
 
 QUnit.module( "enhancer: basic" );
 
@@ -109,4 +113,4 @@ QUnit.test( "$.fn.enhanceOptions", function( assert ) {
 	assert.deepEqual( options, expected, "enhanceOptions returns options object" );
 } );
 
-} )( QUnit, jQuery );
+} );
