@@ -86,7 +86,6 @@ $files = array(
 	'../external/jquery-ui/controlgroup.js',
 	'widgets/controlgroup.js',
 	'widgets/controlgroup.backcompat.js',
-	'links.js',
 	'widgets/toolbar.js',
 	'widgets/fixedToolbar.js',
 	'widgets/fixedToolbar.backcompat.js',
