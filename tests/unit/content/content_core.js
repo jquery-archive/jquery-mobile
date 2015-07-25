@@ -1,7 +1,8 @@
 /*
  * Content Widget Tests
  */
-( function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 // TODO !! reset the prototype after every test
 
 var mockEvent,
@@ -531,4 +532,5 @@ QUnit.test( "_find() does not throw upon encountering a weird file name", functi
 
 	assert.deepEqual( errorThrown, undefined, "Error was not thrown" );
 } );
-} )( jQuery, QUnit );
+
+} );
