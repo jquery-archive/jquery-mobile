@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 QUnit.test( "Collapsible widget works correctly", function( assert ) {
 var collapsible = $( "#collapsible" ).collapsible();
@@ -9,4 +9,4 @@ assert.deepEqual( collapsible.children( "h1" ).next().hasClass( "ui-collapsible-
 assert.deepEqual( collapsible.children().length, 2, "Collapsible contains exactly two children" );
 } );
 
-} )( QUnit, jQuery );
+} );
