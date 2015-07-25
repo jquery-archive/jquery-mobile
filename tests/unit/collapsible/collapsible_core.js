@@ -1,3 +1,5 @@
+define( [ "jquery" ], function( $ ) {
+
 test( "Pre-rendered nested collapsibles are enhanced correctly", function() {
 
 // This Test previously was actually testing auto page enhancment unintentionally, we now use
@@ -22,4 +24,6 @@ deepEqual( outerWidget._ui.anchor[ 0 ], $( "#outer-anchor" )[ 0 ],
 deepEqual( outerWidget._ui.status.length, 1, "Outer anchor consists of one element" );
 deepEqual( outerWidget._ui.status[ 0 ], $( "#outer-status" )[ 0 ],
 	"Outer status consists of the right element" );
+} );
+
 } );
