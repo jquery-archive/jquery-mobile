@@ -2,7 +2,8 @@
  * mobile core unit tests
  */
 
-( function( $, QUnit ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 var libName = "core",
 	setGradeA = function( value, version ) {
 		$.support.mediaquery = value;
@@ -189,4 +190,6 @@ QUnit.test( "test that $.fn.jqmHijackable works", function( assert ) {
 
 	$.mobile.ignoreContentEnabled = false;
 } );
-} )( jQuery, QUnit );
+
+} );
+
