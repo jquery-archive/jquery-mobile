@@ -1,7 +1,9 @@
 /*
  * Mobile flipswitch unit tests
  */
-( function( QUnit, $ ) {
+
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 QUnit.test( "checkbox based flipswitch backcompat tests", function( assert ) {
 	assert.hasClasses( $( "#flip-checkbox-mini" ).parent(), "ui-mini", "is mini" );
 	assert.lacksClasses( $( "#flip-checkbox-corners" ).parent(), "ui-corner-all",
@@ -18,4 +20,4 @@ QUnit.test( "select based flipswitch backcompat tests", function( assert ) {
 		"has wrapper class" );
 } );
 
-} )( QUnit, jQuery );
+} );

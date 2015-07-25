@@ -1,7 +1,7 @@
 /*
  * Mobile flipswitch unit tests
  */
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 QUnit.test( "checkbox based flipswitch", function( assert ) {
 	assert.hasClasses( $( "#flip-checkbox" ).parent(), "ui-flipswitch", "is enhanced" );
@@ -67,4 +67,4 @@ QUnit.test( "select based flipswitch is destroyed without error", function( asse
 		"flipswitch destroyed/removed properly" );
 } );
 
-} )( QUnit, jQuery );
+} );
