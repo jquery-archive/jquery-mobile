@@ -6,31 +6,18 @@
 	<title>jQuery Mobile Navigation Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/requirejs.config.js"></script>
-	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
-	<script src="../../../external/qunit/qunit.js"></script>
-	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
-	<script>
-		$.mobileBackcompat = false;
-
-		$.testHelper.asyncLoad([
-			[ "widgets/page" ],
-			[
-				"widgets/navbar",
-				"widgets/navbar.morebutton"
-			],
-			[ "init" ],
-			[
-				"./navbar_core.js"
-			]
-		]);
-	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-	<script src="../../swarminject.js"></script>
+
+ 	<script
+ 		src="../../lib/bootstrap.js"
+ 		data-deps="qunit-assert-classes page navbar navbar.morebutton"
+ 		data-init="true"
+ 		data-no-backcompat="true"
+ 		data-modules="navbar_core"/>
+	</script>
 </head>
 <body>
 	<div id="qunit"></div>
