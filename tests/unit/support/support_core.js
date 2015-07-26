@@ -2,10 +2,10 @@
  * mobile support unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "jquery" ], function( $ ) {
 
-$.testHelper.excludeFileProtocol(function(){
-	var	prependToFn = $.fn.prependTo,
+$.testHelper.excludeFileProtocol( function() {
+	var prependToFn = $.fn.prependTo,
 		moduleName = "support";
 
 	QUnit.module(moduleName, {
@@ -113,7 +113,6 @@ $.testHelper.excludeFileProtocol(function(){
 
 	//TODO propExists testing, refactor propExists into mockable method
 	//TODO scrollTop testing, refactor scrollTop logic into mockable method
-});
+} );
 
-} )( QUnit, jQuery );
-
+} );
