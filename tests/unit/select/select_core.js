@@ -2,7 +2,7 @@
  * mobile select unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "jquery" ], function( $ ) {
 
 QUnit.module( "Native select" );
 
@@ -74,4 +74,5 @@ QUnit.module( "Native select" );
 QUnit.test( "Select menu ID", function( assert ) {
 	assert.ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
 } );
-} )( QUnit, jQuery );
+
+} );
