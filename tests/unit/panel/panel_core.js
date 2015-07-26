@@ -2,7 +2,11 @@
  * Mobile panel unit tests
  */
 
+<<<<<<< HEAD
 ( function( QUnit, $ ) {
+=======
+define( [ "jquery" ], function( $ ) {
+>>>>>>> cf8a1d7... Panel: Shift to use bootstrap
 
 var count,
 	defaults = $.mobile.panel.prototype.options,
@@ -700,4 +704,4 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 	} );
 } );
 
-}( QUnit, jQuery ) );
+} );
