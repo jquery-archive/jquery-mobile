@@ -1,7 +1,7 @@
 /*
  * Mobile popup unit tests
  */
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( "jquery.mobile.popup.js" );
 
@@ -148,4 +148,4 @@ QUnit.test( "On-the-fly popup is enhanced and de-enhanced correctly", function( 
 		"After destroying on-the-fly popup, its payload is returned to its original location" );
 } );
 
-} )( QUnit, jQuery );
+} );
