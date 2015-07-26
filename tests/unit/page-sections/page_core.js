@@ -1,7 +1,11 @@
 /*
  * mobile page unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 var libName = 'jquery.mobile.page.sections';
 
 QUnit.module( libName );
@@ -44,4 +48,5 @@ QUnit.test( "sections inside an ignored container do not enhance", function( ass
 
 	$.mobile.ignoreContentEnabled = false;
 } );
-} )( QUnit, jQuery );
+
+} );
