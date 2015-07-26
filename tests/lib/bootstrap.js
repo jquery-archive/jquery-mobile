@@ -51,6 +51,7 @@
 		"listview.hidedividers",
 		"loader",
 		"navbar",
+		"navbar.morebutton",
 		"page",
 		"page.dialog",
 		"page.dialog.backcompat",
