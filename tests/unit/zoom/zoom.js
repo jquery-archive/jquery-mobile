@@ -1,7 +1,7 @@
 /*
  * mobile Fixed Toolbar unit tests
  */
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( 'jquery.mobile.fixedToolbar.js' );
 
@@ -95,4 +95,4 @@ QUnit.test( "When locked, the disable method with a true 'lock' argument works",
 
 } );
 
-} )( QUnit, jQuery );
+} );
