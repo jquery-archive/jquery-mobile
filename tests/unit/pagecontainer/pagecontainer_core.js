@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 QUnit.test( "_find() can handle weird data-url attributes", function( assert ) {
 	assert.deepEqual(
@@ -93,4 +96,4 @@ QUnit.test( "Recognize dialog via presence of the data key, not the ui-page-dial
 
 } )();
 
-} )( QUnit, jQuery );
+} );
