@@ -1,7 +1,7 @@
 /*
  * Transitions unit tests
  */
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 var instance, proto, $to, $from;
 
@@ -237,4 +237,4 @@ QUnit.test( "transition respects getMaxScrollForTransition", function( assert ) 
 	$.mobile.defaultHomeScroll = original.defaultHomeScroll;
 } );
 
-} )( QUnit, jQuery );
+} );
