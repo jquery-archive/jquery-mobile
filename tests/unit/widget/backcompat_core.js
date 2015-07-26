@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 // Convert the values of the keys under option classes to hashes so they may be compared via
 // deepEquals. We convert to hash because order does not matter in a hash, just as it does not
@@ -250,4 +250,4 @@ QUnit.test( "wrapperClass is correctly applied, modified, and removed", function
 		"Class attribute cleared upon destroy()" );
 } );
 
-} )( QUnit, jQuery );
+} );
