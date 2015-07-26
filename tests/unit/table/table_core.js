@@ -3,7 +3,7 @@
  * mobile table unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( "Basic Table", {
 	setup: function() {
@@ -358,4 +358,5 @@ QUnit.asyncTest( "The dialog should become visible when button is clicked", func
 		}
 	] );
 } );
-} )( QUnit, jQuery );
+
+} );

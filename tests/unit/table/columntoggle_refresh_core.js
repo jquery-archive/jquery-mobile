@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( "Table integration tests" );
 
@@ -49,5 +49,4 @@ QUnit.test( "Hidden columns stay hidden after row/column addition", function( as
 		false, "Checkbox remains unchecked after row addition and table refresh" );
 });
 
-} )( QUnit, jQuery );
-
+} );
