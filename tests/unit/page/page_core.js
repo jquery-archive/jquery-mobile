@@ -1,7 +1,12 @@
 /*
  * mobile page unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery",
+	"./page.setup.js"
+	], function( QUnit, $, container ) {
+
 var libName = 'jquery.mobile.page',
 	themedefault = $.mobile.page.prototype.options.theme;
 
@@ -113,6 +118,4 @@ QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", fu
 
 } );
 
-
-
-} )( QUnit, jQuery );
+} );
