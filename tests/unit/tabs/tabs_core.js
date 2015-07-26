@@ -1,4 +1,4 @@
-( function( QUnit ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 var originalBase,
 	originalBaseSupport,
@@ -29,4 +29,4 @@ QUnit.test( "_isLocal() correctly identifies URLs as local/non-local", function(
 
 } );
 
-} )( QUnit );
+} );
