@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "Heading label added for empty heading", function( assert ) {
 	$( "#test-reflow-headings" ).table();
@@ -6,4 +6,4 @@ QUnit.test( "Heading label added for empty heading", function( assert ) {
 		"Cell beneath empty heading has a copy of the heading" );
 });
 
-} )( QUnit, jQuery );
+} );
