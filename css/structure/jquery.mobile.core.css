@@ -294,17 +294,12 @@ div.ui-mobile-viewport {
 }
 .ui-button-icon-only .ui-icon {
 	position: absolute;
-	display: inline-block;
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	bottom: auto;
 	top: 50%;
 	left: 50%;
-}
-.ui-button-icon-only .ui-icon,
-.ui-button-icon-only.ui-button-left > .ui-icon,
-.ui-button-icon-only.ui-button-right > .ui-icon {
 	margin-top: -11px;
 	margin-left: -11px;
 }
