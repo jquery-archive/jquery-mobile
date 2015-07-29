@@ -1,7 +1,7 @@
 /*
  * mobile dialog unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
@@ -9,14 +9,14 @@ function jqmDataSelector( expression ) {
 	return "[data-" + $.mobile.ns + expression + "]";
 }
 
-module( "dialog", {
+QUnit.module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
 		$.testHelper.navReset( homeWithSearch );
 	}
 } );
 
-asyncTest( "Test option data-close-btn", function( assert ) {
+QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 	expect( 5 );
 
 	$.testHelper.pageSequence( [
@@ -49,12 +49,12 @@ asyncTest( "Test option data-close-btn", function( assert ) {
 		},
 
 		function() {
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with no theming", function( assert ) {
+QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 	expect( 4 );
 
 	$.testHelper.pageSequence( [
@@ -81,12 +81,12 @@ asyncTest( "dialog element with no theming", function( assert ) {
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme", function( assert ) {
+QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
@@ -119,12 +119,12 @@ asyncTest( "dialog element with data-theme", function( assert ) {
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
+QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
 	expect( 4 );
 
 	$.testHelper.pageSequence( [
@@ -151,40 +151,41 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow", function( assert ) {
-	var pageTheme;
+QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow",
+	function( assert ) {
+		var pageTheme;
 
-	expect( 1 );
+		expect( 1 );
 
-	$.testHelper.pageSequence( [
-		function() {
-			$.mobile.changePage( "#mypage" );
-		},
+		$.testHelper.pageSequence( [
+			function() {
+				$.mobile.changePage( "#mypage" );
+			},
 
-		function() {
+			function() {
 
-			// Bring up the dialog
-			$( "#foo-dialog-link" ).click();
-		},
+				// Bring up the dialog
+				$( "#foo-dialog-link" ).click();
+			},
 
-		function() {
-			pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
+			function() {
+				pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
 
-			$.mobile.pageContainer.removeClass( pageTheme );
+				$.mobile.pageContainer.removeClass( pageTheme );
 
-			$.mobile.activePage
-				.bind( "pagebeforeshow", function() {
-					assert.hasClasses( $.mobile.pageContainer, pageTheme,
-						"Page container has the same theme as the dialog overlayTheme on " +
-							"pagebeforeshow" );
-					start();
-				} ).trigger( "pagebeforeshow" );
-		}
-	] );
-} );
-} )( jQuery );
+				$.mobile.activePage
+					.bind( "pagebeforeshow", function() {
+						assert.hasClasses( $.mobile.pageContainer, pageTheme,
+							"Page container has the same theme as the dialog overlayTheme on " +
+								"pagebeforeshow" );
+						QUnit.start();
+					} ).trigger( "pagebeforeshow" );
+			}
+		] );
+	} );
+} )( QUnit, jQuery );

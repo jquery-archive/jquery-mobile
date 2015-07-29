@@ -1,3 +1,5 @@
+( function( QUnit, $ ) {
+
 asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function() {
 	expect( 2 );
 
@@ -117,3 +119,5 @@ function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
 
 genOptionSyncTests( "", "Normal" );
 genOptionSyncTests( "enhanced-", "Pre-rendered" );
+
+} )( QUnit, jQuery );

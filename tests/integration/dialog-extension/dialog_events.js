@@ -1,7 +1,7 @@
 /*
  * mobile dialog unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
@@ -9,14 +9,14 @@ function jqmDataSelector( expression ) {
 	return "[data-" + $.mobile.ns + expression + "]";
 }
 
-module( "dialog", {
+QUnit.module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
 		$.testHelper.navReset( homeWithSearch );
 	}
 } );
 
-asyncTest( "test option overlayTheme", function( assert ) {
+QUnit.asyncTest( "test option overlayTheme", function( assert ) {
 	$.testHelper.pageSequence( [
 
 		function() {
@@ -36,12 +36,12 @@ asyncTest( "test option overlayTheme", function( assert ) {
 			$.mobile.back();
 		},
 
-		start
+		QUnit.start
 
 	] );
 } );
 
-asyncTest( "Test option data-close-btn", function( assert ) {
+QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 	expect( 7 );
 
 	$.testHelper.pageSequence( [
@@ -82,14 +82,14 @@ asyncTest( "Test option data-close-btn", function( assert ) {
 				"Initially, the dialog header has no anchor elements (option value 'none')" );
 		},
 
-		start
+		QUnit.start
 	] );
 } );
 
-asyncTest( "Clicking dialog 'Close' button renders it unclickable", function() {
+QUnit.asyncTest( "Clicking dialog 'Close' button renders it unclickable", function( assert ) {
 	var correctLocation;
 
-	expect( 4 );
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -108,24 +108,24 @@ asyncTest( "Clicking dialog 'Close' button renders it unclickable", function() {
 		function() {
 			var closeButton = $( "#foo-dialog a" ).click();
 
-			strictEqual( closeButton.css( "pointer-events" ), "none",
+			assert.strictEqual( closeButton.css( "pointer-events" ), "none",
 				"Close button has pointer events turned off post-click" );
-			strictEqual( closeButton.attr( "tabindex" ), "-1",
+			assert.strictEqual( closeButton.attr( "tabindex" ), "-1",
 				"Close button tabindex is set to -1 post-click" );
 		},
 
 		function( timedOut ) {
-			ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
-			ok( location.href === correctLocation, "Location is correct afterwards" );
+			assert.ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
+			assert.ok( location.href === correctLocation, "Location is correct afterwards" );
 			$.mobile.back();
 		},
 
-		start
+		QUnit.start
 	] );
 } );
 
-asyncTest( "dialog element with no theming", function( assert ) {
-	expect( 4 );
+QUnit.asyncTest( "dialog element with no theming", function( assert ) {
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -150,12 +150,12 @@ asyncTest( "dialog element with no theming", function( assert ) {
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme", function( assert ) {
+QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
@@ -186,12 +186,12 @@ asyncTest( "dialog element with data-theme", function( assert ) {
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
+QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
 	expect( 4 );
 
 	$.testHelper.pageSequence( [
@@ -216,43 +216,45 @@ asyncTest( "dialog element with data-theme & data-overlay-theme", function( asse
 			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
-			start();
+			QUnit.start();
 		}
 	] );
 } );
 
-asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow", function() {
-	var pageTheme;
+QUnit.asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow",
+	function( assert ) {
+		var pageTheme;
 
-	expect( 1 );
+		expect( 1 );
 
-	$.testHelper.pageSequence( [
-		function() {
-			$.mobile.changePage( "#mypage" );
-		},
+		$.testHelper.pageSequence( [
+			function() {
+				$.mobile.changePage( "#mypage" );
+			},
 
-		function() {
-			// Bring up the dialog
-			$( "#foo-dialog-link" ).click();
-		},
+			function() {
+				// Bring up the dialog
+				$( "#foo-dialog-link" ).click();
+			},
 
-		function() {
-			pageTheme = "ui-overlay-" + $( ".ui-page-active" ).page( "option", "overlayTheme" );
+			function() {
+				pageTheme = "ui-overlay-" +
+					$( ".ui-page-active" ).page( "option", "overlayTheme" );
 
-			$.mobile.pageContainer.removeClass( pageTheme );
+				$.mobile.pageContainer.removeClass( pageTheme );
 
-			$( ".ui-page-active" )
-				.bind( "pagebeforeshow", function() {
-					ok( $.mobile.pageContainer.hasClass( pageTheme ),
-						"Page container has the same theme as the dialog overlayTheme on " +
-							"pagebeforeshow" );
-					start();
-				} ).trigger( "pagebeforeshow" );
-		}
-	] );
-} );
+				$( ".ui-page-active" )
+					.bind( "pagebeforeshow", function() {
+						assert.ok( $.mobile.pageContainer.hasClass( pageTheme ),
+							"Page container has the same theme as the dialog overlayTheme on " +
+								"pagebeforeshow" );
+						QUnit.start();
+					} ).trigger( "pagebeforeshow" );
+			}
+		] );
+	} );
 
-asyncTest( "pre-rendered dialog options work", function( assert ) {
+QUnit.asyncTest( "pre-rendered dialog options work", function( assert ) {
 	expect( 3 );
 
 	$.testHelper.pageSequence( [
@@ -271,8 +273,8 @@ asyncTest( "pre-rendered dialog options work", function( assert ) {
 
 			$.mobile.back();
 		},
-		start
+		QUnit.start
 	] );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );

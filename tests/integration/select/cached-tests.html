@@ -17,17 +17,12 @@
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
-		$.testHelper.asyncLoad([
-			[
-				"widgets/forms/select",
-				"widgets/forms/select.custom"
-			],
+		$.testHelper.asyncLoad( [
+			[ "widgets/forms/select.custom" ],
 			[ "init" ],
-			[	"select_cached.js" ]
-		]);
+			[ "select_cached.js" ]
+		] );
 	</script>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 

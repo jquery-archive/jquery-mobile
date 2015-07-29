@@ -1,4 +1,6 @@
-test( "Page theme", function( assert ) {
+( function( QUnit, $ ) {
+
+QUnit.test( "Page theme", function( assert ) {
 	var testDone = assert.async(),
 		page = $( "#theme-test" );
 
@@ -30,3 +32,5 @@ test( "Page theme", function( assert ) {
 		testDone
 	] );
 } );
+
+} )( QUnit, jQuery );

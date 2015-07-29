@@ -18,27 +18,21 @@
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
-		$.testHelper.asyncLoad([
-			[
-				"widgets/page.dialog"
-			],
+		$.testHelper.asyncLoad( [
+			[ "widgets/page.dialog" ],
 			[ "init" ],
-			[
-				"dialog_count.js"
-			]
-		]);
+			[ "dialog_count.js" ]
+		] );
 	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 
 	<div id="qunit"></div>
-
+	<pre><code id="console"></code></pre>
 	<div id="foo-dialog" data-nstest-dialog="true" data-nstest-role="dialog" data-nstest-theme="b">
 		<div  data-nstest-role="header">
 			<h1>Dialog</h1>
