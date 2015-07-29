@@ -100,11 +100,18 @@ return $.widget( "mobile.panel", {
 		this._bindSwipeEvents();
 	},
 
+	_safelyWrap: function( parent, wrapperHtml, children ) {
+		return children.length ? children.wrapAll( wrapperHtml ).parent() :
+			$( wrapperHtml ).appendTo( parent );
+	},
+
 	_getPanelInner: function() {
 		var panelInner = this.element.find( "." + this.options.classes.panelInner );
 
 		if ( panelInner.length === 0 ) {
-			panelInner = this.element.children().wrapAll( "<div class='" + this.options.classes.panelInner + "' />" ).parent();
+			panelInner = this._safelyWrap( this.element,
+				"<div class='" + this.options.classes.panelInner + "'></div>",
+				this.element.children() );
 		}
 
 		return panelInner;
@@ -128,11 +135,15 @@ return $.widget( "mobile.panel", {
 	},
 
 	_getWrapper: function() {
-		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
+		var thePage,
+			wrapper = this._page().find( "." + this.options.classes.pageWrapper );
+
 		if ( wrapper.length === 0 ) {
-			wrapper = this._page().children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" )
-				.wrapAll( "<div class='" + this.options.classes.pageWrapper + "'></div>" )
-				.parent();
+			thePage = this._page();
+			wrapper = this._safelyWrap( thePage,
+				"<div class='" + this.options.classes.pageWrapper + "'></div>",
+				this._page().children( ".ui-header:not(.ui-header-fixed), " +
+					".ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" ) );
 		}
 
 		this._wrapper = wrapper;
