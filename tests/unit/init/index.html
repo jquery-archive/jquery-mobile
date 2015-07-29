@@ -16,11 +16,12 @@
     <script src="../../../external/qunit/qunit.js"></script>
     <script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
     <script>
+		$.mobileBackcompat = false;
 		QUnit.config.autostart = false;
 
-        $.testHelper.asyncLoad( [
-            [ "tests/unit/init/init_core" ]
-        ] );
+		$.testHelper.asyncLoad( [
+			[ "tests/unit/init/init_core" ]
+		] );
     </script>
 </head>
 <body>
