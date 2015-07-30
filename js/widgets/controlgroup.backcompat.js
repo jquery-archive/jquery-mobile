@@ -51,6 +51,8 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		this._super();
 	},
 
+	classProp: "ui-controlgroup",
+
 	_setOption: function( key, value ) {
 		if ( key === "direction" ) {
 			this.options.type = value;

@@ -33,8 +33,7 @@
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
-		enhanced: false,
-		theme: null
+		theme: "inherit"
 	},
 
 	_create: function() {
@@ -52,12 +51,6 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	// This method is no longer necessary since controlgroup no longer has a wrapper
 	container: function() {
 		return this.element;
-	},
-
-	_enhance: function() {
-		if ( !this.options.enhanced ) {
-			this._super();
-		}
 	},
 
 	_themeElements: function() {
