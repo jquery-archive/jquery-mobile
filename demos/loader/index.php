@@ -55,15 +55,15 @@
 				<button class="show-page-loading-msg" data-textonly="false" data-textvisible="false" data-msgtext="" data-inline="true">Icon (default)</button>
 				<button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>
 				<button class="show-page-loading-msg" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-inline="true">Text only</button>
-				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
+				<button class="hide-page-loading-msg" data-inline="true" data-icon="ui-icon-delete">Hide</button>
 
 			</div><!--/demo-html -->
 
 		<h2>Custom HTML</h2>
 		<p>Any HTML can be added to the loader overlay</p>
 			<div data-demo-html="true" data-demo-js="true">
-				<button class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true" data-html="&lt;span class=&quot;ui-bar ui-shadow ui-overlay-d ui-corner-all&quot;&gt;&lt;img src=&quot;../_assets/img/jquery-logo.png&quot;&gt;&lt;h2&gt;is loading for you ...&lt;/h2&gt;&lt;/span&gt;" data-iconpos="right">Custom HTML</button>
-				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
+				<button class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true" data-html="&lt;span class=&quot;ui-bar ui-shadow ui-overlay-d ui-corner-all&quot;&gt;&lt;img src=&quot;../_assets/img/jquery-logo.png&quot;&gt;&lt;h2&gt;is loading for you ...&lt;/h2&gt;&lt;/span&gt;">Custom HTML</button>
+				<button class="hide-page-loading-msg" data-inline="true" data-icon="ui-icon-delete">Hide</button>
 
 			</div><!--/demo-html -->
 
@@ -73,7 +73,7 @@
 			<div data-demo-html="true" data-demo-js="true">
 				<button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme a" data-inline="true">A</button>
 				<button class="show-page-loading-msg" data-theme="b" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme b" data-inline="true">B</button>
-				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
+				<button class="hide-page-loading-msg" data-inline="true" data-icon="ui-icon-delete">Hide</button>
 			</div><!--/demo-html -->
 
 	</div><!-- /content -->
