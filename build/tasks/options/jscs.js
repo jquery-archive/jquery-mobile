@@ -39,6 +39,8 @@ module.exports = {
 			"js/widgets/popup.arrow.js",
 			"js/widgets/popup.backcompat.js",
 			"js/widgets/popup.js",
+			"js/widgets/loader.js",
+			"js/widgets/loader.backcompat.js",
 
 			// Tests
 			"tests/unit/textinput/settings.js",
@@ -47,7 +49,8 @@ module.exports = {
 			"tests/unit/enhancer/enhancer.js",
 			"tests/integration/popup/popup_core.js",
 			"tests/integration/popup/backcompat_core.js",
-			"tests/unit/popup/popup_core.js"
+			"tests/unit/popup/popup_core.js",
+			"tests/unit/loader/loader_core.js"
 		]
 	},
 	tests: {
