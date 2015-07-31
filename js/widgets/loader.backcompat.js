@@ -33,7 +33,7 @@ if ( $.mobileBackcompat !== false ) {
 			html: ""
 		},
 		defaultHtml: "<div>" +
-			"<span class='ui-icon-loading'></span>" +
+			"<span class='ui-icon ui-icon-loading'></span>" +
 			"<h1></h1>" +
 			"</div>",
 
