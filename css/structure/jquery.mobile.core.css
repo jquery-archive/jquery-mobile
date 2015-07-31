@@ -145,10 +145,6 @@ div.ui-mobile-viewport {
 .ui-loader-textonly .ui-icon-loading {
 	display: none;
 }
-.ui-loader-fakefix {
-	position: absolute;
-}
-
 /* Headers, content panels */
 .ui-bar,
 .ui-body {

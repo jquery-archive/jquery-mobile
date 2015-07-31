@@ -29,6 +29,7 @@ $files = array(
 	'widgets/page.dialog.js',
 	'widgets/page.dialog.backcompat.js',
 	'widgets/loader.js',
+	'widgets/loader.backcompat.js',
 	
 	'events/navigate.js',
 	'navigation/path.js',

@@ -221,7 +221,7 @@ $.extend( $.mobile, {
 
 	loading: function() {
 		// If this is the first call to this function, instantiate a loader widget
-		var loader = this.loading._widget || $( $.mobile.loader.prototype.defaultHtml ).loader(),
+		var loader = this.loading._widget || $.mobile.loader().element,
 
 			// Call the appropriate method on the loader
 			returnValue = loader.loader.apply( loader, arguments );

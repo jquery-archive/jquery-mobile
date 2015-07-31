@@ -15,6 +15,7 @@
 		define( [
 			"require",
 			"./widgets/loader",
+			"./widgets/loader.backcompat",
 			"./events/navigate",
 			"./navigation/path",
 			"./navigation/history",
