@@ -153,6 +153,35 @@
 			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
 
+		<h2>Float icons</h2>
+		
+		<p>The framework offers helper classes, <code>ui-widget-icon-floatbeginning</code> and <code>ui-widget-icon-floatend</code> to make icons inside block buttons float to the beginning or end.</p>
+		
+		<div data-demo-html="true">
+			<a href="index.php" data-role="button" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</a>
+			<button href="index.php" data-role="button" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</button>
+			<a href="index.php" data-role="button" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</a>
+			<button href="index.php" data-role="button" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</button>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</a>
+			<button href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</button>
+			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</a>
+			<button href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</button>
+		</div><!--/demo-html -->
+		
+		<p>Examples of adding the helper class to icons in pre-enhanced buttons.</p>
+		
+		<div data-demo-html="true">
+			<a href="index.php" data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning"></span><span class="ui-button-icon-space"> </span>Beginning</a>
+			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">End<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend"></span></button>
+        </div><!--/demo-html -->		
+				
+		<p>Examples of adding the helper class to icons in CSS-only buttons.</p>
+		
+		<div data-demo-html="true">
+			<a href="index.php" class="ui-button ui-shadow ui-corner-all"><span class="ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning"></span> Beginning</a>
+			<button data-role="none" class="ui-button ui-shadow ui-corner-all">End <span class="ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend"></span></button>
+        </div><!--/demo-html -->
+				
 		<h2>Icon-only</h2>
 
 		<p>Add <code>data-show-label="false"</code> if you want to create an icon-only button.</p>
