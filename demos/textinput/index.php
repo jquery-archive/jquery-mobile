@@ -267,6 +267,24 @@
 			</form>
         </div><!-- /demo-html -->
 
+        <h2>Theming</h2>
+		
+        <div data-demo-html="true">
+			<form>
+				 <label for="search-10">Search:</label>
+				 <input type="search" name="search-10" id="search-10" value="" data-theme="b">
+			</form>
+        </div><!-- /demo-html -->
+		
+		<p>To have a light icon, remove the <code>ui-alt-icon</code> class by setting the widget's <code>classes</code> option with the <code>data-classes</code> attribute. By default the classes <code>ui-icon</code>, <code>ui-icon-search</code>, and <code>ui-alt-icon</code> are added to the search icon span. Here we show how you can omit the <code>ui-alt-icon</code> class. Note: You have to use double quotes inside the object!</p>
+		
+        <div data-demo-html="true">
+			<form>
+				 <label for="search-12">Search:</label>
+				 <input type="search" name="search-12" id="search-12" value="" data-theme="b" data-classes='{ "ui-textinput-search-icon": "ui-icon ui-icon-search" }'>
+			</form>
+        </div><!-- /demo-html -->
+		
         <h2>Label hidden</h2>
 
         <div data-demo-html="true">
