@@ -304,6 +304,16 @@ div.ui-mobile-viewport {
 	margin-left: -11px;
 }
 
+/* Float icons helper classes */
+.ui-widget-icon-floatbeginning {
+	bottom: auto;
+	float: left;
+}
+.ui-widget-icon-floatend {
+	bottom: auto;
+	float: right;
+}
+
 /* Buttons in header position classes */
 .ui-header .ui-button-left,
 .ui-header .ui-button-right,
