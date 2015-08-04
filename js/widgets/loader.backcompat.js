@@ -32,10 +32,6 @@ if ( $.mobileBackcompat !== false ) {
 			// custom html for the inner content of the loading message
 			html: ""
 		},
-		defaultHtml: "<div>" +
-			"<span class='ui-icon ui-icon-loading'></span>" +
-			"<h1></h1>" +
-			"</div>",
 
 		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0 - we no longer support browsers
 		// incapable of native fixed support
@@ -48,6 +44,8 @@ if ( $.mobileBackcompat !== false ) {
 		show: function( theme ) {
 			var html;
 
+			this.resetHtml();
+
 			this._superApply( arguments );
 
 			html = ( $.type( theme ) === "object" && theme.html || this.options.html );
@@ -58,7 +56,10 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		resetHtml: function() {
-			this.element.html( $( this.defaultHtml ).html() );
+			this.element
+				.empty()
+				.append( this.loader.span )
+				.append( this.loader.header.empty() );
 		}
 	} );
 }

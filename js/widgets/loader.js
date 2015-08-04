@@ -47,13 +47,13 @@ $.widget( "mobile.loader", {
 
 		enhanced: false,
 
-		// the theme for the loading message
+		// The theme for the loading message
 		theme: "a",
 
-		// whether the text in the loading message is shown
+		// Whether the text in the loading message is shown
 		textVisible: false,
 
-		// the text to be displayed when the popup is shown
+		// The text to be displayed when the popup is shown
 		text: "loading"
 	},
 
@@ -86,15 +86,15 @@ $.widget( "mobile.loader", {
 		} ];
 	},
 
-	// Turn on/off page loading message. Theme doubles as an object argument
-	// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
+	// Turn on/off page loading message. Theme doubles as an object argument with the following
+	// shape: { theme: '', text: '', html: '', textVisible: '' }
 	// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 	// TODO sweet jesus we need to break some of this out
 	show: function( theme, msgText, textonly ) {
-		var textVisible, message, loadSettings;
+		var textVisible, message, loadSettings, currentTheme;
 
-		// use the prototype options so that people can set them globally at
-		// mobile init. Consistency, it's what's for dinner
+		// Use the prototype options so that people can set them globally at mobile init.
+		// Consistency, it's what's for dinner.
 		if ( $.type( theme ) === "object" ) {
 			loadSettings = $.extend( {}, this.options, theme );
 
@@ -102,25 +102,27 @@ $.widget( "mobile.loader", {
 		} else {
 			loadSettings = this.options;
 
-			// here we prefer the theme value passed as a string argument, then
-			// we prefer the global option because we can't use undefined default
-			// prototype options, then the prototype option
+			// Here we prefer the theme value passed as a string argument, then we prefer the
+			// global option because we can't use undefined default prototype options, then the
+			// prototype option
 			theme = theme || loadSettings.theme;
 		}
 
-		// set the message text, prefer the param, then the settings object
-		// then loading message
+		// Set the message text, prefer the param, then the settings object then loading message
 		message = msgText || ( loadSettings.text === false ? "" : loadSettings.text );
 
-		// prepare the dom
+		// Prepare the DOM
 		this._addClass( html, "ui-loading" );
 
 		textVisible = loadSettings.textVisible;
 
-		// add the proper css given the options (theme, text, etc)
-		// Force text visibility if the second argument was supplied, or
-		// if the text was explicitly set in the object args
-		this._removeClass( "ui-loader-verbose ui-loader-default ui-loader-textonly" )
+		currentTheme = this.element.attr( "class" ).match( /\bui-body-[a-z]\b/ ) || [];
+
+		// Add the proper css given the options (theme, text, etc). Force text visibility if the
+		// second argument was supplied, or if the text was explicitly set in the object args.
+		this._removeClass.apply( this,
+				[ "ui-loader-verbose ui-loader-default ui-loader-textonly" ]
+					.concat( currentTheme ) )
 			._addClass( "ui-loader-" +
 			( textVisible || msgText || theme.text ? "verbose" : "default" ) +
 			( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ),
@@ -128,9 +130,9 @@ $.widget( "mobile.loader", {
 
 		this.loader.header.text( message );
 
-		// If the pagecontainer widget has been defined we may use the :mobile-pagecontainer
-		// and attach to the element on which the pagecontainer widget has been defined. If not,
-		// we attach to the body.
+		// If the pagecontainer widget has been defined we may use the :mobile-pagecontainer and
+		// attach to the element on which the pagecontainer widget has been defined. If not, we
+		// attach to the body.
 		// TODO: Replace the selector below with $.mobile.pagecontainers[] once #7947 lands
 		this.element.appendTo( $.mobile.pagecontainer ?
 			$( ":mobile-pagecontainer" ) : $( "body" ) );
