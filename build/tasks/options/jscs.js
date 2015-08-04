@@ -50,7 +50,8 @@ module.exports = {
 			"tests/integration/popup/popup_core.js",
 			"tests/integration/popup/backcompat_core.js",
 			"tests/unit/popup/popup_core.js",
-			"tests/unit/loader/loader_core.js"
+			"tests/unit/loader/loader_core.js",
+			"tests/unit/loader/backcompat_core.js"
 		]
 	},
 	tests: {
