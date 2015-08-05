@@ -204,7 +204,6 @@ test( "expandedIcon behavior when collapsedIcon set to false", function() {
 	deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 		false, "Turning off collapsedIcon makes expanded icon disappear" );
 	collapsible.collapsible( "option", "collapsedIcon", "plus" );
-	console.log( collapsible.find( "a .ui-icon" ) )
 	deepEqual( collapsible.find( "a .ui-icon" ).hasClass( "ui-icon-minus" ),
 		true, "Turning on collapsedIcon makes expanded icon reappear" );
 } );
@@ -309,7 +308,6 @@ test( "collapsedIcon", function() {
 		null, "Option not set on inheriting child collapsible" );
 	deepEqual( $( "#explicit" ).collapsible( "option", "collapsedIcon" ),
 		"plus", "Option not set on explicitly assigned child collapsible" );
-	console.log( $( "#inherits" ).collapsible( "instance" ).options );
 	deepEqual( $( "#inherits" ).find( "a .ui-icon" ).hasClass( "ui-icon-forward" ),
 		true, "Inheriting collapsible has collapsedIcon 'forward'" );
 	deepEqual( $( "#explicit" ).find( "a .ui-icon" ).hasClass( "ui-icon-plus" ),
