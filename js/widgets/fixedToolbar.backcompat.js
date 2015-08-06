@@ -11,7 +11,7 @@
 //>>group: Widgets
 //>>description: Behavior for "fixed" headers and footers - be sure to also include the
 //>> item 'Browser specific workarounds for "fixed" headers and footers' when supporting
-//>> Android 2.x or iOS 5
+//>> Android 2.x
 //>>docs: http://api.jquerymobile.com/toolbar/
 //>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
@@ -99,7 +99,6 @@ if ( $.mobileBackcompat !== false ) {
 		//check the browser and version and run needed workarounds
 		_workarounds: function() {
 			var ua = navigator.userAgent,
-				platform = navigator.platform,
 
 				// Rendering engine is Webkit, and capture major version
 				wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
@@ -107,22 +106,13 @@ if ( $.mobileBackcompat !== false ) {
 				os = null,
 				self = this;
 
-			//set the os we are working in if it dosent match one with workarounds return
-			if ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1 ||
-					platform.indexOf( "iPod" ) > -1 ) {
-				os = "ios";
-			} else if ( ua.indexOf( "Android" ) > -1 ) {
+			if ( ua.indexOf( "Android" ) > -1 ) {
 				os = "android";
 			} else {
 				return;
 			}
 
-			//check os version if it dosent match one with workarounds return
-			if ( os === "ios" ) {
-
-				//iOS  workarounds
-				self._bindScrollWorkaround();
-			} else if ( os === "android" && wkversion && wkversion < 534 ) {
+			if ( os === "android" && wkversion && wkversion < 534 ) {
 
 				//Android 2.3 run all Android 2.3 workaround
 				self._bindScrollWorkaround();
