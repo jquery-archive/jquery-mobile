@@ -1,7 +1,8 @@
 /*
  * mobile navigation unit tests
  */
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit) {
+
 var siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 	home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
@@ -321,4 +322,5 @@ QUnit.test( "isSameDomain() compares domains case-insensitively", function( asse
 			"Domain comparison was case-insensitive" );
 	} );
 } )();
-} )( QUnit, jQuery );
+
+} );
