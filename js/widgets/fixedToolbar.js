@@ -46,24 +46,12 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		// Can be none, fade, slide (slide maps to slideup or slidedown)
 		transition: "slide",
 		fullscreen: false,
-		updatePagePadding: true,
-
-		// Browser detection! Weeee, here we go...
-		// Unfortunately, position:fixed is costly, not to mention probably impossible,
-		// to feature-detect accurately. Some tests exist, but they currently return false results
-		// in critical devices and browsers, which could lead to a broken experience. Testing fixed
-		// positioning is also pretty obtrusive to page load, requiring injected elements and
-		// scrolling the window. The following function serves to rule out some popular browsers
-		// with known fixed-positioning issues. This is a plugin option like any other, so feel
-		// free to improve or overwrite it
-		supportBlacklist: function() {
-			return !$.support.fixedPosition;
-		}
+		updatePagePadding: true
 	},
 
 	_create: function() {
 		this._super();
-		if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
+		if ( this.options.position === "fixed" ) {
 			this.pagecontainer = this.element.closest( ".ui-mobile-viewport" );
 			this._makeFixed();
 		}
@@ -80,7 +68,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		if ( o.position === "fixed" && this.options.position !== "fixed" ) {
 			this._makeFixed();
 		}
-		if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
+		if ( this.options.position === "fixed" ) {
 			var pageActive = $( ".ui-page-active" ),
 				currentPage = !!this.page ?
 				this.page :

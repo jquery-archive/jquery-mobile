@@ -37,7 +37,10 @@ if ( $.mobileBackcompat !== false ) {
 
 		options: {
 			hideDuringFocus: "input, textarea, select",
-			tapToggle: true
+			tapToggle: true,
+			supportBlacklist: function() {
+				return $.noop;
+			}
 		},
 
 		_hideDuringFocusData: {
