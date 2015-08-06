@@ -1,7 +1,7 @@
 /*
  * mobile Fixed Toolbar unit tests
  */
-(function($){
+( function( $ ) {
 	module( "jquery.mobile.toolbar.js" );
 
 	var pageActiveFixedHeader = $( ".ui-page-active .ui-toolbar-header-fixed" );
