@@ -181,7 +181,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 			elHeight = $el.height(),
 			pHeight = ( !!this.page ) ? $el.closest( ".ui-page" ).height() :
 				$( ".ui-page-active" ).height(),
-			viewportHeight = $.mobile.getScreenHeight();
+			viewportHeight = $( window ).height();
 
 		return !notransition &&
 			( this.options.transition && this.options.transition !== "none" &&
