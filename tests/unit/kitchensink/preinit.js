@@ -1,4 +1,5 @@
-( function( QUnit, $ ) {
+define( [ "jquery" ], function( $ ) {
+
 var $w = $( window ), incCreated, created, expected;
 
 created = 0;
@@ -24,4 +25,5 @@ $( document ).bind( "mobileinit", function() {
 		window.createTests.pageCreateTimed = expected === created;
 	} );
 } );
-} )( QUnit, jQuery );
+
+} );

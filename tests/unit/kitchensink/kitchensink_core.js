@@ -1,7 +1,8 @@
 /*
  * Kitchen Sink Tests
  */
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 QUnit.module( "Kitchen Sink" );
 
 QUnit.test( "Nothing on the page has a class that contains `undefined`.", function( assert ) {
@@ -17,4 +18,5 @@ QUnit.test( "all widget create events fire before page create", function( assert
 	// see preinit.js
 	assert.ok( window.createTests.pageCreateTimed );
 } );
-} )( QUnit, jQuery );
+
+} );
