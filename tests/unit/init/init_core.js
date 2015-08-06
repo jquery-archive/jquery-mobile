@@ -3,11 +3,15 @@
  */
 
 define( [
+	"qunit",
 	"jquery",
 	"jquery.mobile",
-	"./shared",
-	"./prepare"
-], function( $, jqm, shared ) {
+	"tests/unit/init/shared",
+	"tests/unit/init/prepare"
+], function( QUnit, $, jqm, shared ) {
+
+QUnit.config.autostart = false;
+
 require( [
 	"init"
 ], function() {
@@ -20,7 +24,7 @@ require( [
 			};
 		},
 		reloadCoreNSandInit = function() {
-			$.testHelper.reloadLib( "jquery.setNameSpace.js" );
+			$.testHelper.reloadLib( "../../jquery.setNameSpace.js" );
 			return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ) )
 		};
 
@@ -56,7 +60,7 @@ require( [
 
 			$.testHelper.reloadModule( libName ).then( function() {
 				assert.ok( initFired, "init fired" );
-			} ).then( start );
+			} ).then( QUnit.start );
 		} );
 
 		QUnit.asyncTest( "enhancements are skipped when the browser is not grade A", function( assert ) {
@@ -64,7 +68,7 @@ require( [
 			$.testHelper.reloadModule( libName ).then( function() {
 				//NOTE easiest way to check for enhancements, not the most obvious
 				assert.ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
-			} ).then( start );
+			} ).then( QUnit.start );
 
 		} );
 
@@ -75,7 +79,7 @@ require( [
 				function() {
 					assert.ok( $( "html" ).hasClass( "ui-mobile" ), "html elem has class mobile" );
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 
 		var findFirstPage = function() {
@@ -91,7 +95,7 @@ require( [
 					assert.deepEqual( $.mobile.firstPage[ 0 ], firstPage[ 0 ] );
 					assert.deepEqual( $.mobile.activePage[ 0 ], firstPage[ 0 ] );
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 
 		QUnit.asyncTest( "mobile viewport class is defined on the first page's parent", function( assert ) {
@@ -102,7 +106,7 @@ require( [
 
 					assert.ok( firstPage.parent().hasClass( "ui-mobile-viewport" ), "first page has viewport" );
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 
 		QUnit.asyncTest( "mobile page container is the first page's parent", function( assert ) {
@@ -113,7 +117,7 @@ require( [
 
 					assert.deepEqual( $( ".ui-pagecontainer" )[ 0 ], firstPage.parent()[ 0 ] );
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 
 		QUnit.test( "pages without a data-url attribute have it set to their id", function( assert ) {
@@ -141,7 +145,7 @@ require( [
 				function() {
 					assert.deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 
 
@@ -165,7 +169,7 @@ require( [
 
 					return reloadCoreNSandInit();
 				}
-			).then( start );
+			).then( QUnit.start );
 		} );
 	} );
 } );
