@@ -67,7 +67,7 @@
 	clip: rect(1px,1px,1px,1px);
 }
 .ui-toolbar-header-fixed .ui-button,
-.ui-toolbar-footer-fixed .ui-button { 
+.ui-toolbar-footer-fixed .ui-button {
 	z-index: 10;
 }
 /* workarounds for other widgets */
