@@ -244,7 +244,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		this._super();
 		if ( this.options.position === "fixed" ) {
-			hasFixed = $(  "body>.ui-" + this.role + "-fixed" )
+			hasFixed = $( "body>.ui-" + this.role + "-fixed" )
 						.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
 						.not( this.element ).length > 0;
 			hasFullscreen = $(  "body>.ui-" + this.role + "-fixed" )
