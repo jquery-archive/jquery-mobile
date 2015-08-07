@@ -484,14 +484,14 @@ QUnit.asyncTest( "overlay panel should not call getWrapper", function( assert ) 
 		},
 		function() {
 			assert.deepEqual( count, 0, "getWrapper not called on close" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page2" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page2" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
 			assert.deepEqual( count, 0, "getWrapper not called on pagechange" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page1" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page1" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -530,14 +530,14 @@ QUnit.asyncTest( "push panel should call getWrapper only once on create", functi
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on close" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page2" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page2" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on pagechange" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page1" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page1" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -573,14 +573,14 @@ QUnit.asyncTest( "reveal panel should call getWrapper only once on create", func
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on close" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page2" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page2" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on pagechange" );
-			$.mobile.pageContainer.pagecontainer( "change", "#page1" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#page1" );
 		},
 		{
 			pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -617,7 +617,7 @@ QUnit.asyncTest( "external panel should call getWrapper once on create and on pa
 			},
 			function() {
 				assert.deepEqual( count, 1, "getWrapper not called on close" );
-				$.mobile.pageContainer.pagecontainer( "change", "#page2" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "#page2" );
 			},
 			{
 				pageshow: { src: $( "body" ), event: "pagecontainershow" }
@@ -634,7 +634,7 @@ QUnit.asyncTest( "external panel should call getWrapper once on create and on pa
 						QUnit.start();
 					}, 0 );
 				} );
-				$.mobile.pageContainer.pagecontainer( "change", "#page1" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "#page1" );
 			}
 		] );
 	} );
