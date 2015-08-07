@@ -85,6 +85,8 @@ $.widget( "mobile.pagecontainer", {
 		// TODO move from page* events to content* events
 		this._on( { pagechange: "_afterContentChange" } );
 
+		this._addClass( "ui-pagecontainer" );
+
 		// Handle initial hashchange from chrome :(
 		this.window.one( "navigate", $.proxy( function() {
 			this.setLastScrollEnabled = true;
@@ -93,10 +95,10 @@ $.widget( "mobile.pagecontainer", {
 
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined && options.theme !== "none" ) {
-			this.element.removeClass( "ui-overlay-" + this.options.theme )
-				.addClass( "ui-overlay-" + options.theme );
+			this._removeClass( null, "ui-overlay-" + this.options.theme )
+				._addClass( null, "ui-overlay-" + options.theme );
 		} else if ( options.theme !== undefined ) {
-			this.element.removeClass( "ui-overlay-" + this.options.theme );
+			this._removeClass( null, "ui-overlay-" + this.options.theme );
 		}
 
 		this._super( options );
