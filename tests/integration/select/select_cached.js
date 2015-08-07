@@ -22,7 +22,7 @@ QUnit.asyncTest( "dialog sized select should alter the value of its parent selec
 			resetHash,
 
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "cached.html" );
 			},
 
 			function() {
@@ -59,7 +59,7 @@ QUnit.asyncTest( "dialog sized select should prevent the removal of its parent p
 			resetHash,
 
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "cached.html" );
 			},
 
 			function() {
@@ -88,7 +88,7 @@ QUnit.asyncTest( "dialog sized select shouldn't rebind its parent page remove ha
 			resetHash,
 
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "cached-dom-cache-true.html" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "cached-dom-cache-true.html" );
 			},
 
 			function() {
@@ -103,7 +103,7 @@ QUnit.asyncTest( "dialog sized select shouldn't rebind its parent page remove ha
 			function() {
 				ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ),
 					"the dialog closed" );
-				$.mobile.pageContainer.pagecontainer( "change", $( "#default" ) );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#default" ) );
 			},
 
 			function() {
@@ -120,7 +120,7 @@ QUnit.asyncTest( "menupage is removed when the parent page is removed", function
 		resetHash,
 
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", "uncached-dom-cached-false.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "uncached-dom-cached-false.html" );
 		},
 
 		function() {
