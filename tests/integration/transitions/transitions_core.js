@@ -102,7 +102,7 @@ asyncTest( "change() applies perspective class to mobile viewport for flip", fun
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", "#foo" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#foo" );
 		},
 
 		function() {
@@ -120,7 +120,7 @@ asyncTest( "change() applies transition class to mobile viewport for default tra
 	expect( 1 );
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", "#baz" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#baz" );
 		},
 
 		function() {
@@ -165,8 +165,8 @@ asyncTest( "change() queues requests", function() {
 	var firstPage = $( "#foo" ),
 		secondPage = $( "#bar" );
 
-	$.mobile.pageContainer.pagecontainer( "change", firstPage );
-	$.mobile.pageContainer.pagecontainer( "change", secondPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
 
 	onToComplete( function() {
 		ok( isTransitioningIn( firstPage ), "first page begins transition" );
@@ -204,7 +204,7 @@ function testTransitionMaxWidth( val, expected ) {
 		start();
 	}, 5000 );
 
-	$.mobile.pageContainer.pagecontainer( "change", $( ".ui-page:not(.ui-page-active)" ).first() );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", $( ".ui-page:not(.ui-page-active)" ).first() );
 
 }
 
