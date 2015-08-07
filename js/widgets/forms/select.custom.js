@@ -431,7 +431,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 
-			self.menuPage.appendTo( $.mobile.pageContainer ).page();
+			self.menuPage.appendTo( this.element.closest( ".ui-pagecontainer" ) ).page();
 			self.menuPageContent = self.menuPage.find( ".ui-content" );
 			self.menuPageClose = self.menuPage.find( ".ui-header a" );
 
