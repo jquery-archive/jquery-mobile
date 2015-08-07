@@ -84,7 +84,7 @@ QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", fu
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-	$.mobile.pageContainer.removeClass( pageTheme );
+	$( ".ui-pagecontainer" ).removeClass( pageTheme );
 
 	$.mobile.activePage
 		.bind( "pagebeforeshow", function() {
@@ -101,7 +101,7 @@ QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", fu
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-	$.mobile.pageContainer.addClass( pageTheme );
+	$( ".ui-pagecontainer" ).addClass( pageTheme );
 
 	$.mobile.activePage
 		.bind( "pagebeforehide", function() {
