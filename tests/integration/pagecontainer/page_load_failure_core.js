@@ -15,13 +15,13 @@ $( document ).on( "pagecontainerloadfailed", function( event ) {
 				$( "#go-to-other-page" ).click();
 			},
 			function() {
-				deepEqual( $.mobile.pageContainer.pagecontainer( "getActivePage" )
+				deepEqual( $( ".ui-pagecontainer" ).pagecontainer( "getActivePage" )
 					.attr( "id" ), "other-page",
 					"The other page is the active page" );
 				$.mobile.back();
 			},
 			function() {
-				deepEqual( $.mobile.pageContainer.pagecontainer( "getActivePage" )
+				deepEqual( $( ".ui-pagecontainer" ).pagecontainer( "getActivePage" )
 					.attr( "id" ), "start-page",
 					"Returned to start page" );
 				start();
