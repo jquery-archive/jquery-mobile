@@ -166,7 +166,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 			if ( nextFooter.length || nextHeader.length ) {
 
-				nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+				nextFooter.add( nextHeader ).appendTo( this.element.closest( ".ui-pagecontainer" ) );
 
 				ui.nextPage.one( "pageshow", function() {
 					nextHeader.prependTo( this );
