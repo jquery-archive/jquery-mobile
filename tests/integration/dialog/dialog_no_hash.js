@@ -15,7 +15,7 @@ asyncTest( "dialog opens and closes correctly when hash handling is off", functi
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
