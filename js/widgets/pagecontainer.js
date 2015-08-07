@@ -67,6 +67,15 @@ $.widget( "mobile.pagecontainer", {
 	initSelector: false,
 
 	_create: function() {
+
+		// Maintain a global array of pagecontainers
+		$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
+			.concat( [ this ] );
+
+		// In the future this will be tracked to give easy access to the active pagecontainer
+		// For now we just set it since multiple containers are not supported.
+		$.mobile.pagecontainers.active = this;
+
 		this._trigger( "beforecreate" );
 		this.setLastScrollEnabled = true;
 
@@ -89,7 +98,7 @@ $.widget( "mobile.pagecontainer", {
 		// TODO move from page* events to content* events
 		this._on( { pagechange: "_afterContentChange" } );
 
-		this._addClass( "ui-pagecontainer" );
+		this._addClass( "ui-pagecontainer", "ui-mobile-viewport" );
 
 		// Handle initial hashchange from chrome :(
 		this.window.one( "navigate", $.proxy( function() {
@@ -1215,6 +1224,19 @@ $.widget( "mobile.pagecontainer", {
 		var closestBase = ( this.activePage &&
 			$.mobile.getClosestBaseUrl( this.activePage ) );
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
+	},
+
+	_destroy: function() {
+		var myIndex;
+
+		if ( $.mobile.pagecontainers ) {
+			myIndex = $.inArray( this.element, $.mobile.pagecontainers );
+			if ( myIndex >= 0 ) {
+				$.mobile.pagecontainers.splice( myIndex, 1 );
+			}
+		}
+
+		this._super();
 	}
 } );
 
