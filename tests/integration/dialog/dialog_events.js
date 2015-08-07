@@ -59,7 +59,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -74,7 +74,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 			// Assert dialog theme inheritance (issue 1375):
 			assert.hasClasses( dialog, "ui-page-theme-a",
 				"Expected explicit theme ui-page-theme-a" );
-			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
+			assert.hasClasses( $( ".ui-pagecontainer" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
 			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
@@ -95,7 +95,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -110,9 +110,9 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 			// Assert dialog theme inheritance (issue 1375):
 			assert.hasClasses( dialog, "ui-page-theme-e",
 				"Expected explicit theme ui-page-theme-e" );
-			assert.lacksClasses( $.mobile.pageContainer, "ui-overlay-b",
+			assert.lacksClasses( $( ".ui-pagecontainer" ), "ui-overlay-b",
 				"Expected no overlay theme ui-overlay-b" );
-			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
+			assert.hasClasses( $( ".ui-pagecontainer" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
 			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
@@ -129,7 +129,7 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -144,7 +144,7 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 			// Assert dialog theme inheritance (issue 1375):
 			assert.hasClasses( dialog, "ui-page-theme-e",
 				"Expected explicit theme ui-page-theme-e" );
-			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-b",
+			assert.hasClasses( $( ".ui-pagecontainer" ), "ui-overlay-b",
 				"Expected explicit overlay theme ui-overlay-b" );
 			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
@@ -164,7 +164,7 @@ QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow"
 
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "#mypage" );
+				$( ".ui-pagecontainer" ).pagecontainer( "change", "#mypage" );
 			},
 
 			function() {
@@ -176,11 +176,11 @@ QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow"
 			function() {
 				pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "overlayTheme" );
 
-				$.mobile.pageContainer.removeClass( pageTheme );
+				$( ".ui-pagecontainer" ).removeClass( pageTheme );
 
 				$.mobile.activePage
 					.bind( "pagebeforeshow", function() {
-						assert.hasClasses( $.mobile.pageContainer, pageTheme,
+						assert.hasClasses( $( ".ui-pagecontainer" ), pageTheme,
 							"Page container has the same theme as the dialog overlayTheme on " +
 								"pagebeforeshow" );
 						QUnit.start();
