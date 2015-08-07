@@ -151,7 +151,6 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		if ( this.options.updatePagePadding ) {
 			this._off( this.window, "throttledresize" );
 		}
-
 	},
 
 	_visible: true,
