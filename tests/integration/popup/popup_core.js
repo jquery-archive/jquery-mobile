@@ -158,7 +158,7 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			$( "#go-to-another-page" ).click();
 		},
 		{
-			pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
 			strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
@@ -403,7 +403,7 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 					event: $.event.special.navigate.originalEventName + ".anotherPageStep3"
 				},
 				pagechange: {
-					src: $.mobile.pageContainer,
+					src: $( ".ui-pagecontainer" ),
 					event: "pagechange.anotherPageStep3"
 				}
 			},
@@ -552,7 +552,7 @@ asyncTest( "Navigating away from the popup page closes the no-history popup", fu
 
 		function() {
 			ok( $popup.is( ":visible" ), "popup is indeed visible" );
-			$.mobile.pageContainer.pagecontainer( "change", "#no-popups" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#no-popups" );
 		},
 
 		{
