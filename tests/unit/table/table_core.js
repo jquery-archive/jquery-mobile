@@ -15,7 +15,7 @@ QUnit.module( "Basic Table", {
 				QUnit.start();
 			} );
 
-			$.mobile.pageContainer.pagecontainer( "change", hash );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", hash );
 		}
 	},
 
@@ -81,7 +81,7 @@ QUnit.module( "Reflow Mode", {
 				QUnit.start();
 			} );
 
-			$.mobile.pageContainer.pagecontainer( "change", hash );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", hash );
 		}
 	},
 
@@ -154,7 +154,7 @@ QUnit.module( "Column toggle table Mode", {
 				QUnit.start();
 			} );
 
-			$.mobile.pageContainer.pagecontainer( "change", hash );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", hash );
 		}
 	},
 
