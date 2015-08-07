@@ -91,7 +91,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling change() directly with a relative path.
-			$.mobile.pageContainer.pagecontainer( "change", "base-page-1.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "base-page-1.html" );
 		},
 
 		function() {
@@ -102,7 +102,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling changePage() directly with a relative path.
-			$.mobile.pageContainer.pagecontainer( "change", "../content/content-page-1.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "../content/content-page-1.html" );
 		},
 
 		function() {
@@ -113,7 +113,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling changePage() with an id
-			$.mobile.pageContainer.pagecontainer( "change", "content-page-2.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "content-page-2.html" );
 		},
 
 		function() {
@@ -137,7 +137,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling change() with an id
-			$.mobile.pageContainer.pagecontainer( "change", "internal-page-1" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "internal-page-1" );
 		},
 
 		function() {
@@ -209,7 +209,7 @@ asyncTest( "external page form with no action submits to external page URL", fun
 var testBaseTagAlteration = function( assertions ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.pageContainer.pagecontainer( "change", "../../base-change.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "../../base-change.html" );
 		},
 
 		function() {

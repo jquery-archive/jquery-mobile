@@ -93,7 +93,7 @@ $.mobile.back = function() {
 			nav.app.backHistory ) {
 		nav.app.backHistory();
 	} else {
-		$.mobile.pageContainer.pagecontainer( "back" );
+		$.mobile.pagecontainers.active.back();
 	}
 };
 
@@ -193,7 +193,8 @@ $.mobile._registerInternalEvents = function() {
 		if ( !event.isDefaultPrevented() ) {
 			formData = getAjaxFormData( $( this ) );
 			if ( formData ) {
-				$.mobile.pageContainer.pagecontainer( "change", formData.url, formData.options );
+				$( this ).closest( ".ui-pagecontainer" )
+					.pagecontainer( "change", formData.url, formData.options );
 				event.preventDefault();
 			}
 		}
@@ -356,7 +357,7 @@ $.mobile._registerInternalEvents = function() {
 		//this may need to be more specific as we use data-rel more
 		role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-		$.mobile.pageContainer.pagecontainer( "change", href, {
+		$link.closest( ".ui-pagecontainer" ).pagecontainer( "change", href, {
 			transition: transition,
 			reverse: reverse,
 			role: role,
@@ -367,7 +368,8 @@ $.mobile._registerInternalEvents = function() {
 
 	//prefetch pages when anchors with data-prefetch are encountered
 	$.mobile.document.delegate( ".ui-page", "pageshow.prefetch", function() {
-		var urls = [];
+		var urls = [],
+			that = this;
 		$( this ).find( "a:jqmData(prefetch)" ).each( function() {
 			var $link = $( this ),
 				url = $link.attr( "href" );
@@ -375,7 +377,7 @@ $.mobile._registerInternalEvents = function() {
 			if ( url && $.inArray( url, urls ) === -1 ) {
 				urls.push( url );
 
-				$.mobile.pageContainer.pagecontainer( "load", url, {
+				that.closest( ".ui-pagecontainer" ).pagecontainer( "load", url, {
 					role: $link.attr( "data-" + $.mobile.ns + "rel" ),
 					prefetch: true
 				});
@@ -384,7 +386,7 @@ $.mobile._registerInternalEvents = function() {
 	} );
 
 	// TODO ensure that the navigate binding in the content widget happens at the right time
-	$.mobile.pageContainer.pagecontainer();
+	//$.mobile.pageContainer.pagecontainer();
 
 	//set page min-heights to be device specific
 	$.mobile.document.bind( "pageshow", function() {
