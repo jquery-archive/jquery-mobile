@@ -15,7 +15,7 @@ function defineTest( testName, clickAction, expectChange ) {
 				}
 			},
 			function( result ) {
-				var activePage = $.mobile.pageContainer.pagecontainer( "getActivePage" );
+				var activePage = $( ".ui-pagecontainer" ).pagecontainer( "getActivePage" );
 
 				deepEqual( result.pagecontainerchange.timedOut, false, "Page change has occurred" );
 				deepEqual( activePage.attr( "id" ), "button-focus-test-dialog", "Dialog is active" );
@@ -37,7 +37,7 @@ function defineTest( testName, clickAction, expectChange ) {
 				}
 			} : {} ) ),
 			function( result ) {
-				var activePage = $.mobile.pageContainer.pagecontainer( "getActivePage" );
+				var activePage = $( ".ui-pagecontainer" ).pagecontainer( "getActivePage" );
 
 				deepEqual( result.pagecontainerchange.timedOut, false, "Page change has occurred" );
 				deepEqual( activePage.attr( "id" ), "default", "Default page is active" );
