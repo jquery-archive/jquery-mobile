@@ -9,7 +9,6 @@
 
 //>>label: Content Management
 //>>group: Navigation
-<<<<<<< HEAD
 //>>description: Widget to create page container which manages pages and transitions
 //>>docs: http://api.jquerymobile.com/pagecontainer/
 //>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
