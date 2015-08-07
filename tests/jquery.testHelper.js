@@ -227,7 +227,7 @@ $.testHelper = {
 			}, 10000 );
 
 			// bind the recursive call to the event
-			( self.eventTarget || $.mobile.pageContainer ).one( event, function( event, data ) {
+			( self.eventTarget || $( ".ui-pagecontainer" ) ).one( event, function( event, data ) {
 				clearTimeout( warnTimer );
 
 				// Let the current stack unwind before we fire off the next item in the sequence.
