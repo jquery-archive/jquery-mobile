@@ -199,7 +199,7 @@ asyncTest( "The persistent headers and footers are working properly", function()
 		function() {
 			$( "#persist-test-b" )
 				.one( "pagebeforeshow", function() {
-					ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
+					ok( nextpageheader.parent().parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
 				} );
 
 			$.mobile.changePage( "#persist-test-b" );
@@ -231,7 +231,7 @@ asyncTest( "The persistent headers should work without a footer", function() {
 		function() {
 			$( "#persist-test-d" )
 				.one( "pagebeforeshow", function() {
-					deepEqual( nextpageheader.parent()[ 0 ], $.mobile.pageContainer[ 0 ], "fixed header is now a child of page container" );
+					deepEqual( nextpageheader.parent().parent()[ 0 ], $.mobile.pageContainer[ 0 ], "fixed header is now a child of page container" );
 				} );
 
 			$.mobile.changePage( "#persist-test-d" );
@@ -263,7 +263,7 @@ asyncTest( "The persistent footers should work without a header", function() {
 		function() {
 			$( "#persist-test-f" )
 				.one( "pagebeforeshow", function() {
-					deepEqual( nextpagefooter.parent()[ 0 ], $.mobile.pageContainer[ 0 ], "fixed footer is now a child of page container" );
+					deepEqual( nextpagefooter.parent().parent()[ 0 ], $.mobile.pageContainer[ 0 ], "fixed footer is now a child of page container" );
 				} );
 
 			$.mobile.changePage( "#persist-test-f" );
