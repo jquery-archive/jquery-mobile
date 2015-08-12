@@ -513,7 +513,7 @@ asyncTest( "destroy removes classes from correct page ", function() {
 
 				// These are called asynchronously from hide()'s animationComplete handler
 				{ addClass: [ "ui-toolbar-fixed-hidden" ] },
-				{ removeClass: [ "out reverse" ] },
+				{ removeClass: [ "out reverse" ] }
 			];
 
 			expect( 1 );

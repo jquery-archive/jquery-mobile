@@ -194,16 +194,15 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	},
 
 	show: function( notransition ) {
-		var self = this;
-
 		if ( this._useTransition( notransition ) ) {
 			this._animationInProgress = "show";
-			this._removeClass( null, "out" );
-			this._removeClass( "ui-toolbar-fixed-hidden" );
-			this._addClass( null, "in" );
-			this.element.animationComplete( function() {
-				self._removeClass( null, "in" );
-			} );
+			this._removeClass( null, "out ui-toolbar-fixed-hidden" )._addClass( null, "in" );
+			this.element.animationComplete( $.proxy( function() {
+				if ( this._animationInProgress === "show" ) {
+					this._animationInProgress = false;
+					this._removeClass( null, "in" );
+				}
+			}, this ) );
 		} else {
 			this._removeClass( "ui-toolbar-fixed-hidden" );
 		}
@@ -211,23 +210,22 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	},
 
 	hide: function( notransition ) {
-		var self = this,
 
-			// if it's a slide transition, our new transitions need the
-			// reverse class as well to slide outward
-			outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
+		// if it's a slide transition, our new transitions need the
+		// reverse class as well to slide outward
+		var	outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 		if ( this._useTransition( notransition ) ) {
 			this._animationInProgress = "hide";
-			this._addClass( null, outClass );
-			this._removeClass( null, "in" );
-			this.element.animationComplete( function() {
-				self._addClass( "ui-toolbar-fixed-hidden" );
-				self._removeClass( null, outClass );
-			} );
+			this._addClass( null, outClass )._removeClass( null, "in" );
+			this.element.animationComplete( $.proxy( function() {
+				if ( this._animationInProgress === "hide" ) {
+					this._animationInProgress = false;
+					this._addClass( "ui-toolbar-fixed-hidden" )._removeClass( null, outClass );
+				}
+			}, this ) );
 		} else {
-			this._addClass( "ui-toolbar-fixed-hidden" );
-			this._removeClass( null, outClass );
+			this._addClass( "ui-toolbar-fixed-hidden" )._removeClass( null, outClass );
 		}
 		this._visible = false;
 	},
