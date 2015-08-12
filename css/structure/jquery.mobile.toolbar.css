@@ -50,3 +50,6 @@
 	top: .3125em;
 	right: .3125em;
 }
+.ui-toolbar-header .ui-controlgroup-horizontal:after {
+    clear: none;
+}
