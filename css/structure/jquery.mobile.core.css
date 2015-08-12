@@ -172,17 +172,17 @@ div.ui-mobile-viewport {
 	padding: 1em;
 }
 /* Corner styling for dialogs and popups */
-.ui-corner-all > .ui-header:first-child,
+.ui-corner-all > .ui-toolbar-header:first-child,
 .ui-corner-all > .ui-content:first-child,
-.ui-corner-all > .ui-footer:first-child {
+.ui-corner-all > .ui-toolbar-footer:first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.ui-corner-all > .ui-header:last-child,
+.ui-corner-all > .ui-toolbar-header:last-child,
 .ui-corner-all > .ui-content:last-child,
-.ui-corner-all > .ui-footer:last-child {
+.ui-corner-all > .ui-toolbar-footer:last-child {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
@@ -208,8 +208,8 @@ div.ui-mobile-viewport {
 	user-select: none;
 }
 .ui-button-icon-only,
-.ui-header button.ui-button.ui-button-icon-only,
-.ui-footer button.ui-button.ui-button-icon-only {
+.ui-toolbar-header button.ui-button.ui-button-icon-only,
+.ui-toolbar-footer button.ui-button.ui-button-icon-only {
 	padding: 0;
 	width: 1.75em;
 	height: 1.75em;
@@ -221,25 +221,25 @@ div.ui-mobile-viewport {
 	line-height: inherit;
 }
 /* Make buttons in toolbars default to mini and inline. */
-.ui-header .ui-button,
-.ui-footer .ui-button {
+.ui-toolbar-header .ui-button,
+.ui-toolbar-footer .ui-button {
 	display: inline-block;
 	vertical-align: middle;
 }
 .ui-mini,
-.ui-header .ui-button,
-.ui-footer .ui-button,
-.ui-header .ui-controlgroup .ui-button-icon-only,
-.ui-footer .ui-controlgroup .ui-button-icon-only,
-.ui-header .ui-button-left,
-.ui-header .ui-button-right {
+.ui-toolbar-header .ui-button,
+.ui-toolbar-footer .ui-button,
+.ui-toolbar-header .ui-controlgroup .ui-button-icon-only,
+.ui-toolbar-footer .ui-controlgroup .ui-button-icon-only,
+.ui-toolbar-header .ui-toolbar-header-button-left,
+.ui-toolbar-header .ui-toolbar-header-button-right {
 	font-size: 13px;
 	line-height: 1.8462;
 }
 .ui-mini.ui-button-icon-only,
 .ui-mini .ui-button-icon-only,
-.ui-header .ui-button-icon-only,
-.ui-footer .ui-button-icon-only {
+.ui-toolbar-header .ui-button-icon-only,
+.ui-toolbar-footer .ui-button-icon-only {
 	font-size: 16px;
 	padding: 0;
 }
@@ -270,6 +270,10 @@ div.ui-mobile-viewport {
 	bottom: auto;
 	top: 50%;
 	left: 50%;
+}
+.ui-button-icon-only .ui-icon,
+.ui-button-icon-only.ui-toolbar-header-button-left > .ui-icon,
+.ui-button-icon-only.ui-toolbar-header-button-right > .ui-icon {
 	margin-top: -11px;
 	margin-left: -11px;
 }
@@ -286,8 +290,8 @@ input.ui-button {
 }
 button.ui-button-inline,
 input.ui-button-inline,
-.ui-header button.ui-button,
-.ui-footer button.ui-button {
+.ui-toolbar-header button.ui-button,
+.ui-toolbar-footer button.ui-button {
 	width: auto;
 }
 /* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */

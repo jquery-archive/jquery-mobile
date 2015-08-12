@@ -110,7 +110,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 	_toggleButtonClasses: function( add, location ) {
 		this._toggleClass( this.dialog.button, "ui-page-dialog-close-button",
-			"ui-button-" + location, add );
+			"ui-toolbar-header-button-" + location, add );
 		this._toggleClass( this.dialog.icon, "ui-page-dialog-close-button-icon", null, add );
 	},
 
@@ -195,8 +195,9 @@ return $.widget( "mobile.page", $.mobile.page, {
 			} else {
 
 				// Update existing button
-				this._removeClass( this.dialog.button, null, "ui-button-left ui-button-right" )
-					._addClass( this.dialog.button, null, "ui-button-" + location );
+				this._removeClass( this.dialog.button, null,
+						"ui-toolbar-header-button-left ui-toolbar-header-button-right" )
+					._addClass( this.dialog.button, null, "ui-toolbar-header-button-" + location );
 				if ( text ) {
 
 					// Get rid of all text nodes without touching other node types before updating
@@ -213,7 +214,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 			// Create new button
 			destination = this.dialog.wrapper
-				.children( ".ui-header,[data-" + $.mobile.ns + "role='header']" )
+				.children( ".ui-toolbar-header,[data-" + $.mobile.ns + "role='header']" )
 					.first();
 			if ( destination.length ) {
 				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )
