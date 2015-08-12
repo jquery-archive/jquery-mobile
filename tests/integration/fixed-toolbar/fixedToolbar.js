@@ -74,7 +74,7 @@ asyncTest( "The hide method is working properly", function() {
 		},
 
 		function() {
-			ok( $( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar has the ui-fixed-hidden class applied after hide' );
+			ok( $( '#classes-test-g' ).hasClass( 'ui-toolbar-fixed-hidden' ), 'The toolbar has the ui-toolbar-fixed-hidden class applied after hide' );
 			$( '#classes-test-g' ).toolbar( "show" );
 
 		},
@@ -107,7 +107,7 @@ asyncTest( "The show method is working properly", function() {
 		},
 
 		function() {
-			ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class applied after show' );
+			ok( !$( '#classes-test-g' ).hasClass( 'ui-toolbar-fixed-hidden' ), 'The toolbar does not have the ui-toolbar-fixed-hidden class applied after show' );
 
 		},
 
@@ -132,7 +132,7 @@ asyncTest( "The toggle method is working properly", function() {
 		},
 
 		function() {
-			ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class' );
+			ok( !$( '#classes-test-g' ).hasClass( 'ui-toolbar-fixed-hidden' ), 'The toolbar does not have the ui-toolbar-fixed-hidden class' );
 		},
 
 		function() {
@@ -140,7 +140,7 @@ asyncTest( "The toggle method is working properly", function() {
 		},
 
 		function() {
-			ok( $( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does have the ui-fixed-hidden class' );
+			ok( $( '#classes-test-g' ).hasClass( 'ui-toolbar-fixed-hidden' ), 'The toolbar does have the ui-toolbar-fixed-hidden class' );
 		},
 
 		function() {
@@ -148,7 +148,7 @@ asyncTest( "The toggle method is working properly", function() {
 		},
 
 		function() {
-			ok( !$( '#classes-test-g' ).hasClass( 'ui-fixed-hidden' ), 'The toolbar does not have the ui-fixed-hidden class' );
+			ok( !$( '#classes-test-g' ).hasClass( 'ui-toolbar-fixed-hidden' ), 'The toolbar does not have the ui-toolbar-fixed-hidden class' );
 
 		},
 
@@ -169,8 +169,8 @@ asyncTest( "Fullscreen toolbars add classes to page", function() {
 		},
 
 		function() {
-			ok( $( '#classes-test-l' ).closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
-			ok( $( '#classes-test-m' ).closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
+			ok( $( '#classes-test-l' ).closest( ".ui-page" ).hasClass( "ui-toolbar-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
+			ok( $( '#classes-test-m' ).closest( ".ui-page" ).hasClass( "ui-toolbar-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
 		},
 
 		function() {
@@ -186,8 +186,8 @@ asyncTest( "The persistent headers and footers are working properly", function()
 
 	$( "#persist-test-b, #persist-test-a" ).page();
 
-	var nextpageheader = $( "#persist-test-b .ui-header-fixed" ),
-		nextpagefooter = $( "#persist-test-b .ui-footer-fixed" );
+	var nextpageheader = $( "#persist-test-b .ui-toolbar-header-fixed" ),
+		nextpagefooter = $( "#persist-test-b .ui-toolbar-footer-fixed" );
 
 
 	$.testHelper.pageSequence( [
@@ -220,7 +220,7 @@ asyncTest( "The persistent headers should work without a footer", function() {
 
 	$( "#persist-test-c, #persist-test-d" ).page();
 
-	var nextpageheader = $( "#persist-test-d .ui-header-fixed" );
+	var nextpageheader = $( "#persist-test-d .ui-toolbar-header-fixed" );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -252,7 +252,7 @@ asyncTest( "The persistent footers should work without a header", function() {
 
 	$( "#persist-test-e, #persist-test-f" ).page();
 
-	var nextpagefooter = $( "#persist-test-f .ui-footer-fixed" );
+	var nextpagefooter = $( "#persist-test-f .ui-toolbar-footer-fixed" );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -285,15 +285,15 @@ var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 		},
 
 		function() {
-			var $footer = $.mobile.activePage.find( ".ui-footer" ),
-				$header = $.mobile.activePage.find( ".ui-header" ),
+			var $footer = $.mobile.activePage.find( ".ui-toolbar-footer" ),
+				$header = $.mobile.activePage.find( ".ui-toolbar-header" ),
 				hiddenStr = visible ? "hidden" : "visible";
 
 			equal( $footer.length, 1, "there should be one footer" );
 			equal( $header.length, 1, "there should be one header" );
 
-			equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
-			equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
+			equal( !$footer.hasClass( "ui-toolbar-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
+			equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
 			$.mobile.changePage( "#default" );
 		},
@@ -338,7 +338,7 @@ asyncTest( "page-retains-fixed-header-on-popup-remove", function() {
 			popup.on( "popupafterclose", function() {
 				popup.remove();
 				ok( $( ":mobile-pagecontainer" ).pagecontainer( "getActivePage" )
-					.hasClass( "ui-page-header-fixed" ),
+					.hasClass( "ui-toolbar-page-header-fixed" ),
 					"page should retain the fixed header after popup is removed" );
 				start();
 			} );
@@ -388,12 +388,12 @@ asyncTest( "destroy removes classes from correct page ", function() {
 			var first = $( "#page-destroy-test-page-1" ),
 				second = $( "#page-destroy-test-page-2" );
 
-			ok( first.hasClass( "ui-page-header-fixed" ) === true, "ui-page-header-fixed class exists on first page before destroy" );
+			ok( first.hasClass( "ui-toolbar-page-header-fixed" ) === true, "ui-toolbar-page-header-fixed class exists on first page before destroy" );
 
 			var firstHeader = $( "#headerOnFirstPage" ).toolbar( "destroy" );
 
-			ok( first.hasClass( "ui-page-header-fixed" ) === false, "ui-page-header-fixed class is removed from first page" );
-			ok( second.hasClass( "ui-page-header-fixed" ) === true, "ui-page-header-fixed class is not removed from second page" );
+			ok( first.hasClass( "ui-toolbar-page-header-fixed" ) === false, "ui-toolbar-page-header-fixed class is removed from first page" );
+			ok( second.hasClass( "ui-toolbar-page-header-fixed" ) === true, "ui-toolbar-page-header-fixed class is not removed from second page" );
 
 			start();
 		},
@@ -463,7 +463,7 @@ asyncTest( "destroy removes classes from correct page ", function() {
 				{ removeClass: [ "in" ] },
 
 				// These are called synchronously from show
-				{ removeClass: [ "out ui-fixed-hidden" ] },
+				{ removeClass: [ "out ui-toolbar-fixed-hidden" ] },
 				{ addClass: [ "in" ] },
 
 				// This is called asynchronously from show()'s animationComplete handler
@@ -504,7 +504,7 @@ asyncTest( "destroy removes classes from correct page ", function() {
 			var expectedCallSequence = [
 
 				// These are called synchronously from show
-				{ removeClass: [ "out ui-fixed-hidden" ] },
+				{ removeClass: [ "out ui-toolbar-fixed-hidden" ] },
 				{ addClass: [ "in" ] },
 
 				// These are called synchronously from hide
@@ -512,7 +512,7 @@ asyncTest( "destroy removes classes from correct page ", function() {
 				{ removeClass: [ "in" ] },
 
 				// These are called asynchronously from hide()'s animationComplete handler
-				{ addClass: [ "ui-fixed-hidden" ] },
+				{ addClass: [ "ui-toolbar-fixed-hidden" ] },
 				{ removeClass: [ "out reverse" ] },
 			];
 

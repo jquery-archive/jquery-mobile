@@ -232,6 +232,10 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		this._visible = false;
 	},
 
+	toggle: function() {
+		this[ this._visible ? "hide" : "show" ]();
+	},
+
 	_setRelative: function() {
 		if ( this.options.position !== "fixed" ) {
 			$( "[data-" + $.mobile.ns + "role='page']" ).css( { "position": "relative" } );

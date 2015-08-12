@@ -62,7 +62,7 @@ if ( $.mobileBackcompat !== false ) {
 			if ( this.options.hideDuringFocus && screen.width < 1025 &&
 					$( event.target ).is( this.options.hideDuringFocus ) &&
 					!$( event.target )
-						.closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
+						.closest( ".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed" ).length ) {
 
 				// Fix for issue #4724 Moving through form in Mobile Safari with "Next" and
 				// "Previous" system controls causes fixed position, tap-toggle false Header to
@@ -128,7 +128,7 @@ if ( $.mobileBackcompat !== false ) {
 		//Utility class for checking header and footer positions relative to viewport
 		_viewportOffset: function() {
 			var $el = this.element,
-				header = $el.hasClass( "ui-header" ),
+				header = $el.hasClass( "ui-toolbar-header" ),
 				offset = Math.abs( $el.offset().top - this.window.scrollTop() );
 			if ( !header ) {
 				offset = Math.round( offset - this.window.height() + $el.outerHeight() ) - 60;

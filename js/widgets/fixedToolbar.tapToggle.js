@@ -36,17 +36,13 @@
 return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	options: {
 		tapToggle: false,
-		tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, " +
-			".ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open"
+		tapToggleBlacklist: "a, button, input, select, textarea, .ui-toolbar-header-fixed, " +
+			".ui-toolbar-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open"
 	},
 
 	_makeFixed: function() {
 		this._super();
 		this._bindToggleHandlers();
-	},
-
-	toggle: function() {
-		this[ this._visible ? "hide" : "show" ]();
 	},
 
 	_bindToggleHandlers: function() {
