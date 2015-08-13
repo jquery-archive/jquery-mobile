@@ -478,11 +478,13 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 			var expectedCallSequence = [
 
 				// These are called synchronously from hide
-				{ addClass: [ "out reverse" ] },
+				{ addClass: [ "out" ] },
+				{ addClass: [ "reverse" ] },
 				{ removeClass: [ "in" ] },
 
 				// These are called synchronously from show
-				{ removeClass: [ "out ui-toolbar-fixed-hidden" ] },
+				{ removeClass: [ "out" ] },
+				{ removeClass: [ "ui-toolbar-fixed-hidden" ] },
 				{ addClass: [ "in" ] },
 
 				// This is called asynchronously from show()'s animationComplete handler
@@ -523,16 +525,19 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 			var expectedCallSequence = [
 
 				// These are called synchronously from show
-				{ removeClass: [ "out ui-toolbar-fixed-hidden" ] },
+				{ removeClass: [ "out" ] },
+				{ removeClass: [ "ui-toolbar-fixed-hidden" ] },
 				{ addClass: [ "in" ] },
 
 				// These are called synchronously from hide
-				{ addClass: [ "out reverse" ] },
+				{ addClass: [ "out" ] },
+				{ addClass: [ "reverse" ] },
 				{ removeClass: [ "in" ] },
 
 				// These are called asynchronously from hide()'s animationComplete handler
 				{ addClass: [ "ui-toolbar-fixed-hidden" ] },
-				{ removeClass: [ "out reverse" ] }
+				{ removeClass: [ "out" ] },
+				{ removeClass: [ "reverse" ] }
 			];
 
 			expect( 1 );

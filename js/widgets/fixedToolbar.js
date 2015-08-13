@@ -196,7 +196,9 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	show: function( notransition ) {
 		if ( this._useTransition( notransition ) ) {
 			this._animationInProgress = "show";
-			this._removeClass( null, "out ui-toolbar-fixed-hidden" )._addClass( null, "in" );
+			this._removeClass( null, "out" );
+			this._removeClass( "ui-toolbar-fixed-hidden" );
+			this._addClass( null, "in" );
 			this.element.animationComplete( $.proxy( function() {
 				if ( this._animationInProgress === "show" ) {
 					this._animationInProgress = false;
@@ -213,15 +215,19 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		// if it's a slide transition, our new transitions need the
 		// reverse class as well to slide outward
-		var	outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
+		var	outClass =  this.options.transition === "slide" ? " reverse" : "";
 
 		if ( this._useTransition( notransition ) ) {
 			this._animationInProgress = "hide";
-			this._addClass( null, outClass )._removeClass( null, "in" );
+			this._addClass( null, "out" );
+			this._addClass( null, outClass );
+			this._removeClass( null, "in" );
 			this.element.animationComplete( $.proxy( function() {
 				if ( this._animationInProgress === "hide" ) {
 					this._animationInProgress = false;
-					this._addClass( "ui-toolbar-fixed-hidden" )._removeClass( null, outClass );
+					this._addClass( "ui-toolbar-fixed-hidden" );
+					this._removeClass( null, "out" );
+					this._removeClass( null, outClass );
 				}
 			}, this ) );
 		} else {
