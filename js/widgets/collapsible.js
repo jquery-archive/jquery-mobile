@@ -30,13 +30,7 @@
 	}
 } )( function( $ ) {
 
-var rInitialLetter = /([A-Z])/g,
-
-	// Construct iconpos class from iconpos value
-	iconposClass = function( iconpos ) {
-		return ( "ui-icon-" +
-			( iconpos === null ? $.mobile.collapsible.defaults.iconpos : iconpos ) );
-	};
+var rInitialLetter = /([A-Z])/g;
 
 $.widget( "mobile.collapsible", {
 	version: "@VERSION",
@@ -76,6 +70,7 @@ $.widget( "mobile.collapsible", {
 			ui.content = ui.heading.next();
 			ui.anchor = ui.heading.children();
 			ui.status = ui.anchor.children( ".ui-collapsible-heading-status" );
+			ui.icon = ui.anchor.children( ".ui-icon" );
 		} else {
 			this._enhance( elem, ui );
 		}
@@ -132,8 +127,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_enhance: function( elem, ui ) {
-		var iconclass,
-			opts = this._renderedOptions,
+		var opts = this._renderedOptions,
 			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 
 		elem.addClass( "ui-collapsible " +
@@ -155,9 +149,6 @@ $.widget( "mobile.collapsible", {
 			ui.originalHeading.remove();
 		}
 
-		iconclass = ( opts.collapsed ? ( opts.collapsedIcon ? "ui-icon-" + opts.collapsedIcon : "" ) :
-			( opts.expandedIcon ? "ui-icon-" + opts.expandedIcon : "" ) );
-
 		ui.status = $( "<span class='ui-collapsible-heading-status'></span>" );
 		ui.anchor = ui.heading
 			.detach()
@@ -168,11 +159,10 @@ $.widget( "mobile.collapsible", {
 			.find( "a" )
 				.first()
 					.addClass( "ui-button " +
-						( iconclass ? iconclass + " " : "" ) +
-						( iconclass ? iconposClass( opts.iconpos ) +
-						" " : "" ) +
 						this._themeClassFromOption( "ui-button-", opts.theme ) + " " +
 						( opts.mini ? "ui-mini " : "" ) );
+
+		this._updateIcon();
 
 		//drop heading in before content
 		ui.heading.insertBefore( ui.content );
@@ -182,13 +172,48 @@ $.widget( "mobile.collapsible", {
 		return ui;
 	},
 
+	_updateIcon: function() {
+		var ui = this._ui,
+			opts = this._getOptions( this.options ),
+			iconclass =
+				opts.collapsed ?
+				( opts.collapsedIcon ? " ui-icon-" + opts.collapsedIcon : "" ) :
+				( opts.expandedIcon ? " ui-icon-" + opts.expandedIcon : "" ),
+			method = opts.iconpos === ( "bottom" || "right" ) ? "append" : "prepend";
+
+		if ( ui.icon ) {
+			ui.icon.remove();
+		}
+		if ( ui.space ) {
+			ui.space.remove();
+		}
+
+		ui.icon = $( "<span class='ui-icon" + ( iconclass ? iconclass + " " : "" ) + "'></span>" );
+
+		if ( opts.iconpos === "left" || opts.iconpos === "right" ||
+				opts.iconpos === null ) {
+			ui.space = $( "<span class='ui-icon-space'> </span>" );
+
+			ui.anchor[ method ]( ui.space );
+		} else {
+			ui.icon.addClass( "ui-widget-icon-block" );
+		}
+
+		ui.anchor[ method ]( ui.icon );
+
+		if ( opts.iconpos === "right" ) {
+			ui.icon.addClass( "ui-collapsible-icon-right" );
+		}
+	},
+
 	refresh: function() {
 		this._applyOptions( this.options );
 		this._renderedOptions = this._getOptions( this.options );
+		this._updateIcon();
 	},
 
 	_applyOptions: function( options ) {
-		var isCollapsed, newTheme, oldTheme, hasCorners, hasIcon,
+		var isCollapsed, newTheme, oldTheme, hasCorners,
 			elem = this.element,
 			currentOpts = this._renderedOptions,
 			ui = this._ui,
@@ -215,50 +240,6 @@ $.widget( "mobile.collapsible", {
 		} else {
 			if ( opts.collapseCueText !== undefined ) {
 				status.text( opts.collapseCueText );
-			}
-		}
-
-		// Update icon
-
-		// Is it supposed to have an icon?
-		hasIcon =
-
-			// If the collapsedIcon is being set, consult that
-			( opts.collapsedIcon !== undefined ? opts.collapsedIcon !== false :
-
-				// Otherwise consult the existing option value
-				currentOpts.collapsedIcon !== false );
-
-
-		// If any icon-related options have changed, make sure the new icon
-		// state is reflected by first removing all icon-related classes
-		// reflecting the current state and then adding all icon-related
-		// classes for the new state
-		if ( !( opts.iconpos === undefined &&
-				opts.collapsedIcon === undefined &&
-				opts.expandedIcon === undefined ) ) {
-
-			// Remove all current icon-related classes
-			anchor.removeClass( [ iconposClass( currentOpts.iconpos ) ]
-				.concat( ( currentOpts.expandedIcon ?
-					[ "ui-icon-" + currentOpts.expandedIcon ] : [] ) )
-				.concat( ( currentOpts.collapsedIcon ?
-					[ "ui-icon-" + currentOpts.collapsedIcon ] : [] ) )
-				.join( " " ) );
-
-			// Add new classes if an icon is supposed to be present
-			if ( hasIcon ) {
-				anchor.addClass(
-					[ iconposClass( opts.iconpos !== undefined ?
-						opts.iconpos : currentOpts.iconpos ) ]
-						.concat( isCollapsed ?
-							[ "ui-icon-" + ( opts.collapsedIcon !== undefined ?
-								opts.collapsedIcon :
-								currentOpts.collapsedIcon ) ] :
-							[ "ui-icon-" + ( opts.expandedIcon !== undefined ?
-								opts.expandedIcon :
-								currentOpts.expandedIcon ) ] )
-						.join( " " ) );
 			}
 		}
 
@@ -298,6 +279,17 @@ $.widget( "mobile.collapsible", {
 		this._applyOptions( options );
 		this._super( options );
 		this._renderedOptions = this._getOptions( this.options );
+
+		// If any icon-related options have changed, make sure the new icon
+		// state is reflected by first removing all icon-related classes
+		// reflecting the current state and then adding all icon-related
+		// classes for the new state
+		if ( !( options.iconpos === undefined &&
+				options.collapsedIcon === undefined &&
+				options.expandedIcon === undefined ) ) {
+
+			this._updateIcon();
+		}
 	},
 
 	_handleExpandCollapse: function( isCollapse ) {
@@ -308,11 +300,18 @@ $.widget( "mobile.collapsible", {
 		ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 			.find( "a" ).first()
-				.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
+				.removeClass( $.mobile.activeBtnClass );
 
-				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
-				.removeClass( "ui-button-active" );
+		ui.heading
+			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+			.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+
+		if ( ui.icon ) {
+			ui.icon.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
+
+			// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
+			.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) );
+		}
 
 		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 		ui.content
@@ -352,6 +351,13 @@ $.widget( "mobile.collapsible", {
 					.unwrap();
 		}
 
+		if ( ui.icon ) {
+			ui.icon.remove();
+		}
+		if( ui.space ) {
+			ui.space.remove();
+		}
+
 		ui.anchor.contents().unwrap();
 		ui.content.contents().unwrap();
 		this.element
@@ -370,7 +376,7 @@ $.mobile.collapsible.defaults = {
 	collapsedIcon: "plus",
 	contentTheme: "inherit",
 	expandedIcon: "minus",
-	iconpos: "beginning",
+	iconpos: "left",
 	inset: true,
 	corners: true,
 	theme: "inherit",
