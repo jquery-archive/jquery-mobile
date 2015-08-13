@@ -38,6 +38,6 @@ $.testHelper.pageSequence( [
 			"After navigating back from page 2 no back button " +
 			"appears on the external toolbar" );
 		start();
-	},
+	}
 ] );
 } );
