@@ -242,6 +242,13 @@ div.ui-mobile-viewport {
 	text-indent: -9999px;
 	white-space: nowrap !important;
 }
+.ui-mini .ui-button,
+.ui-mini.ui-button,
+.ui-mini .ui-controlgroup .ui-button-icon-only,
+.ui-mini.ui-controlgroup .ui-button-icon-only,
+.ui-controlgroup .ui-button-icon-only.ui-mini {
+	padding: .365em 1em;
+}
 .ui-mini .ui-button {
 	font-size: inherit;
 	line-height: inherit;
