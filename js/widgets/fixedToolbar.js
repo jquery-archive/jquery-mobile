@@ -123,7 +123,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		} );
 	},
 
-	_handlePageBeforeShow: function( ) {
+	_handlePageBeforeShow: function() {
 		var o = this.options;
 		if ( o.disablePageZoom ) {
 			$.mobile.zoom.disable( true );
