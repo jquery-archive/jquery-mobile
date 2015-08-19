@@ -1,13 +1,16 @@
+.ui-toolbar,
 .ui-toolbar-header,
 .ui-toolbar-footer {
 	border-width: 1px 0;
 	border-style: solid;
 	position: relative;
 }
+.ui-toolbar:empty,
 .ui-toolbar-header:empty,
 .ui-toolbar-footer:empty {
 	min-height: 2.6875em;
 }
+.ui-toolbar .ui-toolbar-title,
 .ui-toolbar-header .ui-toolbar-title,
 .ui-toolbar-footer .ui-toolbar-title {
 	font-size: 1em;

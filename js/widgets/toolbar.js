@@ -7,7 +7,7 @@
  * http://jquery.org/license
  */
 
-//>>label: Toolbars: Fixed
+//>>label: Toolbars
 //>>group: Widgets
 //>>description: Headers and footers
 //>>docs: http://api.jquerymobile.com/toolbar/
@@ -37,19 +37,23 @@
 $.widget( "mobile.toolbar", {
 	version: "@VERSION",
 
-	initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
-
 	options: {
 		theme: "inherit",
 		addBackBtn: false,
 		backBtnTheme: null,
-		backBtnText: "Back"
+		backBtnText: "Back",
+		toolbarType: "toolbar",
+		ariaRole: null
 	},
 
 	_create: function() {
 		var leftbutton, rightbutton,
-			role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
-			page = this.element.closest( ".ui-page" );
+			role =  this.options.toolbarType,
+			page = this.element.closest( ".ui-page" ),
+			toolbarAriaRole = this.options.ariaRole === null ?
+				role === "header" ? "banner" :
+				( role === "footer" ? "contentinfo" : "toolbar" ) :
+				this.options.ariaRole;
 		if ( page.length === 0 ) {
 			page = false;
 			this._on( this.document, {
@@ -62,8 +66,8 @@ $.widget( "mobile.toolbar", {
 			leftbutton: leftbutton,
 			rightbutton: rightbutton
 		} );
-		this.element.attr( "role", role === "header" ? "banner" : "contentinfo" );
-		this._addClass( "ui-toolbar-" + role );
+		this.element.attr( "role", toolbarAriaRole );
+		this._addClass( "ui-toolbar" + ( role !== "toolbar" ? "-" + role : "" ) );
 		this.refresh();
 		this._setOptions( this.options );
 	},

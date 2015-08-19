@@ -240,7 +240,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 	_setRelative: function() {
 		if ( this.options.position !== "fixed" ) {
-			$( "[data-" + $.mobile.ns + "role='page']" ).css( { "position": "relative" } );
+			this._super();
 		}
 	},
 
@@ -251,10 +251,10 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		this._super();
 		if ( this.options.position === "fixed" ) {
 			hasFixed = $( "body>.ui-" + this.role + "-fixed" )
-						.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
+						.add( page.find( ".ui-" + this.role + "-fixed" ) )
 						.not( this.element ).length > 0;
 			hasFullscreen = $( "body>.ui-" + this.role + "-fixed" )
-						.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
+						.add( page.find( ".ui-" + this.role + "-fullscreen" ) )
 						.not( this.element ).length > 0;
 			toolbarClasses =  "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
 				" ui-footer-fullscreen fade slidedown slideup ui-fixed-hidden";
