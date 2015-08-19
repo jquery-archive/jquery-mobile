@@ -39,7 +39,7 @@
             }
         } );
 
-        assert.hasClasses( toolbar, "ui-toolbar-footer", "manual init gets footer class" );
+        assert.hasClasses( toolbar, "ui-toolbar", "manual init gets base toolbar class" );
         assert.hasClasses( toolbar.find( "h1" ), "ui-toolbar-title", "ui-toolbar-title assigned" );
     } );
 
