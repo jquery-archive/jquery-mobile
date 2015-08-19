@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos">
 
-	<div data-role="header">
+	<div data-role="toolbar" data-toolbar-type="header">
 		<h1>External panels</h1>
 		<a href="../panel/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 	</div><!-- /header -->

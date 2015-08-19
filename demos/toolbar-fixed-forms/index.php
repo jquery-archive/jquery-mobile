@@ -33,7 +33,7 @@
 
 	<div data-role="page" class="jqm-demos">
 
-		<div data-role="header" data-position="fixed">
+		<div data-role="toolbar" data-toolbar-type="header" data-position="fixed">
 			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 			<h1>2,146 Songs</h1>
 			<div class="ui-bar ui-bar-b">
@@ -117,7 +117,7 @@
 
 		</div><!-- /content -->
 
-		<div data-role="footer" data-theme="b" data-position="fixed">
+		<div data-role="toolbar" data-toolbar-type="footer" data-theme="b" data-position="fixed">
 			<form action="#" method="get">
 				<div class="ui-bar">
 					<label for="slider">Volume:</label>

@@ -15,7 +15,7 @@
 <body>
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	    <div data-role="header" data-position="fixed">
+	    <div data-role="toolbar" data-toolbar-type="header" data-position="fixed">
 			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 	        <h1>Fixed header</h1>
 	    </div><!-- /header -->
@@ -32,7 +32,7 @@
 			<p>Fixed header markup example:</p>
 
 <pre><code>
-&lt;div data-role=&quot;header&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
+&lt;div data-role=&quot;toolbar&quot; data-toolbar-type=&quot;header&quot;<strong>data-position=&quot;fixed&quot;</strong>&gt;
 	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
 &lt;/div&gt;
 </code></pre>
@@ -40,7 +40,7 @@
 			<p>Fixed footer markup example:</p>
 
 <pre><code>
-&lt;div data-role=&quot;footer&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
+&lt;div data-role=&quot;toolbar&quot; data-toolbar-type=&quot;footer&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
 	&lt;h1&gt;Fixed Footer!&lt;/h1&gt;
 &lt;/div&gt;
 </code></pre>
@@ -52,7 +52,7 @@
 			<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
 
 <pre><code>
-&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot; data-fullscreen=&quot;true&quot;&gt;
+&lt;div data-role=&quot;toolbar&quot; data-toolbar-type=&quot;header&quot; data-position=&quot;fixed&quot; data-fullscreen=&quot;true&quot;&gt;
 	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
 &lt;/div&gt;
 </code></pre>
@@ -97,7 +97,7 @@
 
 	    </div><!-- /content -->
 
-	    <div data-role="footer" data-position="fixed">
+	    <div data-role="toolbar" data-toolbar-type="footer" data-position="fixed">
 	    	<h1>Fixed footer</h1>
 	    </div><!-- /footer -->
 

@@ -23,7 +23,7 @@
 
 <div data-role="page" class="jqm-demos">
 
-    <div data-role="header" class="jqm-header">
+    <div data-role="toolbar" data-toolbar-type="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
@@ -44,7 +44,7 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
@@ -59,7 +59,7 @@
 
 <!-- The ID's of the header and footer are prefixed here with "_" to prevent the external toolbars to show up on our intro page. -->
 
-<div id="_header" data-role="header" data-id="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
+<div id="_header" data-role="toolbar" data-toolbar-type="header" data-id="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 	<h1>City</h1>
     <a href="./" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
 </div><!-- /header -->

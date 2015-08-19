@@ -61,7 +61,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 				this.dialog.wrapper = this.element.children( ".ui-page-dialog-contain" ).eq( 0 );
 				if ( this.options.closeBtn !== "none" ) {
 					this.dialog.button = this.dialog.wrapper
-						.children( ".ui-header" )
+						.children( ".ui-toolbar-header" )
 							.children( "a.ui-page-dialog-close-button" );
 					this.dialog.icon = this.dialog.button
 						.children( ".ui-page-dialog-close-button-icon" );
@@ -214,7 +214,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 			// Create new button
 			destination = this.dialog.wrapper
-				.children( ".ui-toolbar-header,[data-" + $.mobile.ns + "role='header']" )
+				.children( ".ui-toolbar-header,[data-" + $.mobile.ns + "toolbar-type='header']" )
 					.first();
 			if ( destination.length ) {
 				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )

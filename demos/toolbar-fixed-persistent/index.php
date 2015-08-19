@@ -14,7 +14,7 @@
 	<script>
 		$(function() {
 			$( "[data-role='navbar']" ).navbar();
-			$( "[data-role='header'], [data-role='footer']" ).toolbar();
+			$( "[data-role='toolbar']" ).toolbar();
 		});
 		// Update the contents of the toolbars
 		$( document ).on( "pagecontainerchange", function() {
@@ -23,7 +23,7 @@
 			// For example, on first page: <div data-role="page" data-title="Info">
 			var current = $( ".ui-page-active" ).jqmData( "title" );
 			// Change the heading
-			$( "[data-role='header'] h1" ).text( current );
+			$( "[data-toolbar-type='header'] h1" ).text( current );
 			// Remove active class from nav buttons
 			$( "[data-role='navbar'] a.ui-button-active" ).removeClass( "ui-button-active" );
 			// Add active class to current nav button
@@ -36,7 +36,7 @@
 	</script>
 </head>
 <body>
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="toolbar" data-toolbar-type="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
         <h1>Info</h1>
     </div><!-- /header -->
@@ -71,7 +71,7 @@
 
 	</div><!-- /page -->
 
-	<div data-role="footer" data-position="fixed" data-theme="a">
+	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
 				<li><a href="index.php" data-prefetch="true" data-transition="fade">Info</a></li>
