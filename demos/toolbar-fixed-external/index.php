@@ -18,7 +18,7 @@
 	</script>
 </head>
 <body>
-	<div data-role="toolbar" data-toolbar-type="header" data-position="fixed" data-theme="a">
+	<div data-role="toolbar" data-type="header" data-position="fixed" data-theme="a">
 			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 		<h1>External fixed header</h1>
 	</div><!-- /header -->
@@ -61,7 +61,7 @@ $(function(){
 
 	</div><!-- /page -->
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-theme="a">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-theme="a">
 		<h1>External fixed footer</h1>
 	</div><!-- /footer -->
 

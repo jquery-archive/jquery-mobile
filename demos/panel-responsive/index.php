@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page">
 
-    <div data-role="toolbar" data-toolbar-type="header">
+    <div data-role="toolbar" data-type="header">
         <h1>Panel responsive</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
@@ -102,7 +102,7 @@
 
 <div data-role="page" id="panel-responsive-page2">
 
-    <div data-role="toolbar" data-toolbar-type="header">
+    <div data-role="toolbar" data-type="header">
         <h1>Landing page</h1>
     </div><!-- /header -->
 

@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Panel fixed positioning">
 
-    <div data-role="toolbar" data-toolbar-type="header" data-position="fixed">
+    <div data-role="toolbar" data-type="header" data-position="fixed">
         <h1>Fixed header</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
@@ -64,7 +64,7 @@
 
 	</div><!-- /content -->
 
-    <div data-role="toolbar" data-toolbar-type="footer" data-position="fixed">
+    <div data-role="toolbar" data-type="footer" data-position="fixed">
     	<h4>Fixed footer</h4>
     </div><!-- /footer -->
 
@@ -131,7 +131,7 @@
 
 <div data-role="page" id="panel-fixed-page2">
 
-    <div data-role="toolbar" data-toolbar-type="header">
+    <div data-role="toolbar" data-type="header">
         <h1>Landing page</h1>
     </div><!-- /header -->
 

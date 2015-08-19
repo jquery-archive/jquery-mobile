@@ -16,7 +16,7 @@
 
 	<div data-role="page" id="dialog-success" data-dom-cache="true"><!-- dialog-->
 
-		<div data-role="toolbar" data-toolbar-type="header" data-theme="b">
+		<div data-role="toolbar" data-type="header" data-theme="b">
 			<h1>Dialog</h1>
 		</div><!-- /header -->
 

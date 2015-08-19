@@ -13,11 +13,11 @@
 	<script src="../../js/"></script>
 	<script>
     	$( document ).on( "click", "#inject-toolbars", function() {
-    		$( "<div data-role='toolbar' data-toolbar-type='header'><h1>Dynamic header</h1></div>")
+    		$( "<div data-role='toolbar' data-type='header'><h1>Dynamic header</h1></div>")
     			.prependTo( "#page-with-dynamic-toolbars" )
     			.toolbar({ position: "fixed" });
 
-    		$( "<div data-role='toolbar' data-toolbar-type='footer'><h4>Dynamic footer</h4></div>")
+    		$( "<div data-role='toolbar' data-type='footer'><h4>Dynamic footer</h4></div>")
     			.appendTo( "#page-with-dynamic-toolbars" )
     			.toolbar({ position: "fixed" });
     		// Update the page height and padding

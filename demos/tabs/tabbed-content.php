@@ -37,7 +37,7 @@
 				</ul>
 			</div>
 		</div>
-		<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 			<p>Copyright 2014 The jQuery Foundation</p>
 		</div><!-- /footer -->

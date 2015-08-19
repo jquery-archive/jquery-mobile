@@ -16,7 +16,7 @@
 </head>
 <body>
 <div data-role="page">
-	<div data-role="toolbar" data-toolbar-type="header">
+	<div data-role="toolbar" data-type="header">
 		<h1>Redirect Target</h1>
 	</div>
 	<div role="main" class="ui-content">

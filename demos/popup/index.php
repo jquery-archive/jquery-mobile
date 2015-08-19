@@ -40,7 +40,7 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="toolbar" data-toolbar-type="header" class="jqm-header">
+	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
@@ -184,7 +184,7 @@
 			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-b">Delete page... <span class="ui-icon ui-icon-delete"></span></a>
 
 			<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
-				<div data-role="toolbar" data-toolbar-type="header" data-theme="a">
+				<div data-role="toolbar" data-type="header" data-theme="a">
 				<h1>Delete Page?</h1>
 				</div>
 				<div role="main" class="ui-content">
@@ -320,7 +320,7 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
@@ -330,7 +330,7 @@
 </div><!-- /page -->
 
 	<div id="pre-rendered-page" data-role="page">
-		<div data-role="toolbar" data-toolbar-type="header" data-add-back-btn="true">
+		<div data-role="toolbar" data-type="header" data-add-back-btn="true">
 		<h1>Pre-rendered popup demo</h1>
 		</div>
 		<div role="main" class="ui-content">

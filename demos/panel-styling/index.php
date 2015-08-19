@@ -121,7 +121,7 @@
 
 <div data-role="page" class="jqm-demos" id="demo-intro">
 
-    <div data-role="toolbar" data-toolbar-type="header" class="jqm-header">
+    <div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
@@ -152,7 +152,7 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
@@ -163,7 +163,7 @@
 
 <div data-role="page" id="demo-page">
 
-    <div data-role="toolbar" data-toolbar-type="header">
+    <div data-role="toolbar" data-type="header">
         <h1>Bikes</h1>
         <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
     </div><!-- /header -->

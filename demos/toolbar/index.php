@@ -30,7 +30,7 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="toolbar" data-toolbar-type="header" class="jqm-header">
+	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
@@ -52,7 +52,7 @@
 		<p>The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. The framework add class <code>ui-title</code> to headings that are immediate children of toolbars. All heading levels with class <code>ui-title</code> are styled identically by default to maintain visual consistency.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header">
+			<div data-role="toolbar" data-type="header">
 				<h1>Page Title</h1>
 			</div>
 		</div><!-- /demo-html -->
@@ -64,7 +64,7 @@
 		<p>The footer bar has the same basic structure as the header except it uses the <code>data-role</code> attribute value of <code>footer</code>. Headings that are immediate children of the footer get class <code>ui-title</code>, just like headers.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<h4>Powered by jQuery Mobile</h4>
 			</div>
 		</div><!-- /demo-html -->
@@ -74,7 +74,7 @@
 		<p>The header and footer toolbar inherit the theme swatch from the page by default but you can easily set the theme swatch color. If you use external fixed toolbars you always have to set a theme, because there is no parent page from which they can inherit the theme.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header" data-theme="b">
+			<div data-role="toolbar" data-type="header" data-theme="b">
 				<h1>Page Title</h1>
 			</div>
 		</div><!-- /demo-html -->
@@ -106,7 +106,7 @@
 		<p>You can use the <code>ui-toolbar-header-button-left</code> and <code>ui-toolbar-header-button-right</code> classes to position buttons in the header.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header">
+			<div data-role="toolbar" data-type="header">
 				<a href="#" class="ui-toolbar-header-button-left ui-button ui-button-inline ui-mini ui-corner-all">Cancel <span class="ui-icon ui-icon-delete"></span></a>
 			<h1>My App</h1>
 				<button class="ui-toolbar-header-button-right ui-button ui-button-b ui-button-inline ui-mini ui-corner-all">Save <span class="ui-icon ui-icon-check"></span></button>
@@ -114,7 +114,7 @@
 		</div><!-- /demo-html -->
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header">
+			<div data-role="toolbar" data-type="header">
 			<h1>Page Title</h1>
 				<a href="#" class="ui-toolbar-header-button-right ui-button ui-button-inline ui-mini ui-corner-all">Options <span class="ui-icon ui-icon-gear"></span></a>
 			</div>
@@ -125,7 +125,7 @@
 		<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-toolbar-title"</code> so that the bar can get the height and display correctly.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header">
+			<div data-role="toolbar" data-type="header">
 				<a href="#" class="ui-toolbar-header-button-left ui-button ui-button-inline ui-mini ui-corner-all">View <span class="ui-icon ui-icon-grid"></span></a>
 				<span class="ui-toolbar-title"></span>
 			</div>
@@ -136,7 +136,7 @@
 		<p>The classes <code>ui-toolbar-header-button-left</code> and <code>ui-toolbar-header-button-right</code> were not meant to be used in footers, because they do not account for the possible presence of text, navbars, and and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
 
 		<div data-demo-html="true" data-demo-css="#footer-abs-buttons">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<h2>Footer</h2>
 				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-left">Quit <span class="ui-icon ui-icon-power"></span></a>
 				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-right">Next <span class="ui-icon ui-icon-caret-r"></span></a>
@@ -170,7 +170,7 @@
 		<p>To group buttons into a button set, wrap the links in an element with <code> data-role=&quot;controlgroup&quot;</code> and <code>data-type=&quot;horizontal&quot;</code> attributes.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="header">
+			<div data-role="toolbar" data-type="header">
 				<div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-button-left">
 					<a href="#" class="ui-button">Add <span class="ui-icon ui-icon-plus"></span></a>
 					<a href="#" class="ui-button">Up <span class="ui-icon ui-icon-arrow-u"></span></a>
@@ -185,7 +185,7 @@
 		<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To add padding inside of a full-width toolbar, wrap the toolbar's contents in an element and add class <code>ui-bar</code> to that element or apply your own padding rule in your custom CSS.</p>
 
 		<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<div class="ui-bar">
 					<label for="select-choice-1" class="ui-hidden-accessible">Shipping:</label>
 					<select name="select-choice-1" id="select-choice-1" data-mini="true" data-inline="true">
@@ -202,7 +202,7 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->

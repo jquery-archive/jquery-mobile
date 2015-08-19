@@ -51,7 +51,7 @@
 <body>
 <div data-role="page" id="testpage">
 
-	<div data-role="toolbar" data-toolbar-type="header">
+	<div data-role="toolbar" data-type="header">
 		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back<span class="ui-icon ui-icon-back"></span></a>
 		<a href="#" class="ui-button ui-corner-all ui-shadow">Button<span class="ui-icon ui-icon-gear"></span></a>
@@ -278,7 +278,7 @@
 
 	</div><!-- /content -->
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed">
+	<div data-role="toolbar" data-type="footer" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#">Menu item 1</a></li>

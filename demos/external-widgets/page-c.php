@@ -20,7 +20,7 @@
 	</script>
 </head>
 <body>
-    <div data-role="toolbar" data-toolbar-type="header" data-position="fixed" data-theme="a">
+    <div data-role="toolbar" data-type="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
         <h1>Fixed external header</h1>
     </div><!-- /header -->
@@ -112,7 +112,7 @@
 	</div><!-- /page -->
 
 <?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-theme="a">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
 				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>

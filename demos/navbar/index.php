@@ -25,7 +25,7 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="toolbar" data-toolbar-type="header" class="jqm-header">
+	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
@@ -130,7 +130,7 @@
 		<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
 
 			<div data-demo-html="true">
-				<div data-role="toolbar" data-toolbar-type="header" style="overflow:hidden;">
+				<div data-role="toolbar" data-type="header" style="overflow:hidden;">
 				<h1>I'm a header</h1>
 					<a href="#" data-icon="gear" class="ui-button-right">Options</a>
 					<div data-role="navbar">
@@ -145,10 +145,10 @@
 
 		<h2>Navbars in footers</h2>
 
-		<p>If you want to add a navbar to the bottom of the page so it acts more like a tab bar, simply wrap the navbar in a container with a <code>data-role="toolbar" data-toolbar-type="footer"</code></p>
+		<p>If you want to add a navbar to the bottom of the page so it acts more like a tab bar, simply wrap the navbar in a container with a <code>data-role="toolbar" data-type="footer"</code></p>
 
 			<div data-demo-html="true">
-				<div data-role="toolbar" data-toolbar-type="footer" style="overflow:hidden;">
+				<div data-role="toolbar" data-type="footer" style="overflow:hidden;">
 					<h4 style="text-align:center;">I'm the footer</h4>
 					<div data-role="navbar">
 						<ul>
@@ -169,7 +169,7 @@
 		<p>Icons can be added to navbar items by adding the <code> data-icon</code> attribute specifying a <a href="../icons/">standard mobile icon</a> to each anchor. By default, icons are added above the text (<code>data-iconpos="top"</code>). The following examples add icons to a navbar in a footer.</p>
 
 			<div data-demo-html="true">
-				<div data-role="toolbar" data-toolbar-type="footer">
+				<div data-role="toolbar" data-type="footer">
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#" data-icon="grid">Summary</a></li>
@@ -186,7 +186,7 @@
 
 		<div data-demo-html="true">
 		<p>This will result in a bottom icon alignment:</p>
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="bottom">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
@@ -200,7 +200,7 @@
 		<p>The icon position can be set to <code>data-iconpos="left"</code>:</p>
 
 			<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
@@ -214,7 +214,7 @@
 		<p>Or the icon position can be set to <code>data-iconpos="right"</code>:</p>
 
 			<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="right">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
@@ -230,7 +230,7 @@
 		<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
 
 			<div data-demo-html="true" data-demo-css="true">
-			<div data-role="toolbar" data-toolbar-type="footer" class="nav-glyphish-example" data-theme="b">
+			<div data-role="toolbar" data-type="footer" class="nav-glyphish-example" data-theme="b">
 				<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
 				<ul>
 					<li><a href="#" id="chat" data-icon="custom">Chat</a></li>
@@ -283,7 +283,7 @@
 		<p>To set the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch to the navbar container is <em>not</em> supported.</p>
 
 			<div data-demo-html="true">
-			<div data-role="toolbar" data-toolbar-type="footer">
+			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar">
 					<ul>
 						<li><a href="#" data-icon="grid" data-theme="a">A</a></li>
@@ -308,7 +308,7 @@
 			</div><!--/demo-html -->
 
 			<div data-demo-html="true">
-				<div data-role="toolbar" data-toolbar-type="header" style="overflow:hidden;">
+				<div data-role="toolbar" data-type="header" style="overflow:hidden;">
 				<h1>I'm a header</h1>
 					<div data-role="navbar" data-iconpos="right">
 						<ul>
@@ -324,7 +324,7 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="toolbar" data-toolbar-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->

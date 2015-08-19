@@ -42,13 +42,13 @@ $.widget( "mobile.toolbar", {
 		addBackBtn: false,
 		backBtnTheme: null,
 		backBtnText: "Back",
-		toolbarType: "toolbar",
+		type: "toolbar",
 		ariaRole: null
 	},
 
 	_create: function() {
 		var leftbutton, rightbutton,
-			role =  this.options.toolbarType,
+			role =  this.options.type,
 			page = this.element.closest( ".ui-page" ),
 			toolbarAriaRole = this.options.ariaRole === null ?
 				role === "header" ? "banner" :
