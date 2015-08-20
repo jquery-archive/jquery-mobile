@@ -1098,7 +1098,7 @@ $.widget( "mobile.pagecontainer", {
 		// If title element wasn't found, try the page div data attr too.
 		// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
 		newPageTitle = ( !active ) ? pageTitle : toPage.jqmData( "title" ) ||
-		toPage.children( ":jqmData(role='header')" ).find( ".ui-toolbar-title" ).text();
+		toPage.children( ":jqmData(type='header')" ).find( ".ui-toolbar-title" ).text();
 		if ( !!newPageTitle && pageTitle === document.title ) {
 			pageTitle = newPageTitle;
 		}

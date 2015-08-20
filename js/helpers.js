@@ -52,10 +52,10 @@ var compensateToolbars = function( page, desiredHeight ) {
 			return !( widgetOptions.position === "fixed" &&
 				widgetOptions.updatePagePadding === true );
 		},
-		externalHeaders = pageParent.children( ":jqmData(role='header')" ).filter( noPadders ),
-		internalHeaders = page.children( ":jqmData(role='header')" ),
-		externalFooters = pageParent.children( ":jqmData(role='footer')" ).filter( noPadders ),
-		internalFooters = page.children( ":jqmData(role='footer')" );
+		externalHeaders = pageParent.children( ":jqmData(type='header')" ).filter( noPadders ),
+		internalHeaders = page.children( ":jqmData(type='header')" ),
+		externalFooters = pageParent.children( ":jqmData(type='footer')" ).filter( noPadders ),
+		internalFooters = page.children( ":jqmData(type='footer')" );
 
 	// If we have no internal headers, but we do have external headers, then their height
 	// reduces the page height
