@@ -344,7 +344,7 @@ asyncTest( "page-retains-fixed-header-on-popup-remove", function( assert ) {
 			var popup;
 
 			popup = $( "<div data-nstest-role='popup' />" )
-				.append( "<div data-nstest-role='header' />" )
+				.append( "<div data-nstest-role='toolbar' data-nstest-type='header' />" )
 				.append( "<h1>Dynamic Popup</h1>" );
 
 			page.append( popup );

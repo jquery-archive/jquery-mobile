@@ -145,9 +145,9 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 				"Expected explicit theme ui-page-theme-a" );
 			assert.hasClasses( $( "body" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -181,9 +181,9 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 				"Expected no overlay theme ui-overlay-b" );
 			assert.hasClasses( $( "body" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -211,9 +211,9 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 				"Expected explicit theme ui-page-theme-e" );
 			assert.hasClasses( $( "body" ), "ui-overlay-b",
 				"Expected explicit overlay theme ui-overlay-b" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();

@@ -214,7 +214,7 @@ return $.widget( "mobile.page", $.mobile.page, {
 
 			// Create new button
 			destination = this.dialog.wrapper
-				.children( ".ui-toolbar-header,[data-" + $.mobile.ns + "toolbar-type='header']" )
+				.children( ".ui-toolbar-header,[data-" + $.mobile.ns + "type='header']" )
 					.first();
 			if ( destination.length ) {
 				this.dialog.button = $( "<a href='#' data-" + $.mobile.ns + "rel='back'></a>" )

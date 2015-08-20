@@ -82,7 +82,8 @@
 
         var unEnhanced = $( "#testDestroy" ).clone(),
             destroyed = $( "#testDestroy" ).toolbar().toolbar( "destroy" ),
-            unEnhancedHeader = $( "<div data-" + ( $.mobile.ns || "" ) + "role='header'>" +
+            unEnhancedHeader = $( "<div data-" + ( $.mobile.ns || "" ) + "role='toolbar' data-" +
+                            ( $.mobile.ns || "" ) + "type='header'>" +
                             "<h1>title</h1>" +
                             "</div>" ),
             headerClone = unEnhancedHeader.clone();
