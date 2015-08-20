@@ -33,6 +33,7 @@ module.exports = {
 			"js/widgets/controlgroup.backcompat.js",
 			"js/widgets/tabs.ajax.js",
 			"js/widgets/toolbar.js",
+			"js/widgets/toolbar.backcompat.js",
 			"js/widgets/fixedToolbar.js",
 			"js/widgets/fixedToolbar.backcompat.js",
 			"js/widgets/fixedToolbar.tapToggle.js",
