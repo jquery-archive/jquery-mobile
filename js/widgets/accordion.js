@@ -47,6 +47,7 @@ $.widget( "ui.accordion", $.ui.accordion, {
 	},
 	_create: function() {
 		this._super();
+
 		// We need to refresh on page show so that the height can be calculated
 		// when the widget is not hidden
 		this._on( this.document, {
@@ -56,7 +57,7 @@ $.widget( "ui.accordion", $.ui.accordion, {
 				}
 			}
 		} );
-	},
+	}
 } );
 
 $.widget( "ui.accordion", $.ui.accordion, $.mobile.widget.theme );
