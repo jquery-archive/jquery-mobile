@@ -22,7 +22,7 @@
 		if ( !!~location.search.indexOf( "no-history" ) ) {
 			$.mobile.pushStateEnabled = false;
 			$.mobile.hashListeningEnabled = false;
-			$.mobile.changePage.defaults.changeHash = false;
+			$.mobile.pagecontainer.prototype.options.changeOptions.changeHash = false;
 		}
 	});
 })( jQuery );

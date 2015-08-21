@@ -84,11 +84,11 @@ asyncTest( "page container is updated to page theme at pagebeforeshow", function
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-	$.mobile.pageContainer.removeClass( pageTheme );
+	$( ".ui-pagecontainer" ).removeClass( pageTheme );
 
 	$.mobile.activePage
 		.bind( "pagebeforeshow", function() {
-			ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
+			ok( $( ".ui-pagecontainer" ).hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
 			start();
 		} )
 		.trigger( "pagebeforeshow" );
@@ -101,11 +101,11 @@ asyncTest( "page container is updated to page theme at pagebeforeshow", function
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-	$.mobile.pageContainer.addClass( pageTheme );
+	$( ".ui-pagecontainer" ).addClass( pageTheme );
 
 	$.mobile.activePage
 		.bind( "pagebeforehide", function() {
-			ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
+			ok( !$( ".ui-pagecontainer" ).hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
 			start();
 		} )
 		.trigger( "pagebeforehide" );

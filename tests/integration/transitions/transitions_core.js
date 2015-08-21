@@ -97,12 +97,12 @@ NOTES:
 Our default transition handler now has either one or two animationComplete calls - two if there are two pages in play (from and to)
 To is required, so each async function must call start() onToComplete, not onFromComplete.
 */
-asyncTest( "changePage applies perspective class to mobile viewport for flip", function() {
+asyncTest( "change() applies perspective class to mobile viewport for flip", function() {
 	expect( 1 );
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#foo" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#foo" );
 		},
 
 		function() {
@@ -116,11 +116,11 @@ asyncTest( "changePage applies perspective class to mobile viewport for flip", f
 	] );
 } );
 
-asyncTest( "changePage applies transition class to mobile viewport for default transition", function() {
+asyncTest( "change() applies transition class to mobile viewport for default transition", function() {
 	expect( 1 );
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#baz" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#baz" );
 		},
 
 		function() {
@@ -160,13 +160,13 @@ asyncTest( "default transition is fade", function() {
 	$( "#default-trans > a" ).click();
 } );
 
-asyncTest( "changePage queues requests", function() {
+asyncTest( "change() queues requests", function() {
 	expect( 4 )
 	var firstPage = $( "#foo" ),
 		secondPage = $( "#bar" );
 
-	$.mobile.changePage( firstPage );
-	$.mobile.changePage( secondPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
 
 	onToComplete( function() {
 		ok( isTransitioningIn( firstPage ), "first page begins transition" );
@@ -204,7 +204,7 @@ function testTransitionMaxWidth( val, expected ) {
 		start();
 	}, 5000 );
 
-	$.mobile.changePage( $( ".ui-page:not(.ui-page-active)" ).first() );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", $( ".ui-page:not(.ui-page-active)" ).first() );
 
 }
 

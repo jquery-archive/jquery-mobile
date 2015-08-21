@@ -43,12 +43,34 @@ $.widget( "mobile.pagecontainer", {
 	version: "@VERSION",
 
 	options: {
-		theme: "a"
+		theme: "a",
+		changeOptions: {
+			transition: undefined,
+			reverse: false,
+			changeHash: true,
+			fromHashChange: false,
+			duplicateCachedPage: undefined,
+
+			//loading message shows by default when pages are being fetched during change()
+			showLoadMsg: true,
+			dataUrl: undefined,
+			fromPage: undefined,
+			allowSamePageTransition: false
+		}
 	},
 
 	initSelector: false,
 
 	_create: function() {
+
+		// Maintain a global array of pagecontainers
+		$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
+			.concat( [ this ] );
+
+		// In the future this will be tracked to give easy access to the active pagecontainer
+		// For now we just set it since multiple containers are not supported.
+		$.mobile.pagecontainers.active = this;
+
 		this._trigger( "beforecreate" );
 		this.setLastScrollEnabled = true;
 
@@ -71,6 +93,8 @@ $.widget( "mobile.pagecontainer", {
 		// TODO move from page* events to content* events
 		this._on( { pagechange: "_afterContentChange" } );
 
+		this._addClass( "ui-pagecontainer", "ui-mobile-viewport" );
+
 		// Handle initial hashchange from chrome :(
 		this.window.one( "navigate", $.proxy( function() {
 			this.setLastScrollEnabled = true;
@@ -79,10 +103,10 @@ $.widget( "mobile.pagecontainer", {
 
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined && options.theme !== "none" ) {
-			this.element.removeClass( "ui-overlay-" + this.options.theme )
-				.addClass( "ui-overlay-" + options.theme );
+			this._removeClass( null, "ui-overlay-" + this.options.theme )
+				._addClass( null, "ui-overlay-" + options.theme );
 		} else if ( options.theme !== undefined ) {
-			this.element.removeClass( "ui-overlay-" + this.options.theme );
+			this._removeClass( null, "ui-overlay-" + this.options.theme );
 		}
 
 		this._super( options );
@@ -279,7 +303,7 @@ $.widget( "mobile.pagecontainer", {
 				this.forward();
 			}
 
-			// Prevent changePage call
+			// Prevent change() call
 			return false;
 		} else {
 
@@ -342,11 +366,7 @@ $.widget( "mobile.pagecontainer", {
 			}
 		}
 
-		this._changeContent( this._handleDestination( to ), changePageOptions );
-	},
-
-	_changeContent: function( to, opts ) {
-		$.mobile.changePage( to, opts );
+		this.change( this._handleDestination( to ), changePageOptions );
 	},
 
 	_getBase: function() {
@@ -843,7 +863,7 @@ $.widget( "mobile.pagecontainer", {
 		// Release transition lock so navigation is free again
 		isPageTransitioning = false;
 		if ( pageTransitionQueue.length > 0 ) {
-			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
+			this.change.apply( this, pageTransitionQueue.pop() );
 		}
 	},
 
@@ -868,7 +888,7 @@ $.widget( "mobile.pagecontainer", {
 			isPageTransitioning = false;
 
 			// Store the original absolute url so that it can be provided to events in the
-			// triggerData of the subsequent changePage call
+			// triggerData of the subsequent change() call
 			options.absUrl = triggerData.absUrl;
 
 			this.transition( content, triggerData, options );
@@ -900,7 +920,7 @@ $.widget( "mobile.pagecontainer", {
 			triggerData.absUrl = $.mobile.path.makeUrlAbsolute( to, this._findBaseWithDefault() );
 		} else {
 
-			// If the toPage is a jQuery object grab the absolute url stored in the loadPage
+			// If the toPage is a jQuery object grab the absolute url stored in the load()
 			// callback where it exists
 			triggerData.absUrl = settings.absUrl;
 		}
@@ -920,13 +940,13 @@ $.widget( "mobile.pagecontainer", {
 	change: function( to, options ) {
 
 		// If we are in the midst of a transition, queue the current request. We'll call
-		// changePage() once we're done with the current transition to service the request.
+		// change() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
 			pageTransitionQueue.unshift( arguments );
 			return;
 		}
 
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
+		var settings = $.extend( {}, this.options.changeOptions, options ),
 			triggerData = {};
 
 		// Make sure we have a fromPage.
@@ -942,7 +962,7 @@ $.widget( "mobile.pagecontainer", {
 		// string, because an object can also be replaced by a string
 		to = triggerData.toPage;
 
-		// If the caller passed us a url, call loadPage() to make sure it is loaded into the DOM.
+		// If the caller passed us a url, call load() to make sure it is loaded into the DOM.
 		// We'll listen to the promise object it returns so we know when it is done loading or if
 		// an error ocurred.
 		if ( $.type( to ) === "string" ) {
@@ -962,7 +982,7 @@ $.widget( "mobile.pagecontainer", {
 			isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred, beforeTransition;
 
 		// If we are in the midst of a transition, queue the current request. We'll call
-		// changePage() once we're done with the current transition to service the request.
+		// change() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
 
 			// Make sure to only queue the to and settings values so the arguments work with a call
@@ -1017,11 +1037,11 @@ $.widget( "mobile.pagecontainer", {
 			toPage.jqmData( "role" ) === "dialog" ) &&
 			toPage.jqmData( "dialog" ) !== true;
 
-		// By default, we prevent changePage requests when the fromPage and toPage are the same
+		// By default, we prevent change() requests when the fromPage and toPage are the same
 		// element, but folks that generate content manually/dynamically and reuse pages want to be
 		// able to transition to the same page. To allow this, they will need to change the default
 		// value of allowSamePageTransition to true, *OR*, pass it in as an option when they
-		// manually call changePage(). It should be noted that our default transition animations
+		// manually call change(). It should be noted that our default transition animations
 		// assume that the formPage and toPage are different elements, so they may behave
 		// unexpectedly. It is up to the developer that turns on the allowSamePageTransitiona
 		// option to either turn off transition animations, or make sure that an appropriate
@@ -1045,7 +1065,7 @@ $.widget( "mobile.pagecontainer", {
 		// We need to make sure the page we are given has already been enhanced.
 		toPage.page( { role: settings.role } );
 
-		// If the changePage request was sent from a hashChange event, check to see if the page is
+		// If the change() request was sent from a hashChange event, check to see if the page is
 		// already within the urlHistory stack. If so, we'll assume the user hit the forward/back
 		// button and will try to match the transition accordingly.
 		if ( settings.fromHashChange ) {
@@ -1186,6 +1206,19 @@ $.widget( "mobile.pagecontainer", {
 		var closestBase = ( this.activePage &&
 			$.mobile.getClosestBaseUrl( this.activePage ) );
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
+	},
+
+	_destroy: function() {
+		var myIndex;
+
+		if ( $.mobile.pagecontainers ) {
+			myIndex = $.inArray( this.element, $.mobile.pagecontainers );
+			if ( myIndex >= 0 ) {
+				$.mobile.pagecontainers.splice( myIndex, 1 );
+			}
+		}
+
+		this._super();
 	}
 } );
 

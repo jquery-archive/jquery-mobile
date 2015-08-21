@@ -71,7 +71,8 @@ $.extend( $.mobile, {
 	// find and enhance the pages in the dom and transition to the first page.
 	initializePage: function() {
 		// find present pages
-		var path = $.mobile.path,
+		var pagecontainer,
+			path = $.mobile.path,
 			$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
 			hash = path.stripHash( path.stripQueryParams( path.parseLocation().hash ) ),
 			theLocation = $.mobile.path.parseLocation(),
@@ -100,18 +101,11 @@ $.extend( $.mobile, {
 		$.enhance._installWidget();
 
 		// define page container
-		$.mobile.pageContainer = $.mobile.firstPage
-			.parent()
-				.addClass( "ui-mobile-viewport" )
-				.pagecontainer();
+		pagecontainer = $.mobile.firstPage.parent().pagecontainer();
 
 		// initialize navigation events now, after mobileinit has occurred and the page container
 		// has been created but before the rest of the library is alerted to that fact
 		$.mobile.navreadyDeferred.resolve();
-
-		// alert listeners that the pagecontainer has been determined for binding
-		// to events triggered on it
-		$window.trigger( "pagecontainercreate" );
 
 		// cue page loading message
 		$.mobile.loading( "show" );
@@ -135,7 +129,7 @@ $.extend( $.mobile, {
 				$.mobile.navigate.navigator.squash( path.parseLocation().href );
 			}
 
-			$.mobile.changePage( $.mobile.firstPage, {
+			pagecontainer.pagecontainer( "change", $.mobile.firstPage, {
 				transition: "none",
 				reverse: true,
 				changeHash: false,

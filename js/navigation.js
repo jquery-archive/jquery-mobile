@@ -74,25 +74,6 @@ function findClosestLink( ele ) {
 	return ele;
 }
 
-$.mobile.loadPage = function( url, opts ) {
-	var container;
-
-	opts = opts || {};
-	container = ( opts.pageContainer || $.mobile.pageContainer );
-
-	// create the deferred that will be supplied to loadPage callers
-	// and resolved by the content widget's load method
-	opts.deferred = $.Deferred();
-
-	// Preferring to allow exceptions for uninitialized opts.pageContainer
-	// widgets so we know if we need to force init here for users
-	container.pagecontainer( "load", url, opts );
-
-	// provide the deferred
-	return opts.deferred.promise();
-};
-
-//define vars for interal use
 
 /* internal utility functions */
 
@@ -112,7 +93,7 @@ $.mobile.back = function() {
 			nav.app.backHistory ) {
 		nav.app.backHistory();
 	} else {
-		$.mobile.pageContainer.pagecontainer( "back" );
+		$.mobile.pagecontainers.active.back();
 	}
 };
 
@@ -139,25 +120,6 @@ $.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function(
 	};
 
 // Exposed $.mobile methods
-
-$.mobile.changePage = function( to, options ) {
-	$.mobile.pageContainer.pagecontainer( "change", to, options );
-};
-
-$.mobile.changePage.defaults = {
-	transition: undefined,
-	reverse: false,
-	changeHash: true,
-	fromHashChange: false,
-	role: undefined, // By default we rely on the role defined by the @data-role attribute.
-	duplicateCachedPage: undefined,
-	pageContainer: undefined,
-	showLoadMsg: true, //loading message shows by default when pages are being fetched during changePage
-	dataUrl: undefined,
-	fromPage: undefined,
-	allowSamePageTransition: false
-};
-
 $.mobile._registerInternalEvents = function() {
 	var getAjaxFormData = function( $form, calculateOnly ) {
 		var url,
@@ -248,7 +210,8 @@ $.mobile._registerInternalEvents = function() {
 		if ( !event.isDefaultPrevented() ) {
 			formData = getAjaxFormData( $( this ) );
 			if ( formData ) {
-				$.mobile.changePage( formData.url, formData.options );
+				$( this ).closest( ".ui-pagecontainer" )
+					.pagecontainer( "change", formData.url, formData.options );
 				event.preventDefault();
 			}
 		}
@@ -411,13 +374,19 @@ $.mobile._registerInternalEvents = function() {
 		//this may need to be more specific as we use data-rel more
 		role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-		$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, link: $link } );
+		$link.closest( ".ui-pagecontainer" ).pagecontainer( "change", href, {
+			transition: transition,
+			reverse: reverse,
+			role: role,
+			link: $link
+		});
 		event.preventDefault();
 	} );
 
 	//prefetch pages when anchors with data-prefetch are encountered
 	$.mobile.document.delegate( ".ui-page", "pageshow.prefetch", function() {
-		var urls = [];
+		var urls = [],
+			that = this;
 		$( this ).find( "a:jqmData(prefetch)" ).each( function() {
 			var $link = $( this ),
 				url = $link.attr( "href" );
@@ -425,13 +394,16 @@ $.mobile._registerInternalEvents = function() {
 			if ( url && $.inArray( url, urls ) === -1 ) {
 				urls.push( url );
 
-				$.mobile.loadPage( url, { role: $link.attr( "data-" + $.mobile.ns + "rel" ), prefetch: true } );
+				that.closest( ".ui-pagecontainer" ).pagecontainer( "load", url, {
+					role: $link.attr( "data-" + $.mobile.ns + "rel" ),
+					prefetch: true
+				});
 			}
 		} );
 	} );
 
 	// TODO ensure that the navigate binding in the content widget happens at the right time
-	$.mobile.pageContainer.pagecontainer();
+	//$.mobile.pageContainer.pagecontainer();
 
 	//set page min-heights to be device specific
 	$.mobile.document.bind( "pageshow", function() {

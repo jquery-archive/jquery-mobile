@@ -90,8 +90,8 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 				report: "navigate from a page in a non-base directory to an internal page"
 			} );
 
-			// Try calling changePage() directly with a relative path.
-			$.mobile.changePage( "base-page-1.html" );
+			// Try calling change() directly with a relative path.
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "base-page-1.html" );
 		},
 
 		function() {
@@ -102,7 +102,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling changePage() directly with a relative path.
-			$.mobile.changePage( "../content/content-page-1.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "../content/content-page-1.html" );
 		},
 
 		function() {
@@ -113,7 +113,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			} );
 
 			// Try calling changePage() with an id
-			$.mobile.changePage( "content-page-2.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "content-page-2.html" );
 		},
 
 		function() {
@@ -136,8 +136,8 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 				report: "call changePage() with a page id"
 			} );
 
-			// Try calling changePage() with an id
-			$.mobile.changePage( "internal-page-1" );
+			// Try calling change() with an id
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "internal-page-1" );
 		},
 
 		function() {
@@ -145,7 +145,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 			$.testHelper.assertUrlLocation( assert, {
 				hash: "internal-page-2",
 				push: home + "#internal-page-2",
-				report: "calling changePage() with a page id that is not prefixed with '#' " +
+				report: "calling change() with a page id that is not prefixed with '#' " +
 					"should not change page"
 			} );
 
@@ -209,7 +209,7 @@ asyncTest( "external page form with no action submits to external page URL", fun
 var testBaseTagAlteration = function( assertions ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "../../base-change.html" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "../../base-change.html" );
 		},
 
 		function() {

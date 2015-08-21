@@ -16,6 +16,8 @@ define([
         // The Router constructor
         initialize: function() {
 
+            this.pagecontainer = $( ".ui-pagecontainer" ).pagecontainer( "instance" );
+
             // Instantiates a new Animal Category View
             this.animalsView = new CategoryView( { el: "#animals", collection: new CategoriesCollection( [] , { type: "animals" } ) } );
 
@@ -45,7 +47,10 @@ define([
         home: function() {
 
             // Programatically changes to the categories page
-            $.mobile.changePage( "#categories" , { reverse: false, changeHash: false } );
+            this.pagecontainer.change( "#categories", {
+				reverse: false,
+				changeHash: false
+			});
 
         },
 
@@ -65,8 +70,10 @@ define([
                 currentView.collection.fetch().done( function() {
 
                     // Programatically changes to the current categories page
-                    $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
-    
+                    this.pagecontainer.change( "#" + type, {
+						reverse: false,
+						changeHash: false
+					});
                 } );
 
             }
@@ -75,7 +82,10 @@ define([
             else {
 
                 // Programatically changes to the current categories page
-                $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
+                this.pagecontainer.change( "#" + type, {
+					reverse: false,
+					changeHash: false
+				});
 
             }
 

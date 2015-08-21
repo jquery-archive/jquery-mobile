@@ -111,7 +111,7 @@ require( [
 				function() {
 					var firstPage = findFirstPage();
 
-					assert.deepEqual( $.mobile.pageContainer[ 0 ], firstPage.parent()[ 0 ] );
+					assert.deepEqual( $( ".ui-pagecontainer" )[ 0 ], firstPage.parent()[ 0 ] );
 				}
 			).then( start );
 		} );
