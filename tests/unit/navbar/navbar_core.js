@@ -3,7 +3,7 @@
  */
 ( function( QUnit, $ ) {
 QUnit.test( "navbar button gets active button class when clicked", function( assert ) {
-	var link = $( "#disabled-btn-click a:not(.ui-state-disabled)" ).first();
+	var link = $( "#disabled-button-click a:not(.ui-state-disabled)" ).first();
 
 	link.click();
 	assert.ok( link.hasClass( "ui-button-active" ), "link has active button class" );
@@ -18,9 +18,9 @@ QUnit.test( "disabled navbar button doesn't add active button class when clicked
 
 QUnit.test( "classes are correctly assigned", function( assert ) {
 	var $ul = $( '#enhanced-classes' ),
-		r = $ul.find( "li" ).eq( 0 ).find( "a" ),
-		d = $ul.find( "li" ).eq( 1 ).find( "a" ),
-		u = $ul.find( "li" ).eq( 2 ).find( "a" );
+		r = $ul.find( "li" ).eq( 0 ).find( "a" ).find( "span") ,
+		d = $ul.find( "li" ).eq( 1 ).find( "a" ).find( "span" ),
+		u = $ul.find( "li" ).eq( 2 ).find( "a" ).find( "span" );
 
 	assert.ok( r.hasClass( "ui-icon-arrow-r" ) && !r.hasClass( "ui-icon-arrow-d" ) && !r.hasClass( "ui-icon-arrow-u" ), "first item only has class of arrow-r" );
 	assert.ok( !d.hasClass( "ui-icon-arrow-r" ) && d.hasClass( "ui-icon-arrow-d" ) && !d.hasClass( "ui-icon-arrow-u" ), "second item only has class of arrow-d" );
@@ -65,8 +65,8 @@ QUnit.test( "adding items to navbar", function() {
     var navRows = this.addNav.children( "ul" ),
         navRowCount = navRows.length;
 
-    ok( this.navbarRow.find( "li:last-child > a" ).hasClass ( "ui-btn" ),
-        "added items get ui-btn class after refresh" );
+    ok( this.navbarRow.find( "li:last-child > a" ).hasClass ( "ui-button" ),
+        "added items get ui-button class after refresh" );
     ok( navRowCount === 2, "six items overflows to two lists" );
     ok( navRows.eq(1).hasClass("ui-navbar-row"),
         "overflow list gets appropriate classname" );
@@ -87,7 +87,7 @@ QUnit.test( "destroy navbar ", function() {
 
     ok( navRowCount === 1, "destroyed navbars revert to one ul" );
     navRows.find( "li" ).each( function() {
-        ok( !$(this).find("a").hasClass( "ui-btn" ), "ui-btn class removed on item" );
+        ok( !$(this).find("a").hasClass( "ui-button" ), "ui-button class removed on item" );
     });
 });
 

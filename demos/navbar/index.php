@@ -112,7 +112,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar" data-maxbutton="5" >
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 						<li><a href="#">Three</a></li>
 						<li><a href="#">Four</a></li>
@@ -161,21 +161,21 @@
 			<code>data-morebuttonicon</code> attribute and specifying an icon</p>
 
 			<div data-demo-html="true">
-				<div data-role="navbar" data-maxbutton="5" data-morebutton="true" data-morebuttonicon="grid">
+				<div data-role="navbar" data-maxbutton="5" data-morebutton="true" data-morebuttonicon="ui-icon-grid">
 					<ul>
-						<li><a data-icon="star" href="#" class="ui-btn-active">One</a></li>
-						<li><a data-icon="star" href="#">Two</a></li>
-						<li><a data-icon="star" href="#">Three</a></li>
-						<li><a data-icon="star" href="#">Four</a></li>
-						<li><a data-icon="star" href="#">Five</a></li>
-						<li><a data-icon="star" href="#">Six</a></li>
-						<li><a data-icon="star" href="#">Seven</a></li>
-						<li><a data-icon="star" href="#">Eight</a></li>
-						<li><a data-icon="star" href="#">Nine</a></li>
-						<li><a data-icon="star" href="#">Ten</a></li>
-						<li><a data-icon="star" href="#">Eleven</a></li>
-						<li><a data-icon="star" href="#">Twelve</a></li>
-						<li><a data-icon="star" href="#">Thirteen</a></li>
+						<li><a data-icon="ui-icon-star" href="#" class="ui-button-active">One</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Two</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Three</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Four</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Five</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Six</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Seven</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Eight</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Nine</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Ten</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Eleven</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Twelve</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Thirteen</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
@@ -186,7 +186,7 @@
 			<div data-demo-html="true">
 				<div data-role="toolbar" data-type="header" style="overflow:hidden;">
 				<h1>I'm a header</h1>
-					<a href="#" data-icon="gear" class="ui-toolbar-header-button-right">Options</a>
+					<a href="#" data-icon="ui-icon-gear" class="ui-button-right">Options</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#">One</a></li>
@@ -226,9 +226,9 @@
 				<div data-role="toolbar" data-type="footer">
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#" data-icon="grid">Summary</a></li>
-							<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-							<li><a href="#" data-icon="gear">Setup</a></li>
+							<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+							<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+							<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 						</ul>
 					</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -243,9 +243,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="bottom">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -257,9 +257,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -271,9 +271,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="right">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -309,11 +309,11 @@
 				<h3>Swatch "a"</h3>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid">A</a></li>
-						<li><a href="#" data-icon="star">B</a></li>
-						<li><a href="#" data-icon="gear">C</a></li>
-						<li><a href="#" data-icon="arrow-l">D</a></li>
-						<li><a href="#" data-icon="arrow-r">E</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star">B</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">C</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-l">D</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-r">E</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /container -->
@@ -324,11 +324,11 @@
 				<h3>Swatch "b"</h3>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid">A</a></li>
-						<li><a href="#" data-icon="star">B</a></li>
-						<li><a href="#" data-icon="gear">C</a></li>
-						<li><a href="#" data-icon="arrow-l">D</a></li>
-						<li><a href="#" data-icon="arrow-r">E</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star">B</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">C</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-l">D</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-r">E</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /container -->
@@ -340,8 +340,8 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid" data-theme="a">A</a></li>
-						<li><a href="#" data-icon="star" data-theme="b">B</a></li>
+						<li><a href="#" data-icon="ui-icon-grid" data-theme="a">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star" data-theme="b">B</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -354,9 +354,9 @@
 			<div data-demo-html="true">
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
-						<li><button data-icon="home">One</button></li>
-						<li><button data-icon="grid" data-theme="b">Two</button></li>
-						<li><button data-icon="search">Three</button></li>
+						<li><button data-icon="ui-icon-home">One</button></li>
+						<li><button data-icon="ui-icon-grid" data-theme="b">Two</button></li>
+						<li><button data-icon="ui-icon-search">Three</button></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
@@ -366,9 +366,9 @@
 				<h1>I'm a header</h1>
 					<div data-role="navbar" data-iconpos="right">
 						<ul>
-							<li><button data-icon="home">One</button></li>
-							<li><button data-icon="grid" data-theme="b">Two</button></li>
-							<li><button data-icon="search">Three</button></li>
+							<li><button data-icon="ui-icon-home">One</button></li>
+							<li><button data-icon="ui-icon-grid" data-theme="b">Two</button></li>
+							<li><button data-icon="ui-icon-search">Three</button></li>
 						</ul>
 					</div><!-- /navbar -->
 				</div><!-- /header -->

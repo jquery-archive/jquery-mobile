@@ -36,7 +36,7 @@
 .ui-navbar .ui-button:focus {
 	z-index: 1;
 }
-.ui-navbar-row li .ui-btn {
+.ui-navbar-row li .ui-button {
 	border-top-width: 0;
 }
 /* fixes gaps caused by subpixel problem */
@@ -46,20 +46,20 @@
 .ui-navbar li:last-child .ui-button:after {
 	margin-right: 4px;
 }
-.ui-content .ui-navbar li:last-child .ui-btn {
+.ui-content .ui-navbar li:last-child .ui-button {
 	border-right-width: 1px;
 	margin-right: 0;
 }
-.ui-content .ui-navbar li:last-child .ui-btn:after {
+.ui-content .ui-navbar li:last-child .ui-button:after {
 	margin-right: 0;
 }
-.ui-header .ui-navbar .ui-btn,
-.ui-footer .ui-navbar .ui-btn {
+.ui-header .ui-navbar .ui-button,
+.ui-footer .ui-navbar .ui-button {
 	border-top-width: 0;
 	border-bottom-width: 0;
 	display: inline-block;
 }
-.ui-header .ui-title ~ .ui-navbar .ui-btn,
-.ui-footer .ui-title ~ .ui-navbar .ui-btn {
+.ui-header .ui-title ~ .ui-navbar .ui-button,
+.ui-footer .ui-title ~ .ui-navbar .ui-button {
 	border-top-width: 1px;
 }

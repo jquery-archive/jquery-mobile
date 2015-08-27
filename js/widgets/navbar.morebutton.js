@@ -1,15 +1,37 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+/*!
+ * jQuery Mobile Navbar @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>description: navbar morebutton extension.
 //>>label: NavbarMoreButton
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.navbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./navbar", "./popup", "./listview"], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+    if ( typeof define === "function" && define.amd ) {
 
-$.widget( "mobile.navbar", $.mobile.navbar, {
+        // AMD. Register as an anonymous module.
+        define( [
+            "jquery",
+            "./navbar",
+            "./popup",
+            "./listview",
+            "../widget"], factory );
+    } else {
+
+        // Browser globals
+        factory( jQuery );
+    }
+} )( function( $ ) {
+
+
+return $.widget( "mobile.navbar", $.mobile.navbar, {
 
     options: {
         morebutton: false,
@@ -45,7 +67,7 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
             maxButton = this.maxButton,
             iconpos = this.iconpos,
             icon = this.options.morebuttonicon,
-            classes = "ui-btn";
+            classes = "ui-button";
 
         id = this._id() + "-popup";
 
@@ -59,14 +81,14 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
             this._makeNavButton(buttonItem.find("a"), iconpos);
             if (pos + 1 === maxButton) {
                 if ( icon ) {
-                    classes += " ui-icon-" + icon + " ui-btn-icon-" + this.options.morebuttoniconpos;
+                    classes += " ui-icon-" + icon + " ui-button-icon-" + this.options.morebuttoniconpos;
                 }
                 moreButton = $( "<li></li>" ).append(
                                  $( "<a></a>" )
                                     .attr( "href", "#" + id)
                                     .attr( "data-rel", "popup" )
-                                    .addClass( classes )
-                                    .html( this.options.morebuttontext ));
+                                    // .addClass( classes )
+                                    .html( this.options.morebuttontext ).button() );
                 this.navbar.find( "ul" ).first().append( moreButton );
             }
             if ( pos + 1 >= maxButton ) {
@@ -138,7 +160,4 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
     }
 });
   
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");
