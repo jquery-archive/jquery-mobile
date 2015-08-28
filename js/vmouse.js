@@ -62,7 +62,8 @@ var dataPropertyName = "virtualMouseBindings",
 $.vmouse = {
 	moveDistanceThreshold: 10,
 	clickDistanceThreshold: 10,
-	resetTimerDuration: 1500
+	resetTimerDuration: 1500,
+	maximumTimeBetweenTouches: 100
 };
 
 function getNativeEvent( event ) {
@@ -213,6 +214,22 @@ function mouseEventCallback( event ) {
 	var touchID = $.data( event.target, touchTargetPropertyName ),
 		ve;
 
+	// It is unexpected if a click event is received before a touchend
+	// or touchmove event, however this is a known behavior in Mobile
+	// Safari when Mobile VoiceOver (as of iOS 8) is enabled and the user
+	// double taps to activate a link element. In these cases if a touch
+	// event is not received within the maximum time between touches,
+	// re-enable mouse bindings and call the mouse event handler again.
+	if ( event.type === "click" && $.data( event.target, "lastTouchType" ) === "touchstart" ) {
+		setTimeout( function() {
+			if ( $.data( event.target, "lastTouchType" ) === "touchstart" ) {
+				enableMouseBindings();
+				delete $.data( event.target ).lastTouchType;
+				mouseEventCallback( event );
+			}
+		}, $.vmouse.maximumTimeBetweenTouches );
+	}
+
 	if ( !blockMouseTriggers && ( !lastTouchID || lastTouchID !== touchID ) ) {
 		ve = triggerVirtualEvent( "v" + event.type, event );
 		if ( ve ) {
@@ -238,6 +255,8 @@ function handleTouchStart( event ) {
 
 		target = event.target;
 		flags = getVirtualBindingFlags( target );
+
+		$.data( event.target, "lastTouchType", event.type );
 
 		if ( flags.hasVirtualBinding ) {
 
@@ -268,6 +287,8 @@ function handleScroll( event ) {
 		triggerVirtualEvent( "vmousecancel", event, getVirtualBindingFlags( event.target ) );
 	}
 
+	$.data( event.target, "lastTouchType", event.type );
+
 	didScroll = true;
 	startResetTimer();
 }
@@ -282,6 +303,8 @@ function handleTouchMove( event ) {
 		moveThreshold = $.vmouse.moveDistanceThreshold,
 		flags = getVirtualBindingFlags( event.target );
 
+	$.data( event.target, "lastTouchType", event.type );
+
 	didScroll = didScroll ||
 		( Math.abs( t.pageX - startX ) > moveThreshold ||
 		Math.abs( t.pageY - startY ) > moveThreshold );
@@ -295,11 +318,12 @@ function handleTouchMove( event ) {
 }
 
 function handleTouchEnd( event ) {
-	if ( blockTouchTriggers ) {
+	if ( blockTouchTriggers || $.data( event.target, "lastTouchType" ) === undefined ) {
 		return;
 	}
 
 	disableTouchBindings();
+	delete $.data( event.target ).lastTouchType;
 
 	var flags = getVirtualBindingFlags( event.target ),
 		ve, t;
