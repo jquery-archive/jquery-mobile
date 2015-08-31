@@ -26,7 +26,7 @@ The easiest way to obtain a custom build is to use the [download builder](http:/
 
 ### Requirements
 
-* [node.js](http://nodejs.org/) ~0.8.22
+* [node.js](http://nodejs.org/)
 * [grunt-cli](http://gruntjs.com/)
 
 ### Commands
