@@ -1,7 +1,7 @@
 /*
  * mobile flipswitch unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 var oldTransitions, oldAnimations,
 	countEvents = function( element, eventName ) {
 		var count = 0,
@@ -46,15 +46,15 @@ var oldTransitions, oldAnimations,
 		return events;
 	} )();
 
-module( "Callbacks: Event", {
+QUnit.module( "Callbacks: Event", {
 	teardown: function() {
 		$( "#transition-test" )
 			.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "Make sure callback is executed and is cleared by actual event", function() {
-	expect( 2 );
+QUnit.asyncTest( "Make sure callback is executed and is cleared by actual event", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -69,20 +69,20 @@ asyncTest( "Make sure callback is executed and is cleared by actual event", func
 	} );
 
 	window.setTimeout( function() {
-		ok( transitionComplete, "transition completed" );
-		ok( animationComplete, "animation completed" );
-		start();
+		assert.ok( transitionComplete, "transition completed" );
+		assert.ok( animationComplete, "animation completed" );
+		QUnit.start();
 	}, 800 );
 } );
-module( "Callbacks: fallback", {
+QUnit.module( "Callbacks: fallback", {
 	teardown: function() {
 		$( "#transition-test" )
 			.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "Make sure callback is executed by fall back when no animation", function() {
-	expect( 2 );
+QUnit.asyncTest( "Make sure callback is executed by fall back when no animation", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -95,12 +95,12 @@ asyncTest( "Make sure callback is executed by fall back when no animation", func
 	} );
 
 	window.setTimeout( function() {
-		ok( transitionComplete, "transition callback called" );
-		ok( animationComplete, "animation callback called" );
-		start();
+		assert.ok( transitionComplete, "transition callback called" );
+		assert.ok( animationComplete, "animation callback called" );
+		QUnit.start();
 	}, 1200 );
 } );
-module( "Callbacks: No support", {
+QUnit.module( "Callbacks: No support", {
 	setup: function() {
 		oldTransitions = $.support.cssTransitions,
 		oldAnimations = $.support.cssAnimations;
@@ -116,8 +116,8 @@ module( "Callbacks: No support", {
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "callback executes immediately when animations unsupported on device", function() {
-	expect( 2 );
+QUnit.asyncTest( "callback executes immediately when animations unsupported on device", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -132,23 +132,23 @@ asyncTest( "callback executes immediately when animations unsupported on device"
 	} );
 
 	window.setTimeout( function() {
-		ok( transitionComplete, "transition callback called" );
-		ok( animationComplete, "animation callback called" );
+		assert.ok( transitionComplete, "transition callback called" );
+		assert.ok( animationComplete, "animation callback called" );
 	}, 10 );
 
 	window.setTimeout( function() {
-		start();
+		QUnit.start();
 	}, 800 );
 } );
-module( "Event Bindings", {
+QUnit.module( "Event Bindings", {
 	teardown: function() {
 		$( "#transition-test" )
 			.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "Ensure at most one event is bound", function() {
-	expect( 2 );
+QUnit.asyncTest( "Ensure at most one event is bound", function( assert ) {
+	assert.expect( 2 );
 
 	$( "#transition-test" )
 		.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
@@ -158,16 +158,16 @@ asyncTest( "Ensure at most one event is bound", function() {
 	$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 		animationComplete = true;
 	} );
-	ok( Object.keys( $._data( $( "#animation-test" )[ 0 ], "events" ) ).length === 1,
+	assert.ok( Object.keys( $._data( $( "#animation-test" )[ 0 ], "events" ) ).length === 1,
 		"Only one animation event" );
 
-	ok( Object.keys( $._data( $( "#transition-test" )[ 0 ], "events" ) ).length === 1,
+	assert.ok( Object.keys( $._data( $( "#transition-test" )[ 0 ], "events" ) ).length === 1,
 		"Only one transition event" );
 	window.setTimeout( function() {
-		start();
+		QUnit.start();
 	}, 800 );
 } );
-module( "Event Bindings: no animation support", {
+QUnit.module( "Event Bindings: no animation support", {
 	setup: function() {
 		oldTransitions = $.support.cssTransitions,
 		oldAnimations = $.support.cssAnimations;
@@ -183,8 +183,8 @@ module( "Event Bindings: no animation support", {
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "Make sure no bindings when no cssanimation support", function() {
-	expect( 2 );
+QUnit.asyncTest( "Make sure no bindings when no cssanimation support", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -196,22 +196,22 @@ asyncTest( "Make sure no bindings when no cssanimation support", function() {
 		$( "#animation-test" ).animationComplete( function() {
 			animationComplete = true;
 		} );
-		ok( $._data( $( "#animation-test" )[ 0 ], "events" ) === undefined,
+		assert.ok( $._data( $( "#animation-test" )[ 0 ], "events" ) === undefined,
 			"no animation bindings remain" );
-		ok( $._data( $( "#transition-test" )[ 0 ], "events" ) === undefined,
+		assert.ok( $._data( $( "#transition-test" )[ 0 ], "events" ) === undefined,
 			"no transition bindings remain" );
-		start();
+		QUnit.start();
 	}, 800 );
 } );
-module( "Event Removal: event", {
+QUnit.module( "Event Removal: event", {
 	teardown: function() {
 		$( "#transition-test" )
 			.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
 		$( "#animation-test" ).removeClass( "in" );
 	}
 } );
-asyncTest( "Make sure no bindings remain after event", function() {
-	expect( 2 );
+QUnit.asyncTest( "Make sure no bindings remain after event", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -225,14 +225,14 @@ asyncTest( "Make sure no bindings remain after event", function() {
 		animationComplete = true;
 	} );
 	window.setTimeout( function() {
-		ok( $._data( $( "#animation-test" )[ 0 ], "events" ) === undefined,
+		assert.ok( $._data( $( "#animation-test" )[ 0 ], "events" ) === undefined,
 			"no animation bindings remain" );
-		ok( $._data( $( "#transition-test" )[ 0 ], "events" ) === undefined,
+		assert.ok( $._data( $( "#transition-test" )[ 0 ], "events" ) === undefined,
 			"no transition bindings remain" );
-		start();
+		QUnit.start();
 	}, 800 );
 } );
-module( "Event Removal: fallback", {
+QUnit.module( "Event Removal: fallback", {
 	setup: function() {
 		$( "#transition-test" ).on( events.transition.name, $.noop );
 		$( "#animation-test" ).on( events.animation.name, $.noop );
@@ -245,8 +245,8 @@ module( "Event Removal: fallback", {
 		$( "#animation-test" ).off( events.animation.name, $.noop );
 	}
 } );
-asyncTest( "Make sure no bindings remain after fallback", function() {
-	expect( 2 );
+QUnit.asyncTest( "Make sure no bindings remain after fallback", function( assert ) {
+	assert.expect( 2 );
 	var transitionComplete = false,
 		animationComplete = false;
 
@@ -259,25 +259,25 @@ asyncTest( "Make sure no bindings remain after fallback", function() {
 	} );
 
 	window.setTimeout( function() {
-		deepEqual( countEvents( $( "#animation-test" )[ 0 ], events.animation.name ), 1,
+		assert.deepEqual( countEvents( $( "#animation-test" )[ 0 ], events.animation.name ), 1,
 			"no animation bindings remain" );
-		deepEqual( countEvents( $( "#transition-test" )[ 0 ], events.transition.name ), 1,
+		assert.deepEqual( countEvents( $( "#transition-test" )[ 0 ], events.transition.name ), 1,
 			"no transition bindings remain" );
-		start();
+		QUnit.start();
 	}, 1200 );
 } );
 
-var createContextChecker = function( expectedTransitionContext, expectedAnimationContext ) {
+function createContextChecker( assert, expectedTransitionContext, expectedAnimationContext ) {
 	var actualAnimationContext, actualTransitionContext,
 		completeCount = 0,
 		maybeAssert = function() {
 			completeCount++;
 			if ( completeCount === 2 ) {
-				deepEqual( actualTransitionContext, expectedTransitionContext,
+				assert.deepEqual( actualTransitionContext, expectedTransitionContext,
 					"Transition context is correct" );
-				deepEqual( actualAnimationContext, expectedAnimationContext,
+				assert.deepEqual( actualAnimationContext, expectedAnimationContext,
 					"Animation context is correct" );
-				start();
+				QUnit.start();
 			}
 		};
 
@@ -293,7 +293,7 @@ var createContextChecker = function( expectedTransitionContext, expectedAnimatio
 	};
 };
 
-module( "Callback context and return value: event", {
+QUnit.module( "Callback context and return value: event", {
 	teardown: function() {
 		$( "#transition-test" )
 			.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
@@ -301,52 +301,52 @@ module( "Callback context and return value: event", {
 	}
 } );
 
-asyncTest( "Make sure context and return value is correct for event", function() {
-	expect( 4 );
+QUnit.asyncTest( "Make sure context and return value is correct for event", function( assert ) {
+	assert.expect( 4 );
 
 	var returnValue,
 		transitionTest = $( "#transition-test" ),
 		animationTest = $( "#animation-test" ),
-		checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+		checker = createContextChecker( assert, transitionTest[ 0 ], animationTest[ 0 ] );
 
 	returnValue = transitionTest
 		.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
 		.animationComplete( checker.transitionHandler, "transition" );
 
-	deepEqual( returnValue, transitionTest,
+	assert.deepEqual( returnValue, transitionTest,
 		"Returned jQuery object for transition is the one passed in" );
 
 	returnValue = animationTest
 		.addClass( "in" )
 		.animationComplete( checker.animationHandler );
 
-	deepEqual( returnValue, animationTest,
+	assert.deepEqual( returnValue, animationTest,
 		"Returned jQuery object for animation is the one passed in" );
 
 } );
 
-module( "Callback context and return value: fallback" );
+QUnit.module( "Callback context and return value: fallback" );
 
-asyncTest( "Make sure context and return value is correct for fallback", function() {
-	expect( 4 );
+QUnit.asyncTest( "Make sure context and return value is correct for fallback", function( assert ) {
+	assert.expect( 4 );
 
 	var returnValue,
 		transitionTest = $( "#transition-test" ),
 		animationTest = $( "#animation-test" ),
-		checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+		checker = createContextChecker( assert, transitionTest[ 0 ], animationTest[ 0 ] );
 
 	returnValue = transitionTest.animationComplete( checker.transitionHandler, "transition" );
 
-	deepEqual( returnValue, transitionTest,
+	assert.deepEqual( returnValue, transitionTest,
 		"Returned jQuery object for transition is the one passed in" );
 
 	returnValue = animationTest.animationComplete( checker.animationHandler );
 
-	deepEqual( returnValue, animationTest,
+	assert.deepEqual( returnValue, animationTest,
 		"Returned jQuery object for animation is the one passed in" );
 } );
 
-module( "Callback context and return value: no support", {
+QUnit.module( "Callback context and return value: no support", {
 	setup: function() {
 		oldTransitions = $.support.cssTransitions,
 		oldAnimations = $.support.cssAnimations;
@@ -363,32 +363,32 @@ module( "Callback context and return value: no support", {
 	}
 } );
 
-asyncTest( "Make sure context and return value is correct for no support", function() {
-	expect( 4 );
+QUnit.asyncTest( "Make sure context and return value is correct for no support", function( assert ) {
+	assert.expect( 4 );
 
 	var returnValue,
 		transitionTest = $( "#transition-test" ),
 		animationTest = $( "#animation-test" ),
-		checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+		checker = createContextChecker( assert, transitionTest[ 0 ], animationTest[ 0 ] );
 
 	returnValue = transitionTest
 		.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
 		.animationComplete( checker.transitionHandler, "transition" );
 
-	deepEqual( returnValue, transitionTest,
+	assert.deepEqual( returnValue, transitionTest,
 		"Returned jQuery object for transition is the one passed in" );
 
 	returnValue = animationTest
 		.addClass( "in" )
 		.animationComplete( checker.animationHandler );
 
-	deepEqual( returnValue, animationTest,
+	assert.deepEqual( returnValue, animationTest,
 		"Returned jQuery object for animation is the one passed in" );
 } );
 
-module( "Empty jQuery object" );
+QUnit.module( "Empty jQuery object" );
 
-asyncTest( "Make sure callback is not called on empty jQuery object", function() {
+QUnit.asyncTest( "Make sure callback is not called on empty jQuery object", function( assert ) {
 	var transitionCallbackExecuted = false,
 		animationCallbackExecuted = false;
 
@@ -401,10 +401,10 @@ asyncTest( "Make sure callback is not called on empty jQuery object", function()
 	} );
 
 	setTimeout( function() {
-		deepEqual( transitionCallbackExecuted, false, "Transition callback was not run" );
-		deepEqual( animationCallbackExecuted, false, "Animation callback was not run" );
-		start();
+		assert.deepEqual( transitionCallbackExecuted, false, "Transition callback was not run" );
+		assert.deepEqual( animationCallbackExecuted, false, "Animation callback was not run" );
+		QUnit.start();
 	}, $.fn.animationComplete.defaultDuration * 1.5 );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
