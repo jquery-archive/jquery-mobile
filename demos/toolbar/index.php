@@ -33,8 +33,8 @@
 	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -171,7 +171,7 @@
 
 		<div data-demo-html="true">
 			<div data-role="toolbar" data-type="header">
-				<div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-button-left">
+				<div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-toolbar-header-button-left">
 					<a href="#" class="ui-button">Add <span class="ui-icon ui-icon-plus"></span></a>
 					<a href="#" class="ui-button">Up <span class="ui-icon ui-icon-arrow-u"></span></a>
 					<a href="#" class="ui-button">Down <span class="ui-icon ui-icon-arrow-d"></span></a>

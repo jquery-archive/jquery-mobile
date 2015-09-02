@@ -53,8 +53,8 @@
     <div data-role="toolbar" data-type="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -104,7 +104,7 @@
     <div data-role="panel" id="left-panel" data-theme="b">
 
     	<p>Left reveal panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-toolbar-header-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
 
     </div><!-- /panel -->
 

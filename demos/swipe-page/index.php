@@ -26,8 +26,8 @@
     <div data-role="toolbar" data-type="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -69,7 +69,7 @@
 	<div role="main" class="ui-content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
-        	<a href="#" data-rel="back" class="ui-button ui-button-right ui-button-b ui-button-icon-only ui-corner-all">Close<span class="ui-icon ui-icon-delete"></span></a>
+        	<a href="#" data-rel="back" class="ui-button ui-toolbar-header-button-right ui-button-b ui-button-icon-only ui-corner-all">Close<span class="ui-icon ui-icon-delete"></span></a>
 			<p>Here some text.</p>
         </div><!-- /popup -->
 
@@ -78,12 +78,12 @@
 </div><!-- /page -->
 
 <div id="_footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
-	<div data-role="controlgroup" class="control ui-button-left" data-type="horizontal" data-mini="true">
+	<div data-role="controlgroup" class="control ui-toolbar-header-button-left" data-type="horizontal" data-mini="true">
     	<a href="#" class="prev ui-button ui-button-icon-only">Previous<span class="ui-icon ui-icon-caret-l"></span></a>
     	<a href="#" class="next ui-button ui-button-icon-only">Next<span class="ui-icon ui-icon-caret-r"></span></a>
     </div>
 
-	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-mini ui-corner-all">Trivia<span class="ui-icon ui-icon-info"></span></a>
+	<a href="#" data-rel="popup" class="trivia-button ui-button ui-toolbar-header-button-right ui-mini ui-corner-all">Trivia<span class="ui-icon ui-icon-info"></span></a>
 </div><!-- /footer -->
 
 </body>

@@ -18,8 +18,8 @@
     <div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -328,14 +328,14 @@
 				<label for="text-enhanced">Text input:</label>
 				<div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-inherit ui-textinput-has-clear-button">
 					<input type="text" data-enhanced="true" data-clear-btn="true" name="text-enhanced" id="text-enhanced" value="" class="ui-textinput-hide-clear">
-					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
+					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-toolbar-header-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
 				</div>
 				
 				<label for="search-enhanced">Search:</label>
 				<div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-search ui-body-inherit ui-textinput-has-clear-button">
 					<span class="ui-textinput-search-icon ui-icon ui-alt-icon ui-icon-search"></span>
 					<input type="text" data-enhanced="true" data-type="search" name="search-enhanced" id="search-enhanced" value="" class="ui-textinput-hide-clear">
-					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
+					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-toolbar-header-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
 				</div>				
 				
 				<label for="textarea-enhanced">Textarea:</label>
