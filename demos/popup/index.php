@@ -43,8 +43,8 @@
 	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -84,13 +84,13 @@
 			<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
 
 			<div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 			</div>
 			<div data-role="popup" id="popupSydney" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
 			</div>
 			<div data-role="popup" id="popupNYC" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
 			</div>
 		</div><!--/demo-html -->
 
@@ -216,17 +216,17 @@
 			<a href="#popupUndismissible" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline">Undismissible Popup</a>
 
 			<div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have a close button at the top right corner with simple HTML markup.</p>
 			</div>
 
 			<div data-role="popup" id="popupCloseLeft" class="ui-content" style="max-width:280px">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have a close button at the top left corner with simple HTML markup.</p>
 			</div>
 
 			<div data-role="popup" id="popupUndismissible" class="ui-content" style="max-width:280px" data-dismissible="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have the <code>data-dismissible</code> attribute set to <code>false</code>. I'm not closeable by clicking outside of me.</p>
 			</div>
 		</div><!--/demo-html -->
@@ -284,7 +284,7 @@
 
 			<a href="#transparent" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline">Theme "none", no shadow</a>
 			<div id="transparent" data-role="popup" data-theme="none" data-shadow="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
 			  <img src="../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup" height="300" width="300">
 			</div>
 

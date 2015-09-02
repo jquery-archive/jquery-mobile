@@ -19,7 +19,7 @@
 					brand = target.find( "h2" ).html(),
 					model = target.find( "p" ).html(),
 					short = target.attr( "id" ),
-					closebutton = '<a href="#" data-rel="back" class="ui-button ui-corner-all ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>',
+					closebutton = '<a href="#" data-rel="back" class="ui-button ui-corner-all ui-button-a ui-button-icon-only ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>',
 					header = '<div data-role="toolbar" data-type="header"><h2>' + brand + ' ' + model + '</h2></div>',
 					img = '<img src="../_assets/img/' + short + '.jpg" alt="' + brand + '" class="photo">',
 					popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15"></div>';
@@ -85,8 +85,8 @@
 	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
