@@ -1,7 +1,7 @@
-( function( $ ) {
+( function( QUnit, $ ) {
 
-asyncTest( "Returning from a dialog results in the page from which it opened", function() {
-	expect( 2 );
+QUnit.asyncTest( "Returning from a dialog results in the page from which it opened", function( assert ) {
+	assert.expect( 2 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -9,15 +9,15 @@ asyncTest( "Returning from a dialog results in the page from which it opened", f
 		},
 
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "a", $.mobile.activePage[ 0 ] ).click();
 		},
 
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			QUnit.start();
 		}
 	] );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
