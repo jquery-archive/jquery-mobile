@@ -2,12 +2,12 @@
  * mobile core unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
 var libName = "core",
 	scrollTimeout = 70, // TODO expose timing as an attribute
 	scrollStartEnabledTimeout = 150;
 
-module( libName, {
+QUnit.module( libName, {
 	setup: function() {
 		$( "<div id='scroll-testing' " +
 			"style='height: " + ( screen.height * 3 ) + "px'></div>" ).appendTo( "body" );
@@ -18,44 +18,44 @@ module( libName, {
 	}
 } );
 
-var scrollUp = function( pos ) {
+function scrollUp( assert, pos ) {
 	$( window ).scrollTop( screen.height );
-	deepEqual( $( window ).scrollTop() > 0, true,
+	assert.deepEqual( $( window ).scrollTop() > 0, true,
 		"After setting scrollTop, it is " + $( window ).scrollTop() );
 	$.mobile.silentScroll( pos );
-};
+}
 
-asyncTest( "silent scroll scrolls the page to the top by default", function() {
-	scrollUp();
+QUnit.asyncTest( "silent scroll scrolls the page to the top by default", function( assert ) {
+	scrollUp( assert );
 
 	setTimeout( function() {
-		deepEqual( $( window ).scrollTop(), $.mobile.defaultHomeScroll,
+		assert.deepEqual( $( window ).scrollTop(), $.mobile.defaultHomeScroll,
 			"After parameterless silentScroll(), scrollTop is $.mobile.defaultHomescroll: " +
 			$.mobile.defaultHomeScroll );
-		start();
+		QUnit.start();
 	}, scrollTimeout );
 } );
 
-asyncTest( "silent scroll scrolls the page to the passed y position", function() {
+QUnit.asyncTest( "silent scroll scrolls the page to the passed y position", function( assert ) {
 	var pos = 10;
-	scrollUp( pos );
+	scrollUp( assert, pos );
 
 	setTimeout( function() {
-		deepEqual( $( window ).scrollTop(), pos );
-		start();
+		assert.deepEqual( $( window ).scrollTop(), pos );
+		QUnit.start();
 	}, scrollTimeout );
 } );
 
-asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function() {
+QUnit.asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function( assert ) {
 	$.event.special.scrollstart.enabled = true;
-	scrollUp();
-	ok( !$.event.special.scrollstart.enabled );
+	scrollUp( assert );
+	assert.ok( !$.event.special.scrollstart.enabled );
 
 	setTimeout( function() {
-		ok( $.event.special.scrollstart.enabled );
-		start();
+		assert.ok( $.event.special.scrollstart.enabled );
+		QUnit.start();
 	}, scrollStartEnabledTimeout );
 } );
 
 //TODO test that silentScroll is called on window load
-} )( jQuery );
+} )( QUnit, jQuery );
