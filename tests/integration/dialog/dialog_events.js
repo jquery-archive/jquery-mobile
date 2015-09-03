@@ -17,7 +17,7 @@ QUnit.module( "dialog", {
 } );
 
 QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
-	expect( 5 );
+	assert.expect( 5 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -55,7 +55,7 @@ QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 } );
 
 QUnit.asyncTest( "dialog element with no theming", function( assert ) {
-	expect( 4 );
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -91,7 +91,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
-	expect( 5 );
+	assert.expect( 5 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -125,7 +125,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 } );
 
 QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function( assert ) {
-	expect( 4 );
+	assert.expect( 4 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -160,7 +160,7 @@ QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow"
 	function( assert ) {
 		var pageTheme;
 
-		expect( 1 );
+		assert.expect( 1 );
 
 		$.testHelper.pageSequence( [
 			function() {
