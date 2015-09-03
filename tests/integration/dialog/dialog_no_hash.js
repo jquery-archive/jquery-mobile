@@ -1,17 +1,17 @@
 /*
  * mobile dialog unit tests
  */
-( function( $ ) {
-module( "dialog", {
+( function( QUnit, $ ) {
+QUnit.module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
 	}
 } );
 
-asyncTest( "dialog opens and closes correctly when hash handling is off", function() {
+QUnit.asyncTest( "dialog opens and closes correctly when hash handling is off", function( assert ) {
 	var activePage;
 
-	expect( 3 );
+	assert.expect( 3 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -26,18 +26,18 @@ asyncTest( "dialog opens and closes correctly when hash handling is off", functi
 
 		function() {
 			// make sure the dialog came up
-			ok( $( "#dialog-no-hash" ).is( ":visible" ), "dialog showed up" );
+			assert.ok( $( "#dialog-no-hash" ).is( ":visible" ), "dialog showed up" );
 
 			// close the dialog
 			$( "#dialog-no-hash a" ).click();
 		},
 
 		function() {
-			ok( !$( "#dialog-no-hash" ).is( ":visible" ), "dialog disappeared" );
-			ok( $.mobile.activePage[ 0 ] === activePage[ 0 ], "active page has been restored" );
-			start();
+			assert.ok( !$( "#dialog-no-hash" ).is( ":visible" ), "dialog disappeared" );
+			assert.ok( $.mobile.activePage[ 0 ] === activePage[ 0 ], "active page has been restored" );
+			QUnit.start();
 		}
 	] );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
