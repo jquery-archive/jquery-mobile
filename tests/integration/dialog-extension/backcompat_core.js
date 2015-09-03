@@ -1,7 +1,7 @@
 ( function( QUnit, $ ) {
 
-asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function() {
-	expect( 2 );
+QUnit.asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function( assert ) {
+	assert.expect( 2 );
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -12,7 +12,7 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 
 		function() {
 			// Make sure the dialog came up
-			ok( /&ui-state=dialog/.test( location.hash ),
+			assert.ok( /&ui-state=dialog/.test( location.hash ),
 				"ui-state=dialog =~ location.hash", "dialog open" );
 
 			// Close the dialog
@@ -20,9 +20,9 @@ asyncTest( "dialog hash is added when the dialog is opened and removed when clos
 		},
 
 		function() {
-			ok( !( /&ui-state=dialog/.test( location.hash ) ),
+			assert.ok( !( /&ui-state=dialog/.test( location.hash ) ),
 				"ui-state=dialog !~ location.hash" );
-			start();
+			QUnit.start();
 		}
 	] );
 } );
@@ -48,7 +48,7 @@ function testClassPresence( assert, dialog, prefix, optionName, newOptionValue, 
 }
 
 function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
-	asyncTest( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
+	QUnit.asyncTest( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
 		var option = "corners",
 			dialogOn = $( "#" + prerenderedIdPrefix + "corners-option-test" ),
 			dialogOff = $( "#" + prerenderedIdPrefix + "corners-option-test-false" );
@@ -82,7 +82,7 @@ function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
 		] );
 	} );
 
-	asyncTest( "Class ui-corner-all is synchronized to option corners", function( assert ) {
+	QUnit.asyncTest( "Class ui-corner-all is synchronized to option corners", function( assert ) {
 		var option = "classes.ui-page-dialog-contain",
 			dialogOn = $( "#" + prerenderedIdPrefix + "corners-via-class-test" ),
 			dialogOff = $( "#" + prerenderedIdPrefix + "corners-via-class-test-false" );
