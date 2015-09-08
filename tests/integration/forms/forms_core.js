@@ -61,13 +61,16 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		var id = el.attr( "id" ),
 			button = el.parent(),
 			wrapper = button.parent(),
-			anonySpan = button.children().eq( 0 );
+			anonySpan = button.children( ".ui-selectmenu-button-text" );
 
 		assert.ok( button.length === 1, prefix + id + " has a parent" );
 		assert.ok( wrapper.length === 1, prefix + id + " has a wrapper" );
-		assert.ok( wrapper.hasClass( "ui-select" ), prefix + id + "'s wrapper has class ui-select" );
-		assert.ok( anonySpan.length === 1, prefix + id + "'s wrapper contains a single span element as its first child" );
-		assert.ok( anonySpan.text() === el.children( "[value='" + el.val() + "']" ).text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
+		assert.ok( wrapper.hasClass( "ui-selectmenu" ), prefix + id +
+			"'s wrapper has class ui-selectmenu" );
+		assert.ok( anonySpan.length === 1, prefix + id +
+			"'s wrapper contains a single span element as its last child" );
+		assert.strictEqual( anonySpan.text(), el.children( "[value='" + el.val() + "']" ).text(),
+			prefix + id + "'s text is identical to the selected <option> element's text" );
 	}
 
 	function verifyFlipswitch( assert, prefix, el, value ) {
