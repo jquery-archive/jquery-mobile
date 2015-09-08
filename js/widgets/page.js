@@ -88,8 +88,12 @@ $.widget( "mobile.page", {
 		if ( !page.data( "mobile-page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
-			this._on( {
-				pagehide: callback || function( e, data ) {
+			this._on( this.document, {
+				pagecontainerhide: callback || function( e, data ) {
+
+					if ( data.prevPage[ 0 ] !== this.element[ 0 ] ) {
+						return;
+					}
 
 					// Check if this is a same page transition and if so don't remove the page
 					if ( !data.samePage ) {

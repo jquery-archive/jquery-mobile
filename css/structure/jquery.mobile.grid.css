@@ -58,7 +58,7 @@ li.ui-block-e {
 	margin-left: 0;
 }
 [class*="ui-block-"] > .ui-button,
-[class*="ui-block-"] > .ui-select,
+[class*="ui-block-"] > .ui-selectmenu,
 [class*="ui-block-"] > .ui-checkbox,
 [class*="ui-block-"] > .ui-radio,
 [class*="ui-block-"] > button.ui-button-inline,

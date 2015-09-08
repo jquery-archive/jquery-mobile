@@ -38,13 +38,14 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		shadow: false,
 
 		//Corners: true,
+		direction: "vertical",
 		type: "vertical",
 		mini: false
 	},
 
 	_create: function() {
 		if ( this.options.direction !== $.ui.controlgroup.prototype.options.direction ) {
-			this.options.type = this.options.type;
+			this.options.type = this.options.direction;
 		} else if ( this.options.type !== $.ui.controlgroup.prototype.options.type ) {
 			this._setOption( "direction", this.options.type );
 		}

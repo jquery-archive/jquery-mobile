@@ -13,6 +13,7 @@
 
 	<script src="../../lib/bootstrap.js"
 			data-deps="forms/select forms/select.custom"
+			data-no-backcompat="true"
 			data-init="true"
 			data-modules="button_focus_core">
 	</script>
@@ -21,8 +22,8 @@
 
 	<div id="qunit"></div>
 
-	<div id="default" data-nstest-role="page">
-		<select name="button-focus-test" id="button-focus-test" data-nstest-native-menu="false">
+	<div id="default" data-ui-role="page">
+		<select data-ui-role="selectmenu" name="button-focus-test" id="button-focus-test" data-ui-native-menu="false">
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
 			<option value="AZ">Arizona</option>

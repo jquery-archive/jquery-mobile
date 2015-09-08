@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Controlgroup CSS Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page forms/select forms/button forms/checkboxradio controlgroup"
+			data-init="true"
+			data-no-backcompat="true"
+			data-modules="controlgroup_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-ui-role="page">
+		<div class="ui-content">
+			<div data-ui-role="controlgroup" id="button-horizontal" data-ui-direction="horizontal">
+				<a href="#">Button 1</a>
+				<a href="#">Button 2</a>
+			</div>
+			<div data-ui-role="controlgroup" id="button-vertical" data-ui-direction="vertical">
+				<a href="#">Button 1</a>
+				<a href="#">Button 2</a>
+			</div>
+			<div data-ui-role="controlgroup" id="button-single">
+				<a href="#">Button 1</a>
+			</div>
+
+			<div data-ui-role="controlgroup" id="checkboxradio-horizontal" data-ui-direction="horizontal">
+				<label><input type="checkbox" data-ui-role="checkboxradio">Checkbox 1</label>
+				<label><input type="checkbox" data-ui-role="checkboxradio">Checkbox 2</label>
+			</div>
+			<div data-ui-role="controlgroup" id="checkboxradio-vertical" data-ui-direction="vertical">
+				<label><input type="checkbox" data-ui-role="checkboxradio">Checkbox 1</label>
+				<label><input type="checkbox" data-ui-role="checkboxradio">Checkbox 2</label>
+			</div>
+			<div data-ui-role="controlgroup" id="checkboxradio-single">
+				<label><input type="checkbox" data-ui-role="checkboxradio">Checkbox 1</label>
+			</div>
+
+			<div data-ui-role="controlgroup" id="selectmenu-horizontal" data-ui-direction="horizontal">
+				<select data-ui-role="selectmenu">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+				<select data-ui-role="selectmenu">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</div>
+			<div data-ui-role="controlgroup" id="selectmenu-vertical" data-ui-direction="vertical">
+				<select data-ui-role="selectmenu">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+				<select data-ui-role="selectmenu">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</div>
+			<div data-ui-role="controlgroup" id="selectmenu-single">
+				<select data-ui-role="selectmenu">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
