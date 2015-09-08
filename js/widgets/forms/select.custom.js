@@ -9,7 +9,7 @@
 
 //>>label: Selects: Custom menus
 //>>group: Forms
-//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
+//>>description: Select menu extension for menu styling, placeholder options, and multi-select.
 //>>docs: http://api.jquerymobile.com/selectmenu/
 //>>demos: http://demos.jquerymobile.com/@VERSION/selectmenu-custom/
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
@@ -24,6 +24,7 @@
 			"../../core",
 			"../../navigation",
 			"./select",
+			"../toolbar",
 			"../listview",
 			"../page.dialog.backcompat",
 			"../popup" ], factory );
@@ -34,10 +35,11 @@
 	}
 } )( function( $ ) {
 
-var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-listview-item-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
+var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-listview-item-divider," +
+		".ui-screen-hidden",
 	goToAdjacentItem = function( item, target, direction ) {
 		var adjacent = item[ direction + "All" ]()
-			.not( unfocusableItemSelector )
+			.not( unfocusableItemSelector + ",[data-" + this._ns() + "role='placeholder']" )
 				.first();
 
 		// If there's a previous option, focus it
@@ -51,14 +53,31 @@ var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-listview-item
 	};
 
 return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
+	options: {
+		classes: {
+			"ui-selectmenu-custom-header-close-button": "ui-corner-all"
+		},
+		overlayTheme: null,
+		dividerTheme: null,
+		hidePlaceholderMenuItems: true,
+		closeText: "Close"
+	},
+
+	_ns: function() {
+		return "ui-";
+	},
+
 	_create: function() {
 		var o = this.options;
 
-		this._origTabIndex = ( this.element.attr( "tabindex" ) === undefined ) ? false : this.element.attr( "tabindex" );
+		this._origTabIndex = ( this.element.attr( "tabindex" ) === undefined ) ? false :
+			this.element.attr( "tabindex" );
 
 		// Custom selects cannot exist inside popups, so revert the "nativeMenu" option to true if
 		// a parent is a popup
-		o.nativeMenu = o.nativeMenu || ( this.element.parents( ":jqmData(role='popup'),:mobile-popup" ).length > 0 );
+		o.nativeMenu = o.nativeMenu ||
+			( this.element.closest( "[data-" + this._ns() +
+			"role='popup'],:mobile-popup" ).length > 0 );
 
 		return this._super();
 	},
@@ -79,16 +98,24 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		if ( event.type === "vclick" ||
-				event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE ) ) {
+				event.keyCode &&
+					( event.keyCode === $.ui.keyCode.ENTER ||
+						event.keyCode === $.ui.keyCode.SPACE ) ) {
 
 			this._decideFormat();
 			if ( this.menuType === "overlay" ) {
-				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+				this.button
+					.attr( "href", "#" + this.popupId )
+					.attr( "data-" + this._ns() + "rel", "popup" );
 			} else {
-				this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+				this.button
+					.attr( "href", "#" + this.dialogId )
+					.attr( "data-" + this._ns() + "rel", "dialog" );
 			}
 			this.isOpen = true;
-			// Do not prevent default, so the navigation may have a chance to actually open the chosen format
+
+			// Do not prevent default, so the navigation may have a chance to actually open the
+			// chosen format
 		}
 	},
 
@@ -146,25 +173,6 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
-	_handleMenuPageHide: function() {
-
-		// After the dialog's done, we may want to trigger change if the value has actually changed
-		this._delayedTrigger();
-
-		// TODO centralize page removal binding / handling in the page plugin.
-		// Suggestion from @jblas to do refcounting.
-		//
-		// TODO extremely confusing dependency on the open method where the pagehide.remove
-		// bindings are stripped to prevent the parent page from disappearing. The way we're
-		// keeping pages in the DOM right now sucks
-		//
-		// Rebind the page remove that was unbound in the open function to allow for the parent
-		// page removal from actions other than the use of a dialog sized custom select
-		//
-		// Doing this here provides for the back button on the custom select dialog
-		this.thisPage.page( "bindRemove" );
-	},
-
 	_handleHeaderCloseClick: function() {
 		if ( this.menuType === "overlay" ) {
 			this.close();
@@ -173,10 +181,11 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_handleListItemClick: function( event ) {
-		var listItem = $( event.target ).closest( "li" ),
+		var anchors,
+			listItem = $( event.target ).closest( "li" ),
 
 			// Index of option tag to be selected
-			oldIndex = this.select[ 0 ].selectedIndex,
+			oldIndex = this.element[ 0 ].selectedIndex,
 			newIndex = $.mobile.getAttribute( listItem, "option-index" ),
 			option = this._selectOptions().eq( newIndex )[ 0 ];
 
@@ -185,9 +194,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Toggle checkbox class for multiple selects
 		if ( this.isMultiple ) {
-			listItem.find( "a" )
-				.toggleClass( "ui-checkbox-on", option.selected )
-				.toggleClass( "ui-checkbox-off", !option.selected );
+			anchors = listItem.find( "a" );
+			this._toggleClass( anchors, null, "ui-checkbox-on", option.selected );
+			this._toggleClass( anchors, null, "ui-checkbox-off", !option.selected );
 		}
 
 		// If it's not a multiple select, trigger change after it has finished closing
@@ -199,7 +208,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Hide custom select for single selects only - otherwise focus clicked item
 		// We need to grab the clicked item the hard way, because the list may have been rebuilt
 		if ( this.isMultiple ) {
-			this.select.trigger( "change" );
+			this.element.trigger( "change" );
 			this.list.find( "li:not(.ui-listview-item-divider)" ).eq( newIndex )
 				.find( "a" ).first().focus();
 		} else {
@@ -210,15 +219,15 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	build: function() {
-		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
-			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
-			menuPage, listbox, list, header, headerTitle, menuPageContent,
-			menuPageClose, headerClose,
-			o = this.options;
-
-		if ( o.nativeMenu ) {
+		if ( this.options.nativeMenu ) {
 			return this._super();
 		}
+
+		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
+			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
+			menuPage, menuPageHeader, listbox, list, header, headerTitle, menuPageContent,
+			menuPageClose, headerClose,
+			o = this.options;
 
 		selectId = this.selectId;
 		popupId = selectId + "-listbox";
@@ -227,39 +236,50 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		thisPage = this.element.closest( ".ui-page" );
 		isMultiple = this.element[ 0 ].multiple;
 		menuId = selectId + "-menu";
-		themeAttr = o.theme ? ( " data-" + $.mobile.ns + "theme='" + o.theme + "'" ) : "";
+		themeAttr = o.theme ? ( " data-" + this._ns() + "theme='" + o.theme + "'" ) : "";
 		overlayTheme = o.overlayTheme || o.theme || null;
-		overlayThemeAttr = overlayTheme ? ( " data-" + $.mobile.ns +
+		overlayThemeAttr = overlayTheme ? ( " data-" + this._ns() +
 		"overlay-theme='" + overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( o.dividerTheme && this.element.children( "optgroup" ).length > 0 ) ?
-			( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu'" +
-			themeAttr + overlayThemeAttr + ">" +
-			"<div data-" + $.mobile.ns + "type='header'>" +
-			"<div class='ui-title'></div>" +
-			"</div>" +
-			"<div class='ui-content'></div>" +
+			( " data-" + this._ns() + "divider-theme='" + o.dividerTheme + "'" ) : "";
+		menuPage = $( "<div data-" + this._ns() + "role='page' " +
+			"data-" + this._ns() + "dialog='true'>" +
+			"<div></div>" +
 			"</div>" )
 			.attr( "id", dialogId );
-		listbox = $( "<div" + themeAttr + overlayThemeAttr +
-			" class='ui-selectmenu'></div>" )
+		menuPageContent = menuPage.children();
+		menuPageHeader = $( "<div><h1></h1></div>" )
+			.toolbar( { type: "header" } )
+			.prependTo( menuPage );
+		listbox = $( "<div></div>" )
 			.attr( "id", popupId )
-			.insertAfter( this.select )
+			.insertAfter( this.element )
 			.popup();
-		list = $( "<ul class='ui-selectmenu-list' role='listbox' aria-labelledby='" +
+		list = $( "<ul role='listbox' aria-labelledby='" +
 			this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" )
 			.attr( "id", menuId )
 			.appendTo( listbox );
-		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
-		headerTitle = $( "<h1 class='ui-title'></h1>" ).appendTo( header );
+		header = $( "<div>" )
+			.toolbar( { type: "header" } )
+			.prependTo( listbox );
+		headerTitle = $( "<h1></h1>" ).appendTo( header );
+
+		menuPage.page();
+
+		this._addClass( menuPage, "ui-selectmenu-custom" );
+		this._addClass( menuPageContent, null, "ui-content" );
+		this._addClass( listbox, null, "ui-selectmenu-custom" );
+		this._addClass( list, null, "ui-selectmenu-custom-list" );
 
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
 				"role": "button",
 				"text": o.closeText,
-				"href": "#",
-				"class": "ui-button ui-corner-all ui-button-left ui-button-icon-only ui-icon-delete"
-			} ).appendTo( header );
+				"href": "#"
+			} );
+			this._addClass( headerClose, "ui-selectmenu-custom-header-close-button",
+				"ui-button ui-button-left ui-button-icon-only ui-icon-delete" );
+			headerClose.appendTo( header );
 		}
 
 		$.extend( this, {
@@ -269,6 +289,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			dialogId: dialogId,
 			thisPage: thisPage,
 			menuPage: menuPage,
+			menuPageHeader: menuPageHeader,
 			label: label,
 			isMultiple: isMultiple,
 			theme: o.theme,
@@ -285,8 +306,8 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Create list from select, update state
 		this.refresh();
 
-		this.select.attr( "tabindex", "-1" );
-		this._on( this.select, { focus: "_handleSelectFocus" } );
+		this.element.attr( "tabindex", "-1" );
+		this._on( this.element, { focus: "_handleSelectFocus" } );
 
 		// Button events
 		this._on( this.button, {
@@ -299,12 +320,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"focusin": "_handleListFocus",
 			"focusout": "_handleListFocus",
 			"keydown": "_handleListKeydown",
-			"click li:not(.ui-disabled,.ui-state-disabled,.ui-listview-item-divider)": "_handleListItemClick"
+			"click li:not(.ui-disabled,.ui-state-disabled,.ui-listview-item-divider)":
+				"_handleListItemClick"
 		} );
-
-		// Button refocus ensures proper height calculation by removing the inline style and
-		// ensuring page inclusion
-		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
 
 		// Events on the popup
 		this._on( this.listbox, { popupafterclose: "_popupClosed" } );
@@ -341,50 +359,57 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	selected: function() {
-		return this._selectOptions().filter( ":selected:not( :jqmData(placeholder='true') )" );
+		return this._selectOptions()
+			.filter( ":selected:not( [data-" + this._ns() + "placeholder='true'] )" );
 	},
 
 	refresh: function( force ) {
-		var self, indices;
+		var indices, items;
 
 		if ( this.options.nativeMenu ) {
 			return this._super( force );
 		}
 
-		self = this;
 		if ( force || this._isRebuildRequired() ) {
-			self._buildList();
+			this._buildList();
 		}
 
 		indices = this.selectedIndices();
 
-		self.setButtonText();
-		self.setButtonCount();
+		this.setButtonText();
+		this.setButtonCount();
 
-		self.list.find( "li:not(.ui-listview-item-divider)" )
-			.find( "a" ).removeClass( "ui-button-active" ).end()
-			.attr( "aria-selected", false )
-			.each( function( i ) {
-				var item = $( this );
-				if ( $.inArray( i, indices ) > -1 ) {
+		items = this.list.find( "li:not(.ui-listview-item-divider)" );
+		this._removeClass( items.find( "a" ), null, "ui-button-active" );
 
-					// Aria selected attr
-					item.attr( "aria-selected", true );
+		items.attr( "aria-selected", false );
 
-					// Multiple selects: add the "on" checkbox state to the icon
-					if ( self.isMultiple ) {
-						item.find( "a" ).removeClass( "ui-checkbox-off" ).addClass( "ui-checkbox-on" );
+		items.each( $.proxy( function( i, element ) {
+			var anchors,
+				item = $( element );
+			if ( $.inArray( i, indices ) > -1 ) {
+
+				// Aria selected attr
+				item.attr( "aria-selected", true );
+
+				// Multiple selects: add the "on" checkbox state to the icon
+				if ( this.isMultiple ) {
+					anchors = item.find( "a" );
+					this._removeClass( anchors, null, "ui-checkbox-off" );
+					this._addClass( anchors, null, "ui-checkbox-on" );
+				} else {
+					if ( item.hasClass( "ui-screen-hidden" ) ) {
+						this._addClass( item.next().find( "a" ), null, "ui-button-active" );
 					} else {
-						if ( item.hasClass( "ui-screen-hidden" ) ) {
-							item.next().find( "a" ).addClass( "ui-button-active" );
-						} else {
-							item.find( "a" ).addClass( "ui-button-active" );
-						}
+						this._addClass( item.find( "a" ), null, "ui-button-active" );
 					}
-				} else if ( self.isMultiple ) {
-					item.find( "a" ).removeClass( "ui-checkbox-on" ).addClass( "ui-checkbox-off" );
 				}
-			} );
+			} else if ( this.isMultiple ) {
+				anchors = item.find( "a" );
+				this._removeClass( anchors, null, "ui-checkbox-on" );
+				this._addClass( anchors, null, "ui-checkbox-off" );
+			}
+		}, this ) );
 	},
 
 	close: function() {
@@ -392,20 +417,18 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			return;
 		}
 
-		var self = this;
-
-		if ( self.menuType === "page" ) {
-			if ( self.menuPage.hasClass( "ui-page-active" ) ) {
+		if ( this.menuType === "page" ) {
+			if ( this.menuPage.hasClass( "ui-page-active" ) ) {
 				$.mobile.back();
 			}
-			self.list.appendTo( self.listbox );
+			this.list.appendTo( this.listbox );
 		} else {
-			self.listbox.popup( "close" );
+			this.listbox.popup( "close" );
 		}
 
-		self._focusButton();
+		this._focusButton();
 		// Allow the dialog to be closed again
-		self.isOpen = false;
+		this.isOpen = false;
 	},
 
 	open: function() {
@@ -415,62 +438,131 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_focusMenuItem: function() {
 		var selector = this.list.find( "a.ui-button-active" );
 		if ( selector.length === 0 ) {
-			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-button" );
+			selector = this.list.find( "li:not(" + unfocusableItemSelector +
+				",[data-" + this._ns() + "role='placeholder'] ) a.ui-button" );
 		}
 		selector.first().focus();
 	},
 
+	_setTheme: function( key, value ) {
+		this.listbox.popup( "option", key, value );
+
+		// We cannot pass inherit to the dialog because pages are supposed to set the theme for
+		// the pagecontainer in which they reside. If they set it to inherit the pagecontainer
+		// will not inherit from anything above it.
+		if ( value !== "inherit" ) {
+			this.menuPage.page( "option", key, value );
+		}
+
+		if ( key === "theme" ) {
+			this.header.toolbar( "option", key, value );
+			this.menuPageHeader.toolbar( "option", key, value );
+		}
+	},
+
+	_setOption: function( key, value ) {
+		if ( !this.options.nativeMenu && ( key === "theme" || key === "overlayTheme" ) ) {
+			this._setTheme( key, value );
+		}
+
+		if ( key === "hidePlaceholderMenuItems" ) {
+			this._superApply( arguments );
+			this.refresh( true );
+			return;
+		}
+
+		if ( key === "closeText" ) {
+			this.headerClose.text( value );
+		}
+
+		return this._superApply( arguments );
+	},
+
 	_decideFormat: function() {
-		var self = this,
-			$window = this.window,
-			selfListParent = self.list.parent(),
+		var pageWidget,
+			theWindow = this.window,
+			selfListParent = this.list.parent(),
 			menuHeight = selfListParent.outerHeight(),
-			scrollTop = $window.scrollTop(),
-			buttonOffset = self.button.offset().top,
-			screenHeight = $window.height();
+			scrollTop = theWindow.scrollTop(),
+			buttonOffset = this.button.offset().top,
+			screenHeight = theWindow.height();
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 
-			self.menuPage.appendTo( this.element.closest( ".ui-pagecontainer" ) ).page();
-			self.menuPageContent = self.menuPage.find( ".ui-content" );
-			self.menuPageClose = self.menuPage.find( ".ui-header a" );
+			this.menuPage.appendTo( this.element.closest( ".ui-pagecontainer" ) );
+			this.menuPageClose = this.menuPage.find( ".ui-header a" );
 
 			// Prevent the parent page from being removed from the DOM, otherwise the results of
 			// selecting a list item in the dialog fall into a black hole
-			self.thisPage.unbind( "pagehide.remove" );
+			pageWidget = this.thisPage.page( "instance" );
+			pageWidget._off( pageWidget.document, "pagecontainerhide" );
 
 			// For WebOS/Opera Mini (set lastscroll using button offset)
 			if ( scrollTop === 0 && buttonOffset > screenHeight ) {
-				self.thisPage.one( "pagehide", function() {
-					$( this ).jqmData( "lastScroll", buttonOffset );
+				this.thisPage.one( "pagehide", function() {
+					$( this ).data( $.camelCase( this._ns() + "lastScroll" ), buttonOffset );
 				} );
 			}
 
-			self.menuPage.one( {
-				pageshow: $.proxy( this, "_focusMenuItem" ),
-				pagehide: $.proxy( this, "close" )
+			this._on( this.document, {
+				pagecontainershow: "_handlePageContainerShow",
+				pagecontainerhide: "_handlePageContainerHide"
 			} );
 
-			self.menuType = "page";
-			self.menuPageContent.append( self.list );
-			self.menuPage
-				.find( "div .ui-title" )
-					.text( self.label.getEncodedText() || self.placeholder );
+			this.menuType = "page";
+			this.menuPageContent.append( this.list );
+			this.menuPage
+				.find( "div .ui-toolbar-title" )
+					.text( this.label.getEncodedText() || this.placeholder );
 		} else {
-			self.menuType = "overlay";
+			this.menuType = "overlay";
 
-			self.listbox.one( { popupafteropen: $.proxy( this, "_focusMenuItem" ) } );
+			this.listbox.one( { popupafteropen: $.proxy( this, "_focusMenuItem" ) } );
+		}
+		this._setTheme( "theme", this.options.theme );
+		this._setTheme( "overlayTheme", this.options.overlayTheme );
+	},
+
+	_handlePageContainerShow: function( event, data ) {
+		if ( data.toPage[ 0 ] === this.menuPage[ 0 ] ) {
+			this._off( this.document, "pagecontainershow" );
+			this._focusMenuItem();
+		}
+	},
+
+	_handlePageContainerHide: function( event, data ) {
+		if ( data.prevPage[ 0 ] === this.menuPage[ 0 ] ) {
+			this._off( this.document, "pagecontainershow" );
+
+			// After the dialog's done, we may want to trigger change if the value has actually
+			// changed
+			this._delayedTrigger();
+
+			// TODO centralize page removal binding / handling in the page plugin.
+			// Suggestion from @jblas to do refcounting.
+			//
+			// TODO extremely confusing dependency on the open method where the pagehide.remove
+			// bindings are stripped to prevent the parent page from disappearing. The way we're
+			// keeping pages in the DOM right now sucks
+			//
+			// Rebind the page remove that was unbound in the open function to allow for the parent
+			// page removal from actions other than the use of a dialog sized custom select
+			//
+			// Doing this here provides for the back button on the custom select dialog
+			this.thisPage.page( "bindRemove" );
+			this.menuPage.detach();
+
+			this.close();
 		}
 	},
 
 	_buildList: function() {
-		var self = this,
-			o = this.options,
+		var o = this.options,
 			placeholder = this.placeholder,
 			needPlaceholder = true,
 			dataIcon = "false",
-			$options, numOptions, select,
-			dataPrefix = "data-" + $.mobile.ns,
+			optionsList, numOptions, select,
+			dataPrefix = "data-" + this._ns(),
 			dataIndexAttr = dataPrefix + "option-index",
 			dataIconAttr = dataPrefix + "icon",
 			dataRoleAttr = dataPrefix + "role",
@@ -479,20 +571,20 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			isPlaceholderItem = false,
 			optGroup,
 			i,
-			option, $option, parent, text, anchor, classes,
+			option, optionElement, parent, text, anchor, classes,
 			optLabel, divider, item;
 
-		self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
-		$options = this._selectOptions();
-		numOptions = $options.length;
-		select = this.select[ 0 ];
+		this.list.empty().filter( ".ui-listview" ).listview( "destroy" );
+		optionsList = this._selectOptions();
+		numOptions = optionsList.length;
+		select = this.element[ 0 ];
 
 		for ( i = 0; i < numOptions; i++, isPlaceholderItem = false ) {
-			option = $options[ i ];
-			$option = $( option );
+			option = optionsList[ i ];
+			optionElement = $( option );
 
 			// Do not create options based on ui-screen-hidden select options
-			if ( $option.hasClass( "ui-screen-hidden" ) ) {
+			if ( optionElement.hasClass( "ui-screen-hidden" ) ) {
 				continue;
 			}
 
@@ -504,7 +596,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// only arises if we do something like $( "<li><a href='#'>" + text + "</a></li>" ). We
 			// don't do that. We do document.createTextNode( text ) instead, which guarantees that
 			// whatever we paste in will end up as text, with characters like <, > and & escaped.
-			text = $option.text();
+			text = optionElement.text();
 			anchor = document.createElement( "a" );
 			anchor.setAttribute( "href", "#" );
 			anchor.appendChild( document.createTextNode( text ) );
@@ -523,7 +615,10 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				}
 			}
 
-			if ( needPlaceholder && ( !option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ) ) ) {
+			if ( needPlaceholder &&
+				( !option.getAttribute( "value" ) ||
+					text.length === 0 ||
+					optionElement.data( $.camelCase( this._ns() + "placeholder" ) ) ) ) {
 				needPlaceholder = false;
 				isPlaceholderItem = true;
 
@@ -537,7 +632,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 					classes.push( "ui-screen-hidden" );
 				}
 				if ( placeholder !== text ) {
-					placeholder = self.placeholder = text;
+					placeholder = this.placeholder = text;
 				}
 			}
 
@@ -555,24 +650,24 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			item.setAttribute( "role", "option" );
 			anchor.setAttribute( "tabindex", "-1" );
 			if ( this.isMultiple ) {
-				$( anchor ).addClass( "ui-button ui-checkbox-off ui-icon-end" );
+				this._addClass( $( anchor ), null, "ui-button ui-checkbox-off ui-icon-end" );
 			}
 
 			item.appendChild( anchor );
 			fragment.appendChild( item );
 		}
 
-		self.list[ 0 ].appendChild( fragment );
+		this.list[ 0 ].appendChild( fragment );
 
 		// Hide header if it's not a multiselect and there's no placeholder
 		if ( !this.isMultiple && !placeholder.length ) {
-			this.header.addClass( "ui-screen-hidden" );
+			this._addClass( this.header, null, "ui-screen-hidden" );
 		} else {
 			this.headerTitle.text( this.placeholder );
 		}
 
 		// Now populated, create listview
-		self.list.listview();
+		this.list.listview();
 	},
 
 	_button: function() {
@@ -586,6 +681,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				// TODO value is undefined at creation
 				"aria-owns": this.menuId
 			};
+		attributes[ "data-" + this._ns() + "transition" ] = "pop";
 
 		if ( this._origTabIndex ) {
 			attributes.tabindex = this._origTabIndex;
@@ -601,15 +697,15 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// Restore the tabindex attribute to its original value
 			if ( this._origTabIndex !== undefined ) {
 				if ( this._origTabIndex !== false ) {
-					this.select.attr( "tabindex", this._origTabIndex );
+					this.element.attr( "tabindex", this._origTabIndex );
 				} else {
-					this.select.removeAttr( "tabindex" );
+					this.element.removeAttr( "tabindex" );
 				}
 			}
 
 			// Remove the placeholder attribute if we were the ones to add it
 			if ( this._removePlaceholderAttr ) {
-				this._selectOptions().removeAttr( "data-" + $.mobile.ns + "placeholder" );
+				this._selectOptions().removeAttr( "data-" + this._ns() + "placeholder" );
 			}
 
 			// Remove the popup

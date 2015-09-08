@@ -5,10 +5,6 @@
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 var resetHash;
 
-function jqmDataSelector( expression ) {
-	return "[data-" + $.mobile.ns + expression + "]";
-}
-
 resetHash = function() {
 	$.testHelper.openPage( location.hash.indexOf( "#default" ) >= 0 ? "#" : "#default" );
 };
@@ -119,7 +115,9 @@ QUnit.test( "dialog sized select shouldn't rebind its parent page remove handler
 
 QUnit.test( "menupage is removed when the parent page is removed", function( assert ) {
 	var ready = assert.async();
-	var dialogCount = $( jqmDataSelector( "role='dialog'" ) ).length;
+	var dialogSelector = "[data-" + $.mobile.ns + "role='page']" +
+		"[data-" + $.mobile.ns + "dialog='true']";
+	var dialogCount = $( dialogSelector ).length;
 	$.testHelper.pageSequence( [
 		resetHash,
 
@@ -130,7 +128,7 @@ QUnit.test( "menupage is removed when the parent page is removed", function( ass
 		function() {
 
 			// For performance reasons we don't initially create the menu dialog now
-			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
+			assert.strictEqual( $( dialogSelector ).length, dialogCount );
 
 			// Manually trigger dialog opening
 			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).open();
@@ -139,7 +137,7 @@ QUnit.test( "menupage is removed when the parent page is removed", function( ass
 		function() {
 
 			// Check if dialog was successfully  created
-			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount + 1 );
+			assert.strictEqual( $( dialogSelector ).length, dialogCount + 1 );
 			$( "#domcache-uncached-page-select" ).data( "mobile-selectmenu" ).close();
 		},
 
@@ -150,7 +148,7 @@ QUnit.test( "menupage is removed when the parent page is removed", function( ass
 		},
 
 		function() {
-			assert.strictEqual( $( jqmDataSelector( "role='dialog'" ) ).length, dialogCount );
+			assert.strictEqual( $( dialogSelector ).length, dialogCount );
 			ready();
 		}
 	] );

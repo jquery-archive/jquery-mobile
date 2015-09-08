@@ -65,7 +65,7 @@ QUnit.test( "Form resets correctly", function( assert ) {
 
 		assert.ok( button.length === 1, prefix + id + " has a parent" );
 		assert.ok( wrapper.length === 1, prefix + id + " has a wrapper" );
-		assert.ok( wrapper.hasClass( "ui-select" ), prefix + id + "'s wrapper has class ui-select" );
+		assert.ok( wrapper.hasClass( "ui-selectmenu" ), prefix + id + "'s wrapper has class ui-selectmenu" );
 		assert.ok( anonySpan.length === 1, prefix + id + "'s wrapper contains a single span element as its first child" );
 		assert.ok( anonySpan.text() === el.children( "[value='" + el.val() + "']" ).text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}

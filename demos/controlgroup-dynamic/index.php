@@ -24,7 +24,7 @@
 						action = function() {
 							var action = $( "[name='radio-action']:checked" ).attr( "id" );
 							if ( $( $el[1] ).is( "select" ) && action === "hide" ) {
-								$el = $( $el[1] ).parents( ".ui-select" );
+								$el = $( $el[1] ).parents( ".ui-selectmenu" );
 							}
 							$el[ action ]();
 							group.controlgroup( "refresh" );

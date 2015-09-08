@@ -151,7 +151,7 @@ QUnit.test( "a large select menu should use the default dialog transition",
 QUnit.test( "selecting an item from a large custom select leaves no dialog hash key",
 	function( assert ) {
 		var ready = assert.async();
-		var dialogHashKey = "ui-state=dialog";
+		var dialogHashKey = "select-choice-many-hash-check-dialog";
 
 		$.testHelper.pageSequence( [
 			resetHash,
@@ -175,7 +175,7 @@ QUnit.test( "selecting an item from a large custom select leaves no dialog hash 
 QUnit.test( "dialog sized select menu opened many times remains a dialog",
 	function( assert ) {
 		var ready = assert.async();
-		var dialogHashKey = "ui-state=dialog",
+		var dialogHashKey = "select-choice-many-many-clicks-dialog",
 
 			openDialogSequence = [
 				resetHash,
@@ -221,7 +221,7 @@ QUnit.test( "a large select option should not overflow", function( assert ) {
 		},
 
 		function() {
-			menu = $( "#select-long-option-label-menu.ui-selectmenu-list" );
+			menu = $( "#select-long-option-label-menu.ui-selectmenu-custom-list" );
 
 			assert.equal( menu.outerWidth( true ),
 				menu.find( "li:nth-child(2) a" ).outerWidth( true ),
@@ -242,7 +242,7 @@ QUnit.test( "focus is transferred to a menu item when the menu is opened",
 			function() {
 
 				// Bring up the dialog
-				$( "#select-choice-menu-focus-test a:first" ).trigger( "click" );
+				$( "#select-choice-menu-focus-test-container a:first" ).trigger( "click" );
 			},
 
 			function() {
@@ -270,7 +270,7 @@ QUnit.test( "using custom refocuses the button after close", function( assert ) 
 		resetHash,
 
 		function() {
-			select = $( "#select-choice-focus-test" );
+			select = $( "#select-choice-focus-test-container" );
 			button = select.find( "a" );
 			button.trigger( "click" );
 		},
@@ -350,7 +350,8 @@ QUnit.test( "adding options and refreshing a custom select changes the options l
 
 			function() {
 				assert.strictEqual(
-					$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
+					$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu-custom ul" )
+						.text(),
 					"default" );
 				$( ".ui-popup-screen.in" ).click();
 			},
@@ -369,7 +370,8 @@ QUnit.test( "adding options and refreshing a custom select changes the options l
 
 			function() {
 				assert.strictEqual(
-					$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(),
+					$( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu-custom ul" )
+						.text(),
 					text );
 				$( ".ui-popup-screen.in" ).click();
 			},
@@ -385,7 +387,7 @@ QUnit.test( "custom select list item links have encoded option text values", fun
 } );
 
 // Not testing the positive case here since's it's obviously tested elsewhere
-QUnit.test( "select elements in the keepNative set shouldn't be enhanced", function( assert ) {
+QUnit.test( "select elements not marked with role shouldn't be enhanced", function( assert ) {
 	assert.lacksClasses( $( "#keep-native" ).parent(), "ui-button" );
 } );
 
@@ -401,7 +403,9 @@ QUnit.test( "dialog size select title should match the label", function( assert 
 		},
 
 		function() {
-			assert.strictEqual( $.mobile.activePage.find( ".ui-title" ).text(), $label.text() );
+			assert.strictEqual( $.mobile.activePage.find( ".ui-toolbar-title" ).text(),
+				$label.text(),
+				"Dialog title set to label text" );
 			window.history.back();
 		},
 
@@ -422,7 +426,7 @@ QUnit.test( "dialog size select title should match the placeholder when there's 
 			},
 
 			function() {
-				assert.strictEqual( $.mobile.activePage.find( ".ui-title" ).text(),
+				assert.strictEqual( $.mobile.activePage.find( ".ui-toolbar-title" ).text(),
 					$label.text() );
 				window.history.back();
 			},
@@ -452,7 +456,7 @@ QUnit.test( "dialog size select title should match the label when changed after 
 			},
 
 			function() {
-				assert.strictEqual( $.mobile.activePage.find( ".ui-title" ).text(),
+				assert.strictEqual( $.mobile.activePage.find( ".ui-toolbar-title" ).text(),
 					$label.text() );
 				window.history.back();
 			},
@@ -687,6 +691,7 @@ function testChangeAfterClose( assert, select, ns, openEvent, closeEvent, tail )
 				}
 
 				if ( name === closeEventName &&
+						( !closeEvent.filter || closeEvent.filter( callLog[ index ].data ) ) &&
 						target === ( typeof closeEvent.src === "function" ?
 							closeEvent.src()[ 0 ] :
 							closeEvent.src[ 0 ] ) ) {
@@ -721,12 +726,19 @@ QUnit.test( "Large select triggers change after dialog closes", function( assert
 	var ready = assert.async();
 	testChangeAfterClose( assert, $( "#large-select-change-after-close" ),
 		".largeSelectTriggersChangeAfterPopupCloses",
-		{ src: $( document ), event: "pageshow" },
 		{
-			src: function() {
-				return $( "#large-select-change-after-close-dialog" );
-			},
-			event: "pagehide"
+			src: $( "body" ),
+			event: "pagecontainershow",
+			filter: function dataFilter( data ) {
+				return data.nextPage.attr( "id" ) === "large-select-change-after-close-dialog";
+			}
+		},
+		{
+			src: $( "body" ),
+			event: "pagecontainerhide",
+			filter: function dataFilter( data ) {
+				return data.prevPage.attr( "id" ) === "large-select-change-after-close-dialog";
+			}
 		},
 		ready );
 } );

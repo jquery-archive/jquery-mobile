@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Controlgroup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
+	<script>
+		( function( $ ) {
+			$.testHelper.asyncLoad( [
+				[ "widgets/enhancer.backcompat", "widgets/forms/select.backcompat" ],
+				[ "new_backcompat_core.js" ]
+			] );
+		} )( jQuery );
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<select id="corners-implicit">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="corners-explicit" data-nstest-corners="false">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="corners-implicit-classes">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="corners-explicit-classes" data-nstest-classes='{ "ui-selectmenu-button": "ui-shadow" }'>
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+
+	<select id="shadow-implicit">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="shadow-explicit" data-nstest-shadow="false">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="shadow-implicit-classes">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="shadow-explicit-classes" data-nstest-classes='{ "ui-selectmenu-button": "ui-corner-all" }'>
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+
+	<select id="mini-implicit">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="mini-explicit" data-nstest-mini="true">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="mini-implicit-classes">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="mini-explicit-classes" data-nstest-classes='{ "ui-selectmenu-button": "ui-corner-all ui-shadow ui-mini" }'>
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+
+	<select id="inline-implicit">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="inline-explicit" data-nstest-inline="true">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="inline-implicit-classes">
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+	<select id="inline-explicit-classes" data-nstest-classes='{ "ui-selectmenu-button": "ui-corner-all ui-shadow ui-button-inline" }'>
+		<option val="1">Option 1</option>
+		<option val="2">Option 2</option>
+	</select>
+</body>
+</html>
