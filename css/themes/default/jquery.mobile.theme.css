@@ -599,7 +599,7 @@ html head + body .ui-body-b.ui-focus {
 .ui-disabled,
 .ui-state-disabled,
 button[disabled],
-.ui-select .ui-button.ui-state-disabled {
+.ui-selectmenu .ui-button.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 	cursor: default !important;

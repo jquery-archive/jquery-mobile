@@ -20,13 +20,35 @@ QUnit.test( "Native select does not blur synchronously in response to change", f
 QUnit.module( "Custom select" );
 
 QUnit.test( "Custom select is enhanced correctly", function( assert ) {
-	var popup = $( "#enhance-test-listbox" );
+	var eventNamespace = ".customSelectIsEnhancedCorrectly",
+		popup = $( "#enhance-test-listbox" ),
+		done = assert.async();
 
-	assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + "'" + "role='button'" + "'" + " set" );
-	assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2", "Tabindex is correctly copied from select" );
-	assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
-	assert.strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
-
+	$.testHelper.detailedEventCascade( [
+		function() {
+			$( "#enhance-test" ).selectmenu( "open" );
+		},
+		{
+			popupafteropen: { src: popup, event: "popupafteropen" + eventNamespace + "1" }
+		},
+		function() {
+			popup.popup( "close" );
+		},
+		{
+			popupafterclose: { src: popup, event: "popupafterclose" + eventNamespace + 2 }
+		},
+		function() {
+			assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button",
+				"The close button for a multiple choice select popup has the " + '"' +
+					"role='button'" + '"' + " set" );
+			assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2",
+				"Tabindex is correctly copied from select" );
+			assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b",
+				"Popup has overlayTheme b" );
+			assert.strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+			done();
+		}
+	] );
 } );
 
 QUnit.module( "Custom select Multiple" );

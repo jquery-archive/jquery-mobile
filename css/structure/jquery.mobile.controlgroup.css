@@ -2,7 +2,8 @@
     margin: .5em 0;
 }
 
-.ui-controlgroup .ui-button {
+.ui-controlgroup .ui-button,
+.ui-controlgroup .ui-selectmenu {
     margin: 0;
 }
 
@@ -55,22 +56,32 @@
 }
 
 .ui-controlgroup-horizontal > .ui-button,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-button,
 .ui-controlgroup-horizontal > li > .ui-button {
 	border-left-width: 0;
 }
 
 .ui-controlgroup-horizontal > .ui-corner-left,
-.ui-controlgroup-horizontal > li > .ui-corner-left {
+.ui-controlgroup-horizontal > .ui-corner-all,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-corner-left,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-corner-all,
+.ui-controlgroup-horizontal > li > .ui-corner-left,
+.ui-controlgroup-horizontal > li > .ui-corner-all {
 	border-left-width: 1px;
 }
 
 .ui-controlgroup-vertical > .ui-button,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-button,
 .ui-controlgroup-vertical > li > .ui-button {
 	border-top-width: 0;
 }
 
 .ui-controlgroup-vertical > .ui-corner-top,
-.ui-controlgroup-vertical > li > .ui-corner-top {
+.ui-controlgroup-vertical > .ui-corner-all,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-corner-top,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-corner-all,
+.ui-controlgroup-vertical > li > .ui-corner-top,
+.ui-controlgroup-vertical > li > .ui-corner-all {
 	border-top-width: 1px;
 }
 

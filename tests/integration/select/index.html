@@ -9,6 +9,7 @@
 
 	<script src="../../lib/bootstrap.js"
 			data-deps="forms/select.custom ./defineKeepNative.js"
+			data-no-backcompat="true"
 			data-init="true"
 			data-modules="select_core">
 	</script>
@@ -21,17 +22,17 @@
 
 	<div id="qunit"></div>
 
-	<div id="default" data-nstest-role="page" data-nstest-theme="c">
-		<select id="encoding-test" data-nstest-native-menu="false">
+	<div id="default" data-ui-role="page" data-ui-theme="c">
+		<select data-ui-role="selectmenu" id="encoding-test" data-ui-native-menu="false">
 			<option value="1">&lt;script&gt;$( "*" ).css( "background-color", "red" );&lt;/script&gt;</option>
 			<option value="2">Another option</option>
 		</select>
-		<select name="small-select-change-after-close" id="small-select-change-after-close" data-nstest-native-menu="false">
+		<select data-ui-role="selectmenu" name="small-select-change-after-close" id="small-select-change-after-close" data-ui-native-menu="false">
 			<option value="1">One</option>
 			<option value="2">Two</option>
 			<option value="3">Three</option>
 		</select>
-		<select name="large-select-change-after-close" id="large-select-change-after-close" data-nstest-native-menu="false">
+		<select data-ui-role="selectmenu" name="large-select-change-after-close" id="large-select-change-after-close" data-ui-native-menu="false">
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
 			<option value="AZ">Arizona</option>
@@ -84,8 +85,8 @@
 			<option value="WY">Wyoming</option>
 		</select>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-few-container">
-			<select name="select-choice-few" id="select-choice-few.dotTest" data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-choice-few-container">
+			<select data-ui-role="selectmenu" name="select-choice-few" id="select-choice-few.dotTest" data-ui-native-menu="false">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -93,9 +94,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="native-select-choice-few-container">
+		<div data-ui-role="fieldcontain" id="native-select-choice-few-container">
 			<label for="native-select-choice-few" class="select">Choose shipping method:</label>
-			<select name="native-select-choice-few" id="native-select-choice-few" data-nstest-native-menu="true">
+			<select data-ui-role="selectmenu" name="native-select-choice-few" id="native-select-choice-few" data-ui-native-menu="true">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -103,8 +104,8 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-native-container">
-			<select name="select-choice-native" id="select-choice-native" data-nstest-native-menu="true">
+		<div data-ui-role="fieldcontain" id="select-choice-native-container">
+			<select data-ui-role="selectmenu" name="select-choice-native" id="select-choice-native" data-ui-native-menu="true">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -112,8 +113,8 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-global-native-container">
-			<select name="select-choice-global-native" id="select-choice-global-native"  data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-choice-global-native-container">
+			<select data-ui-role="selectmenu" name="select-choice-global-native" id="select-choice-global-native"  data-ui-native-menu="false">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -121,8 +122,8 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-focus-test">
-			<select name="select-choice-focus-test" id="select-choice-focus-test"  data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-choice-focus-test-container">
+			<select data-ui-role="selectmenu" name="select-choice-focus-test" id="select-choice-focus-test"  data-ui-native-menu="false">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -130,8 +131,8 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-menu-focus-test">
-			<select name="select-choice-menu-focus-test" id="select-choice-menu-focus-test"  data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-choice-menu-focus-test-container">
+			<select data-ui-role="selectmenu" name="select-choice-menu-focus-test" id="select-choice-menu-focus-test"  data-ui-native-menu="false">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -139,9 +140,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-many-container-1">
+		<div data-ui-role="fieldcontain" id="select-choice-many-container-1">
 			<label for="select-choice-many-1.dotTest" class="select">Your state:</label>
-			<select name="select-choice-many-1" id="select-choice-many-1.dotTest" data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" name="select-choice-many-1" id="select-choice-many-1.dotTest" data-ui-native-menu="false">
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -195,8 +196,8 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-many-placeholder-container-1">
-			<select name="select-choice-many-placeholder-1" id="select-choice-many-placeholder-1" data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-choice-many-placeholder-container-1">
+			<select data-ui-role="selectmenu" name="select-choice-many-placeholder-1" id="select-choice-many-placeholder-1" data-ui-native-menu="false">
 				<option>Select state...</option>
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
@@ -251,9 +252,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-overlay-theme-container">
+		<div data-ui-role="fieldcontain" id="select-overlay-theme-container">
 			<label for="select-choice-many-overlay-theme-test" class="select">Your state:</label>
-			<select data-nstest-theme="x" data-nstest-overlay-theme="x" name="select-choice-many-overlay-theme-test" id="select-choice-many-overlay-theme-test" data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" data-ui-theme="x" data-ui-overlay-theme="x" name="select-choice-many-overlay-theme-test" id="select-choice-many-overlay-theme-test" data-ui-native-menu="false">
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -307,9 +308,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-many-container">
+		<div data-ui-role="fieldcontain" id="select-choice-many-container">
 			<label for="select-choice-many" class="select">Your state:</label>
-			<select name="select-choice-many" id="select-choice-many" data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" name="select-choice-many" id="select-choice-many" data-ui-native-menu="false">
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -363,9 +364,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-many-container-hash-check">
+		<div data-ui-role="fieldcontain" id="select-choice-many-container-hash-check">
 			<label for="select-choice-many-hash-check" class="select">Your state:</label>
-			<select name="select-choice-many-hash-check" id="select-choice-many-hash-check"  data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" name="select-choice-many-hash-check" id="select-choice-many-hash-check"  data-ui-native-menu="false">
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -419,9 +420,9 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-choice-many-container-many-clicks">
+		<div data-ui-role="fieldcontain" id="select-choice-many-container-many-clicks">
 			<label for="select-choice-many-many-clicks" class="select">Your state:</label>
-			<select name="select-choice-many-many-clicks" id="select-choice-many-many-clicks"  data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" name="select-choice-many-many-clicks" id="select-choice-many-many-clicks"  data-ui-native-menu="false">
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -475,7 +476,7 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-offscreen-container">
+		<div data-ui-role="fieldcontain" id="select-offscreen-container">
 			<style>
 				/* keep the select small and close to the screen border to test rendering */
 				#select-offscreen-container {
@@ -486,7 +487,7 @@
 				}
 			</style>
 
-			<select name="select-choice-few" id="select-offscreen" data-nstest-native-menu="false">
+			<select data-ui-role="selectmenu" name="select-choice-few" id="select-offscreen" data-ui-native-menu="false">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
 				<option value="express">Express: next day</option>
@@ -494,23 +495,23 @@
 			</select>
 		</div>
 
-		<div data-nstest-role="fieldcontain" id="select-long-option-label-container">
-			<select name="select-long-option-label" id="select-long-option-label" data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="select-long-option-label-container">
+			<select data-ui-role="selectmenu" name="select-long-option-label" id="select-long-option-label" data-ui-native-menu="false">
 				<option value="short">Choice 1</option>
 				<option value="long">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</option>
 			</select>
 		</div>
 
-		<select name="native-refresh" id="native-refresh">
+		<select data-ui-role="selectmenu" name="native-refresh" id="native-refresh">
 			<option value="-1">default</option>
 			<option value="-1">other</option>
 		</select>
 
-		<select name="custom-refresh-opts-list" id="custom-refresh-opts-list" data-nstest-native-menu="false">
+		<select data-ui-role="selectmenu" name="custom-refresh-opts-list" id="custom-refresh-opts-list" data-ui-native-menu="false">
 			<option value="-1">default</option>
 		</select>
 
-		<select name="encoded-option" id="encoded-option" data-nstest-native-menu="false">
+		<select data-ui-role="selectmenu" name="encoded-option" id="encoded-option" data-ui-native-menu="false">
 			<option>&lt;script&gt;window.encodedValueIsDefined = true;&lt;/script&gt;</option>
 		</select>
 
@@ -518,8 +519,8 @@
 			<option></option>
 		</select>
 
-		<div data-nstest-role="fieldcontain" id="optgroup-and-placeholder-container">
-			<select name="optgroup-and-placeholder" data-nstest-divider-theme="b" id="optgroup-and-placeholder" data-nstest-native-menu="false">
+		<div data-ui-role="fieldcontain" id="optgroup-and-placeholder-container">
+			<select data-ui-role="selectmenu" name="optgroup-and-placeholder" data-ui-divider-theme="b" id="optgroup-and-placeholder" data-ui-native-menu="false">
 				<option>Choose shipping method</option>
 				<optgroup label="USPS">
 					<option value="standard" selected>Standard: 7 day</option>
@@ -535,7 +536,7 @@
 			</select>
 		</div>
 
-		<select name="select-default-option-text" id="select-default-option-text">
+		<select data-ui-role="selectmenu" name="select-default-option-text" id="select-default-option-text">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -543,14 +544,14 @@
 		</select>
 	</div>
 
-	<div data-nstest-role="page" id="destroyTest">
+	<div data-ui-role="page" id="destroyTest">
 	</div>
 
-	<div data-nstest-role="page" id="destroyTestCustom">
+	<div data-ui-role="page" id="destroyTestCustom">
 	</div>
 
 	<div id="enhancetest">
-		<select name="select-enhancetest" id="select-enhancetest">
+		<select data-ui-role="selectmenu" name="select-enhancetest" id="select-enhancetest">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -558,5 +559,21 @@
 		</select>
 	</div>
 
+	<div id="resettest">
+		<form id="resettestform">
+			<select data-ui-role="selectmenu" id="select-resettest">
+				<option value="HEL">Helsinki</option>
+				<option value="BUD">Budapest</option>
+				<option value="PDX">Portland, OR</option>
+				<option value="YYZ">Toronto, ON</option>
+			</select>
+			<select data-ui-role="selectmenu" id="select-resettest-non-native" data-ui-native-menu="false">
+				<option value="HEL">Helsinki</option>
+				<option value="BUD">Budapest</option>
+				<option value="PDX">Portland, OR</option>
+				<option value="YYZ">Toronto, ON</option>
+			</select>
+		</form>
+	</div>
 </body>
 </html>

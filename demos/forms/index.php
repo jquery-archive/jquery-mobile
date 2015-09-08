@@ -53,7 +53,7 @@
 
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
-            <div data-role="controlgroup" data-mini="true">
+            <div data-role="controlgroup" data-mini="true" data-type="horizontal">
                 <a href="#" class="ui-button">Add <span class="ui-icon ui-icon-plus"></span></a>
                 <a href="#" class="ui-button">Delete <span class="ui-icon ui-icon-delete"></span></a>
                 <a href="#" class="ui-button">More <span class="ui-icon ui-icon-grid"></span></a>
@@ -147,7 +147,7 @@
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
-            <fieldset data-role="controlgroup" data-mini="true">
+            <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                 <legend>Checkboxes, mini, horizontal controlgroup:</legend>
                 <input type="checkbox" name="checkbox-6" id="checkbox-6">
                 <label for="checkbox-6">b</label>
@@ -182,7 +182,7 @@
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
-                <fieldset data-role="controlgroup" data-mini="true">
+                <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                     <legend>Radio buttons, mini, horizontal controlgroup:</legend>
                         <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
                         <label for="radio-choice-c">List</label>

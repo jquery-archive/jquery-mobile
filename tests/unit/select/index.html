@@ -13,9 +13,9 @@
 
 	<script
 		src="../../lib/bootstrap.js"
-		data-deps="page enhancer widget.backcompat
-		enhancer.backcompat forms/select.custom"
+		data-deps="page forms/select.custom"
 		data-init="true"
+		data-no-backcompat="true"
 		data-modules="select_core">
 	</script>
 </head>
@@ -23,11 +23,11 @@
 
 	<div id="qunit"></div>
 
-	<div data-nstest-role="page">
-		<div data-nstest-role="content">
+	<div data-ui-role="page">
+		<div data-ui-role="content">
 		<div data-role="fieldcontain">
 			<label for="enhance-test">Multiple:</label>
-			<select name="enhance-test" id="enhance-test" multiple="multiple" data-nstest-native-menu="false" data-nstest-overlay-theme="b" data-nstest-theme="x" tabindex="2">
+			<select name="enhance-test" id="enhance-test" multiple="multiple" data-ui-role="selectmenu" data-ui-native-menu="false" data-ui-overlay-theme="b" data-ui-theme="x" tabindex="2">
 			<option>Choose options</option>
 			<option value="1">The 1st Option</option>
 			<option value="2" selected="selected">The 2nd Option</option>
@@ -38,7 +38,7 @@
 		<div id="width-test-container">
 			<div data-role="fieldcontain">
 				<label for="width-test">Multiple:</label>
-				<select name="width-test" id="width-test" multiple data-inline="true" data-nstest-native-menu="false" data-nstest-overlay-theme="b" data-nstest-theme="x">
+				<select name="width-test" id="width-test" multiple data-ui-role="selectmenu" data-ui-inline="true" data-ui-native-menu="false" data-ui-overlay-theme="b" data-ui-theme="x">
 				<option>Choose options</option>
 				<option value="1">The 1st Option</option>
 				<option value="2" selected="selected">The 2nd Option</option>
@@ -54,14 +54,14 @@
 				</select>
 			</div>
 		</div>
-		<select class="no-id-test">
+		<select data-ui-role="selectmenu" class="no-id-test">
 			<option>Choose options</option>
 			<option value="1">The 1st Option</option>
 			<option value="2">The 2nd Option</option>
 			<option value="3">The 3rd Option</option>
 			<option value="4">The 4th Option</option>
 		</select>
-		<select id="blur-test">
+		<select data-ui-role="selectmenu" id="blur-test">
 			<option value="1">Option 1</option>
 			<option value="2">Option 2</option>
 		</select>

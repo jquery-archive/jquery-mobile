@@ -111,22 +111,22 @@ $.mobile.document
 })( jQuery );
 	</script>
 	<style>
-		.ui-selectmenu.ui-popup .ui-textinput-search {
+		.ui-selectmenu-custom.ui-popup .ui-textinput-search {
 			margin-left: .5em;
 			margin-right: .5em;
 		}
-		.ui-selectmenu.ui-page-dialog .ui-content {
+		.ui-selectmenu-custom.ui-page-dialog .ui-content {
 			padding-top: 0;
 		}
-		.ui-selectmenu.ui-page-dialog .ui-selectmenu-list {
+		.ui-selectmenu-custom.ui-page-dialog .ui-selectmenu-custom-list {
 			margin-top: 0;
 		}
-		.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-button {
+		.ui-selectmenu-custom.ui-popup .ui-selectmenu-custom-list li.ui-first-child .ui-button {
 			border-top-width: 1px;
 			-webkit-border-radius: 0;
 			border-radius: 0;
 		}
-		.ui-selectmenu.ui-page-dialog .ui-header {
+		.ui-selectmenu-custom.ui-page-dialog .ui-header {
 			border-bottom-width: 1px;
 		}
 	</style>
