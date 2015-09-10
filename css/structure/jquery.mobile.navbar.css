@@ -46,6 +46,10 @@
 .ui-navbar li:last-child .ui-button:after {
 	margin-right: 4px;
 }
+.ui-content .ui-navbar li .ui-button {
+	border-right-width: 0;
+	border-radius: 0;
+}
 .ui-content .ui-navbar li:last-child .ui-button {
 	border-right-width: 1px;
 	margin-right: 0;

@@ -80,15 +80,16 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
             buttonItem = navItems.eq(pos);
             this._makeNavButton(buttonItem.find("a"), iconpos);
             if (pos + 1 === maxButton) {
-                if ( icon ) {
-                    classes += " ui-icon-" + icon + " ui-button-icon-" + this.options.morebuttoniconpos;
-                }
-                moreButton = $( "<li></li>" ).append(
-                                 $( "<a></a>" )
+
+                moreButton = $( "<li></li>" ).append( $( "<a></a>" )
                                     .attr( "href", "#" + id)
                                     .attr( "data-rel", "popup" )
-                                    // .addClass( classes )
-                                    .html( this.options.morebuttontext ).button() );
+                                    .button( {
+                                        icon: icon,
+                                        iconPosition: this.options.morebuttoniconpos,
+                                        label: this.options.morebuttontext
+
+                                    } ) );
                 this.navbar.find( "ul" ).first().append( moreButton );
             }
             if ( pos + 1 >= maxButton ) {
@@ -96,7 +97,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
                 popupNav.append( buttonItem );
             }
             popupNav.listview();
-           
+
         }
         popupDiv.appendTo( this.navbar );
         popupDiv.popup();
