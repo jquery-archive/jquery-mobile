@@ -22,14 +22,13 @@
             "./navbar",
             "./popup",
             "./listview",
-            "../widget"], factory );
+            "../widget" ], factory );
     } else {
 
         // Browser globals
         factory( jQuery );
     }
 } )( function( $ ) {
-
 
 return $.widget( "mobile.navbar", $.mobile.navbar, {
 
@@ -43,7 +42,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
     _create: function() {
 
         this._super();
-        if ( this.options.morebutton  && this.numButtons > this.maxButton) {
+        if ( this.options.morebutton  && this.numButtons > this.maxButton ) {
             this._createNavPopup();
         }
     },
@@ -52,7 +51,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
         return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
     },
 
-    _createNavRows: function () {
+    _createNavRows: function() {
         if ( this.options.morebutton ) {
             return;
         }
@@ -60,14 +59,13 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
         this._super();
     },
 
-    _createNavPopup: function(){
+    _createNavPopup: function() {
         var popupDiv, popupNav, moreButton, pos, buttonItem, id,
             navItems = this.navbar.find( "li" ),
             buttonCount = navItems.length,
             maxButton = this.maxButton,
             iconpos = this.iconpos,
-            icon = this.options.morebuttonicon,
-            classes = "ui-button";
+            icon = this.options.morebuttonicon;
 
         id = this._id() + "-popup";
 
@@ -76,13 +74,13 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
             .appendTo( popupDiv );
 
         // enhance buttons and move to new rows
-        for( pos = 0; pos < buttonCount; pos++ ) {
-            buttonItem = navItems.eq(pos);
-            this._makeNavButton(buttonItem.find("a"), iconpos);
-            if (pos + 1 === maxButton) {
+        for ( pos = 0; pos < buttonCount; pos++ ) {
+            buttonItem = navItems.eq( pos );
+            this._makeNavButton( buttonItem.find( "a" ), iconpos );
+            if ( pos + 1 === maxButton ) {
 
                 moreButton = $( "<li></li>" ).append( $( "<a></a>" )
-                                    .attr( "href", "#" + id)
+                                    .attr( "href", "#" + id )
                                     .attr( "data-rel", "popup" )
                                     .button( {
                                         icon: icon,
@@ -102,63 +100,62 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
         popupDiv.appendTo( this.navbar );
         popupDiv.popup();
 
-        $.extend(this, {
+        $.extend( this, {
             moreButton: moreButton,
             popupDiv: popupDiv
-        });
+        } );
     },
 
     refresh: function() {
-	    var newitems,
+        var newitems,
             self = this,
-	        iconpos = self.iconpos;
-	    if (!self.options.morebutton) {
-	      self._super();
-	      return;
-	    }
+            iconpos = self.iconpos;
+        if ( !self.options.morebutton ) {
+          self._super();
+          return;
+        }
 
         if ( self.popupDiv ) {
-		    newitems = self.moreButton.parent().nextAll();
-		    newitems.find("a").each(function() {
-		      self._makeNavButton(this, iconpos);
-		    });
-		    newitems.appendTo(self.popupDiv.find("ul"));
-		}
+            newitems = self.moreButton.parent().nextAll();
+            newitems.find( "a" ).each( function() {
+              self._makeNavButton( this, iconpos );
+            } );
+            newitems.appendTo( self.popupDiv.find( "ul" ) );
+        }
         self._createNavPopup();
     },
 
     _destroy: function() {
         var navitems,
             self = this;
-            
 
-        if (!self.options.morebutton) {
+        if ( !self.options.morebutton ) {
             self._super();
             return;
         }
-           
+
         if ( self.popupDiv ) {
-            navitems = self.popupDiv.find("li").detach();
+            navitems = self.popupDiv.find( "li" ).detach();
             self.popupDiv.remove();
             self.moreButton.parent().remove();
-            self.navbar.find("ul").append(navitems);
+            self.navbar.find( "ul" ).append( navitems );
             self.navbar.removeClass( "ui-navbar" );
-            self.navButtons = self.navbar.find("a");
-            self.navButtons.each(function() {
+            self.navButtons = self.navbar.find( "a" );
+            self.navButtons.each( function() {
                 var icon = $.mobile.getAttribute( this, "icon" ),
                     theme = $.mobile.getAttribute( this, "theme" ),
-                    classes = "ui-btn";
+                    classes = "ui-button";
 
                 if ( theme ) {
-                    classes += " ui-btn-" + theme;
+                    classes += " ui-button-" + theme;
                 }
                 if ( icon ) {
-                    classes += " ui-icon-" + icon + " ui-btn-icon-" + self.iconpos;
+                    classes += " ui-icon-" + icon + " ui-button-icon-" + self.iconpos;
                 }
                 $( this ).removeClass( classes );
-            });
+            } );
         }
     }
-});
-  
-});
+} );
+
+} );

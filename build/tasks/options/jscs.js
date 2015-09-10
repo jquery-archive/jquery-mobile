@@ -50,6 +50,8 @@ module.exports = {
 			"js/widgets/listview.backcompat.js",
 			"js/widgets/listview.hidedividers.js",
 			"js/widgets/listview.js",
+			"js/widgets/navbar.js",
+			"js/widgets/navbar.morebutton.js",
 
 			// Tests
 			"tests/integration/listview/autodividers_core.js",
