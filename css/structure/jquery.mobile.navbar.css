@@ -28,8 +28,8 @@
 	border-right-width: 0;
 	box-sizing: border-box;
 }
-.ui-header .ui-navbar li button.ui-button,
-.ui-footer .ui-navbar li button.ui-button {
+.ui-toolbar-header .ui-navbar li button.ui-button,
+.ui-toolbar-footer .ui-navbar li button.ui-button {
 	margin: 0;
 	width: 100%;
 }
@@ -57,13 +57,13 @@
 .ui-content .ui-navbar li:last-child .ui-button:after {
 	margin-right: 0;
 }
-.ui-header .ui-navbar .ui-button,
-.ui-footer .ui-navbar .ui-button {
+.ui-toolbar-header .ui-navbar .ui-button,
+.ui-toolbar-footer .ui-navbar .ui-button {
 	border-top-width: 0;
 	border-bottom-width: 0;
 	display: inline-block;
 }
-.ui-header .ui-title ~ .ui-navbar .ui-button,
-.ui-footer .ui-title ~ .ui-navbar .ui-button {
+.ui-toolbar-header .ui-title ~ .ui-navbar .ui-button,
+.ui-toolbar-footer .ui-title ~ .ui-navbar .ui-button {
 	border-top-width: 1px;
 }
