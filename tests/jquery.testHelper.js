@@ -138,17 +138,20 @@ $.testHelper = {
 	reloadLib: function( libName ) {
 		var reload;
 
+		if ( libName.indexOf( "../" ) === -1 ) {
+			libName = "../../../js/" + libName;
+		}
+
 		if ( this.reloads[ libName ] === undefined ) {
 			this.reloads[ libName ] = {
-				lib: $( "script[src$='" + libName + "']" ),
-				dataSrcLib: $( "script[data-src$='" + libName + "']" ),
+				lib: libName,
 				count: 0
 			};
 		}
 
 		reload = this.reloads[ libName ];
 
-		var src = reload.lib.attr( 'src' ) || reload.dataSrcLib.attr( "data-src" ) + "?" + this.reloads[libName].count++;
+		var src = reload.lib + "?" + this.reloads[libName].count++;
 		$.ajax( { url: src, dataType: "script", async: false } );
 	},
 
