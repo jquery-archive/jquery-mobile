@@ -14,7 +14,8 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
     options: {
         morebutton: false,
         morebuttontext: "...",
-        morebuttoniconpos: "top"
+        morebuttoniconpos: "top",
+        morebuttonicon: null
     },
 
     _create: function() {
@@ -44,7 +45,7 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
             buttonCount = $navButtons.length,
             maxButton = this.options.maxbutton,
             iconpos = this.options.iconpos,
-            icon = $.mobile.getAttribute( this.element, "morebuttonicon" ),
+            icon = this.options.morebuttonicon,
             classes = "ui-btn";
 
         id = this._id() + "-popup";
