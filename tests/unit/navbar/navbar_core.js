@@ -3,7 +3,7 @@
  */
 ( function( QUnit, $ ) {
 QUnit.test( "navbar button gets active button class when clicked", function( assert ) {
-	var link = $( "#disabled-button-click a:not(.ui-disabled)" ).first();
+	var link = $( "#disabled-btn-click a:not(.ui-state-disabled)" ).first();
 
 	link.click();
 	assert.ok( link.hasClass( "ui-button-active" ), "link has active button class" );
@@ -14,19 +14,6 @@ QUnit.test( "disabled navbar button doesn't add active button class when clicked
 
 	link.click();
 	assert.ok( !link.hasClass( "ui-button-active" ), "link doesn't have active button class" );
-} );
-
-QUnit.test( "grids inside an ignored container do not enhance", function( assert ) {
-	var $ignored = $( "#ignored-grid" ),
-		$enhanced = $( "#enhanced-grid" );
-
-	$.mobile.ignoreContentEnabled = true;
-
-	$( "#foo" ).enhance();
-
-	assert.ok( !$ignored.hasClass( "ui-grid" ), "ignored list doesn't have the grid theme" );
-	assert.deepEqual( $enhanced.attr( "class" ).indexOf( "ui-grid" ), 0, "enhanced list has the grid theme" );
-	$.mobile.ignoreContentEnabled = false;
 } );
 
 QUnit.test( "classes are correctly assigned", function( assert ) {
