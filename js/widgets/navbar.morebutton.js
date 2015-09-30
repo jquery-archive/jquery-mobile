@@ -142,17 +142,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
             self.navbar.removeClass( "ui-navbar" );
             self.navButtons = self.navbar.find( "a" );
             self.navButtons.each( function() {
-                var icon = $.mobile.getAttribute( this, "icon" ),
-                    theme = $.mobile.getAttribute( this, "theme" ),
-                    classes = "ui-button";
-
-                if ( theme ) {
-                    classes += " ui-button-" + theme;
-                }
-                if ( icon ) {
-                    classes += " ui-icon-" + icon + " ui-button-icon-" + self.iconpos;
-                }
-                $( this ).removeClass( classes );
+                $( this ).button( "destroy" );
             } );
         }
     }

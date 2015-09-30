@@ -58,6 +58,7 @@ $files = array(
 	'widgets/collapsibleSet.js',
 	'grid.js',
 	'widgets/navbar.js',
+	'widgets/navbar.backcompat.js',
 	'widgets/navbar.morebutton.js',
 	'widgets/listview.js',
 	'widgets/listview.backcompat.js',

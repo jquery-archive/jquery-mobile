@@ -69,35 +69,10 @@ return $.widget( "mobile.navbar", {
 			self._createNavRows();
 		}
 
-		// Deprecated in 1.5
-		self._on( self.element, {
-			"vclick a": function( event ) {
-				var activeBtn = $( event.target );
-
-				if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
-					activeBtn.hasClass( "ui-button-active" ) ) ) {
-
-					navButtons.removeClass( "ui-button-active" );
-					activeBtn.addClass( "ui-button-active" );
-
-					// The code below is a workaround to fix #1181
-					$( document ).one( "pagehide", function() {
-						activeBtn.removeClass( "ui-button-active" );
-					} );
-				}
-			}
-		} );
-
-		// Deprecated in 1.5
-		// Buttons in the navbar with ui-state-persist class should
-		// regain their active state before page show
-		navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			navButtons.filter( ".ui-state-persist" ).addClass( "ui-button-active" );
-		} );
 	},
 
 	_createNavRows: function() {
-		var rowCount, row, pos, buttonItem, overflowNav,
+		var rowCount, row, pos, buttonItem, overflowNav, navRow,
 			navItems = this.navbar.find( "li" ),
 			buttonCount = this.numButtons,
 			maxButton = this.maxButton;
@@ -108,9 +83,9 @@ return $.widget( "mobile.navbar", {
 
 		// prep for new rows
 		for ( pos = 1; pos < rowCount ; pos++ ) {
-			$( "<ul>" )
-				.addClass( "ui-navbar-row ui-navbar-row-" + pos )
-				.appendTo( this.navbar );
+			navRow = $( "<ul>" );
+			this._addClass( navRow, "ui-navbar-row ui-navbar-row-" + pos );
+			navRow.appendTo( this.navbar );
 		}
 
 		// enhance buttons and move to new rows
@@ -138,8 +113,8 @@ return $.widget( "mobile.navbar", {
 		self.navButtons = self.navbar.find( "a" );
 		self.numButtons = self.navButtons.length;
 
-		self.navbar.addClass( "ui-navbar" )
-			.attr( "role", "navigation" )
+		this._addClass( self.navbar, "ui-navbar" );
+		self.navbar.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable();
 
@@ -162,7 +137,7 @@ return $.widget( "mobile.navbar", {
 			self.navbar.find( "ul" ).append( navrows );
 		}
 
-		self.navbar.removeClass( "ui-navbar" );
+		this._removeClass( self.navbar, "ui-navbar" );
 
 		self.navButtons.each( function() {
 			$( this ).button( "destroy" );
