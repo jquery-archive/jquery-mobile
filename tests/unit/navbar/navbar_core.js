@@ -9,27 +9,20 @@ QUnit.test( "classes are correctly assigned", function( assert ) {
 		d = $ul.find( "li" ).eq( 1 ).find( "a" ).find( "span" ),
 		u = $ul.find( "li" ).eq( 2 ).find( "a" ).find( "span" );
 
-	assert.ok( r.hasClass( "ui-icon-arrow-r" ) &&
-        !r.hasClass( "ui-icon-arrow-d" ) &&
-        !r.hasClass( "ui-icon-arrow-u" ), "first item only has class of arrow-r" );
-	assert.ok( !d.hasClass( "ui-icon-arrow-r" ) &&
-     d.hasClass( "ui-icon-arrow-d" ) &&
-     !d.hasClass( "ui-icon-arrow-u" ), "second item only has class of arrow-d" );
-	assert.ok( !u.hasClass( "ui-icon-arrow-r" ) &&
-        !u.hasClass( "ui-icon-arrow-d" ) &&
-        u.hasClass( "ui-icon-arrow-u" ), "third item only has class of arrow-u" );
+    assert.hasClasses( r, "ui-icon-arrow-r" );
+    assert.hasClasses( d, "ui-icon-arrow-d" );
+    assert.hasClasses( u, "ui-icon-arrow-u" );
 } );
 
 QUnit.module( "navbar exceed maxbutton, without moreButton" );
 
-QUnit.test( "exceeding default maxbutton creates a new row", function() {
+QUnit.test( "exceeding default maxbutton creates a new row", function( assert ) {
     var navbar = $( "#default-maxbutton-overflow" ),
         navRows = navbar.children( "ul" ),
         navRowCount = navRows.length;
 
     ok( navRowCount === 2, "six items overflows to two lists" );
-    ok( navRows.eq( 1 ).hasClass( "ui-navbar-row" ),
-        "overflow list gets appropriate classname" );
+    assert.hasClasses( navRows.eq( 1 ), "ui-navbar-row" );
     ok( navRows.eq( 1 ).children( "li" ).length === 1,
         "overflow row holds sixth nav item" );
 } );
@@ -54,15 +47,13 @@ QUnit.module( "navbar appending items and refresh, without moreButton", {
     }
 } );
 
-QUnit.test( "adding items to navbar", function() {
+QUnit.test( "adding items to navbar", function( assert ) {
     var navRows = this.addNav.children( "ul" ),
         navRowCount = navRows.length;
 
-    ok( this.navbarRow.find( "li:last-child > a" ).hasClass ( "ui-button" ),
-        "added items get ui-button class after refresh" );
+    assert.hasClasses( this.navbarRow.find( "li:last-child > a" ), "ui-button" );
     ok( navRowCount === 2, "six items overflows to two lists" );
-    ok( navRows.eq( 1 ).hasClass( "ui-navbar-row" ),
-        "overflow list gets appropriate classname" );
+    assert.hasClasses( navRows.eq( 1 ), "ui-navbar-row" );
     ok( navRows.eq( 1 ).children( "li" ).length === 1,
         "overflow row holds sixth nav item" );
 } );
@@ -74,13 +65,13 @@ QUnit.module( "navbar destroy, without moreButton", {
     }
 } );
 
-QUnit.test( "destroy navbar ", function() {
+QUnit.test( "destroy navbar ", function( assert ) {
     var navRows = this.navbar.children( "ul" ),
         navRowCount = navRows.length;
 
     ok( navRowCount === 1, "destroyed navbars revert to one ul" );
     navRows.find( "li" ).each( function() {
-        ok( !$( this ).find( "a" ).hasClass( "ui-button" ), "ui-button class removed on item" );
+        assert.lacksClasses( $( this ).find( "a" ), "ui-button" );
     } );
 } );
 
