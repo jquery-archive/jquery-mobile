@@ -69,7 +69,7 @@ $.event.special.tap = {
 		$this.bind( "vmousedown", function( event ) {
 			isTaphold = false;
 			if ( event.which && event.which !== 1 ) {
-				return false;
+				return true;
 			}
 
 			var origTarget = event.target,
