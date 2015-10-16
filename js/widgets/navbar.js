@@ -49,8 +49,7 @@ return $.widget( "mobile.navbar", {
 
 		navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
-			.find( "ul" )
-			.jqmEnhanceable();
+			.find( "ul" );
 
 		that.navbar = navbar;
 		that.navButtons = navButtons;
