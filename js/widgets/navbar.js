@@ -39,56 +39,58 @@ return $.widget( "mobile.navbar", {
 	},
 
 	_create: function() {
-
-		var self = this,
-			navbar = self.element,
-			navButtons = navbar.find( "a" ),
-			numButtons = navButtons.length,
-			maxButton = this.options.maxbutton,
-			iconpos = navButtons.filter( ":jqmData(icon)" ).length ?
-				self.options.iconpos : undefined;
+		var that = this;
+		var navbar = that.element;
+		var navButtons = navbar.find( "a" );
+		var numButtons = navButtons.length;
+		var maxButton = this.options.maxbutton;
+		var iconpos = navButtons.filter( ":jqmData(icon)" ).length ?
+				that.options.iconpos : undefined;
 
 		navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable();
 
-		$.extend( self, {
-			navbar: navbar,
-			navButtons: navButtons,
-			numButtons: numButtons,
-			maxButton: maxButton,
-			iconpos: iconpos
-		} );
+		that.navbar = navbar;
+		that.navButtons = navButtons;
+		that.numButtons = numButtons;
+		that.maxButton = maxButton;
+		that.iconpos = iconpos;
 
 		 if ( numButtons <= maxButton ) {
 			navButtons.each( function() {
-				self._makeNavButton( this, iconpos );
+				that._makeNavButton( this, iconpos );
 			} );
 		} else {
-			self._createNavRows();
+			that._createNavRows();
 		}
 
 	},
 
 	_createNavRows: function() {
-		var rowCount, row, pos, buttonItem, overflowNav, navRow,
-			navItems = this.navbar.find( "li" ),
-			buttonCount = this.numButtons,
-			maxButton = this.maxButton;
+		var rowCount;
+		var row;
+		var pos;
+		var buttonItem;
+		var overflowNav;
+		var navRow;
+		var navItems = this.navbar.find( "li" );
+		var buttonCount = this.numButtons;
+		var maxButton = this.maxButton;
 
 		rowCount = ( buttonCount % maxButton ) === 0 ?
 						( buttonCount / maxButton ) :
 						Math.floor( buttonCount / maxButton ) + 1;
 
-		// prep for new rows
+		// Prep for new rows
 		for ( pos = 1; pos < rowCount ; pos++ ) {
 			navRow = $( "<ul>" );
 			this._addClass( navRow, "ui-navbar-row ui-navbar-row-" + pos );
 			navRow.appendTo( this.navbar );
 		}
 
-		// enhance buttons and move to new rows
+		// Enhance buttons and move to new rows
 		for ( pos = 0; pos < buttonCount ; pos++ ) {
 			buttonItem = navItems.eq( pos );
 			this._makeNavButton( buttonItem.find( "a" ), this.iconpos );
@@ -108,38 +110,38 @@ return $.widget( "mobile.navbar", {
 	},
 
 	refresh: function() {
-		var self = this;
+		var that = this;
 
-		self.navButtons = self.navbar.find( "a" );
-		self.numButtons = self.navButtons.length;
+		that.navButtons = that.navbar.find( "a" );
+		that.numButtons = that.navButtons.length;
 
-		this._addClass( self.navbar, "ui-navbar" );
-		self.navbar.attr( "role", "navigation" )
+		this._addClass( that.navbar, "ui-navbar" );
+		that.navbar.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable();
 
-		 if ( self.numButtons <= self.maxButton ) {
-			self.navButtons.each( function() {
-				self._makeNavButton( this, self.iconpos );
+		 if ( that.numButtons <= that.maxButton ) {
+			that.navButtons.each( function() {
+				that._makeNavButton( this, that.iconpos );
 			} );
 		} else {
-			self._createNavRows();
+			that._createNavRows();
 		}
 	},
 
 	_destroy: function() {
-		var navrows,
-			self = this;
+		var navrows;
+		var that = this;
 
-		if ( self.numButtons > self.maxButton ) {
-			navrows = self.navbar.find( ".ui-navbar-row li" ).detach();
+		if ( that.numButtons > that.maxButton ) {
+			navrows = that.navbar.find( ".ui-navbar-row li" ).detach();
 			$( ".ui-navbar-row" ).remove();
-			self.navbar.find( "ul" ).append( navrows );
+			that.navbar.find( "ul" ).append( navrows );
 		}
 
-		this._removeClass( self.navbar, "ui-navbar" );
+		this._removeClass( that.navbar, "ui-navbar" );
 
-		self.navButtons.each( function() {
+		that.navButtons.each( function() {
 			$( this ).button( "destroy" );
 		} );
 	}
