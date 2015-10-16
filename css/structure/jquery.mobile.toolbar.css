@@ -24,6 +24,7 @@
 	white-space: nowrap;
 	outline: 0 !important;
 }
+.ui-toolbar .ui-toolbar-title,
 .ui-toolbar-footer .ui-toolbar-title {
 	margin: 0 1em;
 }
