@@ -208,6 +208,7 @@ div.ui-mobile-viewport {
 	user-select: none;
 }
 .ui-button-icon-only,
+.ui-toolbar button.ui-button.ui-button-icon-only,
 .ui-toolbar-header button.ui-button.ui-button-icon-only,
 .ui-toolbar-footer button.ui-button.ui-button-icon-only {
 	padding: 0;
@@ -228,14 +229,17 @@ div.ui-mobile-viewport {
 	line-height: inherit;
 }
 /* Make buttons in toolbars default to mini and inline. */
+.ui-toolbar .ui-button,
 .ui-toolbar-header .ui-button,
 .ui-toolbar-footer .ui-button {
 	display: inline-block;
 	vertical-align: middle;
 }
 .ui-mini,
+.ui-toolbar .ui-button,
 .ui-toolbar-header .ui-button,
 .ui-toolbar-footer .ui-button,
+.ui-toolbar .ui-controlgroup .ui-button-icon-only,
 .ui-toolbar-header .ui-controlgroup .ui-button-icon-only,
 .ui-toolbar-footer .ui-controlgroup .ui-button-icon-only,
 .ui-toolbar-header .ui-toolbar-header-button-left,
@@ -245,6 +249,7 @@ div.ui-mobile-viewport {
 }
 .ui-mini.ui-button-icon-only,
 .ui-mini .ui-button-icon-only,
+.ui-toolbar .ui-button-icon-only,
 .ui-toolbar-header .ui-button-icon-only,
 .ui-toolbar-footer .ui-button-icon-only {
 	font-size: 16px;
@@ -307,6 +312,7 @@ input.ui-button {
 }
 button.ui-button-inline,
 input.ui-button-inline,
+.ui-toolbar button.ui-button,
 .ui-toolbar-header button.ui-button,
 .ui-toolbar-footer button.ui-button {
 	width: auto;
