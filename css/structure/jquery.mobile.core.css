@@ -285,6 +285,16 @@ div.ui-mobile-viewport {
 	margin-left: -11px;
 }
 
+/* Float icons helper classes */
+.ui-widget-icon-floatbeginning {
+	bottom: auto;
+	float: left;
+}
+.ui-widget-icon-floatend {
+	bottom: auto;
+	float: right;
+}
+
 /* Button elements and input buttons */
 button.ui-button,
 input.ui-button {
