@@ -32,18 +32,18 @@
 if ( $.mobileBackcompat !== false ) {
 	return $.widget( "mobile.navbar", $.mobile.navbar, {
 		_create: function() {
-			var self = this;
+			var that = this;
 			this._super();
 
 			// Deprecated in 1.5
-			self._on( self.element, {
+			that._on( that.element, {
 				"vclick a": function( event ) {
 					var activeBtn = $( event.target );
 
 					if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
 						activeBtn.hasClass( "ui-button-active" ) ) ) {
 
-						self.navButtons.removeClass( "ui-button-active" );
+						that.navButtons.removeClass( "ui-button-active" );
 						activeBtn.addClass( "ui-button-active" );
 
 						// The code below is a workaround to fix #1181
@@ -57,8 +57,8 @@ if ( $.mobileBackcompat !== false ) {
 			// Deprecated in 1.5
 			// Buttons in the navbar with ui-state-persist class should
 			// regain their active state before page show
-			self.navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-				self.navButtons.filter( ".ui-state-persist" ).addClass( "ui-button-active" );
+			that.navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
+				that.navButtons.filter( ".ui-state-persist" ).addClass( "ui-button-active" );
 			} );
 		}
 	} );
