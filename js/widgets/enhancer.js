@@ -25,7 +25,8 @@
 	}
 } )( function( $ ) {
 
-var installed = false;
+var widgetBaseClass,
+	installed = false;
 
 $.fn.extend( {
 	enhance: function() {
@@ -52,10 +53,6 @@ $.extend( $.enhance, {
 		if ( $.enhance._filter ) {
 			enhanceables = $.enhance._filter( enhanceables );
 		}
-
-		// Check if the widget factory exists and if it
-		// does make sure the options extension is installed
-		$.enhance._installWidget();
 
 		// Loop over and execute any hooks that exist
 		for ( i = 0; i < $.enhance.hooks.length; i++ ) {
@@ -172,7 +169,25 @@ $.extend( $.enhance, {
 	}
 } );
 
-$.enhance._installWidget();
+if ( !$.Widget ) {
+	Object.defineProperty( $, "Widget", {
+		configurable: true,
+		enumerable: true,
+		get: function() {
+			return widgetBaseClass;
+		},
+		set: function( newValue ) {
+			if ( newValue ) {
+				widgetBaseClass = newValue;
+				setTimeout( function() {
+					$.enhance._installWidget();
+				} );
+			}
+		}
+	} );
+} else {
+	$.enhance._installWidget();
+}
 
 return $.enhance;
 } );
