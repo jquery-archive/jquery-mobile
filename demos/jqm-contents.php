@@ -44,7 +44,6 @@
 	</div>
 </li>
 <li data-filtertext="form datepicker widget date input"><a href="../datepicker/" data-ajax="false">Datepicker</a></li>
->>>>>>> Accordion: Demo styling for various accordion options
 <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="caret-d" data-expanded-icon="caret-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
 	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
 		<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-caret-d">
