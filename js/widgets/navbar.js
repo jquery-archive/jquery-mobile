@@ -51,18 +51,18 @@ return $.widget( "mobile.navbar", {
 			.attr( "role", "navigation" )
 			.find( "ul" );
 
-		that.navbar = navbar;
-		that.navButtons = navButtons;
-		that.numButtons = numButtons;
-		that.maxButton = maxButton;
-		that.iconpos = iconpos;
+		this.navbar = navbar;
+		this.navButtons = navButtons;
+		this.numButtons = numButtons;
+		this.maxButton = maxButton;
+		this.iconpos = iconpos;
 
 		 if ( numButtons <= maxButton ) {
 			navButtons.each( function() {
 				that._makeNavButton( this, iconpos );
 			} );
 		} else {
-			that._createNavRows();
+			this._createNavRows();
 		}
 
 	},
@@ -111,36 +111,34 @@ return $.widget( "mobile.navbar", {
 	refresh: function() {
 		var that = this;
 
-		that.navButtons = that.navbar.find( "a" );
-		that.numButtons = that.navButtons.length;
+		this.navButtons = this.navbar.find( "a" );
+		this.numButtons = this.navButtons.length;
 
-		this._addClass( that.navbar, "ui-navbar" );
-		that.navbar.attr( "role", "navigation" )
-			.find( "ul" )
-			.jqmEnhanceable();
+		this._addClass( this.navbar, "ui-navbar" );
+		this.navbar.attr( "role", "navigation" )
+			.find( "ul" );
 
-		 if ( that.numButtons <= that.maxButton ) {
-			that.navButtons.each( function() {
+		 if ( this.numButtons <= this.maxButton ) {
+			this.navButtons.each( function() {
 				that._makeNavButton( this, that.iconpos );
 			} );
 		} else {
-			that._createNavRows();
+			this._createNavRows();
 		}
 	},
 
 	_destroy: function() {
 		var navrows;
-		var that = this;
 
-		if ( that.numButtons > that.maxButton ) {
-			navrows = that.navbar.find( ".ui-navbar-row li" ).detach();
+		if ( this.numButtons > this.maxButton ) {
+			navrows = this.navbar.find( ".ui-navbar-row li" ).detach();
 			$( ".ui-navbar-row" ).remove();
-			that.navbar.find( "ul" ).append( navrows );
+			this.navbar.find( "ul" ).append( navrows );
 		}
 
-		this._removeClass( that.navbar, "ui-navbar" );
+		this._removeClass( this.navbar, "ui-navbar" );
 
-		that.navButtons.each( function() {
+		this.navButtons.each( function() {
 			$( this ).button( "destroy" );
 		} );
 	}
