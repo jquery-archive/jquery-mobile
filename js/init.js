@@ -96,9 +96,6 @@ $.extend( $.mobile, {
 		// define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
 		$.mobile.firstPage = $pages.first();
 
-		// Ensure the widget factory takes into account option values stored as data-attributes
-		$.enhance._installWidget();
-
 		// define page container
 		$.mobile.pageContainer = $.mobile.firstPage
 			.parent()
