@@ -18,6 +18,7 @@
 }
 .ui-navbar li {
 	display: table-cell;
+	vertical-align: middle;
 	width: 100%;
 }
 .ui-navbar li .ui-button {

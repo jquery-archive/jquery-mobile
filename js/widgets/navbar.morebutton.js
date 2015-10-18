@@ -83,7 +83,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
             this._makeNavButton( buttonItem.find( "a" ), iconpos );
             if ( pos + 1 === maxButton ) {
 
-                moreButton = $( "<li></li>" ).append( $( "<a></a>" )
+                moreButton = $( "<li></li>" ).append( $( "<button></button>" )
                                     .attr( "data-rel", "popup" )
                                     .button( {
                                         icon: icon,
