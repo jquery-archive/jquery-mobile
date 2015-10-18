@@ -2,7 +2,7 @@
  * mobile filter unit tests - listview
  */
 
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( "Filterable tests" );
 
@@ -38,4 +38,4 @@ QUnit.test( "Filterable input prevents default on ENTER", function( assert ) {
 	assert.deepEqual( event.isDefaultPrevented(), true, "Subsequent keypress default is also prevented" );
 } );
 
-} )( QUnit, jQuery );
+} );
