@@ -105,7 +105,14 @@ return $.widget( "mobile.navbar", {
 	},
 
 	_makeNavButton: function( button, iconpos ) {
-		$( button ).button( { iconPosition: iconpos } );
+		var isDisabled = false;
+		if ( $( button ).hasClass( "ui-state-disabled" ) ) {
+			isDisabled = true;
+		}
+		$( button ).button( {
+			iconPosition: iconpos,
+			disabled: isDisabled
+		 } );
 	},
 
 	refresh: function() {

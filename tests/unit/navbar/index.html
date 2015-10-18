@@ -8,11 +8,12 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
+		$.mobileBackcompat = false;
+
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
 			[
@@ -33,22 +34,22 @@
 </head>
 <body>
 	<div id="qunit"></div>
-	<div data-nstest-role="page" id="disabled-button-click">
-		<div data-nstest-role="navbar">
+	<div data-ui-role="page" id="disabled-button-click">
+		<div data-ui-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-state-disabled">One</a></li>
 				<li><a href="#">Two</a></li>
 			</ul>
 		</div>
 
-		<div data-nstest-role="navbar">
+		<div data-ui-role="navbar">
 			<ul id="enhanced-classes">
-				<li><a href="#" data-nstest-role="button" data-nstest-icon="ui-icon-arrow-r">a</a></li>
-				<li><a href="#" data-nstest-role="button" data-nstest-icon="ui-icon-arrow-d">b</a></li>
-				<li><a href="#" data-nstest-role="button" data-nstest-icon="ui-icon-arrow-u">c</a></li>
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-r">a</a></li>
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-d">b</a></li>
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-u">c</a></li>
 			</ul>
 		</div>
-		<div data-nstest-role="navbar" id="default-maxbutton-overflow">
+		<div data-ui-role="navbar" id="default-maxbutton-overflow">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>
@@ -59,7 +60,7 @@
 			</ul>
 		</div>
 
-		<div data-nstest-role="navbar" data-nstest-maxbutton="6" id="default-maxbutton-override">
+		<div data-ui-role="navbar" data-ui-maxbutton="6" id="default-maxbutton-override">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>
@@ -70,7 +71,7 @@
 			</ul>
 		</div>
 
-		<div data-nstest-role="navbar" id="add-items-navbar">
+		<div data-ui-role="navbar" id="add-items-navbar">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>
@@ -78,7 +79,7 @@
 			</ul>
 		</div>
 
-		<div data-nstest-role="navbar" id="default-maxbutton-overflow-destroy">
+		<div data-ui-role="navbar" id="default-maxbutton-overflow-destroy">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>
@@ -89,7 +90,7 @@
 			</ul>
 		</div>
 
-		<div data-nstest-role="navbar" data-nstest-morebutton="true" id="default-maxbutton-morebutton">
+		<div data-ui-role="navbar" data-ui-morebutton="true" id="default-maxbutton-morebutton">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>
