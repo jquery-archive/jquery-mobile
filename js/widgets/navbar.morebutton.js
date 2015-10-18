@@ -40,7 +40,6 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
     },
 
     _create: function() {
-
         this._super();
         if ( this.options.morebutton  && this.numButtons > this.maxButton ) {
             this._createNavPopup();
@@ -48,7 +47,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
     },
 
     _id: function() {
-        return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
+        return this.element.attr( "id" ) || ( this.widgetName + this.uuid );
     },
 
     _createNavRows: function() {
