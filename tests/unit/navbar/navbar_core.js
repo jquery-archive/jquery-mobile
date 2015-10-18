@@ -4,10 +4,10 @@
 ( function( QUnit, $ ) {
 
 QUnit.test( "classes are correctly assigned", function( assert ) {
-	var $ul = $( "#enhanced-classes" ),
-		r = $ul.find( "li" ).eq( 0 ).find( "a" ).find( "span" ),
-		d = $ul.find( "li" ).eq( 1 ).find( "a" ).find( "span" ),
-		u = $ul.find( "li" ).eq( 2 ).find( "a" ).find( "span" );
+	var navbar = $( "#enhanced-classes" ),
+		r = navbar.find( "li" ).eq( 0 ).find( "a span" ),
+		d = navbar.find( "li" ).eq( 1 ).find( "a span" ),
+		u = navbar.find( "li" ).eq( 2 ).find( "a span" );
 
     assert.hasClasses( r, "ui-icon-arrow-r" );
     assert.hasClasses( d, "ui-icon-arrow-d" );
