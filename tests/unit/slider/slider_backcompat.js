@@ -1,7 +1,10 @@
 /*
  * Mobile slider unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 QUnit.module( "jquery.mobile.slider.js backcompat" );
 
@@ -29,4 +32,4 @@ QUnit.test( "slider elements in the keepNative set shouldn't be enhanced", funct
 	assert.deepEqual( $( "input.should-be-native" ).siblings( ".ui-slider-track" ).length, 0 );
 } );
 
-} )( QUnit, jQuery );
+} );

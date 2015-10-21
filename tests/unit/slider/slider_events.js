@@ -2,8 +2,10 @@
  * Mobile slider unit tests
  */
 
-( function( QUnit, $ ) {
-
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var onChangeCnt = 0;
 window.onChangeCounter = function() {
 	onChangeCnt++;
@@ -306,4 +308,4 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 			"vmousemove event was removed" );
 	} );
 }
-} )( QUnit, jQuery );
+} );

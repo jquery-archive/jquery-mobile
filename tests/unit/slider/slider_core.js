@@ -1,7 +1,10 @@
 /*
  * Mobile slider unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 QUnit.module( "jquery.mobile.slider.js core" );
 
@@ -98,4 +101,4 @@ QUnit.test( "slider input is disabled correctly", function( assert ) {
 	assert.hasClasses( slider, "ui-state-disabled" );
 } );
 
-} )( QUnit, jQuery );
+} );
