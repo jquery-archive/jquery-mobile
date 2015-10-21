@@ -6,32 +6,20 @@
 	<title>jQuery Mobile Rangeslider Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/requirejs.config.js"></script>
-	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
-	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
-	<script>
-		$.testHelper.asyncLoad([
-			[
-				"widgets/forms/slider",
-				"widgets/forms/slider.backcompat",
-				"widgets/forms/rangeslider",
-				"widgets/forms/rangeslider.backcompat"
-			],
-			[ 
-				"rangeslider_core.js",
-				"rangeslider_backcompat.js" 
-			],
-			[ "init" ]
-		]);
-	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
+ 	<script
+ 		src="../../lib/bootstrap.js"
+ 		data-deps="qunit-assert-classes forms/slider forms/slider.backcompat
+ 		forms/rangeslider forms/rangeslider.backcompat
+ 		./rangeslider_backcompat.js"
+ 		data-init="true"
+ 		data-modules="rangeslider_core"/>
+	</script>
 </head>
 <body>
 
