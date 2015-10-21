@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 QUnit.test( "Slider widget works correctly", function( assert ) {
 var trackWidth, trackX,
@@ -37,4 +37,4 @@ moveHandle( handle, trackX + trackWidth * 0.5 );
 assert.ok( handle.offset().left > 0, "Handle responds to user interaction" );
 } );
 
-} )( QUnit, jQuery );
+} );
