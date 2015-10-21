@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 QUnit.test( "Textinput widget works correctly", function( assert ) {
 var plainText = $( "#plain-text" ).textinput(),
@@ -15,4 +15,4 @@ assert.hasClasses( textarea.textinput( "widget" )[ 0 ], "ui-textinput-text",
 	"Textarea widget has class ui-textinput-text" );
 } );
 
-} )( QUnit, jQuery );
+} );
