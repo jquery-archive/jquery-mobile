@@ -1,4 +1,5 @@
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 
 QUnit.test( "Rangeslider widget works correctly", function( assert ) {
 var rangeslider = $( "#plain" ).rangeslider(),
@@ -41,4 +42,4 @@ assert.ok( handles.eq( 1 ).offset().left > handles.eq( 0 ).offset().left,
 	"Upper handle responds to user interaction" );
 } );
 
-} )( QUnit, jQuery );
+} );

@@ -1,8 +1,7 @@
 /*
  * Mobile slider unit tests
  */
-( function( QUnit, $ ) {
-
+define( [ "jquery" ], function( $ ) {
 	QUnit.module( "jquery.mobile.rangeslider.js core" );
 
 	QUnit.test( "Highlight has correct margin and width", function( assert ) {
@@ -48,4 +47,4 @@
 		assert.lacksClasses( $( "#nocorners-rangeslider" ), "ui-corner-all" );
 	} );
 
-} )( QUnit, jQuery );
+} );
