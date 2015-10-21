@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "jquery" ], function( $ ) {
 
 QUnit.test( "Loader attaches to DOM when running individually", function( assert ) {
 var loader = $.mobile.loading( "show" );
@@ -11,4 +11,4 @@ assert.deepEqual( loader.is( ":visible" ), true, "Loader is visible when shown" 
 $.mobile.loading( "hide" );
 } );
 
-} )( QUnit, jQuery );
+} );

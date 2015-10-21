@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "Loader html option", function( assert ) {
 	var children, firstChild, lastChild,
@@ -85,4 +85,4 @@ QUnit.test( "show() with custom HTML", function( assert ) {
 	loader.destroy();
 } );
 
-} )( QUnit, jQuery );
+} );
