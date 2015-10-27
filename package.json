@@ -48,7 +48,7 @@
 		"grunt-hash-manifest": "0.5.3",
 		"grunt-jscs": "2.8.0",
 		"grunt-php": "1.4.0",
-		"grunt-qunit-istanbul": "0.3.0",
+		"grunt-qunit-istanbul": "asciidisco/grunt-qunit-istanbul#e152e39a7a30097af10048604a55b5e2741154cb",
 		"grunt-qunit-junit": "0.1.0-alpha2",
 		"grunt-spider": "0.2.2",
 		"load-grunt-config": "0.16.0",
