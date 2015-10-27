@@ -1,6 +1,12 @@
 ( function() {
 
+	var script = ( function() {
+		var scripts = document.getElementsByTagName( "script" );
+		return scripts[ scripts.length - 1 ];
+	} )();
+
 	requirejs.config( {
+		"baseUrl": script.getAttribute( "data-base-url" ) || "../../../js",
 		"paths": {
 			// requireJS plugins
 			"text": "../external/requirejs/plugins/text",
@@ -148,9 +154,6 @@
 
 	( function() {
 
-		var scripts = document.getElementsByTagName( "script" );
-		var script = scripts[ scripts.length - 1 ];
-
 		var deps = script.getAttribute( "data-deps" );
 
 		if ( deps ) {
@@ -164,7 +167,6 @@
 		var full = !!script.getAttribute( "data-full" );
 		var init = !!script.getAttribute( "data-init" );
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
-		var baseUrl = script.getAttribute( "data-base-url" );
 		var noAutoStart = !!script.getAttribute( "data-no-autostart" );
 		var initAfterModules = !!script.getAttribute( "data-init-after-modules" );
 		var modules = script.getAttribute( "data-modules" );
@@ -214,15 +216,13 @@
 			deps = deps.concat( modules );
 		}
 
-		// Set base url for requirejs
-		require( {
-			baseUrl: baseUrl || "../../../js"
+		require( [ "qunit" ], function() {
+
+			// Set autostart to false
+			QUnit.config.autostart = false;
+
+			requireModules( deps, noAutoStart );
 		} );
-
-		// Set autostart to false
-		QUnit.config.autostart = false;
-
-		requireModules( deps, noAutoStart );
 
 	} )();
 } )();
