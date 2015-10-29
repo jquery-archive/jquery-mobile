@@ -54,7 +54,7 @@
 
         			<p><a href="toolbar/" data-ajax="false">Toolbar</a>, <a href="navbar/" data-ajax="false">Navbar</a>, <a href="controlgroup/" data-ajax="false">Controlgroup</a></p>
         			<p><a href="tabs/" data-ajax="false">Tabs</a>, <a href="panel/" data-ajax="false">Panel</a>, <a href="popup/" data-ajax="false">Popup</a></p>
-        			<p><a href="collapsible/" data-ajax="false">Collapsible</a>, <a href="collapsibleset/" data-ajax="false">Collapsible set</a>, <a href="filterable/" data-ajax="false">Filterable</a></p>
+        			<p><a href="accordion/" data-ajax="false">Accordion</a>, <a href="collapsible/" data-ajax="false">Collapsible</a>, <a href="collapsibleset/" data-ajax="false">Collapsible set</a>, <a href="filterable/" data-ajax="false">Filterable</a></p>
         		</div>
         	</div>
         	<div class="ui-block-b">
