@@ -51,7 +51,6 @@
 		"grunt-qunit-istanbul": "0.3.0",
 		"grunt-qunit-junit": "0.1.0-alpha2",
 		"grunt-spider": "0.2.2",
-		"jsdom": "0.8.3",
 		"load-grunt-config": "0.16.0",
 		"optimist": "0.6.0",
 		"requirejs": "2.1.8",
