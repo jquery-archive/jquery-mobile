@@ -16,20 +16,22 @@
 <div data-role="page" class="jqm-demos jqm-home">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile"></h2>
-		<p>Version <span class="jqm-version"></span></p>
+		<h2><img src="_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></h2>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
 		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
+		<h1><span class="jqm-version"></span> Demos</h1>
+
+		<p><span class="jqm-intro-span">jQuery Mobile</span> is a touch-optimized HTML5 UI framework designed to make responsive web sites and apps that are accessible on all smartphone, tablet and desktop devices.</p>
+
         <img src="_assets/img/devices.png" class="jqm-demos-hero">
-            <h1>Demos</h1>
 
-		  <p><strong>jQuery Mobile is a touch-optimized HTML5 UI framework designed to make responsive web sites and apps that are accessible on all smartphone, tablet and desktop devices.</strong></p>
+		<p>New to jQuery Mobile? Get started by reading this <a href="intro/" data-ajax="false">introduction</a>. For technical info, visit the <a href="http://api.jquerymobile.com" title="jQuery Mobile API documentation" target="_blank">API documentation</a>. Downloads and info about the project can be found on <a href="http://jquerymobile.com" title="jQuery Mobile web site" target="_blank">jquerymobile.com</a>.</p>
 
-		  <p>New to jQuery Mobile? Get started by reading this <a href="intro/" data-ajax="false">introduction</a>. For technical info, visit the <a href="http://api.jquerymobile.com" title="jQuery Mobile API documentation" target="_blank">API documentation</a>. Downloads and info about the project can be found on <a href="http://jquerymobile.com" title="jQuery Mobile web site" target="_blank">jquerymobile.com</a>.</p>
-        <div class="ui-grid-a ui-responsive">
+        <div class="ui-grid-a ui-responsive jqm-grid">
         	<div class="ui-block-a">
         		<div class="jqm-block-content">
         			<h3>Pages &amp; Navigation</h3>
@@ -54,7 +56,7 @@
 
         			<p><a href="toolbar/" data-ajax="false">Toolbar</a>, <a href="navbar/" data-ajax="false">Navbar</a>, <a href="controlgroup/" data-ajax="false">Controlgroup</a></p>
         			<p><a href="tabs/" data-ajax="false">Tabs</a>, <a href="panel/" data-ajax="false">Panel</a>, <a href="popup/" data-ajax="false">Popup</a></p>
-        			<p><a href="accordion/" data-ajax="false">Accordion</a>, <a href="collapsible/" data-ajax="false">Collapsible</a>, <a href="collapsibleset/" data-ajax="false">Collapsible set</a>, <a href="filterable/" data-ajax="false">Filterable</a></p>
+        			<p><a href="accordion/" data-ajax="false">Accordion</a>, <a href="collapsible/" data-ajax="false">Collapsible</a>, <a href="collapsibleset/" data-ajax="false">Collapsible set</a></p>
         		</div>
         	</div>
         	<div class="ui-block-b">
@@ -81,6 +83,7 @@
                     <h3>Lists and Tables</h3>
 
                     <p><a href="listview/" data-ajax="false">Listview</a>, <a href="../listview-collapsible-item-flat/" data-ajax="false">Collapsible Listview</a></p>
+					<p><a href="filterable/" data-ajax="false">Filterable</a></p>
                     <p><a href="table-reflow/" data-ajax="false">Table Reflow</a>, <a href="table-column-toggle/" data-ajax="false">Table Column Toggle</a></p>
                 </div>
             </div>
@@ -91,13 +94,17 @@
 	<?php include( 'jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( 'jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( 'jqm-search.php' ); ?>
 
 </body>
 </html>

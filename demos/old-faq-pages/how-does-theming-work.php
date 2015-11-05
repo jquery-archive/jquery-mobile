@@ -16,10 +16,10 @@
 <div data-role="page" class="jqm-demos">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
 		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -86,11 +86,11 @@
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
 
 						<div class="swatch-preview">
-							<a href="index.html" class="ui-button ui-corner-all ui-button-a">Button A<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-b">Button B<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-c">Button C<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-d">Button D<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-e">Button E<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-a">Button A <span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-b">Button B <span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-c">Button C <span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-d">Button D <span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-e">Button E <span class="ui-icon ui-icon-arrow-l"></span></a>
 						</div><!-- end swatch-bars -->
 
 					<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. This  behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>
@@ -100,7 +100,7 @@
 						<h3>Global "Active" state</h3>
 					<p>The jQuery Mobile framework uses a swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-button-active</code> style rules.</p>
 
-						<fieldset data-role="controlgroup" data-type="horizontal" class="ui-field-contain">
+						<fieldset data-role="controlgroup" class="ui-field-contain">
 					     	<legend>Active is used for the on state of these toggles:</legend>
 					         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked">
 					         	<label for="radio-choice-a">On</label>
@@ -136,13 +136,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

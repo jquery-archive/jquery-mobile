@@ -21,7 +21,7 @@
 </head>
 <body>
     <div data-role="toolbar" data-type="header" data-position="fixed" data-theme="a">
-		<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+		<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back <span class="ui-icon ui-icon-caret-l"></span></a>
         <h1>Fixed external header</h1>
     </div><!-- /header -->
 <?php } ?>
@@ -103,7 +103,7 @@
 			<div data-role="popup" id="purchase" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-				<a href="#" class="ui-button ui-button-b ui-button-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Buy: $10.99<span class="ui-icon ui-icon-check"></span></a>
+				<a href="#" class="ui-button ui-button-b ui-button-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Buy: $10.99 <span class="ui-icon ui-icon-check"></span></a>
 				<a href="#" class="ui-button ui-button-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Cancel</a>
 			</div>
 

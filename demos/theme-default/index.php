@@ -52,9 +52,11 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="toolbar" data-type="header">
-		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
-		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back<span class="ui-icon ui-icon-back"></span></a>
-		<a href="#" class="ui-button ui-corner-all ui-shadow">Button<span class="ui-icon ui-icon-gear"></span></a>
+		<h1>Default theme</h1>
+
+		<a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
+		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back <span class="ui-icon ui-icon-back"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow">Button <span class="ui-icon ui-icon-gear"></span></a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 1</a></li>
@@ -68,7 +70,7 @@
 
 		<form class="ui-mini">
 			<div class="ui-field-contain" id="theme-selector">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Theme:</legend>
 					<label for="a">A</label>
 					<input type="radio" name="theme" id="a" checked>
@@ -77,7 +79,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-navbars">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Navbars:</legend>
 					<label for="show">Show</label>
 					<input type="radio" name="navbars" id="show" checked>
@@ -86,7 +88,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-shadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Shadow:<br><small>Off: set the widget option shadow to false (data-shadow="false")</small></legend>
 					<label for="on">On</label>
 					<input type="radio" name="shadow" id="on" checked>
@@ -109,8 +111,8 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline">We<span class="ui-icon ui-icon-caret-r"></span></a>
-		<button class="ui-button ui-corner-all ui-shadow ui-button-inline">are<span class="ui-icon ui-icon-caret-r"></span></button>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline">We <span class="ui-icon ui-icon-caret-r"></span></a>
+		<button class="ui-button ui-corner-all ui-shadow ui-button-inline">are <span class="ui-icon ui-icon-caret-r"></span></button>
 		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true">
@@ -191,11 +193,11 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Controlgroup:</legend>
-					<button class="ui-button ui-corner-all ui-shadow">One<span class="ui-icon ui-icon-home"></span></button>
+					<button class="ui-button ui-corner-all ui-shadow">One <span class="ui-icon ui-icon-home"></span></button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" class="ui-button ui-corner-all ui-shadow">Three<span class="ui-icon ui-icon-grid"></span></a>
+					<a href="#" class="ui-button ui-corner-all ui-shadow">Three <span class="ui-icon ui-icon-grid"></span></a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -213,7 +215,7 @@
 			</div>
 		</form>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-active">Active button<span class="ui-icon ui-icon-gear"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-active"><span class="ui-icon ui-icon-gear"></span> Active button</a>
 
 		<p>Form inside static list:</p>
 

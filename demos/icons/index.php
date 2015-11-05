@@ -22,15 +22,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
 		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-        <h1>Icons <a href="http://api.jquerymobile.com/icons/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+        <h1>Icons</h1>
+
+		<a href="http://api.jquerymobile.com/icons/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
         <p>A set of built-in icons in jQuery Mobile can be applied to buttons, collapsibles, listview buttons and more. There is an SVG and PNG image of each icon. By default the SVG icons, that look great on both SD and HD screens, are used. On platforms that don't support SVG the framework falls back to PNG icons.</p>
 
@@ -95,7 +97,7 @@
 
         <h2>Custom Icons</h2>
 
-		<p>Icons are displayed as background image of a <code>span</code>code> element and have a background size of 18x18px. The example below shows the custom CSS that you would need to use to add your own icons.</p>
+		<p>Icons are displayed as background image of a <code>span</code> element and have a background size of 18x18px. The example below shows the custom CSS that you would need to use to add your own icons.</p>
 
         <div data-demo-html="true" data-demo-css="#custom-icon">
 			<button data-icon="ui-icon-myicon">myicon</button>
@@ -112,31 +114,31 @@
 	background-image: url("iconimg.png");
 }
 </code></pre>
-		
+
 		<h2>Icon positioning</h2>
 
 		<p>In case of link buttons and <code>button</code> elements there are four possible icon positions; "beginning" (left), "end" (right), "top", and "bottom". By default the icon is placed at the beginning, but this can be overridden by using the <code>data-iconpos</code> attribute.</p>
 
 		<h3>Block buttons</h3>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-l">Beginning</a>
 			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
 			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
 			<a href="index.php" data-role="button" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
-		
+
 		<h3>Mini buttons</h3>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-l">Beginning</a>
 			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
 			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-u" data-icon-position="top">Top</a>
 			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</a>
 		</div><!--/demo-html -->
-		
+
 		<h3>Inline buttons</h3>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-l">Beginning</a>
 			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
@@ -145,7 +147,7 @@
 		</div><!--/demo-html -->
 
 		<h3>Inline mini buttons</h3>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-l">Beginning</a>
 			<a href="index.php" data-role="button" data-inline="true" data-mini="true" data-icon="ui-icon-arrow-r" data-icon-position="end">End</a>
@@ -154,9 +156,9 @@
 		</div><!--/demo-html -->
 
 		<h2>Float icons</h2>
-		
+
 		<p>The framework offers helper classes, <code>ui-widget-icon-floatbeginning</code> and <code>ui-widget-icon-floatend</code> to make icons inside block buttons float to the beginning or end.</p>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</a>
 			<button href="index.php" data-role="button" data-icon="ui-icon-caret-l" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning" }'>Beginning</button>
@@ -167,21 +169,21 @@
 			<a href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</a>
 			<button href="index.php" data-role="button" data-mini="true" data-icon="ui-icon-caret-r" data-icon-position="end" data-classes='{ "ui-button-icon": "ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend" }'>End</button>
 		</div><!--/demo-html -->
-		
+
 		<p>Examples of adding the helper class to icons in pre-enhanced buttons.</p>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning"></span><span class="ui-button-icon-space"> </span>Beginning</a>
 			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">End<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend"></span></button>
-        </div><!--/demo-html -->		
-				
+        </div><!--/demo-html -->
+
 		<p>Examples of adding the helper class to icons in CSS-only buttons.</p>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" class="ui-button ui-shadow ui-corner-all"><span class="ui-button-icon ui-icon ui-icon-caret-l ui-widget-icon-floatbeginning"></span> Beginning</a>
 			<button data-role="none" class="ui-button ui-shadow ui-corner-all">End <span class="ui-button-icon ui-icon ui-icon-caret-r ui-widget-icon-floatend"></span></button>
         </div><!--/demo-html -->
-				
+
 		<h2>Icon-only</h2>
 
 		<p>Add <code>data-show-label="false"</code> if you want to create an icon-only button.</p>
@@ -208,7 +210,7 @@
 			</div>
 		</div><!--/demo-html -->
 
-        <h2>Black vs. white icon sets</h2>
+        <h2>Black versus white icon sets</h2>
 
         <p>Icons are white by default but you can switch to black icons by adding the <code>ui-alt-icon</code> class to the element or its container. This also changes the color that is used for the discs.</p>
 
@@ -234,7 +236,7 @@
 			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-plus" data-show-label="false" class="ui-nodisc-icon ui-alt-icon">Alt icon without disc</a>
 			<a href="index.php" data-role="button" data-inline="true" data-icon="ui-icon-minus" data-theme="b" data-show-label="false" class="ui-nodisc-icon">No disc</a>
 		</div><!--/demo-html -->
-		
+
 		<p>Example of the classes being applied to a wrapper.</p>
 
 		<div data-demo-html="true">
@@ -265,35 +267,39 @@
         </div><!--/demo-html -->
 
 		<h2>CSS only buttons with icons</h2>
-		
+
 		<p>Examples of buttons with icons that don't use the Button widget.</p>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b">Link <span class="ui-button-icon ui-icon ui-icon-delete"></span></a>
 			<button data-role="none" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b">Button <span class="ui-button-icon ui-icon ui-icon-delete"></span></button>
         </div><!--/demo-html -->
-		
+
 		<h2>Enhanced buttons with icons</h2>
-		
+
 		<p>Examples of buttons with icons that do use the Button widget, but are pre-enhanced.</p>
-		
+
 		<div data-demo-html="true">
 			<a href="index.php" data-role="button" data-enhanced="true" data-inline="true" data-theme="b" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b ui-widget">Link<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-delete"></span></a>
 			<button data-role="button" data-enhanced="true" data-inline="true" data-theme="b" class="ui-button ui-button-inline ui-shadow ui-corner-all ui-button-b ui-widget">Button<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-delete"></span></button>
         </div><!--/demo-html -->
-		
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

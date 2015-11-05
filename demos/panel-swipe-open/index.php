@@ -51,10 +51,10 @@
 <div data-role="page" class="jqm-demos" id="demo-intro">
 
     <div data-role="toolbar" data-type="header" class="jqm-header">
-        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
         <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -65,7 +65,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-caret-r"></span></a>
+        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Open demo <span class="ui-icon ui-icon-caret-r"></span></a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -74,13 +74,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 <div data-role="page" id="demo-page">
 
@@ -97,21 +101,21 @@
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
         </dl>
 
-		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Back to demo intro<span class="ui-icon ui-icon-back"></span></a>
+		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Back to demo intro <span class="ui-icon ui-icon-back"></span></a>
 
     </div><!-- /content -->
 
     <div data-role="panel" id="left-panel" data-theme="b">
 
     	<p>Left reveal panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-toolbar-header-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-toolbar-header-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
 
     </div><!-- /panel -->
 
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
 
     	<p>Right push panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Close<span class="ui-icon ui-icon-delete"></span></a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Close <span class="ui-icon ui-icon-delete"></span></a>
 
     </div><!-- /panel -->
 

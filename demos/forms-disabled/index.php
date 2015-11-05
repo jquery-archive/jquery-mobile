@@ -16,10 +16,10 @@
 <div data-role="page" class="jqm-demos">
 
     <div data-role="toolbar" data-type="header" class="jqm-header">
-        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
         <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
     </div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -76,20 +76,20 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One<span class="ui-icon ui-icon-home"></span></button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all">Three<span class="ui-icon ui-icon-grid"></span></a>
+                        <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <fieldset data-role="controlgroup">
                         <legend>Horizontal controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One<span class="ui-icon ui-icon-home"></span></button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-state-disabled ui-button ui-corner-all">Three<span class="ui-icon ui-icon-grid"></span></a>
+                        <a href="#" class="ui-shadow ui-state-disabled ui-button ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -122,7 +122,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <fieldset data-role="controlgroup">
                         <legend>Horizontal controlgroup, select:</legend>
                         <label for="select-h-1a">Select A</label>
                         <select disabled="disabled" name="select-h-1a" id="select-h-1a">
@@ -148,10 +148,10 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <fieldset data-role="controlgroup">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Link<span class="ui-icon ui-icon-arrow-r"></span></a>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button<span class="ui-icon ui-icon-grid"></span></button>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Link <span class="ui-icon ui-icon-arrow-r"></span></a>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
                         <label for="select-v-1e">Select</label>
                         <select disabled="disabled" name="select-v-1e" id="select-v-1e">
                             <option value="#">One</option>
@@ -219,7 +219,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <fieldset data-role="controlgroup">
                         <legend>Horizontal controlgroup, checkbox:</legend>
                         <input disabled="disabled" type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
                         <label for="checkbox-h-1a">One</label>
@@ -233,7 +233,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal">
+                    <fieldset data-role="controlgroup">
                         <legend>Horizontal controlgroup, radio:</legend>
                         <input disabled="disabled" type="radio" name="radio-choice-h-1" id="radio-choice-h-1a" value="on" checked="checked">
                         <label for="radio-choice-h-1a">One</label>
@@ -306,20 +306,20 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One<span class="ui-icon ui-icon-home"></span></button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Three<span class="ui-icon ui-icon-grid"></span></a>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Horizontal controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One<span class="ui-icon ui-icon-home"></span></button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Three<span class="ui-icon ui-icon-grid"></span></a>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -352,7 +352,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Horizontal controlgroup, select:</legend>
                         <label for="select-h-5a">Select A</label>
                         <select disabled="disabled" name="select-h-5a" id="select-h-5a">
@@ -378,10 +378,10 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Link<span class="ui-icon ui-icon-arrow-r"></span></a>
-                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button<span class="ui-icon ui-icon-grid"></span></button>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all">Link <span class="ui-icon ui-icon-arrow-r"></span></a>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
                         <label for="select-v-5e">Select</label>
                         <select disabled="disabled" name="select-v-5e" id="select-v-5e">
                             <option value="#">One</option>
@@ -449,7 +449,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Horizontal controlgroup, checkbox:</legend>
                         <input disabled="disabled" type="checkbox" name="checkbox-h-5a" id="checkbox-h-5a">
                         <label for="checkbox-h-5a">One</label>
@@ -463,7 +463,7 @@
 
             <div data-demo-html="true">
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Horizontal controlgroup, radio:</legend>
                         <input disabled="disabled" type="radio" name="radio-choice-h-5" id="radio-choice-h-5a" value="on" checked="checked">
                         <label for="radio-choice-h-5a">One</label>
@@ -487,11 +487,11 @@
         <h2>Class ui-state-disabled</h2>
 
         <div data-demo-html="true">
-            <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all">Link button<span class="ui-icon ui-icon-arrow-r"></span></a>
+            <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all">Link button <span class="ui-icon ui-icon-arrow-r"></span></a>
         </div><!--/demo-html -->
 
         <div data-demo-html="true">
-            <a href="#" class="ui-shadow ui-button ui-corner-all ui-state-disabled ui-mini">Link button<span class="ui-icon ui-icon-arrow-r"></span></a>
+            <a href="#" class="ui-shadow ui-button ui-corner-all ui-state-disabled ui-mini">Link button <span class="ui-icon ui-icon-arrow-r"></span></a>
         </div><!--/demo-html -->
 
 	</div><!-- /content -->
@@ -499,13 +499,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

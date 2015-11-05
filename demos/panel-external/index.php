@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>External panels - jQuery Mobile Demos</title>
@@ -22,7 +22,7 @@
 
 	<div data-role="toolbar" data-type="header">
 		<h1>External panels</h1>
-		<a href="../panel/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+		<a href="../panel/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back <span class="ui-icon ui-icon-caret-l"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content jqm-fullwidth">
@@ -49,63 +49,64 @@
 
 </div><!-- /page -->
 
-	<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
 
-        <h3>Left Panel: Reveal</h3>
-        <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Left Panel: Reveal</h3>
+    <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /leftpanel1 -->
+</div><!-- /leftpanel1 -->
 
-	<!-- leftpanel2  -->
-	<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
+<!-- leftpanel2  -->
+<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
 
-        <h3>Left Panel: Push</h3>
-        <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Left Panel: Push</h3>
+    <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /leftpanel2 -->
+</div><!-- /leftpanel2 -->
 
-	<!-- leftpanel3  -->
-	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+<!-- leftpanel3  -->
+<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
 
-        <h3>Left Panel: Overlay</h3>
-        <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Left Panel: Overlay</h3>
+    <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /leftpanel3 -->
+</div><!-- /leftpanel3 -->
 
-	<!-- rightpanel1  -->
-	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
+<!-- rightpanel1  -->
+<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
 
-        <h3>Right Panel: Reveal</h3>
-        <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Right Panel: Reveal</h3>
+    <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /rightpanel1 -->
+</div><!-- /rightpanel1 -->
 
-	<!-- rightpanel2  -->
-	<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
+<!-- rightpanel2  -->
+<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
 
-        <h3>Right Panel: Push</h3>
-        <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Right Panel: Push</h3>
+    <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /rightpanel2 -->
+</div><!-- /rightpanel2 -->
 
-	<!-- rightpanel3  -->
-	<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
+<!-- rightpanel3  -->
+<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
 
-        <h3>Right Panel: Overlay</h3>
-        <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+    <h3>Right Panel: Overlay</h3>
+    <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+    <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+    <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel <span class="ui-icon ui-icon-delete"></span></a>
 
-	</div><!-- /rightpanel3 -->
+</div><!-- /rightpanel3 -->
+
 </body>
 </html>
