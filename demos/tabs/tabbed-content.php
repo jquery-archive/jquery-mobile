@@ -18,15 +18,15 @@
 		<div data-role="tabs">
 			<div data-role="navbar">
 				<ul>
-			      <li><a href="#one" data-theme="a" data-ajax="false">one</a></li>
-			      <li><a href="#two" data-theme="a" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content-ignore.php" data-theme="a" data-ajax="false">three</a></li>
-			    </ul>
-			</div>
+					<li><a href="#one" data-theme="a" data-ajax="false">one</a></li>
+					<li><a href="#two" data-theme="a" data-ajax="false">two</a></li>
+					<li><a href="ajax-content-ignore.php" data-theme="a" data-ajax="false">three</a></li>
+				</ul>
+			</div><!-- /navbar -->
 
 			<div id="one" class="ui-content">
-			<h1>First tab contents</h1>
-			</div>
+				<h1>First tab contents</h1>
+			</div><!-- /one -->
 			<div id="two" class="ui-content">
 				<ul data-role="listview">
 				    <li><a href="#">Acura</a></li>
@@ -35,13 +35,15 @@
 				    <li><a href="#">Cadillac</a></li>
 				    <li><a href="#">Ferrari</a></li>
 				</ul>
-			</div>
-		</div>
+			</div><!-- /two -->
+		</div><!-- /tabs -->
 		<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 			<p>Copyright jQuery Foundation</p>
 		</div><!-- /footer -->
-	</div>
+	</div><!-- /demo-html -->
+
 </div><!-- /page -->
+
 </body>
 </html>

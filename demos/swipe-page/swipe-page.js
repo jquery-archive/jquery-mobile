@@ -1,9 +1,10 @@
 // Pagecreate will fire for each of the pages in this demo
 // but we only need to bind once so we use "one()"
 $( document ).one( "pagecreate", ".demo-page", function() {
-	// Initialize the external persistent header and footer
+	// Initialize the external persistent header and footer, and the footer controlgroup
 	$( "#header" ).toolbar({ theme: "b" });
 	$( "#footer" ).toolbar({ theme: "b" });
+	$( "#footer" ).find( ".control" ).controlgroup({ mini: true });
 
 	// Handler for navigating to the next page
 	function navnext( next ) {

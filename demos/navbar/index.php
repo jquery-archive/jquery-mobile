@@ -25,15 +25,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
 		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Navbar</h1>
+
+		<a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
 		<p>jQuery Mobile has a navbar widget that is useful for providing buttons with optional icons in a bar. The navbar can support any number of buttons resorting to multiple rows when the number of buttons exceeds the <code>maxbuttons</code> option. Alternatively, if you set the <code>morebutton</code> option you will turn the final button in the row into a popup that contains the remaining buttons</p>
 
@@ -105,7 +107,7 @@
 
 		<h2>Multi-row</h2>
 
-		<p>If more than the set <code>maxbutton</code> items are added, the navbar will smart wrap the items 
+		<p>If more than the set <code>maxbutton</code> items are added, the navbar will smart wrap the items
 			n-across up to the value of the <code>maxbutton</code>option and then fill the remaining rows to full width:</p>
 
 			<div data-demo-html="true">
@@ -129,8 +131,8 @@
 			</div><!--/demo-html -->
 
 		<h2> Show More Button </h2>
-		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
-			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code>
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that
 			resides on the last button in the row of buttons</p>
 
 			<div data-demo-html="true">
@@ -154,8 +156,8 @@
 			</div><!--/demo-html -->
 
 		<h2> Show More Button with icon</h2>
-		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
-			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code>
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that
 			resides on the last button in the row of buttons. An icon can be added by adding the
 			<code>data-morebuttonicon</code> attribute and specifying an icon</p>
 
@@ -378,13 +380,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

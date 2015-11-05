@@ -37,7 +37,7 @@
         <br>
         <br>
 
-        <a href="../" data-rel="back" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-mini ui-button-inline ui-alt-icon ui-nodisc-icon">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+        <a href="../" data-rel="back" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-mini ui-button-inline ui-alt-icon ui-nodisc-icon">Back <span class="ui-icon ui-icon-caret-l"></span></a>
 
         <br>
         <br>
@@ -139,7 +139,7 @@
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Back<span class="ui-icon ui-icon-back"></span></a>
+        <a href="#panel-fixed-page1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Back <span class="ui-icon ui-icon-back"></span></a>
 
     </div><!-- /content -->
 

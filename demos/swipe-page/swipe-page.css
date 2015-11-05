@@ -12,13 +12,13 @@
 	background-repeat: no-repeat;
 }
 /* Transparent footer */
-.demo-page .ui-footer {
+.ui-toolbar-footer {
 	background: none;
-	border: none;
+	border: 0;
 	bottom: 0;
 }
 /* The footer won't have a height because there are only two absolute positioned elements in it.
-So we position the buttons from the bottom. */
+We can use the header button position classes, but have to position the buttons from the bottom. */
 .control.ui-toolbar-header-button-left,
 .trivia-button.ui-toolbar-header-button-right {
 	top: auto;
