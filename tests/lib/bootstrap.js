@@ -50,6 +50,7 @@
 		"collapsible",
 		"collapsibleSet",
 		"controlgroup",
+		"controlgroup.backcompat",
 		"dialog",
 		"enhancer",
 		"enhancer.backcompat",
@@ -82,7 +83,9 @@
 		// Form Widgets
 		"forms/autogrow",
 		"forms/button",
+		"forms/button.backcompat",
 		"forms/checkboxradio",
+		"forms/checkboxradio.backcompat",
 		"forms/clearButton",
 		"forms/flipswitch",
 		"forms/rangeslider",
