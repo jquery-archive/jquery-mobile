@@ -16,15 +16,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
 		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Buttons</h1>
+
+		<a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
 		<h2>Basic markup</h2>
 
@@ -81,28 +83,28 @@
 			<button data-mini="true">Mini</button>
 			<button data-enhanced="true" class="ui-button ui-mini ui-corner-all ui-shadow ui-widget">Enhanced</button>
 		</div><!--/demo-html -->
-		
+
 		<h2>Mini inline</h2>
 
 		<div data-demo-html="true">
 			<button data-mini="true" data-inline="true">Mini</button>
 			<button data-enhanced="true" class="ui-button ui-mini ui-button-inline ui-corner-all ui-shadow ui-widget">Enhanced</button>
 		</div><!--/demo-html -->
-		
+
 		<h2>Theme</h2>
 
 		<div data-demo-html="true">
 			<button>Inherit</button>
 			<button data-theme="a">Theme swatch A</button>
 			<button data-theme="b">Theme swatch B</button>
-				
+
 			<button data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - Inherit</button>
 			<button data-enhanced="true" class="ui-button ui-button-a ui-shadow ui-corner-all ui-widget">Enhanced - Theme swatch A</button>
 			<button data-enhanced="true" class="ui-button ui-button-b ui-shadow ui-corner-all ui-widget">Enhanced - Theme swatch B</button>
 		</div><!--/demo-html -->
 
 		<h2>Icons</h2>
-		
+
 		<p>Link buttons and <code>button</code> elements can contain icons. The use of icons in <code>input</code> buttons is no longer supported.</p>
 
 		<div data-demo-html="true">
@@ -117,7 +119,7 @@
 			<button data-icon="ui-icon-arrow-r" data-icon-position="end">End</button>
 			<button data-icon="ui-icon-arrow-u" data-icon-position="top">Top</button>
 			<button data-icon="ui-icon-arrow-d" data-icon-position="bottom">Bottom</button>
-			
+
 			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-arrow-l"></span><span class="ui-button-icon-space"> </span>Enhanced - Beginning</button>
 			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Enhanced - End<span class="ui-button-icon-space"> </span><span class="ui-button-icon ui-icon ui-icon-arrow-r"></span></button>
 			<button data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget"><span class="ui-button-icon ui-icon ui-icon-arrow-u ui-widget-icon-block"></span>Enhanced - Top</button>
@@ -150,13 +152,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

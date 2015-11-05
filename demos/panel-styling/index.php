@@ -109,23 +109,17 @@
 				-moz-column-gap: 2em;
 				column-gap: 2em;
 			}
-			/* Fix for issue with buttons and form elements
-			if CSS columns are used on a page with a panel. */
-			.article a.ui-button {
-				-webkit-transform: translate3d(0,0,0);
-			}
 		}
 	</style>
 </head>
 <body>
-
 <div data-role="page" class="jqm-demos" id="demo-intro">
 
     <div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
         <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -144,7 +138,7 @@
 
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
-        <a href="#demo-page" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-caret-r"></span></a>
+        <a href="#demo-page" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-nodisc-icon ui-alt-icon">Open demo <span class="ui-icon ui-icon-caret-r"></span></a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
 
@@ -153,19 +147,23 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 <div data-role="page" id="demo-page">
 
     <div data-role="toolbar" data-type="header">
         <h1>Bikes</h1>
-        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+		<a href="#left-panel" class="ui-button ui-button-icon-only ui-corner-all ui-toolbar-header-button-left"><span class="ui-icon ui-icon-bars"></span>Menu</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content">

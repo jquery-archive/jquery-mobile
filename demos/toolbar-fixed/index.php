@@ -16,7 +16,7 @@
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	    <div data-role="toolbar" data-type="header" data-position="fixed">
-			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back <span class="ui-icon ui-icon-caret-l"></span></a>
 	        <h1>Fixed header</h1>
 	    </div><!-- /header -->
 
