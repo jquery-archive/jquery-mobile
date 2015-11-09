@@ -144,12 +144,16 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 function makeButton() {
 	var d = document.createElement( "div" )
 		a = document.createElement( "a" ),
-		txt = document.createTextNode( "View Source" );
+		txt = document.createTextNode( " View Source" ),
+		icon = document.createElement( "span" );
 
-	a.className = "jqm-view-source-link ui-button ui-corner-all ui-button-inline ui-mini";
+	d.className = "jqm-view-source-link-container";
+	a.className = "jqm-view-source-link ui-button ui-corner-all ui-button-inline ui-mini ui-alt-icon ui-nodisc-icon";
+	icon.className = "ui-icon ui-icon-eye";
 
 	a.setAttribute( "href", "#popupDemo" );
 	a.setAttribute( "data-rel", "popup" );
+	a.appendChild( icon );
 	a.appendChild( txt );
 
 	d.appendChild( a );
