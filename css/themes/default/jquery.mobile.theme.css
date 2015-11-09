@@ -319,7 +319,7 @@ html body .ui-group-theme-a .ui-button:visited,
 html head + body .ui-button.ui-button-a:visited,
 /* Accordion */
 .ui-page-theme-a .ui-accordion-header,
-html .ui-body-a .ui-accordion-header{
+html .ui-body-a .ui-accordion-header {
 	background-color: 			#f6f6f6 /*{a-bup-background-color}*/;
 	border-color:	 		#ddd /*{a-bup-border}*/;
 	color: 					#333 /*{a-bup-color}*/;
