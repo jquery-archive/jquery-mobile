@@ -19,9 +19,10 @@
 
 .ui-accordion-header .ui-accordion-header-icon {
 	position: absolute;
+	bottom: auto;
 	left: .5em;
 	top: 50%;
-	margin-top: -8px;
+	margin-top: -11px;
 }
 
 .ui-accordion-content {
