@@ -32,7 +32,7 @@
 }
 
 .ui-accordion-header-active,
-.ui-accordion-header.ui-state-active  {
+.ui-accordion-header.ui-state-active {
 	border: 1px solid #aaaaaa;
 	font-weight: normal;
 }
