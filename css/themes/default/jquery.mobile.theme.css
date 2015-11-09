@@ -190,6 +190,7 @@ html .ui-alt-icon .ui-radio-off .ui-icon {
 }
 
 /* No disc */
+.ui-nodisc-icon .ui-icon,
 .ui-nodisc-icon.ui-button .ui-icon,
 .ui-nodisc-icon .ui-button .ui-icon {
 	background-color: transparent;
