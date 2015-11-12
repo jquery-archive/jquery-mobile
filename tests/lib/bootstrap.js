@@ -43,6 +43,23 @@
 		} );
 	} )
 
+	define( "override-enhancewithin-once", [ "jquery" ], function( $ ) {
+		// The next call to $.fn.enhanceWithin() will have no effect
+		$( document ).one( "pagebeforecreate", function() {
+			var overrideOnce = true;
+
+			$.fn.enhanceWithin = ( function( original ) {
+				return function() {
+					if ( overrideOnce ) {
+						overrideOnce = false;
+					} else {
+						return original.apply( this, arguments );
+					}
+				};
+			} )( $.fn.enhanceWithin );
+		} );
+	});
+
 	var widgets = [
 		// Main Widgets
 		"accordion",
@@ -180,6 +197,7 @@
 		var initAfterModules = !!script.getAttribute( "data-init-after-modules" );
 		var setPushState = !!script.getAttribute( "data-set-push-state" );
 		var setNs = !!script.getAttribute( "data-set-ns" );
+		var overrideEnhanceWithin = !!script.getAttribute( "data-override-enhancewithin" );
 		var modules = script.getAttribute( "data-modules" );
 
 		if ( setPushState ) {
@@ -214,6 +232,10 @@
 
 		if ( setNs ) {
 			deps = [ "jquery-set-ns" ].concat( deps );
+		}
+
+		if ( overrideEnhanceWithin ) {
+			deps = [ "override-enhancewithin-once" ].concat( deps );
 		}
 
 		if ( init ) {
