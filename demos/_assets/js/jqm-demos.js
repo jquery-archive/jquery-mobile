@@ -51,7 +51,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		that = this,
 		searchUrl = ( $( this ).hasClass( "jqm-home" ) ) ? "_search/" : "../_search/",
 		searchContents = $( ".jqm-search ul.jqm-list" ).find( "li:not(.ui-collapsible)" ),
-		version = $.mobile.version || "dev",
+		version = $.mobile.version || "Dev",
 		words = version.split( "-" ),
 		ver = words[0],
 		str = words[1] || "",
@@ -71,10 +71,14 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		text += " " + str;
 	}
 
+	if ( "@VERSION" === $.mobile.version ) {
+		text = version = "Dev";
+	}
+
 	$( ".jqm-version" ).html( text );
 
 	// Insert version in API documentation links
-	if ( version !== "dev" ) {
+	if ( version !== "Dev" ) {
 		$( ".jqm-api-docs-link" ).each(function() {
 			href = $( this ).attr( "href" ).replace( "api.jquerymobile.com/", "api.jquerymobile.com/" + apiVersion + "/" );
 
