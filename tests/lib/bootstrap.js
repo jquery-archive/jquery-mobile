@@ -74,6 +74,7 @@
 		"enhancer.widgetCrawler",
 		"filterable",
 		"fixedToolbar",
+		"fixedToolbar.backcompat",
 		"fixedToolbar.workarounds",
 		"listview",
 		"listview.autodividers",
