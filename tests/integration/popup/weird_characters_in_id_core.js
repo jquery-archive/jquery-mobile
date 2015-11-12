@@ -1,20 +1,3 @@
-// Setup
-// The next call to $.fn.enhanceWithin() will have no effect
-$( document ).one( "pagebeforecreate", function() {
-	var overrideOnce = true;
-
-	$.fn.enhanceWithin = ( function( original ) {
-		return function() {
-			if ( overrideOnce ) {
-				overrideOnce = false;
-			} else {
-				return original.apply( this, arguments );
-			}
-		};
-	} )( $.fn.enhanceWithin );
-} );
-
-
 asyncTest( "Popup with weird characters in its ID", function() {
 var popup = $( "div#the-\\[\\'x\\'\\]-popup" ),
 	openPopup = $( "#openPopup" );
