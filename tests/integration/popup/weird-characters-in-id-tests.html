@@ -6,41 +6,17 @@
 	<title>jQuery Mobile Popup Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/requirejs.config.js"></script>
-	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-	<script>
-		( function( $ ) {
-			$.mobileBackcompat = false;
-		} )( jQuery );
 
-		// The next call to $.fn.enhanceWithin() will have no effect
-		$( document ).one( "pagebeforecreate", function() {
-			var overrideOnce = true;
-
-			$.fn.enhanceWithin = ( function( original ) {
-				return function() {
-					if ( overrideOnce ) {
-						overrideOnce = false;
-					} else {
-						return original.apply( this, arguments );
-					}
-				};
-			} )( $.fn.enhanceWithin );
-		} );
+ 	<script src="../../lib/bootstrap.js"
+	 		data-deps="popup"
+	 		data-init="true"
+	 		data-no-backcompat="true"
+	 		data-modules="weird_characters_in_id_core"/>
 	</script>
-	<script>
-		$.testHelper.asyncLoad( [
-			[ "widgets/popup" ],
-			[ "init" ],
-			[ "weird_characters_in_id_core.js" ]
-		] );
-	</script>
-
 	<script src="../../swarminject.js"></script>
 </head>
 <body>

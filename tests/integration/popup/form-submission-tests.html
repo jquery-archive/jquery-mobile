@@ -6,27 +6,17 @@
 	<title>jQuery Mobile Popup Form Submission Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/requirejs.config.js"></script>
-	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-	<script>
-		( function( $ ) {
-			$.mobileBackcompat = false;
-		} )( jQuery );
-	</script>
-	<script>
-		$.testHelper.asyncLoad([
-			[ "widgets/popup" ],
-			[ "init" ],
-			[ "form_submission_core.js" ]
-		]);
-	</script>
 
-	<script src="../../swarminject.js"></script>
+ 	<script src="../../lib/bootstrap.js"
+	 		data-deps="popup"
+	 		data-init="true"
+	 		data-no-backcompat="true"
+	 		data-modules="form_submission_core"/>
+	</script>
 </head>
 <body>
 	<div id="qunit"></div>
