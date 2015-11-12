@@ -89,12 +89,50 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	// Global navmenu panel
 	$( ".jqm-navmenu-panel ul" ).listview();
 
-	$( document ).on( "panelopen", ".jqm-search-panel", function() {
-		$( this ).find( "input" ).focus();
-	})
+	$( ".jqm-navmenu-panel ul" ).accordion({
+		"header": "> li > h3",
+		"collapsible": true,
+		"active": false,
+		"heightStyle": "content",
+		"icons": {
+			"header": "ui-icon-plus",
+			"activeHeader": "ui-icon-minus"
+		}
+	});
+
+	// Collapse nested accordions when their parent is being collapsed.
+	$( ".jqm-navmenu-panel > .ui-panel-inner > .ui-accordion" ).on( "accordionbeforeactivate", function( event, ui ) {
+		var target = $( event.target );
+
+		if ( target.is( ".jqm-navmenu-panel > .ui-panel-inner > .ui-accordion" ) ) {
+			target.find( ".ui-accordion" ).accordion( "option", "active", false );
+		}
+	});
+
+	// Keyboard accessibility of the navmenu.
+	$( ".jqm-navmenu-panel .ui-accordion-header, .jqm-navmenu-panel .ui-listview-item-button" ).on( "keydown", function( event ) {
+	    if ( event.which == 9 ) {
+	        var target = $( event.target ),
+				parent = target.parent( "li" );
+
+			parent.next( "li" )
+				.add( parent.prev( "li" ) )
+				.children( "h3" )
+				.attr( "tabIndex", 0 );
+	    }
+	});
+
+	// On panel demo pages copy the navmenu into the wrapper
+	if ( $( this ).is( '.jqm-panel-page' ) ) {
+		var wrapper = $( this ).children( '.ui-panel-wrapper' );
+
+		if ( wrapper ) {
+			$( '.jqm-navmenu-panel' ).clone( true, true ).appendTo( wrapper );
+		}
+	}
 
 	$( ".jqm-navmenu-link" ).on( "click", function() {
-		page.find( ".jqm-navmenu-panel:not(.jqm-panel-page-nav)" ).panel( "open" );
+		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
 
 	// Turn off autocomplete / correct for demos search
@@ -104,6 +142,10 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	$( ".jqm-search-link" ).on( "click", function() {
 		page.find( ".jqm-search-panel" ).panel( "open" );
 	});
+
+	$( document ).on( "panelopen", ".jqm-search-panel", function() {
+		$( this ).find( "input" ).focus();
+	})
 
 	// Initalize search panel list and filter also remove collapsibles
 	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
