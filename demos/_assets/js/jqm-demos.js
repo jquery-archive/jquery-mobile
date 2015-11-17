@@ -48,9 +48,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	var search,
 		page = $( this ),
-		that = this,
 		searchUrl = ( $( this ).hasClass( "jqm-home" ) ) ? "_search/" : "../_search/",
-		searchContents = $( ".jqm-search ul.jqm-list" ).find( "li:not(.ui-collapsible)" ),
+		searchContents = $( ".jqm-search-panel ul.jqm-search-list" ).find( "li[data-filtertext]" ),
 		version = $.mobile.version || "Dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -139,16 +138,25 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 
 	// Global search
+
+	// Initalize search panel
+	$( ".jqm-search-panel" ).panel({
+		position: "right",
+		display: "overlay",
+		theme: "a",
+	});
+
 	$( ".jqm-search-link" ).on( "click", function() {
-		page.find( ".jqm-search-panel" ).panel( "open" );
+		$( "body" ).find( ".jqm-search-panel" ).panel( "open" );
+		$( ".ui-page-active" ).addClass( "jqm-demos-search-panel-open" );
 	});
 
 	$( document ).on( "panelopen", ".jqm-search-panel", function() {
-		$( this ).find( "input" ).focus();
+		$( this ).find( ".jqm-search-input" ).focus();
 	})
 
-	// Initalize search panel list and filter also remove collapsibles
-	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
+	// Initalize search panel list and filter
+	$( ".jqm-search-panel ul.jqm-search-list" ).html( searchContents ).listview({
 		inset: false,
 		theme: null,
 		dividerTheme: null,
@@ -163,9 +171,9 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		submitTo: searchUrl
 	}).filterable();
 
-	// Initalize search page list and remove collapsibles
-	$( this ).find( ".jqm-search-results-wrap ul.jqm-list" ).html( searchContents ).listview({
-		inset: true,
+	// Initalize search page list
+	$( this ).find( ".jqm-search-results-wrap ul.jqm-search-list" ).html( searchContents ).listview({
+		inset: false,
 		theme: null,
 		dividerTheme: null,
 		icon: false,
@@ -174,27 +182,27 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		highlight: true
 	}).filterable();
 
+	// Search results page get search query string and enter it into filter then trigger keyup to filter
+	if ( $( event.target ).hasClass( "jqm-demos-search-results" ) ) {
+		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[ 1 ];
+		setTimeout(function() {
+			e = $.Event( "keyup" );
+			e.which = 65;
+			$( this ).find( "#jqm-search-results-input" ).val( search ).trigger(e).trigger( "change" );
+		}, 0 );
+	}
+
 	// Fix links on homepage to point to sub directories
 	if ( $( event.target ).hasClass( "jqm-home") ) {
 		$( this ).find( "a" ).each( function() {
 			$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
 		});
 	}
-
-	// Search results page get search query string and enter it into filter then trigger keyup to filter
-	if ( $( event.target ).hasClass( "jqm-demos-search-results") ) {
-		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[ 1 ];
-		setTimeout(function() {
-			e = $.Event( "keyup" );
-			e.which = 65;
-			$( that ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
-		}, 0 );
-	}
 });
 
 // Append keywords list to each list item
 $( document ).one( "pagecreate", ".jqm-demos", function( event ) {
-	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
+	$( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
 
 		$( this )
