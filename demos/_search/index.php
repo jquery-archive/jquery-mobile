@@ -6,15 +6,14 @@
 	<title>jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-
 </head>
 <body>
-<div data-role="page" class="jqm-demos jqm-demos-index jqm-demos-search-results">
+<div data-role="page" class="jqm-demos jqm-demos-search-results">
 
 	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
@@ -27,10 +26,13 @@
 
 		<h1>Search Results</h1>
 
-        <div class="jqm-search-results-wrap">
-	        <ul class="jqm-list jqm-search-results-list">
-	            <?php include( '../jqm-contents.php' ); ?>
-	        </ul>
+        <div class="jqm-search jqm-search-results-wrap">
+			<form class="ui-alt-icon ui-nodisc-icon">
+				<input data-type="search" name="search" id="jqm-search-results-input" class="jqm-search-input" placeholder="Search demos...">
+			</form>
+			<ul class="jqm-search-list jqm-search-results-list" data-filter="true" data-filter-reveal="true" data-input="#jqm-search-results-input">
+				<?php include( '../jqm-contents.php' ); ?>
+			</ul>
 	    </div>
 
 	</div><!-- /content -->
