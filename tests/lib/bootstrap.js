@@ -22,6 +22,14 @@
 		}
 	} );
 
+	// Log error in a better way
+	requirejs.onError = function (err) {
+		console.log(err.requireType);
+		console.log('Modules: ' + err.requireModules);
+		throw err;
+	};
+
+
 	// Define no backcompat and set ns modules
 	define( "jquery-no-backcompat", [ "jquery" ], function( $ ) {
 		$.mobileBackcompat = false;

@@ -6,26 +6,15 @@
 	<title>jQuery Mobile Navigation Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/requirejs.config.js"></script>
-	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../tests/jquery.testHelper.js"></script>
 
 	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
-	<script src="../../jquery.testHelper.js"></script>
 
-	<script>
-	$.testHelper.asyncLoad([
-		[
-			"navigation/base"
-		],
-		[
-			"dynamic_base_disabled_core.js"
-		]
-	]);
+ 	<script src="../../lib/bootstrap.js"
+	 		data-deps="navigation/base"
+	 		data-modules="dynamic_base_disabled_core"/>
 	</script>
-	<script src="../swarminject.js"></script>
 </head>
 <body>
 
