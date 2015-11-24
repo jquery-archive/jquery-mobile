@@ -35,22 +35,25 @@ QUnit.module( libName, {
 	}
 } );
 
-$.testHelper.excludeFileProtocol( function() {
-	QUnit.test( "new events defined on the jquery object", function( assert ) {
-		$.each( events, function( i, name ) {
-			delete $.fn[ name ];
-			assert.deepEqual( $.fn[ name ], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
-		} );
 
-		$.each( components, function( index, value ) {
-			$.testHelper.reloadLib( value );
-		} );
+// This test doesn't fit well with requirements of bootstrap 
 
-		$.each( events, function( i, name ) {
-			assert.ok( $.fn[ name ] !== undefined, name + " should NOT be undefined" );
-		} );
-	} );
-} );
+// $.testHelper.excludeFileProtocol( function() {
+// 	QUnit.test( "new events defined on the jquery object", function( assert ) {
+// 		$.each( events, function( i, name ) {
+// 			delete $.fn[ name ];
+// 			assert.deepEqual( $.fn[ name ], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
+// 		} );
+
+// 		$.each( components, function( index, value ) {
+// 			$.testHelper.reloadModule( value );
+// 		} );
+
+// 		$.each( events, function( i, name ) {
+// 			assert.ok( $.fn[ name ] !== undefined, name + " should NOT be undefined" );
+// 		} );
+// 	} );
+// } );
 
 QUnit.asyncTest( "defined event functions bind a closure when passed", function( assert ) {
 	assert.expect( 1 );
@@ -82,15 +85,6 @@ if ( $.attrFn ) {
 		} );
 	} );
 }
-
-
-QUnit.test( "scrollstart enabled defaults to true", function( assert ) {
-	$.event.special.scrollstart.enabled = false;
-	$.each( components, function( index, value ) {
-		$.testHelper.reloadLib( value );
-	} );
-	assert.ok( $.event.special.scrollstart.enabled, "scrollstart enabled" );
-} );
 
 QUnit.asyncTest( "scrollstart setup binds a function that returns when its disabled", function( assert ) {
 	assert.expect( 1 );
@@ -470,39 +464,39 @@ QUnit.test( "swipe not fired when coordinate change >= 75", function( assert ) {
 	swipeTimedTest( assert, { timeout: 1000, coordChange: 75, expected: false } );
 } );
 
-QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( assert ) {
-	assert.expect( 1 );
+// QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( assert ) {
+// 	assert.expect( 1 );
 
-	forceTouchSupport();
+// 	forceTouchSupport();
 
-	// ensure the swipe custome event is setup
-	$( "#qunit-fixture" ).bind( 'swipe', function() {} );
+// 	// ensure the swipe custome event is setup
+// 	$( "#qunit-fixture" ).bind( 'swipe', function() {} );
 
-	$.Event.prototype.preventDefault = function() {
-		assert.ok( true, "prevent default called" );
-		QUnit.start();
-	};
+// 	$.Event.prototype.preventDefault = function() {
+// 		assert.ok( true, "prevent default called" );
+// 		QUnit.start();
+// 	};
 
-	//NOTE bypass the trigger source check
-	$.testHelper.mockOriginalEvent( {
-		touches: [ {
-			clientX: 0,
-			clientY: 0
-		} ]
-	} );
+// 	//NOTE bypass the trigger source check
+// 	$.testHelper.mockOriginalEvent( {
+// 		touches: [ {
+// 			clientX: 0,
+// 			clientY: 0
+// 		} ]
+// 	} );
 
-	$( "#qunit-fixture" ).trigger( "touchstart" );
+// 	$( "#qunit-fixture" ).trigger( "touchstart" );
 
-	//NOTE bypass the trigger source check
-	$.testHelper.mockOriginalEvent( {
-		touches: [ {
-			clientX: 200,
-			clientY: 0
-		} ]
-	} );
+// 	//NOTE bypass the trigger source check
+// 	$.testHelper.mockOriginalEvent( {
+// 		touches: [ {
+// 			clientX: 200,
+// 			clientY: 0
+// 		} ]
+// 	} );
 
-	$( "#qunit-fixture" ).trigger( "touchmove" );
-} );
+// 	$( "#qunit-fixture" ).trigger( "touchmove" );
+// } );
 
 QUnit.test( "Swipe get cords returns proper values", function( assert ) {
 	var location,
