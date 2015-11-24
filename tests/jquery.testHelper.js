@@ -2,7 +2,7 @@
  * mobile support unit tests
  */
 
-( function( $ ) {
+( function( QUnit, $ ) {
 $.testHelper = {
 	// This function takes sets of files to load asynchronously. Each set will be loaded after
 	// the previous set has completed loading. That is, each require and it's dependencies in a
@@ -534,8 +534,8 @@ $.testHelper = {
 		QUnit.config.autostart = false;
 
 		setTimeout( function() {
-			start();
+			QUnit.start();
 		}, milliseconds || 2000 );
 	}
 };
-} )( jQuery );
+} )( QUnit, jQuery );

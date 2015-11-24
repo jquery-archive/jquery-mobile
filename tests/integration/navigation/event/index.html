@@ -5,19 +5,16 @@
 	<title>jQuery Mobile Navigate Events Test Suite</title>
 
 	<script src="../../../../external/requirejs/require.js"></script>
-	<script src="../../../../js/requirejs.config.js"></script>
-	<script src="../../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../../tests/jquery.testHelper.js"></script>
+
 	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../../jqm-tests.css"/>
-	<script>
-		$.testHelper.asyncLoad([
-			[ "early_popstate_handler.js" ],
-			[ "events/navigate" ],
-			[ "event_core.js" ]
-		], "../../../../js" );
+
+ 	<script src="../../../lib/bootstrap.js"
+ 			data-base-url="../../../../js"
+	 		data-deps="./early_popstate_handler.js events/navigate"
+	 		data-full="true"
+	 		data-modules="event_core"/>
 	</script>
-	<script src="../../../swarminject.js"></script>
 </head>
 <body>
 	<div id="qunit"></div>

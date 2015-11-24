@@ -5,18 +5,16 @@
 	<title>jQuery Mobile Navigate Events Test Suite</title>
 
 	<script src="../../../../external/requirejs/require.js"></script>
-	<script src="../../../../js/requirejs.config.js"></script>
-	<script src="../../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../../tests/jquery.testHelper.js"></script>
+
 	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../../jqm-tests.css"/>
-	<script>
-		$.testHelper.asyncLoad([
-			[ "events/navigate" ],
-			[ "event_beforenavigate.js" ]
-		], "../../../../js" );
+
+ 	<script src="../../../lib/bootstrap.js"
+  			data-base-url="../../../../js"
+	 		data-deps="events/navigate"
+	 		data-full="true"
+	 		data-modules="event_beforenavigate"/>
 	</script>
-	<script src="../../../swarminject.js"></script>
 </head>
 <body>
 	<div id="qunit"></div>
