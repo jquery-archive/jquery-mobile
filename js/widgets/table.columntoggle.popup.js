@@ -4,16 +4,25 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.popup.css
 
-define( [
-	"jquery",
-	"./table.columntoggle",
-	"./popup",
-	"./controlgroup",
-	"./forms/checkboxradio" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function ( factory ) {
 
-$.widget( "mobile.table", $.mobile.table, {
+		if ( typeof define === "function" && define.amd ) {
+
+			// AMD. Register as an anonymous module.
+			define( [
+			"jquery",
+			"./table.columntoggle",
+			"./popup",
+			"./controlgroup",
+			"./forms/checkboxradio" ], factory );
+		} else {
+
+			// Browser globals
+			factory( jQuery );
+		}
+} )( function( $, undefined ) {
+
+return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		columnButton: true,
 		columnBtnTheme: null,
@@ -382,9 +391,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 		return this._superApply( arguments );
 	}
-});
+} );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );
