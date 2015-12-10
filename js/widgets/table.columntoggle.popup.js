@@ -1,29 +1,48 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+/*!
+ * jQuery Mobile Table @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>description: Extends the table widget to a column toggle menu and responsive column visibility
 //>>label: Table: Column Toggle
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.popup.css
 
-define( [
-	"jquery",
-	"./table.columntoggle",
-	"./popup",
-	"./controlgroup",
-	"./forms/checkboxradio" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
 
-$.widget( "mobile.table", $.mobile.table, {
+		if ( typeof define === "function" && define.amd ) {
+
+			// AMD. Register as an anonymous module.
+			define( [
+			"jquery",
+			"./table.columntoggle",
+			"./popup",
+			"./controlgroup",
+			"./forms/button",
+			"./widget.theme",
+			"./forms/checkboxradio" ], factory );
+		} else {
+
+			// Browser globals
+			factory( jQuery );
+		}
+} )( function( $, undefined ) {
+
+return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		columnButton: true,
-		columnBtnTheme: null,
+		columnButtonTheme: null,
 		columnPopupTheme: null,
-		columnBtnText: "Columns...",
+		columnButtonText: "Columns...",
 		columnUi: true,
-		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
-			popup: "ui-table-columntoggle-popup",
-			columnBtn: "ui-table-columntoggle-btn"
-		})
+		classes: {
+			"ui-table-columntoggle-popup": "",
+			"ui-table-columntoggle-btn": "ui-corner-all ui-shadow ui-mini"
+		}
 	},
 
 	_create: function() {
@@ -43,7 +62,7 @@ $.widget( "mobile.table", $.mobile.table, {
 				menu: popup.children().first(),
 				button: $( this.document[ 0 ].getElementById( id + "-button" ) )
 			};
-			this._updateHeaderPriorities({ keep: true });
+			this._updateHeaderPriorities( { keep: true } );
 		}
 	},
 
@@ -55,14 +74,14 @@ $.widget( "mobile.table", $.mobile.table, {
 			// Make sure the (new?) checkbox is associated with its header via .jqmData() and that,
 			// vice versa, the header is also associated with the checkbox
 			input = ( state.keep ? state.inputs.eq( state.checkboxIndex++ ) :
-				$("<label><input type='checkbox' checked />" +
+				$( "<label><input type='checkbox' checked />" +
 					( header.children( "abbr" ).first().attr( "title" ) || header.text() ) +
 					"</label>" )
 					.appendTo( state.container )
 					.children( 0 )
 					.checkboxradio( {
 						theme: this.options.columnPopupTheme
-					}));
+					} ) );
 
 			// Associate the header with the checkbox
 			input
@@ -84,7 +103,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		if ( this.options.columnUi || state.turningOnUI ) {
 			container = this._ui.menu.controlgroup( "container" );
 
-			// allow update of menu on refresh (fixes #5880)
+			// Allow update of menu on refresh (fixes #5880)
 			if ( state.keep ) {
 				inputs = container.find( "input" );
 			} else {
@@ -95,9 +114,9 @@ $.widget( "mobile.table", $.mobile.table, {
 				checkboxIndex: 0,
 				container: container,
 				inputs: inputs
-			}));
+			} ) );
 
-			// the controlgroup can only be refreshed after having called the superclass, because
+			// The controlgroup can only be refreshed after having called the superclass, because
 			// the superclass ultimately ends up instantiating the checkboxes inside the
 			// controlgroup's container
 			if ( !state.keep ) {
@@ -139,7 +158,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			// The reference from the header to the input has to be removed whether we're merely
 			// detaching, or whether we're removing altogether
 			header.jqmRemoveData( "input" );
-		});
+		} );
 
 		if ( !detachOnly ) {
 			this._ui.menu.remove();
@@ -155,45 +174,50 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		if ( this.options.mode === "columntoggle" ) {
 
-			if ( options.columnUi !== undefined ) {
+			if ( options.columnUi != null ) {
 				if ( this.options.columnUi && !options.columnUi ) {
 					this._removeColumnUi( false );
 				} else if ( !this.options.columnUi && options.columnUi ) {
-					this._addColumnUI({
+					this._addColumnUI( {
 						callback: this._updateHeaderPriorities,
 						callbackContext: this,
-						callbackArguments: [{ turningOnUI: true }]
-					});
+						callbackArguments: [ { turningOnUI: true } ]
+					} );
 				}
 
 				haveUi = options.columnUi;
 			}
 
 			if ( haveUi ) {
-				if ( options.disabled !== undefined ) {
+				if ( options.disabled != null ) {
 					this._ui.popup.popup( "option", "disabled", options.disabled );
 					if ( this._ui.button ) {
-						this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
-						if( options.disabled ) {
+						this._toggleClass( this._ui.button,
+							"ui-state-disabled", null, options.disabled );
+						if ( options.disabled ) {
 							this._ui.button.attr( "tabindex", -1 );
 						} else {
 							this._ui.button.removeAttr( "tabindex" );
 						}
 					}
 				}
-				if ( options.columnBtnTheme !== undefined && this._ui.button ) {
-					this._ui.button
-						.removeClass(
-							this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
-						.addClass( this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ) );
+				if ( options.columnButtonTheme != null && this._ui.button ) {
+					this._removeClass( this._ui.button, null,
+						this._themeClassFromOption(
+							"ui-button-",
+							this.options.columnButtonTheme ) );
+					this._addClass( this._ui.button, null,
+						this._themeClassFromOption(
+							"ui-button-",
+							options.columnButtonTheme ) );
 				}
-				if ( options.columnPopupTheme !== undefined ) {
+				if ( options.columnPopupTheme != null ) {
 					this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
 				}
-				if ( options.columnBtnText !== undefined && this._ui.button ) {
-					this._ui.button.text( options.columnBtnText );
+				if ( options.columnButtonText != null && this._ui.button ) {
+					this._ui.button.text( options.columnButtonText );
 				}
-				if ( options.columnButton !== undefined ) {
+				if ( options.columnButton != null ) {
 					if ( options.columnButton ) {
 						if ( !this._ui.button || this._ui.button.length === 0 ) {
 							this._ui.button = this._columnsButton();
@@ -224,16 +248,17 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_setupEvents: function() {
+
 		//NOTE: inputs are bound in bindToggles,
 		// so it can be called on refresh, too
 
-		// update column toggles on resize
+		// Update column toggles on resize
 		this._on( this.window, {
 			throttledresize: "_setToggleState"
-		});
+		} );
 		this._on( this._ui.menu, {
 			"change input": "_menuInputChange"
-		});
+		} );
 	},
 
 	_menuInputChange: function( event ) {
@@ -245,17 +270,18 @@ $.widget( "mobile.table", $.mobile.table, {
 	_columnsButton: function() {
 		var id = this._id(),
 			options = this.options,
-			buttonTheme = this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ),
+			buttonTheme = this._themeClassFromOption( "ui-button-", options.columnButtonTheme ),
 			button = $( "<a href='#" + id + "-popup' " +
 				"id='" + id + "-button' " +
-				"class='ui-btn ui-corner-all ui-shadow ui-mini" +
-					( options.classes.columnBtn ? " " + options.classes.columnBtn : "" ) +
-					( buttonTheme ? " " + buttonTheme : "" ) + "' " +
-				"data-" + $.mobile.ns + "rel='popup'>" + options.columnBtnText + "</a>" );
+				"data-" + $.mobile.ns + "rel='popup'>" + options.columnButtonText + "</a>" );
+
+		button.button();
+		this._addClass( button, "ui-table-columntoggle-btn" +
+					( buttonTheme ? " " + buttonTheme : "" ) );
 
 		this._on( button, {
 			click: "_handleButtonClicked"
-		});
+		} );
 
 		return button;
 	},
@@ -272,10 +298,12 @@ $.widget( "mobile.table", $.mobile.table, {
 		fragment = this.document[ 0 ].createDocumentFragment();
 		ui = this._ui = {
 			button: this.options.columnButton ? this._columnsButton() : null,
-			popup: $( "<div class='" + options.classes.popup + "' id='" + popupId + "'" +
+			popup: $( "<div id='" + popupId + "'" +
 				popupThemeAttr + "></div>" ),
 			menu: $( "<fieldset></fieldset>" ).controlgroup()
 		};
+
+		this._addClass( ui.popup, "ui-table-columntoggle-popup" );
 
 		// Call the updater before we attach the menu to the DOM, because its job is to populate
 		// the menu with checkboxes, and we don't want to do that when it's already attached to
@@ -297,11 +325,11 @@ $.widget( "mobile.table", $.mobile.table, {
 
 	_enhanceColumnToggle: function() {
 		return this.options.columnUi ?
-			this._addColumnUI({
+			this._addColumnUI( {
 				callback: this._superApply,
 				callbackContext: this,
 				callbackArguments: arguments
-			}) :
+			} ) :
 			this._superApply( arguments );
 	},
 
@@ -318,7 +346,7 @@ $.widget( "mobile.table", $.mobile.table, {
 				.prop( "checked",
 					( checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell" ) )
 				.checkboxradio( "refresh" );
-		});
+		} );
 	},
 
 	// Use the .jqmData() stored on the checkboxes to determine which columns have show/hide
@@ -341,6 +369,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			}
 
 			if ( index > -1 ) {
+
 				// The column header associated with /this/ checkbox is still present in the
 				// post-refresh table and it is locked, so the column associated with this column
 				// header is also currently locked. Let's record that.
@@ -352,7 +381,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 				lockedColumns.push( index );
 			}
-		});
+		} );
 
 		return lockedColumns;
 	},
@@ -382,9 +411,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 		return this._superApply( arguments );
 	}
-});
+} );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );

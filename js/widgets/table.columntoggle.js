@@ -1,3 +1,4 @@
+
 /*!
  * jQuery Mobile Column-toggling Table @VERSION
  * http://jquerymobile.com
@@ -14,21 +15,28 @@
 //>>demos: http://demos.jquerymobile.com/@VERSION/table-column-toggle/
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-define( [
-	"jquery",
-	"./table" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./table" ], factory );
+	} else {
+
+		factory( jQuery );
+	}
+} )( function( $, undefined ) {
 
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "columntoggle",
-		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
-			cellHidden: "ui-table-cell-hidden",
-			cellVisible: "ui-table-cell-visible",
-			priorityPrefix: "ui-table-priority-",
-			columnToggleTable: "ui-table-columntoggle"
-		} )
+		classes: {
+			"ui-table-cell-hidden": "",
+			"ui-table-cell-visible": "",
+			"ui-table-priority-": "",
+			"ui-table-columntoggle": ""
+		}
 	},
 
 	_create: function() {
@@ -52,12 +60,12 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_enhanceColumnToggle: function() {
-		this.element.addClass( this.options.classes.columnToggleTable );
+		this._addClass( "ui-table-columntoggle" );
 		this._updateHeaderPriorities();
 	},
 
-	_updateVariableColumn: function( header, cells, priority/*, state */ ) {
-		cells.addClass( this.options.classes.priorityPrefix + priority );
+	_updateVariableColumn: function( header, cells, priority ) {
+		this._addClass( cells, "ui-table-priority-" + priority );
 	},
 
 	_updateHeaderPriorities: function( state ) {
@@ -81,7 +89,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 		if ( cells ) {
 			cells = cells.add( header );
 			this._unlock( cells );
-			cells.addClass( this.options.classes[ visible ? "cellVisible" : "cellHidden" ] );
+			this._addClass( cells,
+				visible ? "ui-table-cell-visible" : "ui-table-cell-hidden" );
 		}
 	},
 
@@ -120,15 +129,14 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_unlock: function( cells ) {
-		var classes = this.options.classes;
 
-		// allow hide/show via CSS only = remove all toggle-locks
-		( cells ||
+		// Allow hide/show via CSS only = remove all toggle-locks
+		var locked = ( cells ||
 			this.element
 				.children( "thead, tbody" )
 					.children( "tr" )
-						.children( "." + classes.cellHidden + ", ." + classes.cellVisible ) )
-			.removeClass( classes.cellHidden + " " + classes.cellVisible );
+						.children( ".ui-table-cell-hidden, .ui-table-cell-visible" ) );
+		this._removeClass( locked, "ui-table-cell-hidden ui-table-cell-visible" );
 	},
 
 	_recordLockedColumns: $.noop,
@@ -145,10 +153,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 			// Record which columns are locked
 			lockedColumns = this._recordLockedColumns();
 
-			// columns not being replaced must be cleared from input toggle-locks
+			// Columns not being replaced must be cleared from input toggle-locks
 			this._unlock();
 
-			// update priorities
+			// Update priorities
 			this._updateHeaderPriorities();
 
 			// Make sure columns that were locked before this refresh, and which are still around
@@ -160,7 +168,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_destroy: function() {
 		if ( this.options.mode === "columntoggle" ) {
 			if ( !this.options.enhanced ) {
-				this.element.removeClass( this.options.classes.columnToggleTable );
 				this.headers.each( $.proxy( function( index, element ) {
 					var header,
 						priority = $.mobile.getAttribute( element, "priority" );
@@ -168,17 +175,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 					if ( priority ) {
 						header = $( element );
 						header
-							.add( header.jqmData( "cells" ) )
-								.removeClass( this.options.classes.priorityPrefix + priority );
+							.add( header.jqmData( "cells" ) );
 					}
-				}, this ));
+				}, this ) );
 			}
 		}
 		return this._superApply( arguments );
 	}
 } );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );
