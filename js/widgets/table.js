@@ -34,7 +34,7 @@ return $.widget( "mobile.table", {
 
 	options: {
 		classes: {
-			table: "ui-table"
+			"ui-table": ""
 		},
 		enhanced: false
 	},
@@ -43,7 +43,7 @@ return $.widget( "mobile.table", {
 	// first TR in the table
 	headers: null,
 
-	// allHeaders references headers, plus all THs in the thead, which may or may not include
+	// AllHeaders references headers, plus all THs in the thead, which may or may not include
 	// several rows
 	allHeaders: null,
 
@@ -51,7 +51,7 @@ return $.widget( "mobile.table", {
 		var options = this.options;
 
 		if ( !options.enhanced ) {
-			this.element.addClass( options.classes.table +
+			this._addClass( "ui-table",
 				( options.disabled ? " ui-state-disabled" : "" ) );
 		}
 
@@ -60,7 +60,7 @@ return $.widget( "mobile.table", {
 
 	_setOptions: function( options ) {
 		if ( options.disabled !== undefined ) {
-			this.element.toggleClass( "ui-state-disabled", options.disabled );
+			this._toggleClass( null, "ui-state-disabled", options.disabled );
 		}
 		return this._super( options );
 	},
@@ -86,7 +86,7 @@ return $.widget( "mobile.table", {
 			selector = ":nth-child(" + ( columnCount + 1 ) + ")";
 
 		if ( span ) {
-			for( columnIndex = 0; columnIndex < span - 1; columnIndex++ ) {
+			for ( columnIndex = 0; columnIndex < span - 1; columnIndex++ ) {
 				columnCount++;
 				selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
 			}
@@ -111,7 +111,8 @@ return $.widget( "mobile.table", {
 	},
 
 	refresh: function() {
-		// updating headers on refresh (fixes #5880)
+
+		// Updating headers on refresh (fixes #5880)
 		this._setHeaders();
 
 		// Iterate over the header rows
@@ -122,15 +123,15 @@ return $.widget( "mobile.table", {
 		var table = this.element;
 
 		if ( !this.options.enhanced ) {
-			table.removeClass( this.options.classes.table );
+			this._removeClass( "ui-table" );
 		}
 
 		// We have to remove "cells" data even if the table was originally enhanced, because it is
 		// added during refresh
 		table.find( "thead tr" ).children().each( function() {
 			$( this ).jqmRemoveData( "cells" );
-		});
+		} );
 	}
-});
+} );
 
 } );
