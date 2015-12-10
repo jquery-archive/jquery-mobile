@@ -14,11 +14,18 @@
 //>>demos: http://demos.jquerymobile.com/@VERSION/table-column-toggle/
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-define( [
-	"jquery",
-	"./table" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if (typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./table" ], factory );
+	} else {
+
+		factory ( jQuery );
+	}
+} )(function( $, undefined ) {
 
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
@@ -178,7 +185,4 @@ return $.widget( "mobile.table", $.mobile.table, {
 	}
 } );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );
