@@ -87,10 +87,15 @@ $.widget( "mobile.textinput", {
 			"blur": "_handleBlur"
 		} );
 
+		if ( options.disabled !== undefined ) {
+			this.element.prop( "disabled", !!options.disabled );
+			this._toggleClass( this._outer, null, "ui-state-disabled", !!options.disabled );
+		}
+
 	},
 
 	refresh: function() {
-		this.setOptions( {
+		this._setOptions( {
 			"disabled": this.element.is( ":disabled" )
 		} );
 	},
