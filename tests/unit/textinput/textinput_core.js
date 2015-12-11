@@ -221,4 +221,13 @@ QUnit.test( "textinput is disabled/enabled correctly", function( assert ) {
 		"After disabling, the 'disabled' prop is true" );
 } );
 
+QUnit.test( "textinput is disabled correctly by default", function( assert ) {
+	var textinput = $( "#disable-test-default" );
+
+	assert.hasClasses( textinput.parent()[ 0 ], "ui-state-disabled",
+		"After disabling, the ui-state-disabled class is present" );
+	assert.deepEqual( textinput.prop( "disabled" ), true,
+		"After disabling, the 'disabled' prop is true" );
+} );
+
 } )( QUnit, jQuery );
