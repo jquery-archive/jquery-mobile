@@ -194,7 +194,7 @@ return $.widget( "mobile.listview", $.extend( {
 							"ui-listview-item-split-button", altButtonClass );
 						last.attr( "title", $.trim( last.getEncodedText() ) );
 						if ( !createEnhanced ) {
-							last.empty().append( span );
+							last.empty().prepend( span );
 						}
 
 						// Reduce to the first anchor, because only the first gets the buttonClass
@@ -205,7 +205,7 @@ return $.widget( "mobile.listview", $.extend( {
 						addItemToDictionary( itemClassDict, span[ 0 ], "ui-listview-item-icon",
 							"ui-icon ui-icon-" + icon + " ui-widget-icon-floatend" );
 						if ( !createEnhanced ) {
-							a.append( span );
+							a.prepend( span );
 						}
 					}
 
