@@ -42,7 +42,7 @@ $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
 		if ( !this.options.enhanced ) {
 			this._super();
 		} else if ( this.options.icon ) {
-			this.icon = this.element.find( "ui-button-icon" );
+			this.icon = this.element.parent().find( ".ui-checkboxradio-icon" );
 		}
 	},
 
