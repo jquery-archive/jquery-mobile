@@ -47,7 +47,7 @@ test( "The page should be enhanced correctly", function() {
 	deepEqual( !!popup.find( "input[type='checkbox']" ).length, true,
 		"Checkboxes were added to menu" );
 
-	deepEqual( popup.find( "input[type='checkbox']:nth(2)" ).prev().text(), "Rotten Tomato Rating",
+	deepEqual( popup.find( "input[type='checkbox']:nth(2)" ).parent().text().trim(), "Rotten Tomato Rating",
 		"The presence of an <abbr> tag with title attribute in the <th> causes the value of the " +
 		"attribute to be used for the checkbox label" );
 });

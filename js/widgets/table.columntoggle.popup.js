@@ -22,6 +22,7 @@
 			"./table.columntoggle",
 			"./popup",
 			"./controlgroup",
+			"./widget.theme",
 			"./forms/checkboxradio" ], factory );
 		} else {
 
@@ -33,9 +34,9 @@
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		columnButton: true,
-		columnBtnTheme: null,
+		columnButtonTheme: null,
 		columnPopupTheme: null,
-		columnBtnText: "Columns...",
+		columnButtonText: "Columns...",
 		columnUi: true,
 		classes: {
 			"ui-table-columntoggle-popup": "",
@@ -172,7 +173,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 		if ( this.options.mode === "columntoggle" ) {
 
-			if ( options.columnUi !== undefined ) {
+			if ( options.columnUi != null ) {
 				if ( this.options.columnUi && !options.columnUi ) {
 					this._removeColumnUi( false );
 				} else if ( !this.options.columnUi && options.columnUi ) {
@@ -187,11 +188,11 @@ return $.widget( "mobile.table", $.mobile.table, {
 			}
 
 			if ( haveUi ) {
-				if ( options.disabled !== undefined ) {
+				if ( options.disabled != null ) {
 					this._ui.popup.popup( "option", "disabled", options.disabled );
 					if ( this._ui.button ) {
 						this._toggleClass( this._ui.button,
-							"ui-state-disabled", options.disabled );
+							"ui-state-disabled", null, options.disabled );
 						if ( options.disabled ) {
 							this._ui.button.attr( "tabindex", -1 );
 						} else {
@@ -199,23 +200,23 @@ return $.widget( "mobile.table", $.mobile.table, {
 						}
 					}
 				}
-				if ( options.columnBtnTheme !== undefined && this._ui.button ) {
+				if ( options.columnButtonTheme != null && this._ui.button ) {
 					this._removeClass( this._ui.button, null,
 						this._themeClassFromOption(
-							"ui-btn-",
-							this.options.columnBtnTheme ) );
+							"ui-button-",
+							this.options.columnButtonTheme ) );
 					this._addClass( this._ui.button, null,
 						this._themeClassFromOption(
-							"ui-btn-",
-							this.options.columnBtnTheme ) );
+							"ui-button-",
+							options.columnButtonTheme ) );
 				}
-				if ( options.columnPopupTheme !== undefined ) {
+				if ( options.columnPopupTheme != null ) {
 					this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
 				}
-				if ( options.columnBtnText !== undefined && this._ui.button ) {
-					this._ui.button.text( options.columnBtnText );
+				if ( options.columnButtonText != null && this._ui.button ) {
+					this._ui.button.text( options.columnButtonText );
 				}
-				if ( options.columnButton !== undefined ) {
+				if ( options.columnButton != null ) {
 					if ( options.columnButton ) {
 						if ( !this._ui.button || this._ui.button.length === 0 ) {
 							this._ui.button = this._columnsButton();
@@ -268,10 +269,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_columnsButton: function() {
 		var id = this._id(),
 			options = this.options,
-			buttonTheme = this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ),
+			buttonTheme = this._themeClassFromOption( "ui-button-", options.columnButtonTheme ),
 			button = $( "<a href='#" + id + "-popup' " +
 				"id='" + id + "-button' " +
-				"data-" + $.mobile.ns + "rel='popup'>" + options.columnBtnText + "</a>" );
+				"data-" + $.mobile.ns + "rel='popup'>" + options.columnButtonText + "</a>" );
 
 		this._addClass( button, "ui-table-columntoggle-btn" +
 					( buttonTheme ? " " + buttonTheme : "" ) );

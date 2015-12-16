@@ -31,16 +31,16 @@
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "reflow",
-		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
-			reflowTable: "ui-table-reflow",
-			cellLabels: "ui-table-cell-label",
-			cellLabelsTop: "ui-table-cell-label-top"
-		})
+		classes: {
+			"ui-table-reflow": "",
+			"ui-table-cell-label": "",
+			"ui-table-cell-label-top": ""
+		}
 	},
 
 	_create: function() {
 		if ( this.options.mode === "reflow" && !this.options.enhanced ) {
-			this.element.addClass( this.options.classes.reflowTable );
+			this._addClass( "ui-table-reflow" );
 		}
 
 		return this._superApply( arguments );
@@ -68,12 +68,12 @@ return $.widget( "mobile.table", $.mobile.table, {
 			contents = header.clone().contents();
 
 		if ( contents.length > 0  ) {
-			labelClasses = this.options.classes.cellLabels;
+			labelClasses = "ui-table-cell-label";
 			cells = header.jqmData( "cells" );
 			colstart = $.mobile.getAttribute( headerCell, "colstart" );
 
 			if ( cells.not( headerCell ).filter( "thead th" ).length > 0 ) {
-				labelClasses = labelClasses + ( " " + this.options.classes.cellLabelsTop );
+				labelClasses = labelClasses + ( " " + "ui-table-cell-label-top" );
 				iteration = parseInt( headerCell.getAttribute( "colspan" ), 10 );
 
 				if ( iteration ) {
@@ -86,14 +86,17 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_addLabels: function( cells, labelClasses, contents ) {
+		var b = $( "<b>" );
 		if ( contents.length === 1 && contents[ 0 ].nodeName.toLowerCase() === "abbr" ) {
 			contents = contents.eq( 0 ).attr( "title" );
 		}
 
 		// .not fixes #6006
+		this._addClass( b, labelClasses );
+		b.append( contents );
 		cells
 			.not( ":has(b." + labelClasses.split( " " ).join( "." ) + ")" )
-				.prepend( $( "<b class='" + labelClasses + "'></b>" ).append( contents ) );
+				.prepend( b );
 	},
 
 	_destroy: function() {
@@ -109,9 +112,9 @@ return $.widget( "mobile.table", $.mobile.table, {
 							.removeAttr( colstartAttr )
 						.end()
 					.end()
-					.removeClass( this.options.classes.reflowTable )
+					.removeClass( "ui-table-reflow" )
 					.children( "tbody" )
-						.find( "b." + this.options.classes.cellLabels )
+						.find( "b.ui-table-cell-label"  )
 							.remove();
 			}
 		}
