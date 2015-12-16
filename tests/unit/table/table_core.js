@@ -1,28 +1,19 @@
 ( function() {
-
 var tableProto = $.mobile.table.prototype;
-
 function test_create( prefix, enhanced, disabled ) {
 
 	test( prefix + "_create()", function() {
-		var expectDisabledClass = !enhanced && disabled,
-			context = {
-				refresh: $.noop,
-				element: $( "<table>" ),
-				options: {
-					disabled: disabled,
-					enhanced: enhanced,
-					classes: {
-						table: "xyzzy"
-					}
+		var expectDisabledClass = !enhanced && disabled;
+		var tableElement = $( "<table>" ).table( {
+				disabled: disabled,
+				enhanced: enhanced,
+				classes: {
+					"ui-table": "xyzzy"
 				}
-			};
-
-		tableProto._create.call( context );
-
-		deepEqual( context.element.hasClass( "xyzzy" ), !enhanced, prefix + "table class " +
+			} );
+		deepEqual( tableElement.hasClass( "xyzzy" ), !enhanced, prefix + "table class " +
 			( enhanced ? "not " : "" ) + "added" );
-		deepEqual( context.element.hasClass( "ui-state-disabled" ), expectDisabledClass,
+		deepEqual( tableElement.hasClass( "ui-state-disabled" ), expectDisabledClass,
 			prefix + "disabled class presence is as expected" );
 	});
 }
@@ -32,24 +23,17 @@ test_create( "Normal and disabled: ", false, true );
 test_create( "Pre-rendered: ", true, false );
 
 test( "_setOptions()", function() {
-	var context = {
-		options: {},
-		widget: function() { return this.element; },
-		hoverable: $([]),
-		focusable: $([]),
-		element: $( "<table>" ),
-		_setOption: $.mobile.table.prototype._setOption,
-		_setOptions: $.mobile.table.prototype._setOptions
-	};
-
-	tableProto._setOptions.call( context, { disabled: true } );
-
-	deepEqual( context.element.hasClass( "ui-state-disabled" ), true,
+	var table = $( "<table>" ).table( {
+			disabled: true
+	} );
+	deepEqual( table.hasClass( "ui-state-disabled" ), true,
 		"_setOptions({ disabled: true }) adds class 'ui-state-disabled'" );
 
-	tableProto._setOptions.call( context, { disabled: false } );
+	var table = $( "<table>" ).table( {
+			disabled: false
+	} );
 
-	deepEqual( context.element.hasClass( "ui-state-disabled" ), false,
+	deepEqual( table.hasClass( "ui-state-disabled" ), false,
 		"_setOptions({ disabled: false }) removes class 'ui-state-disabled'" );
 });
 
@@ -144,6 +128,7 @@ test( "refresh() iterates over all the rows of a table", function() {
 
 function test_destroy( prefix, enhanced ) {
 	test( prefix + "_destroy() undoes table-related changes", function() {
+		var testClass = "foo";
 		var table = $( "#destroy-test" )
 				.clone()
 				.find( "thead tr" )
@@ -153,20 +138,10 @@ function test_destroy( prefix, enhanced ) {
 						})
 					.end()
 				.end()
-				.addClass( tableProto.options.classes.table );
+				.addClass( testClass )
+				.table();
 
-		tableProto._destroy.call({
-			element: table,
-			options: {
-				enhanced: enhanced,
-				classes: {
-					table: tableProto.options.classes.table
-				}
-			}
-		});
-
-		deepEqual( table.hasClass( tableProto.options.classes.table ), enhanced,
-			prefix + "Table does not have class '" + tableProto.options.classes.table + "' after _destroy()" );
+		table.table("destroy");
 		deepEqual( table.find( "thead tr" ).children().is( function( index, element ) {
 				return !!$( element ).jqmData( "cells" );
 			}), false, prefix + "'cells' data has been removed" );
