@@ -1,4 +1,5 @@
 // These tests run on both prerendered and non-prerendered tables
+$.mobile.ns ="nstest-";
 
 module( "Columntoggle options" );
 
@@ -40,24 +41,24 @@ function testClasses( table, element, prefix, startClass, optionName, newValue, 
 	}
 }
 
-test( "Default columnBtnTheme", function() {
+test( "Default columnButtonTheme", function() {
 	testClasses(
 		$( "#columntoggle-option-test-blank" ),
 		$( "#columntoggle-option-test-blank-button" )[ 0 ],
-		"ui-btn-", "", "columnBtnTheme", "b", "ui-btn-b" );
+		"ui-button-", "", "columnButtonTheme", "b", "ui-button-b" );
 });
 
-test( "Explicit columnBtnTheme", function() {
+test( "Explicit columnButtonTheme", function() {
 	testClasses(
 		$( "#columntoggle-option-test-explicit" ),
 		$( "#columntoggle-option-test-explicit-button" )[ 0 ],
-		"ui-btn-", "ui-btn-b", "columnBtnTheme", "a", "ui-btn-a" );
+		"ui-button-", "ui-button-b", "columnButtonTheme", "a", "ui-button-a" );
 });
 
 test( "Default columnPopupTheme", function() {
 	var popup = $( "#columntoggle-option-test-blank-popup" );
 
-	deepEqual( popup.popup( "option", "theme" ), null,
+	deepEqual( popup.popup( "option", "theme" ), "inherit",
 		"Popup has no theme assigned initially" );
 
 	testClasses(
@@ -84,8 +85,8 @@ test( "Explicit columnPopupTheme", function() {
 		"Popup has theme 'a' assigned in the end" );
 });
 
-test( "Explicitly assigned columnBtnText", function() {
-	$( "#columntoggle-option-test-explicit" ).table( "option", "columnBtnText", "xyzzy" );
+test( "Explicitly assigned columnButtonText", function() {
+	$( "#columntoggle-option-test-explicit" ).table( "option", "columnButtonText", "xyzzy" );
 
 	deepEqual( $( "#columntoggle-option-test-explicit-button" ).text(), "xyzzy",
 		"Button text assigned via option is propagated to the button" );

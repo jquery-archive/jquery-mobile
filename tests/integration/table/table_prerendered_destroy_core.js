@@ -8,6 +8,19 @@ test( "Prerendered basic table is destroyed/re-created correctly", function() {
 
 	table.table();
 
+	table.table( "destroy" );
+
+		deepEqual( $.testHelper.domEqual( $( "body" ), unenhancedState ), true,
+		"After enhancing and destroying the table, the DOM is identical to the original state" );
+
+deepEqual(
+		table.find( "*" )
+			.add( table )
+			.filter( ":data(" + $.camelCase( $.mobile.ns + "cells" ) + ")" ).length, 0,
+		"No table elements have data at key 'cells' after destruction" );
+
+	table.table();
+
 	deepEqual(
 		table.find( "*" )
 			.add( table )
@@ -17,15 +30,6 @@ test( "Prerendered basic table is destroyed/re-created correctly", function() {
 	enhancedState = $( "body" ).clone();
 
 	table.table( "destroy" );
-
-	deepEqual(
-		table.find( "*" )
-			.add( table )
-			.filter( ":data(" + $.camelCase( $.mobile.ns + "cells" ) + ")" ).length, 0,
-		"No table elements have data at key 'cells' after destruction" );
-
-	deepEqual( $.testHelper.domEqual( $( "body" ), unenhancedState ), true,
-		"After enhancing and destroying the table, the DOM is identical to the original state" );
 
 	table.table();
 

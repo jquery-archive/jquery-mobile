@@ -6,6 +6,7 @@ test( "Columntoggle table is disabled/enabled correctly", function() {
 		button = $( "#columntoggle-disable-test-button" ),
 		popup = $( "#columntoggle-disable-test-popup" );
 
+debugger;
 	table.table( "option", "disabled", true );
 	deepEqual( table.hasClass( "ui-state-disabled" ), true,
 		"Table has the ui-state-disabled class when disabled" );
