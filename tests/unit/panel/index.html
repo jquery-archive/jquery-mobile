@@ -11,6 +11,8 @@
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
+
 	<script type="text/javascript">
 		// redirects from push-state-tests.html
 		$( document ).bind( 'mobileinit', function(){
@@ -40,6 +42,7 @@
 			<p>Contents of a panel.</p>
 		</div>
 		<div data-nstest-role="panel" id="panel-test-events">
+			<p>Contents of a panel.</p>
 			<p>Contents of a panel.</p>
 		</div>
 		<div data-nstest-role="panel" id="panel-test-open">
@@ -101,7 +104,7 @@
 			<a href="#panel-test-id-change">Open Panel</a>
 			<a href="#panel-test-external">Open Panel</a>
 		</div>
-			
+
 		<div data-nstest-role="panel" id="panel-panelclose-event">
 			<h1>Panel!</h1>
 		</div>
