@@ -85,7 +85,7 @@ return $.widget( "mobile.panel", {
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
-			this.element.addClass( this.options.classes.animate );
+			this._addClass( this.options.classes.animate );
 		}
 
 		this._bindUpdateLayout();
@@ -152,7 +152,9 @@ return $.widget( "mobile.panel", {
 	_getFixedToolbars: function() {
 		var extFixedToolbars = $( "body" ).children( ".ui-header-fixed, .ui-footer-fixed" ),
 			intFixedToolbars = this._page().find( ".ui-header-fixed, .ui-footer-fixed" ),
-			fixedToolbars = extFixedToolbars.add( intFixedToolbars ).addClass( this.options.classes.pageFixedToolbar );
+			fixedToolbars = extFixedToolbars.add( intFixedToolbars );
+		
+		this._addClass( fixedToolbars, this.options.classes.pageFixedToolbar );
 
 		return fixedToolbars;
 	},
@@ -175,7 +177,7 @@ return $.widget( "mobile.panel", {
 	},
 
 	_addPanelClasses: function() {
-		this.element.addClass( this._getPanelClasses() );
+		this._addClass( this._getPanelClasses() );
 	},
 
 	_handleCloseClick: function( event ) {
@@ -232,13 +234,13 @@ return $.widget( "mobile.panel", {
 
 	_unfixPanel: function() {
 		if ( !!this.options.positionFixed && $.support.fixedPosition ) {
-			this.element.removeClass( this.options.classes.panelFixed );
+			this._removeClass( this.options.classes.panelFixed );
 		}
 	},
 
 	_fixPanel: function() {
 		if ( !!this.options.positionFixed && $.support.fixedPosition ) {
-			this.element.addClass( this.options.classes.panelFixed );
+			this._addClass( this.options.classes.panelFixed );
 		}
 	},
 
@@ -268,9 +270,9 @@ return $.widget( "mobile.panel", {
 			e.preventDefault();
 			link = $( e.target );
 			if ( link.hasClass( "ui-button" ) ) {
-				link.addClass( "ui-button-active" );
+				this._addClass( link, "ui-button-active" );
 				this.element.one( "panelopen panelclose", function() {
-					link.removeClass( "ui-button-active" );
+					this._removeClass( "ui-button-active" );
 				} );
 			}
 			this.toggle();
@@ -348,8 +350,8 @@ return $.widget( "mobile.panel", {
 					self._page().jqmData( "panel", "open" );
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
-						self._wrapper.addClass( o.classes.animate );
-						self._fixedToolbars().addClass( o.classes.animate );
+						self._addClass( self._wrapper, o.classes.animate );
+						self._addClass( self._fixedToolbars(), o.classes.animate );
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
@@ -360,29 +362,27 @@ return $.widget( "mobile.panel", {
 					}
 
 					if ( o.theme && o.display !== "overlay" ) {
-						self._page().parent()
-							.addClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
+						self._addClass( self._page().parent(), o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 					}
 
-					self.element
-						.removeClass( o.classes.panelClosed )
-						.addClass( o.classes.panelOpen );
+					self._removeClass( o.classes.panelClosed )
+						._addClass( o.classes.panelOpen );
 
 					self._positionPanel( true );
 
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
 
 					if ( o.display !== "overlay" ) {
-						self._page().parent().addClass( o.classes.pageContainer );
-						self._wrapper.addClass( self._pageContentOpenClasses );
-						self._fixedToolbars().addClass( self._pageContentOpenClasses );
+						self._addClass( self._page().parent(), o.classes.pageContainer );
+						self._addClass( self._wrapper, self._pageContentOpenClasses );
+						self._addClass( self._fixedToolbars(), self._pageContentOpenClasses );
 					}
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
-						self._modal
-							.addClass( self._modalOpenClasses )
-							.height( Math.max( self._modal.height(), self.document.height() ) );
+						self._addClass( self._modal, self._modalOpenClasses );
+
+						self._modal.height( Math.max( self._modal.height(), self.document.height() ) );
 					}
 				},
 				complete = function() {
@@ -393,8 +393,8 @@ return $.widget( "mobile.panel", {
 					}
 
 					if ( o.display !== "overlay" ) {
-						self._wrapper.addClass( o.classes.pageContentPrefix + "-open" );
-						self._fixedToolbars().addClass( o.classes.pageContentPrefix + "-open" );
+						self._addClass( self._wrapper, o.classes.pageContentPrefix + "-open" );
+						self._addClass( self._fixedToolbars(), o.classes.pageContentPrefix + "-open" );
 					}
 
 					self._bindFixListener();
@@ -429,11 +429,11 @@ return $.widget( "mobile.panel", {
 
 				_closePanel = function() {
 
-					self.element.removeClass( o.classes.panelOpen );
+					self._removeClass( o.classes.panelOpen );
 
 					if ( o.display !== "overlay" ) {
-						self._wrapper.removeClass( self._pageContentOpenClasses );
-						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
+						self._removeClass( self._wrapper, self._pageContentOpenClasses );
+						self._removeClass( self._fixedToolbars(), self._pageContentOpenClasses );
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
@@ -444,31 +444,30 @@ return $.widget( "mobile.panel", {
 					}
 
 					if ( self._modal ) {
-						self._modal
-							.removeClass( self._modalOpenClasses )
-							.height( "" );
+						self._removeClass( self._modal, self._modalOpenClasses );
+						self._modal.height( "" );
 					}
 				},
 				complete = function() {
 					if ( o.theme && o.display !== "overlay" ) {
-						currentPage.parent().removeClass( o.classes.pageContainer + "-themed " +
+						self._removeClass( currentPage.parent(), o.classes.pageContainer + "-themed " +
 							o.classes.pageContainer + "-" + o.theme );
 					}
 
-					self.element.addClass( o.classes.panelClosed );
+					self._addClass( o.classes.panelClosed );
 
 					//scroll to the top
 					self._positionPanel( true );
 
 					if ( o.display !== "overlay" ) {
-						currentPage.parent().removeClass( o.classes.pageContainer );
-						self._wrapper.removeClass( o.classes.pageContentPrefix + "-open" );
-						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
+						self._removeClass( currentPage.parent(), o.classes.pageContainer );
+						self._removeClass( self._wrapper, o.classes.pageContentPrefix + "-open" );
+						self._removeClass( self._fixedToolbars(), o.classes.pageContentPrefix + "-open" );
 					}
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
-						self._wrapper.removeClass( o.classes.animate );
-						self._fixedToolbars().removeClass( o.classes.animate );
+						self._removeClass( self._wrapper, o.classes.animate );
+						self._removeClass( self._fixedToolbars(), o.classes.animate );
 					}
 
 					self._fixPanel();
@@ -509,16 +508,16 @@ return $.widget( "mobile.panel", {
 
 			if ( this._open ) {
 
-				this._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
+				this._removeClass( this._fixedToolbars(), o.classes.pageContentPrefix + "-open" );
 
 				if ( $.support.cssTransform3d && !!o.animate ) {
-					this._fixedToolbars().removeClass( o.classes.animate );
+					this._removeClass( this._fixedToolbars(), o.classes.animate );
 				}
 
-				this._page().parent().removeClass( o.classes.pageContainer );
+				this._removeClass( this._page().parent(), o.classes.pageContainer );
 
 				if ( o.theme ) {
-					this._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
+					this._removeClass( this._page().parent(), o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 				}
 			}
 		}
@@ -535,8 +534,9 @@ return $.widget( "mobile.panel", {
 
 		this._panelInner.children().unwrap();
 
+		this._removeClass( [ this._getPanelClasses(), o.classes.panelOpen, o.classes.animate ].join( " " ) );
+		
 		this.element
-			.removeClass( [ this._getPanelClasses(), o.classes.panelOpen, o.classes.animate ].join( " " ) )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
 			.off( "keyup.panel" )
