@@ -53,6 +53,7 @@ module.exports = {
 			"js/widgets/navbar.js",
 			"js/widgets/navbar.backcompat.js",
 			"js/widgets/navbar.morebutton.js",
+			"js/widgets/panel.js",
 
 			// Tests
 			"tests/integration/listview/autodividers_core.js",
@@ -84,7 +85,8 @@ module.exports = {
 			"tests/integration/popup/backcompat_core.js",
 			"tests/unit/popup/popup_core.js",
 			"tests/unit/loader/loader_core.js",
-			"tests/unit/loader/backcompat_core.js"
+			"tests/unit/loader/backcompat_core.js",
+			"tests/unit/panel/panel_core.js"
 		]
 	},
 	tests: {
