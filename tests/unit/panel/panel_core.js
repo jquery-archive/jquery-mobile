@@ -7,8 +7,23 @@
 
 var count,
 	defaults = $.mobile.panel.prototype.options,
-	classes = defaults.classes,
+	classes = { 
+		panel: "ui-panel",
+		panelOpen: "ui-panel-open",
+		panelClosed: "ui-panel-closed",
+		panelFixed: "ui-panel-fixed",
+		panelInner: "ui-panel-inner",
+		modal: "ui-panel-dismiss",
+		modalOpen: "ui-panel-dismiss-open",
+		pageContainer: "ui-panel-page-container",
+		pageWrapper: "ui-panel-wrapper",
+		pageFixedToolbar: "ui-panel-fixed-toolbar",
+		pageContentPrefix: "ui-panel-page-content", /* Used for wrapper and fixed toolbars position, display and open classes. */
+		animate: "ui-panel-animate"
+	},
 	originalWidget = $.mobile.panel.prototype;
+
+defaults.classes = classes;
 
 function getPageFromPanel( $panel ) {
 	return $panel.closest( ":jqmData(role='page')" );
