@@ -6,23 +6,7 @@
 
 var count,
 	defaults = $.mobile.panel.prototype.options,
-	classes = {
-		panel: "ui-panel",
-		panelOpen: "ui-panel-open",
-		panelClosed: "ui-panel-closed",
-		panelFixed: "ui-panel-fixed",
-		panelInner: "ui-panel-inner",
-		modal: "ui-panel-dismiss",
-		modalOpen: "ui-panel-dismiss-open",
-		pageContainer: "ui-panel-page-container",
-		pageWrapper: "ui-panel-wrapper",
-		pageFixedToolbar: "ui-panel-fixed-toolbar",
-		pageContentPrefix: "ui-panel-page-content",
-		animate: "ui-panel-animate"
-	},
 	originalWidget = $.mobile.panel.prototype;
-
-defaults.classes = classes;
 
 function getPageFromPanel( $panel ) {
 	return $panel.closest( ":jqmData(role='page')" );
@@ -33,7 +17,7 @@ function getModalFromPanel( $panel ) {
 }
 
 function getWrapperFromPage( $page ) {
-	return $page.find( "." + defaults.classes.pageWrapper );
+	return $page.find( ".ui-panel-wrapper" );
 }
 
 QUnit.module( "stock panel" );
@@ -43,7 +27,7 @@ QUnit.test( "expected classes on create", function( assert ) {
 	var $panel = $( "#panel-test-create" ),
 		$page = getPageFromPanel( $panel );
 
-	assert.hasClasses( $panel, defaults.classes.panel,
+	assert.hasClasses( $panel, "ui-panel",
 		"default class is present" );
 	assert.hasClasses( $panel, "ui-panel-display-" + defaults.display,
 		"display class is added per the default" );
@@ -51,14 +35,14 @@ QUnit.test( "expected classes on create", function( assert ) {
 		"position class is added per the default" );
 
 	if ( $.support.cssTransform3d ) {
-		assert.hasClasses( $panel, defaults.classes.animate,
+		assert.hasClasses( $panel, "ui-panel-animate",
 			"animate class is present by default when supported" );
 	} else {
-		assert.lacksClasses( $panel, defaults.classes.animate,
+		assert.lacksClasses( $panel, "ui-panel-animate",
 			"animate class is not present by default when not supported" );
 	}
 
-	assert.hasClasses( $panel, defaults.classes.panelClosed,
+	assert.hasClasses( $panel, "ui-panel-closed",
 		"panel is closed by default" );
 } );
 
@@ -94,27 +78,27 @@ QUnit.asyncTest( "classes modified by open", function( assert ) {
 		assert.lacksClasses( $openButton, "ui-button-active",
 			"button doesn't have active class" );
 
-		assert.lacksClasses( $panel, defaults.classes.panelClosed,
+		assert.lacksClasses( $panel, "ui-panel-closed",
 			"closed class removed" );
 
-		assert.hasClasses( $panel, defaults.classes.panelOpen,
+		assert.hasClasses( $panel, "ui-panel-open",
 			"open class added" );
 
 		assert.equal( $wrapper.length, 1, "wrapper exists." );
 
-		assert.hasClasses( $wrapper, defaults.classes.pageContentPrefix +
+		assert.hasClasses( $wrapper, "ui-panel-page-content" +
 			"-open", "wrapper open class" );
 
-		var prefix = defaults.classes.pageContentPrefix;
+		var prefix = "ui-panel-page-content";
 		assert.hasClasses( $wrapper, prefix + "-position-left",
 			"wrapper position class" );
 		assert.hasClasses( $wrapper, prefix + "-display-reveal",
 			"wrapper display type class" );
 
-		assert.hasClasses( $modal, defaults.classes.modalOpen,
+		assert.hasClasses( $modal, "ui-panel-dismiss-open",
 			"modal open class" );
 
-		prefix = defaults.classes.modal;
+		prefix = "ui-panel-dismiss";
 		assert.hasClasses( $modal, prefix + "-position-left",
 			"modal position class" );
 		assert.hasClasses( $modal, prefix + "-display-reveal",
@@ -146,18 +130,18 @@ QUnit.asyncTest( "classes modified by close", function( assert ) {
 	} ).one( "panelclose", function( event ) {
 		assert.lacksClasses( $openButton, "ui-button-active",
 			"button doesn't have active class" );
-		assert.lacksClasses( $panel, defaults.classes.panelOpen, "panel not open class" );
+		assert.lacksClasses( $panel, "ui-panel-open", "panel not open class" );
 
-		assert.lacksClasses( $modal, defaults.classes.modalOpen, "modal without open class" );
-		var prefix = defaults.classes.modal;
+		assert.lacksClasses( $modal, "ui-panel-dismiss-open", "modal without open class" );
+		var prefix = "ui-panel-dismiss";
 		assert.lacksClasses( $modal, prefix + "-position-left", "modal without position class" );
 		assert.lacksClasses( $modal, prefix + "-display-overlay",
 			"modal without display type class" );
 
 		// complete
-		assert.hasClasses( $panel, defaults.classes.panelClosed, "panel closed class" );
+		assert.hasClasses( $panel, "ui-panel-closed", "panel closed class" );
 
-		assert.lacksClasses( $wrapper, defaults.classes.pageContentPrefix +
+		assert.lacksClasses( $wrapper, "ui-panel-page-content" +
 			"-open", "wrapper open class removed" );
 
 		// TODO test positioning when panel height > screen height
@@ -194,7 +178,7 @@ QUnit.test( "wrapper exists after create", function( assert ) {
 		$wrapper = getWrapperFromPage( $page );
 
 	assert.ok( $wrapper.length, "wrapper exists" );
-	assert.ok( !$wrapper.hasClass( defaults.classes.pageContentPrefix +
+	assert.ok( !$wrapper.hasClass( "ui-panel-page-content" +
 		"-open" ), "wrapper does not have open class" );
 
 } );
@@ -211,17 +195,14 @@ QUnit.test( "destroy method", function( assert ) {
 
 	// test page without sibling panels
 
-	assert.lacksClasses( $panel, defaults.classes.panel );
+	assert.lacksClasses( $panel, "ui-panel" );
 	assert.lacksClasses( $wrapper, "ui-panel-position-left" );
 	assert.lacksClasses( $wrapper, "ui-panel-display-overlay" );
-	assert.lacksClasses( $panel, defaults.classes.panelOpen );
-	assert.lacksClasses( $panel, defaults.classes.panelClosed );
+	assert.lacksClasses( $panel, "ui-panel-open" );
+	assert.lacksClasses( $panel, "ui-panel-closed" );
 	assert.lacksClasses( $panel, "ui-body-c" );
-	assert.lacksClasses( $panel, defaults.classes.cssTransform3d );
+	assert.lacksClasses( $panel, "ui-panel-closed ui-panel-open" );
 
-	assert.lacksClasses( $panel,
-		[ classes.openComplete, classes.panelUnfixed,
-		  classes.panelClosed, classes.panelOpen ].join( " " ) );
 	$panel.panel();
 } );
 
@@ -380,13 +361,13 @@ QUnit.asyncTest( "panel opens, close button hides panel", function( assert ) {
 
 	$panel.one( "panelopen", function() {
 
-		assert.lacksClasses( $panel, defaults.classes.panelClosed,
+		assert.lacksClasses( $panel, "ui-panel-closed",
 			"wrapper opens" );
 		$closeButton.trigger( "click" );
 
 	} ).one( "panelclose", function() {
 
-		assert.hasClasses( $panel, defaults.classes.panelClosed,
+		assert.hasClasses( $panel, "ui-panel-closed",
 			"wrapper has closed class" );
 		QUnit.start();
 	} );
@@ -670,8 +651,8 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 
 	$panel.one( "panelopen", function( event ) {
 
-		assert.lacksClasses( $panel, defaults.classes.panelClosed, "closed class removed" );
-		assert.hasClasses( $panel, defaults.classes.panelOpen, "open class added" );
+		assert.lacksClasses( $panel, "ui-panel-closed", "closed class removed" );
+		assert.hasClasses( $panel, "ui-panel-open", "open class added" );
 		assert.ok( $firstPage.data( "nstestPanel" ) === "open", "open flag set on first page" );
 		assert.equal( $firstPage.find( ".ui-panel-wrapper" ).length, 1, "wrapper exists." );
 
@@ -679,8 +660,8 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 
 	} ).one( "panelclose", function( event ) {
 
-		assert.hasClasses( $panel, defaults.classes.panelClosed, "closed class removed" );
-		assert.lacksClasses( $panel, defaults.classes.panelOpen, "open class added" );
+		assert.hasClasses( $panel, "ui-panel-closed", "closed class removed" );
+		assert.lacksClasses( $panel, "ui-panel-open", "open class added" );
 		assert.ok( $firstPage.data( "nstestPanel" ) === undefined, "no open flag on first" );
 
 		$panel.trigger( "continue" );
@@ -690,8 +671,8 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 		setTimeout( function() {
 			$panel.panel( "open" );
 
-			assert.lacksClasses( $panel, defaults.classes.panelClosed, "closed class removed" );
-			assert.hasClasses( $panel, defaults.classes.panelOpen, "open class added" );
+			assert.lacksClasses( $panel, "ui-panel-closed", "closed class removed" );
+			assert.hasClasses( $panel, "ui-panel-open", "open class added" );
 			assert.ok( $secondPage.data( "nstestPanel" ) === "open", "open flag set on 2nd page" );
 			assert.equal( $secondPage.find( ".ui-panel-wrapper" ).length, 1, "wrapper exists." );
 
@@ -711,8 +692,8 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 			$panel.panel( "open" );
 
 			assert.ok( $firstPage.data( "nstestPanel" ) === "open", "open flag set on first page" );
-			assert.lacksClasses( $panel, defaults.classes.panelClosed, "closed class removed" );
-			assert.hasClasses( $panel, defaults.classes.panelOpen, "open class added" );
+			assert.lacksClasses( $panel, "ui-panel-closed", "closed class removed" );
+			assert.hasClasses( $panel, "ui-panel-open", "open class added" );
 
 			QUnit.start();
 		}, 500 );
