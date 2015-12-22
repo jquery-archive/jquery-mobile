@@ -94,6 +94,7 @@ return $.widget( "mobile.panel", {
 		}
 
 		this._bindSwipeEvents();
+		this._superApply( arguments );
 	},
 
 	_safelyWrap: function( parent, wrapperHtml, children ) {
@@ -536,6 +537,8 @@ return $.widget( "mobile.panel", {
 		if ( this._modal ) {
 			this._modal.remove();
 		}
+
+		this._superApply( arguments );
 	}
 } );
 
