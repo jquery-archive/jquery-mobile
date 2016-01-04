@@ -17,7 +17,6 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
 * `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
 * `demos` - build the js and css, and make the docs ready for static consumption
-* `dist` (default target) - all of the above
 * `lint` - Validates JavaScript files using [JSHint](http://jshint.com/)
 
 ### Download Builder
@@ -64,7 +63,7 @@ index 6200fe6..3a4625c 100644
 
 And then run the build:
 
-    grunt js
+    grunt build:js
 
 ### CSS
 
@@ -74,7 +73,7 @@ To create a new theme:
 2. Add customizations to the `jquery.mobile.theme.css` file.
 3. From the project root run the following `grunt` command:
 
-        THEME=my-theme grunt css
+        THEME=my-theme grunt build:css
 
 4. The output will be available in the `$PROJECT_ROOT/dist`
 
@@ -110,11 +109,11 @@ You can run all the test suites by running the following command:
 
 You can choose to run only a subset of the tests by adding the `--suites` option like:
 
-    grunt test --suites=button,slider
+    grunt test --suites=table,slider
 
-will only run the tests under `tests/unit/button/` and `tests/unit/slider/`.
+will only run the tests under `tests/unit/table/` and `tests/unit/slider/`.
 
-You can also exclude some tests buy using `!`.  For instance:
+You can also exclude some tests by using `!`.  For instance:
 
     grunt test --type=integration --suites=!navigation
 
