@@ -218,4 +218,4 @@ QUnit.skip( "_unlock() removes classes from cells", function( assert ) {
 	false, "Both 'ui-table-cell-hidden' and 'ui-table-cell-visible' have been removed" );
 } );
 
-})( QUnit, jQuery );
+} )( QUnit, jQuery );
