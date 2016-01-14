@@ -2,7 +2,7 @@
 
 var tableProto = $.mobile.table.prototype;
 
-function test_create( prefix, mode, enhanced ) {
+function testCreate( prefix, mode, enhanced ) {
 
 	QUnit.test( prefix + "_create()", function( assert ) {
 		var context = {
@@ -21,16 +21,18 @@ function test_create( prefix, mode, enhanced ) {
 
 		tableProto._create.apply( context );
 
-		assert.deepEqual( context.element.hasClass( "simsalabim" ), reflowExpected,
-			prefix + "_create() has " + ( reflowExpected ? "" : "not " ) +
-				"attached the reflow class" );
+		if ( reflowExpected ) {
+			assert.hasClasses( context.element, "simsalabim" );
+		} else {
+			assert.lacksClasses( context.element, "simsalabim" );
+		}
 	} );
 }
 
 // test_create( "Normal reflow: ", "reflow", false );
-test_create( "Enhanced reflow: ", "reflow", true );
+testCreate( "Enhanced reflow: ", "reflow", true );
 // test_create( "Normal non-reflow: ", "abc", false );
-test_create( "Enhanced non-reflow: ", "abc", true );
+testCreate( "Enhanced non-reflow: ", "abc", true );
 
 QUnit.test( "_refreshHeaderCell()", function( assert ) {
 	var header = $( "<th>" );
