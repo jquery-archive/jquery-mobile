@@ -270,6 +270,9 @@ return $.widget( "mobile.selectmenu", $.extend( {
 					span.html( "&#160;" );
 				}
 
+				// hide from assistive technologies, as otherwise this will create redundant text announcement - see gh-8256
+				span.attr( "aria-hidden", "true" );
+
 				// TODO possibly aggregate multiple select option classes
 				return span
 					.addClass( self.select.attr( "class" ) )
