@@ -24,7 +24,7 @@ QUnit.module( libName, {
 		// the collections existence in non touch enabled test browsers
 		$.Event.prototype.touches = [ { pageX: 1, pageY: 1 } ];
 
-		$( ".ui-pagecontainer" ).unbind( "throttledresize" );
+		$( "body" ).unbind( "throttledresize" );
 	},
 	teardown: function() {
 
@@ -619,7 +619,7 @@ QUnit.asyncTest( "throttledresize event promises that a held call will execute o
 		}
 	] );
 
-	$( ".ui-pagecontainer" )
+	$( "body" )
 		.trigger( "resize" )
 		.trigger( "resize" )
 		.trigger( "resize" );

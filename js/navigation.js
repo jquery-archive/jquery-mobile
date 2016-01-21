@@ -402,9 +402,6 @@ $.mobile._registerInternalEvents = function() {
 		} );
 	} );
 
-	// TODO ensure that the navigate binding in the content widget happens at the right time
-	//$.mobile.pageContainer.pagecontainer();
-
 	//set page min-heights to be device specific
 	$.mobile.document.bind( "pageshow", function() {
 

@@ -9,7 +9,7 @@
 <li data-role="list-divider">Pages</li>
 <li data-section="Questions &amp; Answers" data-filtertext="head load scripts styles pageinit onload pagebeforecreate ajax nav pages"><a href="faq/scripts-and-styles-not-loading.php">Why aren't my scripts and styles loading?</a></li>
 <li data-section="Questions &amp; Answers" data-filtertext="document.ready onload paginit DOM ready on ready scripts "><a href="faq/dom-ready-not-working.php">Why isn't DOM ready working for my scripts?</a></li>
-<li data-section="Questions &amp; Answers" data-filtertext="ajax nav load page pagecontainer load"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
+<li data-section="Questions &amp; Answers" data-filtertext="ajax nav page pagecontainer load"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
 <li data-section="Questions &amp; Answers" data-filtertext="ajax nav multi page document load"><a href="faq/why-is-only-the-first-page-loaded.php">Why is only the first page of my multi page document loaded?</a></li>
 <li data-section="Questions &amp; Answers" data-filtertext="pass url query params ajax nav"><a href="faq/pass-query-params-to-page.php">I'm trying to pass query params to a page but it's not working?</a></li>
 <li data-section="Questions &amp; Answers" data-filtertext="hash pass parameters information ajax nav"><a href="faq/pass-via-the-hash-to-page.php">I'm trying to pass information via the hash but it's not working?</a></li>

@@ -1208,6 +1208,15 @@ $.widget( "mobile.pagecontainer", {
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
 	},
 
+	_themeElements: function() {
+		return [
+			{
+				element: this.element,
+				prefix: "ui-overlay-"
+			}
+		];
+	},
+
 	_destroy: function() {
 		var myIndex;
 
@@ -1215,6 +1224,11 @@ $.widget( "mobile.pagecontainer", {
 			myIndex = $.inArray( this.element, $.mobile.pagecontainers );
 			if ( myIndex >= 0 ) {
 				$.mobile.pagecontainers.splice( myIndex, 1 );
+				if ( $.mobile.pagecontainers.length ) {
+					$.mobile.pagecontainers.active = $.mobile.pagecontainers[ 0 ];
+				} else {
+					$.mobile.pagecontainers.active = undefined;
+				}
 			}
 		}
 
@@ -1232,6 +1246,8 @@ var pageTransitionQueue = [],
 
 	// Indicates whether or not page is in process of transitioning
 	isPageTransitioning = false;
+
+$.widget( "mobile.pagecontainer", $.mobile.pagecontainer, $.mobile.widget.theme );
 
 return $.mobile.pagecontainer;
 
