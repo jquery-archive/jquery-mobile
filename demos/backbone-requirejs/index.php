@@ -115,7 +115,7 @@
       } );
 </code>
 </pre>
-<p>Next, inside of the Backbone.js Router class object, we can respond to haschange events and manually call the <code>pagecontainer( "change" )</code> method.  Below is a small snippet of <strong>mobileRouter.js</strong>.</p>
+<p>Next, inside of the Backbone.js Router class object, we can respond to haschange events and manually call the <code>.pagecontainer( "change" )</code> method.  Below is a small snippet of <strong>mobileRouter.js</strong>.</p>
 <pre>
 <code>
         // Backbone.js Routes
