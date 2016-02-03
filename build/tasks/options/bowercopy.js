@@ -45,6 +45,10 @@ return {
 		},
 		files: {
 			"jquery-ui/core.js": "jquery-ui/ui/core.js",
+			"jquery-ui/version.js": "jquery-ui/ui/version.js",
+			"jquery-ui/form.js": "jquery-ui/ui/form.js",
+			"jquery-ui/form-reset-mixin.js": "jquery-ui/ui/form-reset-mixin.js",
+			"jquery-ui/form-reset-mixin.js": "jquery-ui/ui/form-reset-mixin.js",
 			"jquery-ui/widget.js": "jquery-ui/ui/widget.js",
 			"jquery-ui/accordion.js": "jquery-ui/ui/accordion.js",
 			"jquery-ui/tabs.js": "jquery-ui/ui/tabs.js",
