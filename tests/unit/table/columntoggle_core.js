@@ -89,7 +89,7 @@ QUnit.skip( "_updateVariableColumn() adds priority classes to cells",
 		}, null, cells, 2 );
 
 		assert.deepEqual( cells.is( function() {
-			return !$( this ).hasClass( "prio-prefix-2" );
+			return assert.lacksClasses( $( this ), "prio-prefix-2" );
 		} ), false, "All cells have class 'prio-prefix-2'" );
 } );
 
@@ -122,13 +122,13 @@ QUnit.skip( "_updateHeaderPriorities() iterates over headers and adds classes",
 
 		assert.deepEqual( headers.eq( 0 ).add( headers.eq( 0 ).jqmData( "cells" ) )
 			.is( function() {
-				return !$( this ).hasClass( "prio-prefix-3" );
+				return assert.lacksClasses( $( this ), "prio-prefix-3" );
 			} ),
 			false, "first column cells all have priorty class, including header" );
 
 		assert.deepEqual( headers.eq( 1 ).add( headers.eq( 1 ).jqmData( "cells" ) )
 			.is( function() {
-				return !$( this ).hasClass( "prio-prefix-5" );
+				return assert.lacksClasses( $( this ), "prio-prefix-5" );
 			} ),
 			false, "second column cells all have priorty class, including header" );
 } );
@@ -160,7 +160,7 @@ QUnit.skip( "_setColumnVisibility() forces column to be visible/hidden",
 			}, header, visible );
 
 			assert.deepEqual( cells.add( header ).is( function() {
-				return $( this ).hasClass( expectedAbsent );
+				return assert.hasClasses( this, expectedAbsent );
 			} ),
 			false, "Neither header nor cells have class '" + expectedAbsent + "'" );
 		}
@@ -212,8 +212,8 @@ QUnit.skip( "_unlock() removes classes from cells", function( assert ) {
 	}, cellList );
 
 	assert.deepEqual( cellList.is( function() {
-		return $( this ).hasClass( "ui-table-cell-hidden" ) ||
-			$( this ).hasClass( "ui-table-cell-visible" );
+		return assert.hasClasses( $( this ), "ui-table-cell-hidden" ) ||
+			assert.hasClasses( $( this ), "ui-table-cell-visible" );
 	} ),
 	false, "Both 'ui-table-cell-hidden' and 'ui-table-cell-visible' have been removed" );
 } );

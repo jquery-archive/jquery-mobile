@@ -1,3 +1,4 @@
+
 /*!
  * jQuery Mobile Column-toggling Table @VERSION
  * http://jquerymobile.com
@@ -63,7 +64,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._updateHeaderPriorities();
 	},
 
-	_updateVariableColumn: function( header, cells, priority/*, state */ ) {
+	_updateVariableColumn: function( header, cells, priority ) {
 		this._addClass( cells, "ui-table-priority-" + priority );
 	},
 
@@ -167,7 +168,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_destroy: function() {
 		if ( this.options.mode === "columntoggle" ) {
 			if ( !this.options.enhanced ) {
-				this._removeClass( "ui-table-columntoggle" );
 				this.headers.each( $.proxy( function( index, element ) {
 					var header,
 						priority = $.mobile.getAttribute( element, "priority" );
@@ -175,8 +175,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 					if ( priority ) {
 						header = $( element );
 						header
-							.add( header.jqmData( "cells" ) )
-								.removeClass( this.options.classes.priorityPrefix + priority );
+							.add( header.jqmData( "cells" ) );
 					}
 				}, this ) );
 			}
