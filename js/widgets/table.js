@@ -122,10 +122,6 @@ return $.widget( "mobile.table", {
 	_destroy: function() {
 		var table = this.element;
 
-		if ( !this.options.enhanced ) {
-			this._removeClass( "ui-table" );
-		}
-
 		// We have to remove "cells" data even if the table was originally enhanced, because it is
 		// added during refresh
 		table.find( "thead tr" ).children().each( function() {

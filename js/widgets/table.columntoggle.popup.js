@@ -22,6 +22,7 @@
 			"./table.columntoggle",
 			"./popup",
 			"./controlgroup",
+			"./forms/button",
 			"./widget.theme",
 			"./forms/checkboxradio" ], factory );
 		} else {
@@ -40,7 +41,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 		columnUi: true,
 		classes: {
 			"ui-table-columntoggle-popup": "",
-			"ui-table-columntoggle-btn": "ui-button ui-corner-all ui-shadow ui-mini"
+			"ui-table-columntoggle-btn": "ui-corner-all ui-shadow ui-mini"
 		}
 	},
 
@@ -274,6 +275,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 				"id='" + id + "-button' " +
 				"data-" + $.mobile.ns + "rel='popup'>" + options.columnButtonText + "</a>" );
 
+		button.button();
 		this._addClass( button, "ui-table-columntoggle-btn" +
 					( buttonTheme ? " " + buttonTheme : "" ) );
 
