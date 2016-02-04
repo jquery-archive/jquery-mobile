@@ -77,7 +77,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 				iteration = parseInt( headerCell.getAttribute( "colspan" ), 10 );
 
 				if ( iteration ) {
-					cells = cells.filter( "td:nth-child("+ iteration + "n + " + colstart + ")" );
+					cells = cells.filter( "td:nth-child(" + iteration + "n + " + colstart + ")" );
 				}
 			}
 
@@ -112,7 +112,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 							.removeAttr( colstartAttr )
 						.end()
 					.end()
-					.removeClass( "ui-table-reflow" )
 					.children( "tbody" )
 						.find( "b.ui-table-cell-label"  )
 							.remove();
