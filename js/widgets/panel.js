@@ -72,11 +72,11 @@ return $.widget( "mobile.panel", {
 			this._getWrapper();
 		}
 
-		this._addClass( this.element, "ui-panel ui-panel-closed", this._getPanelClasses() );
+		this._addClass( "ui-panel ui-panel-closed", this._getPanelClasses() );
 
 		// If animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
-			this._addClass( this.element, "ui-panel-animate" );
+			this._addClass( "ui-panel-animate" );
 		}
 
 		this._bindUpdateLayout();
