@@ -134,7 +134,10 @@ $.widget( "mobile.page", {
 
 	_setOptions: function( o ) {
 		if ( o.theme !== undefined ) {
-			this.element.removeClass( "ui-page-theme-" + this.options.theme ).addClass( "ui-page-theme-" + o.theme );
+			this.element.removeClass(function( i, c ) {
+                                              return ( c.match(/\bui-page-theme-\w/g) || [] ).join(' ');
+                                     })                             
+                                     .addClass( "ui-page-theme-" + o.theme );
 		}
 
 		if ( o.contentTheme !== undefined ) {
