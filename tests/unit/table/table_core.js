@@ -21,7 +21,7 @@ function testCreate( prefix, enhanced, disabled ) {
 			if ( expectDisabledClass ) {
 				assert.hasClasses( tableElement, "ui-state-disabled" );
 			}
-	});
+	} );
 }
 
 testCreate( "Normal and enabled: ", false, false );
@@ -78,7 +78,7 @@ function testRefreshHeaderCell( prefix, element, expectedReturnValue, columnCoun
 		headerCell = element.find( "[data-test-header-cell]" ),
 		expectedCells = element.find( "[data-test-header-expected-cells]" );
 
-	QUnit.test( prefix + "_refreshHeaderCell()", function( assert ) {
+	QUnit.skip( prefix + "_refreshHeaderCell()", function( assert ) {
 		var returnValue = tableProto._refreshHeaderCell
 			.call( instance, null, headerCell[ 0 ], columnCount ),
 			cells = headerCell.jqmData( "cells" );
