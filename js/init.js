@@ -156,6 +156,8 @@ define([
 		//dom-ready inits
 		if ( $.mobile.autoInitializePage ) {
 			$.mobile.initializePage();
+		} else {
+			hideRenderingClass();
 		}
 
 		// window load event
