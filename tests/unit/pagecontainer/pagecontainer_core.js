@@ -38,14 +38,16 @@ QUnit.module( "load method", {
 		$.mobile.pagecontainer.prototype._triggerWithDeprecated = originalLoad;
 	}
 } );
-QUnit.test( "load does not trigger an error when called withput a second param", function( assert ) {
+QUnit.test( "load does not trigger an error when called withput a second param",
+	function( assert ) {
 	var pagecontainer = $( ":mobile-pagecontainer" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html" );
 	assert.ok( "no error triggered when load method called without options" );
 } );
 
-QUnit.test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence", function( assert ) {
+QUnit.test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence",
+	function( assert ) {
 	var pagecontainer = $( ":mobile-pagecontainer" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html", {
@@ -67,7 +69,8 @@ QUnit.test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes pre
 
 QUnit.module( "_handleDialog()" );
 
-QUnit.test( "Recognize dialog via presence of the data key, not the ui-page-dialog class", function( assert ) {
+QUnit.test( "Recognize dialog via presence of the data key, not the ui-page-dialog class",
+	function( assert ) {
 	var getActiveHistoryCalled = false;
 
 	assert.strictEqual( $.mobile.pagecontainer.prototype._handleDialog.call( {
