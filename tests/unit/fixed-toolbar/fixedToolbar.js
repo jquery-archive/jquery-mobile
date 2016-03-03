@@ -1,11 +1,11 @@
 /*
  * mobile Fixed Toolbar unit tests
  */
-( function( $ ) {
-	module( "jquery.mobile.toolbar.js" );
+( function( QUnit, $ ) {
+	QUnit.module( "jquery.mobile.toolbar.js" );
 
 	var pageActiveFixedHeader = $( ".ui-page-active .ui-toolbar-header-fixed" );
-	test( "markup structure", function( assert ) {
+	QUnit.test( "markup structure", function( assert ) {
 		var classesB = $( "#classes-test-b" ),
 			classesE = $( "#classes-test-e" );
 
@@ -34,35 +34,41 @@
 			"Parent page of a fixed footer has class ui-page-header-fixed" );
 	} );
 
-	test( "User zooming is disabled when the header is visible and disablePageZoom is true",
-		function() {
+	QUnit.test(
+		"User zooming is disabled when the header is visible and disablePageZoom is true",
+		function( assert ) {
 			$.mobile.zoom.enable();
 			var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
 			pageActiveFixedHeader.toolbar( "option", "disablePageZoom", true );
 
 			$( ".ui-page-active" ).trigger( "pagebeforeshow" );
-			ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
+			assert.ok( !$.mobile.zoom.enabled,
+				"Viewport scaling is disabled before page show." );
 			pageActiveFixedHeader
 				.toolbar( "option", "disablePageZoom", defaultZoom );
 			$.mobile.zoom.enable();
 	} );
 
-	test( "Meta viewport content is restored to previous state, and zooming renabled, " +
-		"after pagebeforehide", function() {
+	QUnit.test(
+		"Meta viewport content is restored to previous state, and zooming renabled, " +
+		"after pagebeforehide",
+		function( assert ) {
 			$.mobile.zoom.enable( true );
 			var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
 			pageActiveFixedHeader.toolbar( "option", "disablePageZoom", true );
 
 			$( ".ui-page-active" ).trigger( "pagebeforeshow" );
-			ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
+			assert.ok( !$.mobile.zoom.enabled,
+				"Viewport scaling is disabled before page show." );
 			$( ".ui-page-active" ).trigger( "pagebeforehide" );
-			ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." );
+			assert.ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." );
 			pageActiveFixedHeader.toolbar( "option", "disablePageZoom", defaultZoom );
 			$.mobile.zoom.enable( true );
 	} );
 
-	test( "User zooming is not disabled when the header is visible and disablePageZoom is false",
-		function() {
+	QUnit.test(
+		"User zooming is not disabled when the header is visible and disablePageZoom is false",
+		function( assert ) {
 			$.mobile.zoom.enable( true );
 			var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
 			$( ".ui-page :jqmData(position='fixed')" )
@@ -70,11 +76,12 @@
 
 			$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 
-			ok( $.mobile.zoom.enabled, "Viewport scaling is not disabled before page show." );
+			assert.ok( $.mobile.zoom.enabled,
+				"Viewport scaling is not disabled before page show." );
 
 			$( ".ui-page :jqmData(position='fixed')" )
 				.toolbar( "option", "disablePageZoom", defaultZoom );
 
 			$.mobile.zoom.enable( true );
 	} );
-} )( jQuery );
+} )( QUnit, jQuery );
