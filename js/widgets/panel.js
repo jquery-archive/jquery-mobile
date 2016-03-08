@@ -142,16 +142,20 @@ return $.widget( "mobile.panel", {
 			wrapper = $( "<div>" );
 			this._addClass( wrapper, "ui-panel-wrapper" );
 			wrapper = this._safelyWrap( thePage, wrapper,
-				this._page().children( ".ui-header:not(.ui-header-fixed), " +
-					".ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" ) );
+				this._page().children( ".ui-toolbar-header:not(.ui-toolbar-header-fixed), " +
+					"[data-role='toolbar'],"  +
+					".ui-content:not(.ui-popup)," +
+					".ui-toolbar-footer:not(.ui-toolbar-footer-fixed)" ) );
 		}
 
 		this._wrapper = wrapper;
 	},
 
 	_getFixedToolbars: function() {
-		var extFixedToolbars = $( "body" ).children( ".ui-header-fixed, .ui-footer-fixed" ),
-			intFixedToolbars = this._page().find( ".ui-header-fixed, .ui-footer-fixed" ),
+		var extFixedToolbars = $( "body" )
+								.children( ".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed" ),
+			intFixedToolbars = this._page()
+								.find( ".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed" ),
 			fixedToolbars = extFixedToolbars.add( intFixedToolbars );
 
 		this._addClass( fixedToolbars, "ui-panel-fixed-toolbar" );
@@ -259,7 +263,8 @@ return $.widget( "mobile.panel", {
 
 	_handleClick: function( e ) {
 		var link,
-			panelId = this.element.attr( "id" );
+			panelId = this.element.attr( "id" ),
+			that = this;
 
 		if ( e.currentTarget.href.split( "#" )[ 1 ] === panelId && panelId !== undefined ) {
 
@@ -268,7 +273,7 @@ return $.widget( "mobile.panel", {
 			if ( link.hasClass( "ui-button" ) ) {
 				this._addClass( link, null, "ui-button-active" );
 				this.element.one( "panelopen panelclose", function() {
-					this._removeClass( link, null, "ui-button-active" );
+					that._removeClass( link, null, "ui-button-active" );
 				} );
 			}
 			this.toggle();
