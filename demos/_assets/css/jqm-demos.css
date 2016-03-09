@@ -518,7 +518,6 @@
 	opacity: .75;
 }
 
-/* Darker hover state for links. Overwriting jquery.mobile.theme.css LN298 */
 .ui-page-theme-a a:hover,
 html .ui-bar-a a:hover,
 html .ui-body-a a:hover,
@@ -725,15 +724,14 @@ html body .ui-group-theme-a a:hover {
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:active,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:hover,
-
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:active,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content .ui-accordion-header:hover {
 	color: #333;
 	text-shadow: 0 1px 0 #f3f3f3; 
-    background: #cccccc;
+	background: #cccccc;
 }
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li > .ui-listview-item-button:hover {
-    background: #ccc;
+ 	background: #cccccc;
 }
 
 
@@ -746,8 +744,10 @@ html body .ui-group-theme-a a:hover {
 }
 
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header.ui-accordion-header-active,
+/*
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content .ui-accordion-header:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:focus,
+*/
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-header.ui-accordion-header-active {
 	background: #d2eac6;
 	color: #333;
@@ -978,7 +978,7 @@ li.jqm-3rd-party .ui-listview-item-button::before {
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:focus,
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:active {
 	background: #ebeff3;
-    color: #000;
+	color: #000000;
 }
 
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:focus {
@@ -1013,8 +1013,8 @@ li.jqm-3rd-party .ui-listview-item-button::before {
 }
 
 .jqm-search-results-highlight {
-	background: #77D1EF;
-    text-shadow: 0 1px 0 #bbe8f7;
+	background: #77d1ef;
+	text-shadow: 0 1px 0 #bbe8f7;
 }
 
 @media ( min-width: 60em ) {
