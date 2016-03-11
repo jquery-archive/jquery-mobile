@@ -744,10 +744,6 @@ html body .ui-group-theme-a a:hover {
 }
 
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header.ui-accordion-header-active,
-/*
-.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content .ui-accordion-header:focus,
-.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:focus,
-*/
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-header.ui-accordion-header-active {
 	background: #d2eac6;
 	color: #333;
