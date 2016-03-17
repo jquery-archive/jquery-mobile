@@ -83,8 +83,8 @@
 
 	<div data-role="toolbar" data-type="header">
 		<h1>Classic theme</h1>
-		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back<span class="ui-icon ui-icon-back"></span></a>
-		<a href="#" class="ui-button ui-corner-all ui-shadow">Button<span class="ui-icon ui-icon-gear"></span></a>
+		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back <span class="ui-icon ui-icon-back"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow">Button <span class="ui-icon ui-icon-gear"></span></a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 1</a></li>
@@ -102,7 +102,7 @@
 
 		<form class="ui-mini">
 			<div class="ui-field-contain" id="theme-selector">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Theme:</legend>
 					<label for="a">A</label>
 					<input type="radio" name="theme" id="a" checked>
@@ -117,7 +117,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-navbars">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Navbars:</legend>
 					<label for="show">Show</label>
 					<input type="radio" name="navbars" id="show" checked>
@@ -126,7 +126,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-shadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Shadow:<br><small>Off: set the widget option shadow to false (data-shadow="false")</small></legend>
 					<label for="on">On</label>
 					<input type="radio" name="shadow" id="on" checked>
@@ -135,7 +135,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-iconshadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Icon shadow:<br><small>On: add class ui-shadow-icon to the button or its container</small></legend>
 					<label for="on1">On</label>
 					<input type="radio" name="iconshadow" id="on1">
@@ -144,7 +144,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-gradient">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Gradient:<br><small>Off: remove background-image rules from classic theme CSS</small></legend>
 					<label for="on2">On</label>
 					<input type="radio" name="gradient" id="on2" checked>
@@ -153,7 +153,7 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain" id="opt-highlight">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Highlight:<br><small>Off: remove .ui-button:before rule from classic theme CSS</small></legend>
 					<label for="on3">On</label>
 					<input type="radio" name="highlight" id="on3" checked>
@@ -176,8 +176,8 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline">We<span class="ui-icon ui-icon-caret-r"></span></a>
-		<button class="ui-button ui-corner-all ui-shadow ui-button-inline">are<span class="ui-icon ui-icon-caret-r"></span></button>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline">We <span class="ui-icon ui-icon-caret-r"></span></a>
+		<button class="ui-button ui-corner-all ui-shadow ui-button-inline">are <span class="ui-icon ui-icon-caret-r"></span></button>
 		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
@@ -258,11 +258,11 @@
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<fieldset data-role="controlgroup">
 					<legend>Controlgroup:</legend>
-					<button class="ui-button ui-corner-all ui-shadow">One<span class="ui-icon ui-icon-home"></span></button>
+					<button class="ui-button ui-corner-all ui-shadow">One <span class="ui-icon ui-icon-home"></span></button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" class="ui-button ui-corner-all ui-shadow">Three<span class="ui-icon ui-icon-grid"></span></a>
+					<a href="#" class="ui-button ui-corner-all ui-shadow">Three <span class="ui-icon ui-icon-grid"></span></a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -280,7 +280,7 @@
 			</div>
 		</form>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-active">Active button<span class="ui-icon ui-icon-gear"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-active">Active button <span class="ui-icon ui-icon-gear"></span></a>
 
 		<p>Form inside static list:</p>
 

@@ -15,17 +15,18 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+	<div data-role="toolbar" data-type="header" class="jqm-header">
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Accordion <a href="http://api.jquerymobile.com/accordion/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Accordion</h1>
 
+		<a href="http://api.jquerymobile.com/accordion/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
 		<p>Displays collapsible content panels for presenting information in a limited amount of space.</p>
 
@@ -74,6 +75,7 @@
 
 		<h2>Fill Space</h2>
 		<p>Because the accordion is comprised of block-level elements, by default its width fills the available horizontal space. To fill the vertical space allocated by its container, set the <code>data-height-style</code> option to <code>"fill"</code>, and the script will automatically set the dimensions of the accordion to the height of its parent container.</p>
+
 		<div data-demo-html="true">
 			<div style="height: 200px; width: 50%;">
 				<div data-role="accordion" data-height-style="fill">
@@ -114,7 +116,8 @@
 		</div><!--/demo-html -->
 
 		<h2>No Auto Height</h2>
-		<p>Setting <code>data-height-style: "content"</code> allows the accordion panels to keep their native height.</p>
+		<p>Setting <code>data-height-style="content"</code> allows the accordion panels to keep their native height.</p>
+
 		<div data-demo-html="true">
 			<div data-role="accordion" data-height-style="content">
 				<h3>Section 1</h3>
@@ -153,7 +156,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Collapse Content</h2>
-		<p>By default, accordions always keep one section open. To allow for all sections to be be collapsible, set the <code>data-collapsible</code> option to true. Click on the currently open section to collapse its content pane.</p>
+		<p>By default, accordions always keep one section open. To allow for all sections to be be collapsible, set the <code>data-collapsible</code> option to <code>true</code>. Click on the currently open section to collapse its content pane.</p>
 
 		<div data-demo-html="true">
 			<div data-role="accordion" data-collapsible="true">
@@ -192,13 +195,13 @@
 			</div>
 		</div><!--/demo-html -->
 
-		<h2>Custon Icons</h2>
-		<p>You can add or remove icons with the  <code>data-icons</code> option, which accepts classes for the header's default and active (open) state. Use any class from jQuery Mobile, or create custom classes with background images</p>
+		<h2>Custom Icons</h2>
+		<p>You can add or remove icons with the  <code>data-icons</code> option, which accepts classes for the header's default and active (open) state. Use any class from jQuery Mobile, or create custom classes with background images.</p>
 
 		<h3>Icons</h3>
-		<div data-demo-html="true">
 
-			<div data-role="accordion" data-icons='{ "header": "ui-icon-arrow-d-r", "activeHeader": "ui-icon-star"}'>
+		<div data-demo-html="true">
+			<div data-role="accordion" data-icons='{ "header": "ui-icon-arrow-d-r", "activeHeader": "ui-icon-star" }'>
 				<h3>Section 1</h3>
 				<div>
 					<p>
@@ -235,8 +238,8 @@
 		</div><!--/demo-html -->
 
 		<h3>No Icons</h3>
-		<div data-demo-html="true">
 
+		<div data-demo-html="true">
 			<div data-role="accordion" data-icons="">
 				<h3>Section 1</h3>
 				<div>
@@ -278,7 +281,6 @@
 		<p>Customize the theme with the <code>data-theme</code> option.</p>
 
 		<div data-demo-html="true">
-
 			<div data-role="accordion" data-theme="b">
 				<h3>Section 1</h3>
 				<div>
@@ -318,14 +320,18 @@
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright The jQuery Foundation</p>
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
+		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

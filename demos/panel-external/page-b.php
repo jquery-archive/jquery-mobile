@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>External panels - jQuery Mobile Demos</title>
@@ -17,7 +17,7 @@
 
 	<div data-role="toolbar" data-type="header">
 		<h1>External panels</h1>
-		<a href="../panel/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+		<a href="../panel/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back <span class="ui-icon ui-icon-caret-l"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content jqm-fullwidth">

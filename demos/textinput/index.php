@@ -16,15 +16,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
     <div data-role="toolbar" data-type="header" class="jqm-header">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
         <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
         <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+        <h1>Text inputs</h1>
+
+		<a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
         <p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.
         </p>
@@ -268,23 +270,23 @@
         </div><!-- /demo-html -->
 
         <h2>Theming</h2>
-		
+
         <div data-demo-html="true">
 			<form>
 				 <label for="search-10">Search:</label>
 				 <input type="search" name="search-10" id="search-10" value="" data-theme="b">
 			</form>
         </div><!-- /demo-html -->
-		
+
 		<p>To have a light icon, remove the <code>ui-alt-icon</code> class by setting the widget's <code>classes</code> option with the <code>data-classes</code> attribute. By default the classes <code>ui-icon</code>, <code>ui-icon-search</code>, and <code>ui-alt-icon</code> are added to the search icon span. Here we show how you can omit the <code>ui-alt-icon</code> class. Note: You have to use double quotes inside the object!</p>
-		
+
         <div data-demo-html="true">
 			<form>
 				 <label for="search-12">Search:</label>
 				 <input type="search" name="search-12" id="search-12" value="" data-theme="b" data-classes='{ "ui-textinput-search-icon": "ui-icon ui-icon-search" }'>
 			</form>
         </div><!-- /demo-html -->
-		
+
         <h2>Label hidden</h2>
 
         <div data-demo-html="true">
@@ -330,14 +332,14 @@
 					<input type="text" data-enhanced="true" data-clear-btn="true" name="text-enhanced" id="text-enhanced" value="" class="ui-textinput-hide-clear">
 					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-toolbar-header-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
 				</div>
-				
+
 				<label for="search-enhanced">Search:</label>
 				<div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-search ui-body-inherit ui-textinput-has-clear-button">
 					<span class="ui-textinput-search-icon ui-icon ui-alt-icon ui-icon-search"></span>
 					<input type="text" data-enhanced="true" data-type="search" name="search-enhanced" id="search-enhanced" value="" class="ui-textinput-hide-clear">
 					<a href="#" tabindex="-1" aria-hidden="true" title="Clear text" class="ui-textinput-clear-button ui-corner-all ui-button ui-button-icon-only ui-toolbar-header-button-right ui-textinput-clear-button-hidden">Clear text<span class="ui-textinput-clear-button-icon ui-icon-delete ui-icon"></span></a>
-				</div>				
-				
+				</div>
+
 				<label for="textarea-enhanced">Textarea:</label>
 				<textarea data-enhanced="true" name="textarea-enhanced" id="textarea-enhanced" class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-inherit ui-textinput-autogrow"></textarea>
 			</form>
@@ -400,13 +402,17 @@
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

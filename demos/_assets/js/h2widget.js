@@ -110,7 +110,7 @@
 			_create:function(){
 				var self = this,
 					bodyid = "ui-page-top",
-					panel = "<div data-role='panel' class='jqm-nav-panel jqm-quicklink-panel' data-position='right' data-display='overlay' data-theme='a'><ul data-role='listview' data-inset='false' data-theme='a' data-divider-theme='a' data-icon='false' class='jqm-list'><li data-role='list-divider'>Quick Links</li></ul></div>",
+					panel = "<div data-role='panel' class='jqm-quicklink-panel' data-position='left' data-display='overlay' data-theme='a'><ul data-role='listview' data-inset='false' data-theme='a' data-divider-theme='a' data-icon='false'><li data-role='list-divider'>Table of Contents</li></ul></div>",
 					first = true,
 					h2dictionary = new Object();
 					if(typeof $("body").attr("id") === "undefined"){
@@ -130,15 +130,16 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-alt-icon'>Top <span class='ui-icon ui-icon-caret-u'></span></a>");
+							$(this).before( "<div class='jqm-top-link-container'><span><a href='#" + bodyid + "' class='jqm-top-link ui-nodisc-icon ui-alt-icon'>Top <span class='ui-icon ui-icon-arrow-u'></span></a></span></div>");
 						} else {
-							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink jqm-open-quicklink-panel ui-alt-icon'>Quick Links <span class='ui-icon ui-icon-caret-l'></span></a>");
+							$(this).before("<a href='#' data-ajax='false' class='jqm-toc-link jqm-open-quicklink-panel ui-nodisc-icon ui-alt-icon'><span class='ui-icon ui-icon-caret-r'></span> Table of Contents</a>");
 						}
 						first = false;
 					});
 					this._on(".jqm-open-quicklink-panel", {
 						"click": function(){
 							$(".ui-page-active .jqm-quicklink-panel").panel("open");
+							$(".ui-page-active").addClass("jqm-demos-quicklink-panel-open");
 							return false;
 						}
 					});
@@ -149,7 +150,7 @@
 						}
 					});
 					if( $(h2dictionary).length > 0 ){
-						this.element.prepend(panel)
+						this.element.append(panel)
 						this.element.find(".jqm-quicklink-panel").panel().find("ul").listview();
 					}
 					$.each(h2dictionary,function(id,text){

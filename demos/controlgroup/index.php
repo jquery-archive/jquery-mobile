@@ -4,36 +4,38 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Controlgroup - jQuery Mobile Demos</title>
-	    <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
-	    <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	    <link rel="shortcut icon" href="../favicon.ico">
-	    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	    <script src="../../external/jquery/jquery.js"></script>
-	    <script src="../_assets/js/"></script>
-	    <script src="../../js/"></script>
-	    <style>
-	        #demo-borders .ui-collapsible .ui-collapsible-heading .ui-button { border-top-width: 1px !important; }
-	    </style>
-	    <style id="textinput-controlgroup">
-			.controlgroup-textinput {
-				padding-top:.22em;
-				padding-bottom:.22em;
-			}
-	    </style>
-	</head>
-	<body>
-	<div data-role="page" class="jqm-demos" data-quicklinks="true">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../external/jquery/jquery.js"></script>
+	<script src="../_assets/js/"></script>
+	<script src="../../js/"></script>
+	<style>
+		#demo-borders .ui-collapsible .ui-collapsible-heading .ui-button { border-top-width: 1px !important; }
+	</style>
+	<style id="textinput-controlgroup">
+		.controlgroup-textinput {
+			padding-top:.22em;
+			padding-bottom:.22em;
+		}
+	</style>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	    <div data-role="toolbar" data-type="header" class="jqm-header">
-			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p><span class="jqm-version"></span> Demos</p>
-	        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-	        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
-		    </div><!-- /header -->
+	<div data-role="toolbar" data-type="header" class="jqm-header">
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquerymobile-logo.png" alt="jQuery Mobile"></a></h2>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-toolbar-header-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
+	</div><!-- /header -->
 
-	    <div role="main" class="ui-content jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
-        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
+        <h1>Controlgroup</h1>
+
+		<a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-nodisc-icon ui-alt-icon" title="Visit the API Documentation" target="_blank">API Documentation <span class="ui-icon ui-icon-action"></span></a>
 
         <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.</p>
 
@@ -57,10 +59,10 @@
                 <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
                 <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
-			
+
             <form>
                 <div data-role="controlgroup">
-                    <a href="#" class="ui-button ui-button-icon-only">Home<span class="ui-icon ui-icon-home"></span></a>
+                    <a href="#" class="ui-button ui-button-icon-only">Home <span class="ui-icon ui-icon-home"></span></a>
                     <button data-icon="ui-icon-search">Search</button>
                     <label for="select-more-1a" class="ui-hidden-accessible">More</label>
                     <select name="select-more-1a" id="select-more-1a">
@@ -75,7 +77,7 @@
 
 
 		<h2>Controlgroup vertical</h2>
-			
+
 		<p>To have a controlgroup with a vertical layout, add <code>data-direction="vertical"</code> to the container.</p>
 
         <div data-demo-html="true">
@@ -109,10 +111,10 @@
                 <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
                 <a href="#" data-icon="ui-icon-delete" data-show-label="false">Icon only</a>
             </div>
-			
+
             <form>
                 <div data-role="controlgroup" data-mini="true">
-                    <a href="#" class="ui-button ui-button-icon-only">Home<span class="ui-icon ui-icon-home"></span></a>
+                    <a href="#" class="ui-button ui-button-icon-only">Home <span class="ui-icon ui-icon-home"></span></a>
                     <button data-icon="ui-icon-search">Search</button>
                     <label for="select-more-1a" class="ui-hidden-accessible">More</label>
                     <select name="select-more-1a" id="select-more-1a">
@@ -367,7 +369,7 @@
                 <a href="#" data-icon="ui-icon-delete" data-icon-position="end">Three</a>
                 <a href="#" data-icon="ui-icon-delete" data-show-label="false">Four</a>
             </div>
-			
+
             <form>
                 <fieldset data-role="controlgroup" data-theme="b">
                     <input type="checkbox" name="checkbox-h-7a" id="checkbox-h-7a">
@@ -379,29 +381,29 @@
                 </fieldset>
             </form>
         </div><!--/demo-html -->
-			
-			
+
+
 		<h2>Pre-rendered markup</h2>
-            
+
 		<p>You can supply pre-rendered markup for any controlgroup to save startup time. The example below illustrates the markup you have to provide for a pre-rendered controlgroup. Note that the widgets inside the controlgroup need not necessarily be pre-rendered.</p>
 		<div data-demo-html="true">
 			<div data-role="controlgroup" data-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-group-theme-b">
-                
+
 					<label for="pre-rendered-cb-1" class="ui-first-child">Checkbox 1</label>
 					<input type="checkbox" id="pre-rendered-cb-1" name="pre-rendered-cb-1" value="1">
-                
+
 					<label for="pre-rendered-cb-2" class="ui-last-child">Checkbox 2</label>
 					<input type="checkbox" id="pre-rendered-cb-2" name="pre-rendered-cb-2" value="2">
-                
+
 			</div>
 		</div>
-            
+
         <!-- TODO: This should be a separate demo -->
         <h2>Textinputs</h2>
-            
+
         <p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple CSS.</p>
         <p>To make this work you will need to add one CSS rule and use textinput's <code>wrapperClass</code> option to set two classes on the textinput wrapper.</p>
-            
+
         <div data-demo-html="true" data-demo-css="#textinput-controlgroup">
             <label for="currency-controlgroup">Value</label>
             <div data-role="controlgroup">
@@ -423,20 +425,24 @@
                 <button>Reset</button>
             </div>
         </div>
-            
+
 
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
+		<ul>
+			<li><a href="http://jquerymobile.com/" title="Visit the jQuery Mobile web site">jquerymobile.com</a></li>
+			<li><a href="https://github.com/jquery/jquery-mobile" title="Visit the jQuery Mobile GitHub repository">GitHub repository</a></li>
+		</ul>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-search.php' ); ?>
-
 </div><!-- /page -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </body>
 </html>

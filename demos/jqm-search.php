@@ -1,8 +1,10 @@
-	<!-- TODO: This should become an external panel so we can add input to markup (unique ID) -->
-    <div data-role="panel" class="jqm-search-panel" data-position="right" data-display="overlay" data-theme="a">
-		<div class="jqm-search">
-			<ul class="jqm-list" data-filter-placeholder="Search demos..." data-filter-reveal="true">
-				<?php include( 'jqm-contents.php' ); ?>
-			</ul>
-		</div>
-	</div><!-- /panel -->
+<div class="jqm-search-panel">
+	<div class="jqm-search">
+		<form class="ui-alt-icon ui-nodisc-icon">
+			<input data-type="search" name="search" id="jqm-search-input" class="jqm-search-input" placeholder="Search demos...">
+		</form>
+		<ul class="jqm-search-list" data-filter="true" data-filter-reveal="true" data-input="#jqm-search-input">
+			<?php include( 'jqm-contents.php' ); ?>
+		</ul>
+	</div>
+</div><!-- /panel -->
