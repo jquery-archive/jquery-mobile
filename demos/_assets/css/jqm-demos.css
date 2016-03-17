@@ -518,6 +518,13 @@
 	opacity: .75;
 }
 
+.ui-page-theme-a a:hover,
+html .ui-bar-a a:hover,
+html .ui-body-a a:hover,
+html body .ui-group-theme-a a:hover {
+	color: #003966;
+}
+
 @media ( max-width: 60em ) {
 	.jqm-content > .jqm-api-docs-link::before,
 	.jqm-content > .jqm-api-docs-link::after {
@@ -713,19 +720,20 @@
 	background: #ececec;
 }
 
-.jqm-navmenu-panel .ui-listview li > .ui-listview-item-button:hover,
-.jqm-navmenu-panel .ui-listview li > .ui-listview-item-button:focus,
-.jqm-navmenu-panel .ui-listview li > .ui-listview-item-button:active,
-.jqm-navmenu-panel .ui-listview li > .ui-accordion-header:hover,
-.jqm-navmenu-panel .ui-listview li > .ui-accordion-header:focus,
-.jqm-navmenu-panel .ui-listview li > .ui-accordion-header:active {
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:hover,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:focus,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:active,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:hover,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:active,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content .ui-accordion-header:hover {
 	color: #333;
-	text-shadow: 0 1px 0 #f3f3f3;
+	text-shadow: 0 1px 0 #f3f3f3; 
+	background: #cccccc;
+}
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li > .ui-listview-item-button:hover {
+ 	background: #cccccc;
 }
 
-.jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-header:hover {
-	background: transparent;
-}
 
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-listview-item-button:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header:focus {
@@ -735,8 +743,9 @@
 	box-shadow: inset 0 0 1px #3388cc;
 }
 
-.jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header.ui-accordion-header-active {
-	background: #e1e1e1;
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header.ui-accordion-header-active,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-header.ui-accordion-header-active {
+	background: #d2eac6;
 	color: #333;
 	text-shadow: 0 1px 0 #f3f3f3;
 }
@@ -746,12 +755,6 @@
 	border-bottom: 2px solid #e1e1e1;
 }
 
-.jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-header.ui-accordion-header-active {
-	background: #ededed;
-	color: #333;
-	text-shadow: 0 1px 0 #f3f3f3;
-}
-
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-content .ui-accordion-content-active {
 	background: #fafafa;
 	border-bottom: 2px solid #ededed;
@@ -759,6 +762,11 @@
 
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li.jqm-3rd-party .ui-listview-item-button {
 	background: #ebeff3;
+}
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li.jqm-3rd-party > .ui-listview-item-button:hover,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li.jqm-3rd-party > .ui-listview-item-button:active,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li.jqm-3rd-party > .ui-listview-item-button:focus {
+	background: #bbd9ee;
 }
 
 li.jqm-3rd-party .ui-listview-item-button::before {
@@ -965,7 +973,8 @@ li.jqm-3rd-party .ui-listview-item-button::before {
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:hover,
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:focus,
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:active {
-	color: #333;
+	background: #ebeff3;
+	color: #000000;
 }
 
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:focus {
@@ -1000,7 +1009,8 @@ li.jqm-3rd-party .ui-listview-item-button::before {
 }
 
 .jqm-search-results-highlight {
-	color: #0e82a5;
+	background: #77d1ef;
+	text-shadow: 0 1px 0 #bbe8f7;
 }
 
 @media ( min-width: 60em ) {
