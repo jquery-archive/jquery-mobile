@@ -315,24 +315,40 @@ $( document ).on( "mobileinit", function() {
 				input = this.element.prev("form").find( "input" );
 
 			if ( e.which === $.ui.keyCode.DOWN ) {
-				if ( this.element.find( "li.ui-button-active" ).length === 0 ) {
-					this.element.find( "li:first" ).toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
+				if ( this.element.find( "li.ui-listview-item-active" ).length === 0 ) {
+					this.element.find( "li:not('.ui-screen-hidden'):first" )
+					.toggleClass( "ui-listview-item-active" )
+					.find("a").toggleClass( "ui-button-active" );
 				} else {
-					this.element.find( "li.ui-button-active a" ).toggleClass( "ui-button-active");
-					this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).next().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				}
+					this.element.find( "li.ui-listview-item-active a" )
+					.toggleClass( "ui-button-active");
 
-				this.highlightDown();
-			} else if ( e.which === $.ui.keyCode.UP ) {
-				if ( this.element.find( "li.ui-button-active" ).length !== 0 ) {
-					this.element.find( "li.ui-button-active a" ).toggleClass( "ui-button-active");
-					this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).prev().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				} else {
-					this.element.find( "li:last" ).toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
+					this.element.find( "li.ui-listview-item-active" )
+					.toggleClass( "ui-listview-item-active" )
+					.nextAll("li:not('.ui-screen-hidden'):first")
+					.toggleClass( "ui-listview-item-active" )
+					.find("a").toggleClass( "ui-button-active" );
 				}
-				this.highlightUp();
-			} else if ( typeof e.which !== "undefined" ) {
-				this.element.find( "li.ui-button-active" ).removeClass( "ui-button-active" );
+			} else if ( e.which === $.ui.keyCode.UP ) {
+				if ( this.element.find( "li.ui-listview-item-active" ).length !== 0 ) {
+					this.element.find( "li.ui-listview-item-active a" )
+					.toggleClass( "ui-button-active");
+
+					this.element.find( "li.ui-listview-item-active" )
+					.toggleClass( "ui-listview-item-active" )
+					.prevAll("li:not('.ui-screen-hidden'):first")
+					.toggleClass( "ui-listview-item-active" )
+					.find("a").toggleClass( "ui-button-active" );
+				} else {
+					this.element.find( "li:not('.ui-screen-hidden'):last" )
+					.toggleClass( "ui-listview-item-active" )
+					.find("a").toggleClass( "ui-button-active" );
+				}
+			} else if ( e.which === $.ui.keyCode.ENTER ) {
+				this.submitHandler();
+			}else if ( typeof e.which !== "undefined" ) {
+				this.element.find( "li.ui-listview-item-active" )
+				.removeClass( "ui-listview-item-active" );
 
 				if ( this.options.highlight ) {
 					search = input.val();
@@ -345,8 +361,8 @@ $( document ).on( "mobileinit", function() {
 			}
 		},
 		submitHandler: function() {
-			if ( this.element.find( "li.ui-button-active" ).length !== 0 ) {
-				var href = this.element.find( "li.ui-button-active a" ).attr( "href" );
+			if ( this.element.find( "li.ui-listview-item-active" ).length !== 0 ) {
+				var href = this.element.find( "li.ui-listview-item-active a" ).attr( "href" );
 
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", href );
 				return false;
@@ -355,22 +371,6 @@ $( document ).on( "mobileinit", function() {
 			if ( this.options.submitTo ) {
 				this.submitTo();
 			}
-		},
-		highlightDown: function() {
-			if ( this.element.find( "li.ui-button-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).next().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				this.highlightDown();
-			}
-			return;
-		},
-		highlightUp: function() {
-			if ( this.element.find( "li.ui-button-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).prev().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
-				this.highlightUp();
-			}
-			return;
 		}
 	});
 })( jQuery );

@@ -968,6 +968,10 @@ li.jqm-3rd-party .ui-listview-item-button::before {
 	color: #333;
 }
 
+.jqm-search-list.ui-listview > .ui-listview-item-active {
+	background-color: #eee;
+}
+
 .jqm-search-list.ui-listview > .ui-listview-item > .ui-listview-item-button:focus {
 	-webkit-box-shadow: inset 0 0 1px #0e82a5;
 	-moz-box-shadow: inset 0 0 1px #0e82a5;
