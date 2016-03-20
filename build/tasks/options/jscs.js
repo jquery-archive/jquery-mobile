@@ -89,5 +89,8 @@ module.exports = {
 	},
 	tests: {
 		src: "test/**/*.js"
+	},
+	demos: {
+		src: "demos/**/*.js"
 	}
 };
