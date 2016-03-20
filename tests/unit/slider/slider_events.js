@@ -1,5 +1,5 @@
 /*
- * mobile slider unit tests
+ * Mobile slider unit tests
  */
 
 ( function( QUnit, $ ) {
@@ -12,7 +12,7 @@ window.onChangeCounter = function() {
 QUnit.module( "jquery.mobile.slider.js events", {
 	setup: function() {
 
-		// force the value to be an increment of 10 when we aren't testing the rounding
+		// Force the value to be an increment of 10 when we aren't testing the rounding
 		$( "#stepped" ).val( 20 );
 	}
 } );
@@ -26,7 +26,7 @@ var keypressTest = function( assert, opts ) {
 
 	$.each( opts.keyCodes, function( i, elem ) {
 
-		// stub the keycode value and trigger the keypress
+		// Stub the keycode value and trigger the keypress
 		handle.trigger( createEvent( "keydown", handle, 0, 0, elem ) );
 
 		assert.deepEqual( val, window.parseFloat( slider.val(), 10 ),
@@ -147,12 +147,12 @@ var assertLeftCSS = function( obj, opts ) {
 
 	if ( css.indexOf( "px" ) > -1 ) {
 
-		// parse the actual pixel value returned by the left css value
+		// Parse the actual pixel value returned by the left css value
 		// and the pixels passed in for comparison
 		integerLeft = Math.round( parseFloat( css.replace( "px", "" ) ) ),
 		compare = parseInt( opts.pixels.replace( "px", "" ), 10 );
 
-		// check that the pixel value provided is within a given threshold; default is 0px
+		// Check that the pixel value provided is within a given threshold; default is 0px
 		assert.ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold,
 			opts.message );
 	} else {
@@ -236,7 +236,7 @@ QUnit.asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events
 		$.testHelper.eventCascade( [
 			function() {
 
-				// trigger the slider grab event
+				// Trigger the slider grab event
 				slider.trigger( "mousedown" );
 			},
 

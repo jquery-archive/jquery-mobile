@@ -1,5 +1,5 @@
 /*
- * mobile dialog unit tests
+ * Mobile dialog unit tests
  */
 ( function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,

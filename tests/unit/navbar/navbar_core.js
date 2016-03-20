@@ -1,5 +1,5 @@
 /*
- * mobile navbar unit tests
+ * Mobile navbar unit tests
  */
 ( function( QUnit, $ ) {
 

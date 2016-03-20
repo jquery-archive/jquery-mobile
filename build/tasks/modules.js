@@ -156,19 +156,19 @@ grunt.registerTask( "modules", function() {
 							} else {
 								item.import =
 
-									// url(
+									// Url(
 									match[ 1 ] +
 
-									// quotation mark
+									// Quotation mark
 									match[ 2 ].charAt( 0 ) +
 
-									// path adjusted to be relative to the
+									// Path adjusted to be relative to the
 									// temporary directory
 									path.relative( destinationPath,
 										path.normalize( path.join( cssFilePath,
 											filename ) ) ) +
 
-									// quotation mark
+									// Quotation mark
 									match[ 2 ].charAt( 0 ) +
 
 									// )
@@ -209,7 +209,7 @@ grunt.registerTask( "modules", function() {
 				// directory
 				file = path.relative( destinationPath,
 
-					// css files are originally relative to "js/"
+					// Css files are originally relative to "js/"
 					path.join( "js", file ) );
 				cssFileContents += "@import url(\"" + file + "\");\n";
 			} );
@@ -228,7 +228,7 @@ grunt.registerTask( "modules", function() {
 				// directory
 				file = path.relative( destinationPath,
 
-					// css files are originally relative to "js/"
+					// Css files are originally relative to "js/"
 					path.join( "js", file ) );
 				cssFileContents += "@import url(\"" + file + "\");\n";
 			} );

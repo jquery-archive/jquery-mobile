@@ -125,4 +125,4 @@ files.googleCDNZipOut = path.join( path.join( "<%= dist %>", "cdn-google" ),
 	files.zipFileName );
 
 return files;
-}
+};

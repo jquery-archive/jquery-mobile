@@ -138,7 +138,7 @@ return {
 					var found = false;
 					excludes.forEach( function( exclude ) {
 						if ( new RegExp( exclude ).test( path ) ) {
-							found = true
+							found = true;
 						}
 					} );
 					return !found;
@@ -150,5 +150,5 @@ return {
 			}() )
 		}
 	}
-}
+};
 };

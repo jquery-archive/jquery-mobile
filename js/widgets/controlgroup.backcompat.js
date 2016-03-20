@@ -37,7 +37,7 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
 		shadow: false,
 
-		//corners: true,
+		//Corners: true,
 		type: "vertical",
 		mini: false
 	},

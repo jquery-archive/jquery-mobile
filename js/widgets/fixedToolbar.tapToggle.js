@@ -53,7 +53,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		var self = this,
 			o = self.options;
 
-		// tap toggle
+		// Tap toggle
 		page
 			.bind( "vclick", function( e ) {
 				if ( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ) {

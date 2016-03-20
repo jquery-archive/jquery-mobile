@@ -92,7 +92,7 @@ Release.define( {
 			// If it's a prerelease the option should not be selected
 			// and need to be inserted in the unstable optgroup
 			newOption = "<option value='" + Release.newVersion + "'>" + Release.newVersion +
-				"</option>\n\t\t"
+				"</option>\n\t\t";
 			option = $( "select#branch optgroup[label='Unstable'] option" ).eq( 0 );
 		} else {
 

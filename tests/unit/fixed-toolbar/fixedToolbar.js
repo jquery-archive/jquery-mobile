@@ -1,5 +1,5 @@
 /*
- * mobile Fixed Toolbar unit tests
+ * Mobile Fixed Toolbar unit tests
  */
 ( function( QUnit, $ ) {
 	QUnit.module( "jquery.mobile.toolbar.js" );

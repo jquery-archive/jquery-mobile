@@ -29,7 +29,7 @@ if ( $.mobileBackcompat !== false ) {
 	$.widget( "mobile.loader", $.mobile.loader, {
 		options: {
 
-			// custom html for the inner content of the loading message
+			// Custom html for the inner content of the loading message
 			html: ""
 		},
 

@@ -96,7 +96,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		if ( transitionClass && transitionClass !== "none" ) {
 
-			// use appropriate slide for header or footer
+			// Use appropriate slide for header or footer
 			if ( transitionClass === "slide" ) {
 				transitionClass = this.role === "header" ? "slidedown" : "slideup";
 			}
@@ -108,7 +108,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	_bindPageEvents: function() {
 		var page = ( !!this.page ) ? this.element.closest( ".ui-page" ) : this.document;
 
-		//page event bindings
+		//Page event bindings
 		// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 		// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 		this._on( page, {
@@ -165,7 +165,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 		// This behavior only applies to "fixed", not "fullscreen"
 		if ( this.options.fullscreen ) { return; }
 
-		// tbPage argument can be a Page object or an event, if coming from throttled resize.
+		// TbPage argument can be a Page object or an event, if coming from throttled resize.
 		tbPage = ( tbPage && tbPage.type === undefined && tbPage ) ||
 			this.page || $el.closest( ".ui-page" );
 		tbPage = ( !!this.page ) ? this.page : ".ui-page-active";
@@ -211,7 +211,7 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 	hide: function( notransition ) {
 
-		// if it's a slide transition, our new transitions need the
+		// If it's a slide transition, our new transitions need the
 		// reverse class as well to slide outward
 		var	outClass =  this.options.transition === "slide" ? " reverse" : "";
 

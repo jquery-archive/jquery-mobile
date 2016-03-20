@@ -1,5 +1,5 @@
 /*
- * mobile listview unit tests
+ * Mobile listview unit tests
  */
 
 // TODO split out into separate test files
@@ -154,16 +154,16 @@ test( "Adds dividers based on first letters of list items.", function( assert ) 
 test( "Responds to addition/removal of list elements after refresh.", function( assert ) {
 	var list = $( "#autodividers-test" );
 
-	// should remove all existing dividers
+	// Should remove all existing dividers
 	assert.strictEqual( list.find( "li:contains('SHOULD REMOVE')" ).length, 0 );
 
-	// add li; should add an "X" divider
+	// Add li; should add an "X" divider
 	list.append( "<li>x is for xanthe</li>" );
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 5 );
 	ok( list.find( ".ui-listview-item-divider" ).is( ":contains('X')" ) );
 
-	// adding the same element again should create a valid list item but no new divider
+	// Adding the same element again should create a valid list item but no new divider
 	assert.strictEqual( list.find( ".ui-listview-item-static" ).length, 5 );
 	list.append( "<li>x is for xanthe</li>" );
 	list.listview( "refresh" );
@@ -171,45 +171,45 @@ test( "Responds to addition/removal of list elements after refresh.", function( 
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('X')" ).length, 1 );
 	assert.strictEqual( list.find( ".ui-listview-item-static" ).length, 6 );
 
-	// should ignore addition of non-li elements to the list
+	// Should ignore addition of non-li elements to the list
 	list.find( "li:eq(0)" ).append( "<span>ignore me</span>" );
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 5 );
 	assert.strictEqual( list.find( ".ui-listview-item-static" ).length, 6 );
 
-	// add li with the same initial letter as another li but after the X li item; should add a
+	// Add li with the same initial letter as another li but after the X li item; should add a
 	// second "B" divider to the end of the list
 	list.append( "<li>b is for barry</li>" );
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 6 );
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('B')" ).length, 2 );
 
-	// remove the item with a repeated "b"; should remove the second "B" divider
+	// Remove the item with a repeated "b"; should remove the second "B" divider
 	list.find( "li:contains('barry')" ).remove();
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 5 );
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('B')" ).length, 1 );
 
-	// remove li; should remove the "A" divider
+	// Remove li; should remove the "A" divider
 	list.find( "li:contains('aquaman')" ).remove();
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 4 );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).is( ":contains('A')" ), false );
 
-	// adding another "B" item after "C" should create two separate "B" dividers
+	// Adding another "B" item after "C" should create two separate "B" dividers
 	list.find( "li:contains('catwoman')" ).after( "<li>b is for barry</li>" );
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 5 );
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('B')" ).length, 2 );
 
-	// if two dividers with the same letter have only non-dividers between them, they get merged
+	// If two dividers with the same letter have only non-dividers between them, they get merged
 
-	// removing catwoman should cause the two "B" dividers to merge
+	// Removing catwoman should cause the two "B" dividers to merge
 	list.find( "li:contains('catwoman')" ).remove();
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('B')" ).length, 1 );
 
-	// adding another "D" item before the "D" divider should only result in a single "D" divider
+	// Adding another "D" item before the "D" divider should only result in a single "D" divider
 	// after merging
 	list.find( "li:contains('barry')" ).after( "<li>d is for dan</li>" );
 	list.listview( "refresh" );
@@ -220,7 +220,7 @@ module( "Autodividers Selector" );
 
 test( "Adds right divider text", function( assert ) {
 
-	// check we have the right dividers
+	// Check we have the right dividers
 	var list = $( "#autodividers-selector-test-list1" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 4 );
 	ok( list.find( ".ui-listview-item-divider" ).eq( 0 ).is( ":contains(A)" ) );
@@ -228,7 +228,7 @@ test( "Adds right divider text", function( assert ) {
 	ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(C)" ) );
 	ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(D)" ) );
 
-	// check that adding a new item creates the right divider
+	// Check that adding a new item creates the right divider
 	list.append( "<li><a href='#'>e is for ethel</a></li>" );
 	list.listview( "refresh" );
 	ok( list.find( ".ui-listview-item-divider" ).eq( 4 ).is( ":contains(E)" ) );
@@ -236,7 +236,7 @@ test( "Adds right divider text", function( assert ) {
 
 test( "Adds divider text based on custom selector.", function( assert ) {
 
-	// check we have the right dividers based on custom selector
+	// Check we have the right dividers based on custom selector
 	var list = $( "#autodividers-selector-test-list2" );
 
 	list.listview( "option", "autodividersSelector", function( elt ) {
@@ -252,7 +252,7 @@ test( "Adds divider text based on custom selector.", function( assert ) {
 	ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(G)" ) );
 	ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(H)" ) );
 
-	// check that adding a new item creates the right divider
+	// Check that adding a new item creates the right divider
 	list.append( "<li><div><span class='autodividers-selector-test-selectme'>" +
 		"i is for impy</span></div></li>" );
 	list.listview( "refresh" );

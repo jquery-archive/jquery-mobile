@@ -259,7 +259,7 @@ $.widget( "mobile.popup", {
 		// We detach the payload, add the classes, and then insert it into the popup container
 		this.element.detach();
 
-		// this._ui needs to be fully established before we can all this._addClasses(), because
+		// This._ui needs to be fully established before we can all this._addClasses(), because
 		// this._addClasses() uses this._ui, but we don't want any of the UI elements to be
 		// attached, so as to avoid reflows as this._addClasses() adds classes.
 		this._addClasses();

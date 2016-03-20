@@ -1,4 +1,8 @@
-module.exports = {
+module.exports = function( grunt ) {
+return {
+	options: {
+		config: true
+	},
 	build: {
 		src: [ "build/**/*.js", "*.js" ]
 	},

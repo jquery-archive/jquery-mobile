@@ -1,5 +1,5 @@
 /*
- * degradeInputs unit tests
+ * DegradeInputs unit tests
  */
 
 ( function( QUnit, $ ) {

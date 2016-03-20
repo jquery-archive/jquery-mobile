@@ -1,5 +1,5 @@
 /*
- * mobile navbar unit tests
+ * Mobile navbar unit tests
  */
 ( function( QUnit, $ ) {
 QUnit.test( "navbar button gets active button class when clicked", function( assert ) {

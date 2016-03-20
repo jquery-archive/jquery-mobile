@@ -77,7 +77,7 @@ return $.widget( "mobile.navbar", $.mobile.navbar, {
         this._addClass( popupNav, "ui-navbar-popupnav" );
         popupNav.appendTo( popupDiv );
 
-        // enhance buttons and move to new rows
+        // Enhance buttons and move to new rows
         for ( pos = 0; pos < buttonCount; pos++ ) {
             buttonItem = navItems.eq( pos );
             this._makeNavButton( buttonItem.find( "a" ), iconpos );

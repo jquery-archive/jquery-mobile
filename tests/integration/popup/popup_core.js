@@ -1,5 +1,5 @@
 /*
- * mobile popup unit tests
+ * Mobile popup unit tests
  */
 ( function( $ ) {
 
@@ -360,7 +360,7 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 			$popup = $( "#test-popup" );
 
 		if ( !$popup.data( "mobile-popup" ).options.history ) {
-			expect( 1 )
+			expect( 1 );
 			ok( true, "hash change disabled" );
 			start();
 			return;
