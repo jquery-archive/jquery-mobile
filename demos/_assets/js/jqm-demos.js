@@ -312,50 +312,32 @@ $( document ).on( "mobileinit", function() {
 		},
 		handleKeyUp: function( e ) {
 			var search,
-				input = this.element.prev("form").find( "input" );
+				toBeHighlightled,
+				input = this.element.prev("form").find( "input" ),
+				isDownKeyUp = e.which === $.ui.keyCode.DOWN,
+				isUpKeyUp = e.which === $.ui.keyCode.UP;
 
-			if ( e.which === $.ui.keyCode.DOWN ) {
+			if ( isDownKeyUp || isUpKeyUp ) {
 				if ( this.element.find( "li.ui-listview-item-active" ).length === 0 ) {
-					this.element.find( "li" )
+					toBeHighlightled = this.element.find( "li" )
 					.not( ".ui-screen-hidden" )
-					.first()
-					.toggleClass( "ui-listview-item-active" )
-					.find( "a" )
-					.toggleClass( "ui-button-active" );
+					[ isDownKeyUp ? "first" : "last" ]();
 				} else {
 					this.element.find( "li.ui-listview-item-active a" )
 					.toggleClass( "ui-button-active");
 
-					this.element.find( "li.ui-listview-item-active" )
+					toBeHighlightled = this.element.find( "li.ui-listview-item-active" )
 					.toggleClass( "ui-listview-item-active" )
-					.nextAll( "li" )
+					[ isDownKeyUp ? "nextAll" : "prevAll" ]( "li" )
 					.not( ".ui-screen-hidden" )
-					.first()
-					.toggleClass( "ui-listview-item-active" )
-					.find( "a" )
-					.toggleClass( "ui-button-active" );
+					.first();
 				}
-			} else if ( e.which === $.ui.keyCode.UP ) {
-				if ( this.element.find( "li.ui-listview-item-active" ).length !== 0 ) {
-					this.element.find( "li.ui-listview-item-active a" )
-					.toggleClass( "ui-button-active");
 
-					this.element.find( "li.ui-listview-item-active" )
-					.toggleClass( "ui-listview-item-active" )
-					.prevAll( "li" )
-					.not( ".ui-screen-hidden" )
-					.first()
-					.toggleClass( "ui-listview-item-active" )
-					.find( "a" )
-					.toggleClass( "ui-button-active" );
-				} else {
-					this.element.find( "li" )
-					.not( ".ui-screen-hidden" )
-					.last()
-					.toggleClass( "ui-listview-item-active" )
-					.find( "a" )
-					.toggleClass( "ui-button-active" );
-				}
+				// Highlight the selected list item
+				toBeHighlightled
+				.toggleClass( "ui-listview-item-active" )
+				.find( "a" )
+				.toggleClass( "ui-button-active" );
 			} else if ( e.which === $.ui.keyCode.ENTER ) {
 				this.submitHandler();
 			} else if ( typeof e.which !== "undefined" ) {
