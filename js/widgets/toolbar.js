@@ -94,7 +94,7 @@ $.widget( "mobile.toolbar", {
 		this._addHeadingClasses();
 	},
 
-	//we only want this to run on non fixed toolbars so make it easy to override
+	//We only want this to run on non fixed toolbars so make it easy to override
 	_setRelative: function() {
 		$( "[data-" + $.mobile.ns + "role='page']" ).css( { "position": "relative" } );
 	},

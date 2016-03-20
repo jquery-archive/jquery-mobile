@@ -1,5 +1,5 @@
 /*
- * mobile flipswitch unit tests
+ * Mobile flipswitch unit tests
  */
 ( function( QUnit, $ ) {
 QUnit.test( "checkbox based flipswitch backcompat tests", function( assert ) {

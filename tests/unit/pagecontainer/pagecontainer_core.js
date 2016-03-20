@@ -30,8 +30,8 @@ QUnit.module( "load method", {
 				event: {
 					isDefaultPrevented: true
 				}
-			}
-		}
+			};
+		};
 	},
 	teardown: function() {
 		triggerData = null;

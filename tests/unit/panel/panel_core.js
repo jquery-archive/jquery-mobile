@@ -1,5 +1,5 @@
 /*
- * mobile panel unit tests
+ * Mobile panel unit tests
  */
 
 ( function( QUnit, $ ) {
@@ -138,7 +138,7 @@ QUnit.asyncTest( "classes modified by close", function( assert ) {
 		assert.lacksClasses( $modal, prefix + "-display-overlay",
 			"modal without display type class" );
 
-		// complete
+		// Complete
 		assert.hasClasses( $panel, "ui-panel-closed", "panel closed class" );
 
 		assert.lacksClasses( $wrapper, "ui-panel-page-content" +
@@ -193,7 +193,7 @@ QUnit.test( "destroy method", function( assert ) {
 
 	$panel.panel( "destroy" );
 
-	// test page without sibling panels
+	// Test page without sibling panels
 
 	assert.lacksClasses( $panel, "ui-panel" );
 	assert.lacksClasses( $wrapper, "ui-panel-position-left" );

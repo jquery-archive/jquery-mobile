@@ -1,5 +1,5 @@
 /*
- * mobile slider unit tests
+ * Mobile slider unit tests
  */
 ( function( QUnit, $ ) {
 

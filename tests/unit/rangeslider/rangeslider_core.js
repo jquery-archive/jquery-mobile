@@ -1,5 +1,5 @@
 /*
- * mobile slider unit tests
+ * Mobile slider unit tests
  */
 ( function( QUnit, $ ) {
 
@@ -46,7 +46,7 @@
 		// Fake a click at the beginning of the track
 		track.trigger( createEvent(
 						"mousedown",
-						track[0],
+						track[ 0 ],
 						trackOffset.left + 15,
 						trackOffset.top + 7 ) ).trigger( "mouseup" );
 
@@ -61,7 +61,7 @@
 		// Fake a click at the end of the track
 		track.trigger( createEvent(
 						"mousedown",
-						track[0],
+						track[ 0 ],
 						( trackOffset.left + trackWidth ) - 15,
 						trackOffset.top + 7 ) ).trigger( "mouseup" );
 

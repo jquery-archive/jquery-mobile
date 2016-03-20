@@ -1,5 +1,5 @@
 /*
- * mobile slider unit tests
+ * Mobile slider unit tests
  */
 ( function( QUnit, $ ) {
 
@@ -24,7 +24,7 @@ QUnit.test( "backcompat tests", function( assert ) {
 		"ui-corner-all" );
 } );
 
-// not testing the positive case here since's it's obviously tested elsewhere
+// Not testing the positive case here since's it's obviously tested elsewhere
 QUnit.test( "slider elements in the keepNative set shouldn't be enhanced", function( assert ) {
 	assert.deepEqual( $( "input.should-be-native" ).siblings( ".ui-slider-track" ).length, 0 );
 } );

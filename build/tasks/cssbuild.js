@@ -37,7 +37,7 @@ grunt.registerMultiTask( "cssbuild", "Resolve CSS @imports and concat files", fu
 			async.series( [
 				function( next ) {
 
-					// pull the includes together using require js
+					// Pull the includes together using require js
 					requirejs.optimize(
 						_.extend( {
 							cssIn: src,

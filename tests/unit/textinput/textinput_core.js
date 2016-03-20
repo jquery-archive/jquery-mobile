@@ -1,5 +1,5 @@
 /*
- * mobile textinput unit tests
+ * Mobile textinput unit tests
  */
 ( function( QUnit, $ ) {
 
@@ -47,7 +47,7 @@ QUnit.test( "inputs without type specified are enhanced", function( assert ) {
 		"Input is enhanced" );
 } );
 
-// not testing the positive case here since's it's obviously tested elsewhere
+// Not testing the positive case here since's it's obviously tested elsewhere
 QUnit.test( "textarea in the keepNative set shouldn't be enhanced", function( assert ) {
 	assert.lacksClasses( $( "textarea.should-be-native" )[ 0 ], "ui-textinput-text",
 		"Class ui-textinput-text not present" );

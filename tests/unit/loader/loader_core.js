@@ -1,7 +1,7 @@
 $.testHelper.delayStart();
 
 /*
- * mobile init tests
+ * Mobile init tests
  */
 ( function( QUnit, $ ) {
 
@@ -29,7 +29,7 @@ QUnit.module( "jquery.mobile.loader", {
 
 	teardown: function() {
 
-		// clear the classes added by reloading the init
+		// Clear the classes added by reloading the init
 		$( "html" ).attr( "class", "" );
 
 		// NOTE reset for gradeA tests
@@ -123,7 +123,7 @@ QUnit.test( "page loading should contain new html when provided, prefers passed 
 QUnit.test( "page loading should always contain text when passed as the second arg",
 	function( assert ) {
 
-		// simulate error call in navigation ajax error callback
+		// Simulate error call in navigation ajax error callback
 		$.mobile.loading( "option", "textVisible", true ).loader( "show", "e", "foo serious",
 			true );
 
@@ -136,7 +136,7 @@ QUnit.test( "page loading should always contain text when passed as an object pr
 		$.mobile
 			.loading( "option", "textVisible", false )
 
-			// simulate error call in navigation ajax error callback
+			// Simulate error call in navigation ajax error callback
 			.loader( "show", {
 				theme: "e",
 				text: "foo serious second",
@@ -152,7 +152,7 @@ QUnit.test( "page loading should not contain text when default is used and visib
 		$.mobile
 			.loading( "option", "textVisible", false )
 
-			// simulate error call in navigation ajax error callback
+			// Simulate error call in navigation ajax error callback
 			.loader( "show", { theme: "e", textonly: true } );
 
 		assert.hasClasses( $( ".ui-loader" ), "ui-loader-default",
@@ -163,7 +163,7 @@ QUnit.test( "page loading should not contain text when default is used and visib
 		$.mobile
 			.loading( "hide" )
 
-			// simulate error call in navigation ajax error callback
+			// Simulate error call in navigation ajax error callback
 			.loader( "show", "e", undefined, true );
 
 		assert.hasClasses( $( ".ui-loader" ), "ui-loader-default",

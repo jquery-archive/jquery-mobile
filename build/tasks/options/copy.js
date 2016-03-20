@@ -71,7 +71,7 @@ var processDemos = function( content, srcPath ) {
 						return prefix + " " + group.join( "," ) + " ";
 					} );
 
-				//element.html( text );
+				//Element.html( text );
 				element[ 0 ].children[ 0 ].data = text;
 			}
 		} );
@@ -220,7 +220,7 @@ return {
 						}
 					} );
 
-					// write out newly created file contents
+					// Write out newly created file contents
 					content = $.html();
 				} else if ( /\.js$/.test( srcPath ) ) {
 

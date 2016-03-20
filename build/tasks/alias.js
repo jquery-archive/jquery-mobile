@@ -1,6 +1,6 @@
 module.exports = function( grunt ) {
 
-// ci is a magic task that changes based on options we do this to optimize travis build
+// Ci is a magic task that changes based on options we do this to optimize travis build
 grunt.registerTask( "ci", [ "ci:" + ( grunt.option( "citype" ) || process.env.CITYPE ) ] );
 grunt.registerTask( "ci:demos", [ "test:demos" ] );
 grunt.registerTask( "ci:test", [ "test", "coveralls" ] );

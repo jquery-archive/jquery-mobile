@@ -101,7 +101,7 @@ $.widget( "mobile.slider", $.extend( {
 			mouseMoved: false
 		} );
 
-		// monitor the input for updated values
+		// Monitor the input for updated values
 		this._addClass( "ui-slider-input" );
 
 		this._on( control, {
@@ -121,14 +121,14 @@ $.widget( "mobile.slider", $.extend( {
 
 		slider.insertAfter( control );
 
-		// wrap in a div for styling purposes
+		// Wrap in a div for styling purposes
 		if ( !isRangeslider ) {
 			wrapper = "<div class='ui-slider'></div>";
 
 			control.add( slider ).wrapAll( wrapper );
 		}
 
-		// bind the handle event callbacks and set the context to the widget instance
+		// Bind the handle event callbacks and set the context to the widget instance
 		this._on( this.handle, {
 			"vmousedown": "_handleVMouseDown",
 			"keydown": "_handleKeydown",
@@ -163,7 +163,7 @@ $.widget( "mobile.slider", $.extend( {
 
 	_controlKeyup: function( /* event */ ) {
 
-		// necessary?
+		// Necessary?
 		this.refresh( this._value(), true, true );
 	},
 
@@ -171,7 +171,7 @@ $.widget( "mobile.slider", $.extend( {
 		this.refresh( this._value(), true );
 	},
 
-	// it appears the clicking the up and down buttons in chrome on
+	// It appears the clicking the up and down buttons in chrome on
 	// range/number inputs doesn't trigger a change until the field is
 	// blurred. Here we check thif the value has changed and refresh
 	_controlVMouseUp: function( /* event */ ) {
@@ -211,7 +211,7 @@ $.widget( "mobile.slider", $.extend( {
 			break;
 		}
 
-		// move the slider according to the keypress
+		// Move the slider according to the keypress
 		switch ( event.keyCode ) {
 		case $.mobile.keyCode.HOME:
 			this.refresh( this.min );
@@ -277,13 +277,13 @@ $.widget( "mobile.slider", $.extend( {
 		}
 		if ( this.dragging && !this.options.disabled ) {
 
-			// this.mouseMoved must be updated before refresh() because it will be
+			// This.mouseMoved must be updated before refresh() because it will be
 			// used in the control "change" event
 			this.mouseMoved = true;
 
 			this.refresh( event );
 
-			// only after refresh() you can calculate this.userModified
+			// Only after refresh() you can calculate this.userModified
 			this.userModified = this.beforeStart !== this.element[ 0 ].selectedIndex;
 			return false;
 		}
@@ -321,7 +321,7 @@ $.widget( "mobile.slider", $.extend( {
 			this.disable();
 		}
 
-		// set the stored value for comparison later
+		// Set the stored value for comparison later
 		this.value = this._value();
 		this._addClass( this.handle, null, "ui-button ui-shadow" );
 
@@ -334,7 +334,7 @@ $.widget( "mobile.slider", $.extend( {
 		if ( typeof val === "object" ) {
 			data = val;
 
-			// a slight tolerance helped get to the ends of the slider
+			// A slight tolerance helped get to the ends of the slider
 			tol = 8;
 
 			left = this.slider.offset().left;
@@ -363,7 +363,7 @@ $.widget( "mobile.slider", $.extend( {
 
 		newval = ( percent / 100 ) * ( max - min ) + min;
 
-		//from jQuery UI slider, the following source will round to the nearest step
+		//From jQuery UI slider, the following source will round to the nearest step
 		valModStep = ( newval - min ) % step;
 		alignValue = newval - valModStep;
 
@@ -411,7 +411,7 @@ $.widget( "mobile.slider", $.extend( {
 			this.valuebg.css( "width", percent + "%" );
 		}
 
-		// drag the label widths
+		// Drag the label widths
 		if ( this._labels ) {
 			handlePercent = this.handle.width() / this.slider.width() * 100;
 			aPercent = percent && handlePercent + ( 100 - handlePercent ) * percent / 100;
@@ -426,7 +426,7 @@ $.widget( "mobile.slider", $.extend( {
 		if ( !preventInputUpdate ) {
 			valueChanged = false;
 
-			// update control"s value
+			// Update control"s value
 			valueChanged = parseFloat( control.val() ) !== newval;
 			control.val( newval );
 

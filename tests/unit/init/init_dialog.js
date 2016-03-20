@@ -1,5 +1,5 @@
 /*
- * mobile init dialog tests
+ * Mobile init dialog tests
  */
 ( function( QUnit, $ ) {
 QUnit.module( "jquery.mobile.init dialog load tests" );

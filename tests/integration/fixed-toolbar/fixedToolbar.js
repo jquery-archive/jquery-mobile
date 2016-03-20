@@ -1,5 +1,5 @@
 /*
- * mobile Fixed Toolbar unit tests
+ * Mobile Fixed Toolbar unit tests
  */
 ( function( $ ) {
 $( "html" ).height( screen.height * 3 );
@@ -15,7 +15,7 @@ function scrollUp() {
 module( "toolbar", { setup: function() {
 		var startTimeout;
 
-		// swallow the inital page change
+		// Swallow the inital page change
 		stop();
 		$( document ).one( "pagechange", function() {
 			clearTimeout( startTimeout );

@@ -99,7 +99,7 @@ if ( $.mobileBackcompat !== false ) {
 			this._workarounds();
 		},
 
-		//check the browser and version and run needed workarounds
+		//Check the browser and version and run needed workarounds
 		_workarounds: function() {
 			var ua = navigator.userAgent,
 
@@ -136,15 +136,15 @@ if ( $.mobileBackcompat !== false ) {
 			return offset;
 		},
 
-		//bind events for _triggerRedraw() function
+		//Bind events for _triggerRedraw() function
 		_bindScrollWorkaround: function() {
 			var self = this;
 
-			//bind to scrollstop and check if the toolbars are correctly positioned
+			//Bind to scrollstop and check if the toolbars are correctly positioned
 			this._on( this.window, { scrollstop: function() {
 					var viewportOffset = self._viewportOffset();
 
-					//check if the header is visible and if its in the right place
+					//Check if the header is visible and if its in the right place
 					if ( viewportOffset > 2 && self._visible ) {
 						self._triggerRedraw();
 					}
@@ -172,10 +172,10 @@ if ( $.mobileBackcompat !== false ) {
 		_triggerRedraw: function() {
 			var paddingBottom = parseFloat( $( ".ui-page-active" ).css( "padding-bottom" ) );
 
-			//trigger page redraw to fix incorrectly positioned fixed elements
+			//Trigger page redraw to fix incorrectly positioned fixed elements
 			$( ".ui-page-active" ).css( "padding-bottom", ( paddingBottom + 1 ) + "px" );
 
-			//if the padding is reset with out a timeout the reposition will not occure.
+			//If the padding is reset with out a timeout the reposition will not occure.
 			//this is independent of JQM the browser seems to need the time to react.
 			setTimeout( function() {
 				$( ".ui-page-active" ).css( "padding-bottom", paddingBottom + "px" );

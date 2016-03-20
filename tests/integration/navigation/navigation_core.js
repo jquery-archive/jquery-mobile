@@ -154,7 +154,7 @@ QUnit.asyncTest( "external page is removed from the DOM after pagehide", functio
 			window.history.back();
 		},
 
-		// external-test is *NOT* cached in the dom after transitioning away
+		// External-test is *NOT* cached in the dom after transitioning away
 		function( timedOut ) {
 			assert.strictEqual( $( "#external-test" ).length, 0 );
 			QUnit.start();
@@ -184,7 +184,7 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 				window.history.back();
 			},
 
-			// external-test *IS* cached in the dom after transitioning away
+			// External-test *IS* cached in the dom after transitioning away
 			function() {
 				assert.strictEqual( $( "#external-test" ).length, 1 );
 
@@ -202,7 +202,7 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 				window.history.back();
 			},
 
-			// external-test is *NOT* cached in the dom after transitioning away
+			// External-test is *NOT* cached in the dom after transitioning away
 			function() {
 				assert.strictEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
 				$( document ).unbind( "pageremove", removeCallback );
@@ -359,7 +359,7 @@ QUnit.asyncTest( "anchors with no href attribute will do nothing when clicked",
 
 QUnit.test( "urlHistory is working properly", function( assert ) {
 
-	// urlHistory
+	// UrlHistory
 	assert.strictEqual( $.type( $.mobile.navigate.history.stack ), "array",
 		"urlHistory.stack is an array" );
 
@@ -371,7 +371,7 @@ QUnit.test( "urlHistory is working properly", function( assert ) {
 	// Active index
 	assert.strictEqual( $.mobile.navigate.history.activeIndex, 0, "urlHistory.activeIndex is 0" );
 
-	// getActive
+	// GetActive
 	assert.strictEqual( $.type( $.mobile.navigate.history.getActive() ), "object",
 		"active item is an object" );
 	assert.strictEqual( $.mobile.navigate.history.getActive().url, "foo",
@@ -397,7 +397,7 @@ QUnit.test( "urlHistory is working properly", function( assert ) {
 	assert.strictEqual( $.mobile.navigate.history.activeIndex, 3,
 		"urlHistory.addNew() moves the activeIndex to the newly added item" );
 
-	// clearForward
+	// ClearForward
 	$.mobile.navigate.history.activeIndex = 0;
 	$.mobile.navigate.history.clearForward();
 	assert.strictEqual( $.mobile.navigate.history.stack.length, 1,
@@ -1344,7 +1344,7 @@ QUnit.asyncTest( "navigate to non-existent internal page throws pagechangefailed
 		var pagechangefailed = false,
 			pageChangeFailedCB = function( e ) {
 				pagechangefailed = true;
-		}
+		};
 
 		$( document ).bind( "pagechangefailed", pageChangeFailedCB );
 
