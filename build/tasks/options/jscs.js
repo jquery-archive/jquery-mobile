@@ -99,6 +99,9 @@ return {
 	},
 	tests: {
 		src: "test/**/*.js"
+	},
+	demos: {
+		src: "demos/**/*.js"
 	}
 };
 };
