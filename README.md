@@ -115,7 +115,7 @@ will only run the tests under `tests/unit/table/` and `tests/unit/slider/`.
 
 You can also exclude some tests by using `!`.  For instance:
 
-    grunt test --type=integration --suites=!navigation
+    grunt test --type=integration --suites=\!navigation
 
 will run all the integration tests but the navigation suite.
 
