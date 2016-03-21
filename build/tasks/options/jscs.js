@@ -1,7 +1,11 @@
 module.exports = function( grunt ) {
+
 return {
 	options: {
-		config: true
+		config: true,
+
+		// Check if fix is enabled
+		fix: grunt.option( "fix" ) || process.env.FIX || false
 	},
 	build: {
 		src: [ "build/**/*.js", "*.js" ]
@@ -96,4 +100,5 @@ return {
 	tests: {
 		src: "test/**/*.js"
 	}
+};
 };
