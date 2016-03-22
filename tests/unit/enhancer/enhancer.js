@@ -1,8 +1,7 @@
 define( [
-	"qunit"
+	"qunit",
 	"jquery"
 	], function( QUnit, $ ) {
-
 
 QUnit.module( "enhancer: basic" );
 

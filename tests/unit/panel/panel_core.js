@@ -2,11 +2,10 @@
  * Mobile panel unit tests
  */
 
-<<<<<<< HEAD
-( function( QUnit, $ ) {
-=======
-define( [ "jquery" ], function( $ ) {
->>>>>>> cf8a1d7... Panel: Shift to use bootstrap
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 var count,
 	defaults = $.mobile.panel.prototype.options,
