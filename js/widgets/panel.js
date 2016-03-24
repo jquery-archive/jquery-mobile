@@ -143,7 +143,7 @@ return $.widget( "mobile.panel", {
 			this._addClass( wrapper, "ui-panel-wrapper" );
 			wrapper = this._safelyWrap( thePage, wrapper,
 				this._page().children( ".ui-toolbar-header:not(.ui-toolbar-header-fixed), " +
-					"[data-role='toolbar'],"  +
+					"[data-" + $.mobile.ns + "role='toolbar'],"  +
 					".ui-content:not(.ui-popup)," +
 					".ui-toolbar-footer:not(.ui-toolbar-footer-fixed)" ) );
 		}
