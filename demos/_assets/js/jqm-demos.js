@@ -194,7 +194,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 
 	// Fix links on homepage to point to sub directories
 	if ( $( event.target ).hasClass( "jqm-home") ) {
-		$( this ).find( "a" ).each( function() {
+		$( "body" ).find( "a" ).each( function() {
 			$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
 		});
 	}
