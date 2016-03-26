@@ -1,5 +1,5 @@
 /*
- * mobile init tests
+ * Mobile init tests
  */
 
 define( [
@@ -15,8 +15,8 @@ QUnit.config.autostart = false;
 require( [
 	"init"
 ], function() {
-	var libName = 'init',
-		coreLib = 'core',
+	var libName = "init",
+		coreLib = "core",
 		extendFn = $.extend,
 		setGradeA = function( value ) {
 			$.mobile.gradeA = function() {
@@ -25,22 +25,22 @@ require( [
 		},
 		reloadCoreNSandInit = function() {
 			$.testHelper.reloadLib( "../../jquery.setNameSpace.js" );
-			return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ) )
+			return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ) );
 		};
-
 
 	QUnit.module( libName, {
 		setup: function() {
 			$.mobile.ns = shared.ns;
+
 			// NOTE reset for gradeA tests
-			$( 'html' ).removeClass( 'ui-mobile' );
+			$( "html" ).removeClass( "ui-mobile" );
 		},
 
 		teardown: function() {
 			$.extend = extendFn;
 
-			// clear the classes added by reloading the init
-			$( "html" ).attr( 'class', '' );
+			// Clear the classes added by reloading the init
+			$( "html" ).attr( "class", "" );
 		}
 	} );
 
@@ -54,7 +54,7 @@ require( [
 			var initFired = false;
 			assert.expect( 1 );
 
-			$( window.document ).one( 'mobileinit', function( event ) {
+			$( window.document ).one( "mobileinit", function( event ) {
 				initFired = true;
 			} );
 
@@ -66,6 +66,7 @@ require( [
 		QUnit.asyncTest( "enhancements are skipped when the browser is not grade A", function( assert ) {
 			setGradeA( false );
 			$.testHelper.reloadModule( libName ).then( function() {
+
 				//NOTE easiest way to check for enhancements, not the most obvious
 				assert.ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
 			} ).then( QUnit.start );
@@ -121,11 +122,11 @@ require( [
 		} );
 
 		QUnit.test( "pages without a data-url attribute have it set to their id", function( assert ) {
-			assert.deepEqual( $( "#foo" ).jqmData( 'url' ), "foo" );
+			assert.deepEqual( $( "#foo" ).jqmData( "url" ), "foo" );
 		} );
 
 		QUnit.test( "pages with a data-url attribute are left with the original value", function( assert ) {
-			assert.deepEqual( $( "#bar" ).jqmData( 'url' ), "bak" );
+			assert.deepEqual( $( "#bar" ).jqmData( "url" ), "bak" );
 		} );
 
 		// NOTE the next two tests work on timeouts that assume a page will be
@@ -148,7 +149,6 @@ require( [
 			).then( QUnit.start );
 		} );
 
-
 		QUnit.asyncTest( "page does not initialize at domready when autoinitialize option is false ", function( assert ) {
 			$( document ).one( "mobileinit", function() {
 				$.mobile.autoInitializePage = false;
@@ -157,7 +157,6 @@ require( [
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
 
 			location.hash = "";
-
 
 			reloadCoreNSandInit().then(
 				function() {
