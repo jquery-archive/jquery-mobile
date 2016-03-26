@@ -1,361 +1,161 @@
-
-/*
- * mobile table unit tests
- */
-
 ( function( QUnit, $ ) {
+var tableProto = $.mobile.table.prototype;
+function testCreate( prefix, enhanced, disabled ) {
 
-QUnit.module( "Basic Table", {
-	setup: function() {
-		var hash = "#basic-table-test";
-		if ( location.hash != hash ) {
-			QUnit.stop();
-
-			$( document ).one( "pagechange", function() {
-				QUnit.start();
+	QUnit.test( prefix + "_create()", function( assert ) {
+		var expectDisabledClass = !enhanced && disabled;
+		var tableElement = $( "<table>" ).table( {
+				disabled: disabled,
+				enhanced: enhanced,
+				classes: {
+					"ui-table": "xyzzy"
+				}
 			} );
 
-			$.mobile.changePage( hash );
-		}
-	},
+			if ( !enhanced ) {
+				assert.hasClasses( tableElement, "xyzzy" );
+			} else {
+				assert.lacksClasses( tableElement, "xyzzy" );
+			}
 
-	teardown: function() {}
-} );
-QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
-	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' );
-		assert.ok( $table.length, ".ui-table class added to table element" );
-		QUnit.start();
-	}, 800 );
-} );
-QUnit.asyncTest( "Has data object attributed to table", function( assert ) {
-	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' ),
-			self = $table.data( "mobile-table" );
-		assert.ok( self, "Data object is available" );
-		QUnit.start();
-	}, 800 );
-} );
-QUnit.asyncTest( "Has headers option", function( assert ) {
-	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' ),
-			self = $table.data( "mobile-table" );
-		assert.ok( self.headers.length, "Header array is not empty" );
-		assert.equal( 5, self.headers.length, "Number of headers is correct" );
-		QUnit.start();
-	}, 800 );
-} );
-QUnit.asyncTest( "Reflow Refresh updates table headers correctly",
-	function( assert ) {
-		var $table = $( '#basic-table-test .ui-table' ),
-			$firstHeaderCell = $table.find( 'thead tr th' ).first(),
-			$cellLookUp;
-
-		setTimeout( function() {
-
-			$( window ).trigger( "refresh_test_table", [ "#basic-table-test" ] );
-
-			$cellLookUp = $table.find( 'tbody tr' ).first().find( 'th, td' ).first().attr( "data-test" );
-
-			assert.ok( $table.length, "table still enhanced" );
-
-			assert.ok( $firstHeaderCell.jqmData( "cells" ).length,
-				"column cells still assigned to header cell" );
-
-			assert.equal( $firstHeaderCell.jqmData( "cells" ).eq( 0 ).closest( "table" ).attr( 'id' ),
-				"movie-table",
-				"Cell stored is a refreshed cell (currently in the table" );
-
-			assert.equal( $cellLookUp, $firstHeaderCell.jqmData( "cells" ).first().attr( "data-test" ),
-				"Cell stored in header is in the column of the respective header" );
-			QUnit.start();
-		}, 800 );
+			if ( expectDisabledClass ) {
+				assert.hasClasses( tableElement, "ui-state-disabled" );
+			}
 	} );
-QUnit.module( "Reflow Mode", {
-	setup: function() {
-		var hash = "#reflow-table-test";
-		if ( location.hash != hash ) {
-			QUnit.stop();
+}
 
-			$( document ).one( "pagechange", function() {
-				QUnit.start();
-			} );
+testCreate( "Normal and enabled: ", false, false );
+testCreate( "Normal and disabled: ", false, true );
+testCreate( "Pre-rendered: ", true, false );
 
-			$.mobile.changePage( hash );
-		}
-	},
+QUnit.test( "_setOptions()", function( assert ) {
+	var table = $( "<table>" ).table( {
+			disabled: true
+	} );
 
-	teardown: function() {}
-} );
-QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
-	setTimeout( function() {
-		assert.ok( $( '#reflow-table-test .ui-table-reflow' ).length, ".ui-table-reflow class added to table element" );
-		assert.deepEqual(
-			$( "#reflow-table-test .ui-table-reflow > tbody span.make-it-red" ).length, 1,
-			"span was copied from table header" );
-		QUnit.start();
-	}, 800 );
+	assert.hasClasses( table, "ui-state-disabled" );
+
+	table = $( "<table>" ).table( {
+			disabled: false
+	} );
+
+	assert.lacksClasses( table, "ui-state-disabled" );
 } );
 
-QUnit.test( "Reflow mode honors <abbr> tag title", function( assert ) {
-	var table = $( "#reflow-abbr-test" );
-
-	assert.deepEqual( $( "#reflow-abbr-td1 b" ).text(), "Player Name", "Row 1 has the right label" );
-	assert.deepEqual( $( "#reflow-abbr-td2 b" ).text(), "Player Name", "Row 2 has the right label" );
-} );
-
-QUnit.asyncTest( "The appropriate label is added", function( assert ) {
-	setTimeout( function() {
-		var $table = $( "#reflow-table-test table" ),
-			$firstHeaderCell = $table.find( 'thead tr th' ).first(),
-			$body = $table.find( "tbody" ),
-			$tds = $body.find( "td" ),
-			labels = $tds.find( "b.ui-table-cell-label" );
-		assert.ok( labels, "Appropriate label placed" );
-		assert.equal( $( labels[ 0 ] ).text(), "Movie Title", "Appropriate label placed" );
-
-		// refresh
-		setTimeout( function() {
-			$( window ).trigger( "refresh_test_table", [ "#reflow-table-test" ] );
-
-			assert.equal(
-				$firstHeaderCell.jqmData( "cells" ).first().find( 'b' ).length,
-				1,
-				"Refreshing does not add more labels to a table cell"
-			);
-			QUnit.start();
-		}, 800 );
-	}, 800 );
-} );
-
-QUnit.asyncTest( "Reflow table refresh", function( assert ) {
-	var $table = $( '#reflow-table-test .ui-table' ),
-		$body = $table.find( "tbody" ),
-		$tds = $body.find( "td" ),
-		labels = $tds.find( "b.ui-table-cell-label" );
-
-	setTimeout( function() {
-		// refresh table
-		$( window ).trigger( "refresh_test_table", [ "#reflow-table-test" ] );
-
-		assert.ok( $table.length, "table still enhanced" );
-		assert.ok( $tds.find( "b.ui-table-cell-label" ).length > 0, "Labels still there" );
-		QUnit.start();
-	}, 800 );
-} );
-
-QUnit.module( "Column toggle table Mode", {
-	setup: function() {
-		var hash = "#column-table-test";
-		if ( location.hash != hash ) {
-			QUnit.stop();
-
-			$( document ).one( "pagechange", function() {
-				QUnit.start();
-			} );
-
-			$.mobile.changePage( hash );
-		}
-	},
-
-	teardown: function() {}
-} );
-
-QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
-	setTimeout( function() {
-		var $popup = $( '#column-table-test #movie-table-column-popup-popup' ),
-			button = $( '#column-table-test .ui-table-columntoggle-button:last' );
-
-		assert.ok( $( '#column-table-test .ui-table-columntoggle' ).length, ".ui-table-columntoggle class added to table element" );
-		assert.ok( $( '#column-table-test .ui-table-columntoggle-button' ).length, ".ui-table-columntoggle-button button added" );
-		assert.deepEqual( button.text(), "Columns...", "Column toggle button has correct text" );
-		assert.ok( $popup.length, "dialog added" );
-		assert.ok( $popup.is( ".ui-popup-hidden" ), "dialog hidden" );
-		assert.ok( $( '#column-table-test #movie-table-column-popup-popup' ).find( "input[type=checkbox]" ).length > 0, "Checkboxes added" );
-		assert.deepEqual( $( "#column-table-test #movie-table-column-popup-popup" ).find( "input[type=checkbox]:nth(2)" ).next().text(),
-			" Rotten Tomato Rating",
-			"The presence of an <abbr> tag with title attribute in the <th> causes the value of the attribute to be used for the checkbox label" );
-
-		QUnit.start();
-	}, 800 );
-} );
-
-QUnit.asyncTest( "Toggle column", function( assert ) {
-	assert.expect( 9 );
-
-	var initial, post,
-		input = $( "#toggle-column-test-popup input:nth(1)" ),
-		column = $( "#toggle-column-test tr>:nth-child(3)" ),
-
-		// Ascertain visibility and consistency
-		checkColumn = function( messagePrefix ) {
-			var visible = undefined,
-				inconsistent = false;
-
-			column.each( function() {
-				if ( visible === undefined ) {
-					visible = !!$( this ).is( ":visible" );
-				} else {
-					inconsistent = ( !!$( this ).is( ":visible" ) !== visible );
-				}
-				if ( inconsistent ) {
-
-					// Stop checking
-					return false;
-				}
-			} );
-
-			assert.deepEqual( inconsistent, false,
-				messagePrefix + " visibility of column members is consistent" );
-			assert.deepEqual( visible, input.is( ":checked" ),
-				messagePrefix + " visibility of column members coincides with the " +
-				"corresponding column checkbox state" );
-
-			return visible;
+function testSetHeaders( prefix, element ) {
+	var instance = { element: element },
+		expected = {
+			headerRows: element.find( "[data-header-rows]" ),
+			headers: element.find( "[data-headers]" ),
+			allHeaders: element.find( "[data-all-headers]" ),
+			allRowsExceptFirst: element.find( "[data-all-rows-except-first]" )
 		};
 
-	$.testHelper.detailedEventCascade( [
+	QUnit.test( prefix + "_setHeaders()", function( assert ) {
+		tableProto._setHeaders.call( instance );
+		$.each( expected, function( key, value ) {
+			var messagePrefix = prefix + "_setHeaders(): " + key;
 
-		function() {
-			initial = checkColumn( "Initially: " );
-			input.click().checkboxradio( "refresh" ).trigger( "change" );
-		},
+			assert.deepEqual( !!instance[ key ], true,
+				messagePrefix + ": present on instance" );
+			assert.deepEqual( instance[ key ].length, expected[ key ].length,
+				messagePrefix + " has the right length" );
+			assert.deepEqual( instance[ key ].is( function( index, actualElement ) {
+					return !expected[ key ].is( actualElement );
+				} ), false, messagePrefix + " contains the right elements" );
+		} );
+	} );
+}
 
-		{
-			change: { src: input, event: "change.toggleColumn1" }
-		},
+testSetHeaders( "Basic table: ", $( "#table-enhance-test" ) );
+testSetHeaders( "Grouped headers table: ", $( "#grouped-test-table" ) );
 
-		function( result ) {
-			assert.deepEqual( result.change.timedOut, false, "Clicking the checkbox " +
-				"has resulted in a 'change' event" );
-			post = checkColumn( "After clicking: " );
-			assert.deepEqual( initial !== post, true,
-				"Visibility was toggled by clicking the checkbox" );
-			input.prop( "checked", false ).checkboxradio( "refresh" ).trigger( "change" );
-			post = initial;
+function testRefreshHeaderCell( prefix, element, expectedReturnValue, columnCount ) {
+	var instance = {
+			element: element,
+			allRowsExceptFirst: element.find( "[data-all-rows-except-first]" )
 		},
-		{
-			change: { src: input, event: "change.toggleColumn2" }
+		headerCell = element.find( "[data-test-header-cell]" ),
+		expectedCells = element.find( "[data-test-header-expected-cells]" );
+
+	QUnit.skip( prefix + "_refreshHeaderCell()", function( assert ) {
+		var returnValue = tableProto._refreshHeaderCell
+			.call( instance, null, headerCell[ 0 ], columnCount ),
+			cells = headerCell.jqmData( "cells" );
+
+		assert.deepEqual( returnValue, expectedReturnValue, prefix + "return value is correct" );
+		assert.deepEqual( !!cells, true, prefix + "jqmData('cells') is assigned" );
+		assert.deepEqual( cells.length, expectedCells.length,
+			prefix + "'cells' has the right length"  );
+		assert.deepEqual( cells.is( function( index, cell ) {
+			return !expectedCells.is( cell );
+		} ), false, prefix + "'cells' contains the right elements" );
+	} );
+}
+
+testRefreshHeaderCell( "Basic table: ", $( "#table-enhance-test" ), 0, 0 );
+testRefreshHeaderCell( "Grouped headers table: ", $( "#grouped-test-table" ), 3, 1 );
+
+QUnit.test( "_refreshHeaderRow() iterates over all of a row's children", function( assert ) {
+	var cellsVisited = [],
+		row = $( "#table-enhance-test [data-test-header-row]" ),
+		expectedChildren = row.children();
+
+	tableProto._refreshHeaderRow.call( {
+		_refreshHeaderCell: function( index, element, columnCount ) {
+			cellsVisited.push( element );
 		},
-		function() {
-			post = checkColumn( "After unchecking checkbox via its 'checked' property" );
-			assert.deepEqual( initial === post, true,
-				"Unchecking already unchecked checkbox via its 'checked' property does " +
-				"not affect column visibility" );
-			QUnit.start();
-		}
-	] );
+		allRowsExceptFirst: $( "#table-enhance-test [data-all-rows-except-first]" )
+	}, null, row[ 0 ] );
+	assert.deepEqual( cellsVisited.length, expectedChildren.length,
+		"The right number of cells were visited" );
+	assert.deepEqual( $( cellsVisited ).is( function( index, actualChild ) {
+			return !expectedChildren.is( actualChild );
+		} ), false, "All the row's cells were visited" );
 } );
 
-QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
+QUnit.test( "refresh() iterates over all the rows of a table", function( assert ) {
+	var rowsVisited = [],
+		table = $( "#grouped-test-table" ),
+		expectedChildren = table.find( "thead tr" );
 
-	// hide one column and refresh
-	var $second_input, $visibleCells, $visibleHeaders,
-		$input = $( ".ui-popup-container" ).find( "input" ).eq( 2 ),
-		$table = $( '#movie-table-column' );
-
-	$input.trigger( 'click' );
-
-	setTimeout( function() {
-
-		$( window ).trigger( "refresh_test_table", [ "#column-table-test" ] );
-
-		$second_input = $( ".ui-popup-container" ).find( "input" ).eq( 1 ),
-		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' ),
-		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' );
-
-		assert.ok( $table.length, "Table still enhanced" );
-
-		assert.equal(
-			$table.find( 'tbody tr' ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( 'ui-table-cell-hidden' ),
-			false,
-			"Refreshing a table clears all ui-table-cell-hidden/show classes"
-		);
-
-		assert.ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
-
-		assert.equal(
-			$second_input.jqmData( "cells" ).last().attr( "data-test" ),
-			"foo",
-			"Cell referenced in popup is in table after refresh, columns without data-priority set don't break table on refresh" );
-
-		assert.equal(
-			$visibleCells.length,
-			$visibleHeaders.length,
-			"same number of headers and rows visible"
-		);
-		QUnit.start();
-	}, 1200 );
+	tableProto.refresh.call( {
+		_setHeaders: tableProto._setHeaders,
+		_refreshHeaderRow: function( rowIndex, element ) {
+			rowsVisited.push( element );
+		},
+		element: table
+	} );
+	assert.deepEqual( rowsVisited.length, expectedChildren.length,
+		"The right number of rows were visited" );
+	assert.deepEqual( $( rowsVisited ).is( function( index, actualChild ) {
+			return !expectedChildren.is( actualChild );
+		} ), false, "All the table's rows were visited" );
 } );
 
-QUnit.asyncTest( "Column toggle table rebuild", function( assert ) {
+function testDestroy( prefix, enhanced ) {
+	QUnit.test( prefix + "_destroy() undoes table-related changes", function( assert ) {
+		var testClass = "foo";
+		var table = $( "#destroy-test" )
+				.clone()
+				.find( "thead tr" )
+					.children()
+						.each( function( index, element ) {
+							$( element ).jqmData( "cells", true );
+						} )
+					.end()
+				.end()
+				.addClass( testClass )
+				.table();
 
-	var $last_input, $visibleCells, $visibleHeaders,
-		$input = $( "#movie-table-column-popup" ).find( "input" ).eq( 2 ),
-		$table = $( '#movie-table-column' );
+		table.table( "destroy" );
+		assert.deepEqual( table.find( "thead tr" ).children().is( function( index, element ) {
+				return !!$( element ).jqmData( "cells" );
+			} ), false, prefix + "'cells' data has been removed" );
+	} );
+}
 
-	$input.trigger( 'click' );
+testDestroy( "Normal: ", false );
+testDestroy( "Pre-rendered: ", true );
 
-	setTimeout( function() {
-
-		$( window ).trigger( "refresh_col_table", [ "#column-table-test" ] );
-
-		$last_input = $( "#movie-table-column-popup" ).find( "input" ).last(),
-		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' ),
-		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' );
-
-		assert.ok( $table.length, "Table still enhanced after rebuild" );
-		assert.equal(
-			$table.find( 'tbody tr' ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( 'ui-table-cell-hidden' ),
-			false,
-			"Rebuilding a table clears all ui-table-cell-hidden/show classes"
-		);
-		assert.ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
-
-		assert.equal(
-			$last_input.jqmData( "cells" ).last().attr( "data-test" ),
-			"xyz",
-			"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild" );
-
-		assert.equal(
-			$visibleCells.length,
-			$visibleHeaders.length,
-			"same number of headers and rows visible"
-		);
-
-		QUnit.start();
-	}, 1200 );
-} );
-
-QUnit.asyncTest( "The dialog should become visible when button is clicked", function( assert ) {
-	assert.expect( 2 );
-	var $input;
-	$.testHelper.pageSequence( [
-		function() {
-			$( ".ui-table-columntoggle-button:last" ).click();
-		},
-		function() {
-			setTimeout( function() {
-				assert.ok( $( "#movie-table-column-popup-popup" ).not( ".ui-popup-hidden" ), "Table popup is shown on click" );
-			}, 800 );
-		},
-		function() {
-			$input = $( "#movie-table-column-popup-popup" ).find( "input:first" );
-			$input.click();
-		},
-		function() {
-			setTimeout( function() {
-				var headers = $( "#column-table-test table tr" ).find( "th:first" );
-				if ( $input.is( ":checked" ) ) {
-					assert.ok( headers.not( ".ui-table-cell-hidden" ) );
-				} else {
-					assert.ok( headers.is( ".ui-table-cell-hidden" ) );
-				}
-			}, 800 );
-		},
-		function() {
-			QUnit.start();
-		}
-	] );
-} );
 } )( QUnit, jQuery );

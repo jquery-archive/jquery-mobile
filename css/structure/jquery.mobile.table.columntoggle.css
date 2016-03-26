@@ -2,15 +2,6 @@
  Styles for the table columntoggle mode
 */
 
-.ui-table-columntoggle-button {
-	float: right;
-	margin-bottom: .8em;
-}
-/* Remove top/bottom margins around the fieldcontain on check list */
-.ui-table-columntoggle-popup fieldset {
-	margin:0;
-}
-
 .ui-table-columntoggle {
 	clear: both;
 }

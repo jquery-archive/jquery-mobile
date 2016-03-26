@@ -34,76 +34,98 @@ return $.widget( "mobile.table", {
 
 	options: {
 		classes: {
-			table: "ui-table"
+			"ui-table": ""
 		},
 		enhanced: false
 	},
 
+	// Expose headers and allHeaders properties on the widget headers references the THs within the
+	// first TR in the table
+	headers: null,
+
+	// AllHeaders references headers, plus all THs in the thead, which may or may not include
+	// several rows
+	allHeaders: null,
+
 	_create: function() {
-		if ( !this.options.enhanced ) {
-			this.element.addClass( this.options.classes.table );
+		var options = this.options;
+
+		if ( !options.enhanced ) {
+			this._addClass( "ui-table",
+				( options.disabled ? " ui-state-disabled" : "" ) );
 		}
 
-		// extend here, assign on refresh > _setHeaders
-		$.extend( this, {
+		this.refresh();
+	},
 
-			// Expose headers and allHeaders properties on the widget
-			// headers references the THs within the first TR in the table
-			headers: undefined,
-
-			// allHeaders references headers, plus all THs in the thead, which may
-			// include several rows, or not
-			allHeaders: undefined
-		} );
-
-		this._refresh( true );
+	_setOptions: function( options ) {
+		if ( options.disabled !== undefined ) {
+			this._toggleClass( null, "ui-state-disabled", options.disabled );
+		}
+		return this._super( options );
 	},
 
 	_setHeaders: function() {
-		var trs = this.element.find( "thead tr" );
+		this.headerRows = this.element.children( "thead" ).children( "tr" );
+		this.headers = this.headerRows.first().children();
+		this.allHeaders = this.headerRows.children();
+		this.allRowsExceptFirst = this.element
+			.children( "thead,tbody" )
+				.children( "tr" )
+					.not( this.headerRows.eq( 0 ) );
+	},
 
-		this.headers = this.element.find( "tr:eq(0)" ).children();
-		this.allHeaders = this.headers.add( trs.children() );
+	// Deprecated as of 1.5.0 and will be removed in 1.6.0 - use refresh() instead
+	rebuild: function() {
+		this.refresh();
+	},
+
+	_refreshHeaderCell: function( cellIndex, element, columnCount ) {
+		var columnIndex,
+			span = parseInt( element.getAttribute( "colspan" ), 10 ),
+			selector = ":nth-child(" + ( columnCount + 1 ) + ")";
+
+		if ( span ) {
+			for ( columnIndex = 0; columnIndex < span - 1; columnIndex++ ) {
+				columnCount++;
+				selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
+			}
+		}
+
+		// Store "cells" data on header as a reference to all cells in the same column as this TH
+		$( element ).jqmData( "cells",
+			this.allRowsExceptFirst
+				.not( element )
+				.children( selector ) );
+
+		return columnCount;
+	},
+
+	_refreshHeaderRow: function( rowIndex, element ) {
+		var columnCount = 0;
+
+		// Iterate over the children of the tr
+		$( element ).children().each( $.proxy( function( cellIndex, element ) {
+			columnCount = this._refreshHeaderCell( cellIndex, element, columnCount ) + 1;
+		}, this ) );
 	},
 
 	refresh: function() {
-		this._refresh();
-	},
 
-	rebuild: $.noop,
-
-	_refresh: function( /* create */ ) {
-		var table = this.element,
-			trs = table.find( "thead tr" );
-
-		// updating headers on refresh (fixes #5880)
+		// Updating headers on refresh (fixes #5880)
 		this._setHeaders();
 
-		// Iterate over the trs
-		trs.each( function() {
-			var columnCount = 0;
+		// Iterate over the header rows
+		this.headerRows.each( $.proxy( this, "_refreshHeaderRow" ) );
+	},
 
-			// Iterate over the children of the tr
-			$( this ).children().each( function() {
-				var span = parseInt( this.getAttribute( "colspan" ), 10 ),
-					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
-					j;
+	_destroy: function() {
+		var table = this.element;
 
-				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
-
-				if ( span ) {
-					for ( j = 0; j < span - 1; j++ ) {
-						columnCount++;
-						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
-					}
-				}
-
-				// Store "cells" data on header as a reference to all cells in the
-				// same column as this TH
-				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
-
-				columnCount++;
-			} );
+		// We have to remove "cells" data even if the table was originally enhanced, because it is
+		// added during refresh
+		table.find( "thead tr" ).children().each( function() {
+			$( this ).jqmRemoveData( "cells" );
 		} );
 	}
 } );

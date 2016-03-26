@@ -100,6 +100,7 @@ $files = array(
 	'widgets/popup.arrow.backcompat.js',
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',
+	'widgets/table.columntoggle.popup.js',
 	'widgets/table.reflow.js',
 	'../external/jquery-ui/tabs.js',
 	'widgets/tabs.ajax.js',
