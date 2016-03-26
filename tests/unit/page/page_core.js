@@ -1,13 +1,12 @@
 /*
- * mobile page unit tests
+ * Mobile page unit tests
  */
 define( [
 	"qunit",
 	"jquery",
-	"./page.setup.js"
-	], function( QUnit, $, container ) {
+	], function( QUnit, $ ) {
 
-var libName = 'jquery.mobile.page',
+var libName = "jquery.mobile.page",
 	themedefault = $.mobile.page.prototype.options.theme;
 
 QUnit.module( libName );
@@ -83,8 +82,7 @@ QUnit.test( "Binding to pagebeforecreate and returning false prevents classes fr
 	assert.ok( !$( "#c" ).hasClass( "ui-page" ) );
 } );
 
-
-QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ){
+QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ) {
 	assert.expect( 1 );
 
 	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
