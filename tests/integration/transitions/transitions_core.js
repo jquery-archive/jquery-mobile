@@ -1,5 +1,5 @@
 /*
- * mobile navigation unit tests
+ * Mobile navigation unit tests
  */
 ( function( $ ) {
 var transitioning = "ui-mobile-viewport-transitioning",
@@ -27,7 +27,7 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		$.mobile.maxTransitionWidth = defaultMaxTrans;
 	},
 
-	//animationComplete callback queue
+	//AnimationComplete callback queue
 	fromQueue = [],
 	toQueue = [],
 
@@ -44,21 +44,19 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		toQueue.push( f );
 	},
 
-
-	//wipe all urls
+	//Wipe all urls
 	clearUrlHistory = function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
 	};
 
-module( 'jquery.mobile.navigation.js', {
+module( "jquery.mobile.navigation.js", {
 	setup: function() {
 
-
-		// disable this option so we can test transitions regardless of window width
+		// Disable this option so we can test transitions regardless of window width
 		disableMaxTransWidth();
 
-		//stub to allow callback before function is returned to transition handler
+		//Stub to allow callback before function is returned to transition handler
 		$.fn.animationComplete = function( callback ) {
 			animationCompleteFn.call( this, function() {
 				var queue = $( this ).is( ".out" ) ? fromQueue : toQueue;
@@ -86,7 +84,8 @@ module( 'jquery.mobile.navigation.js', {
 	},
 
 	teardown: function() {
-		// unmock animation complete
+
+		// Unmock animation complete
 		$.fn.animationComplete = animationCompleteFn;
 		enableMaxTransWidth();
 	}
@@ -185,8 +184,7 @@ test( "animationComplete return value", function() {
 	equal( $( "#foo" ).animationComplete( function() {} )[ 0 ], $( "#foo" )[ 0 ] );
 } );
 
-
-// reusable function for a few tests below
+// Reusable function for a few tests below
 function testTransitionMaxWidth( val, expected ) {
 	expect( 1 );
 
@@ -197,7 +195,6 @@ function testTransitionMaxWidth( val, expected ) {
 	onToComplete( function() {
 		transitionOccurred = true;
 	} );
-
 
 	return setTimeout( function() {
 		ok( transitionOccurred === expected, ( expected ? "" : "no " ) + "transition occurred" );
