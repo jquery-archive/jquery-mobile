@@ -88,7 +88,8 @@ QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", fu
 
 	$.mobile.activePage
 		.bind( "pagebeforeshow", function() {
-			assert.ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
+			assert.ok( $( ".ui-pagecontainer" ).hasClass( pageTheme ),
+				"Page container has the same theme as the page on pagebeforeshow" );
 			QUnit.start();
 		} )
 		.trigger( "pagebeforeshow" );
