@@ -43,7 +43,6 @@ QUnit.test( "disables scrollstart for a short duration", function( assert ) {
 	assert.equal( $.event.special.scrollstart.enabled, false, "scrollstart is disabled" );
 } );
 
-
 QUnit.module( "Transition doneIn", {
 	setup: function() {
 		$to = $( "<div>" );
@@ -64,11 +63,11 @@ QUnit.test( "removes classes from the destination 'page'", function( assert ) {
 QUnit.test( "scrolls the page", function( assert ) {
 	assert.expect( 1 );
 
-	// ensure the two values are different to trigger the method call
+	// Ensure the two values are different to trigger the method call
 	window.scrollTo( 0, 0 );
 	instance.toScroll = 100;
 
-	// stub to capture call
+	// Stub to capture call
 	instance.scrollPage = function() {
 		assert.ok( true, "scrollPage called" );
 	};
@@ -154,12 +153,12 @@ QUnit.asyncTest( "runs in and out methods in order", function( assert ) {
 
 	defaults = $.extend( {}, $.mobile.Transition.prototype );
 
-	// transition child classes generally set this up
+	// Transition child classes generally set this up
 	instance.beforeStartOut = function() {
 		this.doneOut.apply( this, arguments );
 	};
 
-	// when the transition is anything but "none" the animation is waited for
+	// When the transition is anything but "none" the animation is waited for
 	// to fire the last step. stub and fire here
 	$to.animationComplete = function( callback ) {
 		callback();
