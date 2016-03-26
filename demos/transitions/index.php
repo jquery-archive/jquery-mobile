@@ -100,7 +100,7 @@
 
 	<p><strong>Only seeing fade transitions?</strong> To view all transition types, you must be on a browser that supports 3D transforms. By default, devices that lack 3D support (such as Android 2.x) will fallback to "fade" for all transition types. This behavior is configurable (see below).</p>
 
-	<p><strong>Transitions were originally inspired by <a href="http://www.jqtouch.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
+	<p><strong>Transitions were originally inspired by <a href="http://www.jqtjs.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
 
 		<h2>Setting a transition</h2>
 		<p>By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>

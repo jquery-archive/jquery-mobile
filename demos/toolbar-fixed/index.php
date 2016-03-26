@@ -70,7 +70,7 @@
 			<h3>Polyfilling older platforms</h3>
 			<p>The fixed toolbar plugin degrades gracefully in platforms that do not support CSS <code>position:fixed</code> properly, such as iOS4.3. If you still need to support fixed toolbars on that platform (with the show/hide behavior) included in previous releases, Filament Group has developed a polyfill that you can use.</p>
 
-			<ul><li><a href="http://slashdot.org/">Slashdot</a></li><li><a href="http://www.intel.com/">Intel</a></li></ul>
+			<ul><li><a href="https://slashdot.org/">Slashdot</a></li><li><a href="http://www.intel.com/">Intel</a></li></ul>
 			<ul>
 					<li><a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">Github code repository with CSS, and JavaScript required for the fixed toolbars polyfill</a></li>
 					<li><a href="http://filamentgroup.github.com/jQuery-Mobile-FixedToolbar-Legacy-Polyfill/">Preview URL using the code in the repo above</a></li>
