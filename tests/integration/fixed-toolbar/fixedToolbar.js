@@ -167,8 +167,8 @@ asyncTest( "The toggle method is working properly", function( assert ) {
 asyncTest( "Fullscreen toolbars add classes to page", function( assert ) {
 	expect( 2 );
 
-	$.testHelper.sequence([
-		function(){
+	$.testHelper.sequence( [
+		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#fullscreen-test-a" );
 		},
 
@@ -188,113 +188,8 @@ asyncTest( "Fullscreen toolbars add classes to page", function( assert ) {
 	], 500 );
 } );
 
-asyncTest( "The persistent headers and footers are working properly", function() {
-
-	expect( 3 );
-
-	$( "#persist-test-b, #persist-test-a" ).page();
-
-	var nextpageheader = $( "#persist-test-b .ui-toolbar-header-fixed" ),
-		nextpagefooter = $( "#persist-test-b .ui-toolbar-footer-fixed" );
-
-	$.testHelper.pageSequence([
-		function(){
-			ok( nextpageheader.length && nextpagefooter.length,
-				"next page has fixed header and fixed footer" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-a" );
-		},
-
-		function() {
-			$( "#persist-test-b" )
-				.one( "pagebeforeshow", function() {
-					ok( nextpageheader.parent().parent( ".ui-mobile-viewport" ).length,
-						"fixed header and footer are now a child of page container" );
-				} );
-
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-b" );
-		},
-
-		function() {
-			ok( nextpageheader.parent( ".ui-page" ).length,
-				"fixed header and footer are now a child of page again" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
-		},
-
-		start
-	] );
-} );
-
-asyncTest( "The persistent headers should work without a footer", function() {
-
-	expect( 3 );
-
-	$( "#persist-test-c, #persist-test-d" ).page();
-
-	var nextpageheader = $( "#persist-test-d .ui-toolbar-header-fixed" );
-
-	$.testHelper.pageSequence([
-		function(){
-			ok( nextpageheader.length, "next page has fixed header and fixed footer" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-c" );
-		},
-
-		function() {
-			$( "#persist-test-d" )
-				.one( "pagebeforeshow", function() {
-					deepEqual( nextpageheader.parent()[ 0 ], $( ".ui-pagecontainer" )[ 0 ],
-						"fixed header is now a child of page container" );
-				} );
-
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-d" );
-		},
-
-		function() {
-
-			deepEqual( nextpageheader.parent()[ 0 ], $.mobile.activePage[ 0 ],
-				"fixed header is now a child of page again" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
-		},
-
-		start
-	] );
-} );
-
-asyncTest( "The persistent footers should work without a header", function() {
-
-	expect( 3 );
-
-	$( "#persist-test-e, #persist-test-f" ).page();
-
-	var nextpagefooter = $( "#persist-test-f .ui-toolbar-footer-fixed" );
-
-	$.testHelper.pageSequence([
-		function(){
-			ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-e" );
-		},
-		function() {
-			$( "#persist-test-f" )
-				.one( "pagebeforeshow", function() {
-					deepEqual( nextpagefooter.parent()[ 0 ], $( ".ui-pagecontainer" )[ 0 ],
-						"fixed footer is now a child of page container" );
-				} );
-
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#persist-test-f" );
-		},
-
-		function() {
-			deepEqual( nextpagefooter.parent()[0], $.mobile.activePage[0],
-				"fixed footer is now a child of page again" );
-			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
-		},
-
-		start
-	] );
-} );
-
-
 var asyncTestFooterAndHeader = function( pageSelector, visible ) {
-	$.testHelper.pageSequence([
+	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", pageSelector );
 		},
@@ -311,7 +206,6 @@ var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 				"the footer should be " + hiddenStr );
 			equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible,
 				"the header should be " + hiddenStr );
-
 
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
 		},
