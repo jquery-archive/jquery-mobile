@@ -1,5 +1,5 @@
 /*
- * mobile select unit tests
+ * Mobile select unit tests
  */
 
 define( [ "jquery" ], function( $ ) {
