@@ -48,6 +48,7 @@ asyncTest( "navigation events are marked", function() {
 } );
 
 asyncTest( "navigation events can be disabled with prevent default on beforenavigate", function() {
+
 	// Failure in this test would be 3 test assertions
 	expect( 2 );
 
@@ -61,10 +62,10 @@ asyncTest( "navigation events can be disabled with prevent default on beforenavi
 		start();
 	} );
 
-	// fire a navigate that will be prevented
+	// Fire a navigate that will be prevented
 	location.hash = "foo";
 
-	// fire another to absorb the navigate binding
+	// Fire another to absorb the navigate binding
 	location.hash = "bar";
 } );
 
@@ -106,7 +107,7 @@ if ( $.support.pushState ) {
 		] );
 	} );
 
-	// relies on having the early popstate handler defined in early_popstate_handler.js
+	// Relies on having the early popstate handler defined in early_popstate_handler.js
 	asyncTest( "Default-prevented popstate does not trigger a navigate event",
 		function( assert ) {
 			var eventNs = ".defaultPreventedPopstate";
