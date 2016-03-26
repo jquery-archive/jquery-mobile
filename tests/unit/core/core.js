@@ -1,5 +1,5 @@
 /*
- * mobile core unit tests
+ * Mobile core unit tests
  */
 
 define( [ "jquery", "qunit" ], function( $, QUnit ) {
@@ -17,10 +17,10 @@ QUnit.module( libName, {
 		$.mobile.ns = ns;
 
 		// NOTE reset for gradeA tests
-		$( 'html' ).removeClass( 'ui-mobile' );
+		$( "html" ).removeClass( "ui-mobile" );
 
 		// NOTE reset for pageLoading tests
-		$( '.ui-loader' ).remove();
+		$( ".ui-loader" ).remove();
 	},
 	teardown: function() {
 		$.extend = extendFn;
@@ -60,6 +60,7 @@ function clearNSNormalizeDictionary() {
 }
 
 QUnit.test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function( assert ) {
+
 	// Start with a fresh namespace property cache, just in case
 	// the previous test mucked with namespaces.
 	clearNSNormalizeDictionary();
@@ -93,7 +94,7 @@ QUnit.test( "$.mobile.nsNormalize works properly with an empty namespace", funct
 	clearNSNormalizeDictionary();
 } );
 
-//data tests
+//Data tests
 QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function( assert ) {
 	var data;
 
@@ -106,7 +107,7 @@ QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", 
 	assert.deepEqual( $( "body" ).jqmData( "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
 
 	data = $.extend( {}, $( "body" ).data() );
-	delete data[ $.expando ]; //discard the expando for that test
+	delete data[ $.expando ]; //Discard the expando for that test
 	assert.deepEqual( data.nstestFoo, true, "passing .data() no arguments returns a hash with all set properties" );
 
 	assert.deepEqual( $( "body" ).jqmData(), undefined, "passing no arguments returns undefined" );
@@ -120,7 +121,6 @@ QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", 
 	assert.deepEqual( $( "body" ).jqmData( "foo" ), undefined, "jqmRemoveData properly removes namespaced data" );
 
 } );
-
 
 QUnit.test( "$.jqmData and $.jqmRemoveData methods are working properly", function( assert ) {
 	assert.deepEqual( $.jqmData( document.body, "foo", true ), true, "setting data returns the value" );
@@ -144,9 +144,9 @@ QUnit.test( "$.jqmData and $.jqmRemoveData methods are working properly", functi
 } );
 
 QUnit.test( "addDependents works properly", function( assert ) {
-	assert.deepEqual( $( "#parent" ).jqmData( 'dependents' ), undefined );
+	assert.deepEqual( $( "#parent" ).jqmData( "dependents" ), undefined );
 	$( "#parent" ).addDependents( $( "#dependent" ) );
-	assert.deepEqual( $( "#parent" ).jqmData( 'dependents' ).length, 1 );
+	assert.deepEqual( $( "#parent" ).jqmData( "dependents" ).length, 1 );
 } );
 
 QUnit.test( "removeWithDependents removes the parent element and ", function( assert ) {
