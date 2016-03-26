@@ -1,5 +1,5 @@
 /*
- * mobile flipswitch unit tests
+ * Mobile flipswitch unit tests
  */
 ( function( $ ) {
 
