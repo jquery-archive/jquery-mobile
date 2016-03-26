@@ -1,9 +1,9 @@
 /*
- * mobile popup unit tests
+ * Mobile popup unit tests
  */
-( function( $ ) {
+( function( QUnit, $ ) {
 
-module( "jquery.mobile.popup.js" );
+QUnit.module( "jquery.mobile.popup.js" );
 
 function pointInRect( pt, rc ) {
 	return ( pt.x >= rc.x && pt.x <= rc.x + rc.cx && pt.y >= rc.y && pt.y <= rc.y + rc.cy );
@@ -21,7 +21,7 @@ function popupEnhancementTests( assert, sel, prefix ) {
 	var container = sel.parent(),
 		screen = sel.parent().prev();
 
-	ok( sel.popup( "instance" ), prefix + ", popup div is associated with a popup widget" );
+	assert.ok( sel.popup( "instance" ), prefix + ", popup div is associated with a popup widget" );
 	assert.hasClasses( sel, "ui-popup",
 		prefix + ", popup payload has class 'ui-popup'" );
 	assert.hasClasses( container, "ui-popup-container",
@@ -30,19 +30,19 @@ function popupEnhancementTests( assert, sel, prefix ) {
 		prefix + ", popup container parent is the page" );
 	assert.hasClasses( screen, "ui-popup-screen",
 		prefix + ", popup div is preceded by its screen" );
-	ok( container.attr( "id" ) === sel.attr( "id" ) + "-popup",
+	assert.ok( container.attr( "id" ) === sel.attr( "id" ) + "-popup",
 		prefix + ", popup container has the id of the payload + '-popup'" );
-	ok( screen.attr( "id" ) === sel.attr( "id" ) + "-screen",
+	assert.ok( screen.attr( "id" ) === sel.attr( "id" ) + "-screen",
 		prefix + ", popup screen has the id of the payload + '-screen'" );
 }
 
-function tolTest( el, popup, val, expected ) {
+function tolTest( assert, el, popup, val, expected ) {
 	el.popup( "option", "tolerance", val );
-	deepEqual( popup._tolerance, expected,
+	assert.deepEqual( popup._tolerance, expected,
 		"Popup tolerance: '" + val + "' results in expected tolerances" );
 }
 
-test( "Popup placement works correctly", function() {
+QUnit.test( "Popup placement works correctly", function( assert ) {
 	var desired, result,
 		testElem = $( "#tolerance-test" ),
 		popup = testElem.popup( "instance" ),
@@ -55,14 +55,14 @@ test( "Popup placement works correctly", function() {
 			cy: wnd.height()
 		};
 
-	ok( rectInRect( clampInfo.rc, windowRect ), "placement window lies within viewport" );
+	assert.ok( rectInRect( clampInfo.rc, windowRect ), "placement window lies within viewport" );
 
 	clampInfo.menuSize.cx = 120;
 	clampInfo.menuSize.cy = 50;
 
 	desired = { x: -12, y: -12 };
 	result = popup._calculateFinalLocation( desired, clampInfo );
-	ok( rectInRect( {
+	assert.ok( rectInRect( {
 		x: result.left,
 		y: result.top,
 		cx: clampInfo.menuSize.cx,
@@ -73,7 +73,7 @@ test( "Popup placement works correctly", function() {
 
 	desired = { x: 23990, y: 19223 };
 	result = popup._calculateFinalLocation( desired, clampInfo );
-	ok( rectInRect( {
+	assert.ok( rectInRect( {
 		x: result.left,
 		y: result.top,
 		cx: clampInfo.menuSize.cx,
@@ -83,53 +83,54 @@ test( "Popup placement works correctly", function() {
 		"result: (" + result.left + "," + result.top + ") lies within the placement window." );
 } );
 
-test( "Popup tolerances are parsed correctly", function() {
+QUnit.test( "Popup tolerances are parsed correctly", function( assert ) {
 	var tolTestElement = $( "#tolerance-test" ),
 		tolTestPopup = tolTestElement.popup( "instance" ),
 		defaultValues = tolTestPopup._tolerance;
 
-	ok( (
+	assert.ok( (
 		$.type( defaultValues.t ) === "number" && !isNaN( defaultValues.t ) &&
 		$.type( defaultValues.r ) === "number" && !isNaN( defaultValues.r ) &&
 		$.type( defaultValues.b ) === "number" && !isNaN( defaultValues.b ) &&
 		$.type( defaultValues.l ) === "number" && !isNaN( defaultValues.l ) ),
 			"Default tolerances are numbers and not NaN" );
 
-	tolTest( tolTestElement, tolTestPopup, "", defaultValues );
-	tolTest( tolTestElement, tolTestPopup, "0", { t: 0, r: 0, b: 0, l: 0 } );
-	tolTest( tolTestElement, tolTestPopup, "14,12", { t: 14, r: 12, b: 14, l: 12 } );
-	tolTest( tolTestElement, tolTestPopup, "9,4,11,5", { t: 9, r: 4, b: 11, l: 5 } );
-	tolTest( tolTestElement, tolTestPopup, null, defaultValues );
+	tolTest( assert, tolTestElement, tolTestPopup, "", defaultValues );
+	tolTest( assert, tolTestElement, tolTestPopup, "0", { t: 0, r: 0, b: 0, l: 0 } );
+	tolTest( assert, tolTestElement, tolTestPopup, "14,12", { t: 14, r: 12, b: 14, l: 12 } );
+	tolTest( assert, tolTestElement, tolTestPopup, "9,4,11,5", { t: 9, r: 4, b: 11, l: 5 } );
+	tolTest( assert, tolTestElement, tolTestPopup, null, defaultValues );
 } );
 
-test( "Popup is enhanced correctly", function( assert ) {
+QUnit.test( "Popup is enhanced correctly", function( assert ) {
 	popupEnhancementTests( assert, $( "#test-popup" ), "When autoenhanced" );
-	ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->",
+	assert.ok(
+		$( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->",
 		"When autoenhanced, there is a placeholder in the popup div's original location" );
 } );
 
-test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is " +
+QUnit.test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is " +
 	"re-created", function( assert ) {
 		$( "#test-popup" ).popup( "destroy" );
 
-		ok( $( "#page-content" ).children().first().attr( "id" ) === "test-popup",
+		assert.ok( $( "#page-content" ).children().first().attr( "id" ) === "test-popup",
 			"After destroying a popup, its payload is returned to its original location" );
-		ok( $( "#page-content" ).children().first().prev().html() !==
+		assert.ok( $( "#page-content" ).children().first().prev().html() !==
 		"<!-- placeholder for test-popup -->",
 			"No placeholder precedes the restored popup" );
-		ok( $( "#page-content" ).children().first().next().html() !==
+		assert.ok( $( "#page-content" ).children().first().next().html() !==
 		"<!-- placeholder for test-popup -->",
 			"No placeholder succeedes the restored popup" );
 
 		$( "#test-popup" ).popup();
 
 		popupEnhancementTests( assert, $( "#test-popup" ), "When re-created" );
-		ok( $( "#page-content" ).children().first().html() ===
+		assert.ok( $( "#page-content" ).children().first().html() ===
 		"<!-- placeholder for test-popup -->",
 			"When re-created, there is a placeholder in the popup div's original location" );
 	} );
 
-test( "On-the-fly popup is enhanced and de-enhanced correctly", function( assert ) {
+QUnit.test( "On-the-fly popup is enhanced and de-enhanced correctly", function( assert ) {
 	var $container = $( "<div></div>" ).appendTo( $( "#page-content" ) ),
 		$payload = $( "<p id='otf-popup'>This is an on-the-fly-popup</p>" )
 			.appendTo( $container ),
@@ -138,13 +139,13 @@ test( "On-the-fly popup is enhanced and de-enhanced correctly", function( assert
 	$payload.popup();
 
 	popupEnhancementTests( assert, $payload, "When created on-the-fly" );
-	ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->",
+	assert.ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->",
 		"When created on-the-fly, there is a placeholder in the popup div's original location" );
 	$payload.popup( "destroy" );
-	strictEqual( $.testHelper.domEqual( $payload, reference ), true,
+	assert.strictEqual( $.testHelper.domEqual( $payload, reference ), true,
 		"After destroying on-the-fly popup, the payload is restored" );
-	ok( $container.children().is( $payload ),
+	assert.ok( $container.children().is( $payload ),
 		"After destroying on-the-fly popup, its payload is returned to its original location" );
 } );
 
-} )( jQuery );
+} )( QUnit, jQuery );
