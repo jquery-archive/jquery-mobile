@@ -6,4 +6,4 @@ define( [ "jquery" ], function( $ ) {
 			$.mobile.popup.prototype.options.transition = "fade";
 		} );
 	}
-} )
+} );
