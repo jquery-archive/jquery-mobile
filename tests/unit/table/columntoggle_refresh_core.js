@@ -13,7 +13,7 @@ QUnit.test( "Table refresh does not drop columns", function( assert ) {
 		$( "tbody tr:first > *:visible", table[ 0 ] ).length,
 		"Number of visible headers columns equals number of visible " +
 			"data columns" );
-});
+} );
 
 QUnit.test( "Hidden columns stay hidden after row/column addition", function( assert ) {
 	var table = $( "#refresh-hidden-column-test" );
@@ -42,11 +42,11 @@ QUnit.test( "Hidden columns stay hidden after row/column addition", function( as
 	table.find( "thead tr th:nth(2)" ).before( "<th data-nstest-priority='4'>Test</th>" );
 	table.find( "tbody tr th:nth(2)" ).each( function() {
 		$( this ).before( "<td>Test</td>" );
-	});
+	} );
 	table.table( "refresh" );
 
 	assert.deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 3 ).prop( "checked" ),
 		false, "Checkbox remains unchecked after row addition and table refresh" );
-});
+} );
 
 } );

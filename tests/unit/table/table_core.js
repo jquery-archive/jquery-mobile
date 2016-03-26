@@ -1,6 +1,6 @@
 
 /*
- * mobile table unit tests
+ * Mobile table unit tests
  */
 
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
@@ -23,14 +23,14 @@ QUnit.module( "Basic Table", {
 } );
 QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
 	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' );
+		var $table = $( "#basic-table-test .ui-table" );
 		assert.ok( $table.length, ".ui-table class added to table element" );
 		QUnit.start();
 	}, 800 );
 } );
 QUnit.asyncTest( "Has data object attributed to table", function( assert ) {
 	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' ),
+		var $table = $( "#basic-table-test .ui-table" ),
 			self = $table.data( "mobile-table" );
 		assert.ok( self, "Data object is available" );
 		QUnit.start();
@@ -38,7 +38,7 @@ QUnit.asyncTest( "Has data object attributed to table", function( assert ) {
 } );
 QUnit.asyncTest( "Has headers option", function( assert ) {
 	setTimeout( function() {
-		var $table = $( '#basic-table-test .ui-table' ),
+		var $table = $( "#basic-table-test .ui-table" ),
 			self = $table.data( "mobile-table" );
 		assert.ok( self.headers.length, "Header array is not empty" );
 		assert.equal( 5, self.headers.length, "Number of headers is correct" );
@@ -47,22 +47,22 @@ QUnit.asyncTest( "Has headers option", function( assert ) {
 } );
 QUnit.asyncTest( "Reflow Refresh updates table headers correctly",
 	function( assert ) {
-		var $table = $( '#basic-table-test .ui-table' ),
-			$firstHeaderCell = $table.find( 'thead tr th' ).first(),
+		var $table = $( "#basic-table-test .ui-table" ),
+			$firstHeaderCell = $table.find( "thead tr th" ).first(),
 			$cellLookUp;
 
 		setTimeout( function() {
 
 			$( window ).trigger( "refresh_test_table", [ "#basic-table-test" ] );
 
-			$cellLookUp = $table.find( 'tbody tr' ).first().find( 'th, td' ).first().attr( "data-test" );
+			$cellLookUp = $table.find( "tbody tr" ).first().find( "th, td" ).first().attr( "data-test" );
 
 			assert.ok( $table.length, "table still enhanced" );
 
 			assert.ok( $firstHeaderCell.jqmData( "cells" ).length,
 				"column cells still assigned to header cell" );
 
-			assert.equal( $firstHeaderCell.jqmData( "cells" ).eq( 0 ).closest( "table" ).attr( 'id' ),
+			assert.equal( $firstHeaderCell.jqmData( "cells" ).eq( 0 ).closest( "table" ).attr( "id" ),
 				"movie-table",
 				"Cell stored is a refreshed cell (currently in the table" );
 
@@ -89,7 +89,7 @@ QUnit.module( "Reflow Mode", {
 } );
 QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
 	setTimeout( function() {
-		assert.ok( $( '#reflow-table-test .ui-table-reflow' ).length, ".ui-table-reflow class added to table element" );
+		assert.ok( $( "#reflow-table-test .ui-table-reflow" ).length, ".ui-table-reflow class added to table element" );
 		assert.deepEqual(
 			$( "#reflow-table-test .ui-table-reflow > tbody span.make-it-red" ).length, 1,
 			"span was copied from table header" );
@@ -107,19 +107,19 @@ QUnit.test( "Reflow mode honors <abbr> tag title", function( assert ) {
 QUnit.asyncTest( "The appropriate label is added", function( assert ) {
 	setTimeout( function() {
 		var $table = $( "#reflow-table-test table" ),
-			$firstHeaderCell = $table.find( 'thead tr th' ).first(),
+			$firstHeaderCell = $table.find( "thead tr th" ).first(),
 			$body = $table.find( "tbody" ),
 			$tds = $body.find( "td" ),
 			labels = $tds.find( "b.ui-table-cell-label" );
 		assert.ok( labels, "Appropriate label placed" );
 		assert.equal( $( labels[ 0 ] ).text(), "Movie Title", "Appropriate label placed" );
 
-		// refresh
+		// Refresh
 		setTimeout( function() {
 			$( window ).trigger( "refresh_test_table", [ "#reflow-table-test" ] );
 
 			assert.equal(
-				$firstHeaderCell.jqmData( "cells" ).first().find( 'b' ).length,
+				$firstHeaderCell.jqmData( "cells" ).first().find( "b" ).length,
 				1,
 				"Refreshing does not add more labels to a table cell"
 			);
@@ -129,13 +129,14 @@ QUnit.asyncTest( "The appropriate label is added", function( assert ) {
 } );
 
 QUnit.asyncTest( "Reflow table refresh", function( assert ) {
-	var $table = $( '#reflow-table-test .ui-table' ),
+	var $table = $( "#reflow-table-test .ui-table" ),
 		$body = $table.find( "tbody" ),
 		$tds = $body.find( "td" ),
 		labels = $tds.find( "b.ui-table-cell-label" );
 
 	setTimeout( function() {
-		// refresh table
+
+		// Refresh table
 		$( window ).trigger( "refresh_test_table", [ "#reflow-table-test" ] );
 
 		assert.ok( $table.length, "table still enhanced" );
@@ -163,15 +164,15 @@ QUnit.module( "Column toggle table Mode", {
 
 QUnit.asyncTest( "The page should be enhanced correctly", function( assert ) {
 	setTimeout( function() {
-		var $popup = $( '#column-table-test #movie-table-column-popup-popup' ),
-			button = $( '#column-table-test .ui-table-columntoggle-button:last' );
+		var $popup = $( "#column-table-test #movie-table-column-popup-popup" ),
+			button = $( "#column-table-test .ui-table-columntoggle-button:last" );
 
-		assert.ok( $( '#column-table-test .ui-table-columntoggle' ).length, ".ui-table-columntoggle class added to table element" );
-		assert.ok( $( '#column-table-test .ui-table-columntoggle-button' ).length, ".ui-table-columntoggle-button button added" );
+		assert.ok( $( "#column-table-test .ui-table-columntoggle" ).length, ".ui-table-columntoggle class added to table element" );
+		assert.ok( $( "#column-table-test .ui-table-columntoggle-button" ).length, ".ui-table-columntoggle-button button added" );
 		assert.deepEqual( button.text(), "Columns...", "Column toggle button has correct text" );
 		assert.ok( $popup.length, "dialog added" );
 		assert.ok( $popup.is( ".ui-popup-hidden" ), "dialog hidden" );
-		assert.ok( $( '#column-table-test #movie-table-column-popup-popup' ).find( "input[type=checkbox]" ).length > 0, "Checkboxes added" );
+		assert.ok( $( "#column-table-test #movie-table-column-popup-popup" ).find( "input[type=checkbox]" ).length > 0, "Checkboxes added" );
 		assert.deepEqual( $( "#column-table-test #movie-table-column-popup-popup" ).find( "input[type=checkbox]:nth(2)" ).next().text(),
 			" Rotten Tomato Rating",
 			"The presence of an <abbr> tag with title attribute in the <th> causes the value of the attribute to be used for the checkbox label" );
@@ -249,25 +250,25 @@ QUnit.asyncTest( "Toggle column", function( assert ) {
 
 QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
 
-	// hide one column and refresh
-	var $second_input, $visibleCells, $visibleHeaders,
+	// Hide one column and refresh
+	var $secondInput, $visibleCells, $visibleHeaders,
 		$input = $( ".ui-popup-container" ).find( "input" ).eq( 2 ),
-		$table = $( '#movie-table-column' );
+		$table = $( "#movie-table-column" );
 
-	$input.trigger( 'click' );
+	$input.trigger( "click" );
 
 	setTimeout( function() {
 
 		$( window ).trigger( "refresh_test_table", [ "#column-table-test" ] );
 
-		$second_input = $( ".ui-popup-container" ).find( "input" ).eq( 1 ),
-		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' ),
-		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' );
+		$secondInput = $( ".ui-popup-container" ).find( "input" ).eq( 1 ),
+		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" ),
+		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" );
 
 		assert.ok( $table.length, "Table still enhanced" );
 
 		assert.equal(
-			$table.find( 'tbody tr' ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( 'ui-table-cell-hidden' ),
+			$table.find( "tbody tr" ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( "ui-table-cell-hidden" ),
 			false,
 			"Refreshing a table clears all ui-table-cell-hidden/show classes"
 		);
@@ -275,7 +276,7 @@ QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
 		assert.ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
 
 		assert.equal(
-			$second_input.jqmData( "cells" ).last().attr( "data-test" ),
+			$secondInput.jqmData( "cells" ).last().attr( "data-test" ),
 			"foo",
 			"Cell referenced in popup is in table after refresh, columns without data-priority set don't break table on refresh" );
 
@@ -290,30 +291,30 @@ QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
 
 QUnit.asyncTest( "Column toggle table rebuild", function( assert ) {
 
-	var $last_input, $visibleCells, $visibleHeaders,
+	var $lastInput, $visibleCells, $visibleHeaders,
 		$input = $( "#movie-table-column-popup" ).find( "input" ).eq( 2 ),
-		$table = $( '#movie-table-column' );
+		$table = $( "#movie-table-column" );
 
-	$input.trigger( 'click' );
+	$input.trigger( "click" );
 
 	setTimeout( function() {
 
 		$( window ).trigger( "refresh_col_table", [ "#column-table-test" ] );
 
-		$last_input = $( "#movie-table-column-popup" ).find( "input" ).last(),
-		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' ),
-		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' );
+		$lastInput = $( "#movie-table-column-popup" ).find( "input" ).last(),
+		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" ),
+		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" );
 
 		assert.ok( $table.length, "Table still enhanced after rebuild" );
 		assert.equal(
-			$table.find( 'tbody tr' ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( 'ui-table-cell-hidden' ),
+			$table.find( "tbody tr" ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( "ui-table-cell-hidden" ),
 			false,
 			"Rebuilding a table clears all ui-table-cell-hidden/show classes"
 		);
 		assert.ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
 
 		assert.equal(
-			$last_input.jqmData( "cells" ).last().attr( "data-test" ),
+			$lastInput.jqmData( "cells" ).last().attr( "data-test" ),
 			"xyz",
 			"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild" );
 
