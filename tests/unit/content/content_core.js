@@ -159,7 +159,7 @@ QUnit.test( "extends changePageOptions when current content is a dialog", functi
 	assert.deepEqual( opts.transition, undefined, "Initially, transition is undefined" );
 	assert.deepEqual( opts.reverse, undefined, "Initially, reverse is undefined" );
 
-	// the pageUrl is returned for use as the target url when the active content is a dialog
+	// The pageUrl is returned for use as the target url when the active content is a dialog
 	assert.deepEqual( proto._handleDialog( opts, { direction: "back", pageUrl: "baz" } ), "baz",
 		"pageUrl is returned" );
 
@@ -247,12 +247,12 @@ QUnit.test( "prefers default scroll when current scroll < default scroll", funct
 		return active;
 	};
 
-	// current scroll
+	// Current scroll
 	proto._getScroll = function() {
 		return 0;
 	};
 
-	// default scroll
+	// Default scroll
 	proto._getDefaultScroll = function() {
 		return 1;
 	};
@@ -306,7 +306,7 @@ QUnit.test( "returns the first page when nothing matches", function( assert ) {
 		return $( "<div><div id='initial'></div></div>" ).children().first();
 	};
 
-	// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
+	// Using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
 	assert.ok( proto._find( location.href ).is( "#initial" ), "matches the first page" );
 } );
 
@@ -449,7 +449,7 @@ QUnit.test( "should call the transition method on success", function( assert ) {
 	proto.load = function( to, settings ) {
 		assert.ok( true, "load called" );
 
-		// resolve with a url, options, and new content
+		// Resolve with a url, options, and new content
 		settings.deferred.resolve( "foo", {}, $( "<div id='newcontent'>" ) );
 	};
 
@@ -467,7 +467,7 @@ QUnit.test( "should trigger pagecontainerchangefailed on failure", function( ass
 	proto.load = function( to, settings ) {
 		assert.ok( true, "load called" );
 
-		// reject with a url, options, and new content
+		// Reject with a url, options, and new content
 		settings.deferred.reject( "foo", {} );
 	};
 
@@ -488,7 +488,7 @@ QUnit.test( "should release page transition lock on failure", function( assert )
 	proto.load = function( to, settings ) {
 		assert.ok( true, "load called" );
 
-		// reject with a url, options, and new content
+		// Reject with a url, options, and new content
 		settings.deferred.reject( "foo", {} );
 	};
 
@@ -505,7 +505,7 @@ QUnit.test( "should remove active link class on failure", function( assert ) {
 	proto.load = function( to, settings ) {
 		assert.ok( true, "load called" );
 
-		// reject with a url, options, and new content
+		// Reject with a url, options, and new content
 		settings.deferred.reject( "foo", {} );
 	};
 
