@@ -47,6 +47,15 @@ div.ui-mobile-viewport {
 	visibility: hidden;
 	border: 0;
 }
+
+/* Need to make sure things with visibility:visible inside a pag stay hidden */
+.ui-page:not(.ui-page-active) *{
+    visibility: hidden !important;
+}
+.ui-page:not(.ui-page-active) {
+	overflow: hidden;
+	max-height: 100%;
+}
 /* On ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
 .ui-page {
 	outline: none;
