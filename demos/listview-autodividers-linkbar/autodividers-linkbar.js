@@ -23,8 +23,8 @@ $.mobile.document.on( "pagecreate", "#demo-page", function(){
 $( function(){
 	$.mobile.window.on( "scroll", function( e ) {
 		var headTop = $(window).scrollTop(),
-			foot = $( ".ui-page-active [data-role='footer']" ),
-			head = $( ".ui-page-active [data-role='header']" ),
+			foot = $( ".ui-page-active .ui-toolbar-header" ),
+			head = $( ".ui-page-active .ui-toolbar-footer" ),
 			headerheight = head.outerHeight();
 
 		if( headTop < headerheight && headTop > 0 ) {

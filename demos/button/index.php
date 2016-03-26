@@ -51,7 +51,7 @@
 				</label>
 			</form>
 			<button data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Button text</button>
-			<a href="inde.php" data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Link text</a>
+			<a href="index.php" data-role="button" data-enhanced="true" class="ui-button ui-shadow ui-corner-all ui-widget">Link text</a>
 		</div><!--/demo-html -->
 
 		<h2>Corners</h2>
