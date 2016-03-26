@@ -94,7 +94,7 @@ QUnit.test( "$.mobile.nsNormalize works properly with an empty namespace", funct
 	clearNSNormalizeDictionary();
 } );
 
-//Data tests
+// Data tests
 QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function( assert ) {
 	var data;
 
@@ -107,7 +107,7 @@ QUnit.test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", 
 	assert.deepEqual( $( "body" ).jqmData( "foo", undefined ), true, "getting data still returns the value if there's an undefined second arg" );
 
 	data = $.extend( {}, $( "body" ).data() );
-	delete data[ $.expando ]; //Discard the expando for that test
+	delete data[ $.expando ]; // Discard the expando for that test
 	assert.deepEqual( data.nstestFoo, true, "passing .data() no arguments returns a hash with all set properties" );
 
 	assert.deepEqual( $( "body" ).jqmData(), undefined, "passing no arguments returns undefined" );

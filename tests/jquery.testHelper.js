@@ -271,7 +271,7 @@ $.testHelper = {
 	//					       (NB: It's a good idea to namespace your events, because the handler will be removed
 	//					        based on the name you give here if a timeout occurs before the event fires.)
 	//
-	//					UserData1: value,
+	//					userData1: value,
 	//					...
 	//					userDatan: value
 	//			  },

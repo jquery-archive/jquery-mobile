@@ -468,14 +468,14 @@ QUnit.test( "swipe not fired when coordinate change >= 75", function( assert ) {
 // 	ForceTouchSupport();
 
 // 	// ensure the swipe custome event is setup
-// 	$( "#qunit-fixture" ).bind( 'swipe', function() {} );
+// 	$( "#qunit-fixture" ).bind( "swipe", function() {} );
 
 // 	$.Event.prototype.preventDefault = function() {
 // 		assert.ok( true, "prevent default called" );
 // 		QUnit.start();
 // 	};
 
-// 	//NOTE bypass the trigger source check
+// 	// NOTE bypass the trigger source check
 // 	$.testHelper.mockOriginalEvent( {
 // 		touches: [ {
 // 			clientX: 0,
@@ -485,7 +485,7 @@ QUnit.test( "swipe not fired when coordinate change >= 75", function( assert ) {
 
 // 	$( "#qunit-fixture" ).trigger( "touchstart" );
 
-// 	//NOTE bypass the trigger source check
+// 	// NOTE bypass the trigger source check
 // 	$.testHelper.mockOriginalEvent( {
 // 		touches: [ {
 // 			clientX: 200,
