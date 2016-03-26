@@ -8,7 +8,8 @@
 	requirejs.config( {
 		"baseUrl": script.getAttribute( "data-base-url" ) || "../../../js",
 		"paths": {
-			// requireJS plugins
+
+			// RequireJS plugins
 			"text": "../external/requirejs/plugins/text",
 			"json": "../external/requirejs/plugins/json",
 
@@ -23,12 +24,11 @@
 	} );
 
 	// Log error in a better way
-	requirejs.onError = function (err) {
-		console.log(err.requireType);
-		console.log('Modules: ' + err.requireModules);
+	requirejs.onError = function( err ) {
+		console.log( err.requireType );
+		console.log( "Modules: " + err.requireModules );
 		throw err;
 	};
-
 
 	// Define no backcompat and set ns modules
 	define( "jquery-no-backcompat", [ "jquery" ], function( $ ) {
@@ -40,18 +40,19 @@
 		$( document ).bind( "mobileinit", function() {
 			$.mobile.ns = "nstest-";
 			$.support.inlineSVG = $.noop;
-		});
+		} );
 
 		return $;
 	} );
 
 	define( "jquery-set-push-state", [ "jquery" ], function( $ ) {
-		$( document ).bind( 'mobileinit', function() {
+		$( document ).bind( "mobileinit", function() {
 			$.testHelper.setPushState();
 		} );
-	} )
+	} );
 
 	define( "override-enhancewithin-once", [ "jquery" ], function( $ ) {
+
 		// The next call to $.fn.enhanceWithin() will have no effect
 		$( document ).one( "pagebeforecreate", function() {
 			var overrideOnce = true;
@@ -66,9 +67,10 @@
 				};
 			} )( $.fn.enhanceWithin );
 		} );
-	});
+	} );
 
 	var widgets = [
+
 		// Main Widgets
 		"accordion",
 		"addFirstLastClasses",
@@ -106,6 +108,7 @@
 		"toolbar",
 		"widget.backcompat",
 		"widget.theme",
+
 		// Form Widgets
 		"forms/autogrow",
 		"forms/button",
@@ -136,13 +139,13 @@
 
 	function getPath( dep ) {
 		for ( var i = 0; i < widgets.length; i++ ) {
-			if ( widgets[i] === dep ) {
+			if ( widgets[ i ] === dep ) {
 				return "widgets/" + dep;
 			}
 		}
 
 		for ( var i = 0; i < events.length; i++ ) {
-			if ( events[i] === dep ) {
+			if ( events[ i ] === dep ) {
 				return "events/" + dep;
 			}
 		}
@@ -161,7 +164,7 @@
 		if ( !dependencies.length ) {
 
 			$( document ).ready( function() {
-				var $fixture = $( '#qunit-fixture' );
+				var $fixture = $( "#qunit-fixture" );
 				if ( $fixture.length ) {
 					QUnit.config.fixture = $fixture.html();
 				}
@@ -220,11 +223,12 @@
 		// Format modules attribute
 		if ( modules ) {
 			modules = modules.replace( /^\s+|\s+$/g, "" )
-					 .split( /\s+/ )
-					 .map( function( module ) {
-					 	// Change to make sure it is loaded from the local folder
-					  	return "./" + module + ".js";
-					  });
+					.split( /\s+/ )
+					.map( function( module ) {
+
+						// Change to make sure it is loaded from the local folder
+						return "./" + module + ".js";
+					} );
 		} else {
 			modules = [];
 		}
@@ -236,7 +240,7 @@
 		].concat( deps );
 
 		if ( initAfterModules ) {
-			deps = deps.concat(modules);
+			deps = deps.concat( modules );
 		}
 
 		if ( setNs ) {
