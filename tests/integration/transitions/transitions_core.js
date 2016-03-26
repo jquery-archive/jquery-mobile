@@ -6,7 +6,7 @@ var transitioning = "ui-mobile-viewport-transitioning",
 	animationCompleteFn = $.fn.animationComplete,
 	defaultMaxTrans = $.mobile.maxTransitionWidth,
 
-	//TODO centralize class names?
+	// TODO centralize class names?
 	transitionTypes = "in out fade slide flip reverse pop",
 
 	isTransitioning = function( page ) {
@@ -27,7 +27,7 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		$.mobile.maxTransitionWidth = defaultMaxTrans;
 	},
 
-	//AnimationComplete callback queue
+	// AnimationComplete callback queue
 	fromQueue = [],
 	toQueue = [],
 
@@ -44,7 +44,7 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		toQueue.push( f );
 	},
 
-	//Wipe all urls
+	// Wipe all urls
 	clearUrlHistory = function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
@@ -56,7 +56,7 @@ module( "jquery.mobile.navigation.js", {
 		// Disable this option so we can test transitions regardless of window width
 		disableMaxTransWidth();
 
-		//Stub to allow callback before function is returned to transition handler
+		// Stub to allow callback before function is returned to transition handler
 		$.fn.animationComplete = function( callback ) {
 			animationCompleteFn.call( this, function() {
 				var queue = $( this ).is( ".out" ) ? fromQueue : toQueue;
