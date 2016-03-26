@@ -6,7 +6,7 @@ var index,
 	toolbars = {
 		external: {
 			header: $( "#external-header" ).remove(),
-			footer: $( "#external-footer" ).remove(),
+			footer: $( "#external-footer" ).remove()
 		},
 		internal: {
 			header: $( "#internal-header" ).remove(),
@@ -679,19 +679,19 @@ var index,
 				header: {
 					present: !!( flags % 2 ),
 					fixed: !!( ( flags >> 1 ) % 2 ),
-					instantiated: !!( ( flags >> 2 ) % 2 ),
+					instantiated: !!( ( flags >> 2 ) % 2 )
 				},
 				footer: {
 					present: !!( ( flags >> 3 ) % 2 ),
 					fixed: !!( ( flags >> 4 ) % 2 ),
-					instantiated: !!( ( flags >> 5 ) % 2 ),
-				},
+					instantiated: !!( ( flags >> 5 ) % 2 )
+				}
 			},
 			internal: {
 				header: {
 					present: !!( ( flags >> 6 ) % 2 ),
 					fixed: !!( ( flags >> 7 ) % 2 ),
-					instantiated: !!( ( flags >> 8 ) % 2 ),
+					instantiated: !!( ( flags >> 8 ) % 2 )
 				},
 				footer: {
 					present: !!( ( flags >> 9 ) % 2 ),
