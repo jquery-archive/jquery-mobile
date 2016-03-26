@@ -1,6 +1,5 @@
 define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
-
 QUnit.test( "Rangeslider widget works correctly", function( assert ) {
 var rangeslider = $( "#plain" ).rangeslider(),
 	handles = rangeslider.parent().find( ".ui-slider-handle" ),
