@@ -31,12 +31,12 @@
 	};
 
 	// Define no backcompat and set ns modules
-	define( "jquery-no-backcompat", [ "jquery" ], function( $ ) {
+	define( "no-backcompat", [ "jquery" ], function( $ ) {
 		$.mobileBackcompat = false;
 		return $;
 	} );
 
-	define( "jquery-set-ns", [ "jquery" ], function( $ ) {
+	define( "set-ns", [ "jquery" ], function( $ ) {
 		$( document ).bind( "mobileinit", function() {
 			$.mobile.ns = "nstest-";
 			$.support.inlineSVG = $.noop;
@@ -45,7 +45,7 @@
 		return $;
 	} );
 
-	define( "jquery-set-push-state", [ "jquery" ], function( $ ) {
+	define( "set-push-state", [ "jquery" ], function( $ ) {
 		$( document ).bind( "mobileinit", function() {
 			$.testHelper.setPushState();
 		} );
@@ -162,7 +162,6 @@
 
 	function requireModules( dependencies, noAutoStart, modules ) {
 		if ( !dependencies.length ) {
-
 			$( document ).ready( function() {
 				var $fixture = $( "#qunit-fixture" );
 				if ( $fixture.length ) {
@@ -173,7 +172,6 @@
 					QUnit.start();
 				}
 			} );
-
 		}
 
 		if ( !modules ) {
@@ -213,11 +211,11 @@
 		var modules = script.getAttribute( "data-modules" );
 
 		if ( setPushState ) {
-			deps.concat( [ "jquery-set-push-state" ] );
+			deps.push( "set-push-state" );
 		}
 
 		if ( full ) {
-			deps = deps.concat( "jquery.mobile" );
+			deps.push( "jquery.mobile" );
 		}
 
 		// Format modules attribute
@@ -234,36 +232,35 @@
 		}
 
 		// Load these before backcompat resolution
-		deps = [
-			"jquery.tag.inserter",
-			"tests/jquery.testHelper"
-		].concat( deps );
+		deps.unshift( "jquery.tag.inserter", "tests/jquery.testHelper" );
 
 		if ( initAfterModules ) {
 			deps = deps.concat( modules );
 		}
 
 		if ( setNs ) {
-			deps = [ "jquery-set-ns" ].concat( deps );
+			deps.unshift( "set-ns" );
 		}
 
 		if ( overrideEnhanceWithin ) {
-			deps = [ "override-enhancewithin-once" ].concat( deps );
+			deps.unshift( "override-enhancewithin-once" );
 		}
 
 		if ( init ) {
-			deps = deps.concat( [ "init" ] );
+			deps.push( "init" );
 
 			if ( noBackCompat ) {
-				deps = [ "jquery-no-backcompat" ].concat( deps );
+				deps.unshift( "no-backcompat" );
 			} else {
 				deps =  [
-					"jquery-set-ns",
+					"set-ns",
 					"widgets/widget.backcompat"
 				].concat( deps );
+
+				deps.unshift( "set-ns", "widgets/widget.backcompat" );
 			}
 		} else {
-			deps = [ "jquery" ].concat( deps );
+			deps.unshift( "jquery" );
 		}
 
 		if ( !initAfterModules ) {
