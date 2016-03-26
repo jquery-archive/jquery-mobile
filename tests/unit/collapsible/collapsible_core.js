@@ -4,7 +4,7 @@ test( "Pre-rendered nested collapsibles are enhanced correctly", function() {
 
 // This Test previously was actually testing auto page enhancment unintentionally, we now use
 // enhance to not worry about each widget.
-$( 'body' ).enhance();
+$( "body" ).enhance();
 
 var outerWidget = $( "#outer" ).data( "mobile-collapsible" ),
 	innerWidget = $( "#inner" ).data( "mobile-collapsible" );
