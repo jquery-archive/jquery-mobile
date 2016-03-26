@@ -10,3 +10,5 @@ QUnit.test( "Static toolbar does not have 'pagecontainer' instance variable",
 	assert.deepEqual( !!$( "#testFooter" ).data( "mobile-toolbar" ).pagecontainer, true,
 		"Fixed toolbar has 'pagecontainer' instance variable" );
 } );
+
+} );
