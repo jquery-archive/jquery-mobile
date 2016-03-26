@@ -1,13 +1,13 @@
 /*
- * mobile navigation unit tests
+ * Mobile navigation unit tests
  */
-define( [ "jquery", "qunit" ], function( $, QUnit) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 var siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 	home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
-QUnit.module( 'jquery.mobile.navigation.js', {
+QUnit.module( "jquery.mobile.navigation.js", {
 	setup: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
@@ -23,11 +23,11 @@ QUnit.test( "path.get method is working properly", function( assert ) {
 } );
 
 QUnit.test( "path.isPath method is working properly", function( assert ) {
-	assert.ok( !$.mobile.path.isPath( 'bar' ), "anything without a slash is not a path" );
-	assert.ok( $.mobile.path.isPath( 'bar/' ), "anything with a slash is a path" );
-	assert.ok( $.mobile.path.isPath( '/bar' ), "anything with a slash is a path" );
-	assert.ok( $.mobile.path.isPath( 'a/r' ), "anything with a slash is a path" );
-	assert.ok( $.mobile.path.isPath( '/' ), "anything with a slash is a path" );
+	assert.ok( !$.mobile.path.isPath( "bar" ), "anything without a slash is not a path" );
+	assert.ok( $.mobile.path.isPath( "bar/" ), "anything with a slash is a path" );
+	assert.ok( $.mobile.path.isPath( "/bar" ), "anything with a slash is a path" );
+	assert.ok( $.mobile.path.isPath( "a/r" ), "anything with a slash is a path" );
+	assert.ok( $.mobile.path.isPath( "/" ), "anything with a slash is a path" );
 } );
 
 QUnit.test( "path.set method is working properly", function( assert ) {
@@ -79,7 +79,7 @@ QUnit.test( "path.makeUrlAbsolute is working properly", function( assert ) {
 	assert.deepEqual( mua( "/?foo=1&bar=2#spaz", p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "site relative root with query and fragment - absolute root" );
 	assert.deepEqual( mua( "?foo=1&bar=2#spaz", p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
 
-	// file tests
+	// File tests
 	assert.deepEqual( mua( "http://jqm.com/test.php", p1 ), "http://jqm.com/test.php", "absolute file at root - absolute root" );
 	assert.deepEqual( mua( "//jqm.com/test.php", p1 ), "http://jqm.com/test.php", "protocol relative file at root - absolute root" );
 	assert.deepEqual( mua( "/test.php", p1 ), "http://jqm.com/test.php", "site relative file at root - absolute root" );
@@ -124,26 +124,27 @@ QUnit.test( "path.makeUrlAbsolute is working properly", function( assert ) {
 
 // https://github.com/jquery/jquery-mobile/issues/2362
 QUnit.test( "ipv6 host support", function( assert ) {
+
 	// http://www.ietf.org/rfc/rfc2732.txt ipv6 examples for tests
 	// most definitely not comprehensive
-	var ipv6_1 = "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
-		ipv6_2 = "http://[1080:0:0:0:8:800:200C:417A]/index.html",
-		ipv6_3 = "http://[3ffe:2a00:100:7031::1]",
-		ipv6_4 = "http://[1080::8:800:200C:417A]/foo",
-		ipv6_5 = "http://[::192.9.5.5]/ipng",
-		ipv6_6 = "http://[::FFFF:129.144.52.38]:80/index.html",
-		ipv6_7 = "http://[2010:836B:4179::836B:4179]",
+	var ipv6One = "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
+		ipv6Two = "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+		ipv6Three = "http://[3ffe:2a00:100:7031::1]",
+		ipv6Four = "http://[1080::8:800:200C:417A]/foo",
+		ipv6Five = "http://[::192.9.5.5]/ipng",
+		ipv6Six = "http://[::FFFF:129.144.52.38]:80/index.html",
+		ipv6Seven= "http://[2010:836B:4179::836B:4179]",
 		fromIssue = "http://[3fff:cafe:babe::]:443/foo";
 
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_1 ).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_1 ).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_2 ).host, "[1080:0:0:0:8:800:200C:417A]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_3 ).host, "[3ffe:2a00:100:7031::1]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_4 ).host, "[1080::8:800:200C:417A]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_5 ).host, "[::192.9.5.5]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_6 ).host, "[::FFFF:129.144.52.38]:80" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_6 ).hostname, "[::FFFF:129.144.52.38]" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6_7 ).host, "[2010:836B:4179::836B:4179]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6One ).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6One ).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Two ).host, "[1080:0:0:0:8:800:200C:417A]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Three ).host, "[3ffe:2a00:100:7031::1]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Four ).host, "[1080::8:800:200C:417A]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Five ).host, "[::192.9.5.5]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Six ).host, "[::FFFF:129.144.52.38]:80" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Six).hostname, "[::FFFF:129.144.52.38]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Seven ).host, "[2010:836B:4179::836B:4179]" );
 	assert.deepEqual( $.mobile.path.parseUrl( fromIssue ).host, "[3fff:cafe:babe::]:443" );
 	assert.deepEqual( $.mobile.path.parseUrl( fromIssue ).hostname, "[3fff:cafe:babe::]" );
 } );
@@ -225,9 +226,9 @@ QUnit.test( "path.isPermittedCrossDomainRequest", function( assert ) {
 	$.mobile.allowCrossDomainPages = false;
 	assert.deepEqual( $.mobile.path.isPermittedCrossDomainRequest( "foo", "bar" ), false, "always false from the setting" );
 
-
 	$.mobile.allowCrossDomainPages = true;
-	// test the two states of the file protocol logic
+
+	// Test the two states of the file protocol logic
 	assert.deepEqual( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl, "http://bar.com/foo" ), true, "external url from file protocol succeeds" );
 
 	assert.deepEqual( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl, "file://foo" ), false, "two file protocol urls fail" );
@@ -275,7 +276,6 @@ QUnit.test( "make sure squash is working properly", function( assert ) {
 
 	assert.equal( squash( "#foo/bar.html", "http://example.com/bing.html" ), "http://example.com/foo/bar.html", "relative path hash applied to subdocument" );
 	assert.equal( squash( "foo/bar.html", "http://example.com/bing.html" ), "http://example.com/foo/bar.html", "relative path applied to subdocument" );
-
 
 	assert.equal( squash( "http://example.com/#foo/bar.html", "http://example.com/" ), "http://example.com/foo/bar.html", "relative path hash on full url" );
 	assert.equal( squash( "http://example.com/#foo/bar.html", "http://example.com/bing/" ), "http://example.com/bing/foo/bar.html", "relative path hash on full url applied to subdir" );
