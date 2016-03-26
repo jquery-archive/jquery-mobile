@@ -1,9 +1,10 @@
 /*
- * mobile support unit tests
+ * Mobile support unit tests
  */
 
 ( function( QUnit, $ ) {
 $.testHelper = {
+
 	// This function takes sets of files to load asynchronously. Each set will be loaded after
 	// the previous set has completed loading. That is, each require and it's dependencies in a
 	// set will be loaded asynchronously, but each set will be run in serial.
@@ -15,7 +16,7 @@ $.testHelper = {
 		function loadSeq( seq, i ) {
 			if ( !seq[ i ] ) {
 				$( document ).ready( function() {
-					var $fixture = $( '#qunit-fixture' );
+					var $fixture = $( "#qunit-fixture" );
 					if ( $fixture.length ) {
 						QUnit.config.fixture = $fixture.html();
 					}
@@ -29,7 +30,7 @@ $.testHelper = {
 			} );
 		}
 
-		// stop qunit from running the tests until everything is in the page
+		// Stop qunit from running the tests until everything is in the page
 		QUnit.config.autostart = false;
 
 		loadSeq( seq, 0 );
@@ -75,7 +76,7 @@ $.testHelper = {
 
 	setPageTransition: function() {
 		if ( location.search.indexOf( "transition=none" ) >= 0 ) {
-			$( document ).bind( 'mobileinit', function() {
+			$( document ).bind( "mobileinit", function() {
 				$.mobile.defaultPageTransition = "none";
 			} );
 		}
@@ -107,7 +108,7 @@ $.testHelper = {
 	reloadModule: function( libName ) {
 		var deferred = $.Deferred();
 
-		// where a module loader isn't defined use the old way
+		// Where a module loader isn't defined use the old way
 		if ( !window.require ) {
 			this.reloadLib( libName );
 			deferred.resolve();
@@ -151,7 +152,7 @@ $.testHelper = {
 
 		reload = this.reloads[ libName ];
 
-		var src = reload.lib + "?" + this.reloads[libName].count++;
+		var src = reload.lib + "?" + this.reloads[ libName ].count++;
 		$.ajax( { url: src, dataType: "script", async: false } );
 	},
 
@@ -169,6 +170,7 @@ $.testHelper = {
 		var extendFn = $.extend;
 
 		$.extend = function( object, extension ) {
+
 			// NOTE extend the object as normal
 			var result = extendFn.apply( this, arguments );
 
@@ -179,8 +181,8 @@ $.testHelper = {
 	},
 
 	hideActivePageWhenComplete: function() {
-		if ( $( '#qunit-testresult' ).length > 0 ) {
-			$( '.ui-page-active' ).css( 'display', 'none' );
+		if ( $( "#qunit-testresult" ).length > 0 ) {
+			$( ".ui-page-active" ).css( "display", "none" );
 		} else {
 			setTimeout( $.testHelper.hideActivePageWhenComplete, 500 );
 		}
@@ -204,7 +206,10 @@ $.testHelper = {
 		var seq = [];
 		$.each( fns, function( i, fn ) {
 			seq.push( fn );
-			if ( i !== fns.length - 1 ) seq.push( event );
+			if ( i !== fns.length - 1 ) {
+				seq.push( event );
+			}
+
 		} );
 
 		this.eventCascade( seq );
@@ -223,13 +228,15 @@ $.testHelper = {
 		}
 
 		if ( event ) {
-			// if a pagechange or defined event is never triggered
+
+			// If a pagechange or defined event is never triggered
 			// continue in the sequence to alert possible failures
 			var warnTimer = setTimeout( function() {
 				self.eventCascade( sequence, true );
 			}, 10000 );
 
 			// bind the recursive call to the event
+			// Bind the recursive call to the event
 			( self.eventTarget || $( ".ui-pagecontainer" ) ).one( event, function( event, data ) {
 				clearTimeout( warnTimer );
 
@@ -241,12 +248,12 @@ $.testHelper = {
 			} );
 		}
 
-		// invoke the function which should, in some fashion,
+		// Invoke the function which should, in some fashion,
 		// trigger the next event
 		fn( timedOut, data );
 	},
 
-	// detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
+	// DetailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
 	// with a timeout against getting stood up. Record the result (timed out / was triggered) for each event, and the order
 	// in which the event arrived wrt. any other events expected.
 	//		seq : [
@@ -264,7 +271,7 @@ $.testHelper = {
 	//					       (NB: It's a good idea to namespace your events, because the handler will be removed
 	//					        based on the name you give here if a timeout occurs before the event fires.)
 	//
-	//					userData1: value,
+	//					UserData1: value,
 	//					...
 	//					userDatan: value
 	//			  },
@@ -285,7 +292,8 @@ $.testHelper = {
 	//			...
 	//		}
 	detailedEventCascade: function( seq, result ) {
-		// grab one step from the sequence
+
+		// Grab one step from the sequence
 		var fn = seq.shift(),
 			events = seq.shift(),
 			self = this,
@@ -293,7 +301,7 @@ $.testHelper = {
 				return ( $.isFunction( src ) ? src() : src );
 			};
 
-		// we're done
+		// We're done
 		if ( fn === undefined ) {
 			return;
 		}
@@ -304,12 +312,15 @@ $.testHelper = {
 				nEventsDone = 0,
 				nEvents = 0,
 				recordResult = function( key, event, result ) {
+
 					// Record the result
 					newResult[ key ] = $.extend( {}, event, result );
+
 					// Increment the number of received responses
 					nEventsDone++;
 					if ( nEventsDone === nEvents ) {
-						// clear the timeout and move on to the next step when all events have been received
+
+						// Clear the timeout and move on to the next step when all events have been received
 						if ( warnTimer ) {
 							clearTimeout( warnTimer );
 						}
@@ -318,14 +329,17 @@ $.testHelper = {
 						}, 0 );
 					}
 				},
-				// set a failsafe timer in case one of the events never happens
+
+				// Set a failsafe timer in case one of the events never happens
 				warnTimer = setTimeout( function() {
 					warnTimer = 0;
 					$.each( events, function( key, event ) {
+
 						// Timeouts are left out of this, because they will complete for
 						// sure, calling recordResult when they do
 						if ( newResult[ key ] === undefined && event.src ) {
-							// clean up the unused handler
+
+							// Clean up the unused handler
 							derefSrc( event.src ).unbind( event.event );
 							recordResult( key, event, { timedOut: true } );
 						}
@@ -333,15 +347,19 @@ $.testHelper = {
 				}, 5000 );
 
 			$.each( events, function( key, event ) {
+
 				// Count the events so that we may know how many responses to expect
 				nEvents++;
+
 				// If it's an event
 				if ( event.src ) {
+
 					// Hook up to the event
 					derefSrc( event.src ).one( event.event, function() {
 						recordResult( key, event, { timedOut: false, idx: nEventsDone } );
 					} );
 				}
+
 				// If it's a timeout
 				else {
 					setTimeout( function() {
@@ -436,7 +454,7 @@ $.testHelper = {
 			rRes = rRes + str.r;
 		}
 
-		// trim initial 0s and return the result of the comparison
+		// Trim initial 0s and return the result of the comparison
 		return t( parseInt( lRes.replace( /^0*/, "" ) ), parseInt( rRes.replace( /^0*/, "" ) ) );
 	},
 
@@ -461,8 +479,10 @@ $.testHelper = {
 	// Check if two chunks of DOM are identical
 	domEqual: function( l, r ) {
 		var idx, idxAttr, lattr, rattr,
+
 			// Decide whether an attribute should be added to those that will be compared
 			addAttr = function( el, idx ) {
+
 				// Special case for empty class attribute
 				if ( el.attributes[ idx ].name === "class" && !el.attributes[ idx ].value ) {
 					return false;
@@ -486,6 +506,7 @@ $.testHelper = {
 		// If the lengths of the two jQuery objects are different, the DOM
 		// must be different so don't bother checking
 		if ( l.length === r.length ) {
+
 			// Otherwise, examine each element
 			for ( idx = 0; idx < l.length; idx++ ) {
 				l = l.eq( idx );
@@ -530,7 +551,8 @@ $.testHelper = {
 	},
 
 	delayStart: function( milliseconds ) {
-		// stop qunit from running the tests until everything is in the page
+
+		// Stop qunit from running the tests until everything is in the page
 		QUnit.config.autostart = false;
 
 		setTimeout( function() {
