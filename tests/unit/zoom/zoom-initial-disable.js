@@ -1,5 +1,5 @@
 /*
- * mobile zoom
+ * Mobile zoom
  */
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 

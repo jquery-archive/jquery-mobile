@@ -1,12 +1,11 @@
 /*
- * mobile Fixed Toolbar unit tests
+ * Mobile Fixed Toolbar unit tests
  */
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-QUnit.module( 'jquery.mobile.fixedToolbar.js' );
+QUnit.module( "jquery.mobile.fixedToolbar.js" );
 
 var defaultMeta = $( "meta[name=viewport]" ).attr( "content" );
-
 
 QUnit.test( "User zooming is enabled by default", function( assert ) {
 	assert.ok( $.mobile.zoom.enabled === true, "property is true" );
@@ -15,7 +14,6 @@ QUnit.test( "User zooming is enabled by default", function( assert ) {
 QUnit.test( "The zoom lock is disabled by default", function( assert ) {
 	assert.ok( $.mobile.zoom.locked === false, "property is false" );
 } );
-
 
 QUnit.test( "Meta viewport content is manipulated with maximum-scale", function( assert ) {
 	$.mobile.zoom.disable();
@@ -35,10 +33,9 @@ QUnit.test( "Meta viewport content restore method restores it back to original v
 
 } );
 
-
-
 QUnit.test( "When locked, the enable method does nothing", function( assert ) {
-	//enabled it first
+
+	//Enabled it first
 	$.mobile.zoom.locked = false;
 	$.mobile.zoom.disable();
 	$.mobile.zoom.locked = true;
@@ -51,7 +48,8 @@ QUnit.test( "When locked, the enable method does nothing", function( assert ) {
 } );
 
 QUnit.test( "When locked, the disable method does nothing", function( assert ) {
-	//enabled it first
+
+	//Enabled it first
 	$.mobile.zoom.locked = false;
 	$.mobile.zoom.enable();
 	$.mobile.zoom.locked = true;
@@ -65,7 +63,8 @@ QUnit.test( "When locked, the disable method does nothing", function( assert ) {
 } );
 
 QUnit.test( "When locked, the enable method with a true 'unlock' argument works", function( assert ) {
-	//enabled it first
+
+	//Enabled it first
 	$.mobile.zoom.locked = false;
 	$.mobile.zoom.disable();
 	$.mobile.zoom.locked = true;
@@ -79,9 +78,9 @@ QUnit.test( "When locked, the enable method with a true 'unlock' argument works"
 
 } );
 
-
 QUnit.test( "When locked, the disable method with a true 'lock' argument works", function( assert ) {
-	//enabled it first
+
+	//Enabled it first
 	$.mobile.zoom.locked = false;
 	$.mobile.zoom.enable();
 
