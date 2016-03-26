@@ -1,5 +1,5 @@
 /*
- * mobile media unit tests
+ * Mobile media unit tests
  */
 
 define( [ "jquery" ], function( $ ) {
