@@ -1,5 +1,5 @@
 /*
- * mobile filter unit tests - listview
+ * Mobile filter unit tests - listview
  */
 
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
