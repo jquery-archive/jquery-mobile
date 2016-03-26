@@ -13,9 +13,10 @@ QUnit.test( "Nothing on the page has a class that contains `undefined`.", functi
 
 QUnit.module( "Widget Create" );
 
-// required as part of the deprecation of init for #3602
+// Required as part of the deprecation of init for #3602
 QUnit.test( "all widget create events fire before page create", function( assert ) {
-	// see preinit.js
+
+	// See preinit.js
 	assert.ok( window.createTests.pageCreateTimed );
 } );
 
