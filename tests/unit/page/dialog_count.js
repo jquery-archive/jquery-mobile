@@ -1,5 +1,5 @@
 /*
- * mobile dialog unit tests
+ * Mobile dialog unit tests
  */
 define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
