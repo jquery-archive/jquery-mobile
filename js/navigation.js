@@ -384,7 +384,7 @@ $.mobile._registerInternalEvents = function() {
 	} );
 
 	//prefetch pages when anchors with data-prefetch are encountered
-	$.mobile.document.delegate( ".ui-page", "pageshow.prefetch", function() {
+	$.mobile.document.delegate( ".ui-page", "page.prefetch", function() {
 		var urls = [],
 			that = this;
 		$( this ).find( "a:jqmData(prefetch)" ).each( function() {
@@ -394,7 +394,7 @@ $.mobile._registerInternalEvents = function() {
 			if ( url && $.inArray( url, urls ) === -1 ) {
 				urls.push( url );
 
-				that.closest( ".ui-pagecontainer" ).pagecontainer( "load", url, {
+				$( that ).closest( ".ui-pagecontainer" ).pagecontainer( "load", url, {
 					role: $link.attr( "data-" + $.mobile.ns + "rel" ),
 					prefetch: true
 				});
