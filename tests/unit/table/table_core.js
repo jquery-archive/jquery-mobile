@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var tableProto = $.mobile.table.prototype;
 function testCreate( prefix, enhanced, disabled ) {
 
@@ -158,4 +161,4 @@ function testDestroy( prefix, enhanced ) {
 testDestroy( "Normal: ", false );
 testDestroy( "Pre-rendered: ", true );
 
-} )( QUnit, jQuery );
+} );

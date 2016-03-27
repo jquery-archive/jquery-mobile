@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var addRowToTable = ( function() {
 	var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
 		letters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i" ],
@@ -73,4 +76,4 @@ QUnit.test( "Reflow refresh() updates table headers correctly", function( assert
 		"Cell stored in header is in the column of the respective header" );
 } );
 
-} )( QUnit, jQuery );
+} );

@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 var tableProto = $.mobile.table.prototype;
 
@@ -196,4 +199,4 @@ QUnit.skip( "_destroy() correctly removes markup", function( assert ) {
 	assertOneCase( table.clone(), false, "xyzzy", table,
 		"Not enhanced and mode 'xyzzy': DOM is left unmodified" );
 } );
-} )( QUnit, jQuery )
+} );

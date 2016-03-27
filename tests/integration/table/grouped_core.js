@@ -1,4 +1,8 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 function runAssertions( prefix, table, expectedColstart, assert ) {
 	var expectedCells = table.find( "[data-column]" ),
 		header = table.find( ".test-column-header" );
@@ -39,4 +43,4 @@ function beforeAndAfterRefresh( prefix, table, expectedColStart ) {
 beforeAndAfterRefresh( "With colspan: ", $( "#grouped-test-table" ), 5 );
 beforeAndAfterRefresh( "Without colspan: ", $( "#single-column-grouped" ), 1 );
 
-} ) ( QUnit, jQuery );
+} );

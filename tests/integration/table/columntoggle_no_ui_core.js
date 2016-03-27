@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 QUnit.test( "Columntoggle table correctly sets priority classes", function( assert ) {
 	var table = $( "#no-ui-test" );
 
@@ -50,4 +53,4 @@ QUnit.test( "setColumnVisibility() correctly resolves column from index/cell", f
 	assert.deepEqual( table.find( ".ui-table-cell-visible" ).is( affectedCells ), true,
 		"Turning on visibility by tbody cell affects only the expected cells" );
 } );
-} )( QUnit, jQuery );
+} );

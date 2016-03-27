@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 $.mobile.ns = "nstest-";
 
 QUnit.test( "Columntoggle table is disabled/enabled correctly", function( assert ) {
@@ -20,4 +23,4 @@ QUnit.test( "Columntoggle table is disabled/enabled correctly", function( assert
 	assert.deepEqual( popup.popup( "option", "disabled" ), false, "Popup is enabled" );
 } );
 
-} )( QUnit, jQuery );
+} );

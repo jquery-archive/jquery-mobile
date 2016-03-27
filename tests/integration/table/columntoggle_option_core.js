@@ -1,3 +1,8 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 // These tests run on both prerendered and non-prerendered tables
 $.mobile.ns ="nstest-";
 
@@ -185,3 +190,4 @@ test( "Toggling option columnUi works", function() {
 
 	testUIPresence( "After turning option back on: ", true );
 });
+} );

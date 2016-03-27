@@ -1,3 +1,8 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 $.mobile.ns ="nstest-";
 
 test( "Prerendered columntoggle table is destroyed/re-created correctly", function() {
@@ -33,4 +38,5 @@ test( "Prerendered columntoggle table is destroyed/re-created correctly", functi
 	deepEqual(
 		$( "input" ).filter( ":data(" + $.camelCase( $.mobile.ns + "cells" ) + ")" ).length, 0,
 		"Checkboxes have no data at key 'cells' after table destruction" );
-});
+} );
+} );
