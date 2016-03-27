@@ -1,3 +1,8 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 $( function() {
 
 $.mobile.ns = "nstest-";
@@ -21,3 +26,5 @@ initSingleTable( "columntoggle-toggle-button-initially-absent" );
 initSingleTable( "columntoggle-toggle-ui" );
 
 });
+
+} );

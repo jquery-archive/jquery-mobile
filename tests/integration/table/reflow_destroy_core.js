@@ -1,3 +1,7 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 test( "Reflow table is destroyed/re-created correctly", function() {
 
 	var enhancedTable,
@@ -23,3 +27,4 @@ test( "Reflow table is destroyed/re-created correctly", function() {
 		"After re-enhancing the table, the DOM is identical to the previous enhanced version" );
 
 });
+} );

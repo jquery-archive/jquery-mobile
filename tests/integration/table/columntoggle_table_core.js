@@ -1,4 +1,8 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 var addRowToTable = ( function() {
 	var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
 		letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i" ],
@@ -405,4 +409,4 @@ QUnit.test( "Columntoggle table with UI initially turned off", function( assert 
 		"No button is created when the UI is turned off" );
 } );
 
-} )( QUnit, jQuery );
+} );

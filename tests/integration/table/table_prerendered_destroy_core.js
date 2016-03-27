@@ -1,3 +1,7 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 $.mobile.ns = "nstest-";
 
 test( "Prerendered basic table is destroyed/re-created correctly", function() {
@@ -37,3 +41,4 @@ deepEqual(
 		"After re-enhancing the table, the DOM is identical to the previous enhanced version" );
 
 });
+} );

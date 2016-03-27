@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 QUnit.test( "Basic table is enhanced correctly", function( assert ) {
 	var basicTable = $( "#table-enhance-test" );
 
@@ -24,4 +27,4 @@ QUnit.test( "Basic initially disabled table has ui-state-disabled class", functi
 	assert.hasClasses( $( "#table-initially-disabled" ), "ui-state-disabled" );
 } );
 
-} )( QUnit, jQuery );
+} );
