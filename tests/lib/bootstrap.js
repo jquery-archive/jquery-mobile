@@ -18,7 +18,7 @@
 			"jquery-plugins": "../external/jquery/plugins",
 			"qunit": "../external/qunit/qunit",
 			"qunit-assert-classes": "../external/qunit-assert-classes/qunit-assert-classes",
-
+			"qunit-assert-domequal": "../tests/lib/qunit-assert-domequal",
 			"tests": "../tests"
 		}
 	} );
@@ -105,6 +105,7 @@
 		"tabs.ajax",
 		"table.reflow",
 		"table.columntoggle",
+		"table.columntoggle.popup",
 		"toolbar",
 		"widget.backcompat",
 		"widget.theme",
@@ -284,6 +285,8 @@
 		if ( !initAfterModules ) {
 			deps = deps.concat( modules );
 		}
+
+		deps.unshift( "qunit-assert-domequal" );
 
 		require( [ "qunit" ], function() {
 
