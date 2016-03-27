@@ -188,7 +188,24 @@
 		}
 	}
 
+	function defineVersionedjQuery() {
+		// Get the version from the url
+		var jqueryRE = /[\\?&]jquery=([^&#]*)/,
+			results = jqueryRE.exec( location.search ),
+			version = "";
+
+		if ( results ) {
+			version = decodeURIComponent( results[ results.length - 1 ].replace( /\+/g, " " ) );
+			url = "http://code.jquery.com/jquery-" + version + ".js";
+			define( "jquery", [ url ], function() {
+				return window.jQuery;
+			} );
+		}
+	}
+
 	( function() {
+
+		defineVersionedjQuery();
 
 		var deps = script.getAttribute( "data-deps" );
 
@@ -199,6 +216,7 @@
 		}
 
 		deps = fixPaths( deps );
+		deps.push( "qunit-assert-classes" );
 
 		var full = !!script.getAttribute( "data-full" );
 		var init = !!script.getAttribute( "data-init" );
@@ -232,7 +250,7 @@
 		}
 
 		// Load these before backcompat resolution
-		deps.unshift( "jquery.tag.inserter", "tests/jquery.testHelper" );
+		deps.unshift( "tests/jquery.testHelper" );
 
 		if ( initAfterModules ) {
 			deps = deps.concat( modules );
