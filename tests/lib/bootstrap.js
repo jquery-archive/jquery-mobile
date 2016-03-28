@@ -94,6 +94,7 @@
 		"loader",
 		"navbar",
 		"navbar.morebutton",
+		"navbar.backcompat",
 		"page",
 		"page.dialog",
 		"page.dialog.backcompat",
