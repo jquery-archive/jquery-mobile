@@ -1,3 +1,5 @@
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 test( "Reflow table is enhanced correctly", function() {
 	var table = $( "#reflow-test" ).table();
 
@@ -51,4 +53,5 @@ test( "Columntoggle table is enhanced correctly", function() {
 	deepEqual( correctPriorities, true,
 		"All tbody cells have priority classes assigned in accordance with their header " +
 			"'data-priority' value" );
-});
+} );
+} );
