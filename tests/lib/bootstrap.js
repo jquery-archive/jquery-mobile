@@ -19,6 +19,7 @@
 			"qunit": "../external/qunit/qunit",
 			"qunit-assert-classes": "../external/qunit-assert-classes/qunit-assert-classes",
 			"qunit-assert-domequal": "../tests/lib/qunit-assert-domequal",
+			"lib/qunit": "../tests/lib/qunit",
 			"tests": "../tests"
 		}
 	} );
@@ -217,7 +218,6 @@
 		}
 
 		deps = fixPaths( deps );
-		deps.push( "qunit-assert-classes" );
 
 		var full = !!script.getAttribute( "data-full" );
 		var init = !!script.getAttribute( "data-init" );
@@ -286,7 +286,7 @@
 			deps = deps.concat( modules );
 		}
 
-		deps.unshift( "qunit-assert-domequal" );
+		deps.unshift( "lib/qunit" );
 
 		require( [ "qunit" ], function() {
 
