@@ -35,25 +35,6 @@ QUnit.module( libName, {
 	}
 } );
 
-// This test doesn't fit well with requirements of bootstrap
-
-// $.testHelper.excludeFileProtocol( function() {
-// 	QUnit.test( "new events defined on the jquery object", function( assert ) {
-// 		$.each( events, function( i, name ) {
-// 			delete $.fn[ name ];
-// 			assert.deepEqual( $.fn[ name ], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
-// 		} );
-
-// 		$.each( components, function( index, value ) {
-// 			$.testHelper.reloadModule( value );
-// 		} );
-
-// 		$.each( events, function( i, name ) {
-// 			assert.ok( $.fn[ name ] !== undefined, name + " should NOT be undefined" );
-// 		} );
-// 	} );
-// } );
-
 QUnit.asyncTest( "defined event functions bind a closure when passed", function( assert ) {
 	assert.expect( 1 );
 

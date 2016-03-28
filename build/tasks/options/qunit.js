@@ -24,7 +24,7 @@ return {
 		options: {
 			urls: ( function() {
 				var allSuites, patterns, paths,
-					testDirs = [ "unit", "integration", "css" ],
+					testDirs = [ "unit", "integration", "css", "no-bootstrap" ],
 					suites = ( grunt.option( "suites" ) || process.env.SUITES || "" )
 						.split( "," ),
 					types = ( grunt.option( "types" ) || process.env.TYPES || "" )
