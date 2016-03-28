@@ -78,7 +78,7 @@ QUnit.test( "scrolls the page", function( assert ) {
 QUnit.asyncTest( "resolves the transition deferred with the requisite data", function( assert ) {
 	assert.expect( 4 );
 
-	$.when( instance.deferred ).then( function( name, reverse, to, from ) {
+	instance.deferred.done( function( name, reverse, to, from ) {
 		assert.equal( name, "foo" );
 		assert.equal( reverse, "reverse" );
 		assert.equal( to, $to );
