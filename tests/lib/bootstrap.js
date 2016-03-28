@@ -272,11 +272,6 @@
 			if ( noBackCompat ) {
 				deps.unshift( "no-backcompat" );
 			} else {
-				deps =  [
-					"set-ns",
-					"widgets/widget.backcompat"
-				].concat( deps );
-
 				deps.unshift( "set-ns", "widgets/widget.backcompat" );
 			}
 		} else {
