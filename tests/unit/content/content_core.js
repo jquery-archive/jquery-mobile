@@ -6,19 +6,23 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 // TODO !! reset the prototype after every test
 
 var mockEvent,
-	proto = $.mobile.pagecontainer.prototype,
-	reset = $.extend( {}, proto );
-
-proto.element = $( "<div>" );
+	proto,
+	reset = $.mobile.pagecontainer.prototype;
 
 QUnit.module( "Content Widget _filterNavigateEvents", {
 	setup: function() {
 		mockEvent = $.Event( "mock" );
 		mockEvent.originalEvent = $.Event( "hashchange" );
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+	},
+	teardown: function() {
 	}
 } );
 
-QUnit.test( "rejects navigate events where the original event's default is prevented", function( assert ) {
+QUnit.test( "rejects navigate events where the original event's default is prevented",
+	function( assert ) {
 	assert.expect( 1 );
 
 	mockEvent.originalEvent.isDefaultPrevented = function() {
@@ -33,7 +37,8 @@ QUnit.test( "rejects navigate events where the original event's default is preve
 	proto._filterNavigateEvents( mockEvent, {} );
 } );
 
-QUnit.test( "uses the hash in the state when the original event is a hashchange", function( assert ) {
+QUnit.test( "uses the hash in the state when the original event is a hashchange",
+	function( assert ) {
 	assert.expect( 2 );
 
 	proto._handleNavigate = function( url, state ) {
@@ -44,7 +49,8 @@ QUnit.test( "uses the hash in the state when the original event is a hashchange"
 	proto._filterNavigateEvents( mockEvent, { state: { hash: "foo" } } );
 } );
 
-QUnit.test( "uses the url in the state when the original event is NOT a hashchange", function( assert ) {
+QUnit.test( "uses the url in the state when the original event is NOT a hashchange",
+	function( assert ) {
 	assert.expect( 2 );
 
 	mockEvent.originalEvent = $.Event( "other" );
@@ -57,7 +63,8 @@ QUnit.test( "uses the url in the state when the original event is NOT a hashchan
 	proto._filterNavigateEvents( mockEvent, { state: { url: "bar" } } );
 } );
 
-QUnit.test( "uses the current hash when no url or hash is present", function( assert ) {
+QUnit.test( "uses the current hash when no url or hash is present",
+	function( assert ) {
 	assert.expect( 1 );
 
 	proto._handleNavigate = function( url, state ) {
@@ -87,7 +94,9 @@ QUnit.test( "uses the current url when no hash is present", function( assert ) {
 
 QUnit.module( "Content Widget _handleDialog", {
 	setup: function() {
-		proto = $.mobile.pagecontainer.prototype;
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
 	}
 } );
 
@@ -102,7 +111,8 @@ QUnit.test( "continues backward when the active content isn't a dialog", functio
 		assert.ok( true, "back called" );
 	};
 
-	assert.ok( !proto._handleDialog( {}, { direction: "back" } ), "returns false to prevent action" );
+	assert.ok( !proto._handleDialog( {}, { direction: "back" } ),
+		"returns false to prevent action" );
 } );
 
 QUnit.test( "continues forward when the active content isn't a dialog", function( assert ) {
@@ -116,7 +126,8 @@ QUnit.test( "continues forward when the active content isn't a dialog", function
 		assert.ok( true, "forward called" );
 	};
 
-	assert.ok( !proto._handleDialog( {}, { direction: "forward" } ), "returns false to prevent action" );
+	assert.ok( !proto._handleDialog( {}, { direction: "forward" } ),
+		"returns false to prevent action" );
 } );
 
 QUnit.test( "extends changePageOptions when current content is a dialog", function( assert ) {
@@ -172,7 +183,10 @@ var base = "http://example.com/";
 
 QUnit.module( "Content Widget _handleDestination", {
 	setup: function() {
-		proto = $.mobile.pagecontainer.prototype;
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+
 		proto._getHistory = function() {
 			return {
 				initialDst: "foo",
@@ -186,7 +200,8 @@ QUnit.module( "Content Widget _handleDestination", {
 	}
 } );
 
-QUnit.test( "skips manipulation and returns the initial content if two is falsey", function( assert ) {
+QUnit.test( "skips manipulation and returns the initial content if two is falsey",
+	function( assert ) {
 	proto._getInitialContent = function() {
 		return "initial content";
 	};
@@ -194,15 +209,23 @@ QUnit.test( "skips manipulation and returns the initial content if two is falsey
 	assert.equal( "initial content", proto._handleDestination( "" ), "avoids manip" );
 } );
 
-QUnit.test( "returns an absolute url when the argument is just a hash", function( assert ) {
+QUnit.test( "returns an absolute url when the argument is just a hash",
+	function( assert ) {
 	assert.equal( base + "#foo", proto._handleDestination( "#foo" ) );
 } );
 
-QUnit.test( "returns the hashless value when the argument is a path", function( assert ) {
+QUnit.test( "returns the hashless value when the argument is a path",
+	function( assert ) {
 	assert.equal( "foo/bar", proto._handleDestination( "#foo/bar" ) );
 } );
 
-QUnit.module( "Content Widget _recordScroll" );
+QUnit.module( "Content Widget _recordScroll", {
+	setup: function() {
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+	}
+} );
 
 QUnit.test( "does not record scroll position when disabled", function( assert ) {
 	assert.expect( 0 );
@@ -215,7 +238,8 @@ QUnit.test( "does not record scroll position when disabled", function( assert ) 
 	proto._recordScroll();
 } );
 
-QUnit.test( "prefers last scroll when it's larger than the minimum scroll", function( assert ) {
+QUnit.test( "prefers last scroll when it's larger than the minimum scroll",
+	function( assert ) {
 	assert.expect( 1 );
 
 	var active = {};
@@ -238,7 +262,8 @@ QUnit.test( "prefers last scroll when it's larger than the minimum scroll", func
 	assert.equal( active.lastScroll, 100, "should be equal to _getScroll value" );
 } );
 
-QUnit.test( "prefers default scroll when current scroll < default scroll", function( assert ) {
+QUnit.test( "prefers default scroll when current scroll < default scroll",
+	function( assert ) {
 	assert.expect( 1 );
 
 	var active = {};
@@ -265,15 +290,18 @@ QUnit.test( "prefers default scroll when current scroll < default scroll", funct
 
 QUnit.module( "Content Widget _find", {
 	setup: function() {
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+
 		proto._getNs = function() {
 			return "foo-";
 		};
-
-		proto.element = $( "<div>" );
 	}
 } );
 
-QUnit.test( "returns the page container child matching the dataUrl first", function( assert ) {
+QUnit.test( "returns the page container child matching the dataUrl first",
+	function( assert ) {
 	this.element = $( "<div><div data-foo-url='bar'></div></div>" );
 
 	assert.equal(
@@ -283,7 +311,8 @@ QUnit.test( "returns the page container child matching the dataUrl first", funct
 	);
 } );
 
-QUnit.test( "returns the child with the dataUrl id and corrects the data-url attr", function( assert ) {
+QUnit.test( "returns the child with the dataUrl id and corrects the data-url attr",
+	function( assert ) {
 	var result;
 
 	proto.element = $( "<div><div id='bar'></div></div>" );
@@ -313,6 +342,9 @@ QUnit.test( "returns the first page when nothing matches", function( assert ) {
 QUnit.module( "Content Widget _parse", {
 	setup: function() {
 		$.mobile.ns = "foo-";
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
 	}
 } );
 
@@ -338,7 +370,8 @@ QUnit.test( "returns first page with data role dialog", function( assert ) {
 	assert.equal( page.attr( "data-foo-role" ), "dialog" );
 } );
 
-QUnit.test( "returns the body of the html wrapped in a page when no page exists", function( assert ) {
+QUnit.test( "returns the body of the html wrapped in a page when no page exists",
+	function( assert ) {
 	var html, page;
 
 	html = "<body>foo</body>";
@@ -352,10 +385,14 @@ QUnit.test( "returns the body of the html wrapped in a page when no page exists"
 QUnit.module( "Content Widget _setLoadedTitle", {
 	setup: function() {
 		$.mobile.ns = "foo-";
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
 	}
 } );
 
-QUnit.test( "does nothing where the title is already defined for the page", function( assert ) {
+QUnit.test( "does nothing where the title is already defined for the page",
+	function( assert ) {
 	var html, page, pageHtml;
 
 	pageHtml = "<div data-foo-role='page' data-foo-title='bar'></div>";
@@ -391,9 +428,16 @@ QUnit.test( "prevents injection", function( assert ) {
 	assert.equal( page.jqmData( "title" ), undefined );
 } );
 
-QUnit.module( "Content Widget _triggerWithDeprecated" );
+QUnit.module( "Content Widget _triggerWithDeprecated", {
+	setup: function() {
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+	}
+} );
 
-QUnit.test( "triggers both content* and page* events and includes data", function( assert ) {
+QUnit.test( "triggers both content* and page* events and includes data",
+	function( assert ) {
 	assert.expect( 4 );
 
 	proto.element.bind( "pagefoo", function( event, data ) {
@@ -409,7 +453,13 @@ QUnit.test( "triggers both content* and page* events and includes data", functio
 	proto._triggerWithDeprecated( "foo", { bar: "baz" } );
 } );
 
-QUnit.module( "Content Widget _include" );
+QUnit.module( "Content Widget _include", {
+	setup: function() {
+		proto = reset;
+		proto.element = $( "<div>" );
+		reset = $.extend( {}, proto );
+	}
+} );
 
 QUnit.test( "include appends to the element", function( assert ) {
 	var page = $( "<div>" );
