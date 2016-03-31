@@ -724,16 +724,17 @@ html body .ui-group-theme-a a:hover {
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-listview-item-button:active,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:hover,
+.jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li > .ui-accordion-header:active,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content .ui-accordion-header:hover {
 	color: #333;
 	text-shadow: 0 1px 0 #f3f3f3;
 	background: #cccccc;
 }
+
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview li .ui-accordion-content li > .ui-listview-item-button:hover {
  	background: #cccccc;
 }
-
 
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-listview-item-button:focus,
 .jqm-navmenu-panel > .ui-panel-inner > .ui-listview > li .ui-accordion-header:focus {
