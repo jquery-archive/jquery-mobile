@@ -94,7 +94,8 @@ return {
 			"tests/unit/popup/popup_core.js",
 			"tests/unit/loader/loader_core.js",
 			"tests/unit/loader/backcompat_core.js",
-			"tests/unit/panel/panel_core.js"
+			"tests/unit/panel/panel_core.js",
+			"tests/unit/content/content_core.js"
 		]
 	},
 	tests: {
