@@ -88,21 +88,21 @@ $.widget( "mobile.page", {
 		if ( !page.data( "mobile-page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
-			// TODO use _on - that is, sort out why it doesn't work in this case
-			page.bind( "pagehide.remove", callback || function( e, data ) {
+			this._on( {
+				pagehide: callback || function( e, data ) {
 
 					// Check if this is a same page transition and if so don't remove the page
 					if ( !data.samePage ) {
-						var $this = $( this ),
-							prEvent = new $.Event( "pageremove" );
+						var prEvent = new $.Event( "pageremove" );
 
-						$this.trigger( prEvent );
+						this.element.trigger( prEvent );
 
 						if ( !prEvent.isDefaultPrevented() ) {
-							$this.removeWithDependents();
+							this.element.removeWithDependents();
 						}
 					}
-				} );
+				}
+			} );
 		}
 	},
 
