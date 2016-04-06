@@ -35,11 +35,16 @@ module( "Option tests" );
 
 QUnit.test( "hidePlaceholderMenuItems", function( assert ) {
 	var menu = $( "#hide-placeholders" ),
-		placeholder = $( "#placeholder" );
 
-	assert.hasClasses( placeholder, "ui-screen-hidden", "Placeholder is initially hidden" );
+		// Use a function because the list gets rebuilt when the option value changes
+		placeholder = function() {
+			return $( "#hide-placeholders-listbox li:first-child" );
+		};
+
+	assert.hasClasses( placeholder(), "ui-screen-hidden", "Placeholder is initially hidden" );
 
 	menu.selectmenu( "option", "hidePlaceholderMenuItems", false );
 
-	assert.lacksClasses( placeholder, "ui-screen-hidden", "Turning off option shows placeholder" );
+	assert.lacksClasses( placeholder(), "ui-screen-hidden",
+		"Turning off option shows placeholder" );
 } );
