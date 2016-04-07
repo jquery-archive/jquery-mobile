@@ -85,16 +85,16 @@
 	overflow: hidden;
 }
 
-.ui-selectmenu-custom .ui-header {
+.ui-selectmenu-custom .ui-toolbar-header {
 	margin: 0;
 	padding: 0;
 	border-width: 0;
 }
-.ui-selectmenu-custom.ui-page-dialog .ui-header {
+.ui-selectmenu-custom.ui-page-dialog .ui-toolbar-header {
 	z-index: 1;
 	position: relative;
 }
-.ui-selectmenu-custom.ui-popup .ui-header {
+.ui-selectmenu-custom.ui-popup .ui-toolbar-header {
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;
@@ -102,11 +102,11 @@
 }
 
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
-.ui-selectmenu-custom.ui-popup .ui-header h1:after {
+.ui-selectmenu-custom.ui-popup .ui-toolbar-header h1:after {
 	content: ".";
 	visibility: hidden;
 }
-.ui-selectmenu-custom .ui-header .ui-title {
+.ui-selectmenu-custom .ui-toolbar-header .ui-toolbar-title {
 	margin: 0 2.875em;
 }
 .ui-selectmenu-custom.ui-page-dialog .ui-content {
@@ -119,13 +119,13 @@
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
-.ui-header:not(.ui-screen-hidden) + .ui-selectmenu-custom-list {
+.ui-toolbar-header:not(.ui-screen-hidden) + .ui-selectmenu-custom-list {
 	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
 	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
 }
-.ui-header.ui-screen-hidden + .ui-selectmenu-custom-list li.ui-first-child .ui-button {
+.ui-toolbar-header.ui-screen-hidden + .ui-selectmenu-custom-list li.ui-first-child .ui-button {
 	border-top-width: 0;
 }
 .ui-selectmenu-custom .ui-selectmenu-custom-list li.ui-last-child .ui-button {
