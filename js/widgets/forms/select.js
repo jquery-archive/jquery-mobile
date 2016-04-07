@@ -127,7 +127,7 @@ return $.widget( "mobile.selectmenu", $.widget( "mobile.selectmenu", [ {
 			this._addClass( this.icon, "ui-selectmenu-button-icon",
 				"ui-icon-" + options.icon + " ui-icon ui-widget-icon-float" +
 					( iconpos === "right" ? "end" : "beginning" ) );
-			this.button.append( this.icon );
+			this.button.prepend( this.icon );
 		}
 
 		this.setButtonText();
@@ -247,7 +247,7 @@ return $.widget( "mobile.selectmenu", $.widget( "mobile.selectmenu", [ {
 		this.button.children( "span" )
 			.not( ".ui-selectmenu-count-bubble,.ui-selectmenu-button-icon" )
 			.remove().end().end()
-			.prepend( ( function() {
+			.append( ( function() {
 				if ( selected.length ) {
 					text = selected.map( function() {
 						return $( this ).text();
