@@ -1,7 +1,6 @@
 .ui-selectmenu {
 	margin-top: .5em;
 	margin-bottom: .5em; /* no shorthand for margin because it would override margin-right for inline selects */
-	position: relative;
 }
 .ui-selectmenu > select {
 	position: absolute !important;
