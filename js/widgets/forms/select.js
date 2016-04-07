@@ -270,7 +270,7 @@ return $.widget( "mobile.selectmenu", $.widget( "mobile.selectmenu", [ {
 				span.attr( "aria-hidden", "true" );
 
 				// TODO possibly aggregate multiple select option classes
-				that._addClass( span, null,
+				that._addClass( span, "ui-selectmenu-button-text",
 					[ that.element.attr( "class" ), selected.attr( "class" ) ].join( " " ) );
 				that._removeClass( span, null, "ui-screen-hidden" );
 				return span;
