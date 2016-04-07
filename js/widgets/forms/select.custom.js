@@ -226,7 +226,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
 			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
 			menuPage, menuPageHeader, listbox, list, header, headerTitle, menuPageContent,
-			menuPageClose, headerClose,
+			menuPageClose, headerClose, headerCloseIcon,
 			o = this.options;
 
 		selectId = this.selectId;
@@ -274,11 +274,14 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
 				"role": "button",
-				"text": o.closeText,
 				"href": "#"
 			} );
+			headerCloseIcon = $( "<span>" );
+			this._addClass( headerCloseIcon, "ui-selectmenu-custom-header-close-button-icon",
+				"ui-icon ui-icon-delete" );
+			headerClose.append( headerCloseIcon );
 			this._addClass( headerClose, "ui-selectmenu-custom-header-close-button",
-				"ui-button ui-button-left ui-button-icon-only ui-icon-delete" );
+				"ui-button ui-toolbar-header-button-left ui-button-icon-only" );
 			headerClose.appendTo( header );
 		}
 
