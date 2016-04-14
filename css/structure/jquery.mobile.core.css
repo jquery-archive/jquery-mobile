@@ -303,10 +303,12 @@ div.ui-mobile-viewport {
 .ui-widget-icon-floatbeginning {
 	bottom: auto;
 	float: left;
+	margin-right: 1em;
 }
 .ui-widget-icon-floatend {
 	bottom: auto;
 	float: right;
+	margin-left: 1em;
 }
 
 /* Button elements and input buttons */
