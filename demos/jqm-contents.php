@@ -129,6 +129,16 @@
 	<div>
 		<ul>
 			<li data-filtertext="accordion collapsible set formatting"><a href="../accordion/" data-ajax="false">Accordion</a></li>
+			<li data-filtertext="form button widget input button submit reset anchor link button element buttonmarkup buttons"><a href="../button/" data-ajax="false">Button widget</a></li>
+			<li>
+				<h3>Checkboxradio widget</h3>
+				<div>
+					<ul>
+						<li data-filtertext="form checkboxradio widget checkbox input checkboxes controlgroups"><a href="../checkboxradio-checkbox/" data-ajax="false">Checkboxes</a></li>
+						<li data-filtertext="form checkboxradio widget radio input radio buttons controlgroups"><a href="../checkboxradio-radio/" data-ajax="false">Radio buttons</a></li>
+					</ul>
+				</div>
+			</li>
 			<li>
 				<h3>Collapsible (set) widget</h3>
 				<div>
@@ -148,7 +158,9 @@
 					</ul>
 				</div>
 			</li>
+			<li data-filtertext="form datepicker widget date input 3rd party demo" class="jqm-3rd-party"><a href="../datepicker/" data-ajax="false">Datepicker widget</a></li>
 			<li data-filtertext="filterable filter elements sorting searching listview table"><a href="../filterable/" data-ajax="false">Filterable widget</a></li>
+			<li data-filtertext="form flipswitch widget flip toggle switch binary select checkbox input"><a href="../flipswitch/" data-ajax="false">Flipswitch widget</a></li>
 			<li>
 				<h3>Listview widget</h3>
 				<div>
@@ -194,6 +206,27 @@
 					</ul>
 				</div>
 			</li>
+			<li data-filtertext="form rangeslider widget dual sliders dual handle sliders range input"><a href="../rangeslider/" data-ajax="false">Rangeslider widget</a></li>
+			<li>
+				<h3>Selectmenu widget</h3>
+				<div>
+					<ul>
+						<li data-filtertext="form selectmenu widget select input custom select menu selects"><a href="../selectmenu/" data-ajax="false">Selectmenu</a></li>
+						<li data-filtertext="form custom select menu selectmenu widget custom menu option optgroup multiple selects"><a href="../selectmenu-custom/" data-ajax="false">Custom select menu</a></li>
+						<li data-filtertext="filterable select filter popup dialog"><a href="../selectmenu-custom-filter/" data-ajax="false">Custom select menu with filter</a></li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<h3>Slider widget</h3>
+				<div>
+					<ul>
+						<li data-filtertext="form slider widget range input single sliders"><a href="../slider/" data-ajax="false">Slider</a></li>
+						<li data-filtertext="form slider widget flipswitch slider binary select flip toggle switch"><a href="../slider-flipswitch/" data-ajax="false">Slider flip toggle switch</a></li>
+						<li data-filtertext="form slider tooltip handle value input range sliders"><a href="../slider-tooltip/" data-ajax="false">Slider tooltip</a></li>
+					</ul>
+				</div>
+			</li>
 			<li>
 				<h3>Table widget</h3>
 				<div>
@@ -210,6 +243,7 @@
 				</div>
 			</li>
 			<li data-filtertext="ui tabs widget"><a href="../tabs/" data-ajax="false">Tabs widget</a></li>
+			<li data-filtertext="form textinput widget text input textarea number date time tel email file color password"><a href="../textinput/" data-ajax="false">Textinput widget</a></li>
 			<li>
 				<h3>Toolbar widget</h3>
 				<div>
