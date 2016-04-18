@@ -36,21 +36,7 @@
 } )( function( $ ) {
 
 var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-listview-item-divider," +
-		".ui-screen-hidden",
-	goToAdjacentItem = function( item, target, direction ) {
-		var adjacent = item[ direction + "All" ]()
-			.not( unfocusableItemSelector + ",[data-" + this._ns() + "role='placeholder']" )
-				.first();
-
-		// If there's a previous option, focus it
-		if ( adjacent.length ) {
-			target
-				.blur()
-				.attr( "tabindex", "-1" );
-
-			adjacent.find( "a" ).first().focus();
-		}
-	};
+		".ui-screen-hidden";
 
 return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	options: {
@@ -129,6 +115,21 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			.trigger( params.event );
 	},
 
+	_goToAdjacentItem: function( item, target, direction ) {
+		var adjacent = item[ direction + "All" ]()
+			.not( unfocusableItemSelector + ",[data-" + this._ns() + "role='placeholder']" )
+				.first();
+
+		// If there's a previous option, focus it
+		if ( adjacent.length ) {
+			target
+				.blur()
+				.attr( "tabindex", "-1" );
+
+			adjacent.find( "a" ).first().focus();
+		}
+	},
+
 	_handleListKeydown: function( event ) {
 		var target = $( event.target ),
 			li = target.closest( "li" );
@@ -138,12 +139,12 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Up or left arrow keys
 		case 38:
-			goToAdjacentItem( li, target, "prev" );
+			this._goToAdjacentItem( li, target, "prev" );
 			return false;
 
 		// Down or right arrow keys
 		case 40:
-			goToAdjacentItem( li, target, "next" );
+			this._goToAdjacentItem( li, target, "next" );
 			return false;
 
 		// If enter or space is pressed, trigger click
@@ -248,8 +249,10 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"</div>" )
 			.attr( "id", dialogId );
 		menuPageContent = menuPage.children();
-		menuPageHeader = $( "<div><h1></h1></div>" )
-			.toolbar( { type: "header" } )
+
+		// Adding the data-type attribute allows the dialog widget to place the close button before
+		// the toolbar is instantiated
+		menuPageHeader = $( "<div data-" + this._ns() + "type='header'><h1></h1></div>" )
 			.prependTo( menuPage );
 		listbox = $( "<div></div>" )
 			.attr( "id", popupId )
@@ -260,11 +263,14 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			.attr( "id", menuId )
 			.appendTo( listbox );
 		header = $( "<div>" )
-			.toolbar( { type: "header" } )
 			.prependTo( listbox );
 		headerTitle = $( "<h1></h1>" ).appendTo( header );
 
 		menuPage.page();
+
+		// Instantiate the toolbars after everything else so that when they are created they find
+		// the page in which they are contained.
+		menuPageHeader.add( header ).toolbar( { type: "header" } );
 
 		this._addClass( menuPage, "ui-selectmenu-custom" );
 		this._addClass( menuPageContent, null, "ui-content" );
@@ -493,7 +499,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 
 			this.menuPage.appendTo( this.element.closest( ".ui-pagecontainer" ) );
-			this.menuPageClose = this.menuPage.find( ".ui-header a" );
+			this.menuPageClose = this.menuPage.find( ".ui-toolbar-header a" );
 
 			// Prevent the parent page from being removed from the DOM, otherwise the results of
 			// selecting a list item in the dialog fall into a black hole
