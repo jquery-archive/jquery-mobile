@@ -34,7 +34,7 @@
 	}
 } )( function( $ ) {
 
-return $.widget( "mobile.selectmenu", $.widget( "mobile.selectmenu", [ {
+var selectmenu = $.widget( "mobile.selectmenu", [ {
 	version: "@VERSION",
 
 	options: {
@@ -313,6 +313,8 @@ return $.widget( "mobile.selectmenu", $.widget( "mobile.selectmenu", [ {
 		this._setDisabled( false );
 		this.button.removeClass( "ui-state-disabled" );
 	}
-}, $.ui.formResetMixin ] ), $.mobile.widget.theme );
+}, $.ui.formResetMixin ] );
+
+return $.widget( "mobile.selectmenu", selectmenu, $.mobile.widget.theme );
 
 } );
