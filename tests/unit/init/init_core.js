@@ -10,8 +10,6 @@ define( [
 	"tests/unit/init/prepare"
 ], function( QUnit, $, jqm, shared ) {
 
-QUnit.config.autostart = false;
-
 require( [
 	"init"
 ], function() {
@@ -50,7 +48,8 @@ require( [
 	} );
 
 	$.testHelper.excludeFileProtocol( function() {
-		QUnit.asyncTest( "loading the init library triggers mobilinit on the document", function( assert ) {
+		QUnit.test( "loading the init library triggers mobilinit on the document", function( assert ) {
+			var done = assert.async();
 			var initFired = false;
 			assert.expect( 1 );
 
@@ -60,34 +59,37 @@ require( [
 
 			$.testHelper.reloadModule( libName ).then( function() {
 				assert.ok( initFired, "init fired" );
-			} ).then( QUnit.start );
+			} ).then( done );
 		} );
 
-		QUnit.asyncTest( "enhancements are skipped when the browser is not grade A", function( assert ) {
+		QUnit.test( "enhancements are skipped when the browser is not grade A", function( assert ) {
+			var done = assert.async();
 			setGradeA( false );
 			$.testHelper.reloadModule( libName ).then( function() {
 
 				//NOTE easiest way to check for enhancements, not the most obvious
 				assert.ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
-			} ).then( QUnit.start );
+			} ).then( done );
 
 		} );
 
-		QUnit.asyncTest( "enhancements are added when the browser is grade A", function( assert ) {
+		QUnit.test( "enhancements are added when the browser is grade A", function( assert ) {
+			var done = assert.async();
 			assert.expect( 1 );
 			setGradeA( true );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
 					assert.ok( $( "html" ).hasClass( "ui-mobile" ), "html elem has class mobile" );
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 
 		var findFirstPage = function() {
 			return $( ":jqmData(role='page')" ).first();
 		};
 
-		QUnit.asyncTest( "active page and start page should be set to the fist page in the selected set", function( assert ) {
+		QUnit.test( "active page and start page should be set to the fist page in the selected set", function( assert ) {
+			var done = assert.async();
 			assert.expect( 2 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
@@ -96,10 +98,11 @@ require( [
 					assert.deepEqual( $.mobile.firstPage[ 0 ], firstPage[ 0 ] );
 					assert.deepEqual( $.mobile.activePage[ 0 ], firstPage[ 0 ] );
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 
-		QUnit.asyncTest( "mobile viewport class is defined on the first page's parent", function( assert ) {
+		QUnit.test( "mobile viewport class is defined on the first page's parent", function( assert ) {
+			var done = assert.async();
 			assert.expect( 1 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
@@ -107,10 +110,11 @@ require( [
 
 					assert.ok( firstPage.parent().hasClass( "ui-mobile-viewport" ), "first page has viewport" );
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 
-		QUnit.asyncTest( "mobile page container is the first page's parent", function( assert ) {
+		QUnit.test( "mobile page container is the first page's parent", function( assert ) {
+			var done = assert.async();
 			assert.expect( 1 );
 			$.testHelper.reloadModule( libName ).then(
 				function() {
@@ -118,7 +122,7 @@ require( [
 
 					assert.deepEqual( $( ".ui-pagecontainer" )[ 0 ], firstPage.parent()[ 0 ] );
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 
 		QUnit.test( "pages without a data-url attribute have it set to their id", function( assert ) {
@@ -132,7 +136,8 @@ require( [
 		// NOTE the next two tests work on timeouts that assume a page will be
 		// created within 2 seconds it'd be great to get these using a more
 		// reliable callback or event
-		QUnit.asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function( assert ) {
+		QUnit.test( "page does auto-initialize at domready when autoinitialize option is true (default) ", function( assert ) {
+			var done = assert.async();
 
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
 
@@ -146,10 +151,11 @@ require( [
 				function() {
 					assert.deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 
-		QUnit.asyncTest( "page does not initialize at domready when autoinitialize option is false ", function( assert ) {
+		QUnit.test( "page does not initialize at domready when autoinitialize option is false ", function( assert ) {
+			var done = assert.async();
 			$( document ).one( "mobileinit", function() {
 				$.mobile.autoInitializePage = false;
 			} );
@@ -168,8 +174,10 @@ require( [
 
 					return reloadCoreNSandInit();
 				}
-			).then( QUnit.start );
+			).then( done );
 		} );
 	} );
+
+	QUnit.start();
 } );
 } );
