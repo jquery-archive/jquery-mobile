@@ -148,6 +148,8 @@ if ( $.mobileBackcompat !== false ) {
 			this._superApply( arguments );
 		}
 	} }, $.mobile.widget );
+} else {
+	$.mobile.widget.backcompat = {};
 }
 
 return $.mobile.widget;
