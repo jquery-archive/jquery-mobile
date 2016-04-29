@@ -430,7 +430,6 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			if ( this.menuPage.hasClass( "ui-page-active" ) ) {
 				$.mobile.back();
 			}
-			this.list.appendTo( this.listbox );
 		} else {
 			this.listbox.popup( "close" );
 		}
@@ -560,7 +559,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// Doing this here provides for the back button on the custom select dialog
 			this.thisPage.page( "bindRemove" );
 			this.menuPage.detach();
-
+			this.list.appendTo( this.listbox );
 			this.close();
 		}
 	},
