@@ -39,7 +39,7 @@ $.widget( "ui.button", $.ui.button, {
 	},
 
 	_enhance: function() {
-		if ( !this.options.enahnced ) {
+		if ( !this.options.enhanced ) {
 			this._super();
 		} else if ( this.options.icon ) {
 			this.icon = this.element.find( "ui-button-icon" );
