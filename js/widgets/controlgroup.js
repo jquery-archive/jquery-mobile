@@ -131,7 +131,7 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		return [
 			{
 				element: this.widget(),
-				prefix: "ui-theme-"
+				prefix: "ui-group-theme-"
 			}
 		];
 	}
