@@ -283,19 +283,19 @@
                 <div data-demo-html="true">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup:</legend>
-                        <label for="select-custom-5">Select A</label>
+                        <label for="select-custom-5" class="ui-hidden-accessible">Select A</label>
                         <select name="select-custom-5" id="select-custom-5" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-6">Select B</label>
+                        <label for="select-custom-6" class="ui-hidden-accessible">Select B</label>
                         <select name="select-custom-6" id="select-custom-6" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-7">Select C</label>
+                        <label for="select-custom-7" class="ui-hidden-accessible">Select C</label>
                         <select name="select-custom-7" id="select-custom-7" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
@@ -307,19 +307,19 @@
                 <div data-demo-html="true">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, icon left, mini sized:</legend>
-                        <label for="select-custom-8">Select A</label>
+                        <label for="select-custom-8" class="ui-hidden-accessible">Select A</label>
                         <select name="select-custom-8" id="select-custom-8" data-native-menu="false" data-iconpos="left">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-9">Select B</label>
+                        <label for="select-custom-9" class="ui-hidden-accessible">Select B</label>
                         <select name="select-custom-9" id="select-custom-9" data-native-menu="false" data-iconpos="left">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-10">Select C</label>
+                        <label for="select-custom-10" class="ui-hidden-accessible">Select C</label>
                         <select name="select-custom-10" id="select-custom-10" data-native-menu="false" data-iconpos="left">
                             <option value="#">One</option>
                             <option value="#">Two</option>
@@ -329,21 +329,21 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <fieldset data-role="controlgroup">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup:</legend>
-                        <label for="select-custom-11">Select A</label>
+                        <label for="select-custom-11" class="ui-hidden-accessible">Select A</label>
                         <select name="select-custom-11" id="select-custom-11" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-12">Select B</label>
+                        <label for="select-custom-12" class="ui-hidden-accessible">Select B</label>
                         <select name="select-custom-12" id="select-custom-12" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-13">Select C</label>
+                        <label for="select-custom-13" class="ui-hidden-accessible">Select C</label>
                         <select name="select-custom-13" id="select-custom-13" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
@@ -353,21 +353,21 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <fieldset data-role="controlgroup" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                         <legend>Horizontal controlgroup, mini sized:</legend>
-                        <label for="select-custom-14">Select A</label>
+                        <label for="select-custom-14" class="ui-hidden-accessible">Select A</label>
                         <select name="select-custom-14" id="select-custom-14" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-15">Select B</label>
+                        <label for="select-custom-15" class="ui-hidden-accessible">Select B</label>
                         <select name="select-custom-15" id="select-custom-15" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>
                             <option value="#">Three</option>
                         </select>
-                        <label for="select-custom-16">Select C</label>
+                        <label for="select-custom-16" class="ui-hidden-accessible">Select C</label>
                         <select name="select-custom-16" id="select-custom-16" data-native-menu="false">
                             <option value="#">One</option>
                             <option value="#">Two</option>

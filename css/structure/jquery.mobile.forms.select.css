@@ -141,6 +141,7 @@
 }
 
 /* This is necessary because multi inline select menu hides if width exceeds device width. */
-.ui-selectmenu.ui-btn-inline {
+.ui-selectmenu.ui-button-inline {
+	float: left;
 	max-width: 100% ;
 }

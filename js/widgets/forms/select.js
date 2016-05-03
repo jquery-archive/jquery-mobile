@@ -88,7 +88,7 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 
 		this.element = this.element;
 		this.selectWrapper = $( "<div>" );
-		this._addClass( this.selectWrapper, "ui-selectmenu", classes );
+		this._addClass( this.selectWrapper, "ui-selectmenu ui-selectmenu-wrapper", classes );
 		this.selectWrapper.insertBefore( this.element );
 		this.element.detach();
 

@@ -34,11 +34,14 @@
 
 						$el = $( "<a href='#'>Link " + counter + "</a>" ).bind( "click", action );
 						$( "#my-controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
-						$el.buttonMarkup();
 
 					} else if ( widgetType === "select" ) {
 
-						$el = $( "<label for='widget" + counter + "'>Select " + counter + "</label><select id='widget" + counter + "'><option value='option1'>Select " + counter + "</option><option value='option2'>Select option</option></select>" );
+						$el = $( "<label for='widget" + counter + "' class='ui-hidden-accessible'>Select " + counter + "</label>" +
+							"<select id='widget" + counter + "'>" +
+							"<option value='option1'>Select " + counter + "</option>" +
+							"<option value='option2'>Select option</option>" +
+							"</select>" );
 						$( $el[ 1 ] ).bind( "change", action);
 						$( "#my-controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 						$( $el[ 1 ] ).selectmenu();
@@ -96,7 +99,7 @@
 
             <form action="#" method="get">
             	<div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                         <legend>Widget type</legend>
 
                         <input type="radio" name="radio-widget" id="link" value="link" checked="checked">
@@ -111,7 +114,7 @@
             	</div>
 
             	<div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                         <legend>Action<br><small>on click/change</small></legend>
 
                         <input type="radio" name="radio-action" id="remove" value="remove" checked="checked">
@@ -126,7 +129,7 @@
             	</div>
 
             	<div class="ui-field-contain">
-                    <fieldset data-role="controlgroup" data-mini="true">
+                    <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                         <legend>Switch orientation</legend>
 
                         <input type="radio" name="radio-orientation" id="isVertical" value="isVertical" checked="checked">

@@ -140,19 +140,19 @@
             <form>
             <fieldset data-role="controlgroup">
                 <legend>Vertical controlgroup:</legend>
-                <label for="select-native-5">Select A</label>
+                <label for="select-native-5" class="ui-hidden-accessible">Select A</label>
                 <select name="select-native-5" id="select-native-5">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-6">Select B</label>
+                <label for="select-native-6" class="ui-hidden-accessible">Select B</label>
                 <select name="select-native-6" id="select-native-6">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-7">Select C</label>
+                <label for="select-native-7" class="ui-hidden-accessible">Select C</label>
                 <select name="select-native-7" id="select-native-7">
                     <option value="#">One</option>
                     <option value="#">Two</option>
@@ -168,19 +168,19 @@
             <form>
             <fieldset data-role="controlgroup" data-mini="true">
                 <legend>Vertical controlgroup, icon left, mini sized:</legend>
-                <label for="select-native-8">Select A</label>
+                <label for="select-native-8" class="ui-hidden-accessible">Select A</label>
                 <select name="select-native-8" id="select-native-8" data-iconpos="left">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-9">Select B</label>
+                <label for="select-native-9" class="ui-hidden-accessible">Select B</label>
                 <select name="select-native-9" id="select-native-9" data-iconpos="left">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-10">Select C</label>
+                <label for="select-native-10" class="ui-hidden-accessible">Select C</label>
                 <select name="select-native-10" id="select-native-10" data-iconpos="left">
                     <option value="#">One</option>
                     <option value="#">Two</option>
@@ -194,21 +194,21 @@
 
         <div data-demo-html="true">
             <form>
-            <fieldset data-role="controlgroup">
+            <fieldset data-role="controlgroup" data-type="horizontal">
                 <legend>Horizontal controlgroup:</legend>
-                <label for="select-native-11">Select A</label>
+                <label for="select-native-11" class="ui-hidden-accessible">Select A</label>
                 <select name="select-native-11" id="select-native-11">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-12">Select B</label>
+                <label for="select-native-12" class="ui-hidden-accessible">Select B</label>
                 <select name="select-native-12" id="select-native-12">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-13">Select C</label>
+                <label for="select-native-13" class="ui-hidden-accessible">Select C</label>
                 <select name="select-native-13" id="select-native-13">
                     <option value="#">One</option>
                     <option value="#">Two</option>
@@ -222,21 +222,21 @@
 
         <div data-demo-html="true">
             <form>
-            <fieldset data-role="controlgroup" data-mini="true">
+            <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
                 <legend>Horizontal controlgroup, mini sized:</legend>
-                <label for="select-native-14">Select A</label>
+                <label for="select-native-14" class="ui-hidden-accessible">Select A</label>
                 <select name="select-native-14" id="select-native-14">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-15">Select B</label>
+                <label for="select-native-15" class="ui-hidden-accessible">Select B</label>
                 <select name="select-native-15" id="select-native-15">
                     <option value="#">One</option>
                     <option value="#">Two</option>
                     <option value="#">Three</option>
                 </select>
-                <label for="select-native-16">Select C</label>
+                <label for="select-native-16" class="ui-hidden-accessible">Select C</label>
                 <select name="select-native-16" id="select-native-16">
                     <option value="#">One</option>
                     <option value="#">Two</option>
