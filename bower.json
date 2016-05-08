@@ -8,6 +8,7 @@
 	"ignore": [
 		".jshintrc",
 		"**/*.txt",
+		"!LICENSE-INFO.txt",
 		"build",
 		"demos",
 		"tests",
