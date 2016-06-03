@@ -14,6 +14,7 @@ asyncTest( "Swipe does not trigger when motion is default-prevented", function()
 		function() {
 			target.trigger( $.extend( $.Event( pointer.down ), {
 				originalEvent: {
+					preventDefault: $.noop,
 					touches: false
 				},
 				pageX: 206,
@@ -28,6 +29,7 @@ asyncTest( "Swipe does not trigger when motion is default-prevented", function()
 					return event;
 				} )( $.extend( $.Event( pointer.move ), {
 					originalEvent: {
+						preventDefault: $.noop,
 						touches: false
 					},
 					pageX: 206,
@@ -42,6 +44,7 @@ asyncTest( "Swipe does not trigger when motion is default-prevented", function()
 					return event;
 				} )( $.extend( $.Event( pointer.move ), {
 				originalEvent: {
+					preventDefault: $.noop,
 					touches: false
 				},
 				pageX: 170,
@@ -56,6 +59,7 @@ asyncTest( "Swipe does not trigger when motion is default-prevented", function()
 					return event;
 				} )( $.extend( $.Event( pointer.up ), {
 				originalEvent: {
+					preventDefault: $.noop,
 					touches: false
 				},
 				pageX: 170,
