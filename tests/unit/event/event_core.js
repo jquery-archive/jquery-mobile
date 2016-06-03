@@ -144,6 +144,7 @@
 
 		//mock originalEvent information
 		$.Event.prototype.originalEvent = {
+			preventDefault: $.noop,
 			touches: [{ 'pageX' : 0 }, { 'pageY' : 0 }]
 		};
 	};
@@ -407,6 +408,7 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
+			preventDefault: $.noop,
 			touches: [{
 				clientX: 0,
 				clientY: 0
@@ -483,6 +485,7 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
+			preventDefault: $.noop,
 			touches: [{
 				clientX: 0,
 				clientY: 0
@@ -493,6 +496,7 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
+			preventDefault: $.noop,
 			touches: [{
 				clientX: 200,
 				clientY: 0

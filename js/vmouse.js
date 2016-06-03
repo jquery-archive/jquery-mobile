@@ -25,9 +25,13 @@ define( [ "jquery" ], function( jQuery ) {
 var dataPropertyName = "virtualMouseBindings",
 	touchTargetPropertyName = "virtualTouchID",
 	virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split( " " ),
+	generalProps = (
+		"altKey bubbles cancelable ctrlKey currentTarget detail eventPhase " +
+		"metaKey relatedTarget shiftKey target timeStamp view which"
+	).split( " " ),
 	touchEventProps = "clientX clientY pageX pageY screenX screenY".split( " " ),
 	mouseHookProps = $.event.mouseHooks ? $.event.mouseHooks.props : [],
-	mouseEventProps = $.event.props.concat( mouseHookProps ),
+	mouseEventProps = generalProps.concat( mouseHookProps ),
 	activeDocHandlers = {},
 	resetTimerID = 0,
 	startX = 0,
@@ -65,7 +69,7 @@ function createVirtualEvent( event, eventType ) {
 	event.type = eventType;
 
 	oe = event.originalEvent;
-	props = $.event.props;
+	props = generalProps;
 
 	// addresses separation of $.event.props in to $.event.mouseHook.props and Issue 3280
 	// https://github.com/jquery/jquery-mobile/issues/3280

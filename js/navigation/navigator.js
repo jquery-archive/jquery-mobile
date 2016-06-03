@@ -133,6 +133,7 @@ define(["jquery",
 			if ( isPopStateEvent ) {
 				popstateEvent = new $.Event( "popstate" );
 				popstateEvent.originalEvent = {
+					preventDefault: $.noop,
 					type: "popstate",
 					state: null
 				};
