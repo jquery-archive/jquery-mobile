@@ -614,9 +614,6 @@ $.widget( "mobile.pagecontainer", {
 		type: "get",
 		data: undefined,
 
-		// DEPRECATED
-		reloadPage: false,
-
 		reload: false,
 
 		// By default we rely on the role defined by the @data-role attribute.
@@ -635,15 +632,8 @@ $.widget( "mobile.pagecontainer", {
 		// know when the content is done loading, or if an error has occurred.
 		var deferred = ( options && options.deferred ) || $.Deferred(),
 
-			// Examining the option "reloadPage" passed by the user is deprecated as of 1.4.0
-			// and will be removed in 1.5.0.
-			// Copy option "reloadPage" to "reload", but only if option "reload" is not present
-			reloadOptionExtension = ( ( options && options.reload === undefined &&
-			options.reloadPage !== undefined ) ?
-				{ reload: options.reloadPage } : {} ),
-
 			// The default load options with overrides specified by the caller.
-			settings = $.extend( {}, this._loadDefaults, options, reloadOptionExtension ),
+			settings = $.extend( {}, this._loadDefaults, options ),
 
 			// The DOM element for the content after it has been loaded.
 			content = null,

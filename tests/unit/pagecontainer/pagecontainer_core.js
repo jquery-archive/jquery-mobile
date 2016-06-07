@@ -49,25 +49,16 @@ QUnit.test( "load does not trigger an error when called withput a second param",
 	assert.ok( "no error triggered when load method called without options" );
 } );
 
-QUnit.test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence",
+QUnit.test( "Options 'reload' works",
 	function( assert ) {
 	var pagecontainer = $( ":mobile-pagecontainer" );
 
 	pagecontainer.pagecontainer( "load", "stuff.html", {
-		reload: true,
-		reloadPage: false
+		reload: true
 	} );
 
 	assert.strictEqual( triggerData.options.reload, true,
 		"The value of option 'reload' is not affected by the value of option 'reloadPage'" );
-
-	pagecontainer.pagecontainer( "load", "stuff.html", {
-		reloadPage: true
-	} );
-
-	assert.strictEqual( triggerData.options.reload, true,
-		"The value of option 'reloadPage' is copied to the value of option 'reload' if the " +
-		"latter is absent from the options hash" );
 } );
 
 QUnit.module( "_handleDialog()" );
