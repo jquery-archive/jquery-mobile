@@ -1,5 +1,8 @@
 // Mobile navigation unit tests
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 $.testHelper.delayStart();
 
@@ -9,10 +12,9 @@ var changePageFn = $.mobile.pagecontainer.prototype.change,
 	originalLinkBinding = $.mobile.linkBindingEnabled,
 	siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 	home = $.mobile.path.parseUrl( location.pathname ).directory,
-	homeWithSearch = home + location.search,
-	search = location.search;
+	homeWithSearch = home + location.search;
 
-navigateTestRoot = function() {
+var navigateTestRoot = function() {
 	$.testHelper.openPage( "#" + location.pathname + location.search );
 };
 
@@ -42,7 +44,7 @@ QUnit.test( "Absolute link with hash works", function( assert ) {
 		navigatorPrototype = $.mobile.Navigator.prototype;
 
 	QUnit.module( "Navigation encoding", {
-		setup: function() {
+		beforeEach: function() {
 			goUrl = undefined;
 			originalGo = navigatorPrototype.go;
 			navigatorPrototype.go = function( url ) {
@@ -51,42 +53,43 @@ QUnit.test( "Absolute link with hash works", function( assert ) {
 				return originalGo.apply( this, arguments );
 			};
 		},
-		teardown: function() {
+		afterEach: function() {
 			navigatorPrototype.go = originalGo;
 		}
 	} );
 
-	QUnit.asyncTest( "Going to a page requiring url encoding works", function( assert ) {
+	QUnit.test( "Going to a page requiring url encoding works", function( assert ) {
 		var endingString = $( "#goToPercentPage" ).attr( "href" );
+		var ready = assert.async();
 
 		$.testHelper.pageSequence( [
 			function() {
 				$( "#goToPercentPage" ).click();
 			},
 			function() {
-				strictEqual( $.mobile.activePage.children( "#percentPageChild" ).length, 1,
+				assert.strictEqual( $.mobile.activePage.children( "#percentPageChild" ).length, 1,
 					"Active page is the one loaded from the directory with a percent symbol" );
 
-				strictEqual(
+				assert.strictEqual(
 					goUrl.lastIndexOf( endingString ),
 					goUrl.length - endingString.length,
 					"Location ends in '" + endingString + "'" );
 				$.mobile.back();
 			},
-			QUnit.start
+			ready
 		] );
 	} );
 
 } )();
 
 QUnit.module( "jquery.mobile.navigation.js", {
-	setup: function() {
+	beforeEach: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
 		$.testHelper.navReset( homeWithSearch );
 	},
 
-	teardown: function() {
+	afterEach: function() {
 		$.Event.prototype.which = undefined;
 		$.mobile.linkBindingEnabled = originalLinkBinding;
 		$.mobile.pagecontainer.prototype.change = changePageFn;
@@ -94,7 +97,8 @@ QUnit.module( "jquery.mobile.navigation.js", {
 	}
 } );
 
-QUnit.asyncTest( "window.history.back() from external to internal page", function( assert ) {
+QUnit.test( "window.history.back() from external to internal page", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Open our test page
@@ -119,12 +123,13 @@ QUnit.asyncTest( "window.history.back() from external to internal page", functio
 		function() {
 			assert.ok( $.mobile.activePage[ 0 ] === $( "#active-state-page1" )[ 0 ],
 				"successful navigation back to internal page." );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "external empty page does not result in any contents", function( assert ) {
+QUnit.test( "external empty page does not result in any contents", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "blank.html" );
@@ -137,12 +142,13 @@ QUnit.asyncTest( "external empty page does not result in any contents", function
 		},
 
 		function() {
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "external page is removed from the DOM after pagehide", function( assert ) {
+QUnit.test( "external page is removed from the DOM after pagehide", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "external.html" );
@@ -155,15 +161,16 @@ QUnit.asyncTest( "external page is removed from the DOM after pagehide", functio
 		},
 
 		// External-test is *NOT* cached in the dom after transitioning away
-		function( timedOut ) {
+		function() {
 			assert.strictEqual( $( "#external-test" ).length, 0 );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "preventDefault on pageremove prevents external page from being removed",
+QUnit.test( "preventDefault on pageremove prevents external page from being removed",
 	function( assert ) {
+		var ready = assert.async();
 		var preventRemoval = true,
 			removeCallback = function( e ) {
 				if ( preventRemoval ) {
@@ -206,12 +213,13 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 			function() {
 				assert.strictEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
 				$( document ).unbind( "pageremove", removeCallback );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "external page is cached in the DOM after pagehide", function( assert ) {
+QUnit.test( "external page is cached in the DOM after pagehide", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "cached-external.html" );
@@ -226,13 +234,14 @@ QUnit.asyncTest( "external page is cached in the DOM after pagehide", function( 
 		// External test page is cached in the dom after transitioning away
 		function() {
 			assert.strictEqual( $( "#external-test-cached" ).length, 1 );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "external page is cached after pagehide when option is set globally",
+QUnit.test( "external page is cached after pagehide when option is set globally",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.mobile.page.prototype.options.domCache = true;
@@ -250,12 +259,13 @@ QUnit.asyncTest( "external page is cached after pagehide when option is set glob
 				assert.strictEqual( $( "#external-test" ).length, 1 );
 				$.mobile.page.prototype.options.domCache = false;
 				$( "#external-test" ).remove();
-				QUnit.start();
+				ready();
 			} ] );
 	} );
 
-QUnit.asyncTest( "page last scroll distance is remembered when navigating to/from pages",
+QUnit.test( "page last scroll distance is remembered when navigating to/from pages",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$( "body" ).height( $( window ).height() + 500 );
@@ -287,14 +297,15 @@ QUnit.asyncTest( "page last scroll distance is remembered when navigating to/fro
 					assert.strictEqual( $( window ).scrollTop(), 300,
 						"scrollTop is 300 after returning to the page" );
 					$( "body" ).height( "" );
-					QUnit.start();
+					ready();
 				}, 300 );
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "forms with data attribute ajax set to false will not call change()",
+QUnit.test( "forms with data attribute ajax set to false will not call change()",
 	function( assert ) {
+		var ready = assert.async();
 		var called = false;
 		var newChangePage = function() {
 			called = true;
@@ -314,13 +325,14 @@ QUnit.asyncTest( "forms with data attribute ajax set to false will not call chan
 
 			function() {
 				assert.ok( !called, "change page should not be called" );
-				QUnit.start();
+				ready();
 			} ], 1000 );
 	} );
 
-QUnit.asyncTest(
+QUnit.test(
 	"forms with data-ajax attribute absent/set or set to anything but false will call change()",
 	function( assert ) {
+		var ready = assert.async();
 		var called = 0,
 			newChangePage = function() {
 				called++;
@@ -336,12 +348,13 @@ QUnit.asyncTest(
 
 			function() {
 				assert.ok( called >= 2, "change page should be called at least twice" );
-				QUnit.start();
+				ready();
 			} ], 300 );
 	} );
-;
-QUnit.asyncTest( "anchors with no href attribute will do nothing when clicked",
+
+QUnit.test( "anchors with no href attribute will do nothing when clicked",
 	function( assert ) {
+		var ready = assert.async();
 		var fired = false;
 
 		$( window ).bind( "hashchange.temp", function() {
@@ -353,7 +366,7 @@ QUnit.asyncTest( "anchors with no href attribute will do nothing when clicked",
 		setTimeout( function() {
 			assert.strictEqual( fired, false, "hash shouldn't change after click" );
 			$( window ).unbind( "hashchange.temp" );
-			QUnit.start();
+			ready();
 		}, 500 );
 	} );
 
@@ -407,30 +420,32 @@ QUnit.test( "urlHistory is working properly", function( assert ) {
 // Url listening
 function testListening( assert, prop ) {
 	var stillListening = false;
+	var ready = assert.async();
 	$( document ).bind( "pagebeforehide", function() {
 		stillListening = true;
 	} );
 	location.hash = "foozball";
 	setTimeout( function() {
-		assert.ok( prop == stillListening,
+		assert.ok( prop === stillListening,
 			prop + " = false disables default hashchange event handler" );
 		location.hash = "";
 		prop = true;
-		QUnit.start();
+		ready();
 	}, 1000 );
 }
 
-QUnit.asyncTest( "ability to disable our hash change event listening internally",
+QUnit.test( "ability to disable our hash change event listening internally",
 	function( assert ) {
 		testListening( assert, !$.mobile.navigate.history.ignoreNextHashChange );
 	} );
 
-QUnit.asyncTest( "ability to disable our hash change event listening globally",
+QUnit.test( "ability to disable our hash change event listening globally",
 	function( assert ) {
 		testListening( assert, $.mobile.hashListeningEnabled );
 	} );
 
 var testDataUrlHash = function( assert, linkSelector, matches ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			window.location.hash = "";
@@ -445,11 +460,9 @@ var testDataUrlHash = function( assert, linkSelector, matches ) {
 				} )
 			);
 
-			QUnit.start();
+			ready();
 		}
 	] );
-
-	QUnit.stop();
 };
 
 QUnit.test(
@@ -476,9 +489,10 @@ QUnit.test( "data url works when role and url are reversed on the page element",
 		testDataUrlHash( assert, "#reverse-attr-data-url a", { hashOrPush: home + url } );
 	} );
 
-QUnit.asyncTest(
+QUnit.test(
 	"last entry chosen amongst multiple identical url history stack entries on hash change",
 	function( assert ) {
+		var ready = assert.async();
 		var stackLength = $.mobile.navigate.history.stack.length;
 
 		$.testHelper.pageSequence( [
@@ -509,13 +523,14 @@ QUnit.asyncTest(
 				// [first #dup-history-second-entry]
 				assert.strictEqual( $.mobile.navigate.history.activeIndex, 3 + stackLength,
 					"should be the fourth page in the stack" );
-				QUnit.start();
+				ready();
 			} ] );
 	} );
 
-QUnit.asyncTest(
+QUnit.test(
 	"going back from a page entered from a dialog skips past the dialog to the prev page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Setup
@@ -546,14 +561,15 @@ QUnit.asyncTest(
 					report: "should be the first page in the sequence"
 				} );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "going forward from a page entered from a dialog skips the dialog and goes to " +
+QUnit.test( "going forward from a page entered from a dialog skips the dialog and goes to " +
 	"the next page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Setup
@@ -589,16 +605,17 @@ QUnit.asyncTest( "going forward from a page entered from a dialog skips the dial
 					report: "should be the second page after the dialog"
 				} );
 
-				QUnit.start();
+				ready();
 			} ] );
 	} );
 
-QUnit.asyncTest(
+QUnit.test(
 	"going back from a stale dialog history entry does not cause the base tag to be reset",
 	function( assert ) {
+		var ready = assert.async();
 		var baseHRef;
 
-		expect( 1 );
+		assert.expect( 1 );
 
 		$.testHelper.pageSequence( [
 
@@ -613,18 +630,18 @@ QUnit.asyncTest(
 			},
 
 			// Record the base href and launch the dialog
-			function( timedOut ) {
+			function() {
 				baseHRef = $( "base" ).attr( "href" );
 				$( "a#go-to-dialog" ).click();
 			},
 
 			// Close the dialog - this assumes a close button link will be added to the dialog as
 			// part of the enhancement process
-			function( timedOut ) {
+			function() {
 				$( "#dialog-base-tag-test a" ).click();
 			},
 
-			function( timedOut ) {
+			function() {
 
 				// $.testHelper.pageSequence cannot be used here because no page changes occur
 				$.testHelper.sequence( [
@@ -660,7 +677,7 @@ QUnit.asyncTest(
 
 							// Conclude the test
 							function() {
-								QUnit.start();
+								ready();
 							}
 						] );
 					}
@@ -669,9 +686,10 @@ QUnit.asyncTest(
 		] );
 	} );
 
-QUnit.asyncTest( "opening a dialog, closing it, moving forward, and opening it again, does not " +
+QUnit.test( "opening a dialog, closing it, moving forward, and opening it again, does not " +
 	"result in a dialog that needs to be closed twice",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Setup
@@ -709,15 +727,16 @@ QUnit.asyncTest( "opening a dialog, closing it, moving forward, and opening it a
 				setTimeout( function() {
 					assert.deepEqual( $( "#dialog-double-hash-test" )[ 0 ],
 						$.mobile.activePage[ 0 ], "should be back to the test page" );
-					QUnit.start();
+					ready();
 				}, 800 );
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "going back from a dialog triggered from a dialog should result in the first " +
+QUnit.test( "going back from a dialog triggered from a dialog should result in the first " +
 	"dialog",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#nested-dialog-page" );
@@ -742,11 +761,12 @@ QUnit.asyncTest( "going back from a dialog triggered from a dialog should result
 			function() {
 				assert.deepEqual( $( ".ui-page-active" )[ 0 ], $( "#nested-dialog-first" )[ 0 ],
 					"should be the first dialog" );
-				QUnit.start();
+				ready();
 			} ] );
 	} );
 
-QUnit.asyncTest( "loading a relative file path after an embedded page works", function( assert ) {
+QUnit.test( "loading a relative file path after an embedded page works", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Transition second page
@@ -770,12 +790,13 @@ QUnit.asyncTest( "loading a relative file path after an embedded page works", fu
 			// Data attribute intentionally left without namespace
 			assert.strictEqual( $( ".ui-page-active" ).data( "other" ), "for testing",
 				"should be relative ajax loaded page" );
-			QUnit.start();
+			ready();
 		} ] );
 } );
 
-QUnit.asyncTest( "Page title updates properly when clicking back to previous page",
+QUnit.test( "Page title updates properly when clicking back to previous page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#relative-after-embedded-page-first" );
@@ -787,13 +808,14 @@ QUnit.asyncTest( "Page title updates properly when clicking back to previous pag
 
 			function() {
 				assert.strictEqual( document.title, "jQuery Mobile Navigation Test Suite" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "Page title updates properly when clicking a link back to first page",
+QUnit.test( "Page title updates properly when clicking a link back to first page",
 	function( assert ) {
+		var ready = assert.async();
 		var title = document.title;
 
 		$.testHelper.pageSequence( [
@@ -812,13 +834,14 @@ QUnit.asyncTest( "Page title updates properly when clicking a link back to first
 
 			function() {
 				assert.strictEqual( document.title, title );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "Page title updates properly from title tag when loading an external page",
+QUnit.test( "Page title updates properly from title tag when loading an external page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#ajax-title-page" );
@@ -830,13 +853,14 @@ QUnit.asyncTest( "Page title updates properly from title tag when loading an ext
 
 			function() {
 				assert.strictEqual( document.title, "Title Tag" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "Page title updates properly from data-title attr  when loading an external page",
+QUnit.test( "Page title updates properly from data-title attr  when loading an external page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#ajax-title-page" );
@@ -848,14 +872,15 @@ QUnit.asyncTest( "Page title updates properly from data-title attr  when loading
 
 			function() {
 				assert.strictEqual( document.title, "Title Attr" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "Page title updates properly from heading text in header when loading an " +
+QUnit.test( "Page title updates properly from heading text in header when loading an " +
 	"external page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#ajax-title-page" );
@@ -867,13 +892,14 @@ QUnit.asyncTest( "Page title updates properly from heading text in header when l
 
 			function() {
 				assert.strictEqual( document.title, "Title Heading" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "Page links to the current active page result in the same active page",
+QUnit.test( "Page links to the current active page result in the same active page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#self-link" );
@@ -886,14 +912,15 @@ QUnit.asyncTest( "Page links to the current active page result in the same activ
 			function() {
 				assert.deepEqual( $.mobile.activePage[ 0 ], $( "#self-link" )[ 0 ],
 					"self-link page is still the active page" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest(
+QUnit.test(
 	"links on subdirectory pages with query params append the params and load the page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#data-url-tests/non-data-url.html" );
@@ -915,13 +942,14 @@ QUnit.asyncTest(
 
 				assert.ok( $( ".ui-page-active" ).jqmData( "url" ).indexOf( "?foo=bar" ) > -1,
 					"the query params are in the data url" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "identical query param link doesn't add additional set of query params",
+QUnit.test( "identical query param link doesn't add additional set of query params",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$.testHelper.openPage( "#data-url-tests/non-data-url.html" );
@@ -935,8 +963,8 @@ QUnit.asyncTest( "identical query param link doesn't add additional set of query
 				$.testHelper.assertUrlLocation( assert, {
 
 					// TODO note there's no guarantee that the query params will remain in this
-					//      order we should fix the comparison to take a callback and do something
-					//      more complex
+					//	  order we should fix the comparison to take a callback and do something
+					//	  more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				} );
@@ -948,21 +976,22 @@ QUnit.asyncTest( "identical query param link doesn't add additional set of query
 				$.testHelper.assertUrlLocation( assert, {
 
 					// TODO note there's no guarantee that the query params will remain in this
-					//      order we should fix the comparison to take a callback and do something
-					//      more complex
+					//	  order we should fix the comparison to take a callback and do something
+					//	  more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url still has query params"
 				} );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
 // Special handling inside navigation because query params must be applied to the hash
 // or absolute reference and dialogs apply extra information int the hash that must be removed
-QUnit.asyncTest( "query param link from a dialog to itself should be a not add another dialog",
+QUnit.test( "query param link from a dialog to itself should be a not add another dialog",
 	function( assert ) {
+		var ready = assert.async();
 		var firstDialogLoc;
 
 		$.testHelper.pageSequence( [
@@ -993,13 +1022,14 @@ QUnit.asyncTest( "query param link from a dialog to itself should be a not add a
 			function() {
 				assert.strictEqual( location.hash || location.href, firstDialogLoc,
 					"additional dialog hash key not added" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "query data passed as a string to change() is appended to URL",
+QUnit.test( "query data passed as a string to change() is appended to URL",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1018,13 +1048,14 @@ QUnit.asyncTest( "query data passed as a string to change() is appended to URL",
 					report: "the hash or url still has query params"
 				} );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "query data passed as an object to change() is appended to URL",
+QUnit.test( "query data passed as an object to change() is appended to URL",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1044,12 +1075,13 @@ QUnit.asyncTest( "query data passed as an object to change() is appended to URL"
 					report: "the hash or url still has query params"
 				} );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "refresh of a dialog url should not duplicate page", function( assert ) {
+QUnit.test( "refresh of a dialog url should not duplicate page", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Open our test page
@@ -1068,12 +1100,13 @@ QUnit.asyncTest( "refresh of a dialog url should not duplicate page", function( 
 
 			assert.strictEqual( $( ".foo-class" ).length, 1,
 				"should only have one instance of foo-class in the document" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "internal form with no action submits to document URL", function( assert ) {
+QUnit.test( "internal form with no action submits to document URL", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Open our test page
@@ -1091,13 +1124,14 @@ QUnit.asyncTest( "internal form with no action submits to document URL", functio
 				report: "hash should match what was loaded"
 			} );
 
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "external page containing form with no action submits to page URL",
+QUnit.test( "external page containing form with no action submits to page URL",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1119,13 +1153,13 @@ QUnit.asyncTest( "external page containing form with no action submits to page U
 					report: "hash should match page url and not document url"
 				} );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "handling of active button state when navigating", 1, function( assert ) {
-
+QUnit.test( "handling of active button state when navigating", 1, function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Open our test page
@@ -1144,15 +1178,16 @@ QUnit.asyncTest( "handling of active button state when navigating", 1, function(
 		function() {
 			assert.lacksClasses( $( "#active-state-page1 a" ), "ui-button-active",
 				"No button should not have class " + $.mobile.activeBtnClass );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
 // Issue 2444 https://github.com/jquery/jquery-mobile/issues/2444 results from preventing spurious
 // hash changes
-QUnit.asyncTest( "dialog should return to its parent page when opened and closed multiple times",
+QUnit.test( "dialog should return to its parent page when opened and closed multiple times",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1179,12 +1214,13 @@ QUnit.asyncTest( "dialog should return to its parent page when opened and closed
 
 			function() {
 				assert.deepEqual( $.mobile.activePage[ 0 ], $( "#default-trans-dialog" )[ 0 ] );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "clicks with middle mouse button are ignored", function( assert ) {
+QUnit.test( "clicks with middle mouse button are ignored", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$.testHelper.openPage( "#odd-clicks-page" );
@@ -1212,13 +1248,14 @@ QUnit.asyncTest( "clicks with middle mouse button are ignored", function( assert
 			assert.ok( timeout, "page event handler timed out due to ignored click" );
 			assert.ok( $.mobile.activePage[ 0 ] !== $( "#odd-clicks-page-dest" )[ 0 ],
 				"pages are not the same" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "disabling link binding disables nav via links and highlighting",
+QUnit.test( "disabling link binding disables nav via links and highlighting",
 	function( assert ) {
+		var ready = assert.async();
 		$.mobile.linkBindingEnabled = false;
 
 		$.testHelper.pageSequence( [
@@ -1234,13 +1271,15 @@ QUnit.asyncTest( "disabling link binding disables nav via links and highlighting
 				assert.lacksClasses( $.mobile.activePage.find( "a" ), "ui-button-active",
 					"vlick handler doesn't add the activebutton class" );
 				assert.ok( timeout, "no page change was fired" );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "handling of button active state when back-button-navigating", 2,
+QUnit.test( "handling of button active state when back-button-navigating", 2,
 	function( assert ) {
+		var ready = assert.async();
+
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1265,13 +1304,14 @@ QUnit.asyncTest( "handling of button active state when back-button-navigating", 
 					assert.lacksClasses( this, "ui-button-active",
 						"No button should have class ui-button-active" );
 				} );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "can navigate to dynamically injected page with dynamically injected link",
+QUnit.test( "can navigate to dynamically injected page with dynamically injected link",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1284,7 +1324,7 @@ QUnit.asyncTest( "can navigate to dynamically injected page with dynamically inj
 					$link = $( "<a href='#injected-test-page'>injected-test-page link</a>" );
 
 				// Make sure we actually navigated to the expected page.
-				assert.ok( $.mobile.activePage[ 0 ] == $ilpage[ 0 ],
+				assert.ok( $.mobile.activePage[ 0 ] === $ilpage[ 0 ],
 					"navigated successfully to #inject-links-page" );
 
 				// Now dynamically insert a page.
@@ -1299,16 +1339,17 @@ QUnit.asyncTest( "can navigate to dynamically injected page with dynamically inj
 			function() {
 
 				// Make sure we actually navigated to the expected page.
-				assert.ok( $.mobile.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ],
+				assert.ok( $.mobile.activePage[ 0 ] === $( "#injected-test-page" )[ 0 ],
 					"navigated successfully to #injected-test-page" );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "application url with dialogHashKey loads first application page",
+QUnit.test( "application url with dialogHashKey loads first application page",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 
 			// Open our test page
@@ -1338,15 +1379,16 @@ QUnit.asyncTest( "application url with dialogHashKey loads first application pag
 				assert.strictEqual( $( ".first-page" ).length, 1,
 					"first page was not duplicated" );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "navigate to non-existent internal page throws pagechangefailed",
+QUnit.test( "navigate to non-existent internal page throws pagechangefailed",
 	function( assert ) {
+		var ready = assert.async();
 		var pagechangefailed = false,
-			pageChangeFailedCB = function( e ) {
+			pageChangeFailedCB = function() {
 				pagechangefailed = true;
 		};
 
@@ -1392,12 +1434,13 @@ QUnit.asyncTest( "navigate to non-existent internal page throws pagechangefailed
 
 				$( document ).unbind( "pagechangefailed", pageChangeFailedCB );
 
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "prefetched links with data rel dialog result in a dialog", function( assert ) {
+QUnit.test( "prefetched links with data rel dialog result in a dialog", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 
 		// Open our test page
@@ -1414,15 +1457,16 @@ QUnit.asyncTest( "prefetched links with data rel dialog result in a dialog", fun
 		function() {
 			assert.hasClasses( $.mobile.activePage, "ui-page-dialog",
 				"prefetched page is rendered as a dialog" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "first page gets reloaded if pruned from the DOM", function( assert ) {
+QUnit.test( "first page gets reloaded if pruned from the DOM", function( assert ) {
+	var ready = assert.async();
 	var hideCallbackTriggered = false;
 
-	function hideCallback( e, data ) {
+	function hideCallback( e ) {
 		var page = e.target;
 		assert.ok( ( page === $.mobile.firstPage[ 0 ] ),
 			"hide called with prevPage set to firstPage" );
@@ -1498,12 +1542,13 @@ QUnit.asyncTest( "first page gets reloaded if pruned from the DOM", function( as
 			// XXX: Should we just get rid of the new one and restore the old?
 			$.mobile.firstPage = $.mobile.activePage;
 
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "clicks are ignored where data-ajax='false' parents exist", function( assert ) {
+QUnit.test( "clicks are ignored where data-ajax='false' parents exist", function( assert ) {
+	var ready = assert.async();
 	var $disabledByParent = $( "#unhijacked-link-by-parent" ),
 		$disabledByAttr = $( "#unhijacked-link-by-attr" );
 
@@ -1542,12 +1587,13 @@ QUnit.asyncTest( "clicks are ignored where data-ajax='false' parents exist", fun
 				"click should be ignored keeping the active mobile page the same as before" );
 
 			$.mobile.ignoreContentEnabled = false;
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function( assert ) {
+QUnit.test( "vclicks are ignored where data-ajax='false' parents exist", function( assert ) {
+	var ready = assert.async();
 	var disabledByParent = $( "#unhijacked-link-by-parent" ),
 		disabledByAttr = $( "#unhijacked-link-by-attr" ),
 		hijacked = $( "#hijacked-link" );
@@ -1576,12 +1622,13 @@ QUnit.asyncTest( "vclicks are ignored where data-ajax='false' parents exist", fu
 				"active button class is never added to the link" );
 
 			$.mobile.ignoreContentEnabled = false;
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function( assert ) {
+QUnit.test( "data-urls with parens work properly (avoid jqmData regex)", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change",
@@ -1599,12 +1646,13 @@ QUnit.asyncTest( "data-urls with parens work properly (avoid jqmData regex)", fu
 
 		function() {
 			assert.equal( $.trim( $.mobile.activePage.text() ), "Parens!", "the page loaded" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "loading an embedded page with query params works", function( assert ) {
+QUnit.test( "loading an embedded page with query params works", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#bar?baz=bak", { dataUrl: false } );
@@ -1614,13 +1662,14 @@ QUnit.asyncTest( "loading an embedded page with query params works", function( a
 			assert.ok( location.hash.indexOf( "bar?baz=bak" ) >= -1,
 				"the hash is targeted at the page to be loaded" );
 			assert.ok( $.mobile.activePage.attr( "id" ), "bar", "the correct page is loaded" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "external page is accessed correctly even if it has a space in the url",
+QUnit.test( "external page is accessed correctly even if it has a space in the url",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			function() {
 				$( ".ui-pagecontainer" ).pagecontainer( "change", " external.html" );
@@ -1628,7 +1677,7 @@ QUnit.asyncTest( "external page is accessed correctly even if it has a space in 
 			function() {
 				assert.equal( $.mobile.activePage.attr( "id" ), "external-test",
 					"the correct page is loaded" );
-				QUnit.start();
+				ready();
 			}
 
 		] );
@@ -1637,8 +1686,9 @@ QUnit.asyncTest( "external page is accessed correctly even if it has a space in 
 var absHomeUrl = $.mobile.path.parseLocation().hrefNoHash,
 	homeDomain = $.mobile.path.parseLocation().domain;
 
-QUnit.asyncTest( "page load events are providided with the absolute url for the content",
+QUnit.test( "page load events are providided with the absolute url for the content",
 	function( assert ) {
+		var ready = assert.async();
 		var requestPath;
 
 		assert.expect( 3 );
@@ -1657,10 +1707,10 @@ QUnit.asyncTest( "page load events are providided with the absolute url for the 
 
 		$( document ).one( "pagechangefailed", function( event, data ) {
 			assert.equal( data.absUrl, homeDomain + requestPath );
-			QUnit.start();
+			ready();
 		} );
 
 		$( ".ui-pagecontainer" ).pagecontainer( "change", requestPath );
 	} );
 
-} )( QUnit, jQuery );
+} );

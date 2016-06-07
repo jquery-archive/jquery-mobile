@@ -1,9 +1,9 @@
 define( [
 	"./shared",
 	"jquery.mobile"
-], function( shared, jqm ) {
+], function( shared ) {
 // NOTE important to use $.fn.one here to make sure library reloads don't fire
-//      the event before the test check below
+//	  the event before the test check below
 $( document ).one( "mobileinit", function() {
 	shared.ns = $.mobile.ns;
 	shared.page = $.mobile.page;

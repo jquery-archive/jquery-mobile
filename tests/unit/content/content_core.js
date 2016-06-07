@@ -67,7 +67,7 @@ QUnit.test( "uses the current hash when no url or hash is present",
 	function( assert ) {
 	assert.expect( 1 );
 
-	proto._handleNavigate = function( url, state ) {
+	proto._handleNavigate = function( url ) {
 		assert.equal( url, "baz", "the url is the hash stored in the state" );
 	};
 
@@ -81,7 +81,7 @@ QUnit.test( "uses the current hash when no url or hash is present",
 QUnit.test( "uses the current url when no hash is present", function( assert ) {
 	assert.expect( 1 );
 
-	proto._handleNavigate = function( url, state ) {
+	proto._handleNavigate = function( url ) {
 		assert.equal( url, location.href, "the url is the hash stored in the state" );
 	};
 
@@ -131,8 +131,7 @@ QUnit.test( "continues forward when the active content isn't a dialog", function
 } );
 
 QUnit.test( "extends changePageOptions when current content is a dialog", function( assert ) {
-	var result,
-		opts = {};
+	var opts = {};
 
 	proto.getActivePage = function() {
 		return $( "<div>" ).data( "mobile-dialog", true );

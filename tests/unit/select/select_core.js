@@ -2,7 +2,7 @@
  * Mobile select unit tests
  */
 
-define( [ "jquery" ], function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.module( "Native select" );
 
@@ -22,7 +22,7 @@ QUnit.module( "Custom select" );
 QUnit.test( "Custom select is enhanced correctly", function( assert ) {
 	var popup = $( "#enhance-test-listbox" );
 
-	assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
+	assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + "'" + "role='button'" + "'" + " set" );
 	assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2", "Tabindex is correctly copied from select" );
 	assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
 	assert.strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );

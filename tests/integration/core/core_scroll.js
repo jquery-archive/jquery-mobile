@@ -1,8 +1,11 @@
 /*
- * mobile core unit tests
+ * Mobile core unit tests
  */
 
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var libName = "core",
 	scrollTimeout = 70, // TODO expose timing as an attribute
 	scrollStartEnabledTimeout = 150;
@@ -58,4 +61,4 @@ QUnit.asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function(
 } );
 
 //TODO test that silentScroll is called on window load
-} )( QUnit, jQuery );
+} );

@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "Panel inner wrapper and page wrapper are attached even if they have nothing to wrap",
 	function( assert ) {
@@ -46,4 +46,4 @@ QUnit.test( "Empty panel on empty page opens correctly", function( assert ) {
 	] );
 } );
 
-} )( QUnit, jQuery );
+} );

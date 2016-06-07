@@ -1,9 +1,9 @@
-( function() {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 var origChange, callSequence;
 
-module( "Pagecontainer transition choice", {
-	setup: function() {
+QUnit.module( "Pagecontainer transition choice", {
+	beforeEach: function() {
 		callSequence = [];
 		origChange = $.mobile.pagecontainer.prototype.change;
 		$.mobile.pagecontainer.prototype.change = function( url, options ) {
@@ -14,14 +14,13 @@ module( "Pagecontainer transition choice", {
 			return origChange.apply( this, arguments );
 		};
 	},
-	teardown: function() {
+	afterEach: function() {
 		$.mobile.pagecontainer.prototype.change = origChange;
 	}
 } );
 
-asyncTest( "Pagecontainer chooses correct transition", function() {
-	debugger;
-
+QUnit.test( "Pagecontainer chooses correct transition", function( assert ) {
+	var ready = assert.async();
 	var pageContainer = $( ":mobile-pagecontainer" );
 
 	$.testHelper.pageSequence( [
@@ -38,7 +37,7 @@ asyncTest( "Pagecontainer chooses correct transition", function() {
 			pageContainer.pagecontainer( "back" );
 		},
 		function() {
-			deepEqual( callSequence,
+			assert.deepEqual( callSequence,
 				[
 					{ transition: "flip", reverse: false },
 					{ transition: "slide", reverse: false },
@@ -47,9 +46,9 @@ asyncTest( "Pagecontainer chooses correct transition", function() {
 				],
 				"call sequence has resulted in the correct transitions" );
 
-			start();
+			ready();
 		}
 	] );
 } );
 
-} )();
+} );

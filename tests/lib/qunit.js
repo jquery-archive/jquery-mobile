@@ -2,7 +2,7 @@ define( [
 	"qunit",
 	"jquery",
 	"qunit-assert-classes",
-	"qunit-assert-domequal",
+	"qunit-assert-domequal"
 ], function( QUnit, $ ) {
 
 QUnit.config.autostart = false;

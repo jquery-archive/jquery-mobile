@@ -24,17 +24,11 @@
 	}
 } )( function( $ ) {
 
-// throttled resize event
-$.event.special.throttledresize = {
-	setup: function() {
-		$( this ).bind( "resize", handler );
-	},
-	teardown: function() {
-		$( this ).unbind( "resize", handler );
-	}
-};
-
 var throttle = 250,
+	lastCall = 0,
+	heldCall,
+	curr,
+	diff,
 	handler = function() {
 		curr = ( new Date() ).getTime();
 		diff = curr - lastCall;
@@ -53,11 +47,17 @@ var throttle = 250,
 			// Promise a held call will still execute
 			heldCall = setTimeout( handler, throttle - diff );
 		}
+	};
+
+// throttled resize event
+$.event.special.throttledresize = {
+	setup: function() {
+		$( this ).bind( "resize", handler );
 	},
-	lastCall = 0,
-	heldCall,
-	curr,
-	diff;
+	teardown: function() {
+		$( this ).unbind( "resize", handler );
+	}
+};
 
 return $.event.special.throttledresize;
 } );

@@ -22,7 +22,7 @@ QUnit.test( "checkbox based flipswitch", function( assert ) {
 	$( "#flip-checkbox" ).trigger( "swiperight" );
 	assert.hasClasses( $( "#flip-checkbox" ).parent(), "ui-flipswitch-active",
 		"is active after right swipe" );
-	assert.deepEqual( parseInt( $( "#flip-checkbox" ).attr( "tabindex" ) ), -1,
+	assert.deepEqual( parseInt( $( "#flip-checkbox" ).attr( "tabindex" ), 10 ), -1,
 		"is untabbable - tabindex is set to -1" );
 } );
 
@@ -43,7 +43,7 @@ QUnit.test( "select based flipswitch", function( assert ) {
 	$( "#flip-select" ).trigger( "swiperight" );
 	assert.hasClasses( $( "#flip-select" ).parent(), "ui-flipswitch-active",
 		"is active after right swipe" );
-	assert.deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ) ), -1,
+	assert.deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ), 10 ), -1,
 		"is untabbable - tabindex is set to -1" );
 } );
 

@@ -13,7 +13,7 @@ QUnit.module( libName, {
 	setup: function() {
 
 		// Ensure bindings are removed
-		$.each( events.concat( "vmouseup vmousedown".split( " " ) ), function( i, name ) {
+		$.each( events.concat( "vmouseup vmousedown".split( " " ) ), function() {
 			$( "#qunit-fixture" ).unbind();
 		} );
 
@@ -49,4 +49,4 @@ $.testHelper.excludeFileProtocol( function() {
 	} );
 } );
 
-} )( QUnit, jQuery);
+} )( window.QUnit, window.jQuery );

@@ -1,7 +1,8 @@
 /*
  * Mobile init dialog tests
  */
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 QUnit.module( "jquery.mobile.init dialog load tests" );
 
 // Issue #3275
@@ -15,4 +16,4 @@ QUnit.test(
 	} );
 
 // NOTE the opposite case is tested everyewhere else in the suite :D
-} )( QUnit, jQuery );
+} );

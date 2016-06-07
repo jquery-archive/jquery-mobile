@@ -56,7 +56,7 @@ function testSetHeaders( prefix, element ) {
 
 	QUnit.test( prefix + "_setHeaders()", function( assert ) {
 		tableProto._setHeaders.call( instance );
-		$.each( expected, function( key, value ) {
+		$.each( expected, function( key ) {
 			var messagePrefix = prefix + "_setHeaders(): " + key;
 
 			assert.deepEqual( !!instance[ key ], true,
@@ -105,7 +105,7 @@ QUnit.test( "_refreshHeaderRow() iterates over all of a row's children", functio
 		expectedChildren = row.children();
 
 	tableProto._refreshHeaderRow.call( {
-		_refreshHeaderCell: function( index, element, columnCount ) {
+		_refreshHeaderCell: function( index, element ) {
 			cellsVisited.push( element );
 		},
 		allRowsExceptFirst: $( "#table-enhance-test [data-all-rows-except-first]" )
@@ -136,7 +136,7 @@ QUnit.test( "refresh() iterates over all the rows of a table", function( assert 
 		} ), false, "All the table's rows were visited" );
 } );
 
-function testDestroy( prefix, enhanced ) {
+function testDestroy( prefix ) {
 	QUnit.test( prefix + "_destroy() undoes table-related changes", function( assert ) {
 		var testClass = "foo";
 		var table = $( "#destroy-test" )

@@ -39,6 +39,13 @@
 	}
 } )( function( $ ) {
 
+// These variables make all page containers use the same queue and only navigate one at a time
+// queue to hold simultanious page transitions
+var pageTransitionQueue = [],
+
+	// Indicates whether or not page is in process of transitioning
+	isPageTransitioning = false;
+
 $.widget( "mobile.pagecontainer", {
 	version: "@VERSION",
 
@@ -1229,13 +1236,6 @@ $.widget( "mobile.pagecontainer", {
 // The following handlers should be bound after mobileinit has been triggered.
 // The following deferred is resolved in the init file.
 $.mobile.navreadyDeferred = $.Deferred();
-
-// These variables make all page containers use the same queue and only navigate one at a time
-// queue to hold simultanious page transitions
-var pageTransitionQueue = [],
-
-	// Indicates whether or not page is in process of transitioning
-	isPageTransitioning = false;
 
 $.widget( "mobile.pagecontainer", $.mobile.pagecontainer, $.mobile.widget.theme );
 

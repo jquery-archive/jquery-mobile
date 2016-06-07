@@ -2,18 +2,19 @@
  * Mobile select unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 var libName = "forms.select",
 	originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 	originalDefTransitionHandler = $.mobile.defaultTransitionHandler.prototype.transition,
 	originalGetEncodedText = $.fn.getEncodedText,
 	resetHash, closeDialog;
 
-resetHash = function( timeout ) {
+resetHash = function() {
 	$.testHelper.openPage( location.hash.indexOf( "#default" ) >= 0 ? "#" : "#default" );
 };
 
-closeDialog = function( timeout ) {
+closeDialog = function() {
 	$.mobile.activePage.find( "li a" ).first().click();
 };
 
@@ -25,13 +26,13 @@ QUnit.test( "No tags are accidentally injected during list building", function( 
 } );
 
 QUnit.module( libName, {
-	setup: function() {
+	beforeEach: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
 		$.testHelper.navReset( homeWithSearch );
 	},
 
-	teardown: function() {
+	afterEach: function() {
 		$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
 		$.mobile.defaultTransitionHandler.prototype.transition = originalDefTransitionHandler;
 
@@ -40,15 +41,16 @@ QUnit.module( libName, {
 	}
 } );
 
-QUnit.asyncTest( "placeholder correctly gets ui-screen-hidden after rebuilding",
+QUnit.test( "placeholder correctly gets ui-screen-hidden after rebuilding",
 	function( assert ) {
+		var ready = assert.async();
 		assert.expect( 3 );
 
 		$.testHelper.sequence( [
 			function() {
 
 				// Bring up the optgroup menu
-				ok( $( "#optgroup-and-placeholder-container a" ).length > 0,
+				assert.ok( $( "#optgroup-and-placeholder-container a" ).length > 0,
 					"there is in fact a button in the page" );
 				assert.hasClasses(
 					$( "#optgroup-and-placeholder-menu li.ui-listview-item-divider" ).first(),
@@ -65,13 +67,14 @@ QUnit.asyncTest( "placeholder correctly gets ui-screen-hidden after rebuilding",
 			function() {
 				assert.hasClasses( $( "#optgroup-and-placeholder-menu li:first" ),
 					"ui-screen-hidden", "the placeholder item has the ui-screen-hidden class" );
-				QUnit.start();
+				ready();
 			}
 		], 1000 );
 	} );
 
-QUnit.asyncTest( "firing a click at least 400ms later on the select screen closes it",
+QUnit.test( "firing a click at least 400ms later on the select screen closes it",
 	function( assert ) {
+		var ready = assert.async();
 		assert.expect( 3 );
 
 		var prefix = ".firingAClick";
@@ -108,17 +111,18 @@ QUnit.asyncTest( "firing a click at least 400ms later on the select screen close
 				assert.strictEqual( $( "#select-choice-few\\.dotTest-menu" )
 					.parent()
 					.parent( ".ui-popup-hidden" ).length, 1 );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "a large select menu should use the default dialog transition",
+QUnit.test( "a large select menu should use the default dialog transition",
 	function( assert ) {
+		var ready = assert.async();
 		$.testHelper.pageSequence( [
 			resetHash,
 
-			function( timeout ) {
+			function() {
 				var select, old;
 
 				select = $( "#select-choice-many-container-1 a" );
@@ -140,18 +144,19 @@ QUnit.asyncTest( "a large select menu should use the default dialog transition",
 
 			closeDialog,
 
-			QUnit.start
+			ready
 		] );
 	} );
 
-QUnit.asyncTest( "selecting an item from a large custom select leaves no dialog hash key",
+QUnit.test( "selecting an item from a large custom select leaves no dialog hash key",
 	function( assert ) {
+		var ready = assert.async();
 		var dialogHashKey = "ui-state=dialog";
 
 		$.testHelper.pageSequence( [
 			resetHash,
 
-			function( timeout ) {
+			function() {
 				$( "#select-choice-many-container-hash-check a" ).click();
 			},
 
@@ -162,13 +167,14 @@ QUnit.asyncTest( "selecting an item from a large custom select leaves no dialog 
 
 			function() {
 				assert.strictEqual( location.hash.indexOf( dialogHashKey ), -1 );
-				QUnit.start();
+				ready();
 			}
 		] );
 	} );
 
-QUnit.asyncTest( "dialog sized select menu opened many times remains a dialog",
+QUnit.test( "dialog sized select menu opened many times remains a dialog",
 	function( assert ) {
+		var ready = assert.async();
 		var dialogHashKey = "ui-state=dialog",
 
 			openDialogSequence = [
@@ -185,21 +191,22 @@ QUnit.asyncTest( "dialog sized select menu opened many times remains a dialog",
 				}
 			],
 
-			sequence = openDialogSequence.concat( openDialogSequence ).concat( [ start ] );
+			sequence = openDialogSequence.concat( openDialogSequence ).concat( [ ready ] );
 
 		$.testHelper.sequence( sequence, 1000 );
 	} );
 
 QUnit.module( "Non native menus", {
-	setup: function() {
+	beforeEach: function() {
 		$.mobile.selectmenu.prototype.options.nativeMenu = false;
 	},
-	teardown: function() {
+	afterEach: function() {
 		$.mobile.selectmenu.prototype.options.nativeMenu = true;
 	}
 } );
 
-QUnit.asyncTest( "a large select option should not overflow", function( assert ) {
+QUnit.test( "a large select option should not overflow", function( assert ) {
+	var ready = assert.async();
 
 	// https://github.com/jquery/jquery-mobile/issues/1338
 	var menu;
@@ -219,13 +226,14 @@ QUnit.asyncTest( "a large select option should not overflow", function( assert )
 			assert.equal( menu.outerWidth( true ),
 				menu.find( "li:nth-child(2) a" ).outerWidth( true ),
 				"a element should not overflow" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "focus is transferred to a menu item when the menu is opened",
+QUnit.test( "focus is transferred to a menu item when the menu is opened",
 	function( assert ) {
+		var ready = assert.async();
 		assert.expect( 1 );
 
 		$.testHelper.sequence( [
@@ -246,12 +254,13 @@ QUnit.asyncTest( "focus is transferred to a menu item when the menu is opened",
 			},
 
 			function() {
-				QUnit.start();
+				ready();
 			}
 		], 5000 );
 	} );
 
-QUnit.asyncTest( "using custom refocuses the button after close", function( assert ) {
+QUnit.test( "using custom refocuses the button after close", function( assert ) {
+	var ready = assert.async();
 	var select, button,
 		triggered = false;
 
@@ -278,12 +287,13 @@ QUnit.asyncTest( "using custom refocuses the button after close", function( asse
 
 		function() {
 			assert.ok( triggered, "focus is triggered" );
-			QUnit.start();
+			ready();
 		}
 	], 1500 );
 } );
 
-QUnit.asyncTest( "selected items are highlighted", function( assert ) {
+QUnit.test( "selected items are highlighted", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.sequence( [
 		resetHash,
 
@@ -319,12 +329,13 @@ QUnit.asyncTest( "selected items are highlighted", function( assert ) {
 			lastMenuChoice.click();
 		},
 
-		QUnit.start
+		ready
 	], 1000 );
 } );
 
-QUnit.asyncTest( "adding options and refreshing a custom select changes the options list",
+QUnit.test( "adding options and refreshing a custom select changes the options list",
 	function( assert ) {
+		var ready = assert.async();
 		var select = $( "#custom-refresh-opts-list" ),
 			button = select.siblings( "a" ),
 			text = "foo";
@@ -363,7 +374,7 @@ QUnit.asyncTest( "adding options and refreshing a custom select changes the opti
 				$( ".ui-popup-screen.in" ).click();
 			},
 
-			QUnit.start
+			ready
 		], 500 );
 	} );
 
@@ -378,10 +389,11 @@ QUnit.test( "select elements in the keepNative set shouldn't be enhanced", funct
 	assert.lacksClasses( $( "#keep-native" ).parent(), "ui-button" );
 } );
 
-QUnit.asyncTest( "dialog size select title should match the label", function( assert ) {
+QUnit.test( "dialog size select title should match the label", function( assert ) {
 	var $select = $( "#select-choice-many-1\\.dotTest" ),
 		$label = $select.parent().siblings( "label" ),
 		$button = $select.siblings( "a" );
+	var ready = assert.async();
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -393,12 +405,13 @@ QUnit.asyncTest( "dialog size select title should match the label", function( as
 			window.history.back();
 		},
 
-		QUnit.start
+		ready
 	] );
 } );
 
-QUnit.asyncTest( "dialog size select title should match the placeholder when there's no label",
+QUnit.test( "dialog size select title should match the placeholder when there's no label",
 	function( assert ) {
+		var ready = assert.async();
 		var $select = $( "#select-choice-many-placeholder-1" ),
 			$label = $( "#select-choice-many-placeholder-1-listbox li:first" ),
 			$button = $select.siblings( "a" );
@@ -414,15 +427,16 @@ QUnit.asyncTest( "dialog size select title should match the placeholder when the
 				window.history.back();
 			},
 
-			QUnit.start
+			ready
 		] );
 	} );
 
-QUnit.asyncTest( "dialog size select title should match the label when changed after the dialog " +
+QUnit.test( "dialog size select title should match the label when changed after the dialog " +
 	"markup is added to the DOM", function( assert ) {
 		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
+		var ready = assert.async();
 
 		$.testHelper.detailedEventCascade( [
 			function() {
@@ -450,11 +464,12 @@ QUnit.asyncTest( "dialog size select title should match the label when changed a
 				}
 			},
 
-			QUnit.start
+			ready
 		] );
 	} );
 
-QUnit.asyncTest( "destroying a select menu leaves no traces", function( assert ) {
+QUnit.test( "destroying a select menu leaves no traces", function( assert ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#destroyTest" );
@@ -484,12 +499,13 @@ QUnit.asyncTest( "destroying a select menu leaves no traces", function( assert )
 			$.mobile.back();
 		},
 
-		QUnit.start
+		ready
 	] );
 } );
 
-QUnit.asyncTest( "destroying a custom select menu leaves no traces", function( assert ) {
+QUnit.test( "destroying a custom select menu leaves no traces", function( assert ) {
 	assert.expect( 7 );
+	var ready = assert.async();
 
 	var unenhancedSelectClone,
 		prefix = ".destroyingASelectMenuLeavesNoTraces",
@@ -589,16 +605,15 @@ QUnit.asyncTest( "destroying a custom select menu leaves no traces", function( a
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + prefix + "5" }
 		},
 
-		QUnit.start
+		ready
 	] );
 } );
 
-QUnit.asyncTest( "Custom select passes overlay theme to its dialog", function( assert ) {
+QUnit.test( "Custom select passes overlay theme to its dialog", function( assert ) {
 
 	assert.expect( 2 );
-
-	var dialog,
-		eventNs = ".passesOnOverlayThemeToDialog";
+	var ready = assert.async();
+	var dialog;
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -612,7 +627,7 @@ QUnit.asyncTest( "Custom select passes overlay theme to its dialog", function( a
 				"Dialog widget overlayTheme option is correct." );
 			$.mobile.back();
 		},
-		QUnit.start
+		ready
 	] );
 } );
 
@@ -629,12 +644,12 @@ var callLog, origTrigger,
 	};
 
 QUnit.module( "Custom select change comes after closing list", {
-	setup: function() {
+	beforeEach: function() {
 		callLog = [];
 		origTrigger = $.event.trigger;
 		$.event.trigger = replacementTrigger;
 	},
-	teardown: function() {
+	afterEach: function() {
 		$.event.trigger = origTrigger;
 	}
 } );
@@ -661,7 +676,7 @@ function testChangeAfterClose( assert, select, ns, openEvent, closeEvent, tail )
 			change: { src: select, event: "change" + ns + "2" }
 		},
 		function() {
-			$.each( callLog, function( index, value ) {
+			$.each( callLog, function( index ) {
 				var name = ( typeof callLog[ index ].event === "string" ?
 						callLog[ index ].event :
 						callLog[ index ].event.type ),
@@ -688,7 +703,8 @@ function testChangeAfterClose( assert, select, ns, openEvent, closeEvent, tail )
 	] );
 }
 
-QUnit.asyncTest( "Small select triggers change after popup closes", function( assert ) {
+QUnit.test( "Small select triggers change after popup closes", function( assert ) {
+	var ready = assert.async();
 	testChangeAfterClose( assert, $( "#small-select-change-after-close" ),
 		".smallSelectTriggersChangeAfterPopupCloses",
 		{
@@ -698,10 +714,11 @@ QUnit.asyncTest( "Small select triggers change after popup closes", function( as
 		{
 			src: $( "#small-select-change-after-close-listbox" ),
 			event: "popupafterclose"
-		}, QUnit.start );
+		}, ready );
 } );
 
-QUnit.asyncTest( "Large select triggers change after dialog closes", function( assert ) {
+QUnit.test( "Large select triggers change after dialog closes", function( assert ) {
+	var ready = assert.async();
 	testChangeAfterClose( assert, $( "#large-select-change-after-close" ),
 		".largeSelectTriggersChangeAfterPopupCloses",
 		{ src: $( document ), event: "pageshow" },
@@ -711,7 +728,7 @@ QUnit.asyncTest( "Large select triggers change after dialog closes", function( a
 			},
 			event: "pagehide"
 		},
-		QUnit.start );
+		ready );
 } );
 
-} )( QUnit, jQuery );
+} );

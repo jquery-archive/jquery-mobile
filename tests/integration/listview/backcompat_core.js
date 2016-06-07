@@ -1,12 +1,17 @@
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 var helper = $.testHelper;
 
-module( "Listview style options - turning options off", {
-	setup: function() {
+QUnit.module( "Listview style options - turning options off", {
+	beforeEach: function() {
 		this.listview = $( "#the-listview" ).listview( { inset: true } ).listview( "instance" );
 	}
 } );
 
-test( "Initial state", function( assert ) {
+QUnit.test( "Initial state", function( assert ) {
 	assert.hasClasses( this.listview.element, "ui-listview-inset ui-corner-all ui-shadow",
 		"The listview has all inset-related classes" );
 	assert.strictEqual(
@@ -19,7 +24,7 @@ test( "Initial state", function( assert ) {
 		true, "Class ui-corner-all present in class key" );
 } );
 
-test( "Turning off option corners", function( assert ) {
+QUnit.test( "Turning off option corners", function( assert ) {
 	this.listview.option( "corners", false );
 	assert.lacksClasses( this.listview.element, "ui-corner-all",
 		"Class ui-corner-all missing from DOM after corners option was turned off" );
@@ -29,7 +34,7 @@ test( "Turning off option corners", function( assert ) {
 		false, "Class ui-corner-all missing from class key after corners option was turned off" );
 } );
 
-test( "Turning off option shadow", function( assert ) {
+QUnit.test( "Turning off option shadow", function( assert ) {
 	this.listview.option( "shadow", false );
 	assert.lacksClasses( this.listview.element, "ui-shadow",
 		"Class ui-shadow missing from DOM" );
@@ -39,13 +44,13 @@ test( "Turning off option shadow", function( assert ) {
 		false, "Class ui-shadow missing from class key" );
 } );
 
-module( "Listview style options - turning options on", {
-	setup: function() {
+QUnit.module( "Listview style options - turning options on", {
+	beforeEach: function() {
 		this.listview = $( "#listview-off" ).listview( { inset: true } ).listview( "instance" );
 	}
 } );
 
-test( "Turning on option corners", function( assert ) {
+QUnit.test( "Turning on option corners", function( assert ) {
 	this.listview.option( "corners", true );
 	assert.hasClasses( this.listview.element, "ui-corner-all",
 		"Class ui-corner-all present in DOM after corners option was turned off" );
@@ -55,7 +60,7 @@ test( "Turning on option corners", function( assert ) {
 		true, "Class ui-corner-all present in class key after corners option was turned off" );
 } );
 
-test( "Turning on option shadow", function( assert ) {
+QUnit.test( "Turning on option shadow", function( assert ) {
 	this.listview.option( "shadow", true );
 	assert.hasClasses( this.listview.element, "ui-shadow",
 		"Class ui-shadow present in DOM after shadow option was turned off" );
@@ -65,38 +70,40 @@ test( "Turning on option shadow", function( assert ) {
 		true, "Class ui-shadow present in class key after shadow option was turned off" );
 } );
 
-module( "Listview style options - turning classes off", {
-	setup: function() {
+QUnit.module( "Listview style options - turning classes off", {
+	beforeEach: function() {
 		this.listview = $( "#the-listview" ).listview( { inset: true } ).listview( "instance" );
 	}
 } );
 
-test( "Turning off class ui-corner-all", function( assert ) {
+QUnit.test( "Turning off class ui-corner-all", function( assert ) {
 	this.listview.option( "classes.ui-listview-inset", "ui-shadow" );
 	assert.strictEqual( this.listview.option( "corners" ), false,
 		"Option corners is false whenever ui-corner-all is absent from ui-listview-inset" );
 } );
 
-test( "Turning off class ui-shadow", function( assert ) {
+QUnit.test( "Turning off class ui-shadow", function( assert ) {
 	this.listview.option( "classes.ui-listview-inset", "" );
 	assert.strictEqual( this.listview.option( "shadow" ), false,
 		"Option shadow is false whenever ui-shadow is absent from ui-listview-inset" );
 } );
 
-module( "Listview style options - turning classes on", {
-	setup: function() {
+QUnit.module( "Listview style options - turning classes on", {
+	beforeEach: function() {
 		this.listview = $( "#listview-off" ).listview( { inset: true } ).listview( "instance" );
 	}
 } );
 
-test( "Turning on class ui-corner-all", function( assert ) {
+QUnit.test( "Turning on class ui-corner-all", function( assert ) {
 	this.listview.option( "classes.ui-listview-inset", "ui-corner-all" );
 	assert.strictEqual( this.listview.option( "corners" ), true,
 		"Option corners is true whenever ui-corner-all is present in ui-listview-inset" );
 } );
 
-test( "Turning on class ui-shadow", function( assert ) {
+QUnit.test( "Turning on class ui-shadow", function( assert ) {
 	this.listview.option( "classes.ui-listview-inset", "ui-shadow" );
 	assert.strictEqual( this.listview.option( "shadow" ), true,
 		"Option shadow is true whenever ui-shadow is present in ui-listview-inset" );
+} );
+
 } );

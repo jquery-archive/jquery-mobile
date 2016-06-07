@@ -17,7 +17,7 @@ $.testHelper.excludeFileProtocol( function() {
 	} );
 
 	// NOTE following two tests have debatable value as they only
-	//      prevent property name changes and improper attribute checks
+	//	  prevent property name changes and improper attribute checks
 	QUnit.asyncTest( "detects functionality from basic affirmative properties and attributes", function( assert ) {
 
 		// TODO expose properties for less brittle tests
@@ -75,7 +75,7 @@ $.testHelper.excludeFileProtocol( function() {
 
 		$.fn.prependTo = function( selector ) {
 			var result = prependToFn.call( this, selector );
-			if ( this[ 0 ].href && this[ 0 ].href.indexOf( "testurl" ) != -1 ) {
+			if ( this[ 0 ].href && this[ 0 ].href.indexOf( "testurl" ) !== -1 ) {
 				result = [ { href: url } ];
 			}
 			return result;
