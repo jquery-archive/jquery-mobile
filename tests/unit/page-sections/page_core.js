@@ -1,25 +1,25 @@
 /*
- * mobile page unit tests
+ * Mobile page unit tests
  */
 define( [
 	"qunit",
 	"jquery"
 	], function( QUnit, $ ) {
 
-var libName = 'jquery.mobile.page.sections';
+var libName = "jquery.mobile.page.sections";
 
 QUnit.module( libName );
 
 QUnit.test( "nested header anchors aren't altered", function( assert ) {
-	assert.ok( !$( '.ui-header > div > a' ).hasClass( 'ui-button' ) );
+	assert.ok( !$( ".ui-header > div > a" ).hasClass( "ui-button" ) );
 } );
 
 QUnit.test( "nested footer anchors aren't altered", function( assert ) {
-	assert.ok( !$( '.ui-footer > div > a' ).hasClass( 'ui-button' ) );
+	assert.ok( !$( ".ui-footer > div > a" ).hasClass( "ui-button" ) );
 } );
 
 QUnit.test( "nested bar anchors aren't styled", function( assert ) {
-	assert.ok( !$( '.ui-bar > div > a' ).hasClass( 'ui-button' ) );
+	assert.ok( !$( ".ui-bar > div > a" ).hasClass( "ui-button" ) );
 } );
 
 QUnit.test( "no auto-generated back button exists on first page", function( assert ) {

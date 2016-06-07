@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 $( document ).on( "mobileinit", function() {
 	var origParseLocation = $.mobile.path.parseLocation,
@@ -38,4 +38,4 @@ QUnit.test( "data-url for initial page is urldecoded", function( assert ) {
 		"Value of 'data-url' attribute is not urlencoded" );
 } );
 
-} )( QUnit, jQuery );
+} );

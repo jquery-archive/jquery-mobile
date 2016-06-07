@@ -1,14 +1,10 @@
-define( [
-	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-$.mobile.ns ="nstest-";
+$.mobile.ns = "nstest-";
 
-test( "Columntoggle table is destroyed", function( assert ) {
+QUnit.test( "Columntoggle table is destroyed", function( assert ) {
 
-	var enhancedTable,
-		table = $( "#columntoggle-destroy-test" ),
+	var table = $( "#columntoggle-destroy-test" ),
 		unenhancedState = $( "body" ).clone();
 
 	table.table();
@@ -24,10 +20,9 @@ test( "Columntoggle table is destroyed", function( assert ) {
 					.filter( ":data(" + $.camelCase( $.mobile.ns + "input" ) + ")" ).length, 0,
 			"All data at key 'input' has been removed after table destruction" );
 
-
 } );
 
-test( "Columntoggle table is destroyed/re-created correctly", function( assert ) {
+QUnit.test( "Columntoggle table is destroyed/re-created correctly", function( assert ) {
 	var enhancedState,
 		table = $( "#columntoggle-destroy-test" );
 

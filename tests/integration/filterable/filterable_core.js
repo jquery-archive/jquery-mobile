@@ -1,15 +1,17 @@
 /*
- * mobile filter unit tests - listview
+ * Mobile filter unit tests - listview
  */
 
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 QUnit.module( "Filter Widget Core Functions" );
 
-QUnit.asyncTest( "Filter hides/shows results when the user enters information", function( assert ) {
+QUnit.test( "Filter hides/shows results when the user enters information", function( assert ) {
 	var input = $( "#filtered-listview-input" ),
 		listview = $( "#filtered-listview" );
 
 	assert.expect( 5 );
+	var ready = assert.async();
 
 	$.testHelper.sequence( [
 		function() {
@@ -35,16 +37,17 @@ QUnit.asyncTest( "Filter hides/shows results when the user enters information", 
 			assert.deepEqual( listview.find( "li.ui-screen-hidden" ).length, 4, "Number of hidden items after entering a regex special character is 4." );
 			input.val( "" ).trigger( "change" );
 		},
-		start
+		ready
 	], 500 );
 } );
 
-QUnit.asyncTest( "Event filterablebeforefilter fires in response to input change", function( assert ) {
+QUnit.test( "Event filterablebeforefilter fires in response to input change", function( assert ) {
 	var input = $( "#filtered-listview-input" ),
 		listview = $( "#filtered-listview" ),
 		beforeFilterCount = 0;
 
 	assert.expect( 2 );
+	var ready = assert.async();
 
 	listview.on( "filterablebeforefilter.theEventIsFiring", function() {
 		beforeFilterCount++;
@@ -63,12 +66,13 @@ QUnit.asyncTest( "Event filterablebeforefilter fires in response to input change
 			listview.off( "filterablebeforefilter.theEventIsFiring" );
 			input.val( "" ).trigger( "change" );
 		},
-		start
+		ready
 	], 500 );
 } );
 
-QUnit.asyncTest( "Filter won't run when preventing default on 'filterablebeforefilter'", function( assert ) {
+QUnit.test( "Filter won't run when preventing default on 'filterablebeforefilter'", function( assert ) {
 	assert.expect( 1 );
+	var ready = assert.async();
 
 	var input = $( "#test-prevent-default-handler" ),
 		listview = $( "#test-prevent-default-signal-emission" );
@@ -86,15 +90,16 @@ QUnit.asyncTest( "Filter won't run when preventing default on 'filterablebeforef
 				"No children are hidden." );
 			listview.off( "filterablebeforefilter.theEventIsPrevented" );
 		},
-		start
+		ready
 	], 500 );
 } );
 
-QUnit.asyncTest( "filterCallback and filterReveal can be altered after widget creation", function( assert ) {
+QUnit.test( "filterCallback and filterReveal can be altered after widget creation", function( assert ) {
+	var ready = assert.async();
 	var filterable = $( "#custom-callback-listview" ),
 		input = $( "#custom-callback-listview-input" ),
 		origCallback = filterable.filterable( "option", "filterCallback" ),
-		customCallback = function( index, searchValue ) {
+		customCallback = function() {
 			return $.mobile.getAttribute( this, "important", true ) ? false :
 				origCallback.apply( this, arguments );
 		};
@@ -114,12 +119,13 @@ QUnit.asyncTest( "filterCallback and filterReveal can be altered after widget cr
 			assert.deepEqual( filterable.find( "li.ui-screen-hidden" ).length, 3, "Only one item is visible when typing 'c'" );
 			filterable.filterable( "option", "filterCallback", customCallback );
 			assert.deepEqual( filterable.find( "li.ui-screen-hidden" ).length, 2, "Two items are visible when the filter is 'c' and a custom callback is used" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Multi-set filtering via 'children' attribute", function( assert ) {
+QUnit.test( "Multi-set filtering via 'children' attribute", function( assert ) {
+	var ready = assert.async();
 	var input = $( "#multi-set-filterable-input" )
 			.filterable( "option", "children", $( ".multi-set-filterable-children > li" ) ),
 		set1 = $( "#multi-set-filterable-set1" ),
@@ -135,14 +141,15 @@ QUnit.asyncTest( "Multi-set filtering via 'children' attribute", function( asser
 		function() {
 			assert.deepEqual( set1.find( "li.ui-screen-hidden" ).length, 3, "After filtering for 'd' set 1 has 3 hidden items" );
 			assert.deepEqual( set2.find( "li.ui-screen-hidden" ).length, 3, "After filtering for 'd' set 2 has 3 hidden items" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
 QUnit.module( "Filter Widget Using Different Elements" );
 
-QUnit.asyncTest( "Filtering Table Rows based on Cells", function( assert ) {
+QUnit.test( "Filtering Table Rows based on Cells", function( assert ) {
+	var ready = assert.async();
 	var table = $( "#table-filter-test" ),
 		input = $( "#table-filter-test-input" );
 
@@ -158,12 +165,13 @@ QUnit.asyncTest( "Filtering Table Rows based on Cells", function( assert ) {
 		},
 		function() {
 			assert.deepEqual( table.find( ".ui-screen-hidden" ).length, 0, "Removing filter value shows all table rows again" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Controlgroup Search Filter", function( assert ) {
+QUnit.test( "Controlgroup Search Filter", function( assert ) {
+	var ready = assert.async();
 	var grp = $( "#search-controlgroup-test" ),
 		container = grp.controlgroup( "container" ),
 		input = $( "#search-controlgroup-test-input" );
@@ -182,12 +190,13 @@ QUnit.asyncTest( "Controlgroup Search Filter", function( assert ) {
 
 		function() {
 			assert.deepEqual( container.children( ".ui-screen-hidden" ).length, 0, "Unsetting the filter unhides all children." );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Native Select Search Filter", function( assert ) {
+QUnit.test( "Native Select Search Filter", function( assert ) {
+	var ready = assert.async();
 	var input = $( "#search-select-test-input" ),
 		filterable = $( "#anotherSelect" );
 
@@ -203,12 +212,13 @@ QUnit.asyncTest( "Native Select Search Filter", function( assert ) {
 		},
 		function() {
 			assert.deepEqual( filterable.find( ".ui-screen-hidden" ).length, 0, "Removing filter value shows all select options again" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Native Select Search Filter using data-filtertext", function( assert ) {
+QUnit.test( "Native Select Search Filter using data-filtertext", function( assert ) {
+	var ready = assert.async();
 	var input = $( "#search-select-test-input" ),
 		filterable = $( "#anotherSelect" );
 
@@ -224,12 +234,13 @@ QUnit.asyncTest( "Native Select Search Filter using data-filtertext", function( 
 		},
 		function() {
 			assert.deepEqual( filterable.find( ".ui-screen-hidden" ).length, 0, "Removing filter value shows all select options again" );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Random Elements Filter - <P>", function( assert ) {
+QUnit.test( "Random Elements Filter - <P>", function( assert ) {
+	var ready = assert.async();
 	var textInput = $( "#p-text-element-filter-input" ),
 		textList = $( "#p-text-element-filter" ),
 		filtertextInput = $( "#p-filtertext-element-filter-input" ),
@@ -246,22 +257,23 @@ QUnit.asyncTest( "Random Elements Filter - <P>", function( assert ) {
 			textInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( textList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( textList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			filtertextInput.val( "f" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 5, "Filtering <p> on 2nd set using data-filtertext works" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 5, "Filtering <p> on 2nd set using data-filtertext works" );
 			assert.deepEqual( filtertextList.find( ":not(.ui-screen-hidden)" ).text(), "a", "Filtering works on data-filtertext and not text" );
 			filtertextInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
-			QUnit.start();
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Random Elements Filter - <SPAN>", function( assert ) {
+QUnit.test( "Random Elements Filter - <SPAN>", function( assert ) {
+	var ready = assert.async();
 	var textInput = $( "#span-text-element-filter-input" ),
 		textList = $( "#span-text-element-filter" ),
 		filtertextInput = $( "#span-filtertext-element-filter-input" ),
@@ -278,24 +290,25 @@ QUnit.asyncTest( "Random Elements Filter - <SPAN>", function( assert ) {
 			textInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( textList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( textList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			filtertextInput.val( "f" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 5, "Filtering <span> on 2nd set using data-filtertext works" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 5, "Filtering <span> on 2nd set using data-filtertext works" );
 			assert.deepEqual( filtertextList.find( ":not(.ui-screen-hidden)" ).text(), "a", "Filtering works on data-filtertext and not text" );
 			filtertextInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
-			QUnit.start();
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
+			ready();
 		}
 	], 500 );
 } );
 
 QUnit.module( "Filter widget destruction" );
 
-QUnit.asyncTest( "Destroy restores visibility of items", function( assert ) {
+QUnit.test( "Destroy restores visibility of items", function( assert ) {
+	var ready = assert.async();
 	var input = $( "#destroy-test-input" ),
 	list = $( "#destroy-test" );
 
@@ -308,12 +321,13 @@ QUnit.asyncTest( "Destroy restores visibility of items", function( assert ) {
 			assert.deepEqual( list.children( ".ui-screen-hidden" ).length, 2, "Two children are hidden when filtering for 'c'." );
 			list.filterable( "destroy" );
 			assert.deepEqual( list.children( ".ui-screen-hidden" ).length, 0, "All children become visible when destroying the filterable while a filter is active." );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
 
-QUnit.asyncTest( "Pre-rendered: destroy restores visibility of items", function( assert ) {
+QUnit.test( "Pre-rendered: destroy restores visibility of items", function( assert ) {
+	var ready = assert.async();
 	var input = $( "#pre-rendered-destroy-test-input" ),
 	list = $( "#pre-rendered-destroy-test" );
 
@@ -326,7 +340,7 @@ QUnit.asyncTest( "Pre-rendered: destroy restores visibility of items", function(
 			assert.deepEqual( list.children( ".ui-screen-hidden" ).length, 2, "Two children are hidden when filtering for 'c'." );
 			list.filterable( "destroy" );
 			assert.deepEqual( list.children( ".ui-screen-hidden" ).length, 4, "All children become hidden when destroying the pre-rendered filterable while a filter is active and filterReveal is set." );
-			QUnit.start();
+			ready();
 		}
 	], 500 );
 } );
@@ -379,4 +393,4 @@ QUnit.test( "All event handlers are removed from input", function( assert ) {
 		"Private data for input is empty again after unsetting as filterable input" );
 } );
 
-} )( QUnit, jQuery );
+} );

@@ -3,7 +3,7 @@
  */
 define( [
 	"qunit",
-	"jquery",
+	"jquery"
 	], function( QUnit, $ ) {
 
 var libName = "jquery.mobile.page",

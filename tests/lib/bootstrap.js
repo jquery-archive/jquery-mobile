@@ -195,7 +195,7 @@
 		// Get the version from the url
 		var jqueryRE = /[\\?&]jquery=([^&#]*)/,
 			results = jqueryRE.exec( location.search ),
-			version = "";
+			version = "", url;
 
 		if ( results ) {
 			version = decodeURIComponent( results[ results.length - 1 ].replace( /\+/g, " " ) );

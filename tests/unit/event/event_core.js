@@ -2,7 +2,8 @@
  * Mobile event unit tests
  */
 
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
+
 var libName = "jquery.mobile.events.js",
 	components = [ "events/touch.js", "events/throttledresize.js", "events/scroll.js",
 		"events/orientationchange.js" ],
@@ -16,7 +17,7 @@ QUnit.module( libName, {
 	setup: function() {
 
 		// Ensure bindings are removed
-		$.each( events.concat( "vmouseup vmousedown".split( " " ) ), function( i, name ) {
+		$.each( events.concat( "vmouseup vmousedown".split( " " ) ), function() {
 			$( "#qunit-fixture" ).unbind();
 		} );
 
@@ -126,7 +127,7 @@ var forceTouchSupport = function() {
 
 QUnit.asyncTest( "long press fires tap hold after taphold duration", function( assert ) {
 	var taphold = false,
-		target = undefined;
+		target;
 
 	forceTouchSupport();
 
@@ -188,8 +189,7 @@ QUnit.asyncTest( "move prevents taphold", function( assert ) {
 
 QUnit.asyncTest( "tap event fired without movement", function( assert ) {
 	assert.expect( 1 );
-	var tap = false,
-		checkTap = function() {
+	var checkTap = function() {
 			assert.ok( true, "tap fired" );
 		};
 
@@ -275,7 +275,7 @@ QUnit.asyncTest( "stopPropagation() prevents tap from propagating up DOM tree", 
 		assert.deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
 		e.stopPropagation();
 	} )
-		.bind( "tap", function( e ) {
+		.bind( "tap", function( ) {
 			assert.deepEqual( ++tap, 2, "tap callback 2 triggered once on #qunit-fixture" );
 		} );
 
@@ -307,7 +307,7 @@ QUnit.asyncTest( "stopImmediatePropagation() prevents tap propagation and execut
 		assert.deepEqual( ++tap, 1, "tap callback 1 triggered once on #qunit-fixture" );
 		e.stopImmediatePropagation();
 	} )
-		.bind( "tap", function( e ) {
+		.bind( "tap", function() {
 			assert.ok( false, "tap callback 2 should NOT be triggered on #qunit-fixture" );
 		} );
 
@@ -326,7 +326,7 @@ QUnit.asyncTest( "stopImmediatePropagation() prevents tap propagation and execut
 } );
 
 var swipeTimedTest = function( assert, opts ) {
-	var newHandlerCount, origHandlerCount,
+	var origHandlerCount,
 		origHandleSwipe = $.event.special.swipe.handleSwipe,
 		handleSwipeAlwaysOnInner = true,
 		swipe = false,
@@ -335,7 +335,7 @@ var swipeTimedTest = function( assert, opts ) {
 		body = $( "body" ),
 		dummyFunction = function() {},
 		getHandlerCount = function( element ) {
-			var event, index,
+			var index,
 				eventNames = [ "touchstart", "touchmove", "touchend" ],
 				returnValue = {},
 				events = $._data( element, "events" );
@@ -373,7 +373,7 @@ var swipeTimedTest = function( assert, opts ) {
 
 	// Instrument method handleSwipe
 	$.event.special.swipe.handleSwipe =
-		function( start, stop, thisObject, origTarget ) {
+		function( start, stop, thisObject ) {
 			if ( thisObject !== qunitFixture[ 0 ] ) {
 				handleSwipeAlwaysOnInner = false;
 			}
@@ -448,7 +448,7 @@ QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( as
 
 	forceTouchSupport();
 
-	// ensure the swipe custome event is setup
+	// Ensure the swipe custome event is setup
 	$( "#qunit-fixture" ).bind( "swipe", function() {} );
 
 	$.Event.prototype.preventDefault = function() {
@@ -573,8 +573,6 @@ QUnit.asyncTest( "throttledresize event prevents resize events from firing more 
 } );
 
 QUnit.asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function( assert ) {
-	var called = 0;
-
 	assert.expect( 2 );
 
 	$.testHelper.eventSequence( "throttledresize", [
@@ -616,4 +614,4 @@ QUnit.asyncTest( "mousedown mouseup and click events should add a which when its
 
 	$( document ).trigger( "mouseup" );
 } );
-} )( QUnit, jQuery );
+} );

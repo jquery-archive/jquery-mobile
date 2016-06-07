@@ -1,7 +1,10 @@
 /*
- * mobile flipswitch unit tests
+ * Mobile flipswitch unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var oldTransitions, oldAnimations,
 	countEvents = function( element, eventName ) {
 		var count = 0,
@@ -149,6 +152,8 @@ QUnit.module( "Event Bindings", {
 } );
 QUnit.asyncTest( "Ensure at most one event is bound", function( assert ) {
 	assert.expect( 2 );
+	var transitionComplete = false,
+		animationComplete = false;
 
 	$( "#transition-test" )
 		.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
@@ -291,7 +296,7 @@ function createContextChecker( assert, expectedTransitionContext, expectedAnimat
 			maybeAssert();
 		}
 	};
-};
+}
 
 QUnit.module( "Callback context and return value: event", {
 	teardown: function() {
@@ -407,4 +412,4 @@ QUnit.asyncTest( "Make sure callback is not called on empty jQuery object", func
 	}, $.fn.animationComplete.defaultDuration * 1.5 );
 } );
 
-} )( QUnit, jQuery );
+} );

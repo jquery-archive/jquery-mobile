@@ -1,14 +1,11 @@
-define( [
-	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 var addRowToTable = ( function() {
 	var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
 		letters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i" ],
 		count = 0;
 
 	return function _addRowToTable( table ) {
-		var dataSource = !!( count++ % 2 ) ? numbers : letters,
+		var dataSource = ( count++ % 2 ) ? numbers : letters,
 			newRow =
 				"<tr>" +
 					"<th data-test='abc'>" + dataSource[ 0 ] + "</th>" +

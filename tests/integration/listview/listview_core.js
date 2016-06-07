@@ -3,20 +3,23 @@
  */
 
 // TODO split out into separate test files
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
-module( "Basic Linked list" );
+QUnit.module( "Basic Linked list" );
 
-test( "The page should be enhanced correctly", function() {
-	ok( $( "#basic-linked-test .ui-listview-item-static" ).length,
+QUnit.test( "The page should be enhanced correctly", function( assert ) {
+	assert.ok( $( "#basic-linked-test .ui-listview-item-static" ).length,
 		".ui-listview-item-static class added to read-only li elements" );
-	ok( $( "#basic-linked-test .ui-listview-item-divider" ).length,
+	assert.ok( $( "#basic-linked-test .ui-listview-item-divider" ).length,
 		".ui-listview-item-divider class added to divider li elements" );
-	ok( $( "#basic-linked-test li > .ui-button" ).length,
+	assert.ok( $( "#basic-linked-test li > .ui-button" ).length,
 		".ui-button classes added to anchors that are immediate child of li elements" );
 } );
 
-test( "Slides to the listview page when the li a is clicked", function( assert ) {
+QUnit.test( "Slides to the listview page when the li a is clicked", function( assert ) {
 	var done = assert.async();
 
 	$.testHelper.pageSequence( [
@@ -32,7 +35,7 @@ test( "Slides to the listview page when the li a is clicked", function( assert )
 	] );
 } );
 
-test( "Presence of ui-listview-item-has- classes", function( assert ) {
+QUnit.test( "Presence of ui-listview-item-has- classes", function( assert ) {
 	var items = $( "#ui-listview-item-has-test li" );
 
 	assert.hasClasses( items.eq( 0 ), "ui-listview-item-has-count",
@@ -64,14 +67,14 @@ test( "Presence of ui-listview-item-has- classes", function( assert ) {
 		"Sixth LI should have ui-listview-item-has-alternate class" );
 } );
 
-module( "Ordered Lists" );
+QUnit.module( "Ordered Lists" );
 
-test( "Enhances numbered list", function( assert ) {
+QUnit.test( "Enhances numbered list", function( assert ) {
 	assert.strictEqual( $( ".ui-button", "#numbered-list-test" ).first().text(), "Number 1",
 		"The text of the first LI should be Number 1" );
 } );
 
-test( "changes to number 1 page when the li a is clicked", function( assert ) {
+QUnit.test( "changes to number 1 page when the li a is clicked", function( assert ) {
 	var done = assert.async();
 
 	$.testHelper.pageSequence( [
@@ -88,21 +91,21 @@ test( "changes to number 1 page when the li a is clicked", function( assert ) {
 	] );
 } );
 
-module( "Read only list" );
+QUnit.module( "Read only list" );
 
-test( "changes to the read only page when hash is changed", function( assert ) {
+QUnit.test( "changes to the read only page when hash is changed", function( assert ) {
 	assert.strictEqual( $( "#read-only-list-test li" ).first().text(), "Read",
 		"The first LI has the proper text." );
 } );
 
-module( "Split view list" );
+QUnit.module( "Split view list" );
 
-test( "split view list is enhanced correctly", function( assert ) {
+QUnit.test( "split view list is enhanced correctly", function( assert ) {
 	assert.strictEqual( $( "#split-list-test .ui-listview-item-has-alternate" ).length, 3 );
 	assert.strictEqual( $( "#split-list-test > li > .ui-button" ).length, 6 );
 } );
 
-test( "change the page to the split view page 1 upon first link click", function( assert ) {
+QUnit.test( "change the page to the split view page 1 upon first link click", function( assert ) {
 	var done = assert.async();
 
 	$.testHelper.pageSequence( [
@@ -120,7 +123,7 @@ test( "change the page to the split view page 1 upon first link click", function
 	] );
 } );
 
-test( "Clicking on the icon (the 2nd link) should take the user to other a href of this LI",
+QUnit.test( "Clicking on the icon (the 2nd link) should take the user to other a href of this LI",
 	function( assert ) {
 		var done = assert.async();
 
@@ -139,19 +142,19 @@ test( "Clicking on the icon (the 2nd link) should take the user to other a href 
 		] );
 } );
 
-module( "List Dividers" );
+QUnit.module( "List Dividers" );
 
-test( "Enhances list with dividers correctly", function( assert ) {
+QUnit.test( "Enhances list with dividers correctly", function( assert ) {
 	assert.strictEqual( $( "#list-divider-test" ).find( ".ui-listview-item-divider" ).length, 2 );
 } );
 
-module( "Autodividers" );
+QUnit.module( "Autodividers" );
 
-test( "Adds dividers based on first letters of list items.", function( assert ) {
+QUnit.test( "Adds dividers based on first letters of list items.", function( assert ) {
 	assert.strictEqual( $( "#autodividers-test" ).find( ".ui-listview-item-divider" ).length, 4 );
 } );
 
-test( "Responds to addition/removal of list elements after refresh.", function( assert ) {
+QUnit.test( "Responds to addition/removal of list elements after refresh.", function( assert ) {
 	var list = $( "#autodividers-test" );
 
 	// Should remove all existing dividers
@@ -161,7 +164,7 @@ test( "Responds to addition/removal of list elements after refresh.", function( 
 	list.append( "<li>x is for xanthe</li>" );
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 5 );
-	ok( list.find( ".ui-listview-item-divider" ).is( ":contains('X')" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).is( ":contains('X')" ) );
 
 	// Adding the same element again should create a valid list item but no new divider
 	assert.strictEqual( list.find( ".ui-listview-item-static" ).length, 5 );
@@ -216,25 +219,25 @@ test( "Responds to addition/removal of list elements after refresh.", function( 
 	assert.strictEqual( list.find( ".ui-listview-item-divider:contains('D')" ).length, 1 );
 } );
 
-module( "Autodividers Selector" );
+QUnit.module( "Autodividers Selector" );
 
-test( "Adds right divider text", function( assert ) {
+QUnit.test( "Adds right divider text", function( assert ) {
 
 	// Check we have the right dividers
 	var list = $( "#autodividers-selector-test-list1" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 4 );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 0 ).is( ":contains(A)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 1 ).is( ":contains(B)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(C)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(D)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 0 ).is( ":contains(A)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 1 ).is( ":contains(B)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(C)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(D)" ) );
 
 	// Check that adding a new item creates the right divider
 	list.append( "<li><a href='#'>e is for ethel</a></li>" );
 	list.listview( "refresh" );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 4 ).is( ":contains(E)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 4 ).is( ":contains(E)" ) );
 } );
 
-test( "Adds divider text based on custom selector.", function( assert ) {
+QUnit.test( "Adds divider text based on custom selector.", function( assert ) {
 
 	// Check we have the right dividers based on custom selector
 	var list = $( "#autodividers-selector-test-list2" );
@@ -247,21 +250,21 @@ test( "Adds divider text based on custom selector.", function( assert ) {
 
 	list.listview( "refresh" );
 	assert.strictEqual( list.find( ".ui-listview-item-divider" ).length, 4 );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 0 ).is( ":contains(E)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 1 ).is( ":contains(F)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(G)" ) );
-	ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(H)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 0 ).is( ":contains(E)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 1 ).is( ":contains(F)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 2 ).is( ":contains(G)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 3 ).is( ":contains(H)" ) );
 
 	// Check that adding a new item creates the right divider
 	list.append( "<li><div><span class='autodividers-selector-test-selectme'>" +
 		"i is for impy</span></div></li>" );
 	list.listview( "refresh" );
 
-	ok( list.find( ".ui-listview-item-divider" ).eq( 4 ).is( ":contains(I)" ) );
+	assert.ok( list.find( ".ui-listview-item-divider" ).eq( 4 ).is( ":contains(I)" ) );
 } );
 
-module( "Programmatically generated list items", {
-	setup: function() {
+QUnit.module( "Programmatically generated list items", {
+	beforeEach: function() {
 		var label, item,
 			data = [
 				{
@@ -292,16 +295,16 @@ module( "Programmatically generated list items", {
 	}
 } );
 
-test( "Corner styling on programmatically created list items", function( assert ) {
+QUnit.test( "Corner styling on programmatically created list items", function( assert ) {
 
 	// https://github.com/jquery/jquery-mobile/issues/1470
 	assert.lacksClasses( $( "#programmatically-generated-list-items li:first-child" ),
 		"ui-last-child", "First list item should not have class ui-last-child" );
 } );
 
-module( "Programmatic list items manipulation" );
+QUnit.module( "Programmatic list items manipulation" );
 
-test( "Removing list items", 4, function( assert ) {
+QUnit.test( "Removing list items", 4, function( assert ) {
 	var ul = $( "#removing-items-from-list-test" );
 
 	ul.find( "li" ).first().remove();
@@ -319,9 +322,9 @@ test( "Removing list items", 4, function( assert ) {
 		"Last list item should have class ui-last-child" );
 } );
 
-module( "Rounded corners" );
+QUnit.module( "Rounded corners" );
 
-test( "Top and bottom corners rounded in inset list", function( assert ) {
+QUnit.test( "Top and bottom corners rounded in inset list", function( assert ) {
 	var ul = $( "#corner-rounded-test" );
 
 	for ( var t = 0; t < 3; t++ ) {
@@ -350,17 +353,18 @@ test( "Top and bottom corners rounded in inset list", function( assert ) {
 		"Last visible list item should have class ui-last-child" );
 } );
 
-test( "Listview will create when inside a container when calling enhance on it",
+QUnit.test( "Listview will create when inside a container when calling enhance on it",
 	function( assert ) {
 		assert.strictEqual(
 			$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-listview" ).length, 0,
 			"did not have enhancements applied" );
-		ok( $( "#enhancetest" ).enhance().find( ".ui-listview" ).length, "enhancements applied" );
+		assert.ok( $( "#enhancetest" ).enhance().find( ".ui-listview" ).length,
+			"enhancements applied" );
 	} );
 
-module( "Cached Linked List" );
+QUnit.module( "Cached Linked List" );
 
-test( "List inherits theme from parent", function( assert ) {
+QUnit.test( "List inherits theme from parent", function( assert ) {
 	var done = assert.async();
 
 	$.testHelper.pageSequence( [
@@ -369,7 +373,6 @@ test( "List inherits theme from parent", function( assert ) {
 		},
 
 		function() {
-			var theme = $.mobile.activePage.jqmData( "theme" );
 			assert.hasClasses( $.mobile.activePage.find( "ul > li" ), "ui-body-inherit",
 				"theme matches the parent" );
 			$.mobile.back();
@@ -379,7 +382,7 @@ test( "List inherits theme from parent", function( assert ) {
 	] );
 } );
 
-test( "split list items respect the icon", function( assert ) {
+QUnit.test( "split list items respect the icon", function( assert ) {
 	$( "#split-list-icon li" ).each( function( i, elem ) {
 		var $elem = $( elem ),
 			order = [ "star", "plus", "delete", "grid" ];
@@ -391,15 +394,15 @@ test( "split list items respect the icon", function( assert ) {
 	} );
 } );
 
-test( "links in list dividers are ignored", function( assert ) {
+QUnit.test( "links in list dividers are ignored", function( assert ) {
 	assert.strictEqual(
 		$( "#list-divider-ignore-link" ).find( "#ignored-link .ui-button-inner" ).length, 0,
 		"no buttons in list dividers" );
 } );
 
-module( "Borders" );
+QUnit.module( "Borders" );
 
-test( "last list item has border-bottom", function( assert ) {
+QUnit.test( "last list item has border-bottom", function( assert ) {
 	var listview = $( "#list-last-visible-item-border" );
 
 	assert.strictEqual( listview.find( ".listitem > .ui-button" ).css( "border-bottom-width" ),
@@ -408,7 +411,7 @@ test( "last list item has border-bottom", function( assert ) {
 		"1px", "has border bottom" );
 } );
 
-test( "list inside collapsible content", function( assert ) {
+QUnit.test( "list inside collapsible content", function( assert ) {
 	var done = assert.async();
 
 	$.testHelper.pageSequence( [
@@ -433,9 +436,9 @@ test( "list inside collapsible content", function( assert ) {
 	] );
 } );
 
-module( "Pre-enhanced" );
+QUnit.module( "Pre-enhanced" );
 
-test( "basic pre-enhanced listview", function( assert ) {
+QUnit.test( "basic pre-enhanced listview", function( assert ) {
 	var item = $( "<li><a href='#'>New Item</a></li>" ),
 		list = $( "#list-pre-enhanced" ),
 		icons = list.find( "span.ui-listview-item-icon" );
@@ -455,4 +458,4 @@ test( "basic pre-enhanced listview", function( assert ) {
 		"Listview refresh() enhances new items" );
 } );
 
-} )( jQuery );
+} );

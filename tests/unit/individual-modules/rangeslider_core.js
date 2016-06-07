@@ -3,8 +3,7 @@ define( [ "jquery", "qunit" ], function( $, QUnit ) {
 QUnit.test( "Rangeslider widget works correctly", function( assert ) {
 var rangeslider = $( "#plain" ).rangeslider(),
 	handles = rangeslider.parent().find( ".ui-slider-handle" ),
-	track = handles.closest( ".ui-slider-track" ),
-	offset = handles.offset();
+	track = handles.closest( ".ui-slider-track" );
 
 assert.deepEqual( rangeslider.rangeslider( "widget" ).hasClass( "ui-rangeslider" ), true,
 	"Has class ui-rangeslider" );
@@ -12,8 +11,7 @@ assert.equal( handles.length, 2, "Contains two handle elements" );
 assert.equal( track.length, 1, "Contains one track element" );
 
 function moveHandle( handle, xPos ) {
-	var trackWidth, trackX,
-		down = $.Event( "mousedown" ),
+	var down = $.Event( "mousedown" ),
 		move = $.Event( "mousemove" ),
 		up = $.Event( "mouseup" ),
 		offset = handle.offset();
@@ -30,8 +28,8 @@ function moveHandle( handle, xPos ) {
 // GH-7274: Events dependency
 // These tests cannot be expressed in the integration tests because the
 // "events/touch" module is artificially loaded in that environment.
-trackWidth = track.width();
-trackX = track.offset().left;
+var trackWidth = track.width(),
+	trackX = track.offset().left;
 assert.ok( trackWidth > 0, "Track has a non-zero width" );
 
 moveHandle( handles.eq( 0 ), trackX + trackWidth * 0.2 );
