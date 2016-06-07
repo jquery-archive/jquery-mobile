@@ -19,6 +19,15 @@ QUnit.module( "jquery.mobile.slider.js events", {
 	}
 } );
 
+var createEvent = function( name, target, x, y, key ) {
+	var event = $.Event( name );
+	event.target = target;
+	event.pageX = x;
+	event.pageY = y;
+	event.keyCode = key;
+	return event;
+};
+
 var keypressTest = function( assert, opts ) {
 	var slider = $( opts.selector ),
 		val = window.parseFloat( slider.val() ),
@@ -132,36 +141,6 @@ QUnit.test( "slider controls will create when inside a container that receives a
 			"enhancements applied" );
 } );
 
-var createEvent = function( name, target, x, y, key ) {
-	var event = $.Event( name );
-	event.target = target;
-	event.pageX = x;
-	event.pageY = y;
-	event.keyCode = key;
-	return event;
-};
-
-var assertLeftCSS = function( obj, opts ) {
-	var integerLeft, compare, css, threshold;
-
-	css = obj.css( "left" );
-	threshold = opts.pxThreshold || 0;
-
-	if ( css.indexOf( "px" ) > -1 ) {
-
-		// Parse the actual pixel value returned by the left css value
-		// and the pixels passed in for comparison
-		integerLeft = Math.round( parseFloat( css.replace( "px", "" ) ) ),
-		compare = parseInt( opts.pixels.replace( "px", "" ), 10 );
-
-		// Check that the pixel value provided is within a given threshold; default is 0px
-		assert.ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold,
-			opts.message );
-	} else {
-		assert.equal( css, opts.percent, opts.message );
-	}
-};
-
 QUnit.asyncTest( "drag should start only when clicked with left button", function( assert ) {
 	assert.expect( 5 );
 
@@ -261,14 +240,14 @@ QUnit.test( "mouse move only triggers the change event when the value changes", 
 		handle = widget.handle,
 		changeCount = 0,
 		actualChanges = 0,
-		changeFunc = function( e ) {
+		currentValue = control.val(),
+		changeFunc = function() {
 			++changeCount;
 			if ( control.val() !== currentValue ) {
 				++actualChanges;
 			}
 		},
-		offset = handle.offset(),
-		currentValue = control.val();
+		offset = handle.offset();
 
 	control.bind( "change", changeFunc );
 

@@ -1,11 +1,8 @@
-define( [
-	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-$.mobile.ns ="nstest-";
+$.mobile.ns = "nstest-";
 
-test( "Prerendered columntoggle table is destroyed/re-created correctly", function() {
+QUnit.test( "Prerendered columntoggle table is destroyed/re-created correctly", function( assert ) {
 	var table = $( "#columntoggle-prerendered-destroy-test" ),
 		popup = $( "#columntoggle-prerendered-destroy-test-popup" );
 
@@ -21,21 +18,21 @@ test( "Prerendered columntoggle table is destroyed/re-created correctly", functi
 
 	table.table();
 
-	deepEqual(
+	assert.deepEqual(
 		$( "input" ).filter( ":data(" + $.camelCase( $.mobile.ns + "header" ) + ")" ).length, 4,
 		"Four checkboxes have data at key 'header' after table construction" );
 
-	deepEqual(
+	assert.deepEqual(
 		$( "input" ).filter( ":data(" + $.camelCase( $.mobile.ns + "cells" ) + ")" ).length, 4,
 		"Four checkboxes have data at key 'cells' after table construction" );
 
 	table.table( "destroy" );
 
-	deepEqual(
+	assert.deepEqual(
 		$( "input" ).filter( ":data(" + $.camelCase( $.mobile.ns + "header" ) + ")" ).length, 0,
 		"Four checkboxes have data at key 'header' after table construction" );
 
-	deepEqual(
+	assert.deepEqual(
 		$( "input" ).filter( ":data(" + $.camelCase( $.mobile.ns + "cells" ) + ")" ).length, 0,
 		"Checkboxes have no data at key 'cells' after table destruction" );
 } );

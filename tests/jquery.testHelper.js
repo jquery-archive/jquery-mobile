@@ -3,6 +3,7 @@
  */
 
 ( function( QUnit, $ ) {
+
 $.testHelper = {
 
 	// This function takes sets of files to load asynchronously. Each set will be loaded after
@@ -53,9 +54,9 @@ $.testHelper = {
 	excludeFileProtocol: function( callback ) {
 		var message = "Tests require script reload and cannot be run via file: protocol";
 
-		if ( location.protocol == "file:" ) {
-			test( message, function() {
-				ok( false, message );
+		if ( location.protocol === "file:" ) {
+			QUnit.test( message, function( assert ) {
+				assert.ok( false, message );
 			} );
 		} else {
 			callback();
@@ -169,7 +170,7 @@ $.testHelper = {
 	alterExtend: function( extraExtension ) {
 		var extendFn = $.extend;
 
-		$.extend = function( object, extension ) {
+		$.extend = function() {
 
 			// NOTE extend the object as normal
 			var result = extendFn.apply( this, arguments );
@@ -202,7 +203,7 @@ $.testHelper = {
 		this.eventSequence( "pagechange", fns );
 	},
 
-	eventSequence: function( event, fns, timedOut ) {
+	eventSequence: function( event, fns ) {
 		var seq = [];
 		$.each( fns, function( i, fn ) {
 			seq.push( fn );
@@ -311,6 +312,7 @@ $.testHelper = {
 			var newResult = {},
 				nEventsDone = 0,
 				nEvents = 0,
+				warnTimer,
 				recordResult = function( key, event, result ) {
 
 					// Record the result
@@ -328,23 +330,23 @@ $.testHelper = {
 							self.detailedEventCascade( seq, newResult );
 						}, 0 );
 					}
-				},
+				};
 
 				// Set a failsafe timer in case one of the events never happens
-				warnTimer = setTimeout( function() {
-					warnTimer = 0;
-					$.each( events, function( key, event ) {
+			warnTimer = setTimeout( function() {
+				warnTimer = 0;
+				$.each( events, function( key, event ) {
 
-						// Timeouts are left out of this, because they will complete for
-						// sure, calling recordResult when they do
-						if ( newResult[ key ] === undefined && event.src ) {
+					// Timeouts are left out of this, because they will complete for
+					// sure, calling recordResult when they do
+					if ( newResult[ key ] === undefined && event.src ) {
 
-							// Clean up the unused handler
-							derefSrc( event.src ).unbind( event.event );
-							recordResult( key, event, { timedOut: true } );
-						}
-					} );
-				}, 5000 );
+						// Clean up the unused handler
+						derefSrc( event.src ).unbind( event.event );
+						recordResult( key, event, { timedOut: true } );
+					}
+				} );
+			}, 5000 );
 
 			$.each( events, function( key, event ) {
 
@@ -400,10 +402,10 @@ $.testHelper = {
 	decorate: function( opts ) {
 		var thisVal = opts.self || window;
 
-		console.log( "decorate called" );
+		window.console.log( "decorate called" );
 
 		return function() {
-			console.log( "decorated function called" );
+			window.console.log( "decorated function called" );
 			var returnVal;
 			opts.before && opts.before.apply( thisVal, arguments );
 			returnVal = opts.fn.apply( thisVal, arguments );
@@ -436,8 +438,8 @@ $.testHelper = {
 			rRes = "", min, max, str, idx, idx1, diff;
 		for ( idx = 0; idx < lLength || idx < rLength; idx++ ) {
 			str = {};
-			lVal = ( idx < lLength ? parseInt( lAr[ idx ] ) : 0 );
-			rVal = ( idx < rLength ? parseInt( rAr[ idx ] ) : 0 );
+			lVal = ( idx < lLength ? parseInt( lAr[ idx ], 10 ) : 0 );
+			rVal = ( idx < rLength ? parseInt( rAr[ idx ], 10 ) : 0 );
 
 			// This ignores things like 10a vs. 10b for now
 			str.l = String( lVal );
@@ -455,22 +457,22 @@ $.testHelper = {
 		}
 
 		// Trim initial 0s and return the result of the comparison
-		return t( parseInt( lRes.replace( /^0*/, "" ) ), parseInt( rRes.replace( /^0*/, "" ) ) );
+		return t( parseInt( lRes.replace( /^0*/, "" ), 10 ), parseInt( rRes.replace( /^0*/, "" ), 10 ) );
 	},
 
 	navReset: function( hash ) {
 		var timeout;
 
-		stop();
+		QUnit.stop();
 
 		timeout = setTimeout( function() {
-			start();
+			QUnit.start();
 			throw "navigation reset timed out";
 		}, 5000 );
 
 		$( document ).one( "pagechange", function() {
 			clearTimeout( timeout );
-			start();
+			QUnit.start();
 		} );
 
 		location.hash = location.hash.replace( "#", "" ) === hash ? "" : "#" + hash;
@@ -560,4 +562,5 @@ $.testHelper = {
 		}, milliseconds || 2000 );
 	}
 };
-} )( QUnit, jQuery );
+
+} )( window.QUnit, window.$ );

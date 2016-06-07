@@ -1,4 +1,6 @@
-function testDisjoint( slider ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
+function testDisjoint( assert, slider ) {
 	var inputOffset = slider.offset(),
 		inputRectangle = $.extend( {}, inputOffset, {
 			right: inputOffset.left + slider.width(),
@@ -11,7 +13,7 @@ function testDisjoint( slider ) {
 			bottom: trackOffset.top + track.height()
 		} );
 
-	deepEqual(
+	assert.deepEqual(
 		inputRectangle.left > trackRectangle.right ||
 		trackRectangle.left > inputRectangle.right ||
 		inputRectangle.top > trackRectangle.bottom ||
@@ -19,10 +21,12 @@ function testDisjoint( slider ) {
 		"input and track rectangles are disjoint" );
 }
 
-test( "mini slider track does not overlap with input", function() {
-testDisjoint( $( "#test-slider-mini" ) );
+QUnit.test( "mini slider track does not overlap with input", function( assert ) {
+testDisjoint( assert, $( "#test-slider-mini" ) );
 } );
 
-test( "normal slider track does not overlap with input", function() {
-testDisjoint( $( "#test-slider-normal" ) );
+QUnit.test( "normal slider track does not overlap with input", function( assert ) {
+testDisjoint( assert, $( "#test-slider-normal" ) );
+} );
+
 } );

@@ -1,4 +1,4 @@
-define( [ "jquery" ], function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "Loader attaches to DOM when running individually", function( assert ) {
 var loader = $.mobile.loading( "show" );

@@ -1,27 +1,28 @@
 /*
  * Mobile popup unit tests
  */
-( function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 var urlObject = $.mobile.path.parseLocation(),
 	home = urlObject.pathname + urlObject.search,
 	originalAnimationComplete = $.fn.animationComplete,
 	animationCompleteCallCount = 0,
-	opensAndCloses = function( assert, eventNs, popupId, linkSelector, contentSelector ) {
+	opensAndCloses = function( assert, eventNs, popupId, linkSelector ) {
 		var popup = $( "#" + popupId ),
 			link = $( linkSelector )[ 0 ];
+		var ready = assert.async();
 
-		expect( 17 );
+		assert.expect( 17 );
 
 		$.testHelper.detailedEventCascade( [
 			function() {
-				strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+				assert.strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 					"Popup container does not have attribute tabindex" );
-				strictEqual( link.getAttribute( "aria-haspopup" ), "true",
+				assert.strictEqual( link.getAttribute( "aria-haspopup" ), "true",
 					popupId + ": 'aria-haspopup' is set to true on link that opens the popup" );
-				strictEqual( link.getAttribute( "aria-owns" ), popupId,
+				assert.strictEqual( link.getAttribute( "aria-owns" ), popupId,
 					popupId + ": 'aria-owns' is set to the ID of the owned popup ('test-popup')" );
-				strictEqual( link.getAttribute( "aria-expanded" ), "false",
+				assert.strictEqual( link.getAttribute( "aria-expanded" ), "false",
 					popupId + ": 'aria-expanded' is set to false when the popup is not open" );
 				popup.popup( "open" );
 			},
@@ -37,8 +38,8 @@ var urlObject = $.mobile.path.parseLocation(),
 				}
 			},
 
-			function( result ) {
-				strictEqual( link.getAttribute( "aria-expanded" ), "true",
+			function() {
+				assert.strictEqual( link.getAttribute( "aria-expanded" ), "true",
 					popupId + ": 'aria-expanded' is set to true when the popup is open" );
 				assert.lacksClasses( popup.parent().prev(), "ui-screen-hidden",
 					popupId + ": Open popup screen is not hidden" );
@@ -55,7 +56,7 @@ var urlObject = $.mobile.path.parseLocation(),
 				assert.hasClasses( popup.parent(), "ui-popup-active",
 					popupId + ": Open popup has the 'ui-popup-active' class" );
 
-				strictEqual( popup.parent().attr( "tabindex" ), "0",
+				assert.strictEqual( popup.parent().attr( "tabindex" ), "0",
 					"Popup container has attribute tabindex" );
 
 				animationCompleteCallCount = 0;
@@ -73,9 +74,10 @@ var urlObject = $.mobile.path.parseLocation(),
 				}
 			},
 
-			function( result ) {
-				strictEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
-				strictEqual( link.getAttribute( "aria-expanded" ), "false",
+			function() {
+				assert.strictEqual( animationCompleteCallCount, 1,
+					"animationComplete called only once" );
+				assert.strictEqual( link.getAttribute( "aria-expanded" ), "false",
 					"'aria-expanded' attribute is set to false when the popup is not open" );
 				assert.lacksClasses( popup.parent(), "in",
 					"Closed popup container does not have class 'in'" );
@@ -83,17 +85,17 @@ var urlObject = $.mobile.path.parseLocation(),
 					"Closed popup screen is hidden" );
 				assert.lacksClasses( popup.parent(), "ui-popup-active",
 					"Open popup does not have the 'ui-popup-active' class" );
-				strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+				assert.strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 					"Popup container does not have attribute tabindex" );
 			},
 
 			{ timeout: { length: 500 } },
-			start
+			ready
 		] );
 	};
 
-module( "popup", {
-	setup: function() {
+QUnit.module( "popup", {
+	beforeEach: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
 		$.testHelper.navReset( home );
@@ -102,17 +104,18 @@ module( "popup", {
 			return originalAnimationComplete.apply( this, arguments );
 		}, $.fn.animationComplete );
 	},
-	teardown: function() {
+	afterEach: function() {
 		$.fn.animationComplete = originalAnimationComplete;
 	}
 } );
 
-asyncTest( "Popup emits popupafterclose exactly once", function() {
+QUnit.test( "Popup emits popupafterclose exactly once", function( assert ) {
+	var ready = assert.async();
 	var eventNs = ".doubleClose",
 		popup = $( "#double-close" ),
 		link = $( "#open-double-close" );
 
-	expect( 2 );
+	assert.expect( 2 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -125,21 +128,23 @@ asyncTest( "Popup emits popupafterclose exactly once", function() {
 
 		function() {
 			var outerTimeout = setTimeout( function() {
-				ok( false, "The popup did not emit a single 'popupafterclose' event." );
-				start();
+				assert.ok( false,
+					"The popup did not emit a single 'popupafterclose' event." );
+				ready();
 			}, 5000 );
 
 			popup.one( "popupafterclose" + eventNs + "2", function() {
 				var timeoutId = setTimeout( function() {
-					ok( true, "Waiting for a second 'popupafterclose' event has timed out." );
-					start();
+					assert.ok( true,
+						"Waiting for a second 'popupafterclose' event has timed out." );
+					ready();
 				}, 5000 );
 				clearTimeout( outerTimeout );
-				ok( true, "The popup emitted a 'popupafterclose' event" );
+				assert.ok( true, "The popup emitted a 'popupafterclose' event" );
 				popup.one( "popupafterclose" + eventNs + "3", function() {
-					ok( false, "The popup emitted a second 'popupafterclose' event" );
+					assert.ok( false, "The popup emitted a second 'popupafterclose' event" );
 					clearTimeout( timeoutId );
-					start();
+					ready();
 				} );
 			} );
 
@@ -148,7 +153,9 @@ asyncTest( "Popup emits popupafterclose exactly once", function() {
 	] );
 } );
 
-asyncTest( "Popup does not go back in history twice when opening on separate page", function() {
+QUnit.test( "Popup does not go back in history twice when opening on separate page",
+	function( assert ) {
+	var ready = assert.async();
 	var eventNs = ".backTwice",
 		popup = function() {
 			return $( "#back-twice-test-popup" );
@@ -161,7 +168,7 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
 				"Reached another page" );
 			$( "#open-back-twice-test-popup" ).click();
 		},
@@ -169,7 +176,7 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "2" }
 		},
 		function( result ) {
-			strictEqual( result.popupafteropen.timedOut, false,
+			assert.strictEqual( result.popupafteropen.timedOut, false,
 				"popupafteropen event did arrive" );
 			$( "#back-twice-test-popup-screen" ).click();
 		},
@@ -178,10 +185,11 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			pagechange: { src: $( document ), event: "pagechange" + eventNs + "3" }
 		},
 		function( result ) {
-			strictEqual( result.popupafterclose.timedOut, false,
+			assert.strictEqual( result.popupafterclose.timedOut, false,
 				"popupafterclose event did arrive" );
-			strictEqual( result.pagechange.timedOut, true, "pagechange event did not arrive" );
-			strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
+			assert.strictEqual( result.pagechange.timedOut, true,
+				"pagechange event did not arrive" );
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
 				"Back to another page" );
 			$.mobile.back();
 		},
@@ -189,26 +197,29 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			pagechange: { src: $( document ), event: "pagechange" + eventNs + "4" }
 		},
 		function( result ) {
-			strictEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
-			strictEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
-			start();
+			assert.strictEqual( result.pagechange.timedOut, false,
+				"pagechange event did arrive" );
+			assert.strictEqual( $.mobile.activePage.attr( "id" ), "start-page",
+				"Back to start page" );
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "Popup opens and closes", function( assert ) {
+QUnit.test( "Popup opens and closes", function( assert ) {
 	opensAndCloses( assert, ".opensandcloses", "test-popup", "a#open-test-popup",
 		"#test-popup p" );
 } );
 
-asyncTest( "Already-enhanced popup opens and closes", function( assert ) {
+QUnit.test( "Already-enhanced popup opens and closes", function( assert ) {
 	opensAndCloses( assert, ".alreadyenhancedopensandcloses", "already-enhanced",
 		"a#open-already-enhanced", "#already-enhanced p" );
 } );
 
-asyncTest( "Link that launches popup is deactivated", function( assert ) {
+QUnit.test( "Link that launches popup is deactivated", function( assert ) {
+	var ready = assert.async();
 
-	expect( 5 );
+	assert.expect( 5 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -231,7 +242,7 @@ asyncTest( "Link that launches popup is deactivated", function( assert ) {
 		},
 
 		function( result ) {
-			ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
+			assert.ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
 			assert.lacksClasses( $( "a#open-test-popup" ).closest( ".ui-button" ),
 				"ui-button-active",
 				"Opening a popup removes active class from link that launched it" );
@@ -250,7 +261,7 @@ asyncTest( "Link that launches popup is deactivated", function( assert ) {
 		},
 
 		function( result ) {
-			ok( !result.closed.timedOut, "Opening a popup did cause 'closed' event" );
+			assert.ok( !result.closed.timedOut, "Opening a popup did cause 'closed' event" );
 			$( "a#open-xyzzy-popup" ).click();
 		},
 
@@ -258,7 +269,7 @@ asyncTest( "Link that launches popup is deactivated", function( assert ) {
 			timeout: { length: 1000 }
 		},
 
-		function( result ) {
+		function() {
 			assert.lacksClasses( $( "a#open-xyzzy-popup" ).closest( ".ui-button" ),
 				"ui-button-active",
 				"Opening a non-existing popup removes active class from link that attempted " +
@@ -293,22 +304,23 @@ asyncTest( "Link that launches popup is deactivated", function( assert ) {
 			timeout: { length: 500 }
 		},
 
-		start
+		ready
 	] );
 } );
 
-asyncTest( "Popup interacts correctly with hashchange", function() {
+QUnit.test( "Popup interacts correctly with hashchange", function( assert ) {
+	var ready = assert.async();
 	var baseUrl, activeIndex,
 		$popup = $( "#test-popup" );
 
 	if ( !$popup.data( "mobile-popup" ).options.history ) {
-		expect( 1 );
-		ok( true, "hash change disabled" );
-		start();
+		assert.expect( 1 );
+		assert.ok( true, "hash change disabled" );
+		ready();
 		return;
 	}
 
-	expect( 5 );
+	assert.expect( 5 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -323,12 +335,12 @@ asyncTest( "Popup interacts correctly with hashchange", function() {
 		},
 
 		function( result ) {
-			ok( !result.hashchange.timedOut,
+			assert.ok( !result.hashchange.timedOut,
 				"Opening a popup from a non-dialogHashKey location causes a hashchange event" );
-			equal( decodeURIComponent( location.href ),
+			assert.equal( decodeURIComponent( location.href ),
 				baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey,
 				"location.href has been updated correctly" );
-			ok( $.mobile.navigate.history.activeIndex === activeIndex + 1,
+			assert.ok( $.mobile.navigate.history.activeIndex === activeIndex + 1,
 				"$.mobile.navigate.history has been advanced correctly" );
 			$( "#test-popup" ).popup( "close" );
 		},
@@ -337,22 +349,23 @@ asyncTest( "Popup interacts correctly with hashchange", function() {
 			closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" }
 		},
 
-		function( result ) {
-			ok( decodeURIComponent( location.href ) === baseUrl,
+		function() {
+			assert.ok( decodeURIComponent( location.href ) === baseUrl,
 				"location.href has been restored after the popup" );
-			ok( $.mobile.navigate.history.activeIndex === activeIndex,
+			assert.ok( $.mobile.navigate.history.activeIndex === activeIndex,
 				"$.mobile.navigate.history has been restored correctly" );
 		},
 
 		{ timeout: { length: 500 } },
-		start
+		ready
 	] );
 } );
 
 // This test assumes that the popup opens into a state that does not include dialogHashKey.
 // This should be the case if the previous test has cleaned up correctly.
-asyncTest( "Opening another page from the popup leaves no trace of the popup in history",
-	function() {
+QUnit.test( "Opening another page from the popup leaves no trace of the popup in history",
+	function( assert ) {
+		var ready = assert.async();
 		var initialActive = $.extend( {}, {}, $.mobile.navigate.history.getActive() ),
 			initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
 			initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority +
@@ -360,13 +373,13 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 			$popup = $( "#test-popup" );
 
 		if ( !$popup.data( "mobile-popup" ).options.history ) {
-			expect( 1 );
-			ok( true, "hash change disabled" );
-			start();
+			assert.expect( 1 );
+			assert.ok( true, "hash change disabled" );
+			ready();
 			return;
 		}
 
-		expect( 6 );
+		assert.expect( 6 );
 
 		$.testHelper.detailedEventCascade( [
 			function() {
@@ -389,9 +402,9 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 
 			function( result ) {
 				var hRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) );
-				ok( !result.closed.timedOut, "Popup closed" );
-				ok( !result.hashchange.timedOut, "hashchange did occur" );
-				ok( decodeURIComponent( location.href ) === initialBase + hRef.filename,
+				assert.ok( !result.closed.timedOut, "Popup closed" );
+				assert.ok( !result.hashchange.timedOut, "hashchange did occur" );
+				assert.ok( decodeURIComponent( location.href ) === initialBase + hRef.filename,
 					"New location is exactly the previous location (up to and including path) " +
 					"and the new filename" );
 				window.history.back();
@@ -408,7 +421,7 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 				}
 			},
 
-			function( result ) {
+			function() {
 				var active = $.mobile.navigate.history.getActive(),
 					identical = true;
 
@@ -428,29 +441,28 @@ asyncTest( "Opening another page from the popup leaves no trace of the popup in 
 					} );
 				}
 
-				ok( decodeURIComponent( location.href ) === initialHRef.href,
+				assert.ok( decodeURIComponent( location.href ) === initialHRef.href,
 					"Going back once places the browser on the initial page" );
-				ok( identical,
+				assert.ok( identical,
 					"Going back returns $.mobile.navigate.history to its initial value" );
-				ok( $.mobile.navigate.history.activeIndex ===
+				assert.ok( $.mobile.navigate.history.activeIndex ===
 						$.mobile.navigate.history.stack.length - 3,
 					"Going back leaves exactly two entries ahead in $.mobile.navigate.history" );
 			},
 
 			{ timeout: { length: 500 } },
 
-			start
+			ready
 		] );
 	} );
 
 // The test below adds an input, gives it focus, then opens the popup,
 // and makes sure the input has been blurred.
-asyncTest( "Popup assures previous element is blurred", function() {
-	var link = $( "#open-test-popup" ),
-		popup = $( "#test-popup" ),
+QUnit.asyncTest( "Popup assures previous element is blurred", function( assert ) {
+	var popup = $( "#test-popup" ),
 		textinput = $( "#test-input" );
 
-	expect( 7 );
+	assert.expect( 7 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -464,9 +476,9 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		function( result ) {
-			deepEqual( document.activeElement, textinput[ 0 ],
+			assert.deepEqual( document.activeElement, textinput[ 0 ],
 				"Textinput focused before popup is opened" );
-			strictEqual( result.focus.timedOut, false );
+			assert.strictEqual( result.focus.timedOut, false );
 			popup.popup( "open" );
 		},
 
@@ -476,8 +488,8 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		function( result ) {
-			ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
-			strictEqual( result.blur.timedOut, false,
+			assert.ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
+			assert.strictEqual( result.blur.timedOut, false,
 				"The blur event is fired after the popup opens" );
 
 			// Try to focus on the textinput again
@@ -489,8 +501,8 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		function( result ) {
-			strictEqual( result.focus.timedOut, false, "Focus event received" );
-			strictEqual( document.activeElement === textinput[ 0 ], false,
+			assert.strictEqual( result.focus.timedOut, false, "Focus event received" );
+			assert.strictEqual( document.activeElement === textinput[ 0 ], false,
 				"An input outside the popup does not receive focus while the popup is open" );
 			popup.popup( "close" );
 		},
@@ -500,15 +512,16 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		function( result ) {
-			ok( !result.closed.timedOut, "popup emitted 'popupafterclose'" );
+			assert.ok( !result.closed.timedOut, "popup emitted 'popupafterclose'" );
 		},
 
 		{ timeout: { length: 500 } },
-		start
+		QUnit.start
 	] );
 } );
 
-asyncTest( "Popup doesn't alter the url when the history option is disabled", function() {
+QUnit.asyncTest( "Popup doesn't alter the url when the history option is disabled",
+	function( assert ) {
 	var $popup = $( "#test-history-popup" ),
 		hash = $.mobile.path.parseLocation().hash;
 
@@ -521,9 +534,9 @@ asyncTest( "Popup doesn't alter the url when the history option is disabled", fu
 			opened: { src: $popup, event: "popupafteropen.popupDoesntAlertUrl1" }
 		},
 
-		function( result ) {
-			equal( hash, $.mobile.path.parseLocation().hash, "the hash remains the same" );
-			ok( $popup.is( ":visible" ), "popup is indeed visible" );
+		function() {
+			assert.equal( hash, $.mobile.path.parseLocation().hash, "the hash remains the same" );
+			assert.ok( $popup.is( ":visible" ), "popup is indeed visible" );
 			$popup.popup( "close" );
 		},
 
@@ -532,14 +545,15 @@ asyncTest( "Popup doesn't alter the url when the history option is disabled", fu
 			timeout: { length: 1000 }
 		},
 
-		start
+		QUnit.start
 	] );
 } );
 
-asyncTest( "Navigating away from the popup page closes the no-history popup", function() {
+QUnit.test( "Navigating away from the popup page closes the no-history popup", function( assert ) {
 	var $popup = $( "#test-history-popup" );
+	var ready = assert.async();
 
-	expect( 3 );
+	assert.expect( 3 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -551,7 +565,7 @@ asyncTest( "Navigating away from the popup page closes the no-history popup", fu
 		},
 
 		function() {
-			ok( $popup.is( ":visible" ), "popup is indeed visible" );
+			assert.ok( $popup.is( ":visible" ), "popup is indeed visible" );
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#no-popups" );
 		},
 
@@ -561,26 +575,27 @@ asyncTest( "Navigating away from the popup page closes the no-history popup", fu
 		},
 
 		function( result ) {
-			ok( !result.close.timedOut, "close happened" );
-			ok( !result.close.timedOut, "hashchange happened" );
+			assert.ok( !result.close.timedOut, "close happened" );
+			assert.ok( !result.close.timedOut, "hashchange happened" );
 
 			// TODO make sure that the afterclose is fired after the nav finishes
 		},
 
 		{ timeout: { length: 500 } },
-		start
+		ready
 	] );
 } );
 
 // TODO would be nice to avoid checking the internal representation
-//      of "openness" but :visible didn't seem to be working in this case
-//      (offscreen?)
-asyncTest( "Close links work on a history disabled popup", function() {
+//	  of "openness" but :visible didn't seem to be working in this case
+//	  (offscreen?)
+QUnit.test( "Close links work on a history disabled popup", function( assert ) {
 	var $popup = $( "#test-history-popup" );
+	var ready = assert.async();
 
-	expect( 3 );
+	assert.expect( 3 );
 
-	ok( !$popup.data( "mobile-popup" )._isOpen, "popup is initially closed" );
+	assert.ok( !$popup.data( "mobile-popup" )._isOpen, "popup is initially closed" );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -592,7 +607,7 @@ asyncTest( "Close links work on a history disabled popup", function() {
 		},
 
 		function() {
-			ok( $popup.data( "mobile-popup" )._isOpen, "popup is opened with open method" );
+			assert.ok( $popup.data( "mobile-popup" )._isOpen, "popup is opened with open method" );
 			$popup.find( "a" ).click();
 		},
 
@@ -601,18 +616,19 @@ asyncTest( "Close links work on a history disabled popup", function() {
 		},
 
 		function() {
-			ok( !$popup.data( "mobile-popup" )._isOpen, "popup is closed on link click" );
+			assert.ok( !$popup.data( "mobile-popup" )._isOpen, "popup is closed on link click" );
 		},
 
 		{ timeout: { length: 500 } },
-		start
+		ready
 	] );
 } );
 
-asyncTest( "Destroy closes open popup first", function() {
+QUnit.test( "Destroy closes open popup first", function( assert ) {
 	var $popup = $( "#test-destroy-popup" );
+	var ready = assert.async();
 
-	expect( 1 );
+	assert.expect( 1 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
@@ -632,15 +648,16 @@ asyncTest( "Destroy closes open popup first", function() {
 		},
 
 		function( result ) {
-			ok( !result.closed.timedOut, "closed on destroy" );
+			assert.ok( !result.closed.timedOut, "closed on destroy" );
 		},
 
 		{ timeout: { length: 500 } },
-		start
+		ready
 	] );
 } );
 
-asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", function() {
+QUnit.test( "Cannot close a non-dismissible popup by clicking on the screen", function( assert ) {
+	var ready = assert.async();
 	var $popup = $( "#test-popup-dismissible" ),
 		eventNs = ".cannotCloseNonDismissiblePopup";
 
@@ -654,7 +671,7 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( !results.popupafteropen.timedOut,
+			assert.ok( !results.popupafteropen.timedOut,
 				"The popup has emitted a 'popupafteropen' event" );
 
 			// Click on popup screen
@@ -666,7 +683,7 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( results.popupafterclose.timedOut,
+			assert.ok( results.popupafterclose.timedOut,
 				"The popup has not emitted a 'popupafterclose' event" );
 			$.mobile.back();
 		},
@@ -676,16 +693,17 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( !results.popupafterclose.timedOut,
+			assert.ok( !results.popupafterclose.timedOut,
 				"The popup has emitted a 'popupafterclose' event" );
-			start();
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "Elements inside the popup lose focus when the popup is closed", function() {
+QUnit.test( "Elements inside the popup lose focus when the popup is closed", function( assert ) {
+	var ready = assert.async();
 
-	expect( 5 );
+	assert.expect( 5 );
 
 	var $popup = $( "#popupLogin" ),
 		$popupContainer = $( "#popupLogin-popup" ),
@@ -700,37 +718,38 @@ asyncTest( "Elements inside the popup lose focus when the popup is closed", func
 			popupafteropen: { src: $popup, event: "popupafteropen" + eventSuffix + "1" }
 		},
 		function( result ) {
-			strictEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+			assert.strictEqual( result.popupafteropen.timedOut, false, "Popup did open" );
 			$textBox.focus();
 		},
 		{
 			focusevent: { src: $textBox, event: "focus" + eventSuffix + "2" }
 		},
 		function( result ) {
-			strictEqual( result.focusevent.timedOut, false, "Text box did get focus event" );
+			assert.strictEqual( result.focusevent.timedOut, false, "Text box did get focus event" );
 			$popup.popup( "close" );
 		},
 		{
 			popupafterclose: { src: $popup, event: "popupafterclose" + eventSuffix + "3" }
 		},
 		function( result ) {
-			strictEqual( result.popupafterclose.timedOut, false, "Popup did close" );
-			strictEqual( $popupContainer.is( ":focus" ), false,
+			assert.strictEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+			assert.strictEqual( $popupContainer.is( ":focus" ), false,
 				"The popup container is not focused" );
-			strictEqual( $popupContainer.find( ":focus" ).length, 0,
+			assert.strictEqual( $popupContainer.find( ":focus" ).length, 0,
 				"The popup container contains no focused elements" );
-			start();
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled",
-	function() {
+QUnit.test( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled",
+	function( assert ) {
+		var ready = assert.async();
 		var $popup = $( "#disabled-popup" ),
 			$link = $( "a#open-disabled-popup" ),
 			eventNs = ".apopupisclosedwhendisabled";
 
-		expect( 3 );
+		assert.expect( 3 );
 
 		$.testHelper.detailedEventCascade( [
 			function() {
@@ -742,7 +761,7 @@ asyncTest( "A popup is closed when it becomes disabled, and cannot be opened whi
 			},
 
 			function( result ) {
-				strictEqual( result.popupafteropen.timedOut, false,
+				assert.strictEqual( result.popupafteropen.timedOut, false,
 					"Received 'popupafteropen' event" );
 				$popup.popup( "disable" );
 			},
@@ -752,7 +771,7 @@ asyncTest( "A popup is closed when it becomes disabled, and cannot be opened whi
 			},
 
 			function( result ) {
-				strictEqual( result.popupafterclose.timedOut, false,
+				assert.strictEqual( result.popupafterclose.timedOut, false,
 					"Received 'popupafterclose' event after calling disable()" );
 				$link.click();
 			},
@@ -762,10 +781,10 @@ asyncTest( "A popup is closed when it becomes disabled, and cannot be opened whi
 			},
 
 			function( result ) {
-				strictEqual( result.popupafteropen.timedOut, true,
+				assert.strictEqual( result.popupafteropen.timedOut, true,
 					"Did not receive 'popupafteropen' when opening a disabled popup" );
-				start();
+				ready();
 			}
 		] );
 	} );
-} )( jQuery );
+} );

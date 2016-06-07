@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 QUnit.asyncTest( "Option enhanceWithin", function( assert ) {
 	$.testHelper.pageSequence( [
@@ -22,4 +25,4 @@ QUnit.asyncTest( "Option enhanceWithin", function( assert ) {
 	] );
 } );
 
-} )( QUnit, jQuery );
+} );

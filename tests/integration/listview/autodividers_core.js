@@ -1,4 +1,7 @@
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 function assertDividers( assert, listview, indices, prefix ) {
 	var index;
@@ -18,9 +21,9 @@ $( function() {
 	listview = $( "#autodividers-test" ).listview( { autodividers: true } );
 } );
 
-module( "listview.autodivider" );
+QUnit.module( "listview.autodivider" );
 
-test( "Automatic dividers behave correctly", function( assert ) {
+QUnit.test( "Automatic dividers behave correctly", function( assert ) {
 	assertDividers( assert, listview, [ 0, 4, 6, 8, 10, 12 ], "Initial: " );
 
 	// Adding an item should not cause new dividers to appear but merely a shift down in index
@@ -54,4 +57,4 @@ test( "Automatic dividers behave correctly", function( assert ) {
 	assertDividers( assert, listview, [ 0, 5 ], "Orphan multiple dividers: " );
 } );
 
-} )( jQuery );
+} );

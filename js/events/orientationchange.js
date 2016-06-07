@@ -82,6 +82,19 @@ if ( $.support.orientation ) {
 	}
 }
 
+// If the event is not supported natively, this handler will be bound to
+// the window resize event to simulate the orientationchange event.
+function handler() {
+	// Get the current orientation.
+	var orientation = get_orientation();
+
+	if ( orientation !== last_orientation ) {
+		// The orientation has changed, so trigger the orientationchange event.
+		last_orientation = orientation;
+		win.trigger( event_name );
+	}
+}
+
 $.event.special.orientationchange = $.extend( {}, $.event.special.orientationchange, {
 	setup: function() {
 		// If the event is supported natively, return false so that jQuery
@@ -121,19 +134,6 @@ $.event.special.orientationchange = $.extend( {}, $.event.special.orientationcha
 		};
 	}
 } );
-
-// If the event is not supported natively, this handler will be bound to
-// the window resize event to simulate the orientationchange event.
-function handler() {
-	// Get the current orientation.
-	var orientation = get_orientation();
-
-	if ( orientation !== last_orientation ) {
-		// The orientation has changed, so trigger the orientationchange event.
-		last_orientation = orientation;
-		win.trigger( event_name );
-	}
-}
 
 // Get the current page orientation. This method is exposed publicly, should it
 // be needed, as jQuery.event.special.orientationchange.orientation()

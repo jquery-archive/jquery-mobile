@@ -1,4 +1,7 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
 QUnit.asyncTest( "Returning from a dialog results in the page from which it opened", function( assert ) {
 	assert.expect( 2 );
@@ -20,4 +23,4 @@ QUnit.asyncTest( "Returning from a dialog results in the page from which it open
 	] );
 } );
 
-} )( QUnit, jQuery );
+} );

@@ -1,7 +1,10 @@
 /*
  * Mobile dialog unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
@@ -188,4 +191,4 @@ QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow"
 			}
 		] );
 	} );
-} )( QUnit, jQuery );
+} );

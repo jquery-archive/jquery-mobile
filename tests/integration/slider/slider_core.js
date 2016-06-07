@@ -1,5 +1,7 @@
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 function defineTooltipTest( name, slider, hasValue, hasTooltip ) {
-	test( name, function( assert ) {
+	QUnit.test( name, function( assert ) {
 		var widget = slider.slider( "instance" ),
 			track = slider.siblings( ".ui-slider-track" ),
 			handle = track.children( ".ui-slider-handle" ),
@@ -15,7 +17,7 @@ function defineTooltipTest( name, slider, hasValue, hasTooltip ) {
 						"Upon " + condition +
 						" the popup reflects the input value (" + slider.val() + ")" );
 				}
-				deepEqual( handle.text(), expectedHandleText,
+				assert.deepEqual( handle.text(), expectedHandleText,
 					"Upon " + condition + " the handle text is " + expectedHandleText );
 			};
 
@@ -52,7 +54,7 @@ function defineTooltipTest( name, slider, hasValue, hasTooltip ) {
 }
 
 function defineTests( moduleNameSuffix, idPrefix ) {
-	module( "Slider tooltip - " + moduleNameSuffix );
+	QUnit.module( "Slider tooltip - " + moduleNameSuffix );
 
 	defineTooltipTest( "Basic slider", $( "#" + idPrefix + "basic-slider" ), false, false );
 	defineTooltipTest( "Slider showing value", $( "#" + idPrefix + "show-value" ), true, false );
@@ -62,3 +64,5 @@ function defineTests( moduleNameSuffix, idPrefix ) {
 
 defineTests( "regular size", "" );
 defineTests( "mini size", "mini-" );
+
+} );

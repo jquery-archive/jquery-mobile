@@ -73,7 +73,7 @@ $.event.special.tap = {
 			}
 
 			var origTarget = event.target,
-				timer;
+				timer, clickHandler;
 
 			function clearTapTimer() {
 				clearTimeout( timer );
@@ -87,7 +87,7 @@ $.event.special.tap = {
 				$document.unbind( "vmousecancel", clearTapHandlers );
 			}
 
-			function clickHandler( event ) {
+			clickHandler = function( event ) {
 				clearTapHandlers();
 
 				// ONLY trigger a 'tap' event if the start target is
@@ -97,7 +97,7 @@ $.event.special.tap = {
 				} else if ( isTaphold ) {
 					event.preventDefault();
 				}
-			}
+			};
 
 			$this.bind( "vmouseup", clearTapTimer )
 				.bind( "vclick", clickHandler );

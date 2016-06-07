@@ -57,7 +57,7 @@ $.extend( $.mobile, {
 					data === "null" ? null :
 						// Only convert to a number if it doesn't change the string
 						+data + "" === data ? +data :
-							rbrace.test( data ) ? JSON.parse( data ) :
+							rbrace.test( data ) ? window.JSON.parse( data ) :
 								data;
 		} catch ( err ) {}
 

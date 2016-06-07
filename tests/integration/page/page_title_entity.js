@@ -1,5 +1,8 @@
-( function( QUnit, $ ) {
-module( "page" );
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+QUnit.module( "page" );
 
 QUnit.asyncTest( "Entity in page title", function( assert ) {
 	$.testHelper.pageSequence( [
@@ -20,4 +23,4 @@ QUnit.asyncTest( "Entity in page title", function( assert ) {
 		QUnit.start
 	] );
 } );
-} )( QUnit, jQuery );
+} );

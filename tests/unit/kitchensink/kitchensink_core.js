@@ -8,7 +8,7 @@ QUnit.module( "Kitchen Sink" );
 QUnit.test( "Nothing on the page has a class that contains `undefined`.", function( assert ) {
 	var undefClass = $( ".ui-page" ).find( "[class*='undefined']" );
 
-	assert.ok( undefClass.length == 0 );
+	assert.ok( undefClass.length === 0 );
 } );
 
 QUnit.module( "Widget Create" );

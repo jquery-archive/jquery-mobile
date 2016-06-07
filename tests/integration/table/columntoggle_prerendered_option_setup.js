@@ -25,6 +25,6 @@ initSingleTable( "columntoggle-toggle-button" );
 initSingleTable( "columntoggle-toggle-button-initially-absent" );
 initSingleTable( "columntoggle-toggle-ui" );
 
-});
+} );
 
 } );

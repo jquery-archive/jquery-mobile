@@ -1,13 +1,16 @@
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 var panel = $( "#wrapper-test-panel" ).panel(),
 	stretchTestPanel = $( "#panel-stretch-test" ).panel();
 
-asyncTest( "External panel updates wrapper correctly", function() {
+QUnit.test( "External panel updates wrapper correctly", function( assert ) {
 var otherPageChildren,
 	thisPage = $( "#start-page" ),
 	otherPage = $( "#other-page" ),
-	otherPageLink = $( "#go-to-other-page" );
+	otherPageLink = $( "#go-to-other-page" ),
+	ready = assert.async();
 
-expect( 7 );
+assert.expect( 7 );
 
 $.testHelper.detailedEventCascade( [
 	function() {
@@ -17,8 +20,8 @@ $.testHelper.detailedEventCascade( [
 		panelopen: { src: panel, event: "panelopen.externalPanelUpdatesWrapperCorrectly1" }
 	},
 	function( result ) {
-		deepEqual( result.panelopen.timedOut, false, "Panel did open" );
-		deepEqual( thisPage.data( $.mobile.ns + "panel" ), "open",
+		assert.deepEqual( result.panelopen.timedOut, false, "Panel did open" );
+		assert.deepEqual( thisPage.data( $.mobile.ns + "panel" ), "open",
 			"Data at key 'panel' on opening page present" );
 		otherPageLink.click();
 	},
@@ -31,13 +34,13 @@ $.testHelper.detailedEventCascade( [
 	},
 	function( result ) {
 		otherPageChildren = otherPage.children();
-		deepEqual( result.panelclose.timedOut, false, "Panel did close upon link click" );
-		deepEqual( result.pagecontainerchange.timedOut, false,
+		assert.deepEqual( result.panelclose.timedOut, false, "Panel did close upon link click" );
+		assert.deepEqual( result.pagecontainerchange.timedOut, false,
 			"pagecontainerchange event received" );
-		deepEqual( otherPageChildren.length, 1, "Other page has exactly one child" );
-		deepEqual( otherPageChildren.hasClass( "ui-panel-wrapper" ), true,
+		assert.deepEqual( otherPageChildren.length, 1, "Other page has exactly one child" );
+		assert.deepEqual( otherPageChildren.hasClass( "ui-panel-wrapper" ), true,
 			"Other page child has class 'ui-panel-wrapper'" );
-		deepEqual( thisPage.data( $.mobile.ns + "panel" ), undefined,
+		assert.deepEqual( thisPage.data( $.mobile.ns + "panel" ), undefined,
 			"Data at key 'panel' on opening page absent" );
 		$.mobile.back();
 	},
@@ -47,13 +50,14 @@ $.testHelper.detailedEventCascade( [
 			event: "pagecontainerchange.externalPanelUpdatesWrapperCorrectly2"
 		}
 	},
-	start
+	ready
 ] );
 } );
 
-asyncTest( "External panel stretches to acommodate page height", function( assert ) {
-expect( 4 );
+QUnit.test( "External panel stretches to acommodate page height", function( assert ) {
+assert.expect( 4 );
 
+var ready = assert.async();
 var eventNs = ".externalPanelStretches";
 
 $.testHelper.detailedEventCascade( [
@@ -97,6 +101,7 @@ $.testHelper.detailedEventCascade( [
 	{
 		pagecontainerchange: { src: $( window ), event: "pagecontainerchange" + eventNs + "4" }
 	},
-	start
+	ready
 ] );
+} );
 } );

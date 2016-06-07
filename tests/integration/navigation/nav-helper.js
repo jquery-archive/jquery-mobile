@@ -1,4 +1,6 @@
-var navHelper = {
+( function( window ) {
+
+window.navHelper = {
 	redirect: function( filename, paramPairs ) {
 		var search,
 			pairs = [];
@@ -20,3 +22,5 @@ var navHelper = {
 		this.redirect( filename, [ "push-state=false" ] );
 	}
 };
+
+} )( window );
