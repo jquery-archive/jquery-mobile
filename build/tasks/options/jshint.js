@@ -6,10 +6,13 @@ module.exports = {
 		files: {
 			src: [
 				"js/**/*.js",
+				"demos/_assets/js/**/*.js",
+				"tests/**/*.js",
 				"!js/jquery.js",
 				"!js/jquery.ui.widget.js",
 				"!js/widgets/jquery.ui.tabs.js",
-				"!js/jquery.ui.core.js"
+				"!js/jquery.ui.core.js",
+				"!demos/_assets/js/view-source.js",
 			]
 		}
 	},
