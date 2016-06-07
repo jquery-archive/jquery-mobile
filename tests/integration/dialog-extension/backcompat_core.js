@@ -40,7 +40,7 @@ function testClassPresence( assert, dialog, prefix, optionName, newOptionValue, 
 	assert.strictEqual(
 		!!dialog.page( "option", "classes.ui-page-dialog-contain" ).match( /\bui-corner-all\b/ ),
 		expectedResult,
-		prefix + ": class ui-corner-all " + ( expectedResult ? "present": "absent" ) +
+		prefix + ": class ui-corner-all " + ( expectedResult ? "present" : "absent" ) +
 			" in class key" );
 	assert.strictEqual(
 		dialog.page( "option", "corners" ), expectedResult,

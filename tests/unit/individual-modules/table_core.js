@@ -16,8 +16,8 @@ test( "Reflow table is enhanced correctly", function() {
 		"All thead cells have the '[data-colstart]' attribute" );
 	deepEqual( table.children( "tbody" ).children().children().is( function() {
 		return ( $( this ).children( "b.ui-table-cell-label" ).length !== 1 );
-	}), false, "All tbody cells have a bold child with class ui-table-cell-label" );
-});
+	} ), false, "All tbody cells have a bold child with class ui-table-cell-label" );
+} );
 
 test( "Columntoggle table is enhanced correctly", function() {
 	var table = $( "#columntoggle-test" ).table(),
@@ -48,7 +48,7 @@ test( "Columntoggle table is enhanced correctly", function() {
 
 		// If incorrect priorities have been identified, stop .each()-ing
 		return correctPriorities;
-	});
+	} );
 
 	deepEqual( correctPriorities, true,
 		"All tbody cells have priority classes assigned in accordance with their header " +

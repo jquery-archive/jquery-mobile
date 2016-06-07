@@ -3,7 +3,7 @@ define( [
 	"jquery"
 	], function( QUnit, $ ) {
 
-$.mobile.ns ="nstest-";
+$.mobile.ns = "nstest-";
 
 test( "Columntoggle table is destroyed", function( assert ) {
 
@@ -23,7 +23,6 @@ test( "Columntoggle table is destroyed", function( assert ) {
 				.add( table )
 					.filter( ":data(" + $.camelCase( $.mobile.ns + "input" ) + ")" ).length, 0,
 			"All data at key 'input' has been removed after table destruction" );
-
 
 } );
 

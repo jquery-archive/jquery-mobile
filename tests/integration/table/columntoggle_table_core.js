@@ -5,7 +5,7 @@ define( [
 
 var addRowToTable = ( function() {
 	var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
-		letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i" ],
+		letters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i" ],
 		count = 0;
 
 	return function _addRowToTable( table ) {
@@ -77,7 +77,7 @@ QUnit.asyncTest( "Toggle column", function( assert ) {
 					// Stop checking
 					return false;
 				}
-			});
+			} );
 
 			assert.deepEqual( inconsistent, false,
 				messagePrefix + " visibility of column members is consistent" );
@@ -88,7 +88,7 @@ QUnit.asyncTest( "Toggle column", function( assert ) {
 			return visible;
 		};
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 
 		function() {
 			initial = checkColumn( "Initially: " );
@@ -144,12 +144,12 @@ QUnit.asyncTest( "Column toggle table refresh - adding a row", function( assert 
 
 	expect( 3 );
 
-	// hide one column and refresh
+	// Hide one column and refresh
 	var secondInput, visibleCells, visibleHeaders,
 		input = $( "#movie-table-column-add-row-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-row" );
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -193,7 +193,7 @@ QUnit.asyncTest( "Column toggle table refresh - adding a column", function( asse
 		input = $( "#movie-table-column-add-column-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-column" );
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -240,7 +240,7 @@ QUnit.asyncTest( "Column toggle table refresh - adding a column", function( asse
 QUnit.asyncTest( "The dialog should become visible when button is clicked", function( assert ) {
 	expect( 4 );
 
-	$.testHelper.detailedEventCascade([
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "#movie-table-column-button" ).click();
 		},

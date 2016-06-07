@@ -216,7 +216,6 @@ if ( $.support.pushState ) {
 		$.mobile.navigate.navigator.squash( url.pathname + url.search );
 	} );
 
-
 	test( "navigating with an absolute url matching the current url save for the hash should transplant the hash", function() {
 		var loc = $.mobile.path.parseLocation();
 

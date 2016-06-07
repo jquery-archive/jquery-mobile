@@ -32,9 +32,9 @@ function testCreate( prefix, mode, enhanced ) {
 	} );
 }
 
-// test_create( "Normal reflow: ", "reflow", false );
+// Test_create( "Normal reflow: ", "reflow", false );
 testCreate( "Enhanced reflow: ", "reflow", true );
-// test_create( "Normal non-reflow: ", "abc", false );
+// Test_create( "Normal non-reflow: ", "abc", false );
 testCreate( "Enhanced non-reflow: ", "abc", true );
 
 QUnit.test( "_refreshHeaderCell()", function( assert ) {

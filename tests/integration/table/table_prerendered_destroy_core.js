@@ -40,5 +40,5 @@ deepEqual(
 	deepEqual( $.testHelper.domEqual( $( "body" ), enhancedState ), true,
 		"After re-enhancing the table, the DOM is identical to the previous enhanced version" );
 
-});
+} );
 } );

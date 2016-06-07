@@ -4,7 +4,7 @@ define( [
 	], function( QUnit, $ ) {
 
 // These tests run on both prerendered and non-prerendered tables
-$.mobile.ns ="nstest-";
+$.mobile.ns = "nstest-";
 
 module( "Columntoggle options" );
 
@@ -51,14 +51,14 @@ test( "Default columnButtonTheme", function() {
 		$( "#columntoggle-option-test-blank" ),
 		$( "#columntoggle-option-test-blank-button" )[ 0 ],
 		"ui-button-", "", "columnButtonTheme", "b", "ui-button-b" );
-});
+} );
 
 test( "Explicit columnButtonTheme", function() {
 	testClasses(
 		$( "#columntoggle-option-test-explicit" ),
 		$( "#columntoggle-option-test-explicit-button" )[ 0 ],
 		"ui-button-", "ui-button-b", "columnButtonTheme", "a", "ui-button-a" );
-});
+} );
 
 test( "Default columnPopupTheme", function() {
 	var popup = $( "#columntoggle-option-test-blank-popup" );
@@ -73,7 +73,7 @@ test( "Default columnPopupTheme", function() {
 
 	deepEqual( popup.popup( "option", "theme" ), "b",
 		"Popup has theme 'b' assigned in the end" );
-});
+} );
 
 test( "Explicit columnPopupTheme", function() {
 	var popup = $( "#columntoggle-option-test-explicit-popup" );
@@ -88,14 +88,14 @@ test( "Explicit columnPopupTheme", function() {
 
 	deepEqual( popup.popup( "option", "theme" ), "a",
 		"Popup has theme 'a' assigned in the end" );
-});
+} );
 
 test( "Explicitly assigned columnButtonText", function() {
 	$( "#columntoggle-option-test-explicit" ).table( "option", "columnButtonText", "xyzzy" );
 
 	deepEqual( $( "#columntoggle-option-test-explicit-button" ).text(), "xyzzy",
 		"Button text assigned via option is propagated to the button" );
-});
+} );
 
 function isMenuButton( element, tableId ) {
 	return element.is( "a#" + tableId + "-button[href='#" + tableId + "-popup']" );
@@ -107,7 +107,7 @@ test( "Default columnButton", function() {
 			"columntoggle-option-test-blank" ),
 		true,
 		"By default the table is preceded by a button that opens the column selection popup" );
-});
+} );
 
 function testColumnButtonOption( prefix, tableId, shouldBeThere ) {
 	var table = $( "#" + tableId ),
@@ -131,7 +131,7 @@ function testColumnButtonOption( prefix, tableId, shouldBeThere ) {
 
 test( "Toggling option columnButton works", function() {
 	testColumnButtonOption( "", "columntoggle-toggle-button", true );
-});
+} );
 
 test( "Toggling option columnButton when initially false works", function() {
 	var tableId = "columntoggle-toggle-button-initially-absent",
@@ -144,7 +144,7 @@ test( "Toggling option columnButton when initially false works", function() {
 
 	deepEqual( isMenuButton( table.prev(), tableId ), true,
 		"Button is present after option is turned on" );
-});
+} );
 
 test( "Toggling option columnUi works", function() {
 	var tableId = "columntoggle-toggle-ui",
@@ -169,9 +169,9 @@ test( "Toggling option columnUi works", function() {
 								var data = $( this ).jqmData( "input" );
 
 								return shouldBeThere ?
-									!( data && inputs.index( data[ 0 ] ) >= 0 ):
+									!( data && inputs.index( data[ 0 ] ) >= 0 ) :
 									!!data;
-							}),
+							} ),
 				false,
 				prefix + "Data " + negation + "present at header key 'input'" +
 					( shouldBeThere ? " and it refers to an input in the popup" : "" ) );
@@ -189,5 +189,5 @@ test( "Toggling option columnUi works", function() {
 	table.table( "option", "columnUi", true );
 
 	testUIPresence( "After turning option back on: ", true );
-});
+} );
 } );

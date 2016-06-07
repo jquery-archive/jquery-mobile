@@ -160,7 +160,7 @@ asyncTest( "default transition is fade", function() {
 } );
 
 asyncTest( "change() queues requests", function() {
-	expect( 4 )
+	expect( 4 );
 	var firstPage = $( "#foo" ),
 		secondPage = $( "#bar" );
 

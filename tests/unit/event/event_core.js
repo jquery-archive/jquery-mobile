@@ -448,7 +448,7 @@ QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( as
 
 	forceTouchSupport();
 
-	// ensure the swipe custome event is setup
+	// Ensure the swipe custome event is setup
 	$( "#qunit-fixture" ).bind( "swipe", function() {} );
 
 	$.Event.prototype.preventDefault = function() {

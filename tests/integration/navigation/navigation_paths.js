@@ -1,5 +1,5 @@
 /*
- * mobile navigation path unit tests
+ * Mobile navigation path unit tests
  */
 ( function( $ ) {
 var url = $.mobile.path.parseUrl( location.href ),
@@ -9,23 +9,23 @@ var testPageLoad = function( testPageAnchorSelector, expectedTextValue ) {
 	expect( 2 );
 
 	$.testHelper.pageSequence( [
-		// open our test page
+		// Open our test page
 		function() {
 			$.testHelper.openPage( "#pathing-tests" );
 		},
 
-		// navigate to the linked page
+		// Navigate to the linked page
 		function() {
 			var page = $.mobile.activePage;
 
-			// check that the reset page isn't still open
+			// Check that the reset page isn't still open
 			equal( "", page.find( ".reset-value" ).text() );
 
-			//click he test page link to execute the path
+			//Click he test page link to execute the path
 			page.find( "a" + testPageAnchorSelector ).click();
 		},
 
-		// verify that the page has changed and the expected text value is present
+		// Verify that the page has changed and the expected text value is present
 		function() {
 			deepEqual( $.mobile.activePage.find( ".test-value" ).text(), expectedTextValue );
 			start();
@@ -33,7 +33,7 @@ var testPageLoad = function( testPageAnchorSelector, expectedTextValue ) {
 	] );
 };
 
-// all of these alterations assume location.pathname will be a directory
+// All of these alterations assume location.pathname will be a directory
 // this is required to prevent the tests breaking in a subdirectory
 // TODO could potentially be fragile since the tests could be running while
 //      the urls are being updated
@@ -43,12 +43,12 @@ $( function() {
 		$elem.attr( "href", location.pathname + $( elem ).attr( "href" ) );
 	} );
 
-	$( 'a.protocol-rel' ).each( function( i, elem ) {
+	$( "a.protocol-rel" ).each( function( i, elem ) {
 		var $elem = $( elem );
 		$elem.attr( "href", "//" + location.host + location.pathname + $( elem ).attr( "href" ) );
 	} );
 
-	$( 'a.absolute' ).each( function( i, elem ) {
+	$( "a.absolute" ).each( function( i, elem ) {
 		var $elem = $( elem );
 		$elem.attr( "href",
 			location.protocol + "//" + location.host +
@@ -146,7 +146,7 @@ asyncTest( "dir reference with parent dir", function() {
 	testPageLoad( "#protocol-rel-test-six", "doc rel test six" );
 } );
 
-// absolute tests
+// Absolute tests
 // NOTE does not test root path or non nested references
 module( "absolute paths" );
 

@@ -1,5 +1,5 @@
 /*
- * mobile select unit tests
+ * Mobile select unit tests
  */
 
 ( function( $ ) {
@@ -11,20 +11,20 @@ test( "native menu selections alter the button text", function() {
 	setAndCheck = function( key ) {
 		var text;
 
-		select.val( key ).selectmenu( 'refresh' );
+		select.val( key ).selectmenu( "refresh" );
 		text = select.find( "option[value='" + key + "']" ).text();
 		deepEqual( select.prev( "span" ).text(), text );
 	};
 
-	setAndCheck( 'rush' );
-	setAndCheck( 'standard' );
+	setAndCheck( "rush" );
+	setAndCheck( "standard" );
 } );
 
-// issue 2424
+// Issue 2424
 test( "native selects should provide open and close as a no-op", function() {
-	// exception will prevent test success if undef
-	$( "#native-refresh" ).selectmenu( 'open' );
-	$( "#native-refresh" ).selectmenu( 'close' );
+	// Exception will prevent test success if undef
+	$( "#native-refresh" ).selectmenu( "open" );
+	$( "#native-refresh" ).selectmenu( "close" );
 	ok( true );
 } );
 
@@ -58,7 +58,6 @@ asyncTest( "The preventFocusZoom option does not manipulate zoom when it is fals
 
 	var zoomstate = $.mobile.zoom.enabled,
 		zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
-
 
 	$( document )
 		.one( "vmousedown.test", function() {

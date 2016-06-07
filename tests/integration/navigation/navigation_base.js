@@ -1,5 +1,5 @@
 /*
- * mobile navigation base tag unit tests
+ * Mobile navigation base tag unit tests
  */
 ( function( $ ) {
 var baseDir = $.mobile.path.parseUrl( $( "base" ).attr( "href" ) ).directory,
@@ -8,7 +8,7 @@ var baseDir = $.mobile.path.parseUrl( $( "base" ).attr( "href" ) ).directory,
 	baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
 	baseTagSupported = $.support.dynamicBaseTag;
 
-module( 'jquery.mobile.navigation.js - base tag', {
+module( "jquery.mobile.navigation.js - base tag", {
 	setup: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
@@ -124,7 +124,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 					"current page"
 			} );
 
-			// test that an internal page works
+			// Test that an internal page works
 			$( "a.ip2" ).click();
 		},
 
@@ -157,7 +157,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 
 asyncTest( "internal form with no action submits to document URL", function( assert ) {
 	$.testHelper.pageSequence( [
-		// open our test page
+		// Open our test page
 		function() {
 			$.testHelper.openPage( "#internal-no-action-form-page" );
 		},

@@ -1,5 +1,5 @@
 /*
- * mobile filter unit tests - listview
+ * Mobile filter unit tests - listview
  */
 
 ( function( QUnit, $ ) {
@@ -246,16 +246,16 @@ QUnit.asyncTest( "Random Elements Filter - <P>", function( assert ) {
 			textInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( textList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( textList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			filtertextInput.val( "f" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 5, "Filtering <p> on 2nd set using data-filtertext works" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 5, "Filtering <p> on 2nd set using data-filtertext works" );
 			assert.deepEqual( filtertextList.find( ":not(.ui-screen-hidden)" ).text(), "a", "Filtering works on data-filtertext and not text" );
 			filtertextInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			QUnit.start();
 		}
 	], 500 );
@@ -278,16 +278,16 @@ QUnit.asyncTest( "Random Elements Filter - <SPAN>", function( assert ) {
 			textInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( textList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( textList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			filtertextInput.val( "f" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 5, "Filtering <span> on 2nd set using data-filtertext works" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 5, "Filtering <span> on 2nd set using data-filtertext works" );
 			assert.deepEqual( filtertextList.find( ":not(.ui-screen-hidden)" ).text(), "a", "Filtering works on data-filtertext and not text" );
 			filtertextInput.val( "" ).trigger( "change" );
 		},
 		function() {
-			assert.deepEqual( filtertextList.find( '.ui-screen-hidden' ).length, 0, "Clearing filter shows all elements again" );
+			assert.deepEqual( filtertextList.find( ".ui-screen-hidden" ).length, 0, "Clearing filter shows all elements again" );
 			QUnit.start();
 		}
 	], 500 );

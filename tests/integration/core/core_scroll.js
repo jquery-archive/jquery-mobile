@@ -1,5 +1,5 @@
 /*
- * mobile core unit tests
+ * Mobile core unit tests
  */
 
 ( function( QUnit, $ ) {

@@ -1,11 +1,11 @@
 /*
- * mobile select unit tests
+ * Mobile select unit tests
  */
 
 ( function( $ ) {
 var libName = "forms.select";
 
-$( document ).bind( 'mobileinit', function() {
+$( document ).bind( "mobileinit", function() {
 	$.mobile.selectmenu.prototype.options.nativeMenu = false;
 } );
 

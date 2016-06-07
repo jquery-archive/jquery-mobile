@@ -3,7 +3,7 @@ define( [
 	"jquery"
 	], function( QUnit, $ ) {
 
-$.mobile.ns ="nstest-";
+$.mobile.ns = "nstest-";
 
 test( "Prerendered columntoggle table is destroyed/re-created correctly", function() {
 	var table = $( "#columntoggle-prerendered-destroy-test" ),

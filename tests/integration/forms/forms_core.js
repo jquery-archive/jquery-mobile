@@ -1,5 +1,5 @@
 /*
- * mobile popup unit tests
+ * Mobile popup unit tests
  */
 ( function( $ ) {
 
@@ -171,7 +171,7 @@ asyncTest( "Form resets correctly", function() {
 					setTimeout( maybeGoToTestPage );
 				}
 			}
-	}
+	};
 
 	$( document ).bind( "pageshow", handlePageShow );
 

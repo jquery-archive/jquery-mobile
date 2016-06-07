@@ -1,5 +1,5 @@
 /*
- * mobile init tests
+ * Mobile init tests
  */
 ( function( QUnit, $ ) {
 

@@ -133,7 +133,7 @@ QUnit.test( "ipv6 host support", function( assert ) {
 		ipv6Four = "http://[1080::8:800:200C:417A]/foo",
 		ipv6Five = "http://[::192.9.5.5]/ipng",
 		ipv6Six = "http://[::FFFF:129.144.52.38]:80/index.html",
-		ipv6Seven= "http://[2010:836B:4179::836B:4179]",
+		ipv6Seven = "http://[2010:836B:4179::836B:4179]",
 		fromIssue = "http://[3fff:cafe:babe::]:443/foo";
 
 	assert.deepEqual( $.mobile.path.parseUrl( ipv6One ).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80" );
@@ -143,7 +143,7 @@ QUnit.test( "ipv6 host support", function( assert ) {
 	assert.deepEqual( $.mobile.path.parseUrl( ipv6Four ).host, "[1080::8:800:200C:417A]" );
 	assert.deepEqual( $.mobile.path.parseUrl( ipv6Five ).host, "[::192.9.5.5]" );
 	assert.deepEqual( $.mobile.path.parseUrl( ipv6Six ).host, "[::FFFF:129.144.52.38]:80" );
-	assert.deepEqual( $.mobile.path.parseUrl( ipv6Six).hostname, "[::FFFF:129.144.52.38]" );
+	assert.deepEqual( $.mobile.path.parseUrl( ipv6Six ).hostname, "[::FFFF:129.144.52.38]" );
 	assert.deepEqual( $.mobile.path.parseUrl( ipv6Seven ).host, "[2010:836B:4179::836B:4179]" );
 	assert.deepEqual( $.mobile.path.parseUrl( fromIssue ).host, "[3fff:cafe:babe::]:443" );
 	assert.deepEqual( $.mobile.path.parseUrl( fromIssue ).hostname, "[3fff:cafe:babe::]" );
