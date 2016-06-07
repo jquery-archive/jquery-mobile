@@ -67,7 +67,12 @@ $.extend( $.mobile.Navigator.prototype, {
 		// Ensuring each history entry has a state object means that onPopState()
 		// will always trigger our hashchange callback even when a hashchange event
 		// is not fired.
-		window.history.replaceState( state, state.title || document.title, href );
+		//
+		//  Check is to make sure that jqm doesn't throw type errors in environments where
+		//  window.history is not available (e.g. Chrome packaged apps)
+		if ( window.history && window.history.replaceState ) {
+			window.history.replaceState( state, state.title || document.title, href );
+		}
 
 		// If we haven't yet received the initial popstate, we need to update the reference
 		// href so that we compare against the correct location
