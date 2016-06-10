@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 QUnit.asyncTest( "Swipe does not trigger when motion is default-prevented", function( assert ) {
 	var target = $( "#qunit" ),
@@ -6,9 +6,9 @@ QUnit.asyncTest( "Swipe does not trigger when motion is default-prevented", func
 		pointer = $.mobile.support.touch ?
 			{ down: "touchstart", move: "touchmove", up: "touchend" } :
 			{ down: "mousedown", move: "mousemove", up: "mouseup" };
-		recordSwipe = function() {
+	var recordSwipe = function() {
 			swipeTriggered = true;
-		};
+	};
 
 	target.one( "swipe", recordSwipe );
 
@@ -78,4 +78,4 @@ QUnit.asyncTest( "Swipe does not trigger when motion is default-prevented", func
 	], 100 );
 } );
 
-} )( QUnit, jQuery );
+} );
