@@ -1,8 +1,11 @@
-asyncTest( "Click on link that opens panel may bubble and does not cause navigation", function() {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
+QUnit.test( "Click on link that opens panel may bubble and does not cause navigation", function( assert ) {
 var origHref = location.href,
 	eventNs = ".clickOnLinkThatOpensPanelMayBubble",
 	panel = $( "#open-click-bubbling-panel" ),
-	link = $( "#open-click-bubbling-link" );
+	link = $( "#open-click-bubbling-link" ),
+	ready = assert.async();
 
 $.testHelper.detailedEventCascade( [
 	function() {
@@ -13,19 +16,20 @@ $.testHelper.detailedEventCascade( [
 		click: { src: $( document ), event: "click" + eventNs + "1" }
 	},
 	function( result ) {
-		deepEqual( result.panelopen.timedOut, false, "panelopen event occurred" );
-		deepEqual( result.click.timedOut, false, "click propagated to document" );
+		assert.deepEqual( result.panelopen.timedOut, false, "panelopen event occurred" );
+		assert.deepEqual( result.click.timedOut, false, "click propagated to document" );
 	},
 	{
 		timeout: { length: 500 }
 	},
 	function() {
-		deepEqual( location.href, origHref, "opening the panel leaves location.href alone" );
+		assert.deepEqual( location.href, origHref, "opening the panel leaves location.href alone" );
 		panel.panel( "close" );
 	},
 	{
 		panelclose: { src: panel, event: "panelclose" + eventNs + "2" }
 	},
-	start
+	ready
 ] );
+} );
 } );

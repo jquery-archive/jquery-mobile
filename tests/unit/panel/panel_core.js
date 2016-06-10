@@ -27,8 +27,7 @@ QUnit.module( "stock panel" );
 
 QUnit.test( "expected classes on create", function( assert ) {
 
-	var $panel = $( "#panel-test-create" ),
-		$page = getPageFromPanel( $panel );
+	var $panel = $( "#panel-test-create" );
 
 	assert.hasClasses( $panel, "ui-panel",
 		"default class is present" );
@@ -49,10 +48,10 @@ QUnit.test( "expected classes on create", function( assert ) {
 		"panel is closed by default" );
 } );
 
-QUnit.asyncTest( "expected open, close events", function( assert ) {
+QUnit.test( "expected open, close events", function( assert ) {
 
 	assert.expect( 4 );
-
+	var ready = assert.async();
 	var $panel = $( "#panel-test-events" );
 
 	$panel.one( "panelbeforeopen panelopen panelbeforeclose panelclose",
@@ -61,19 +60,20 @@ QUnit.asyncTest( "expected open, close events", function( assert ) {
 		} ).one( "panelopen", function() {
 			$panel.panel( "close" );
 		} ).one( "panelclose", function() {
-			QUnit.start();
+			ready();
 		} );
 
 	$panel.panel( "open" );
 
 } );
 
-QUnit.asyncTest( "classes modified by open", function( assert ) {
+QUnit.test( "classes modified by open", function( assert ) {
 	assert.expect( 10 );
 	var $panel = $( "#panel-test-open" ),
 		$page = getPageFromPanel( $panel );
+	var ready = assert.async();
 
-	$panel.one( "panelopen", function( event ) {
+	$panel.one( "panelopen", function() {
 		var $wrapper = getWrapperFromPage( $page ),
 			$modal = getModalFromPanel( $panel ),
 			$openButton = $page.find( "a[href='\\#panel-test-open']" );
@@ -112,25 +112,25 @@ QUnit.asyncTest( "classes modified by open", function( assert ) {
 
 		$panel.panel( "close" );
 	} ).one( "panelclose", function() {
-		QUnit.start();
+		ready();
 	} );
 
 	$panel.panel( "open" );
 
 } );
 
-QUnit.asyncTest( "classes modified by close", function( assert ) {
+QUnit.test( "classes modified by close", function( assert ) {
 	assert.expect( 7 );
-
+	var ready = assert.async();
 	var $panel = $( "#panel-test-close" ),
 		$page = getPageFromPanel( $panel ),
 		$wrapper = getWrapperFromPage( $page ),
 		$modal = getModalFromPanel( $panel ),
 		$openButton = $page.find( "a[href='\\#panel-test-close']" );
 
-	$panel.one( "panelopen", function( event ) {
+	$panel.one( "panelopen", function() {
 		$panel.panel( "close" );
-	} ).one( "panelclose", function( event ) {
+	} ).one( "panelclose", function() {
 		assert.lacksClasses( $openButton, "ui-button-active",
 			"button doesn't have active class" );
 		assert.lacksClasses( $panel, "ui-panel-open", "panel not open class" );
@@ -150,25 +150,24 @@ QUnit.asyncTest( "classes modified by close", function( assert ) {
 		// TODO test positioning when panel height > screen height
 		// TODO test rebind resize after complete
 
-		QUnit.start();
+		ready();
 	} );
 
 	$panel.panel( "open" );
 
 } );
 
-QUnit.asyncTest( "toggle", function( assert ) {
+QUnit.test( "toggle", function( assert ) {
 	assert.expect( 2 );
+	var ready = assert.async();
+	var $panel = $( "#panel-test-toggle" );
 
-	var $panel = $( "#panel-test-toggle" ),
-		$page = getPageFromPanel( $panel );
-
-	$panel.one( "panelopen", function( event ) {
+	$panel.one( "panelopen", function() {
 		assert.ok( true, "toggle open" );
 		$panel.panel( "close" );
-	} ).one( "panelclose", function( event ) {
+	} ).one( "panelclose", function() {
 		assert.ok( true, "toggle closed" );
-		QUnit.start();
+		ready();
 	} );
 
 	$panel.panel( "toggle" );
@@ -211,7 +210,6 @@ QUnit.test( "destroy method", function( assert ) {
 
 QUnit.asyncTest( "panelclose not called on document", function( assert ) {
 	assert.expect( 2 );
-
 	$( document ).on( "panelopen", "#panel-panelclose-event", function() {
 		$( this ).panel( "close" );
 	} );
@@ -229,12 +227,13 @@ QUnit.asyncTest( "panelclose not called on document", function( assert ) {
 
 } );
 
-QUnit.asyncTest( "should be able to open a second panel", function( assert ) {
+QUnit.test( "should be able to open a second panel", function( assert ) {
 	assert.expect( 1 );
+	var ready = assert.async();
 
 	$( document ).on( "panelopen", "#panel-opensecond", function() {
 		assert.ok( true, "second panel opened" );
-		QUnit.start();
+		ready();
 	} );
 
 	$( "#panel-openfirst" ).panel( "open" );
@@ -258,10 +257,10 @@ QUnit.test( "dismissable", function( assert ) {
 	assert.equal( getModalFromPanel( $panel ).length, 1, "modal added to page" );
 } );
 
-QUnit.asyncTest( "click on dismissable modal closes panel", function( assert ) {
+QUnit.test( "click on dismissable modal closes panel", function( assert ) {
 
 	assert.expect( 1 );
-
+	var ready = assert.async();
 	var $panel = $( "#panel-test-dismiss" ),
 		$modal = getModalFromPanel( $panel );
 
@@ -272,7 +271,7 @@ QUnit.asyncTest( "click on dismissable modal closes panel", function( assert ) {
 	} ).one( "panelclose", function() {
 
 		assert.ok( true, "modal is closed" );
-		QUnit.start();
+		ready();
 
 	} );
 
@@ -280,13 +279,14 @@ QUnit.asyncTest( "click on dismissable modal closes panel", function( assert ) {
 
 } );
 
-QUnit.asyncTest( "swipe on dismissible panel does not close panel if the default is prevented",
+QUnit.test( "swipe on dismissible panel does not close panel if the default is prevented",
 	function( assert ) {
 		var panel = $( "#panel-test-dismiss" ),
 			eventNs = ".swipeDoesNotClosePanel",
 			input = $( "#dismiss-input" ).one( "swipeleft", function( event ) {
 				event.preventDefault();
-			} );
+			} ),
+			done = assert.async();
 
 		assert.expect( 1 );
 
@@ -317,17 +317,17 @@ QUnit.asyncTest( "swipe on dismissible panel does not close panel if the default
 				panelclose: { src: panel, event: "panelclose" + eventNs + "3" }
 			},
 
-			start
+			done
 		] );
 	} );
 
-QUnit.asyncTest( "swipe on dismissible modal closes panel", function( assert ) {
+QUnit.test( "swipe on dismissible modal closes panel", function( assert ) {
 
 	assert.expect( 1 );
 
 	var $panel = $( "#panel-test-dismiss" ),
 		$modal = getModalFromPanel( $panel );
-
+	var ready = assert.async();
 	$panel.one( "panelopen", function() {
 
 		$modal.trigger( "swipeleft" );
@@ -335,7 +335,7 @@ QUnit.asyncTest( "swipe on dismissible modal closes panel", function( assert ) {
 	} ).one( "panelclose", function() {
 
 		assert.ok( true, "modal is closed" );
-		QUnit.start();
+		ready();
 
 	} );
 
@@ -355,13 +355,12 @@ QUnit.test( "expected classes on create", function( assert ) {
 
 QUnit.module( "panel with close button" );
 
-QUnit.asyncTest( "panel opens, close button hides panel", function( assert ) {
+QUnit.test( "panel opens, close button hides panel", function( assert ) {
 	assert.expect( 2 );
 
 	var $panel = $( "#panel-test-with-close" ),
-		$page = getPageFromPanel( $panel ),
 		$closeButton = $panel.find( ":jqmData(rel='close')" );
-
+	var ready = assert.async();
 	$panel.one( "panelopen", function() {
 
 		assert.lacksClasses( $panel, "ui-panel-closed",
@@ -372,16 +371,17 @@ QUnit.asyncTest( "panel opens, close button hides panel", function( assert ) {
 
 		assert.hasClasses( $panel, "ui-panel-closed",
 			"wrapper has closed class" );
-		QUnit.start();
+		ready();
 	} );
 
 	$panel.panel( "open" );
 } );
 
 // Test for https://github.com/jquery/jquery-mobile/issues/6693
-QUnit.asyncTest( "unrelated link does not close the panel", function( assert ) {
+QUnit.test( "unrelated link does not close the panel", function( assert ) {
 	var panel = $( "#panel-test-ignore-unrelated-link" ),
-		eventNs = ".ignoreUnrelatedLinkClick";
+		eventNs = ".ignoreUnrelatedLinkClick",
+		done = assert.async();
 
 	$( "#unrelated-link" ).one( "click", function( event ) {
 		event.preventDefault();
@@ -416,16 +416,18 @@ QUnit.asyncTest( "unrelated link does not close the panel", function( assert ) {
 			panelclose: { src: panel, event: "panelclose" + eventNs + "3" }
 		},
 
-		start
+		done
 	] );
 } );
 
-QUnit.asyncTest( "Panel still opens after changing its ID", function( assert ) {
+QUnit.test( "Panel still opens after changing its ID", function( assert ) {
 	var eventNs = ".panelStillOpensAfterChangingItsId",
 		idTestPanel = $( "#panel-test-id-change" ),
 		idTestLink = $( "a[href='#panel-test-id-change']" );
 
 	assert.expect( 1 );
+
+	var done = assert.async();
 
 	idTestPanel.attr( "id", "something-else" );
 	idTestLink.attr( "href", "#something-else" );
@@ -444,7 +446,7 @@ QUnit.asyncTest( "Panel still opens after changing its ID", function( assert ) {
 		{
 			panelclose: { src: idTestPanel, event: "panelclose" + eventNs + "2" }
 		},
-		start
+		done
 	] );
 } );
 QUnit.module( "wrapper generation", {
@@ -461,10 +463,11 @@ QUnit.module( "wrapper generation", {
 		$.mobile.panel.prototype = originalWidget;
 	}
 } );
-QUnit.asyncTest( "overlay panel should not call getWrapper", function( assert ) {
+QUnit.test( "overlay panel should not call getWrapper", function( assert ) {
 	assert.expect( 5 );
 	var eventNs = ".overlayPanelShouldNotCallGetWrapper",
 		testPanel = $( "#panel-test-get-wrapper-overlay" );
+	var ready = assert.async();
 
 	testPanel.panel( {
 		"display": "overlay"
@@ -502,16 +505,16 @@ QUnit.asyncTest( "overlay panel should not call getWrapper", function( assert ) 
 		function() {
 			assert.deepEqual( count, 0,
 				"getWrapper not called on pagechange back to initial page" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "push panel should call getWrapper only once on create", function( assert ) {
+QUnit.test( "push panel should call getWrapper only once on create", function( assert ) {
 	assert.expect( 5 );
 	var eventNs = ".pushPanelShouldCallGetWrapperOnlyOnceOnCreate",
 		testPanel = $( "#panel-test-get-wrapper-push" );
-
+	var ready = assert.async();
 	testPanel.panel( {
 		"display": "push"
 	} );
@@ -547,16 +550,16 @@ QUnit.asyncTest( "push panel should call getWrapper only once on create", functi
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on pagechange back to inital page" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "reveal panel should call getWrapper only once on create", function( assert ) {
+QUnit.test( "reveal panel should call getWrapper only once on create", function( assert ) {
 	assert.expect( 5 );
 	var eventNs = ".revealPanelShouldCallGetWrapperOnlyOnceOnCreate",
 		testPanel = $( "#panel-test-get-wrapper" );
-
+	var ready = assert.async();
 	testPanel.panel();
 	assert.deepEqual( count, 1, "getWrapper only called once durring create" );
 
@@ -590,17 +593,16 @@ QUnit.asyncTest( "reveal panel should call getWrapper only once on create", func
 		},
 		function() {
 			assert.deepEqual( count, 1, "getWrapper not called on pagechange back to inital page" );
-			QUnit.start();
+			ready();
 		}
 	] );
 
 } );
-QUnit.asyncTest( "external panel should call getWrapper once on create and on page changes",
+QUnit.test( "external panel should call getWrapper once on create and on page changes",
 	function( assert ) {
 		assert.expect( 5 );
-		var eventNs = ".externalPanelShouldCallGetWrapperOnceOnCreateAndOnPageChanges",
-			testPanel = $( "#external-panel-getWrapper-test" );
-
+		var testPanel = $( "#external-panel-getWrapper-test" );
+		var ready = assert.async();
 		testPanel.panel();
 		assert.deepEqual( count, 1, "getWrapper only called once durring create" );
 
@@ -634,7 +636,7 @@ QUnit.asyncTest( "external panel should call getWrapper once on create and on pa
 					window.setTimeout( function() {
 						assert.deepEqual( count, 3,
 							"getWrapper called on pagechange back to inital page" );
-						QUnit.start();
+						ready();
 					}, 0 );
 				} );
 				$( ".ui-pagecontainer" ).pagecontainer( "change", "#page1" );
@@ -642,17 +644,16 @@ QUnit.asyncTest( "external panel should call getWrapper once on create and on pa
 		] );
 	} );
 
-QUnit.asyncTest( "external panel: test classes during A>B>A transition", function( assert ) {
+QUnit.test( "external panel: test classes during A>B>A transition", function( assert ) {
 	assert.expect( 16 );
-
+	var ready = assert.async();
 	var $panel = $( "#panel-test-external" ).panel(),
 		$firstPage = $( ":jqmData(role='page')" ).first(),
 		$secondPage = $( ":jqmData(role='page')" ).last(),
-		$openButton = $firstPage.find( "a[href='\\#panel-test-external']" ),
 		$link = $panel.find( "a[href='\\#multipage']" ),
 		$back = $panel.find( "a[data-nstest-rel='back']" );
 
-	$panel.one( "panelopen", function( event ) {
+	$panel.one( "panelopen", function() {
 
 		assert.lacksClasses( $panel, "ui-panel-closed", "closed class removed" );
 		assert.hasClasses( $panel, "ui-panel-open", "open class added" );
@@ -661,7 +662,7 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 
 		$link.trigger( "click" );
 
-	} ).one( "panelclose", function( event ) {
+	} ).one( "panelclose", function() {
 
 		assert.hasClasses( $panel, "ui-panel-closed", "closed class removed" );
 		assert.lacksClasses( $panel, "ui-panel-open", "open class added" );
@@ -669,7 +670,7 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 
 		$panel.trigger( "continue" );
 
-	} ).one( "continue", function( event ) {
+	} ).one( "continue", function() {
 
 		setTimeout( function() {
 			$panel.panel( "open" );
@@ -685,7 +686,7 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 
 	} ).panel( "open" );
 
-	$back.one( "click", function( event ) {
+	$back.one( "click", function() {
 
 		assert.ok( $firstPage.data( "nstestPanel" ) === undefined,
 			"no open flag on first page on backwards transition" );
@@ -698,7 +699,7 @@ QUnit.asyncTest( "external panel: test classes during A>B>A transition", functio
 			assert.lacksClasses( $panel, "ui-panel-closed", "closed class removed" );
 			assert.hasClasses( $panel, "ui-panel-open", "open class added" );
 
-			QUnit.start();
+			ready();
 		}, 500 );
 	} );
 } );
