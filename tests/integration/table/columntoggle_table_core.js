@@ -1,7 +1,4 @@
-define( [
-	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 var addRowToTable = ( function() {
 	var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
@@ -9,7 +6,7 @@ var addRowToTable = ( function() {
 		count = 0;
 
 	return function _addRowToTable( table ) {
-		var dataSource = !!( count++ % 2 ) ? numbers : letters,
+		var dataSource = ( count++ % 2 ) ? numbers : letters,
 			newRow =
 				"<tr>" +
 					"<th data-test='abc'>" + dataSource[ 0 ] + "</th>" +
@@ -54,23 +51,24 @@ QUnit.test( "The page should be enhanced correctly", function( assert ) {
 		"attribute to be used for the checkbox label" );
 } );
 
-QUnit.asyncTest( "Toggle column", function( assert ) {
-	expect( 12 );
+QUnit.test( "Toggle column", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 12 );
 
-	var initial, post,
+    var initial, post,
 		input = $( "#toggle-column-test-popup input:nth(1)" ),
 		column = $( "#toggle-column-test tr>:nth-child(3)" ),
 
 		// Ascertain visibility and consistency
 		checkColumn = function( messagePrefix ) {
-			var visible = undefined,
+			var visible,
 				inconsistent = false;
 
 			column.each( function() {
 				if ( visible === undefined ) {
 					visible = !!$( this ).is( ":visible" );
 				} else {
-					inconsistent = ( !!$( this ).is( ":visible" ) !== visible );
+					inconsistent = ( $( this ).is( ":visible" ) !== visible );
 				}
 				if ( inconsistent ) {
 
@@ -88,7 +86,7 @@ QUnit.asyncTest( "Toggle column", function( assert ) {
 			return visible;
 		};
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 
 		function() {
 			initial = checkColumn( "Initially: " );
@@ -133,23 +131,24 @@ QUnit.asyncTest( "Toggle column", function( assert ) {
 					assert.deepEqual( post, false,
 						"Unchecking already unchecked checkbox by programmatically setting its" +
 						"'checked' property does not affect column visibility" );
-					start();
+					ready();
 				}
 			] ) );
 		}
 	] );
 } );
 
-QUnit.asyncTest( "Column toggle table refresh - adding a row", function( assert ) {
+QUnit.test( "Column toggle table refresh - adding a row", function( assert ) {
+    var ready = assert.async();
 
-	expect( 3 );
+    assert.expect( 3 );
 
-	// Hide one column and refresh
-	var secondInput, visibleCells, visibleHeaders,
+    // Hide one column and refresh
+    var secondInput, visibleCells, visibleHeaders,
 		input = $( "#movie-table-column-add-row-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-row" );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -180,20 +179,21 @@ QUnit.asyncTest( "Column toggle table refresh - adding a row", function( assert 
 			assert.deepEqual( visibleCells.length, visibleHeaders.length,
 				"same number of headers and rows visible" );
 
-			start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "Column toggle table refresh - adding a column", function( assert ) {
-	expect( 3 );
+QUnit.test( "Column toggle table refresh - adding a column", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 3 );
 
-	var lastInput, visibleCells, visibleHeaders,
+    var lastInput, visibleCells, visibleHeaders,
 		popup = $( "#movie-table-column-add-column-popup" ),
 		input = $( "#movie-table-column-add-column-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-column" );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -232,15 +232,16 @@ QUnit.asyncTest( "Column toggle table refresh - adding a column", function( asse
 
 			assert.deepEqual( visibleCells.length, visibleHeaders.length,
 				"same number of headers and rows visible" );
-			start();
+			ready();
 		}
 	] );
 } );
 
-QUnit.asyncTest( "The dialog should become visible when button is clicked", function( assert ) {
-	expect( 4 );
+QUnit.test( "The dialog should become visible when button is clicked", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 4 );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			$( "#movie-table-column-button" ).click();
 		},
@@ -266,7 +267,7 @@ QUnit.asyncTest( "The dialog should become visible when button is clicked", func
 			assert.deepEqual( result.popupafterclose.timedOut, false,
 				"The popup containing the checkboxes did emit a popupafterclose" );
 			assert.hasClasses( $( "#movie-table-column-popup-popup" ), "ui-popup-hidden" );
-			start();
+			ready();
 		}
 	] );
 } );

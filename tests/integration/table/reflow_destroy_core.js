@@ -1,29 +1,25 @@
-define( [
-	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
-test( "Reflow table is destroyed/re-created correctly", function() {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+QUnit.test( "Reflow table is destroyed/re-created correctly", function( assert ) {
 
-	var enhancedTable,
-		table = $( "#reflow-destroy-test" ),
+	var table = $( "#reflow-destroy-test" ),
 		unenhancedState = $( "body" ).clone();
 
 	table.table();
 
 	table.table( "destroy" );
 
-	deepEqual( $.testHelper.domEqual( $( "body" ), unenhancedState ), true,
+	assert.deepEqual( $.testHelper.domEqual( $( "body" ), unenhancedState ), true,
 		"After enhancing and destroying the table, the DOM is identical to the original state" );
 
 	table.table();
 
-	enhancedState = $( "body" ).clone();
+	var enhancedState = $( "body" ).clone();
 
 	table.table( "destroy" );
 
 	table.table();
 
-	deepEqual( $.testHelper.domEqual( $( "body" ), enhancedState ), true,
+	assert.deepEqual( $.testHelper.domEqual( $( "body" ), enhancedState ), true,
 		"After re-enhancing the table, the DOM is identical to the previous enhanced version" );
 
 } );

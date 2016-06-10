@@ -19,8 +19,7 @@ function testCreate( prefix, mode, enhanced ) {
 					}
 				}
 			},
-			reflowExpected = ( mode === "reflow" && !enhanced ),
-			tableExpected = !enhanced;
+			reflowExpected = ( mode === "reflow" && !enhanced );
 
 		tableProto._create.apply( context );
 

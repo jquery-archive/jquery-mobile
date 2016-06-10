@@ -109,7 +109,7 @@ QUnit.skip( "_updateHeaderPriorities() iterates over headers and adds classes",
 				.end();
 
 		tablePrototype._updateHeaderPriorities.call( {
-			_updateVariableColumn: function( header, cells, priority ) {
+			_updateVariableColumn: function( header ) {
 				assert.deepEqual( header[ 0 ], headers.eq( callCount )[ 0 ],
 					"_updateVariableColumn() called on headers[ " + callCount + " ]" );
 				callCount++;
@@ -182,7 +182,7 @@ QUnit.test( "setColumnVisibility() correctly identifies the header",
 				.end(),
 			context = {
 				headers: headers,
-				_setColumnVisibility: function( header, visible ) {
+				_setColumnVisibility: function( header ) {
 					resultingHeader = header[ 0 ];
 				}
 			};
@@ -202,8 +202,7 @@ QUnit.test( "setColumnVisibility() correctly identifies the header",
 
 QUnit.skip( "_unlock() removes classes from cells", function( assert ) {
 	var cellList = $( "<td class='ui-table-cell-hidden'></td>" +
-		"<td class='ui-table-cell-visible'></td>" ),
-		table = $( "#unlock-test-table" );
+		"<td class='ui-table-cell-visible'></td>" );
 
 	tablePrototype._unlock.call( {
 		options: {
