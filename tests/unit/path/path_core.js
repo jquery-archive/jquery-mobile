@@ -3,8 +3,7 @@
  */
 define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
-var siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
-	home = $.mobile.path.parseUrl( location.pathname ).directory,
+var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
 QUnit.module( "jquery.mobile.navigation.js", {
@@ -39,24 +38,8 @@ QUnit.test( "path.set method is working properly", function( assert ) {
 QUnit.test( "path.makeUrlAbsolute is working properly", function( assert ) {
 	var mua = $.mobile.path.makeUrlAbsolute,
 		p1 = "http://jqm.com/",
-		p2 = "http://jqm.com/?foo=1&bar=2",
-		p3 = "http://jqm.com/#spaz",
-		p4 = "http://jqm.com/?foo=1&bar=2#spaz",
+		p5 = "http://jqm.com/test.php";
 
-		p5 = "http://jqm.com/test.php",
-		p6 = "http://jqm.com/test.php?foo=1&bar=2",
-		p7 = "http://jqm.com/test.php#spaz",
-		p8 = "http://jqm.com/test.php?foo=1&bar=2#spaz",
-
-		p9 = "http://jqm.com/dir1/dir2/",
-		p10 = "http://jqm.com/dir1/dir2/?foo=1&bar=2",
-		p11 = "http://jqm.com/dir1/dir2/#spaz",
-		p12 = "http://jqm.com/dir1/dir2/?foo=1&bar=2#spaz",
-
-		p13 = "http://jqm.com/dir1/dir2/test.php",
-		p14 = "http://jqm.com/dir1/dir2/test.php?foo=1&bar=2",
-		p15 = "http://jqm.com/dir1/dir2/test.php#spaz",
-		p16 = "http://jqm.com/dir1/dir2/test.php?foo=1&bar=2#spaz";
 
 	// Test URL conversion against an absolute URL to the site root.
 	// directory tests

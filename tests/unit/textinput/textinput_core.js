@@ -115,7 +115,7 @@ QUnit.test( "'clear text' button for search inputs should use configured text",
 
 QUnit.test( "data-clear-btn adds clear button to text inputs", function( assert ) {
 	assert.ok( $( "#text-input-clear-btn" ).next()
-		.is( 'a[tabindex="-1"][aria-hidden="true"]' ),
+		.is( "a[tabindex='-1'][aria-hidden='true']" ),
 		"correctly marked up clear button is present" );
 	assert.hasClasses( $( "#text-input-clear-btn" ).next()[ 0 ],
 		"ui-textinput-clear-button", "clear button has class ui-textinput-clear-button" );

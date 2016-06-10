@@ -2,7 +2,7 @@
  * Mobile media unit tests
  */
 
-define( [ "jquery" ], function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "$.mobile.media function returns same boolean result as window.matchMedia", function( assert ) {
 	assert.deepEqual( $.mobile.media( "screen" ), window.matchMedia( "screen" ).matches );
