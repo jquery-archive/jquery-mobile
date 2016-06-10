@@ -1,29 +1,33 @@
 /*
  * Mobile navigation base tag unit tests
  */
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var baseDir = $.mobile.path.parseUrl( $( "base" ).attr( "href" ) ).directory,
 	contentDir = $.mobile.path.makePathAbsolute( "../content/", baseDir ),
-	home = location.pathname + location.search,
-	baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
-	baseTagSupported = $.support.dynamicBaseTag;
+	home = location.pathname + location.search;
 
-module( "jquery.mobile.navigation.js - base tag", {
-	setup: function() {
+QUnit.module( "jquery.mobile.navigation.js - base tag", {
+	beforeEach: function() {
 		$.mobile.navigate.history.stack = [];
 		$.mobile.navigate.history.activeIndex = 0;
 		$.testHelper.navReset( home );
 	}
 } );
 
-asyncTest( "can navigate between internal and external pages", function( assert ) {
-	$.testHelper.pageSequence( [
+QUnit.test( "can navigate between internal and external pages", function( assert ) {
+    var ready = assert.async();
+    $.testHelper.pageSequence( [
 		function() {
+
 			// Navigate from default internal page to another internal page.
 			$.testHelper.openPage( "#internal-page-2" );
 		},
 
 		function() {
+
 			// Verify that we are on the 2nd internal page.
 			$.testHelper.assertUrlLocation( assert, {
 				push: home + "#internal-page-2",
@@ -37,6 +41,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-1.html",
@@ -48,6 +53,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-2.html",
@@ -59,6 +65,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
@@ -71,6 +78,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-2.html",
@@ -82,6 +90,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			// the hash based nav result (hash:) is dictate by the fact that #internal-page-1
 			// is the original root page element
@@ -95,6 +104,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: baseDir + "base-page-1.html",
@@ -106,6 +116,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
@@ -117,6 +128,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-2.html",
@@ -129,6 +141,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hash: "internal-page-2",
@@ -141,6 +154,7 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 		},
 
 		function() {
+
 			// Verify that we are on the expected page.
 			$.testHelper.assertUrlLocation( assert, {
 				hash: "internal-page-2",
@@ -149,14 +163,15 @@ asyncTest( "can navigate between internal and external pages", function( assert 
 					"should not change page"
 			} );
 
-			// Previous load should have failed and left us on internal-page-2.
-			start();
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "internal form with no action submits to document URL", function( assert ) {
-	$.testHelper.pageSequence( [
+QUnit.test( "internal form with no action submits to document URL", function( assert ) {
+    var ready = assert.async();
+    $.testHelper.pageSequence( [
+
 		// Open our test page
 		function() {
 			$.testHelper.openPage( "#internal-no-action-form-page" );
@@ -172,19 +187,22 @@ asyncTest( "internal form with no action submits to document URL", function( ass
 				report: "hash should match document url and not base url"
 			} );
 
-			start();
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "external page form with no action submits to external page URL", function( assert ) {
-	$.testHelper.pageSequence( [
+QUnit.test( "external page form with no action submits to external page URL", function( assert ) {
+    var ready = assert.async();
+    $.testHelper.pageSequence( [
 		function() {
+
 			// Go to an external page that has a form.
 			$( "#internal-page-1 .cp1" ).click();
 		},
 
 		function() {
+
 			// Make sure we actually navigated to the external page.
 			$.testHelper.assertUrlLocation( assert, {
 				hashOrPush: contentDir + "content-page-1.html",
@@ -201,12 +219,13 @@ asyncTest( "external page form with no action submits to external page URL", fun
 				report: "hash should match page url and not document url"
 			} );
 
-			start();
+			ready();
 		}
 	] );
 } );
 
-var testBaseTagAlteration = function( assertions ) {
+var testBaseTagAlteration = function( assert, assertions ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "../../base-change.html" );
@@ -218,32 +237,32 @@ var testBaseTagAlteration = function( assertions ) {
 		},
 
 		function() {
-			start();
+			ready();
 		}
 	] );
 
 };
 
-asyncTest( "disabling base tag changes should prevent base href value changes", function() {
+QUnit.test( "disabling base tag changes should prevent base href value changes", function( assert ) {
 	var baseHref = $( "base" ).attr( "href" );
 	$.mobile.dynamicBaseEnabled = false;
 
-	testBaseTagAlteration( function() {
+	testBaseTagAlteration( assert, function() {
 		if ( $.support.dynamicBaseTag ) {
-			equal( baseHref, $( "base" ).attr( "href" ), "the base href value should be unchanged" );
+			assert.equal( baseHref, $( "base" ).attr( "href" ), "the base href value should be unchanged" );
 		} else {
-			equal( $.mobile.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
+			assert.equal( $.mobile.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
 		}
 	} );
 } );
 
-asyncTest( "enabling base tag changes should enable base href value changes", function() {
+QUnit.test( "enabling base tag changes should enable base href value changes", function( assert ) {
 	var baseHref = $( "base" ).attr( "href" );
 	$.mobile.dynamicBaseEnabled = true;
 	$.support.dynamicBaseTag = true;
 
-	testBaseTagAlteration( function() {
-		ok( baseHref !== $( "base" ).attr( "href" ), "the base href value should be changed" );
+	testBaseTagAlteration( assert, function() {
+		assert.ok( baseHref !== $( "base" ).attr( "href" ), "the base href value should be changed" );
 	} );
 } );
-} )( jQuery );
+} );

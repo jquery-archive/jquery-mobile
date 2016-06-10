@@ -1,6 +1,11 @@
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
 //Disable inlineSVG support test
 $.support.inlineSVG = $.noop;
+
 // The following tests are not independent of each other. Thus, if you find
 // that one of them fails, and it causes the failure of the rest of the tests,
 // but that, if you change the order of the tests, it passes, then you should
@@ -15,6 +20,7 @@ $.support.inlineSVG = $.noop;
 function maybeWaitForStartPage( seq, prefix ) {
 	if ( $( "#basicTestPage" ).length === 0 ) {
 		$.testHelper.detailedEventCascade( [
+
 			// This empty function and the following "navigate" event test is
 			// necessary to ensure that, when the initial URL contains the path to a
 			// page to be loaded via AJAX, the loading process which is done via a
@@ -26,6 +32,7 @@ function maybeWaitForStartPage( seq, prefix ) {
 			}
 		] );
 	} else {
+
 		// You can tweak the timeout below to make the tests run faster, but if
 		// you do, make sure it greatly exceeds the timeout used for the pushState
 		// slumber - i.e., the brief time immediately following an adjustment made
@@ -38,11 +45,12 @@ function maybeWaitForStartPage( seq, prefix ) {
 	}
 }
 
-asyncTest( "Navigating to an internal page", function() {
+QUnit.test( "Navigating to an internal page", function( assert ) {
 	var origUrl,
-		eventNs = ".navigatingToAnInternalPage";
+		eventNs = ".navigatingToAnInternalPage",
+		ready = assert.async();
 
-	expect( 1 );
+	assert.expect( 1 );
 
 	maybeWaitForStartPage( [
 		function() {
@@ -54,7 +62,7 @@ asyncTest( "Navigating to an internal page", function() {
 			pagecontainerchange: { src: $( ".ui-pagecontainer" ), event: "pagecontainerchange" + eventNs + "1" }
 		},
 		function() {
-			deepEqual( location.href, origUrl.indexOf( "#" ) >= 0 ?
+			assert.deepEqual( location.href, origUrl.indexOf( "#" ) >= 0 ?
 				origUrl + "internal-page" :
 				origUrl + "#internal-page",
 				"URL after popup opens differs only by an appended dialog hash key" );
@@ -63,42 +71,44 @@ asyncTest( "Navigating to an internal page", function() {
 		{
 			pagecontainerchange: { src: $( ".ui-pagecontainer" ), event: "pagecontainerchange" + eventNs + "2" }
 		},
-		start
+		ready
 	] );
 } );
 
-asyncTest( "Returning from a dialog results in the page from which it opened", function() {
-	var eventNs = ".returningFromADialog";
-	expect( 2 );
+QUnit.test( "Returning from a dialog results in the page from which it opened", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".returningFromADialog";
+    assert.expect( 2 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
-		function( result ) {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+		function() {
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "a:first", $.mobile.activePage[ 0 ] ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Returning from a popup results in the page from which it opened", function() {
-	var origActive, origUrl,
+QUnit.test( "Returning from a popup results in the page from which it opened", function( assert ) {
+    var ready = assert.async();
+    var origActive, origUrl,
 		eventNs = ".returningFromAPopup";
 
-	expect( 4 );
+    assert.expect( 4 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			origActive = $.mobile.activePage;
 			origUrl = location.href;
@@ -110,11 +120,11 @@ asyncTest( "Returning from a popup results in the page from which it opened", fu
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( location.href, origUrl.indexOf( "#" ) >= 0 ?
+			assert.deepEqual( location.href, origUrl.indexOf( "#" ) >= 0 ?
 				origUrl + $.mobile.dialogHashKey :
 				origUrl + "#" + $.mobile.dialogHashKey,
 				"URL after popup opens differs only by an appended dialog hash key" );
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#thePopup" ).parent().prev().click();
 		},
 		{
@@ -123,19 +133,20 @@ asyncTest( "Returning from a popup results in the page from which it opened", fu
 			}, event: "popupafterclose" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
-			start();
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Going from a dialog to another page works", function() {
-	var eventNs = ".goingFromADialogToAnotherPage";
+QUnit.test( "Going from a dialog to another page works", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".goingFromADialogToAnotherPage";
 
-	expect( 3 );
+    assert.expect( 3 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -143,7 +154,7 @@ asyncTest( "Going from a dialog to another page works", function() {
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "#fromDialogToAnotherPage" ).click();
 		},
 		{
@@ -151,25 +162,26 @@ asyncTest( "Going from a dialog to another page works", function() {
 		},
 
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Going from a popup to another page works", function() {
-	var eventNs = ".goingFromAPopupToAnotherPage";
+QUnit.test( "Going from a popup to another page works", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".goingFromAPopupToAnotherPage";
 
-	expect( 3 );
+    assert.expect( 3 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -179,32 +191,34 @@ asyncTest( "Going from a popup to another page works", function() {
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#openPageFromPopup" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Opening one dialog followed by opening another dialog works", function() {
-	var eventNs = ".openingOneDialogFollowedByAnother";
+QUnit.test( "Opening one dialog followed by opening another dialog works", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".openingOneDialogFollowedByAnother";
 
-	expect( 4 );
+    assert.expect( 4 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
+
 		// NOTE: The first part of this test is a copy of the test above
 		function() {
 			$( "#openBasicDialog" ).click();
@@ -213,7 +227,7 @@ asyncTest( "Opening one dialog followed by opening another dialog works", functi
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "a:first", $.mobile.activePage[ 0 ] ).click();
 		},
 		{
@@ -222,33 +236,35 @@ asyncTest( "Opening one dialog followed by opening another dialog works", functi
 
 		// NOTE: The second part of this test is also a copy of the test above
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 			$( "#openAnotherDialog" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherDialog", "Another dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherDialog", "Another dialog has opened" );
 			$( "a:first", $.mobile.activePage[ 0 ] ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Opening one popup followed by opening another popup works", function() {
-	var origActive,
+QUnit.test( "Opening one popup followed by opening another popup works", function( assert ) {
+    var ready = assert.async();
+    var origActive,
 		eventNs = ".openingOnePopupFollowedByAnother";
 
-	expect( 6 );
+    assert.expect( 6 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
+
 		// NOTE: This is basically two copies of the "returning from a popup test" one after the other
 		function() {
 			origActive = $.mobile.activePage;
@@ -260,7 +276,7 @@ asyncTest( "Opening one popup followed by opening another popup works", function
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#thePopup" ).parent().prev().click();
 		},
 		{
@@ -269,8 +285,8 @@ asyncTest( "Opening one popup followed by opening another popup works", function
 			}, event: "popupafterclose" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 			$( "#openAnotherPopup" ).click();
 		},
 		{
@@ -279,7 +295,7 @@ asyncTest( "Opening one popup followed by opening another popup works", function
 			}, event: "popupafteropen" + eventNs + "3" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#anotherPopup" ).parent().prev().click();
 		},
 		{
@@ -288,19 +304,20 @@ asyncTest( "Opening one popup followed by opening another popup works", function
 			}, event: "popupafterclose" + eventNs + "4" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
-			start();
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Opening another page after returning from a dialog works", function() {
-	var eventNs = ".openingAnotherPageAfterDialog";
+QUnit.test( "Opening another page after returning from a dialog works", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".openingAnotherPageAfterDialog";
 
-	expect( 4 );
+    assert.expect( 4 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -308,40 +325,41 @@ asyncTest( "Opening another page after returning from a dialog works", function(
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "a:first", $.mobile.activePage[ 0 ] ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 			$( "#openAnotherPage" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Opening another page after returning from a popup works", function() {
-	var origActive,
+QUnit.test( "Opening another page after returning from a popup works", function( assert ) {
+    var ready = assert.async();
+    var origActive,
 		eventNs = ".openingAnotherPageAfterPopup";
 
-	expect( 5 );
+    assert.expect( 5 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			origActive = $.mobile.activePage;
 			$( "#openPopup" ).click();
@@ -352,7 +370,7 @@ asyncTest( "Opening another page after returning from a popup works", function()
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#thePopup" ).parent().prev().click();
 		},
 		{
@@ -361,33 +379,34 @@ asyncTest( "Opening another page after returning from a popup works", function()
 			}, event: "popupafterclose" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 			$( "#openAnotherPage" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			ready();
 		}
 	], "openingAnotherPageAfterPopup" );
 } );
 
-asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
-	var eventNs = ".page1Dialog1Popup1Page2Back";
+QUnit.test( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".page1Dialog1Popup1Page2Back";
 
-	expect( 5 );
+    assert.expect( 5 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -395,7 +414,7 @@ asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "#fromDialogToPopup" ).click();
 		},
 		{
@@ -404,7 +423,7 @@ asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
 			}, event: "popupafteropen" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#fromDialogPopupToAnotherPage" ).click();
 		},
 		{
@@ -414,26 +433,27 @@ asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function() {
-	var eventNs = ".page1Popup1Dialog1Page2";
+QUnit.test( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".page1Popup1Dialog1Page2";
 
-	expect( 4 );
+    assert.expect( 4 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -443,39 +463,40 @@ asyncTest( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function() {
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#openDialogFromPopup" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "#fromDialogToAnotherPage" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", function() {
-	var eventNs = ".pagePopupDialogPopup";
+QUnit.test( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".pagePopupDialogPopup";
 
-	expect( 8 );
+    assert.expect( 8 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -485,7 +506,7 @@ asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", functi
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#openDialogFromPopup" ).click();
 		},
 		{
@@ -495,8 +516,8 @@ asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", functi
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "#fromDialogToPopup" ).click();
 		},
 		{
@@ -505,7 +526,7 @@ asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", functi
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#popupFromBasicDialog" ).parent().prev().click();
 		},
 		{
@@ -514,27 +535,28 @@ asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", functi
 			}, event: "popupafterclose" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
+			assert.ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
 			$( "a:first", $.mobile.activePage[ 0 ] ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function( result ) {
-			ok( !result.pagechange.timedOut, "A pagechange event has occurred as a result of returning from the dialog" );
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
-			start();
+			assert.ok( !result.pagechange.timedOut, "A pagechange event has occurred as a result of returning from the dialog" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", function() {
-	var eventNs = ".pageDialogPageBackForward";
+QUnit.test( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".pageDialogPageBackForward";
 
-	expect( 5 );
+    assert.expect( 5 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -542,7 +564,7 @@ asyncTest( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", funct
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 			$( "#fromDialogToAnotherPage" ).click();
 		},
 		{
@@ -550,39 +572,40 @@ asyncTest( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", funct
 		},
 
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 			window.history.forward();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Sequence page1 -> popup -> page2 <- back -> forward <- back", function() {
-	var eventNs = ".goingFromAPopupToAnotherPage";
+QUnit.test( "Sequence page1 -> popup -> page2 <- back -> forward <- back", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".goingFromAPopupToAnotherPage";
 
-	expect( 5 );
+    assert.expect( 5 );
 
-	maybeWaitForStartPage( [
+    maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -592,44 +615,45 @@ asyncTest( "Sequence page1 -> popup -> page2 <- back -> forward <- back", functi
 			}, event: "popupafteropen" + eventNs + "1" }
 		},
 		function( result ) {
-			ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+			assert.ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 			$( "#openPageFromPopup" ).click();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "2" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "3" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 			window.history.forward();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+			assert.ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( ".ui-pagecontainer" ), event: "pagechange" + eventNs + "4" }
 		},
 		function() {
-			ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
-			start();
+			assert.ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+			ready();
 		}
 	], eventNs );
 } );
 
-asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", function() {
-	var eventNs = ".page1Page2PopupDialogPageBack";
+QUnit.test( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", function( assert ) {
+	var eventNs = ".page1Page2PopupDialogPageBack",
+	ready = assert.async();
 
-	expect();
+	assert.expect();
 
 	maybeWaitForStartPage( [
 		function() {
@@ -642,7 +666,7 @@ asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", 
 			}
 		},
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
+			assert.deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
 				"Landed on another page" );
 			$( "#openPopupOnAnotherPage" ).click();
 		},
@@ -664,7 +688,7 @@ asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", 
 			}
 		},
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "pageStyledAsDialog",
+			assert.deepEqual( $.mobile.activePage.attr( "id" ), "pageStyledAsDialog",
 				"Landed on page styled as dialog" );
 			$.mobile.back();
 		},
@@ -675,7 +699,7 @@ asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", 
 			}
 		},
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
+			assert.deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
 				"Navigating back() from the page styled as a dialog reaches another page" );
 			$.mobile.back();
 		},
@@ -685,8 +709,8 @@ asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", 
 				event: "pagecontainerchange" + eventNs + "4"
 			}
 		},
-		start
+		ready
 	], eventNs );
 } );
 
-} )( jQuery );
+} );

@@ -1,96 +1,106 @@
 $.testHelper.setPushState();
 
-( function( $ ) {
-module( "navigate", {
-	setup: function() {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
+
+QUnit.module( "navigate", {
+	beforeEach: function() {
 		location.hash = "";
 	},
 
-	teardown: function() {
+	afterEach: function() {
 		$( window ).unbind( "navigate" );
 	}
 } );
 
-asyncTest( "changes to the url trigger a navigate", function() {
-	$( window ).one( "navigate", function( event, data ) {
-		ok( true, "navigate called" );
-		start();
+QUnit.test( "changes to the url trigger a navigate", function( assert ) {
+    var ready = assert.async();
+    $( window ).one( "navigate", function() {
+		assert.ok( true, "navigate called" );
+		ready();
 	} );
 
-	location.hash = "foo";
+    location.hash = "foo";
 } );
 
-asyncTest( "traversing history back fires a navigate", function() {
-	expect( 2 );
+QUnit.test( "traversing history back fires a navigate", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 2 );
 
-	$( window ).one( "navigate", function( event, data ) {
-		ok( true, "navigate called on hash change" );
+    $( window ).one( "navigate", function() {
+		assert.ok( true, "navigate called on hash change" );
 
-		$( window ).one( "navigate", function( event, data ) {
-			ok( true, "navigate called on back button" );
+		$( window ).one( "navigate", function() {
+			assert.ok( true, "navigate called on back button" );
 
-			start();
+			ready();
 		} );
 
 		window.history.back();
 	} );
 
-	location.hash = "foo";
+    location.hash = "foo";
 } );
 
-asyncTest( "navigation events are marked", function() {
-	$( window ).one( "navigate", function( event, data ) {
-		equal( event.originalEvent.type, $.support.pushState ? "popstate" : "hashchange", "tagged as popstate" );
-		start();
+QUnit.test( "navigation events are marked", function( assert ) {
+    var ready = assert.async();
+    $( window ).one( "navigate", function( event ) {
+		assert.equal( event.originalEvent.type, $.support.pushState ? "popstate" : "hashchange", "tagged as popstate" );
+		ready();
 	} );
 
-	location.hash = "foo";
+    location.hash = "foo";
 } );
 
-asyncTest( "navigation events can be disabled with prevent default on beforenavigate", function() {
+QUnit.test( "navigation events can be disabled with prevent default on beforenavigate", function( assert ) {
+    var ready = assert.async();
 
-	// Failure in this test would be 3 test assertions
-	expect( 2 );
+    // Failure in this test would be 3 test assertions
+    assert.expect( 2 );
 
-	$( window ).one( "beforenavigate", function( e ) {
-		ok( true, "beforenavigate fired" );
+    $( window ).one( "beforenavigate", function( e ) {
+		assert.ok( true, "beforenavigate fired" );
 		e.preventDefault();
 	} );
 
-	$( window ).one( "navigate", function() {
-		ok( true, "navigate fired" );
-		start();
+    $( window ).one( "navigate", function() {
+		assert.ok( true, "navigate fired" );
+		ready();
 	} );
 
-	// Fire a navigate that will be prevented
-	location.hash = "foo";
+    // Fire a navigate that will be prevented
+    location.hash = "foo";
 
-	// Fire another to absorb the navigate binding
-	location.hash = "bar";
+    // Fire another to absorb the navigate binding
+    location.hash = "bar";
 } );
 
-asyncTest( "beforenavigate should carry the original navigation function", function() {
+QUnit.test( "beforenavigate should carry the original navigation function", function( assert ) {
+    var ready = assert.async();
 
-	$( window ).one( "beforenavigate", function( event ) {
+    $( window ).one( "beforenavigate", function( event ) {
 		var type = event.originalEvent.type;
 
 		if ( $.support.pushState ) {
-			equal( type, "popstate", "the original event type is popstate" );
+			assert.equal( type, "popstate", "the original event type is popstate" );
 		} else {
-			equal( type, "hashchange", "the original event type is hashchange" );
+			assert.equal( type, "hashchange", "the original event type is hashchange" );
 		}
 
-		start();
+		ready();
 	} );
 
-	location.hash = "beforenavigate";
+    location.hash = "beforenavigate";
 } );
 
 if ( $.support.pushState ) {
-	asyncTest( "popstate navigation events contain pushed state", function() {
-		$.testHelper.eventTarget = $( window );
+	QUnit.test( "popstate navigation events contain pushed state", function( assert ) {
+        var ready = assert.async();
+        $.testHelper.eventTarget = $( window );
 
-		$.testHelper.eventSequence( "navigate", [
+        $.testHelper.eventSequence( "navigate", [
 			function() {
 				window.history.replaceState( { foo: "bar" }, document.title, location.href.replace( /#.*/, "" ) + "#foo" );
 				location.hash = "#foo2";
@@ -101,20 +111,21 @@ if ( $.support.pushState ) {
 			},
 
 			function( timedOut, data ) {
-				equal( data.state.foo, "bar", "state provided properly" );
-				start();
+				assert.equal( data.state.foo, "bar", "state provided properly" );
+				ready();
 			}
 		] );
-	} );
+    } );
 
 	// Relies on having the early popstate handler defined in early_popstate_handler.js
-	asyncTest( "Default-prevented popstate does not trigger a navigate event",
+	QUnit.test( "Default-prevented popstate does not trigger a navigate event",
 		function( assert ) {
-			var eventNs = ".defaultPreventedPopstate";
+            var ready = assert.async();
+            var eventNs = ".defaultPreventedPopstate";
 
-			assert.expect( 2 );
+            assert.expect( 2 );
 
-			$.testHelper.detailedEventCascade( [
+            $.testHelper.detailedEventCascade( [
 				function() {
 					window.history.replaceState( { foo: "bar" }, document.title,
 						location.href.replace( /#.*/, "" ) + "#foo" );
@@ -136,24 +147,25 @@ if ( $.support.pushState ) {
 					assert.deepEqual( result.navigate.timedOut, true,
 						"Received no navigate event from a default-prevented popstate" );
 					delete window.preventDefaultForNextPopstate;
-					start();
+					ready();
 				}
 			] );
-		} );
+        } );
 
 } else {
-	asyncTest( "hashchange navigation provides for data added in a later binding", function() {
-		$( window ).one( "beforenavigate", function( event, data ) {
+	QUnit.test( "hashchange navigation provides for data added in a later binding", function( assert ) {
+        var ready = assert.async();
+        $( window ).one( "beforenavigate", function( event ) {
 			event.originalEvent.hashchangeState = { foo: "bar" };
 		} );
 
-		$( window ).one( "navigate", function( event, data ) {
-			equal( event.originalEvent.type, "hashchange", "event triggered by a hashchange" );
-			equal( data.state.foo, "bar", "state provided properly" );
-			start();
+        $( window ).one( "navigate", function( event, data ) {
+			assert.equal( event.originalEvent.type, "hashchange", "event triggered by a hashchange" );
+			assert.equal( data.state.foo, "bar", "state provided properly" );
+			ready();
 		} );
 
-		location.hash = "#foo2";
-	} );
+        location.hash = "#foo2";
+    } );
 }
-} )( jQuery );
+} );
