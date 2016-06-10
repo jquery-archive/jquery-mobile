@@ -14,8 +14,7 @@ assert.equal( handle.length, 1, "Slider contains a handle element" );
 function moveHandle( handle, xPos ) {
 	var down = $.Event( "mousedown" ),
 		move = $.Event( "mousemove" ),
-		up = $.Event( "mouseup" ),
-		offset = handle.offset();
+		up = $.Event( "mouseup" );
 
 	down.target = move.target = up.target = handle[ 0 ];
 	down.pageY = move.pageY = up.pageY = offset.top;
