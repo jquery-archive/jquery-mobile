@@ -3,7 +3,10 @@
  */
 
 // TODO split out into separate test files
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 function testExpandCollapse( assert, selector ) {
 	var collapsible = $( selector );
 	assert.deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed" );
@@ -155,7 +158,7 @@ QUnit.test( "Collapsible Set with dynamic content", function( assert ) {
 	var set = $( "#dynamic-content" );
 
 	for ( var i = 0; i < 3; i++ ) {
-		$( "<div data-" + $.mobile.ns + 'role="collapsible"><h3>Collapsible Item ' + i + "</h3></div>" ).appendTo( set );
+		$( "<div data-" + $.mobile.ns + "role='collapsible'><h3>Collapsible Item " + i + "</h3></div>" ).appendTo( set );
 	}
 	set.collapsibleset( "refresh" );
 	assert.equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
@@ -171,7 +174,7 @@ QUnit.test( "Collapsible Set with static and dynamic content", function( assert 
 	var set = $( "#static-and-dynamic" );
 
 	for ( var i = 0; i < 2; i++ ) {
-		$( "<div data-" + $.mobile.ns + 'role="collapsible"><h3>Collapsible Item ' + i + "</h3></div>" ).appendTo( set );
+		$( "<div data-" + $.mobile.ns + "role='collapsible'><h3>Collapsible Item " + i + "</h3></div>" ).appendTo( set );
 	}
 	set.collapsibleset( "refresh" );
 	assert.equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
@@ -350,4 +353,4 @@ QUnit.test( "mini", function( assert ) {
 	assert.deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-mini" ),
 		false, "Explicitly assigned collapsible is not mini" );
 } );
-} )( QUnit, jQuery );
+} );
