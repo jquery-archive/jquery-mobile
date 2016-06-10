@@ -3,7 +3,7 @@
  */
 define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-var instance, proto, $to, $from;
+var instance, $to, $from;
 
 QUnit.module( "Transition cleanFrom" );
 
@@ -197,7 +197,7 @@ QUnit.asyncTest( "runs in and out methods in order", function( assert ) {
 } );
 
 QUnit.test( "transition respects getMaxScrollForTransition", function( assert ) {
-	var transition, valuePassedToNone,
+	var valuePassedToNone,
 		original = {
 			maxScroll: $.mobile.getMaxScrollForTransition,
 			startOut: $.mobile.Transition.prototype.startOut,
@@ -211,12 +211,12 @@ QUnit.test( "transition respects getMaxScrollForTransition", function( assert ) 
 		return -1;
 	};
 
-	$.mobile.Transition.prototype.startOut = function( screenHeight, reverseClass, none ) {
+	$.mobile.Transition.prototype.startOut = function() {
 		startOutCalled = true;
 		return original.startOut.apply( this, arguments );
 	};
 
-	$.mobile.Transition.prototype.doneOut = function( height, reverse, none, preventFocus ) {
+	$.mobile.Transition.prototype.doneOut = function( height, reverse, none ) {
 		doneOutCalled = true;
 		valuePassedToNone = none;
 		return original.doneOut.apply( this, arguments );

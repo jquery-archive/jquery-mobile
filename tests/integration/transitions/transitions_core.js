@@ -1,7 +1,8 @@
 /*
  * Mobile navigation unit tests
  */
-( function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 var transitioning = "ui-mobile-viewport-transitioning",
 	animationCompleteFn = $.fn.animationComplete,
 	defaultMaxTrans = $.mobile.maxTransitionWidth,
@@ -10,7 +11,7 @@ var transitioning = "ui-mobile-viewport-transitioning",
 	transitionTypes = "in out fade slide flip reverse pop",
 
 	isTransitioning = function( page ) {
-		return $.grep( transitionTypes.split( " " ), function( className, i ) {
+		return $.grep( transitionTypes.split( " " ), function( className ) {
 				return page.hasClass( className );
 			} ).length > 0;
 	},
@@ -36,10 +37,6 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		toQueue = [];
 	},
 
-	onFromComplete = function( f ) {
-		fromQueue.push( f );
-	},
-
 	onToComplete = function( f ) {
 		toQueue.push( f );
 	},
@@ -50,8 +47,8 @@ var transitioning = "ui-mobile-viewport-transitioning",
 		$.mobile.navigate.history.activeIndex = 0;
 	};
 
-module( "jquery.mobile.navigation.js", {
-	setup: function() {
+QUnit.module( "jquery.mobile.navigation.js", {
+	beforeEach: function( assert ) {
 
 		// Disable this option so we can test transitions regardless of window width
 		disableMaxTransWidth();
@@ -73,17 +70,17 @@ module( "jquery.mobile.navigation.js", {
 		clearUrlHistory();
 
 		if ( location.hash !== "#harmless-default-page" ) {
-			stop();
+			var ready = assert.async();
 
 			$( document ).one( "pagechange", function() {
-				start();
+				ready();
 			} );
 
 			location.hash = "#harmless-default-page";
 		}
 	},
 
-	teardown: function() {
+	afterEach: function() {
 
 		// Unmock animation complete
 		$.fn.animationComplete = animationCompleteFn;
@@ -96,18 +93,19 @@ NOTES:
 Our default transition handler now has either one or two animationComplete calls - two if there are two pages in play (from and to)
 To is required, so each async function must call start() onToComplete, not onFromComplete.
 */
-asyncTest( "change() applies perspective class to mobile viewport for flip", function() {
-	expect( 1 );
+QUnit.test( "change() applies perspective class to mobile viewport for flip", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 1 );
 
-	$.testHelper.pageSequence( [
+    $.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#foo" );
 		},
 
 		function() {
-			onToComplete( function( el ) {
-				ok( $( "body" ).hasClass( "viewport-flip" ) || $( "body" ).hasClass( "viewport-fade" ), "has viewport-flip or viewport-fade" );
-				start();
+			onToComplete( function() {
+				assert.ok( $( "body" ).hasClass( "viewport-flip" ) || $( "body" ).hasClass( "viewport-fade" ), "has viewport-flip or viewport-fade" );
+				ready();
 			} );
 
 			$( "#foo > a" ).first().click();
@@ -115,17 +113,18 @@ asyncTest( "change() applies perspective class to mobile viewport for flip", fun
 	] );
 } );
 
-asyncTest( "change() applies transition class to mobile viewport for default transition", function() {
-	expect( 1 );
-	$.testHelper.pageSequence( [
+QUnit.test( "change() applies transition class to mobile viewport for default transition", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 1 );
+    $.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#baz" );
 		},
 
 		function() {
-			onToComplete( function( el ) {
-				ok( $( "body" ).hasClass( transitioning ), "has transitioning class" );
-				start();
+			onToComplete( function() {
+				assert.ok( $( "body" ).hasClass( transitioning ), "has transitioning class" );
+				ready();
 			} );
 
 			$( "#baz > a" ).click();
@@ -133,60 +132,64 @@ asyncTest( "change() applies transition class to mobile viewport for default tra
 	] );
 } );
 
-asyncTest( "explicit transition preferred for page navigation reversal (ie back)", function() {
-	expect( 1 );
+QUnit.test( "explicit transition preferred for page navigation reversal (ie back)", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 1 );
 
-	onToComplete( function() {
+    onToComplete( function() {
 		$( "#flip-trans > a" ).click();
 		onToComplete( function() {
 			$( "#fade-trans > a" ).click();
 			onToComplete( function() {
-				ok( $( "#flip-trans" ).hasClass( "fade" ), "has fade class" );
-				start();
+				assert.ok( $( "#flip-trans" ).hasClass( "fade" ), "has fade class" );
+				ready();
 			} );
 		} );
 	} );
 
-	$( "#fade-trans > a" ).click();
+    $( "#fade-trans > a" ).click();
 } );
 
-asyncTest( "default transition is fade", function() {
-	onToComplete( function() {
-		ok( $( "#no-trans" ).hasClass( "fade" ), "has fade class" );
-		start();
+QUnit.test( "default transition is fade", function( assert ) {
+    var ready = assert.async();
+    onToComplete( function() {
+		assert.ok( $( "#no-trans" ).hasClass( "fade" ), "has fade class" );
+		ready();
 	} );
 
-	$( "#default-trans > a" ).click();
+    $( "#default-trans > a" ).click();
 } );
 
-asyncTest( "change() queues requests", function() {
-	expect( 4 );
-	var firstPage = $( "#foo" ),
+QUnit.test( "change() queues requests", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 4 );
+    var firstPage = $( "#foo" ),
 		secondPage = $( "#bar" );
 
-	$( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
-	$( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
+    $( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
+    $( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
 
-	onToComplete( function() {
-		ok( isTransitioningIn( firstPage ), "first page begins transition" );
-		ok( !isTransitioningIn( secondPage ), "second page doesn't transition yet" );
+    onToComplete( function() {
+		assert.ok( isTransitioningIn( firstPage ), "first page begins transition" );
+		assert.ok( !isTransitioningIn( secondPage ), "second page doesn't transition yet" );
 		onToComplete( function() {
-			ok( !isTransitioningIn( firstPage ), "first page transition should be complete" );
-			ok( isTransitioningIn( secondPage ), "second page should begin transitioning" );
-			start();
+			assert.ok( !isTransitioningIn( firstPage ), "first page transition should be complete" );
+			assert.ok( isTransitioningIn( secondPage ), "second page should begin transitioning" );
+			ready();
 
 		} );
 	} );
 } );
 
-test( "animationComplete return value", function() {
+QUnit.test( "animationComplete return value", function( assert ) {
 	$.fn.animationComplete = animationCompleteFn;
-	equal( $( "#foo" ).animationComplete( function() {} )[ 0 ], $( "#foo" )[ 0 ] );
+	assert.equal( $( "#foo" ).animationComplete( function() {} )[ 0 ], $( "#foo" )[ 0 ] );
 } );
 
 // Reusable function for a few tests below
-function testTransitionMaxWidth( val, expected ) {
-	expect( 1 );
+function testTransitionMaxWidth( assert, val, expected ) {
+	assert.expect( 1 );
+	var ready = assert.async();
 
 	$.mobile.maxTransitionWidth = val;
 
@@ -196,20 +199,18 @@ function testTransitionMaxWidth( val, expected ) {
 		transitionOccurred = true;
 	} );
 
+
 	return setTimeout( function() {
-		ok( transitionOccurred === expected, ( expected ? "" : "no " ) + "transition occurred" );
-		start();
+		assert.ok( transitionOccurred === expected, ( expected ? "" : "no " ) + "transition occurred" );
+		ready();
 	}, 5000 );
-
-	$( ".ui-pagecontainer" ).pagecontainer( "change", $( ".ui-page:not(.ui-page-active)" ).first() );
-
 }
 
-asyncTest( "maxTransitionWidth property disables transitions when value is less than browser width", function() {
-	testTransitionMaxWidth( $( window ).width() - 1, false );
+QUnit.test( "maxTransitionWidth property disables transitions when value is less than browser width", function( assert ) {
+	testTransitionMaxWidth( assert, $( window ).width() - 1, false );
 } );
 
-asyncTest( "maxTransitionWidth property disables transitions when value is false", function() {
-	testTransitionMaxWidth( false, false );
+QUnit.test( "maxTransitionWidth property disables transitions when value is false", function( assert ) {
+	testTransitionMaxWidth( assert, false, false );
 } );
-} )( jQuery );
+} );
