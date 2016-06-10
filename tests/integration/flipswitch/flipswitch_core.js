@@ -1,10 +1,15 @@
 /*
  * Mobile flipswitch unit tests
  */
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
-var testFocusTransfer = function( element ) {
-	expect( 1 );
+var testFocusTransfer = function( assert, element ) {
+	assert.expect( 1 );
+	var ready = assert.async();
+
 	$.testHelper.detailedEventCascade( [
 		function() {
 			element.focus();
@@ -16,42 +21,43 @@ var testFocusTransfer = function( element ) {
 			}
 		},
 		function( result ) {
-			deepEqual( result.focus.timedOut, false,
+			assert.deepEqual( result.focus.timedOut, false,
 				"'on' button received focus event" );
-			start();
+			ready();
 		}
 	] );
 };
 
-asyncTest( "select based flipswitch transfers focus to 'on' button",
-	function() {
-		testFocusTransfer( $( "#flip-select" ) );
+QUnit.test( "select based flipswitch transfers focus to 'on' button",
+	function( assert ) {
+		testFocusTransfer( assert, $( "#flip-select" ) );
 	} );
 
-asyncTest( "checkbox based flipswitch transfers focus to 'on' button",
-	function() {
-		testFocusTransfer( $( "#flip-checkbox" ) );
+QUnit.test( "checkbox based flipswitch transfers focus to 'on' button",
+	function( assert ) {
+		testFocusTransfer( assert, $( "#flip-checkbox" ) );
 	} );
 
-asyncTest( "Default is prevented on label click, but click is sent to element", function() {
-	var eventNs = ".preventDefaultAndPropagateClick",
+QUnit.test( "Default is prevented on label click, but click is sent to element", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".preventDefaultAndPropagateClick",
 		label = $( "label[for='test-select-label']" ),
 		select = $( "#test-select-label" );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			var event = $.Event( "click" );
 
 			label.trigger( event );
-			deepEqual( event.isDefaultPrevented(), true, "Click-on-label default prevented" );
+			assert.deepEqual( event.isDefaultPrevented(), true, "Click-on-label default prevented" );
 		},
 		{
 			click: { src: select, event: "click" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( result.click.timedOut, false, "Select received a click" );
-			start();
+			assert.deepEqual( result.click.timedOut, false, "Select received a click" );
+			ready();
 		}
 	] );
 } );
-} )( jQuery );
+} );
