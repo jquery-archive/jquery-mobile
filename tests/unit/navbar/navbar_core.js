@@ -1,7 +1,8 @@
 /*
  * Mobile navbar unit tests
  */
-( function( QUnit, $ ) {
+
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.test( "classes are correctly assigned", function( assert ) {
 	var navbar = $( "#enhanced-classes" ),
@@ -21,23 +22,24 @@ QUnit.test( "exceeding default maxbutton creates a new row", function( assert ) 
         navRows = navbar.children( "ul" ),
         navRowCount = navRows.length;
 
-    ok( navRowCount === 2, "six items overflows to two lists" );
+    assert.ok( navRowCount === 2, "six items overflows to two lists" );
     assert.hasClasses( navRows.eq( 1 ), "ui-navbar-row" );
-    ok( navRows.eq( 1 ).children( "li" ).length === 1,
+    assert.ok( navRows.eq( 1 ).children( "li" ).length === 1,
         "overflow row holds sixth nav item" );
 } );
 
-QUnit.test( "override the default maxbutton works", function() {
+QUnit.test( "override the default maxbutton works", function( assert ) {
     var navbar = $( "#default-maxbutton-override" ),
         navRows = navbar.children( "ul" ),
         navRowCount = navRows.length;
 
-    ok( navRowCount === 1, "six items should fit on a single row when maxbutton = 6" );
-    ok( navRows.children( "li" ).length === 6, "there should be six items on the navbar row" );
+    assert.ok( navRowCount === 1, "six items should fit on a single row when maxbutton = 6" );
+    assert.ok( navRows.children( "li" ).length === 6,
+		"there should be six items on the navbar row" );
 } );
 
 QUnit.module( "navbar appending items and refresh, without moreButton", {
-    setup: function() {
+    beforeEach: function() {
         this.addNav = $( "#add-items-navbar" );
         this.navbarRow = this.addNav.find( "ul" );
         this.navbarRow.append( "<li><a href='#'>four</a></li>" );
@@ -52,14 +54,14 @@ QUnit.test( "adding items to navbar", function( assert ) {
         navRowCount = navRows.length;
 
     assert.hasClasses( this.navbarRow.find( "li:last-child > a" ), "ui-button" );
-    ok( navRowCount === 2, "six items overflows to two lists" );
+    assert.ok( navRowCount === 2, "six items overflows to two lists" );
     assert.hasClasses( navRows.eq( 1 ), "ui-navbar-row" );
-    ok( navRows.eq( 1 ).children( "li" ).length === 1,
+    assert.ok( navRows.eq( 1 ).children( "li" ).length === 1,
         "overflow row holds sixth nav item" );
 } );
 
 QUnit.module( "navbar destroy, without moreButton", {
-    setup: function() {
+    beforeEach: function() {
         this.navbar = $( "#default-maxbutton-overflow-destroy" );
         this.navbar.navbar( "destroy" );
     }
@@ -69,7 +71,7 @@ QUnit.test( "destroy navbar ", function( assert ) {
     var navRows = this.navbar.children( "ul" ),
         navRowCount = navRows.length;
 
-    ok( navRowCount === 1, "destroyed navbars revert to one ul" );
+    assert.ok( navRowCount === 1, "destroyed navbars revert to one ul" );
     navRows.find( "li" ).each( function() {
         assert.lacksClasses( $( this ).find( "a" ), "ui-button" );
     } );
@@ -77,12 +79,12 @@ QUnit.test( "destroy navbar ", function( assert ) {
 
 QUnit.module( "navbar exceed maxbutton, with moreButton" );
 
-QUnit.test( "exceeding maxbutton creates morebutton", function() {
+QUnit.test( "exceeding maxbutton creates morebutton", function( assert ) {
     var navbar = $( "#default-maxbutton-morebutton" ),
         morebutton = navbar.find( "li:last-child > button" );
 
-    equal( morebutton.data( "rel" ), "popup",
+    assert.equal( morebutton.data( "rel" ), "popup",
         "The last item in the list is the more button" );
 
 } );
-} )( QUnit, jQuery );
+} );

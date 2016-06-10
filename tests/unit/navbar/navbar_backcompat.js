@@ -1,7 +1,8 @@
 /*
  * Mobile navbar unit tests
  */
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 QUnit.test( "navbar button gets active button class when clicked", function( assert ) {
 	var link = $( "#disabled-button-click a:not(.ui-state-disabled)" ).first();
 
@@ -17,4 +18,4 @@ QUnit.test( "disabled navbar button doesn't add active button class when clicked
         assert.lacksClasses( link, "ui-button-active" );
 } );
 
-} )( QUnit, jQuery );
+} );
