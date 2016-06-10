@@ -54,7 +54,7 @@ require( [
 			var initFired = false;
 			assert.expect( 1 );
 
-			$( window.document ).one( "mobileinit", function( event ) {
+			$( window.document ).one( "mobileinit", function() {
 				initFired = true;
 			} );
 

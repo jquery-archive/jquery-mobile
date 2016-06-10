@@ -1,4 +1,4 @@
-( function( QUnit, $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 QUnit.asyncTest( "resetActivePageHeight() will be called when page is initialized late", function( assert ) {
 var resetActivePageHeightCallCount = 0;
@@ -25,4 +25,4 @@ require( [ "jquery", "./init" ], function() {
 } );
 } );
 
-} )( QUnit, jQuery );
+} );
