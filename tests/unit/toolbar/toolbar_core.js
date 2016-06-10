@@ -38,7 +38,7 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 		assert.expect( 3 );
 
 		var toolbar = $( "#testInit" ).toolbar( {
-			create: function( event, ui ) {
+			create: function() {
 				assert.ok( true, "create event fired" );
 				QUnit.start();
 			}
@@ -53,7 +53,7 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 		assert.expect( 3 );
 
 		var toolbar = $( "#testExternalHeader" ).toolbar( {
-			create: function( event, ui ) {
+			create: function() {
 				assert.ok( true, "external toolbar create event" );
 				QUnit.start();
 			}
@@ -70,7 +70,7 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 		assert.expect( 3 );
 
 		var toolbar = $( "#testExternalFooter" ).toolbar( {
-			create: function( event, ui ) {
+			create: function() {
 				assert.ok( true, "external toolbar create event" );
 				QUnit.start();
 			}

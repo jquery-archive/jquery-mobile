@@ -1,7 +1,10 @@
 /*
  * Mobile Fixed Toolbar unit tests
  */
-( function( $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 $( "html" ).height( screen.height * 3 );
 
 function scrollDown() {
@@ -12,24 +15,25 @@ function scrollUp() {
 	window.scrollTo( 0, 0 );
 }
 
-module( "toolbar", { setup: function() {
+QUnit.module( "toolbar", { beforeEach: function( assert ) {
 		var startTimeout;
 
 		// Swallow the inital page change
-		stop();
+		var ready = assert.async();
 		$( document ).one( "pagechange", function() {
 			clearTimeout( startTimeout );
 		} );
 
-		startTimeout = setTimeout( start, 1000 );
+		startTimeout = setTimeout( ready, 1000 );
 } } );
 
-asyncTest( "Fixed header and footer transition classes are applied correctly", function( assert ) {
-	expect( 5 );
-	var selectors = "#classes-test-b, #classes-test-g, #classes-test-e," +
+QUnit.test( "Fixed header and footer transition classes are applied correctly", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 5 );
+    var selectors = "#classes-test-b, #classes-test-g, #classes-test-e," +
 		"#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k";
 
-	$.testHelper.sequence( [
+    $.testHelper.sequence( [
 		function() {
 			$( selectors ).toolbar( "hide" );
 			scrollDown();
@@ -52,17 +56,17 @@ asyncTest( "Fixed header and footer transition classes are applied correctly", f
 
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 	], 1000 );
-
 } );
 
-asyncTest( "The hide method is working properly", function( assert ) {
+QUnit.test( "The hide method is working properly", function( assert ) {
+    var ready = assert.async();
 
-	expect( 2 );
+    assert.expect( 2 );
 
-	$.testHelper.sequence( [
+    $.testHelper.sequence( [
 		function() {
 			$( "#classes-test-g" ).toolbar( "show" );
 			scrollDown();
@@ -82,17 +86,18 @@ asyncTest( "The hide method is working properly", function( assert ) {
 
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 
 	], 700 );
 } );
 
-asyncTest( "The show method is working properly", function( assert ) {
+QUnit.test( "The show method is working properly", function( assert ) {
+    var ready = assert.async();
 
-	expect( 2 );
+    assert.expect( 2 );
 
-	$.testHelper.sequence( [
+    $.testHelper.sequence( [
 		function() {
 			scrollDown();
 		},
@@ -115,16 +120,17 @@ asyncTest( "The show method is working properly", function( assert ) {
 
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 	], 700 );
 } );
 
-asyncTest( "The toggle method is working properly", function( assert ) {
+QUnit.test( "The toggle method is working properly", function( assert ) {
+    var ready = assert.async();
 
-	expect( 3 );
+    assert.expect( 3 );
 
-	$.testHelper.sequence( [
+    $.testHelper.sequence( [
 		function() {
 			scrollDown();
 		},
@@ -158,16 +164,17 @@ asyncTest( "The toggle method is working properly", function( assert ) {
 
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 
 	], 500 );
 } );
 
-asyncTest( "Fullscreen toolbars add classes to page", function( assert ) {
-	expect( 2 );
+QUnit.test( "Fullscreen toolbars add classes to page", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 2 );
 
-	$.testHelper.sequence( [
+    $.testHelper.sequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#fullscreen-test-a" );
 		},
@@ -183,12 +190,13 @@ asyncTest( "Fullscreen toolbars add classes to page", function( assert ) {
 
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 	], 500 );
 } );
 
-var asyncTestFooterAndHeader = function( pageSelector, visible ) {
+var asyncTestFooterAndHeader = function( assert, pageSelector, visible ) {
+	var ready = assert.async();
 	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", pageSelector );
@@ -199,39 +207,40 @@ var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 				$header = $.mobile.activePage.find( ".ui-toolbar-header" ),
 				hiddenStr = visible ? "hidden" : "visible";
 
-			equal( $footer.length, 1, "there should be one footer" );
-			equal( $header.length, 1, "there should be one header" );
+			assert.equal( $footer.length, 1, "there should be one footer" );
+			assert.equal( $header.length, 1, "there should be one header" );
 
-			equal( !$footer.hasClass( "ui-toolbar-fixed-hidden" ), visible,
+			assert.equal( !$footer.hasClass( "ui-toolbar-fixed-hidden" ), visible,
 				"the footer should be " + hiddenStr );
-			equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible,
+			assert.equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible,
 				"the header should be " + hiddenStr );
 
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
 		},
 
-		start
+		ready
 	] );
 };
 
-asyncTest( "data-visible-on-page-show hides toolbars when false", function() {
-	asyncTestFooterAndHeader( "#page-show-visible-false", false );
+QUnit.test( "data-visible-on-page-show hides toolbars when false", function( assert ) {
+	asyncTestFooterAndHeader( assert, "#page-show-visible-false", false );
 } );
 
-asyncTest( "data-visible-on-page-show shows toolbars when explicitly true", function() {
-	asyncTestFooterAndHeader( "#page-show-visible-true", true );
+QUnit.test( "data-visible-on-page-show shows toolbars when explicitly true", function( assert ) {
+	asyncTestFooterAndHeader( assert, "#page-show-visible-true", true );
 } );
 
-asyncTest( "data-visible-on-page-show shows toolbars when undefined", function() {
-	asyncTestFooterAndHeader( "#page-show-visible-undefined", true );
+QUnit.test( "data-visible-on-page-show shows toolbars when undefined", function( assert ) {
+	asyncTestFooterAndHeader( assert, "#page-show-visible-undefined", true );
 } );
 
-asyncTest( "page-retains-fixed-header-on-popup-remove", function( assert ) {
-	expect( 1 );
+QUnit.test( "page-retains-fixed-header-on-popup-remove", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 1 );
 
-	var page = $( "#page-retains-fixed-header-on-popup-removed" ).page();
+    var page = $( "#page-retains-fixed-header-on-popup-removed" ).page();
 
-	$.testHelper.pageSequence( [
+    $.testHelper.pageSequence( [
 		function() {
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", page );
 		},
@@ -252,7 +261,7 @@ asyncTest( "page-retains-fixed-header-on-popup-remove", function( assert ) {
 				assert.hasClasses( $( ":mobile-pagecontainer" ).pagecontainer( "getActivePage" ),
 					"ui-toolbar-page-header-fixed",
 					"page should retain the fixed header after popup is removed" );
-				start();
+				ready();
 			} );
 
 			popup.popup( "open" ).popup( "close" );
@@ -266,8 +275,9 @@ asyncTest( "page-retains-fixed-header-on-popup-remove", function( assert ) {
 	] );
 } );
 
-asyncTest( "destroy preserves original markup", function() {
-	expect( 1 );
+QUnit.test( "destroy preserves original markup", function( assert ) {
+	assert.expect( 1 );
+	var ready = assert.async();
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -277,18 +287,19 @@ asyncTest( "destroy preserves original markup", function() {
 			var unEnhanced = $( "#testDestroyFixedFullscreen" ).clone(),
 				destroyed = $( "#testDestroyFixedFullscreen" ).toolbar().toolbar( "destroy" );
 
-			ok( $.testHelper.domEqual( destroyed, unEnhanced ),
+			assert.ok( $.testHelper.domEqual( destroyed, unEnhanced ),
 				"unEnhanced equals destroyed" );
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
 		},
-		start
+		ready
 	] );
 } );
 
-asyncTest( "destroy removes classes from correct page ", function( assert ) {
-	expect( 3 );
+QUnit.test( "destroy removes classes from correct page ", function( assert ) {
+    var ready = assert.async();
+    assert.expect( 3 );
 
-	$.testHelper.pageSequence( [
+    $.testHelper.pageSequence( [
 		function() {
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test-page-1" );
 
@@ -310,7 +321,7 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 			assert.hasClasses( second, "ui-toolbar-page-header-fixed",
 				"ui-toolbar-page-header-fixed class is not removed from second page" );
 
-			start();
+			ready();
 		},
 		function() {
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
@@ -331,8 +342,8 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 		originalAddClass = $.fn.addClass,
 		originalRemoveClass = $.fn.removeClass;
 
-	module( "stale animation is ignored", {
-		setup: function() {
+	QUnit.module( "stale animation is ignored", {
+		beforeEach: function() {
 			if ( !testPage ) {
 				testPage = $( "#stale-animation-test-page" ).remove();
 			}
@@ -361,7 +372,7 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 				return originalRemoveClass.apply( this, arguments );
 			};
 		},
-		teardown: function() {
+		afterEach: function() {
 			testPageClone.remove();
 			$.fn.addClass = originalAddClass;
 			$.fn.removeClass = originalRemoveClass;
@@ -369,8 +380,8 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 		}
 	} );
 
-	asyncTest( "hide() followed by show(): stale animationComplete() handler is ignored",
-		function() {
+	QUnit.test( "hide() followed by show(): stale animationComplete() handler is ignored",
+		function( assert ) {
 			var expectedCallSequence = [
 
 				// These are called synchronously from hide
@@ -387,7 +398,8 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 				{ removeClass: [ "in" ] }
 			];
 
-			expect( 1 );
+			assert.expect( 1 );
+			var ready = assert.async();
 
 			$.testHelper.pageSequence( [
 				function() {
@@ -403,21 +415,21 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 					// Give the animations some time
 					setTimeout( function() {
 						recordCalls = false;
-						deepEqual( callSequence, expectedCallSequence,
+						assert.deepEqual( callSequence, expectedCallSequence,
 							"Calls to addClass() and removeClass() made by stale " +
 							"animationComplete() handler are not present" );
 
 						// Conclude test after having gone back to the main page
 						$.testHelper.pageSequence( [ function() {
 							$.mobile.back();
-						}, start ] );
+						}, ready ] );
 					}, 2000 );
 				}
 			] );
 		} );
 
-	asyncTest( "show() followed by hide(): stale animationComplete() handler is ignored",
-		function() {
+	QUnit.test( "show() followed by hide(): stale animationComplete() handler is ignored",
+		function( assert ) {
 			var expectedCallSequence = [
 
 				// These are called synchronously from show
@@ -436,7 +448,8 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 				{ removeClass: [ "reverse" ] }
 			];
 
-			expect( 1 );
+			assert.expect( 1 );
+			var ready = assert.async();
 
 			$.testHelper.pageSequence( [
 				function() {
@@ -454,18 +467,18 @@ asyncTest( "destroy removes classes from correct page ", function( assert ) {
 					// Give the animations some time
 					setTimeout( function() {
 						recordCalls = false;
-						deepEqual( callSequence, expectedCallSequence,
+						assert.deepEqual( callSequence, expectedCallSequence,
 							"Calls to addClass() and removeClass() made by stale " +
 							"animationComplete() handler are not present" );
 
 						// Conclude test after having gone back to the main page
 						$.testHelper.pageSequence( [ function() {
 							$.mobile.back();
-						}, start ] );
+						}, ready ] );
 					}, 2000 );
 				}
 			] );
 		} );
 
 } )();
-} )( jQuery );
+} );
