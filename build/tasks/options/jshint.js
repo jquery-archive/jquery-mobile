@@ -12,7 +12,8 @@ module.exports = {
 				"!js/jquery.ui.widget.js",
 				"!js/widgets/jquery.ui.tabs.js",
 				"!js/jquery.ui.core.js",
-				"!demos/_assets/js/view-source.js",
+				"!tests/lib/**/*.js",
+				"!demos/_assets/js/view-source.js"
 			]
 		}
 	},
