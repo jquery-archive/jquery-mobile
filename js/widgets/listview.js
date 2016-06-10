@@ -42,6 +42,11 @@ function addItemToDictionary( itemClassDict, element, key, extra ) {
 	itemClassDict[ dictionaryKey ].push( element );
 }
 
+var getAttribute = $.mobile.getAttribute,
+	countBubbleClassRegex = /\bui-listview-item-count-bubble\b/,
+	listviewItemClassRegex = /\bui-listview-item-static\b|\bui-listview-item-divider\b/,
+	buttonClassRegex = /\bui-button\b/;
+
 function filterBubbleSpan() {
 	var child, parentNode,
 		anchorHash = { "a": true, "A": true };
@@ -67,11 +72,6 @@ function filterBubbleSpan() {
 		}
 	}
 }
-
-var getAttribute = $.mobile.getAttribute,
-	countBubbleClassRegex = /\bui-listview-item-count-bubble\b/,
-	listviewItemClassRegex = /\bui-listview-item-static\b|\bui-listview-item-divider\b/,
-	buttonClassRegex = /\bui-button\b/;
 
 return $.widget( "mobile.listview", $.extend( {
 	version: "@VERSION",
