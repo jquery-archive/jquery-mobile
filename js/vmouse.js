@@ -181,19 +181,19 @@ function disableMouseBindings() {
 	enableTouchBindings();
 }
 
+function clearResetTimer() {
+	if ( resetTimerID ) {
+		clearTimeout( resetTimerID );
+		resetTimerID = 0;
+	}
+}
+
 function startResetTimer() {
 	clearResetTimer();
 	resetTimerID = setTimeout( function() {
 		resetTimerID = 0;
 		enableMouseBindings();
 	}, $.vmouse.resetTimerDuration );
-}
-
-function clearResetTimer() {
-	if ( resetTimerID ) {
-		clearTimeout( resetTimerID );
-		resetTimerID = 0;
-	}
 }
 
 function triggerVirtualEvent( eventType, event, flags ) {

@@ -349,6 +349,25 @@ return $.widget( "mobile.panel", {
 			var that = this,
 				o = that.options,
 
+				complete = function() {
+
+					// Bail if the panel was closed before the opening animation has completed
+					if ( !that._open ) {
+						return;
+					}
+
+					if ( o.display !== "overlay" ) {
+						that._addClass( that._wrapper, "ui-panel-page-content-open" );
+						that._addClass( that._fixedToolbars(), "ui-panel-page-content-open" );
+					}
+
+					that._bindFixListener();
+
+					that._trigger( "open" );
+
+					that._openedPage = that._page();
+				},
+
 				_openPanel = function() {
 					that._off( that.document, "panelclose" );
 					that._page().jqmData( "panel", "open" );
@@ -394,24 +413,6 @@ return $.widget( "mobile.panel", {
 						that._modal.height(
 							Math.max( that._modal.height(), that.document.height() ) );
 					}
-				},
-				complete = function() {
-
-					// Bail if the panel was closed before the opening animation has completed
-					if ( !that._open ) {
-						return;
-					}
-
-					if ( o.display !== "overlay" ) {
-						that._addClass( that._wrapper, "ui-panel-page-content-open" );
-						that._addClass( that._fixedToolbars(), "ui-panel-page-content-open" );
-					}
-
-					that._bindFixListener();
-
-					that._trigger( "open" );
-
-					that._openedPage = that._page();
 				};
 
 			that._trigger( "beforeopen" );
@@ -437,27 +438,6 @@ return $.widget( "mobile.panel", {
 				currentPage = that._page(),
 				o = this.options,
 
-				_closePanel = function() {
-
-					that._removeClass( "ui-panel-open" );
-
-					if ( o.display !== "overlay" ) {
-						that._removeClass( that._wrapper, that._pageContentOpenClasses );
-						that._removeClass( that._fixedToolbars(), that._pageContentOpenClasses );
-					}
-
-					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						( that._wrapper || that.element )
-							.animationComplete( complete, "transition" );
-					} else {
-						setTimeout( complete, 0 );
-					}
-
-					if ( that._modal ) {
-						that._removeClass( that._modal, that._modalOpenClasses );
-						that._modal.height( "" );
-					}
-				},
 				complete = function() {
 					if ( o.theme && o.display !== "overlay" ) {
 						that._removeClass( currentPage.parent(),
@@ -489,6 +469,27 @@ return $.widget( "mobile.panel", {
 					that._trigger( "close" );
 
 					that._openedPage = null;
+				},
+				_closePanel = function() {
+
+					that._removeClass( "ui-panel-open" );
+
+					if ( o.display !== "overlay" ) {
+						that._removeClass( that._wrapper, that._pageContentOpenClasses );
+						that._removeClass( that._fixedToolbars(), that._pageContentOpenClasses );
+					}
+
+					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+						( that._wrapper || that.element )
+							.animationComplete( complete, "transition" );
+					} else {
+						setTimeout( complete, 0 );
+					}
+
+					if ( that._modal ) {
+						that._removeClass( that._modal, that._modalOpenClasses );
+						that._modal.height( "" );
+					}
 				};
 
 			that._trigger( "beforeclose" );
