@@ -1,7 +1,7 @@
 // Turn off Ajax for local file browsing
-if ( location.protocol.substr(0,4)  === 'file' ||
-     location.protocol.substr(0,11) === '*-extension' ||
-     location.protocol.substr(0,6)  === 'widget' ) {
+if ( location.protocol.substr(0,4)  === "file" ||
+     location.protocol.substr(0,11) === "*-extension" ||
+     location.protocol.substr(0,6)  === "widget" ) {
 
 	// Start with links with only the trailing slash and that aren't external links
 	var fixLinks = function() {
@@ -20,7 +20,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
 	// Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
 	$.ajax({
-		url: '.',
+		url: ".",
 		async: false,
 		isLocal: true
 	}).error(function() {
@@ -28,10 +28,10 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		$( document ).on( "mobileinit", function() {
 			$.mobile.ajaxEnabled = false;
 
-			var message = $( '<div>' , {
-				'class': "jqm-content",
+			var message = $( "<div>" , {
+				"class": "jqm-content",
 				style: "border:none; padding: 10px 15px; overflow: auto;",
-				'data-ajax-warning': true
+				"data-ajax-warning": true
 			});
 
 			message
@@ -60,7 +60,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		href;
 
 	// Insert jqm version in header
-	if ( str.indexOf( "rc" ) == -1 ) {
+	if ( str.indexOf( "rc" ) === -1 ) {
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 	} else {
 		str = str.toUpperCase().replace( ".", "" );
@@ -100,7 +100,8 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	});
 
 	// Collapse nested accordions when their parent is being collapsed.
-	$( ".jqm-navmenu-panel > .ui-panel-inner > .ui-accordion" ).on( "accordionbeforeactivate", function( event, ui ) {
+	$( ".jqm-navmenu-panel > .ui-panel-inner > .ui-accordion" )
+	.on( "accordionbeforeactivate", function( event ) {
 		var target = $( event.target );
 
 		if ( target.is( ".jqm-navmenu-panel > .ui-panel-inner > .ui-accordion" ) ) {
@@ -110,7 +111,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 
 	// Keyboard accessibility of the navmenu.
 	$( ".jqm-navmenu-panel .ui-accordion-header, .jqm-navmenu-panel .ui-listview-item-button" ).on( "keydown", function( event ) {
-	    if ( event.which == 9 ) {
+	    if ( event.which === 9 ) {
 	        var target = $( event.target ),
 				parent = target.parent( "li" );
 
@@ -122,11 +123,11 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	});
 
 	// On panel demo pages copy the navmenu into the wrapper
-	if ( $( this ).is( '.jqm-panel-page' ) ) {
-		var wrapper = $( this ).children( '.ui-panel-wrapper' );
+	if ( $( this ).is( ".jqm-panel-page" ) ) {
+		var wrapper = $( this ).children( ".ui-panel-wrapper" );
 
 		if ( wrapper ) {
-			$( '.jqm-navmenu-panel' ).clone( true, true ).appendTo( wrapper );
+			$( ".jqm-navmenu-panel" ).clone( true, true ).appendTo( wrapper );
 		}
 	}
 
@@ -143,7 +144,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	$( ".jqm-search-panel" ).panel({
 		position: "right",
 		display: "overlay",
-		theme: "a",
+		theme: "a"
 	});
 
 	$( ".jqm-search-link" ).on( "click", function() {
@@ -153,7 +154,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 
 	$( document ).on( "panelopen", ".jqm-search-panel", function() {
 		$( this ).find( ".jqm-search-input" ).focus();
-	})
+	});
 
 	// Initalize search panel list and filter
 	$( ".jqm-search-panel ul.jqm-search-list" ).html( searchContents ).listview({
@@ -162,7 +163,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		dividerTheme: null,
 		icon: false,
 		autodividers: true,
-		autodividersSelector: function ( li ) {
+		autodividersSelector: function () {
 			return "";
 		},
 		arrowKeyNav: true,
@@ -186,7 +187,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	if ( $( event.target ).hasClass( "jqm-demos-search-results" ) ) {
 		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[ 1 ];
 		setTimeout(function() {
-			e = $.Event( "keyup" );
+			var e = $.Event( "keyup" );
 			e.which = 65;
 			$( this ).find( "#jqm-search-results-input" ).val( search ).trigger(e).trigger( "change" );
 		}, 0 );
@@ -201,7 +202,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 });
 
 // Append keywords list to each list item
-$( document ).one( "pagecreate", ".jqm-demos", function( event ) {
+$( document ).one( "pagecreate", ".jqm-demos", function() {
 	$( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
 
@@ -216,19 +217,18 @@ $( document ).one( "pagecreate", ".jqm-demos", function( event ) {
 jQuery.fn.highlight = function( pat ) {
 	function innerHighlight( node, pat ) {
 		var skip = 0;
-		if ( node.nodeType == 3 ) {
+		if ( node.nodeType === 3 ) {
 			var pos = node.data.toUpperCase().indexOf( pat );
 			if ( pos >= 0 ) {
 				var spannode = document.createElement( "span" );
 				spannode.className = "jqm-search-results-highlight";
 				var middlebit = node.splitText( pos );
-				var endbit = middlebit.splitText( pat.length );
 				var middleclone = middlebit.cloneNode( true );
 				spannode.appendChild( middleclone );
 				middlebit.parentNode.replaceChild( spannode, middlebit );
 				skip = 1;
 			}
-		} else if ( node.nodeType == 1 && node.childNodes && !/(script|style)/i.test( node.tagName ) ) {
+		} else if ( node.nodeType === 1 && node.childNodes && !/(script|style)/i.test( node.tagName ) ) {
 			for ( var i = 0; i < node.childNodes.length; ++i ) {
 				i += innerHighlight( node.childNodes[i], pat );
 			}
@@ -244,10 +244,8 @@ jQuery.fn.highlight = function( pat ) {
 jQuery.fn.removeHighlight = function() {
 	return this.find( "span.jqm-search-results-highlight" ).each(function() {
 		this.parentNode.firstChild.nodeName;
-		with ( this.parentNode ) {
-			replaceChild( this.firstChild, this );
-			normalize();
-		}
+		this.parentNode.replaceChild( this.firstChild, this );
+		this.parentNode.normalize();
 	}).end();
 };
 
