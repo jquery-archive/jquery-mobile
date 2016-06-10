@@ -1,4 +1,5 @@
-( function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 $( "html" ).height( screen.height * 3 );
 
 function scrollDown() {
@@ -9,11 +10,12 @@ function scrollUp() {
 	window.scrollTo( 0, 0 );
 }
 
-asyncTest( "Popup repositions when it receives a resize and it's offscreen", function() {
-	var eventNs = ".popupRepositionsUponResize";
-	popup = $( "#test-popup" );
+QUnit.test( "Popup repositions when it receives a resize and it's offscreen", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".popupRepositionsUponResize";
+    var popup = $( "#test-popup" );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			popup.popup( "open", { x: 0, y: 0 } );
 		},
@@ -24,7 +26,7 @@ asyncTest( "Popup repositions when it receives a resize and it's offscreen", fun
 			timeout: { length: 3000 }
 		},
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+			assert.deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
 			scrollDown();
 			$( window ).trigger( "resize" );
 		},
@@ -32,7 +34,7 @@ asyncTest( "Popup repositions when it receives a resize and it's offscreen", fun
 			popupbeforeposition: { src: popup, event: "popupbeforeposition" + eventNs + "2" }
 		},
 		function( result ) {
-			deepEqual( result.popupbeforeposition.timedOut, false, "Popup did reposition" );
+			assert.deepEqual( result.popupbeforeposition.timedOut, false, "Popup did reposition" );
 			popup.popup( "close" );
 		},
 		{
@@ -40,16 +42,17 @@ asyncTest( "Popup repositions when it receives a resize and it's offscreen", fun
 		},
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 	] );
 } );
 
-asyncTest( "Popup does not react when it receives a resize and it's onscreen", function() {
-	var eventNs = ".popupRepositionsUponResize";
-	popup = $( "#test-popup" );
+QUnit.test( "Popup does not react when it receives a resize and it's onscreen", function( assert ) {
+    var ready = assert.async();
+    var eventNs = ".popupRepositionsUponResize";
+    var popup = $( "#test-popup" );
 
-	$.testHelper.detailedEventCascade( [
+    $.testHelper.detailedEventCascade( [
 		function() {
 			scrollDown();
 			popup.popup( "open", { x: 0, y: 0 } );
@@ -61,14 +64,14 @@ asyncTest( "Popup does not react when it receives a resize and it's onscreen", f
 			timeout: { length: 3000 }
 		},
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+			assert.deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
 			$( window ).trigger( "resize" );
 		},
 		{
 			popupbeforeposition: { src: popup, event: "popupbeforeposition" + eventNs + "2" }
 		},
 		function( result ) {
-			deepEqual( result.popupbeforeposition.timedOut, true, "Popup did not reposition" );
+			assert.deepEqual( result.popupbeforeposition.timedOut, true, "Popup did not reposition" );
 			popup.popup( "close" );
 		},
 		{
@@ -76,9 +79,9 @@ asyncTest( "Popup does not react when it receives a resize and it's onscreen", f
 		},
 		function() {
 			scrollUp();
-			start();
+			ready();
 		}
 	] );
 } );
 
-} )( jQuery );
+} );

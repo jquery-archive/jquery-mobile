@@ -1,6 +1,6 @@
-( function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-test( "Synchronization between style options and the classes option", function( assert ) {
+QUnit.test( "Synchronization between style options and the classes option", function( assert ) {
 	var popup = $( "#backcompat-test" ),
 		arrow = $( "#backcompat-test" ).find( ".ui-popup-arrow" );
 
@@ -28,4 +28,4 @@ test( "Synchronization between style options and the classes option", function( 
 	assert.hasClasses( popup, "ui-overlay-shadow", "Shadow is on popup when option turned on" );
 } );
 
-} )( jQuery );
+} );
