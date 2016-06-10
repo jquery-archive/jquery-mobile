@@ -1,7 +1,10 @@
 /*
  * Mobile dialog unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 QUnit.module( "dialog", {
 	setup: function() {
 		$.mobile.page.prototype.options.contentTheme = "d";
@@ -40,4 +43,4 @@ QUnit.asyncTest( "dialog opens and closes correctly when hash handling is off", 
 	] );
 } );
 
-} )( QUnit, jQuery );
+} );

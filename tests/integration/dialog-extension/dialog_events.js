@@ -1,7 +1,10 @@
 /*
  * Mobile dialog unit tests
  */
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 var home = $.mobile.path.parseUrl( location.pathname ).directory,
 	homeWithSearch = home + location.search;
 
@@ -277,4 +280,4 @@ QUnit.asyncTest( "pre-rendered dialog options work", function( assert ) {
 	] );
 } );
 
-} )( QUnit, jQuery );
+} );

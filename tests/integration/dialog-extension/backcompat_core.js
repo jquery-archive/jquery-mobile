@@ -1,7 +1,12 @@
-( function( QUnit, $ ) {
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
-QUnit.asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function( assert ) {
+QUnit.test( "dialog hash is added when the dialog is opened and removed when closed",
+	function( assert ) {
 	assert.expect( 2 );
+	var ready = assert.async();
 
 	$.testHelper.pageSequence( [
 		function() {
@@ -22,7 +27,7 @@ QUnit.asyncTest( "dialog hash is added when the dialog is opened and removed whe
 		function() {
 			assert.ok( !( /&ui-state=dialog/.test( location.hash ) ),
 				"ui-state=dialog !~ location.hash" );
-			QUnit.start();
+			ready();
 		}
 	] );
 } );
@@ -48,10 +53,11 @@ function testClassPresence( assert, dialog, prefix, optionName, newOptionValue, 
 }
 
 function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
-	QUnit.asyncTest( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
+	QUnit.test( "Option corners is synchronized to the class ui-corner-all", function( assert ) {
 		var option = "corners",
 			dialogOn = $( "#" + prerenderedIdPrefix + "corners-option-test" ),
-			dialogOff = $( "#" + prerenderedIdPrefix + "corners-option-test-false" );
+			dialogOff = $( "#" + prerenderedIdPrefix + "corners-option-test-false" ),
+			ready = assert.async();
 
 		$.testHelper.pageSequence( [
 			function() {
@@ -78,14 +84,15 @@ function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
 					option, false, false );
 				$.mobile.back();
 			},
-			start
+			ready
 		] );
 	} );
 
-	QUnit.asyncTest( "Class ui-corner-all is synchronized to option corners", function( assert ) {
+	QUnit.test( "Class ui-corner-all is synchronized to option corners", function( assert ) {
 		var option = "classes.ui-page-dialog-contain",
 			dialogOn = $( "#" + prerenderedIdPrefix + "corners-via-class-test" ),
-			dialogOff = $( "#" + prerenderedIdPrefix + "corners-via-class-test-false" );
+			dialogOff = $( "#" + prerenderedIdPrefix + "corners-via-class-test-false" ),
+			ready = assert.async();
 
 		$.testHelper.pageSequence( [
 			function() {
@@ -112,7 +119,7 @@ function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
 					option, "ui-overlay-shadow", false );
 				$.mobile.back();
 			},
-			start
+			ready
 		] );
 	} );
 }
@@ -120,4 +127,4 @@ function genOptionSyncTests( prerenderedIdPrefix, messagePrefix ) {
 genOptionSyncTests( "", "Normal" );
 genOptionSyncTests( "enhanced-", "Pre-rendered" );
 
-} )( QUnit, jQuery );
+} );
