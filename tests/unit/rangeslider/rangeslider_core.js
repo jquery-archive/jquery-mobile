@@ -1,7 +1,7 @@
 /*
  * Mobile slider unit tests
  */
-define( [ "jquery" ], function( $ ) {
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 	QUnit.module( "jquery.mobile.rangeslider.js core" );
 
