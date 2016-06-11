@@ -95,8 +95,8 @@ QUnit.test( "Filter won't run when preventing default on 'filterablebeforefilter
 } );
 
 QUnit.test( "filterCallback and filterReveal can be altered after widget creation", function( assert ) {
-    var ready = assert.async();
-    var filterable = $( "#custom-callback-listview" ),
+	var ready = assert.async();
+	var filterable = $( "#custom-callback-listview" ),
 		input = $( "#custom-callback-listview-input" ),
 		origCallback = filterable.filterable( "option", "filterCallback" ),
 		customCallback = function() {
@@ -104,9 +104,9 @@ QUnit.test( "filterCallback and filterReveal can be altered after widget creatio
 				origCallback.apply( this, arguments );
 		};
 
-    assert.expect( 4 );
+	assert.expect( 4 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			filterable.filterable( "option", "filterReveal", true );
 			assert.deepEqual( filterable.find( "li.ui-screen-hidden" ).length, 4, "When turning on filterReveal, all items are hidden." );
@@ -125,15 +125,15 @@ QUnit.test( "filterCallback and filterReveal can be altered after widget creatio
 } );
 
 QUnit.test( "Multi-set filtering via 'children' attribute", function( assert ) {
-    var ready = assert.async();
-    var input = $( "#multi-set-filterable-input" )
+	var ready = assert.async();
+	var input = $( "#multi-set-filterable-input" )
 			.filterable( "option", "children", $( ".multi-set-filterable-children > li" ) ),
 		set1 = $( "#multi-set-filterable-set1" ),
 		set2 = $( "#multi-set-filterable-set2" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "d" ).trigger( "change" );
 		},
@@ -149,13 +149,13 @@ QUnit.test( "Multi-set filtering via 'children' attribute", function( assert ) {
 QUnit.module( "Filter Widget Using Different Elements" );
 
 QUnit.test( "Filtering Table Rows based on Cells", function( assert ) {
-    var ready = assert.async();
-    var table = $( "#table-filter-test" ),
+	var ready = assert.async();
+	var table = $( "#table-filter-test" ),
 		input = $( "#table-filter-test-input" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "12:12" ).trigger( "change" );
 		},
@@ -171,14 +171,14 @@ QUnit.test( "Filtering Table Rows based on Cells", function( assert ) {
 } );
 
 QUnit.test( "Controlgroup Search Filter", function( assert ) {
-    var ready = assert.async();
-    var grp = $( "#search-controlgroup-test" ),
+	var ready = assert.async();
+	var grp = $( "#search-controlgroup-test" ),
 		container = grp.controlgroup( "container" ),
 		input = $( "#search-controlgroup-test-input" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "ac" ).trigger( "change" );
 		},
@@ -196,13 +196,13 @@ QUnit.test( "Controlgroup Search Filter", function( assert ) {
 } );
 
 QUnit.test( "Native Select Search Filter", function( assert ) {
-    var ready = assert.async();
-    var input = $( "#search-select-test-input" ),
+	var ready = assert.async();
+	var input = $( "#search-select-test-input" ),
 		filterable = $( "#anotherSelect" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "a" ).trigger( "change" );
 		},
@@ -218,13 +218,13 @@ QUnit.test( "Native Select Search Filter", function( assert ) {
 } );
 
 QUnit.test( "Native Select Search Filter using data-filtertext", function( assert ) {
-    var ready = assert.async();
-    var input = $( "#search-select-test-input" ),
+	var ready = assert.async();
+	var input = $( "#search-select-test-input" ),
 		filterable = $( "#anotherSelect" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "this goes" ).trigger( "change" );
 		},
@@ -240,15 +240,15 @@ QUnit.test( "Native Select Search Filter using data-filtertext", function( asser
 } );
 
 QUnit.test( "Random Elements Filter - <P>", function( assert ) {
-    var ready = assert.async();
-    var textInput = $( "#p-text-element-filter-input" ),
+	var ready = assert.async();
+	var textInput = $( "#p-text-element-filter-input" ),
 		textList = $( "#p-text-element-filter" ),
 		filtertextInput = $( "#p-filtertext-element-filter-input" ),
 		filtertextList = $( "#p-filtertext-element-filter" );
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			textInput.val( "b" ).trigger( "change" );
 		},
@@ -273,15 +273,15 @@ QUnit.test( "Random Elements Filter - <P>", function( assert ) {
 } );
 
 QUnit.test( "Random Elements Filter - <SPAN>", function( assert ) {
-    var ready = assert.async();
-    var textInput = $( "#span-text-element-filter-input" ),
+	var ready = assert.async();
+	var textInput = $( "#span-text-element-filter-input" ),
 		textList = $( "#span-text-element-filter" ),
 		filtertextInput = $( "#span-filtertext-element-filter-input" ),
 		filtertextList = $( "#span-filtertext-element-filter" );
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			textInput.val( "b" ).trigger( "change" );
 		},
@@ -308,11 +308,11 @@ QUnit.test( "Random Elements Filter - <SPAN>", function( assert ) {
 QUnit.module( "Filter widget destruction" );
 
 QUnit.test( "Destroy restores visibility of items", function( assert ) {
-    var ready = assert.async();
-    var input = $( "#destroy-test-input" ),
+	var ready = assert.async();
+	var input = $( "#destroy-test-input" ),
 	list = $( "#destroy-test" );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "c" ).trigger( "change" );
 		},
@@ -327,11 +327,11 @@ QUnit.test( "Destroy restores visibility of items", function( assert ) {
 } );
 
 QUnit.test( "Pre-rendered: destroy restores visibility of items", function( assert ) {
-    var ready = assert.async();
-    var input = $( "#pre-rendered-destroy-test-input" ),
+	var ready = assert.async();
+	var input = $( "#pre-rendered-destroy-test-input" ),
 	list = $( "#pre-rendered-destroy-test" );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			input.val( "c" ).trigger( "change" );
 		},

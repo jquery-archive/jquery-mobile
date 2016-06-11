@@ -11,11 +11,11 @@ QUnit.test( "navbar button gets active button class when clicked", function( ass
 } );
 
 QUnit.test( "disabled navbar button doesn't add active button class when clicked",
-    function( assert ) {
-        var link = $( "#disabled-button-click a.ui-state-disabled" ).first();
+	function( assert ) {
+		var link = $( "#disabled-button-click a.ui-state-disabled" ).first();
 
-        link.click();
-        assert.lacksClasses( link, "ui-button-active" );
+		link.click();
+		assert.lacksClasses( link, "ui-button-active" );
 } );
 
 } );

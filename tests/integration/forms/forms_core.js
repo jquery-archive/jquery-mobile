@@ -7,11 +7,11 @@ define( [
 	], function( QUnit, $ ) {
 
 QUnit.test( "Form resets correctly", function( assert ) {
-    var ready = assert.async(),
-    	arIdx, idx;
+	var ready = assert.async(),
+		arIdx, idx;
 
-    // Grab values from native inputs
-    function grabNativeValues( widgets ) {
+	// Grab values from native inputs
+	function grabNativeValues( widgets ) {
 		var arrays = [ "vcheckbox", "hcheckbox", "vradio", "hradio" ],
 			ret = {
 				vcheckbox: [],
@@ -33,7 +33,7 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		return ret;
 	}
 
-    function verifyRange( assert, prefix, el, value ) {
+	function verifyRange( assert, prefix, el, value ) {
 		var id = el.attr( "id" ),
 			slider = el.next(),
 			buttonStyle = slider.children().attr( "style" ).split( ";" ),
@@ -57,7 +57,7 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		assert.ok( style.left === value + "%", prefix + id + "'s button is located appropriately" );
 	}
 
-    function verifySelect( assert, prefix, el ) {
+	function verifySelect( assert, prefix, el ) {
 		var id = el.attr( "id" ),
 			button = el.parent(),
 			wrapper = button.parent(),
@@ -70,16 +70,16 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		assert.ok( anonySpan.text() === el.children( "[value='" + el.val() + "']" ).text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}
 
-    function verifyFlipswitch( assert, prefix, el, value ) {
+	function verifyFlipswitch( assert, prefix, el, value ) {
 		var id = el.attr( "id" );
 
 		assert.deepEqual( el.parent().hasClass( "ui-flipswitch-active" ), !!value, prefix + "class 'ui-flipswitch-active' presence/absence on parent of " + id + " is correct" );
 	}
 
-    // Verify that the enhanced widgets reflect the expected values - the helpers
-    // make assumptions about where the enhanced widget is wrt. the native widget
-    // and will cause a test failure if that relationship changes.
-    function verifyValues( assert, prefix, widgets, values ) {
+	// Verify that the enhanced widgets reflect the expected values - the helpers
+	// make assumptions about where the enhanced widget is wrt. the native widget
+	// and will cause a test failure if that relationship changes.
+	function verifyValues( assert, prefix, widgets, values ) {
 		verifySelect( assert, prefix, widgets.selectTest, values.selectTest );
 		verifyRange( assert, prefix, widgets.range, values.range );
 
@@ -87,7 +87,7 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		verifyFlipswitch( assert, prefix, widgets.selectFlipswitch, values.selectFlipswitch );
 	}
 
-    function runTest( page, doneCb ) {
+	function runTest( page, doneCb ) {
 
 		// First, record default values
 		var widgets = {
@@ -153,7 +153,7 @@ QUnit.test( "Form resets correctly", function( assert ) {
 		}, 2000 );
 	}
 
-    var testComplete = false,
+	var testComplete = false,
 		wentToTestPage = false,
 		maybeGoToTestPage = function() {
 			if ( !wentToTestPage ) {
@@ -183,9 +183,9 @@ QUnit.test( "Form resets correctly", function( assert ) {
 			}
 	};
 
-    $( document ).bind( "pageshow", handlePageShow );
+	$( document ).bind( "pageshow", handlePageShow );
 
-    setTimeout( maybeGoToTestPage );
+	setTimeout( maybeGoToTestPage );
 } );
 
 QUnit.test( "form action is honored", function( assert ) {

@@ -28,12 +28,12 @@ QUnit.module( "toolbar", { beforeEach: function( assert ) {
 } } );
 
 QUnit.test( "Fixed header and footer transition classes are applied correctly", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 5 );
-    var selectors = "#classes-test-b, #classes-test-g, #classes-test-e," +
+	var ready = assert.async();
+	assert.expect( 5 );
+	var selectors = "#classes-test-b, #classes-test-g, #classes-test-e," +
 		"#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k";
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			$( selectors ).toolbar( "hide" );
 			scrollDown();
@@ -62,11 +62,11 @@ QUnit.test( "Fixed header and footer transition classes are applied correctly", 
 } );
 
 QUnit.test( "The hide method is working properly", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			$( "#classes-test-g" ).toolbar( "show" );
 			scrollDown();
@@ -93,11 +93,11 @@ QUnit.test( "The hide method is working properly", function( assert ) {
 } );
 
 QUnit.test( "The show method is working properly", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			scrollDown();
 		},
@@ -126,11 +126,11 @@ QUnit.test( "The show method is working properly", function( assert ) {
 } );
 
 QUnit.test( "The toggle method is working properly", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    assert.expect( 3 );
+	assert.expect( 3 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			scrollDown();
 		},
@@ -171,10 +171,10 @@ QUnit.test( "The toggle method is working properly", function( assert ) {
 } );
 
 QUnit.test( "Fullscreen toolbars add classes to page", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 2 );
+	var ready = assert.async();
+	assert.expect( 2 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#fullscreen-test-a" );
 		},
@@ -235,12 +235,12 @@ QUnit.test( "data-visible-on-page-show shows toolbars when undefined", function(
 } );
 
 QUnit.test( "page-retains-fixed-header-on-popup-remove", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
+	var ready = assert.async();
+	assert.expect( 1 );
 
-    var page = $( "#page-retains-fixed-header-on-popup-removed" ).page();
+	var page = $( "#page-retains-fixed-header-on-popup-removed" ).page();
 
-    $.testHelper.pageSequence( [
+	$.testHelper.pageSequence( [
 		function() {
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", page );
 		},
@@ -296,10 +296,10 @@ QUnit.test( "destroy preserves original markup", function( assert ) {
 } );
 
 QUnit.test( "destroy removes classes from correct page ", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 3 );
+	var ready = assert.async();
+	assert.expect( 3 );
 
-    $.testHelper.pageSequence( [
+	$.testHelper.pageSequence( [
 		function() {
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test-page-1" );
 

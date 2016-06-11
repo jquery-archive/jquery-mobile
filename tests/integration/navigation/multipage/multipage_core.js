@@ -5,8 +5,8 @@ define( [
 QUnit.module( "Multipage document navigation" );
 
 QUnit.test( "Sequence start(#page1) -> #page3 -> #page1 -> #page2 <- Back", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	$.testHelper.pageSequence( [
 		function() {
 			assert.deepEqual( $.mobile.activePage.attr( "id" ), "page1", "Initially #page1 is active" );
 			$.mobile.activePage.find( "a[href='#page3']" ).click();

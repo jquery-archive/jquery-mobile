@@ -11,11 +11,11 @@ function scrollUp() {
 }
 
 QUnit.test( "Popup repositions when it receives a resize and it's offscreen", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".popupRepositionsUponResize";
-    var popup = $( "#test-popup" );
+	var ready = assert.async();
+	var eventNs = ".popupRepositionsUponResize";
+	var popup = $( "#test-popup" );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			popup.popup( "open", { x: 0, y: 0 } );
 		},
@@ -48,11 +48,11 @@ QUnit.test( "Popup repositions when it receives a resize and it's offscreen", fu
 } );
 
 QUnit.test( "Popup does not react when it receives a resize and it's onscreen", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".popupRepositionsUponResize";
-    var popup = $( "#test-popup" );
+	var ready = assert.async();
+	var eventNs = ".popupRepositionsUponResize";
+	var popup = $( "#test-popup" );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			scrollDown();
 			popup.popup( "open", { x: 0, y: 0 } );

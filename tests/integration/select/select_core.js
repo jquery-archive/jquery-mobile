@@ -43,10 +43,10 @@ QUnit.module( libName, {
 
 QUnit.test( "placeholder correctly gets ui-screen-hidden after rebuilding",
 	function( assert ) {
-        var ready = assert.async();
-        assert.expect( 3 );
+		var ready = assert.async();
+		assert.expect( 3 );
 
-        $.testHelper.sequence( [
+		$.testHelper.sequence( [
 			function() {
 
 				// Bring up the optgroup menu
@@ -70,15 +70,15 @@ QUnit.test( "placeholder correctly gets ui-screen-hidden after rebuilding",
 				ready();
 			}
 		], 1000 );
-    } );
+	} );
 
 QUnit.test( "firing a click at least 400ms later on the select screen closes it",
 	function( assert ) {
-        var ready = assert.async();
-        assert.expect( 3 );
+		var ready = assert.async();
+		assert.expect( 3 );
 
-        var prefix = ".firingAClick";
-        $.testHelper.detailedEventCascade( [
+		var prefix = ".firingAClick";
+		$.testHelper.detailedEventCascade( [
 			function() {
 
 				// Bring up the smaller choice menu
@@ -114,7 +114,7 @@ QUnit.test( "firing a click at least 400ms later on the select screen closes it"
 				ready();
 			}
 		] );
-    } );
+	} );
 
 QUnit.test( "a large select menu should use the default dialog transition",
 	function( assert ) {
@@ -150,10 +150,10 @@ QUnit.test( "a large select menu should use the default dialog transition",
 
 QUnit.test( "selecting an item from a large custom select leaves no dialog hash key",
 	function( assert ) {
-        var ready = assert.async();
-        var dialogHashKey = "ui-state=dialog";
+		var ready = assert.async();
+		var dialogHashKey = "ui-state=dialog";
 
-        $.testHelper.pageSequence( [
+		$.testHelper.pageSequence( [
 			resetHash,
 
 			function() {
@@ -170,7 +170,7 @@ QUnit.test( "selecting an item from a large custom select leaves no dialog hash 
 				ready();
 			}
 		] );
-    } );
+	} );
 
 QUnit.test( "dialog sized select menu opened many times remains a dialog",
 	function( assert ) {
@@ -206,12 +206,12 @@ QUnit.module( "Non native menus", {
 } );
 
 QUnit.test( "a large select option should not overflow", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    // https://github.com/jquery/jquery-mobile/issues/1338
-    var menu;
+	// https://github.com/jquery/jquery-mobile/issues/1338
+	var menu;
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		resetHash,
 
 		function() {
@@ -233,10 +233,10 @@ QUnit.test( "a large select option should not overflow", function( assert ) {
 
 QUnit.test( "focus is transferred to a menu item when the menu is opened",
 	function( assert ) {
-        var ready = assert.async();
-        assert.expect( 1 );
+		var ready = assert.async();
+		assert.expect( 1 );
 
-        $.testHelper.sequence( [
+		$.testHelper.sequence( [
 			resetHash,
 
 			function() {
@@ -257,16 +257,16 @@ QUnit.test( "focus is transferred to a menu item when the menu is opened",
 				ready();
 			}
 		], 5000 );
-    } );
+	} );
 
 QUnit.test( "using custom refocuses the button after close", function( assert ) {
-    var ready = assert.async();
-    var select, button,
+	var ready = assert.async();
+	var select, button,
 		triggered = false;
 
-    assert.expect( 1 );
+	assert.expect( 1 );
 
-    $.testHelper.sequence( [
+	$.testHelper.sequence( [
 		resetHash,
 
 		function() {

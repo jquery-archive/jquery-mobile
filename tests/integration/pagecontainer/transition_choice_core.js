@@ -23,7 +23,7 @@ QUnit.test( "Pagecontainer chooses correct transition", function( assert ) {
 	var ready = assert.async();
 	var pageContainer = $( ":mobile-pagecontainer" );
 
-    $.testHelper.pageSequence( [
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#go-to-b" ).click();
 		},

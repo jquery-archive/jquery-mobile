@@ -16,10 +16,10 @@ resetHash = function() {
 // https://github.com/jquery/jquery-mobile/issues/2181
 QUnit.test( "dialog sized select should alter the value of its parent select",
 	function( assert ) {
-        var ready = assert.async();
-        var selectButton, value;
+		var ready = assert.async();
+		var selectButton, value;
 
-        $.testHelper.pageSequence( [
+		$.testHelper.pageSequence( [
 			resetHash,
 
 			function() {
@@ -47,7 +47,7 @@ QUnit.test( "dialog sized select should alter the value of its parent select",
 				ready();
 			}
 		] );
-    } );
+	} );
 
 // https://github.com/jquery/jquery-mobile/issues/2181
 QUnit.test( "dialog sized select should prevent the removal of its parent page",
@@ -84,43 +84,43 @@ QUnit.test( "dialog sized select should prevent the removal of its parent page",
 
 QUnit.test( "dialog sized select shouldn't rebind its parent page remove handler when " +
 	"closing, if the parent page domCache option is true", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 3 );
+	var ready = assert.async();
+	assert.expect( 3 );
 
-    $.testHelper.pageSequence( [
-        resetHash,
+	$.testHelper.pageSequence( [
+		resetHash,
 
-        function() {
-            $( ".ui-pagecontainer" ).pagecontainer( "change", "cached-dom-cache-true.html" );
-        },
+		function() {
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "cached-dom-cache-true.html" );
+		},
 
-        function() {
-            $.mobile.activePage.find( "#domcache-page-select" ).siblings( "a" ).click();
-        },
+		function() {
+			$.mobile.activePage.find( "#domcache-page-select" ).siblings( "a" ).click();
+		},
 
-        function() {
-            assert.hasClasses( $.mobile.activePage, "ui-page-dialog", "the dialog came up" );
-            $.mobile.activePage.find( "li a" ).last().click();
-        },
+		function() {
+			assert.hasClasses( $.mobile.activePage, "ui-page-dialog", "the dialog came up" );
+			$.mobile.activePage.find( "li a" ).last().click();
+		},
 
-        function() {
-            assert.ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ),
-                "the dialog closed" );
-            $( ".ui-pagecontainer" ).pagecontainer( "change", $( "#default" ) );
-        },
+		function() {
+			assert.ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ),
+				"the dialog closed" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", $( "#default" ) );
+		},
 
-        function() {
-            assert.strictEqual( $( "#dialog-select-parent-domcache-test" ).length, 1,
-                "select parent page is still cached in the dom after changing page" );
-            ready();
-        }
-    ] );
+		function() {
+			assert.strictEqual( $( "#dialog-select-parent-domcache-test" ).length, 1,
+				"select parent page is still cached in the dom after changing page" );
+			ready();
+		}
+	] );
 } );
 
 QUnit.test( "menupage is removed when the parent page is removed", function( assert ) {
-    var ready = assert.async();
-    var dialogCount = $( jqmDataSelector( "role='dialog'" ) ).length;
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	var dialogCount = $( jqmDataSelector( "role='dialog'" ) ).length;
+	$.testHelper.pageSequence( [
 		resetHash,
 
 		function() {

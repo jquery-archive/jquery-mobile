@@ -110,14 +110,14 @@ QUnit.module( "popup", {
 } );
 
 QUnit.test( "Popup emits popupafterclose exactly once", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".doubleClose",
+	var ready = assert.async();
+	var eventNs = ".doubleClose",
 		popup = $( "#double-close" ),
 		link = $( "#open-double-close" );
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			link.click();
 		},
@@ -155,12 +155,12 @@ QUnit.test( "Popup emits popupafterclose exactly once", function( assert ) {
 
 QUnit.test( "Popup does not go back in history twice when opening on separate page",
 	function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".backTwice",
+	var ready = assert.async();
+	var eventNs = ".backTwice",
 		popup = function() {
 			return $( "#back-twice-test-popup" );
 		};
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "#go-to-another-page" ).click();
 		},
@@ -309,20 +309,20 @@ QUnit.test( "Link that launches popup is deactivated", function( assert ) {
 } );
 
 QUnit.test( "Popup interacts correctly with hashchange", function( assert ) {
-    var ready = assert.async();
-    var baseUrl, activeIndex,
+	var ready = assert.async();
+	var baseUrl, activeIndex,
 		$popup = $( "#test-popup" );
 
-    if ( !$popup.data( "mobile-popup" ).options.history ) {
+	if ( !$popup.data( "mobile-popup" ).options.history ) {
 		assert.expect( 1 );
 		assert.ok( true, "hash change disabled" );
 		ready();
 		return;
 	}
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			baseUrl = decodeURIComponent( location.href );
 			activeIndex = $.mobile.navigate.history.activeIndex;
@@ -365,23 +365,23 @@ QUnit.test( "Popup interacts correctly with hashchange", function( assert ) {
 // This should be the case if the previous test has cleaned up correctly.
 QUnit.test( "Opening another page from the popup leaves no trace of the popup in history",
 	function( assert ) {
-        var ready = assert.async();
-        var initialActive = $.extend( {}, {}, $.mobile.navigate.history.getActive() ),
+		var ready = assert.async();
+		var initialActive = $.extend( {}, {}, $.mobile.navigate.history.getActive() ),
 			initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
 			initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority +
 				initialHRef.directory,
 			$popup = $( "#test-popup" );
 
-        if ( !$popup.data( "mobile-popup" ).options.history ) {
+		if ( !$popup.data( "mobile-popup" ).options.history ) {
 			assert.expect( 1 );
 			assert.ok( true, "hash change disabled" );
 			ready();
 			return;
 		}
 
-        assert.expect( 6 );
+		assert.expect( 6 );
 
-        $.testHelper.detailedEventCascade( [
+		$.testHelper.detailedEventCascade( [
 			function() {
 				$( "#test-popup" ).popup( "open" );
 			},
@@ -454,7 +454,7 @@ QUnit.test( "Opening another page from the popup leaves no trace of the popup in
 
 			ready
 		] );
-    } );
+	} );
 
 // The test below adds an input, gives it focus, then opens the popup,
 // and makes sure the input has been blurred.
@@ -587,8 +587,8 @@ QUnit.test( "Navigating away from the popup page closes the no-history popup", f
 } );
 
 // TODO would be nice to avoid checking the internal representation
-//      of "openness" but :visible didn't seem to be working in this case
-//      (offscreen?)
+//	  of "openness" but :visible didn't seem to be working in this case
+//	  (offscreen?)
 QUnit.test( "Close links work on a history disabled popup", function( assert ) {
 	var $popup = $( "#test-history-popup" );
 	var ready = assert.async();
@@ -657,11 +657,11 @@ QUnit.test( "Destroy closes open popup first", function( assert ) {
 } );
 
 QUnit.test( "Cannot close a non-dismissible popup by clicking on the screen", function( assert ) {
-    var ready = assert.async();
-    var $popup = $( "#test-popup-dismissible" ),
+	var ready = assert.async();
+	var $popup = $( "#test-popup-dismissible" ),
 		eventNs = ".cannotCloseNonDismissiblePopup";
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$popup.popup( "open" );
 		},
@@ -701,16 +701,16 @@ QUnit.test( "Cannot close a non-dismissible popup by clicking on the screen", fu
 } );
 
 QUnit.test( "Elements inside the popup lose focus when the popup is closed", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    var $popup = $( "#popupLogin" ),
+	var $popup = $( "#popupLogin" ),
 		$popupContainer = $( "#popupLogin-popup" ),
 		$textBox = $( "#textBox" ),
 		eventSuffix = ".ElementsInsideThePopupLoseFocus";
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$popup.popup( "open" );
 		},
@@ -744,14 +744,14 @@ QUnit.test( "Elements inside the popup lose focus when the popup is closed", fun
 
 QUnit.test( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled",
 	function( assert ) {
-        var ready = assert.async();
-        var $popup = $( "#disabled-popup" ),
+		var ready = assert.async();
+		var $popup = $( "#disabled-popup" ),
 			$link = $( "a#open-disabled-popup" ),
 			eventNs = ".apopupisclosedwhendisabled";
 
-        assert.expect( 3 );
+		assert.expect( 3 );
 
-        $.testHelper.detailedEventCascade( [
+		$.testHelper.detailedEventCascade( [
 			function() {
 				$link.click();
 			},
@@ -786,5 +786,5 @@ QUnit.test( "A popup is closed when it becomes disabled, and cannot be opened wh
 				ready();
 			}
 		] );
-    } );
+	} );
 } );

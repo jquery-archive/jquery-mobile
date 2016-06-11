@@ -2,12 +2,12 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
 function defineTest( testName, clickAction, expectChange ) {
 	QUnit.test( testName, function( assert ) {
-        var ready = assert.async();
-        var eventNs = "." + $.camelCase( testName.replace( / /g, "-" ) );
+		var ready = assert.async();
+		var eventNs = "." + $.camelCase( testName.replace( / /g, "-" ) );
 
-        assert.expect( expectChange ? 6 : 5 );
+		assert.expect( expectChange ? 6 : 5 );
 
-        $.testHelper.detailedEventCascade( [
+		$.testHelper.detailedEventCascade( [
 			function() {
 				$( "#button-focus-test-button" ).click();
 			},
@@ -51,7 +51,7 @@ function defineTest( testName, clickAction, expectChange ) {
 				ready();
 			}
 		] );
-    } );
+	} );
 }
 
 defineTest( "Selectmenu regains focus when dialog closes without changes", function( dialogPage ) {

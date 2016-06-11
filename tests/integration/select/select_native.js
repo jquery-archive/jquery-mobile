@@ -30,12 +30,12 @@ QUnit.test( "native selects should provide open and close as a no-op", function(
 } );
 
 QUnit.test( "The preventFocusZoom option is working as expected", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    var zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
-    $.mobile.selectmenu.prototype.options.preventFocusZoom = true;
+	var zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
+	$.mobile.selectmenu.prototype.options.preventFocusZoom = true;
 
-    $( document )
+	$( document )
 		.one( "vmousedown.test", function() {
 			assert.ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
 		} )
@@ -49,7 +49,7 @@ QUnit.test( "The preventFocusZoom option is working as expected", function( asse
 			}, 0 );
 		} );
 
-    $( "#select-choice-native" )
+	$( "#select-choice-native" )
 		.selectmenu( "option", "preventFocusZoom", true )
 		.parent()
 			.trigger( "vmousedown" )
@@ -57,12 +57,12 @@ QUnit.test( "The preventFocusZoom option is working as expected", function( asse
 } );
 
 QUnit.test( "The preventFocusZoom option does not manipulate zoom when it is false", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    var zoomstate = $.mobile.zoom.enabled,
+	var zoomstate = $.mobile.zoom.enabled,
 		zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
 
-    $( document )
+	$( document )
 		.one( "vmousedown.test", function() {
 			assert.ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on vmousedown" );
 		} )
@@ -74,7 +74,7 @@ QUnit.test( "The preventFocusZoom option does not manipulate zoom when it is fal
 
 		} );
 
-    $( "#select-choice-native" )
+	$( "#select-choice-native" )
 		.selectmenu( "option", "preventFocusZoom", false )
 		.parent()
 			.trigger( "vmousedown" )

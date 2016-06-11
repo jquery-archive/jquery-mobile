@@ -52,10 +52,10 @@ QUnit.test( "The page should be enhanced correctly", function( assert ) {
 } );
 
 QUnit.test( "Toggle column", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 12 );
+	var ready = assert.async();
+	assert.expect( 12 );
 
-    var initial, post,
+	var initial, post,
 		input = $( "#toggle-column-test-popup input:nth(1)" ),
 		column = $( "#toggle-column-test tr>:nth-child(3)" ),
 
@@ -86,7 +86,7 @@ QUnit.test( "Toggle column", function( assert ) {
 			return visible;
 		};
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 
 		function() {
 			initial = checkColumn( "Initially: " );
@@ -139,16 +139,16 @@ QUnit.test( "Toggle column", function( assert ) {
 } );
 
 QUnit.test( "Column toggle table refresh - adding a row", function( assert ) {
-    var ready = assert.async();
+	var ready = assert.async();
 
-    assert.expect( 3 );
+	assert.expect( 3 );
 
-    // Hide one column and refresh
-    var secondInput, visibleCells, visibleHeaders,
+	// Hide one column and refresh
+	var secondInput, visibleCells, visibleHeaders,
 		input = $( "#movie-table-column-add-row-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-row" );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -185,15 +185,15 @@ QUnit.test( "Column toggle table refresh - adding a row", function( assert ) {
 } );
 
 QUnit.test( "Column toggle table refresh - adding a column", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 3 );
+	var ready = assert.async();
+	assert.expect( 3 );
 
-    var lastInput, visibleCells, visibleHeaders,
+	var lastInput, visibleCells, visibleHeaders,
 		popup = $( "#movie-table-column-add-column-popup" ),
 		input = $( "#movie-table-column-add-column-popup input:nth(2)" ),
 		table = $( "#movie-table-column-add-column" );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			input.trigger( "click" );
 		},
@@ -238,10 +238,10 @@ QUnit.test( "Column toggle table refresh - adding a column", function( assert ) 
 } );
 
 QUnit.test( "The dialog should become visible when button is clicked", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 4 );
+	var ready = assert.async();
+	assert.expect( 4 );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "#movie-table-column-button" ).click();
 		},

@@ -963,8 +963,8 @@ QUnit.test( "identical query param link doesn't add additional set of query para
 				$.testHelper.assertUrlLocation( assert, {
 
 					// TODO note there's no guarantee that the query params will remain in this
-					//      order we should fix the comparison to take a callback and do something
-					//      more complex
+					//	  order we should fix the comparison to take a callback and do something
+					//	  more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				} );
@@ -976,8 +976,8 @@ QUnit.test( "identical query param link doesn't add additional set of query para
 				$.testHelper.assertUrlLocation( assert, {
 
 					// TODO note there's no guarantee that the query params will remain in this
-					//      order we should fix the comparison to take a callback and do something
-					//      more complex
+					//	  order we should fix the comparison to take a callback and do something
+					//	  more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url still has query params"
 				} );

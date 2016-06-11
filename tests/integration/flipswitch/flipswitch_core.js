@@ -39,12 +39,12 @@ QUnit.test( "checkbox based flipswitch transfers focus to 'on' button",
 	} );
 
 QUnit.test( "Default is prevented on label click, but click is sent to element", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".preventDefaultAndPropagateClick",
+	var ready = assert.async();
+	var eventNs = ".preventDefaultAndPropagateClick",
 		label = $( "label[for='test-select-label']" ),
 		select = $( "#test-select-label" );
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			var event = $.Event( "click" );
 

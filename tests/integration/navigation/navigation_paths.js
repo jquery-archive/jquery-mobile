@@ -40,7 +40,7 @@ var testPageLoad = function( assert, testPageAnchorSelector, expectedTextValue )
 // All of these alterations assume location.pathname will be a directory
 // this is required to prevent the tests breaking in a subdirectory
 // TODO could potentially be fragile since the tests could be running while
-//      the urls are being updated
+//	  the urls are being updated
 $( function() {
 	$( "a.site-rel" ).each( function( i, elem ) {
 		var $elem = $( elem );

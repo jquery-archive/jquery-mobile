@@ -18,8 +18,8 @@ QUnit.module( "jquery.mobile.navigation.js - base tag", {
 } );
 
 QUnit.test( "can navigate between internal and external pages", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	$.testHelper.pageSequence( [
 		function() {
 
 			// Navigate from default internal page to another internal page.
@@ -169,8 +169,8 @@ QUnit.test( "can navigate between internal and external pages", function( assert
 } );
 
 QUnit.test( "internal form with no action submits to document URL", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	$.testHelper.pageSequence( [
 
 		// Open our test page
 		function() {
@@ -193,8 +193,8 @@ QUnit.test( "internal form with no action submits to document URL", function( as
 } );
 
 QUnit.test( "external page form with no action submits to external page URL", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	$.testHelper.pageSequence( [
 		function() {
 
 			// Go to an external page that has a form.

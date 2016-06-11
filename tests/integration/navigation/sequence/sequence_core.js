@@ -76,11 +76,11 @@ QUnit.test( "Navigating to an internal page", function( assert ) {
 } );
 
 QUnit.test( "Returning from a dialog results in the page from which it opened", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".returningFromADialog";
-    assert.expect( 2 );
+	var ready = assert.async();
+	var eventNs = ".returningFromADialog";
+	assert.expect( 2 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -102,13 +102,13 @@ QUnit.test( "Returning from a dialog results in the page from which it opened", 
 } );
 
 QUnit.test( "Returning from a popup results in the page from which it opened", function( assert ) {
-    var ready = assert.async();
-    var origActive, origUrl,
+	var ready = assert.async();
+	var origActive, origUrl,
 		eventNs = ".returningFromAPopup";
 
-    assert.expect( 4 );
+	assert.expect( 4 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			origActive = $.mobile.activePage;
 			origUrl = location.href;
@@ -141,12 +141,12 @@ QUnit.test( "Returning from a popup results in the page from which it opened", f
 } );
 
 QUnit.test( "Going from a dialog to another page works", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".goingFromADialogToAnotherPage";
+	var ready = assert.async();
+	var eventNs = ".goingFromADialogToAnotherPage";
 
-    assert.expect( 3 );
+	assert.expect( 3 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -176,12 +176,12 @@ QUnit.test( "Going from a dialog to another page works", function( assert ) {
 } );
 
 QUnit.test( "Going from a popup to another page works", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".goingFromAPopupToAnotherPage";
+	var ready = assert.async();
+	var eventNs = ".goingFromAPopupToAnotherPage";
 
-    assert.expect( 3 );
+	assert.expect( 3 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -212,12 +212,12 @@ QUnit.test( "Going from a popup to another page works", function( assert ) {
 } );
 
 QUnit.test( "Opening one dialog followed by opening another dialog works", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".openingOneDialogFollowedByAnother";
+	var ready = assert.async();
+	var eventNs = ".openingOneDialogFollowedByAnother";
 
-    assert.expect( 4 );
+	assert.expect( 4 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 
 		// NOTE: The first part of this test is a copy of the test above
 		function() {
@@ -257,13 +257,13 @@ QUnit.test( "Opening one dialog followed by opening another dialog works", funct
 } );
 
 QUnit.test( "Opening one popup followed by opening another popup works", function( assert ) {
-    var ready = assert.async();
-    var origActive,
+	var ready = assert.async();
+	var origActive,
 		eventNs = ".openingOnePopupFollowedByAnother";
 
-    assert.expect( 6 );
+	assert.expect( 6 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 
 		// NOTE: This is basically two copies of the "returning from a popup test" one after the other
 		function() {
@@ -312,12 +312,12 @@ QUnit.test( "Opening one popup followed by opening another popup works", functio
 } );
 
 QUnit.test( "Opening another page after returning from a dialog works", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".openingAnotherPageAfterDialog";
+	var ready = assert.async();
+	var eventNs = ".openingAnotherPageAfterDialog";
 
-    assert.expect( 4 );
+	assert.expect( 4 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -353,13 +353,13 @@ QUnit.test( "Opening another page after returning from a dialog works", function
 } );
 
 QUnit.test( "Opening another page after returning from a popup works", function( assert ) {
-    var ready = assert.async();
-    var origActive,
+	var ready = assert.async();
+	var origActive,
 		eventNs = ".openingAnotherPageAfterPopup";
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			origActive = $.mobile.activePage;
 			$( "#openPopup" ).click();
@@ -401,12 +401,12 @@ QUnit.test( "Opening another page after returning from a popup works", function(
 } );
 
 QUnit.test( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".page1Dialog1Popup1Page2Back";
+	var ready = assert.async();
+	var eventNs = ".page1Dialog1Popup1Page2Back";
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -448,12 +448,12 @@ QUnit.test( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function( as
 } );
 
 QUnit.test( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".page1Popup1Dialog1Page2";
+	var ready = assert.async();
+	var eventNs = ".page1Popup1Dialog1Page2";
 
-    assert.expect( 4 );
+	assert.expect( 4 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -491,12 +491,12 @@ QUnit.test( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function( as
 } );
 
 QUnit.test( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".pagePopupDialogPopup";
+	var ready = assert.async();
+	var eventNs = ".pagePopupDialogPopup";
 
-    assert.expect( 8 );
+	assert.expect( 8 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},
@@ -551,12 +551,12 @@ QUnit.test( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", funct
 } );
 
 QUnit.test( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".pageDialogPageBackForward";
+	var ready = assert.async();
+	var eventNs = ".pageDialogPageBackForward";
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openBasicDialog" ).click();
 		},
@@ -600,12 +600,12 @@ QUnit.test( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", func
 } );
 
 QUnit.test( "Sequence page1 -> popup -> page2 <- back -> forward <- back", function( assert ) {
-    var ready = assert.async();
-    var eventNs = ".goingFromAPopupToAnotherPage";
+	var ready = assert.async();
+	var eventNs = ".goingFromAPopupToAnotherPage";
 
-    assert.expect( 5 );
+	assert.expect( 5 );
 
-    maybeWaitForStartPage( [
+	maybeWaitForStartPage( [
 		function() {
 			$( "#openPopup" ).click();
 		},

@@ -94,10 +94,10 @@ Our default transition handler now has either one or two animationComplete calls
 To is required, so each async function must call start() onToComplete, not onFromComplete.
 */
 QUnit.test( "change() applies perspective class to mobile viewport for flip", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
+	var ready = assert.async();
+	assert.expect( 1 );
 
-    $.testHelper.pageSequence( [
+	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#foo" );
 		},
@@ -114,9 +114,9 @@ QUnit.test( "change() applies perspective class to mobile viewport for flip", fu
 } );
 
 QUnit.test( "change() applies transition class to mobile viewport for default transition", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
-    $.testHelper.pageSequence( [
+	var ready = assert.async();
+	assert.expect( 1 );
+	$.testHelper.pageSequence( [
 		function() {
 			$( ".ui-pagecontainer" ).pagecontainer( "change", "#baz" );
 		},
@@ -133,10 +133,10 @@ QUnit.test( "change() applies transition class to mobile viewport for default tr
 } );
 
 QUnit.test( "explicit transition preferred for page navigation reversal (ie back)", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
+	var ready = assert.async();
+	assert.expect( 1 );
 
-    onToComplete( function() {
+	onToComplete( function() {
 		$( "#flip-trans > a" ).click();
 		onToComplete( function() {
 			$( "#fade-trans > a" ).click();
@@ -147,29 +147,29 @@ QUnit.test( "explicit transition preferred for page navigation reversal (ie back
 		} );
 	} );
 
-    $( "#fade-trans > a" ).click();
+	$( "#fade-trans > a" ).click();
 } );
 
 QUnit.test( "default transition is fade", function( assert ) {
-    var ready = assert.async();
-    onToComplete( function() {
+	var ready = assert.async();
+	onToComplete( function() {
 		assert.ok( $( "#no-trans" ).hasClass( "fade" ), "has fade class" );
 		ready();
 	} );
 
-    $( "#default-trans > a" ).click();
+	$( "#default-trans > a" ).click();
 } );
 
 QUnit.test( "change() queues requests", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 4 );
-    var firstPage = $( "#foo" ),
+	var ready = assert.async();
+	assert.expect( 4 );
+	var firstPage = $( "#foo" ),
 		secondPage = $( "#bar" );
 
-    $( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
-    $( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", firstPage );
+	$( ".ui-pagecontainer" ).pagecontainer( "change", secondPage );
 
-    onToComplete( function() {
+	onToComplete( function() {
 		assert.ok( isTransitioningIn( firstPage ), "first page begins transition" );
 		assert.ok( !isTransitioningIn( secondPage ), "second page doesn't transition yet" );
 		onToComplete( function() {

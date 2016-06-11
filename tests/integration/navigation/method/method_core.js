@@ -56,10 +56,10 @@ if ( $.support.pushState ) {
 // Test the inclusion of state for both pushstate and hashchange
 // --nav--> #foo {state} --nav--> #bar --back--> #foo {state} --foward--> #bar {state}
 QUnit.test( "navigating backward and forward should include the history state", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.eventTarget = $( window );
+	var ready = assert.async();
+	$.testHelper.eventTarget = $( window );
 
-    $.testHelper.eventSequence( "navigate", [
+	$.testHelper.eventSequence( "navigate", [
 		function() {
 			$.mobile.navigate( "#foo", { foo: "bar" } );
 		},
@@ -88,10 +88,10 @@ QUnit.test( "navigating backward and forward should include the history state", 
 
 // --nav--> #foo {state} --nav--> #bar --nav--> #foo {state} --back--> #bar --back--> #foo {state.direction = back}
 QUnit.test( "navigation back to a duplicate history state should prefer back", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.eventTarget = $( window );
+	var ready = assert.async();
+	$.testHelper.eventTarget = $( window );
 
-    $.testHelper.eventSequence( "navigate", [
+	$.testHelper.eventSequence( "navigate", [
 		function() {
 			$.mobile.navigate( "#foo" );
 		},
@@ -126,8 +126,8 @@ QUnit.test( "navigation back to a duplicate history state should prefer back", f
 
 QUnit.test( "Entries with identical URLs are distinguishable when pushState is enabled",
 	function( assert ) {
-        var ready = assert.async();
-        $.testHelper.eventSequence( "navigate", [
+		var ready = assert.async();
+		$.testHelper.eventSequence( "navigate", [
 			function() {
 				$.mobile.navigate( "#foo" );
 			},
@@ -153,13 +153,13 @@ QUnit.test( "Entries with identical URLs are distinguishable when pushState is e
 				ready();
 			}
 		] );
-    } );
+	} );
 
 QUnit.test( "setting the hash with a url not in history should always create a new history entry", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.eventTarget = $( window );
+	var ready = assert.async();
+	$.testHelper.eventTarget = $( window );
 
-    $.testHelper.eventSequence( "navigate", [
+	$.testHelper.eventSequence( "navigate", [
 		function() {
 			$.mobile.navigate( "#bar" );
 		},
@@ -177,10 +177,10 @@ QUnit.test( "setting the hash with a url not in history should always create a n
 } );
 
 QUnit.test( "setting the hash to the existing hash should not result in a new history entry", function( assert ) {
-    var ready = assert.async();
-    $.testHelper.eventTarget = $( window );
+	var ready = assert.async();
+	$.testHelper.eventTarget = $( window );
 
-    $.testHelper.eventSequence( "navigate", [
+	$.testHelper.eventSequence( "navigate", [
 		function() {
 			location.hash = "#foo";
 		},

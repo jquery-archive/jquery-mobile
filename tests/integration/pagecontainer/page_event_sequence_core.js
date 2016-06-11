@@ -74,10 +74,10 @@ function makeOtherPageUrl( filename ) {
 }
 
 QUnit.test( "Event sequence during navigation to another page", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
+	var ready = assert.async();
+	assert.expect( 1 );
 
-    var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
+	var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
 		expectedEventSequence = [
 
 			// Deprecated as of 1.4.0
@@ -167,7 +167,7 @@ QUnit.test( "Event sequence during navigation to another page", function( assert
 			data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } }
 		];
 
-    $.testHelper.pageSequence( [
+	$.testHelper.pageSequence( [
 		function() {
 			$( "#go-to-other-page" ).click();
 		},
@@ -182,10 +182,10 @@ QUnit.test( "Event sequence during navigation to another page", function( assert
 } );
 
 QUnit.test( "Event sequence during page load failure", function( assert ) {
-    var ready = assert.async();
-    assert.expect( 1 );
+	var ready = assert.async();
+	assert.expect( 1 );
 
-    var otherPageUrl = makeOtherPageUrl( "page-does-not-exist.html" ),
+	var otherPageUrl = makeOtherPageUrl( "page-does-not-exist.html" ),
 		expectedEventSequence = [
 
 			// Deprecated as of 1.4.0
@@ -213,7 +213,7 @@ QUnit.test( "Event sequence during page load failure", function( assert ) {
 			data: { prevPage: "start-page", nextPage: undefined, toPage: otherPageUrl } }
 		];
 
-    $.testHelper.detailedEventCascade( [
+	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "#go-to-nonexistent-page" ).click();
 		},

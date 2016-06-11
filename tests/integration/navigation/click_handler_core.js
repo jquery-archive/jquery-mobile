@@ -6,16 +6,16 @@ define( [
 QUnit.module( "Click handler" );
 
 QUnit.test( "Active class is removed from reset button", function( assert ) {
-    var ready = assert.async();
-    var button = $( "#reset-button" ).click();
+	var ready = assert.async();
+	var button = $( "#reset-button" ).click();
 
-    assert.expect( 2 );
+	assert.expect( 2 );
 
-    assert.deepEqual( button.hasClass( "ui-button-active" ), true, "When clicked, reset button gets active class" );
+	assert.deepEqual( button.hasClass( "ui-button-active" ), true, "When clicked, reset button gets active class" );
 
-    setTimeout( function() {
-        assert.deepEqual( button.hasClass( "ui-button-active" ), false, "Active class is removed after a while" );
-        ready();
-    }, 700 );
+	setTimeout( function() {
+		assert.deepEqual( button.hasClass( "ui-button-active" ), false, "Active class is removed after a while" );
+		ready();
+	}, 700 );
 } );
 } );
