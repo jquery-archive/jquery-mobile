@@ -47,6 +47,7 @@
 		"grunt-esformatter": "1.0.1",
 		"grunt-git-authors": "2.0.0",
 		"grunt-hash-manifest": "0.5.3",
+		"grunt-html": "7.0.0",
 		"grunt-jscs": "2.8.0",
 		"grunt-php": "1.4.0",
 		"grunt-qunit-junit": "0.1.0-alpha2",
