@@ -34,6 +34,7 @@ grunt.registerTask( "build:css", [
 	"cssmin"
 ] );
 grunt.registerTask( "build:demos", [
+	"htmllint:demos",
 	"concat:demos",
 	"copy:images",
 	"copy:demos.nested-includes",
@@ -67,11 +68,13 @@ grunt.registerTask( "test", [
 	"jshint",
 	"jscs:build",
 	"jscs:good",
+	"htmllint:tests",
 	"build:js",
 	"connect",
 	"qunit:http"
 ] );
 grunt.registerTask( "test:demos", [
+	"htmllint:demos",
 	"test:demos:src",
 	"test:demos:dist"
 ] );
