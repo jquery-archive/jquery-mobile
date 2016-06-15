@@ -14,7 +14,7 @@
 				   controlgroup controlgroup.backcompat forms/select
 				   forms/checkboxradio forms/checkboxradio.backcompat"
 		data-init="true"
-		data-modules="filterable_core"/>
+		data-modules="filterable_core">
 	</script>
 
 
@@ -61,7 +61,7 @@
 			<h1>Filterable</h1>
 		</div>
 		<div data-nstest-role="content">
-			<input id="filtered-listview-input"></input>
+			<input id="filtered-listview-input">
 			<ul id="filtered-listview" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#filtered-listview-input">
 				<li>a is for aquaman</li>
 				<li>b is for batman</li>
@@ -69,7 +69,7 @@
 				<li>d is for darkwing</li>
 			</ul>
 
-			<input id="test-prevent-default-handler"></input>
+			<input id="test-prevent-default-handler">
 			<ul id="test-prevent-default-signal-emission"
 				data-nstest-role="listview"
 				data-nstest-filter="true"
@@ -80,7 +80,7 @@
 				<li>New York, NY</li>
 			</ul>
 
-			<input id="custom-callback-listview-input"></input>
+			<input id="custom-callback-listview-input">
 			<ul id="custom-callback-listview" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#custom-callback-listview-input">
 				<li>a is for aquaman</li>
 				<li data-nstest-important="true">b is for batman</li>
@@ -91,23 +91,23 @@
 			<input id="multi-set-filterable-input"
 				data-nstest-type="search"
 				data-nstest-filter="true"
-				data-nstest-input="#multi-set-filterable-input"></input>
+				data-nstest-input="#multi-set-filterable-input">
 			<ul id="multi-set-filterable-set1" data-nstest-role="listview" class="multi-set-filterable-children">
-				<li>Acura</a></li>
+				<li>Acura</li>
 				<li>Audi</li>
 				<li>BMW</li>
 				<li>Cadillac</li>
 				<li>Chrysler</li>
 			</ul>
 			<ul id="multi-set-filterable-set2" data-nstest-role="listview" class="multi-set-filterable-children">
-				<li>Acura</a></li>
+				<li>Acura</li>
 				<li>Audi</li>
 				<li>BMW</li>
 				<li>Cadillac</li>
 				<li>Chrysler</li>
 			</ul>
 
-			<input id="table-filter-test-input"></input>
+			<input id="table-filter-test-input">
 			<table id="table-filter-test"
 				data-nstest-input="#table-filter-test-input"
 				data-nstest-role="table"
@@ -188,7 +188,7 @@
 			 </tbody>
 			</table>
 
-			<input id="search-controlgroup-test-input"></input>
+			<input id="search-controlgroup-test-input">
 			<div id="search-controlgroup-test"
 				data-nstest-role="controlgroup"
 				data-nstest-filter="true"
@@ -202,7 +202,7 @@
 				<a data-nstest-role="button" href="#">acporsche</a>
 			</div>
 
-			<input id="search-select-test-input"></input>
+			<input id="search-select-test-input">
 			<label for="anotherSelect">Select Element</label>
 			<select id="anotherSelect" name="anotherselect"
 				data-nstest-filter="true"
@@ -219,7 +219,7 @@
 				<option value="J">Option J</option>
 			</select>
 
-			<input id="p-text-element-filter-input"></input>
+			<input id="p-text-element-filter-input">
 			<div
 				id="p-text-element-filter"
 				data-nstest-filter="true"
@@ -232,7 +232,7 @@
 				<p>f</p>
 			</div>
 
-			<input id="p-filtertext-element-filter-input"></input>
+			<input id="p-filtertext-element-filter-input">
 			<div
 				id="p-filtertext-element-filter"
 				data-nstest-filter="true"
@@ -245,7 +245,7 @@
 				<p data-nstest-filtertext="a">f</p>
 			</div>
 
-			<input id="span-text-element-filter-input"></input>
+			<input id="span-text-element-filter-input">
 			<div
 				id="span-text-element-filter"
 				data-nstest-filter="true"
@@ -258,7 +258,7 @@
 				<span>f</span>
 			</div>
 
-			<input id="span-filtertext-element-filter-input"></input>
+			<input id="span-filtertext-element-filter-input">
 			<div
 				id="span-filtertext-element-filter"
 				data-nstest-filter="true"
@@ -271,7 +271,7 @@
 				<span data-nstest-filtertext="a">f</span>
 			</div>
 
-			<input id="destroy-test-input"></input>
+			<input id="destroy-test-input">
 			<div id="destroy-test" data-nstest-filter="true" data-nstest-input="#destroy-test-input">
 				<p>San Francisco, CA</p>
 				<p>Portland, OR</p>
@@ -279,7 +279,7 @@
 				<p>New York, NY</p>
 			</div>
 
-			<input id="pre-rendered-destroy-test-input"></input>
+			<input id="pre-rendered-destroy-test-input">
 			<div id="pre-rendered-destroy-test"
 				data-nstest-enhanced="true"
 				data-nstest-filter="true"
@@ -291,7 +291,7 @@
 				<p class="ui-screen-hidden">New York, NY</p>
 			</div>
 
-			<input id="test-backcompat-signal-emission-input"></input>
+			<input id="test-backcompat-signal-emission-input">
 			<ul id="test-backcompat-signal-emission"
 				data-nstest-role="listview"
 				data-nstest-filter="true"
@@ -318,11 +318,11 @@
 			<ul id="test-handler-removal-list"
 				data-nstest-role="listview"
 				data-nstest-filter="true">
-				<li id="acura">Acura</li>
-				<li id="audi">Audi</li>
-				<li id="bmw">BMW</li>
-				<li id="cadillac">Cadillac</li>
-				<li id="ferrari">Ferrari</li>
+				<li id="acura1">Acura</li>
+				<li id="audi1">Audi</li>
+				<li id="bmw1">BMW</li>
+				<li id="cadillac1">Cadillac</li>
+				<li id="ferrari1">Ferrari</li>
 			</ul>
 		</div>
 	</div>
