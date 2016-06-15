@@ -247,9 +247,9 @@ QUnit.test( "focus is transferred to a menu item when the menu is opened",
 
 			function() {
 				assert.ok( $( document.activeElement )
-					.parents( "#select-choice-menu-focus-test-menu" ).length > 0,
+					.parents( "#select-choice-menu-focus-test-1-menu" ).length > 0,
 					"item in open select menu (" +
-						$( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
+						$( "#select-choice-menu-focus-test-1-menu" ).length + ") has focus" );
 				$( ".ui-popup-screen:not(.ui-screen-hidden)" ).trigger( "click" );
 			},
 
