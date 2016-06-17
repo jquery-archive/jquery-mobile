@@ -16,10 +16,20 @@
 	</style>
 	<style id="textinput-controlgroup">
 		.controlgroup-textinput {
-			padding-top:.22em;
-			padding-bottom:.22em;
+			padding-top:.35em;
+			padding-bottom:.35em;
+			cursor: text;
+			padding-left: 0;
+			padding-right: 0;
 		}
 	</style>
+	<script id="textinput-controlgroup-script">
+		$.widget( "ui.controlgroup", $.ui.controlgroup, {
+			_textinputOptions: function( position ) {
+				return this._buildSimpleOptions( position, "ui-textinput" );
+			}
+		} );
+	</script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -401,12 +411,12 @@
         <!-- TODO: This should be a separate demo -->
         <h2>Textinputs</h2>
 
-        <p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple CSS.</p>
-        <p>To make this work you will need to add one CSS rule and use textinput's <code>wrapperClass</code> option to set two classes on the textinput wrapper.</p>
+        <p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple CSS and script.</p>
+        <p>To make this work you will need to add one CSS rule and a simple controlgroup extension which uses textinput's <code>ui-textinput</code> class key to allow the controlgroup widget to set the corner classes on the textinput wrapper.</p>
 
-        <div data-demo-html="true" data-demo-css="#textinput-controlgroup">
+        <div data-demo-html="true" data-demo-css="#textinput-controlgroup" data-demo-js="#textinput-controlgroup-script">
             <label for="currency-controlgroup">Value</label>
-            <div data-role="controlgroup">
+            <div data-role="controlgroup" data-type="horizontal" data-items='{ "textinput" : "#currency-controlgroup" }'>
                 <select>
                     <option>$</option>
                     <option>€</option>
@@ -419,7 +429,7 @@
                 <button>.00</button>
             </div>
             <label for="search-control-group">Search</label>
-            <div data-role="controlgroup">
+            <div data-role="controlgroup" data-type="horizontal" data-items='{ "textinput" : "#search-control-group" }'>
                 <input type="text" id="search-control-group" data-wrapper-class="controlgroup-textinput ui-button">
                 <button>Submit</button>
                 <button>Reset</button>

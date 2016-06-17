@@ -24,7 +24,7 @@
 			"../../core",
 			"../../widget",
 			"../widget.theme",
-			"jquery-ui/button" ], factory );
+			"jquery-ui/widgets/button" ], factory );
 	} else {
 
 		// Browser globals
