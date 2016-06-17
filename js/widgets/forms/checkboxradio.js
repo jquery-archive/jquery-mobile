@@ -23,7 +23,7 @@
 			"jquery",
 			"../../core",
 			"../../widget",
-			"jquery-ui/checkboxradio",
+			"jquery-ui/widgets/checkboxradio",
 			"../widget.theme" ], factory );
 	} else {
 

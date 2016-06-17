@@ -57,13 +57,13 @@ function testStyleOptionToClass( assert, optionName, initialMode, initialValue, 
 		button = $( selector + "-button" );
 
 	// Make sure the initial state is correct
-	assert[ initialValue ? "hasClasses": "lacksClasses" ]( button, className,
+	assert[ initialValue ? "hasClasses" : "lacksClasses" ]( button, className,
 		"Initially class " + className + " is " +
 			( initialValue ? "present" : "absent" ) );
 
 	// Toggle the option value and make sure the new state is correct
 	menu.selectmenu( "option", optionName, !initialValue );
-	assert[ !initialValue ? "hasClasses": "lacksClasses" ]( button, className,
+	assert[ !initialValue ? "hasClasses" : "lacksClasses" ]( button, className,
 		"After setting '" + optionName + "' to " + ( !initialValue ) +
 			" class " + className + " is " + ( ( !initialValue ) ? "present" : "absent" ) );
 }

@@ -88,7 +88,7 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 
 		this.element = this.element;
 		this.selectWrapper = $( "<div>" );
-		this._addClass( this.selectWrapper, "ui-selectmenu ui-selectmenu-wrapper", classes );
+		this._addClass( this.selectWrapper, "ui-selectmenu", classes );
 		this.selectWrapper.insertBefore( this.element );
 		this.element.detach();
 
@@ -174,6 +174,7 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 		this.element
 			.appendTo( that.button )
 			.bind( "vmousedown", function() {
+
 				// Add active class to button
 				that.button.addClass( "ui-button-active" );
 			} )
@@ -187,6 +188,7 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 				that.button.trigger( "vmouseover" );
 			} )
 			.bind( "vmousemove", function() {
+
 				// Remove active class on scroll/touchmove
 				that.button.removeClass( "ui-button-active" );
 			} )
@@ -265,7 +267,7 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 					span.html( "&#160;" );
 				}
 
-				// hide from assistive technologies, as otherwise this will create redundant text
+				// Hide from assistive technologies, as otherwise this will create redundant text
 				// announcement - see gh-8256
 				span.attr( "aria-hidden", "true" );
 
