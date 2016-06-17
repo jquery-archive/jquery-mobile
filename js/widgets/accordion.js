@@ -21,7 +21,7 @@
 			"jquery",
 			"jquery-ui/widget",
 			"widget.theme",
-			"jquery-ui/accordion" ], factory );
+			"jquery-ui/widgets/accordion" ], factory );
 	} else {
 
 		// Browser globals

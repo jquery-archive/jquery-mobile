@@ -27,7 +27,12 @@ QUnit.test( "selects marked with data-native-menu=true should sit inside the but
 	assert.deepEqual( $( "#select-choice-native-container div.ui-button select" ).length, 1 );
 } );
 
-QUnit.test( "select controls will create when inside a container that receives a 'create' event", function( assert ) {
-	assert.ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-selectmenu" ).length, "did not have enhancements applied" );
-	assert.ok( $( "#enhancetest" ).enhanceWithin().find( ".ui-selectmenu" ).length, "enhancements applied" );
-} );
+QUnit.test( "select controls will create when inside a container that receives a 'create' event",
+	function( assert ) {
+		assert.ok(
+			!$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-selectmenu" ).length,
+			"did not have enhancements applied" );
+		assert.ok( $( "#enhancetest" ).enhanceWithin().find( ".ui-selectmenu" ).length,
+			"enhancements applied" );
+	} );
+} )( jQuery );

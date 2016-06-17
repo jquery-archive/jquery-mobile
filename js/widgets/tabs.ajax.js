@@ -22,7 +22,7 @@
 			"../defaults",
 			"../navigation/path",
 			"../navigation/base",
-			"jquery-ui/tabs" ], factory );
+			"jquery-ui/widgets/tabs" ], factory );
 	} else {
 
 		// Browser globals

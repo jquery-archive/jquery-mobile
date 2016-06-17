@@ -23,7 +23,7 @@ function defineModule( whichWidget, prependHiddenWidget ) {
 			} );
 	}
 
-	QUnit.module( capitalize ( whichWidget ) );
+	QUnit.module( capitalize( whichWidget ) );
 
 	defineBorderExceptionTest( "horizontal", "left" );
 	defineBorderExceptionTest( "vertical", "top" );

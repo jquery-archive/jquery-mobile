@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Button button-fixup
+ * jQuery UI Button @VERSION
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -12,9 +12,9 @@
 //>>description: Enhances a form with themeable buttons.
 //>>docs: http://api.jqueryui.com/button/
 //>>demos: http://jqueryui.com/button/
-//>>css.structure: ../themes/base/core.css
-//>>css.structure: ../themes/base/button.css
-//>>css.theme: ../themes/base/theme.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/button.css
+//>>css.theme: ../../themes/base/theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -22,13 +22,14 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"./core",
-			"./widget",
 
 			// These are only for backcompat
 			// TODO: Remove after 1.12
 			"./controlgroup",
-			"./checkboxradio"
+			"./checkboxradio",
+
+			"../keycode",
+			"../widget"
 		], factory );
 	} else {
 
@@ -38,7 +39,7 @@
 }( function( $ ) {
 
 $.widget( "ui.button", {
-	version: "button-fixup",
+	version: "@VERSION",
 	defaultElement: "<button>",
 	options: {
 		classes: {
@@ -120,7 +121,9 @@ $.widget( "ui.button", {
 	},
 
 	_enhance: function() {
-		this.element.attr( "role", "button" );
+		if ( !this.element.is( "button" ) ) {
+			this.element.attr( "role", "button" );
+		}
 
 		if ( this.options.icon ) {
 			this._updateIcon( "icon", this.options.icon );
@@ -235,7 +238,7 @@ $.widget( "ui.button", {
 
 		// Make sure we can't end up with a button that has neither text nor icon
 		if ( key === "showLabel" ) {
-				this._toggleClass( this._classes( "ui-button-icon-only" ), null, !value );
+				this._toggleClass( "ui-button-icon-only", null, !value );
 				this._updateTooltip();
 		}
 

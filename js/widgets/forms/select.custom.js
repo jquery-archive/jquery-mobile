@@ -435,6 +435,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		this._focusButton();
+
 		// Allow the dialog to be closed again
 		this.isOpen = false;
 	},
@@ -682,6 +683,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		var attributes = {
 				"href": "#",
 				"role": "button",
+
 				// TODO value is undefined at creation
 				"id": this.buttonId,
 				"aria-haspopup": "true",
