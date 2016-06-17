@@ -23,7 +23,7 @@
 			"jquery",
 			"jquery-ui/widget",
 			"./widget.theme",
-			"jquery-ui/controlgroup",
+			"jquery-ui/widgets/controlgroup",
 			"./controlgroup",
 			"./widget.backcompat" ], factory );
 	} else {

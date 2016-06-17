@@ -49,6 +49,7 @@ QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
+
 			// Bring up the dialog
 			$( "#close-button-test-link" ).click();
 		},
@@ -136,6 +137,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 		},
 
 		function() {
+
 			// Bring up the dialog
 			$( "#link-a" ).click();
 		},
@@ -159,6 +161,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 } );
 
 QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
+
 	// Reset fallback theme for content
 	$.mobile.page.prototype.options.contentTheme = null;
 
@@ -170,6 +173,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 		},
 
 		function() {
+
 			// Bring up the dialog
 			$( "#link-b" ).click();
 		},
@@ -203,12 +207,14 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 		},
 
 		function() {
+
 			// Bring up the dialog
 			$( "#link-c" ).click();
 		},
 
 		function() {
 			var dialog = $( "#dialog-c" );
+
 			// Assert dialog theme inheritance (issue 1375):
 			assert.hasClasses( dialog, "ui-page-theme-e",
 				"Expected explicit theme ui-page-theme-e" );
@@ -236,6 +242,7 @@ QUnit.asyncTest( "page container is updated to dialog overlayTheme at pagebefore
 			},
 
 			function() {
+
 				// Bring up the dialog
 				$( "#foo-dialog-link" ).click();
 			},
