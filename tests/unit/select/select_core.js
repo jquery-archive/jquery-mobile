@@ -39,8 +39,8 @@ QUnit.test( "Custom select is enhanced correctly", function( assert ) {
 		},
 		function() {
 			assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button",
-				"The close button for a multiple choice select popup has the " + '"' +
-					"role='button'" + '"' + " set" );
+				"The close button for a multiple choice select popup has the " +
+					"\"role='button'\" set" );
 			assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2",
 				"Tabindex is correctly copied from select" );
 			assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b",
