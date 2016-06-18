@@ -1,3 +1,5 @@
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 QUnit.test( "Controlgroup interaction", function( assert ) {
 	var group = $( "#group" );
 	var select1 = $( "#select1" );
@@ -58,4 +60,6 @@ QUnit.test( "Disabled selects", function( assert ) {
 	assert.hasClasses( button3, "ui-corner-bottom", "Last select has class ui-corner-bottom" );
 	assert.lacksClasses( button3, "ui-corner-top ui-corner-all",
 		"Last select lacks both ui-corner-top and ui-corner-all" );
+} );
+
 } );
