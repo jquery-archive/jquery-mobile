@@ -1,3 +1,5 @@
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
+
 QUnit.module( "Style options", {
 	setup: function() {
 		$.mobile.ns = "nstest-";
@@ -34,8 +36,7 @@ function toggleClass( classValue, singleClass, turnItOn ) {
 // Make sure that modifying the classes option key updates the relevant style option
 function testClassToStyleOption( assert, optionName, initialMode, initialValue, className ) {
 	var selector = "#" + optionName + "-" + initialMode + "-classes",
-		menu = $( selector ).selectmenu(),
-		button = $( selector + "-button" );
+		menu = $( selector ).selectmenu();
 
 	// Make sure the initial state is correct
 	assert.strictEqual( menu.selectmenu( "option", optionName ), initialValue,
@@ -88,3 +89,5 @@ defineStyleOptionTests( "corners", true, "ui-corner-all" );
 defineStyleOptionTests( "shadow", true, "ui-shadow" );
 defineStyleOptionTests( "mini", false, "ui-mini" );
 defineStyleOptionTests( "inline", false, "ui-button-inline" );
+
+} );
