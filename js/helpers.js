@@ -20,7 +20,7 @@
 		define( [
 			"jquery",
 			"./ns",
-			"jquery-ui/core" ], factory );
+			"jquery-ui/keycode" ], factory );
 	} else {
 
 		// Browser globals

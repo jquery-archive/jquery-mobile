@@ -21,7 +21,8 @@
 		define( [
 			"jquery",
 			"../core",
-			"jquery-ui/core",
+			"jquery-ui/safe-active-element",
+			"jquery-ui/safe-blur",
 			"../navigation/path",
 			"../navigation/base",
 			"../events/navigate",
