@@ -29,7 +29,9 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"jquery-ui/core",
+			"jquery-ui/focusable",
+			"jquery-ui/safe-active-element",
+			"jquery-ui/safe-blur",
 			"../widget",
 			"./widget.theme",
 			"../support",
