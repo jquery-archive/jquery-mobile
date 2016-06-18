@@ -44,7 +44,6 @@ return {
 			}
 		},
 		files: {
-			"jquery-ui/core.js": "jquery-ui/ui/core.js",
 			"jquery-ui/data.js": "jquery-ui/ui/data.js",
 			"jquery-ui/disable-selection.js": "jquery-ui/ui/disable-selection.js",
 			"jquery-ui/escape-selector.js": "jquery-ui/ui/escape-selector.js",
