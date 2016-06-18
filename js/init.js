@@ -17,7 +17,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"jquery-ui/core",
 			"./defaults",
 			"./helpers",
 			"./data",
