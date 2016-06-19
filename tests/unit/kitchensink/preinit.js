@@ -2,6 +2,8 @@ define( [ "jquery" ], function( $ ) {
 
 var $w = $( window ), incCreated, created, expected;
 
+window.createTests = $.Deferred();
+
 created = 0;
 expected = 0;
 
@@ -16,13 +18,15 @@ $( document ).bind( "mobileinit", function() {
 	} );
 
 	$w.bind( "pagecreate", function() {
-		window.createTests = {};
+		var createTests = {};
 
 		// If the expected count is larger than the actual count by the
 		// time we get the pagecreate event we know that not all of the widgets
 		// have been properly initialized before pagecreate, and that pagecreate
 		// isn't properly functioning as the "everything is initialized" event
-		window.createTests.pageCreateTimed = expected === created;
+		createTests.pageCreateTimed = expected === created;
+
+		window.createTests.resolve( createTests );
 	} );
 } );
 
