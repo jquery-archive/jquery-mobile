@@ -80,6 +80,20 @@ return $.widget( "mobile.page", $.mobile.page, {
 		return returnValue;
 	},
 
+	_themeElements: function() {
+		var elements = this._super();
+		if ( this.options.dialog ) {
+			elements.push(
+				{
+					element: this.dialog.wrapper,
+					prefix: "ui-body-"
+				}
+			);
+		}
+
+		return elements;
+	},
+
 	_setAttributes: function() {
 		var returnValue = this._superApply( arguments );
 
