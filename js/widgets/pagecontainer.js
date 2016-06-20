@@ -55,6 +55,9 @@ $.widget( "mobile.pagecontainer", {
 		changeOptions: {
 			transition: undefined,
 			reverse: false,
+			changeUrl: true,
+
+			// Use changeUrl instead, changeHash is deprecated and will be removed in 1.6
 			changeHash: true,
 			fromHashChange: false,
 			duplicateCachedPage: undefined,
@@ -70,6 +73,10 @@ $.widget( "mobile.pagecontainer", {
 	initSelector: false,
 
 	_create: function() {
+		var currentOptions = this.options;
+
+		currentOptions.changeUrl = currentOptions.changeUrl ? currentOptions.changeUrl :
+		( currentOptions.changeHash ? true : false );
 
 		// Maintain a global array of pagecontainers
 		$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
@@ -251,7 +258,7 @@ $.widget( "mobile.pagecontainer", {
 			$.mobile.navigate.history.previousIndex = activeIndex;
 
 			// Change to the new page
-			this.change( url, { direction: direction, changeHash: false, fromHashChange: true } );
+			this.change( url, { direction: direction, changeUrl: false, fromHashChange: true } );
 		}
 	},
 
@@ -349,7 +356,7 @@ $.widget( "mobile.pagecontainer", {
 			// the page and the hash, NOTE that the transition is derived from the previous history
 			// entry
 			changePageOptions = {
-				changeHash: false,
+				changeUrl: false,
 				fromHashChange: true,
 				reverse: data.direction === "back"
 			};
@@ -1097,7 +1104,7 @@ $.widget( "mobile.pagecontainer", {
 					!this.activePage.hasClass( "ui-page-dialog" ) &&
 					$.mobile.navigate.history.activeIndex > 0 ) {
 
-				settings.changeHash = false;
+				settings.changeUrl = false;
 				alreadyThere = true;
 			}
 
@@ -1152,7 +1159,7 @@ $.widget( "mobile.pagecontainer", {
 				role: settings.role
 			};
 
-			if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
+			if ( settings.changeUrl !== false && $.mobile.hashListeningEnabled ) {
 				$.mobile.navigate( this.window[ 0 ].encodeURI( url ), params, true );
 			} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
 				$.mobile.navigate.history.add( url, params );

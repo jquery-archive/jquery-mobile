@@ -128,7 +128,7 @@ $.extend( $.mobile, {
 			pagecontainer.pagecontainer( "change", $.mobile.firstPage, {
 				transition: "none",
 				reverse: true,
-				changeHash: false,
+				changeUrl: false,
 				fromHashChange: true
 			} );
 		} else {
