@@ -90,6 +90,12 @@ $.extend( $.mobile, {
 
 	// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 	silentScroll: function( ypos ) {
+
+		// If user has already scrolled then do nothing
+		if ( $( window ) > 0 ) {
+			return;
+		}
+
 		if ( $.type( ypos ) !== "number" ) {
 			ypos = $.mobile.defaultHomeScroll;
 		}
