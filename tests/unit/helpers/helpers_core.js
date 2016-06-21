@@ -762,4 +762,39 @@ for ( index = 0; index < 4096; index++ ) {
 	createTestScenario( index );
 }
 
+QUnit.module( "Silent scroll tests" );
+
+QUnit.test( "Silent scroll works when scrollTop is zero", function( assert ) {
+	assert.expect( 3 );
+	var done = assert.async();
+
+	$( window ).scrollTop( 0 );
+	assert.equal( $( window ).scrollTop(), 0, "At start, scroll is reset to 0" );
+
+	$.mobile.document.on( "silentscroll", function ( e, data ) {
+		assert.equal( data.x, 0, "X coordinate of event should be 0" );
+		assert.equal( data.y, 100, "Y coordinate of event should be 100" );
+		$( window ).scrollTop( 0 );
+		done();
+	});
+
+	$.mobile.silentScroll( 100 );
+} );
+
+QUnit.test( "Silent scroll doesn't occur when scrollTop is not zero",
+	function ( assert ) {
+		assert.expect( 2 );
+		var done = assert.async();
+
+		$( window ).scrollTop( 150 );
+		assert.equal( $( window ).scrollTop(), 150, "At start, scroll is reset to 150" );
+		$.mobile.silentScroll( 0 );
+
+		window.setTimeout( function() {
+			assert.equal( $( window ).scrollTop(), 150,
+			"It should not scroll if user has already scrolled");
+			done();
+		}, 2000);
+} );
+
 } );

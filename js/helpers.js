@@ -92,7 +92,7 @@ $.extend( $.mobile, {
 	silentScroll: function( ypos ) {
 
 		// If user has already scrolled then do nothing
-		if ( $( window ) > 0 ) {
+		if ( $( window ).scrollTop() > 0 ) {
 			return;
 		}
 
