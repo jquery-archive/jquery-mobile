@@ -76,7 +76,10 @@ $.event.special.tap = {
 				timer, clickHandler;
 
 			function clearTapTimer() {
-				clearTimeout( timer );
+				if ( timer ) {
+					$this.bind( "vclick", clickHandler );
+					clearTimeout( timer );
+				}
 			}
 
 			function clearTapHandlers() {
@@ -99,14 +102,15 @@ $.event.special.tap = {
 				}
 			};
 
-			$this.bind( "vmouseup", clearTapTimer )
-				.bind( "vclick", clickHandler );
+			$this.bind( "vmouseup", clearTapTimer );
+
 			$document.bind( "vmousecancel", clearTapHandlers );
 
 			timer = setTimeout( function() {
 				if ( !$.event.special.tap.emitTapOnTaphold ) {
 					isTaphold = true;
 				}
+				timer = 0;
 				triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 			}, $.event.special.tap.tapholdThreshold );
 		} );
