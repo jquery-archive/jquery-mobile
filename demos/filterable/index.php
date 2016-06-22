@@ -205,7 +205,10 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Find cars..." data-filter-theme="a" data-inset="true">
+				<form>
+					<input data-type="search" id="searchFilterStyling">
+				</form>
+				<ul data-role="listview" data-filter="true" data-input="#searchFilterStyling" data-filter-placeholder="Find cars..." data-filter-theme="a" data-inset="true">
 					<li>Acura</li>
 					<li>Audi</li>
 					<li>BMW</li>
@@ -227,7 +230,10 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
+				<form>
+					<input data-type="search" id="searchFilterReveal">
+				</form>
+				<ul data-role="listview" data-filter="true" data-input="#searchFilterReveal" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
 					<li><a href="#">Apple</a></li>
 					<li><a href="#">Banana</a></li>
 					<li><a href="#">Cherry</a></li>
