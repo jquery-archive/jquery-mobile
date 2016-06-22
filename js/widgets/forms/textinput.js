@@ -69,7 +69,7 @@ $.widget( "mobile.textinput", {
 		if ( !options.enhanced ) {
 			this._enhance();
 		} else {
-			this._outer = ( isTextarea ? this.element.parent() : this.element );
+			this._outer = ( isTextarea ? this.element : this.element.parent() );
 			if ( isSearch ) {
 				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
 			}
