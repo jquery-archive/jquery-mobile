@@ -109,7 +109,7 @@
 	&lt;a href=&quot;index.html&quot; <strong>data-transition=&quot;pop&quot;</strong>&gt;I'll pop&lt;/a&gt;
 	</code></code>
 
-		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link.</p>
+		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link. <b>Note:</b> <code>data-direction="reverse"</code> attribute can only be used with page and dialog.</p>
 
 		<h2>Global configuration</h2>
 
