@@ -33,7 +33,7 @@ $.mobile.degradeInputs = {
 
 // Auto self-init widgets
 $.mobile.degradeInputsWithin = function( target ) {
-	target = $( target );
+	target = typeof target === "string" ? $( target ) : target;
 
 	// Degrade inputs to avoid poorly implemented native functionality
 	target.find( "input" ).not( $.mobile.keepNative ).each( function() {
