@@ -59,7 +59,7 @@ $.event.special.scrollstart = {
 			event.type = originalEventType;
 		}
 
-		var handler = $.event.special.scrollstart.handler = function ( event ) {
+		var scrollStartHandler = $.event.special.scrollstart.handler = function ( event ) {
 
 			if ( !$.event.special.scrollstart.enabled ) {
 				return;
@@ -76,10 +76,10 @@ $.event.special.scrollstart = {
 		};
 
 		// iPhone triggers scroll after a small delay; use touchmove instead
-		$this.bind( scrollEvent, handler );
+		$this.on( scrollEvent, scrollStartHandler );
 	},
 	teardown: function() {
-		$( this ).unbind( scrollEvent, $.event.special.scrollstart.handler );
+		$( this ).off( scrollEvent, $.event.special.scrollstart.handler );
 	}
 };
 
