@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Focusable @VERSION
+ * jQuery UI Focusable master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

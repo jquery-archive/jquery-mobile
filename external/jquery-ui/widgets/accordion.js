@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Accordion @VERSION
+ * jQuery UI Accordion master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -37,7 +37,7 @@
 }( function( $ ) {
 
 return $.widget( "ui.accordion", {
-	version: "@VERSION",
+	version: "master",
 	options: {
 		active: 0,
 		animate: {},

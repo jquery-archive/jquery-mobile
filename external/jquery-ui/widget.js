@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Widget @VERSION
+ * jQuery UI Widget master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

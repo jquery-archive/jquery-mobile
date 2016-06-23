@@ -1,5 +1,5 @@
 /*!
- * jQuery UI :data @VERSION
+ * jQuery UI :data master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

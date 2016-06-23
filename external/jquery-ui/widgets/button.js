@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Button @VERSION
+ * jQuery UI Button master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -39,7 +39,7 @@
 }( function( $ ) {
 
 $.widget( "ui.button", {
-	version: "@VERSION",
+	version: "master",
 	defaultElement: "<button>",
 	options: {
 		classes: {
