@@ -13,7 +13,8 @@ module.exports = {
 				"!js/widgets/jquery.ui.tabs.js",
 				"!js/jquery.ui.core.js",
 				"!tests/lib/**/*.js",
-				"!demos/_assets/js/view-source.js"
+				"!demos/_assets/js/view-source.js",
+				"!demos/_assets/js/syntaxhighlighter.js"
 			]
 		}
 	},
