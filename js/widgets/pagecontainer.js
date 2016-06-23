@@ -56,6 +56,9 @@ $.widget( "mobile.pagecontainer", {
 			transition: undefined,
 			reverse: false,
 			changeUrl: true,
+
+			// Use changeUrl instead, changeHash is deprecated and will be removed in 1.6
+			changeHash: true,
 			fromHashChange: false,
 			duplicateCachedPage: undefined,
 
@@ -70,6 +73,10 @@ $.widget( "mobile.pagecontainer", {
 	initSelector: false,
 
 	_create: function() {
+		var currentOptions = this.options;
+
+		currentOptions.changeUrl = currentOptions.changeUrl ? currentOptions.changeUrl :
+		( currentOptions.changeHash ? true : false );
 
 		// Maintain a global array of pagecontainers
 		$.mobile.pagecontainers = ( $.mobile.pagecontainers ? $.mobile.pagecontainers : [] )
