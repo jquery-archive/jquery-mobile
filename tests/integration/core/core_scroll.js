@@ -21,44 +21,67 @@ QUnit.module( libName, {
 	}
 } );
 
-function scrollUp( assert, pos ) {
-	$( window ).scrollTop( screen.height );
-	assert.deepEqual( $( window ).scrollTop() > 0, true,
-		"After setting scrollTop, it is " + $( window ).scrollTop() );
-	$.mobile.silentScroll( pos );
-}
-
-QUnit.asyncTest( "silent scroll scrolls the page to the top by default", function( assert ) {
-	scrollUp( assert );
-
-	setTimeout( function() {
-		assert.deepEqual( $( window ).scrollTop(), $.mobile.defaultHomeScroll,
-			"After parameterless silentScroll(), scrollTop is $.mobile.defaultHomescroll: " +
-			$.mobile.defaultHomeScroll );
-		QUnit.start();
-	}, scrollTimeout );
+QUnit.module( "Silent scroll tests", {
+	afterEach: function() {
+		$.mobile.window.scrollTop( 0 );
+	}
 } );
 
-QUnit.asyncTest( "silent scroll scrolls the page to the passed y position", function( assert ) {
-	var pos = 10;
-	scrollUp( assert, pos );
-
-	setTimeout( function() {
-		assert.deepEqual( $( window ).scrollTop(), pos );
-		QUnit.start();
-	}, scrollTimeout );
-} );
-
-QUnit.asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function( assert ) {
+QUnit.test( "scrolling marks scrollstart as disabled for 150 ms", function( assert ) {
 	$.event.special.scrollstart.enabled = true;
-	scrollUp( assert );
+	var done = assert.async();
+
+	$.mobile.silentScroll( 100 );
+
 	assert.ok( !$.event.special.scrollstart.enabled );
 
-	setTimeout( function() {
+	window.setTimeout( function() {
 		assert.ok( $.event.special.scrollstart.enabled );
-		QUnit.start();
+		done();
 	}, scrollStartEnabledTimeout );
 } );
+
+
+
+QUnit.test( "Silent scroll works when scrollTop is zero", function( assert ) {
+	assert.expect( 4 );
+	var done = assert.async();
+	var done2 = assert.async();
+
+	$.mobile.window.scrollTop( 0 );
+	assert.equal( $.mobile.window.scrollTop(), 0, "At start, scroll is reset to 0" );
+
+	$.mobile.document.on( "silentscroll", function( e, data ) {
+		assert.equal( data.x, 0, "X coordinate of event should be 0" );
+		assert.equal( data.y, 100, "Y coordinate of event should be 100" );
+		done();
+	} );
+
+	$.mobile.silentScroll( 100 );
+
+	window.setTimeout( function() {
+		assert.equal( $.mobile.window.scrollTop(), 100, "It should work after scrollTimeout" );
+		done2();
+	}, scrollTimeout );
+
+} );
+
+QUnit.test( "Silent scroll doesn't occur when scrollTop is not zero",
+	function( assert ) {
+		assert.expect( 2 );
+		var done = assert.async();
+
+		$.mobile.window.scrollTop( 150 );
+		assert.equal( $.mobile.window.scrollTop(), 150, "At start, scroll is reset to 150" );
+		$.mobile.silentScroll( 0 );
+
+		window.setTimeout( function() {
+			assert.equal( $.mobile.window.scrollTop(), 150,
+			"It should not scroll if user has already scrolled" );
+			done();
+		}, 2000 );
+} );
+
 
 //TODO test that silentScroll is called on window load
 } );
