@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Tabs @VERSION
+ * jQuery UI Tabs master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -37,7 +37,7 @@
 }( function( $ ) {
 
 $.widget( "ui.tabs", {
-	version: "@VERSION",
+	version: "master",
 	delay: 300,
 	options: {
 		active: null,

@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Unique ID @VERSION
+ * jQuery UI Unique ID master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

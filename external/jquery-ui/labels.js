@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Labels @VERSION
+ * jQuery UI Labels master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

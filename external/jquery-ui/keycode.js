@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Keycode @VERSION
+ * jQuery UI Keycode master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
