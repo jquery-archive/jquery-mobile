@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Disable Selection @VERSION
+ * jQuery UI Disable Selection master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors

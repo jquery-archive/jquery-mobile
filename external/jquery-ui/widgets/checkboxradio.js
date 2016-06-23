@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Checkboxradio @VERSION
+ * jQuery UI Checkboxradio master
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -36,7 +36,7 @@
 }( function( $ ) {
 
 $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
-	version: "@VERSION",
+	version: "master",
 	options: {
 		disabled: null,
 		label: null,
