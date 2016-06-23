@@ -18,6 +18,16 @@ return {
 			"jshint/jshint.js": "jshint/dist/jshint.js"
 		}
 	},
+	demos: {
+		files: {
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.js":
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.js",
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.css":
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.css",
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.theme.css":
+			"jquery-mobile-datepicker-wrapper/jquery.mobile.datepicker.theme.css"
+		}
+	},
 	requirejs: {
 		files: {
 			"requirejs/require.js": "requirejs/require.js"
@@ -54,10 +64,7 @@ return {
 			"jquery-ui/jquery-1-7.js": "jquery-ui/ui/jquery-1-7.js",
 			"jquery-ui/keycode.js": "jquery-ui/ui/keycode.js",
 			"jquery-ui/labels.js": "jquery-ui/ui/labels.js",
-			"jquery-ui/LICENSE.txt": "jquery-ui/ui/LICENSE.txt",
-			"jquery-ui/LICENSE.txt~HEAD": "jquery-ui/ui/LICENSE.txt~HEAD",
-			"jquery-ui/LICENSE.txt~Widgets": "jquery-ui/ui/LICENSE.txt~Widgets",
-			"jquery-ui/MIT-LICENSE.txt": "jquery-ui/ui/MIT-LICENSE.txt",
+			"jquery-ui/LICENSE.txt": "jquery-ui/LICENSE.txt",
 			"jquery-ui/plugin.js": "jquery-ui/ui/plugin.js",
 			"jquery-ui/safe-active-element.js": "jquery-ui/ui/safe-active-element.js",
 			"jquery-ui/safe-blur.js": "jquery-ui/ui/safe-blur.js",
@@ -70,6 +77,7 @@ return {
 			"jquery-ui/widgets/button.js": "jquery-ui/ui/widgets/button.js",
 			"jquery-ui/widgets/checkboxradio.js": "jquery-ui/ui/widgets/checkboxradio.js",
 			"jquery-ui/widgets/controlgroup.js": "jquery-ui/ui/widgets/controlgroup.js",
+			"jquery-ui/widgets/datepicker.js": "jquery-ui/ui/widgets/datepicker.js",
 			"jquery-ui/widgets/tabs.js": "jquery-ui/ui/widgets/tabs.js"
 		}
 	}

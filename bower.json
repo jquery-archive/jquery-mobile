@@ -16,13 +16,14 @@
 	],
 	"dependencies": {
 		"jquery": ">=1.8.0",
-		"jquery-ui": "arschmitz/jquery-ui#button-fixup"
+		"jquery-ui": "jquery/jquery-ui#master"
 	},
 	"devDependencies": {
 		"requirejs": "2.1.2",
 		"qunit": "1.18.0",
 		"qunit-assert-classes": "1.0.2",
 		"jquery-1.11.3": "jquery#1.11.3",
+		"jquery-mobile-datepicker-wrapper": "arschmitz/jquery-mobile-datepicker-wrapper#0.1.9",
 		"jshint": "2.4.0"
 	}
 }
