@@ -3,13 +3,15 @@ language: php
 php:
   - "5.5"
 
-sudo: false
+sudo: required
+
+dist: trusty
 
 cache:
   directories:
   - node_modules
 
-before_script: 
+before_script:
   - npm install -g grunt-cli
   - npm install
 
