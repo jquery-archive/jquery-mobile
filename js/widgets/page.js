@@ -99,7 +99,7 @@ $.widget( "mobile.page", {
 					if ( !data.samePage ) {
 						var prEvent = new $.Event( "pageremove" );
 
-						this.element.trigger( prEvent );
+						this._trigger( "remove", prEvent );
 
 						if ( !prEvent.isDefaultPrevented() ) {
 							this.element.removeWithDependents();
