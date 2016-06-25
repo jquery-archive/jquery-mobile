@@ -155,7 +155,7 @@
 					<li><a href="#">Inbox <span class="ui-listview-item-count-bubble">12</span></a></li>
 					<li><a href="#">Outbox <span class="ui-listview-item-count-bubble">0</span></a></li>
 					<li><a href="#">Drafts <span class="ui-listview-item-count-bubble">4</span></a></li>
-					<li><a href="#">Sent <span class="ui-listview-item-count-bubble">328</span></a></li>
+					<li><a href="#">Sent <span class="ui-listview-item-count-bubble">32811</span></a></li>
 					<li><a href="#">Trash <span class="ui-listview-item-count-bubble">62</span></a></li>
 				</ul>
 			</div><!--/demo-html -->
