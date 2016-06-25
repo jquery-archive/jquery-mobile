@@ -119,7 +119,7 @@
 .ui-listview > .ui-listview-item-has-count > .ui-button,
 .ui-listview > .ui-listview-item-static.ui-listview-item-has-count,
 .ui-listview > .ui-listview-item-divider.ui-listview-item-has-count {
-	padding-right: 2.8125em;
+	padding-right: 0.7em;
 }
 .ui-listview > .ui-listview-item-has-count > .ui-icon-end {
 	padding-right: 4.6875em;
@@ -141,7 +141,7 @@
 	line-height: 1.6em;
 	min-height: 1.6em;
 	min-width: .64em;
-	right: .8em;
+	right: 3em;
 	top: 50%;
 	margin-top: -.88em;
 }
