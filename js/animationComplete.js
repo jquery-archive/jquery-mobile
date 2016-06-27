@@ -28,7 +28,8 @@ var props = {
 		"transition": {}
 	},
 	testElement = document.createElement( "a" ),
-	vendorPrefixes = [ "", "webkit-", "moz-", "o-" ];
+	vendorPrefixes = [ "", "webkit-", "moz-", "o-" ],
+	callbackLookupTable = {};
 
 $.each( [ "animation", "transition" ], function( i, test ) {
 
@@ -62,70 +63,86 @@ $.support.cssAnimations = ( props[ "animation" ][ "prefix" ] !== undefined );
 $( testElement ).remove();
 
 // Animation complete callback
-$.fn.animationComplete = function( callback, type, fallbackTime ) {
-	var timer, duration,
-		that = this,
-		eventBinding = function() {
+$.fn.extend( {
+	animationComplete: function( callback, type, fallbackTime ) {
+		var timer, duration,
+			that = this,
+			eventBinding = function() {
 
-			// Clear the timer so we don't call callback twice
-			clearTimeout( timer );
-			callback.apply( this, arguments );
-		},
-		animationType = ( !type || type === "animation" ) ? "animation" : "transition";
+				// Clear the timer so we don't call callback twice
+				clearTimeout( timer );
+				callback.apply( this, arguments );
+			},
+			animationType = ( !type || type === "animation" ) ? "animation" : "transition";
 
-	if ( !this.length ) {
-		return this;
-	}
-
-	// Make sure selected type is supported by browser
-	if ( ( $.support.cssTransitions && animationType === "transition" ) ||
-			( $.support.cssAnimations && animationType === "animation" ) ) {
-
-		// If a fallback time was not passed set one
-		if ( fallbackTime === undefined ) {
-
-			// Make sure the was not bound to document before checking .css
-			if ( this.context !== document ) {
-
-				// Parse the durration since its in second multiple by 1000 for milliseconds
-				// Multiply by 3 to make sure we give the animation plenty of time.
-				duration = parseFloat(
-						this.css( props[ animationType ].duration )
-					) * 3000;
-			}
-
-			// If we could not read a duration use the default
-			if ( duration === 0 || duration === undefined || isNaN( duration ) ) {
-				duration = $.fn.animationComplete.defaultDuration;
-			}
+		if ( !this.length ) {
+			return this;
 		}
 
-		// Sets up the fallback if event never comes
-		timer = setTimeout( function() {
-			that
-				.off( props[ animationType ].event, eventBinding )
-				.each( function() {
+		// Make sure selected type is supported by browser
+		if ( ( $.support.cssTransitions && animationType === "transition" ) ||
+				( $.support.cssAnimations && animationType === "animation" ) ) {
+
+			// If a fallback time was not passed set one
+			if ( fallbackTime === undefined ) {
+
+				// Make sure the was not bound to document before checking .css
+				if ( this.context !== document ) {
+
+					// Parse the durration since its in second multiple by 1000 for milliseconds
+					// Multiply by 3 to make sure we give the animation plenty of time.
+					duration = parseFloat(
+							this.css( props[ animationType ].duration )
+						) * 3000;
+				}
+
+				// If we could not read a duration use the default
+				if ( duration === 0 || duration === undefined || isNaN( duration ) ) {
+					duration = $.fn.animationComplete.defaultDuration;
+				}
+			}
+
+			// Sets up the fallback if event never comes
+			timer = setTimeout( function() {
+				that
+					.off( props[ animationType ].event, eventBinding )
+					.each( function() {
+						callback.apply( this );
+					} );
+			}, duration );
+
+			// Update lookupTable
+			callbackLookupTable[ callback ] = {
+				event: props[ animationType ].event,
+				binding: eventBinding
+			};
+
+
+			// Bind the event
+			return this.one( props[ animationType ].event, eventBinding );
+		} else {
+
+			// CSS animation / transitions not supported
+			// Defer execution for consistency between webkit/non webkit
+			setTimeout( function() {
+				that.each( function() {
 					callback.apply( this );
 				} );
-		}, duration );
+			}, 0 );
+			return this;
+		}
+	},
 
-		// Bind the event
-		return this.one( props[ animationType ].event, eventBinding );
-	} else {
+	removeAnimationComplete: function( callback ) {
+		var callbackInfoObject = callbackLookupTable[ callback ];
 
-		// CSS animation / transitions not supported
-		// Defer execution for consistency between webkit/non webkit
-		setTimeout( function() {
-			that.each( function() {
-				callback.apply( this );
-			} );
-		}, 0 );
-		return this;
+		return callbackInfoObject ?
+		this.off( callbackInfoObject.event, callbackInfoObject.binding ) : this;
 	}
-};
+} );
 
 // Allow default callback to be configured on mobileInit
 $.fn.animationComplete.defaultDuration = 1000;
 
-return $.fn.animationComplete;
+return $;
 } );
