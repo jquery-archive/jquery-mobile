@@ -72,6 +72,7 @@ $files = array(
 	'../external/jquery-ui/widgets/checkboxradio.js',
 	'../external/jquery-ui/widgets/button.js',
 	'widgets/forms/button.js',
+	'widgets/forms/button.backcompat.js',
 	'widgets/navbar.js',
 	'widgets/navbar.backcompat.js',
 	'widgets/popup.js',
