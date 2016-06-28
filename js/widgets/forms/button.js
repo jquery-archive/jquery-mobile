@@ -47,6 +47,8 @@ $.widget( "ui.button", $.ui.button, {
 	},
 
 	_themeElements: function() {
+		this.options.theme = this.options.theme ? this.options.theme : "inherit";
+
 		return [
 			{
 				element: this.widget(),
