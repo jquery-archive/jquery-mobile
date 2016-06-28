@@ -31,6 +31,12 @@
 } )( function( $ ) {
 
 return $.widget( "ui.tabs", $.ui.tabs, {
+
+	_create: function() {
+		this._super();
+
+		this.active.find( "a.ui-tabs-anchor" ).addClass( "ui-button-active" );
+	},
 	_isLocal: function( anchor ) {
 		var path, baseUrl, absUrl;
 
