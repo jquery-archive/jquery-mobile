@@ -48,7 +48,11 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_create: function() {
 		var id, popup;
 
+		this.options.columnButtonTheme =
+		this.options.columnButtonTheme ? this.options.columnButtonTheme : "inherit";
+
 		this._super();
+
 
 		if ( this.options.mode !== "columntoggle" || !this.options.columnUi ) {
 			return;
@@ -270,14 +274,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_columnsButton: function() {
 		var id = this._id(),
 			options = this.options,
-			buttonTheme = this._themeClassFromOption( "ui-button-", options.columnButtonTheme ),
 			button = $( "<a href='#" + id + "-popup' " +
 				"id='" + id + "-button' " +
-				"data-" + $.mobile.ns + "rel='popup'>" + options.columnButtonText + "</a>" );
+				"data-" + $.mobile.ns + "rel='popup' data-theme='" +
+				options.columnButtonTheme + "'>" + options.columnButtonText + "</a>" );
 
 		button.button();
-		this._addClass( button, "ui-table-columntoggle-btn" +
-					( buttonTheme ? " " + buttonTheme : "" ) );
+		this._addClass( button, "ui-table-columntoggle-btn" );
 
 		this._on( button, {
 			click: "_handleButtonClicked"

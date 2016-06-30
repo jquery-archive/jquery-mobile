@@ -47,7 +47,7 @@ QUnit.test( "Default columnButtonTheme", function( assert ) {
 	testClasses( assert,
 		$( "#columntoggle-option-test-blank" ),
 		$( "#columntoggle-option-test-blank-button" )[ 0 ],
-		"ui-button-", "", "columnButtonTheme", "b", "ui-button-b" );
+		"ui-button-", "ui-button-inherit", "columnButtonTheme", "b", "ui-button-b" );
 } );
 
 QUnit.test( "Explicit columnButtonTheme", function( assert ) {
