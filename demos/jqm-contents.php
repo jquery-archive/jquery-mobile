@@ -213,7 +213,6 @@
 					<ul>
 						<li data-filtertext="form selectmenu widget select input custom select menu selects"><a href="../selectmenu/" data-ajax="false">Selectmenu</a></li>
 						<li data-filtertext="form custom select menu selectmenu widget custom menu option optgroup multiple selects"><a href="../selectmenu-custom/" data-ajax="false">Custom select menu</a></li>
-						<li data-filtertext="filterable select filter popup dialog"><a href="../selectmenu-custom-filter/" data-ajax="false">Custom select menu with filter</a></li>
 					</ul>
 				</div>
 			</li>
