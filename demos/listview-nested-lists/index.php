@@ -23,7 +23,7 @@
 		<div class="jqm-banner"><h3>Version <span class="jqm-version"></span> Demos</h3></div>
 	</div><!-- /header -->
 
-	<div role="main" class="ui-content jqm-content">
+	<div role="main">
 
         <h1>Nested Listviews</h1>
 
@@ -96,7 +96,6 @@
         </div>
 	</div><!-- /content -->
 
-	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<h6>jQuery Mobile Version <span class="jqm-version"></span> Demos</h6>
