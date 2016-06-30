@@ -94,22 +94,6 @@
             </form>
         </div><!--/demo-html -->
 
-        <h2>Disabled option</h2>
-
-        <div data-demo-html="true">
-            <form>
-            <div class="ui-field-contain">
-                <label for="select-native-18">1 option disabled:</label>
-                <select name="select-native-18" id="select-native-18">
-                    <option value="1">The 1st Option</option>
-                    <option value="2">The 2nd Option</option>
-                    <option value="3" disabled="disabled">The 3rd Option</option>
-                    <option value="4">The 4th Option</option>
-                </select>
-            </div>
-            </form>
-        </div><!--/demo-html -->
-
         <h2>Optgroup</h2>
 
         <div data-demo-html="true">
