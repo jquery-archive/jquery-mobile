@@ -64,7 +64,7 @@
 			"./widgets/forms/select.custom.backcompat",
 			"./jquery-ui/widgets/controlgroup",
 			"./widgets/controlgroup",
-			"./widgets/enhancer.backcompat",,
+			"./widgets/enhancer.backcompat",
 			"./widgets/controlgroup.backcompat",
 			"./widgets/controlgroup.selectmenu",
 			"./widgets/toolbar",
