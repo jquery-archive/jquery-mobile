@@ -14,6 +14,7 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"require",
+			"jquery-ui/widget",
 			"./widgets/loader",
 			"./widgets/loader.backcompat",
 			"./events",

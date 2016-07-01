@@ -23,6 +23,7 @@
 			"../core",
 			"jquery-ui/safe-active-element",
 			"jquery-ui/safe-blur",
+			"jquery-ui/widget",
 			"../navigation/path",
 			"../navigation/base",
 			"../events/navigate",
