@@ -247,6 +247,20 @@ return {
 			}
 		]
 	},
+	"demos.datepicker": {
+		files: [
+			{
+				expand: true,
+				src: [ "external/jquery-mobile-datepicker-wrapper/**/*" ],
+				dest: path.join( "<%= dist %>" )
+			},
+			{
+				expand: true,
+				src: [ "external/jquery-ui/widgets/datepicker.js" ],
+				dest: path.join( "<%= dist %>" )
+			}
+		]
+	},
 	"demos.unprocessed": {
 		files: [
 			{
