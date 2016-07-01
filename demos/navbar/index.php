@@ -298,7 +298,7 @@
 			</div>
 			</div><!--/demo-html -->
 
-		<p>Icons by Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
+		<p>Icons by Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Licensed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
 
 		<h2>Themes</h2>
 

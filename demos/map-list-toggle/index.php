@@ -260,7 +260,7 @@
 	<!-- Load map assets at bottom for performance -->
 	<script type="text/javascript" src="jquery.gmap.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/infobox/1.0/src/infobox_packed.js"></script>
 	</div>
 
 </body>
