@@ -269,7 +269,7 @@ QUnit.test( "page-retains-fixed-header-on-popup-remove", function( assert ) {
 
 		function() {
 
-			$( ".ui-pagecontainer" ).change( "#default" );
+			$( ".ui-pagecontainer" ).pagecontainer( "change", "#default" );
 
 		}
 	] );
