@@ -41,7 +41,8 @@ grunt.registerTask( "build:demos", [
 	"copy:demos.processed",
 	"copy:demos.php",
 	"copy:demos.unprocessed",
-	"copy:demos.backbone"
+	"copy:demos.backbone",
+	"copy:demos.datepicker"
 ] );
 grunt.registerTask( "build:cdn", [
 	"copy:jqueryCDN",
