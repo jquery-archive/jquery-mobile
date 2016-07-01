@@ -18,7 +18,7 @@
 		define( [
 			"jquery",
 			"../ns",
-			"../widget.js",
+			"../widget",
 			"jquery-ui/widget" ], factory );
 	} else {
 
