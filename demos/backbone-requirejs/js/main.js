@@ -48,8 +48,10 @@ require([
 	)
 
 	require( [ "jquerymobile" ], function () {
+		$( "body" ).one( "pagecontainerchange", function() {
 
-		// Instantiates a new Backbone.js Mobile Router
-		this.router = new Mobile();
+			// Instantiates a new Backbone.js Mobile Router
+			this.router = new Mobile();
+		} );
 	});
 });
