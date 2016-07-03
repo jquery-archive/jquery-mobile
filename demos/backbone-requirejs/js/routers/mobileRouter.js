@@ -12,6 +12,7 @@ define([
 
     // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend( {
+    	backToHome: false,
 
         // The Router constructor
         initialize: function() {
@@ -27,9 +28,9 @@ define([
             // Instantiates a new Vehicles Category View
             this.vehiclesView = new CategoryView( { el: "#vehicles", collection: new CategoriesCollection( [] , { type: "vehicles" } ) } );
 
+
             // Tells Backbone to start watching for hashchange events
             Backbone.history.start();
-
         },
 
         // Backbone.js Routes
@@ -47,11 +48,10 @@ define([
         home: function() {
 
             // Programatically changes to the categories page
-            this.pagecontainer.change( "#categories", {
+			this.pagecontainer.change( "#categories", {
 				reverse: false,
-				changeHash: false
+				changeUrl: false
 			});
-
         },
 
         // Category method that passes in the type that is appended to the url hash
@@ -59,9 +59,10 @@ define([
 
             // Stores the current Category View  inside of the currentView variable
             var currentView = this[ type + "View" ];
+            var that = this;
 
             // If there are no collections in the current Category View
-            if(!currentView.collection.length) {
+            if( !currentView.collection.length ) {
 
                 // Show's the jQuery Mobile loading icon
                 $.mobile.loading( "show" );
@@ -70,9 +71,9 @@ define([
                 currentView.collection.fetch().done( function() {
 
                     // Programatically changes to the current categories page
-                    this.pagecontainer.change( "#" + type, {
+                    that.pagecontainer.change( "#" + type, {
 						reverse: false,
-						changeHash: false
+						changeUrl: false
 					});
                 } );
 
@@ -84,7 +85,7 @@ define([
                 // Programatically changes to the current categories page
                 this.pagecontainer.change( "#" + type, {
 					reverse: false,
-					changeHash: false
+					changeUrl: false
 				});
 
             }
