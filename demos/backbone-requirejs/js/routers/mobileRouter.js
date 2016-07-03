@@ -17,7 +17,7 @@ define([
         // The Router constructor
         initialize: function() {
 
-            this.pagecontainer = $( ".ui-pagecontainer" ).pagecontainer( "instance" );
+            this.pagecontainerHandle = $( ".ui-pagecontainer" );
 
             // Instantiates a new Animal Category View
             this.animalsView = new CategoryView( { el: "#animals", collection: new CategoriesCollection( [] , { type: "animals" } ) } );
@@ -48,7 +48,7 @@ define([
         home: function() {
 
             // Programatically changes to the categories page
-			this.pagecontainer.change( "#categories", {
+			this.pagecontainerHandle.pagecontainer( "change", "#categories", {
 				reverse: false,
 				changeUrl: false
 			});
@@ -71,7 +71,7 @@ define([
                 currentView.collection.fetch().done( function() {
 
                     // Programatically changes to the current categories page
-                    that.pagecontainer.change( "#" + type, {
+                    that.pagecontainerHandle.pagecontainer( "change", "#" + type, {
 						reverse: false,
 						changeUrl: false
 					});
@@ -83,7 +83,7 @@ define([
             else {
 
                 // Programatically changes to the current categories page
-                this.pagecontainer.change( "#" + type, {
+                this.pagecontainerHandle.pagecontainer( "change", "#" + type, {
 					reverse: false,
 					changeUrl: false
 				});
