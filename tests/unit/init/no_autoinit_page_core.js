@@ -21,7 +21,9 @@ require( [ "jquery", "./init" ]
 		[ "./widgets/pagecontainer.transitions" ] : [] ), function() {
 	$.testHelper.detailedEventCascade( [
 		function() {
-			$.mobile.initializePage();
+			$( function() {
+				$.mobile.initializePage();
+			} );
 		},
 		{
 			pagecontainershow: { src: $( "body" ), event: "pagecontainershow.noAutoinit1" }
