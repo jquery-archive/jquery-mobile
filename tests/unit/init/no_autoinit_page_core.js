@@ -3,7 +3,7 @@ define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 QUnit.asyncTest( "resetActivePageHeight() will be called when page is initialized late", function( assert ) {
 var resetActivePageHeightCallCount = 0;
 
-expect( 1 );
+assert.expect( 1 );
 
 $( document ).on( "mobileinit", function() {
 	$.mobile.autoInitializePage = false;
