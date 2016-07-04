@@ -1,18 +1,38 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extension that adds transition management support to pagecontainer widget
-//>>label: Transitions Support for Pagecontainer
+/*!
+ * jQuery Mobile Page Container @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+//>>label: Content Management
 //>>group: Navigation
-define( [
-	"jquery",
-	"./pagecontainer",
+//>>description: Widget to create page container which manages pages and transitions
+//>>docs: http://api.jquerymobile.com/pagecontainer/
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-	// For $.mobile.navigate.history
-	"../navigation/method",
-	"../transitions/handlers" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-$.widget( "mobile.pagecontainer", $.mobile.pagecontainer, {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./pagecontainer",
+
+			// For $.mobile.navigate.history
+			"../navigation/method",
+			"../transitions/handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+} )( function( $ ) {
+return $.widget( "mobile.pagecontainer", $.mobile.pagecontainer, {
 	_getTransitionHandler: function( transition ) {
 		transition = $.mobile._maybeDegradeTransition( transition );
 
@@ -28,9 +48,5 @@ $.widget( "mobile.pagecontainer", $.mobile.pagecontainer, {
 		return ( new TransitionHandler( transition, reverse, to, from ) ).transition(
 			$.mobile.navigate.history.getActive().lastScroll || $.mobile.defaultHomeScroll );
 	}
-});
-
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
+} );
+} );

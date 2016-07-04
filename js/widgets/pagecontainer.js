@@ -38,11 +38,6 @@
 		// Browser globals
 		factory( jQuery );
 	}
-<<<<<<< 55d1ef47bd2f60ed10701a2e519bcfa3b0d80404
-})( function( $ ) {
-	$.widget( "mobile.pagecontainer", {
-		version: "@VERSION",
-=======
 } )( function( $ ) {
 
 // These variables make all page containers use the same queue and only navigate one at a time
@@ -54,7 +49,6 @@ var pageTransitionQueue = [],
 
 $.widget( "mobile.pagecontainer", {
 	version: "@VERSION",
->>>>>>> Page: Style fixes powered by esformatter
 
 	options: {
 		theme: "a",
