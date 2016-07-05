@@ -45,7 +45,7 @@
 		"grunt-coveralls": "0.3.0",
 		"grunt-csscomb": "1.2.1",
 		"grunt-esformatter": "1.0.1",
-		"grunt-git-authors": "2.0.0",
+		"grunt-git-authors": "3.2.0",
 		"grunt-hash-manifest": "0.5.3",
 		"grunt-html": "7.0.0",
 		"grunt-jscs": "2.8.0",
