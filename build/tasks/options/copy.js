@@ -316,7 +316,7 @@ return {
 		files: [ {
 			expand: true,
 			cwd: "<%= dist %>",
-			src: "<%= files.cdn %>",
+			src: files.cdn,
 			dest: "<%= dirs.cdn.jquery %>/"
 		} ]
 	},
@@ -339,7 +339,7 @@ return {
 
 			// WARNING: This will be modified by the config:copy:noversion task
 			cwd: "<%= dist %>",
-			src: "<%= files.cdn %>",
+			src: files,
 			dest: "<%= dirs.tmp %>"
 		}
 	},
@@ -360,7 +360,7 @@ return {
 
 			// WARNING: This will be modified by the config:copy:git task
 			cwd: "<%= dist %>",
-			src: "<%= files.cdn %>",
+			src: files,
 			dest: "<%= dirs.cdn.git %>"
 		}
 	}
