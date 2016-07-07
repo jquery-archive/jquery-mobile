@@ -917,6 +917,8 @@ $.widget( "mobile.pagecontainer", {
 			this._releaseTransitionLock();
 			this._triggerWithDeprecated( "changefailed", triggerData );
 		}, this ) );
+
+		return settings.deferred.promise();
 	},
 
 	_triggerPageBeforeChange: function( to, triggerData, settings ) {
@@ -989,9 +991,9 @@ $.widget( "mobile.pagecontainer", {
 			// while we are in the midst of loading a page or transitioning.
 			isPageTransitioning = true;
 
-			this._loadUrl( to, triggerData, settings );
+			return this._loadUrl( to, triggerData, settings );
 		} else {
-			this.transition( to, triggerData, settings );
+			return this.transition( to, triggerData, settings );
 		}
 	},
 
@@ -1217,6 +1219,8 @@ $.widget( "mobile.pagecontainer", {
 			this._triggerWithDeprecated( "transition", triggerData );
 			this._triggerWithDeprecated( "change", triggerData );
 		}, this ) );
+
+		return cssTransitionDeferred.promise();
 	},
 
 	// Determine the current base url
