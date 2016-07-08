@@ -255,8 +255,6 @@ var selectmenu = $.widget( "mobile.selectmenu", [ {
 					text = selected.map( function() {
 						return $( this ).text();
 					} ).get().join( ", " );
-				} else {
-					text = that.placeholder;
 				}
 
 				if ( text ) {
