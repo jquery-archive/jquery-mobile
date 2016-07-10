@@ -255,6 +255,24 @@ $.extend( $.mobile, {
 		this.loading._widget = loader;
 
 		return returnValue;
+	},
+
+	isElementCurrentlyVisible: function( el ) {
+		el = typeof el === "string" ? $( el )[ 0 ] : el[ 0 ];
+
+		if( !el ) {
+			return true;
+		}
+
+		var rect = el.getBoundingClientRect();
+
+		return (
+			rect.bottom > 0 &&
+			rect.right > 0 &&
+			rect.top <
+			( window.innerHeight || document.documentElement.clientHeight ) &&
+			rect.left <
+			( window.innerWidth || document.documentElement.clientWidth ) );
 	}
 } );
 
