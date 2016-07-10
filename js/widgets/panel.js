@@ -216,7 +216,8 @@ return $.widget( "mobile.panel", {
 						( heightWithMargins - heightWithoutMargins ) );
 				}
 			}
-			if ( scrollToTop === true ) {
+			if ( scrollToTop === true &&
+				!$.mobile.isElementCurrentlyVisible( ".ui-content" ) ) {
 				this.window[ 0 ].scrollTo( 0, $.mobile.defaultHomeScroll );
 			}
 		} else {
