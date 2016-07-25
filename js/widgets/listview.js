@@ -43,9 +43,7 @@ function addItemToDictionary( itemClassDict, element, key, extra ) {
 }
 
 var getAttribute = $.mobile.getAttribute,
-	countBubbleClassRegex = /\bui-listview-item-count-bubble\b/,
-	listviewItemClassRegex = /\bui-listview-item-static\b|\bui-listview-item-divider\b/,
-	buttonClassRegex = /\bui-button\b/;
+	countBubbleClassRegex = /\bui-listview-item-count-bubble\b/;
 
 function filterBubbleSpan() {
 	var child, parentNode,
@@ -94,7 +92,7 @@ return $.widget( "mobile.listview", $.extend( {
 		if ( this.options.inset ) {
 			this._addClass( "ui-listview-inset" );
 		}
-		this.refresh( true );
+		this._refresh( true );
 	},
 
 	// We only handle the theme option through the theme extension. Theme options concerning list
@@ -131,40 +129,55 @@ return $.widget( "mobile.listview", $.extend( {
 	_beforeListviewRefresh: $.noop,
 	_afterListviewRefresh: $.noop,
 
-	refresh: function( create ) {
-		var buttonClass, pos, numli, item, itemClass, itemExtraClass, itemTheme, itemIcon, icon, a,
-			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, li, ol,
-			altButtonClass, dividerTheme, start, itemClassDict, dictionaryKey, span, spliticon,
-			currentOptions = this.options,
-			createEnhanced = create && this.options.enhanced,
-			list = this.element;
+	updateItems: function( items ) {
+		this._refresh( false, items );
+	},
 
-		ol = !!$.nodeName( list[ 0 ], "ol" );
-		start = list.attr( "start" );
-		itemClassDict = {};
+	refresh: function() {
+		this._refresh();
+	},
+
+	_processListItem: function( /* item */ ) {
+		return true;
+	},
+
+	_processListItemAnchor: function( /* a */ ) {
+		return true;
+	},
+
+	_refresh: function( create, items ) {
+		var buttonClass, pos, numli, item, itemClass, itemExtraClass, itemTheme, itemIcon, icon, a,
+			isDivider, value, last, splittheme, li, dictionaryKey, span, allItems, newSpan,
+			currentOptions = this.options,
+			list = this.element,
+			ol = !!$.nodeName( list[ 0 ], "ol" ),
+			start = list.attr( "start" ),
+			itemClassDict = {};
 
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
-			startCount = parseInt( start, 10 ) - 1;
-			list.css( "counter-reset", "listnumbering " + startCount );
+			list.css( "counter-reset", "listnumbering " + ( parseInt( start, 10 ) - 1 ) );
 		}
 
 		this._beforeListviewRefresh();
 
-		li = this._getChildrenByTagName( list[ 0 ], "li", "LI" );
+		// We need all items even if a set was passed in - we just won't iterate over them in the
+		// main refresh loop.
+		allItems = this._getChildrenByTagName( list[ 0 ], "li", "LI" );
+		li = items || allItems;
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
 			itemClass = "ui-listview-item";
 			itemExtraClass = undefined;
 
-			if ( create || !listviewItemClassRegex.test( item[ 0 ].className ) ) {
+			if ( create || this._processListItem( item ) ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttribute( item[ 0 ], "role" ) === "list-divider" );
 				value = item.attr( "value" );
 				itemTheme = getAttribute( item[ 0 ], "theme" );
 
-				if ( a.length && ( ( !buttonClassRegex.test( a[ 0 ].className ) && !isDivider ) ||
+				if ( a.length && ( ( this._processListItemAnchor( a ) && !isDivider ) ||
 						create ) ) {
 					itemIcon = getAttribute( item[ 0 ], "icon" );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || currentOptions.icon );
@@ -176,35 +189,48 @@ return $.widget( "mobile.listview", $.extend( {
 					}
 
 					if ( a.length > 1 ) {
-						itemClass = "ui-listview-item-has-alternate";
+						itemClass += " ui-listview-item-has-alternate";
 
 						last = a.last();
 						splittheme = getAttribute( last[ 0 ], "theme" ) ||
-							currentOptions.splitTheme || getAttribute( item[ 0 ], "theme", true );
-						splitThemeClass = splittheme ? " ui-button-" + splittheme : "";
-						spliticon = getAttribute( last[ 0 ], "icon" ) ||
-							getAttribute( item[ 0 ], "icon" ) || currentOptions.splitIcon;
-						altButtonClass = "ui-button ui-button-icon-only" + splitThemeClass;
+							currentOptions.splitTheme || itemTheme;
 
-						span = createEnhanced ? last.children( ".ui-listview-item-split-icon" ) :
-							$( "<span>" );
+						newSpan = false;
+						span = last.children( ".ui-listview-item-split-icon" );
+						if ( !span.length ) {
+							span = $( "<span>" );
+							newSpan = true;
+						}
+
 						addItemToDictionary( itemClassDict, span[ 0 ],
-							"ui-listview-item-split-icon", "ui-icon ui-icon-" + spliticon );
+							"ui-listview-item-split-icon", "ui-icon ui-icon-" +
+								( getAttribute( last[ 0 ], "icon" ) || itemIcon ||
+									currentOptions.splitIcon ) );
 						addItemToDictionary( itemClassDict, last[ 0 ],
-							"ui-listview-item-split-button", altButtonClass );
+							"ui-listview-item-split-button",
+							"ui-button ui-button-icon-only" +
+								( splittheme ? " ui-button-" + splittheme : "" ) );
 						last.attr( "title", $.trim( last.getEncodedText() ) );
-						if ( !createEnhanced ) {
+
+						if ( newSpan ) {
 							last.empty().prepend( span );
 						}
 
 						// Reduce to the first anchor, because only the first gets the buttonClass
 						a = a.first();
 					} else if ( icon ) {
-						span = createEnhanced ? a.children( ".ui-listview-item-icon" ) :
-							$( "<span>" );
+
+						newSpan = false;
+						span = a.children( ".ui-listview-item-icon" );
+						if ( !span.length ) {
+							span = $( "<span>" );
+							newSpan = true;
+						}
+
 						addItemToDictionary( itemClassDict, span[ 0 ], "ui-listview-item-icon",
 							"ui-icon ui-icon-" + icon + " ui-widget-icon-floatend" );
-						if ( !createEnhanced ) {
+
+						if ( newSpan ) {
 							a.prepend( span );
 						}
 					}
@@ -213,21 +239,17 @@ return $.widget( "mobile.listview", $.extend( {
 					addItemToDictionary( itemClassDict, a[ 0 ], "ui-listview-item-button",
 						buttonClass );
 				} else if ( isDivider ) {
-					dividerTheme = ( getAttribute( item[ 0 ], "theme" ) ||
-						currentOptions.dividerTheme || currentOptions.theme );
-
-					itemClass = "ui-listview-item-divider";
-					itemExtraClass = "ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
+					itemClass += " ui-listview-item-divider";
+					itemExtraClass = "ui-bar-" + ( itemTheme || currentOptions.dividerTheme ||
+						currentOptions.theme || "inherit" );
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {
-					itemClass = "ui-listview-item-static";
+					itemClass += " ui-listview-item-static";
 					itemExtraClass = "ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
-					newStartCount = parseInt( value, 10 ) - 1;
-
-					item.css( "counter-reset", "listnumbering " + newStartCount );
+					item.css( "counter-reset", "listnumbering " + ( parseInt( value, 10 ) - 1 ) );
 				}
 			}
 
@@ -259,7 +281,9 @@ return $.widget( "mobile.listview", $.extend( {
 
 		this._afterListviewRefresh();
 
-		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
+		// NOTE: Using the extension addFirstLastClasses is deprecated as of 1.5.0 and this and the
+		// extension itself will be removed in 1.6.0.
+		this._addFirstLastClasses( allItems, this._getVisibles( allItems, create ), create );
 
 		// Untrack removed items
 		if ( this._oldListItems ) {
@@ -269,7 +293,7 @@ return $.widget( "mobile.listview", $.extend( {
 				} ),
 				"ui-listview-item ui-listview-item-static ui-listview-item-has-count " +
 				"ui-listview-item-has-alternate ui-listview-item-divider" );
-			this._oldListItems = li;
+			this._oldListItems = allItems;
 		}
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
