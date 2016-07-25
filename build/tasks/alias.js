@@ -32,6 +32,7 @@ grunt.registerTask( "build:js", [
 ] );
 grunt.registerTask( "build:css", [
 	"cssbuild",
+	"postcss",
 	"csslint",
 	"cssmin"
 ] );
