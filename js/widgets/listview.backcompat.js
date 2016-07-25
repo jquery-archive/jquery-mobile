@@ -32,12 +32,22 @@
 } )( function( $ ) {
 
 if ( $.mobileBackcompat !== false ) {
+	var listviewItemClassRegex = /\bui-listview-item-static\b|\bui-listview-item-divider\b/;
+	var buttonClassRegex = /\bui-button\b/;
+
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
 			corners: true,
 			shadow: true
 		},
-		classProp: "ui-listview-inset"
+		classProp: "ui-listview-inset",
+		_processListItem: function( item ) {
+			return !listviewItemClassRegex.test( item[ 0 ].className );
+		},
+
+		_processListItemAnchor: function( a ) {
+			return !buttonClassRegex.test( a[ 0 ].className );
+		}
 	} );
 	$.widget( "mobile.listview", $.mobile.listview, $.mobile.widget.backcompat );
 }

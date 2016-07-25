@@ -1,7 +1,8 @@
 define( [
 	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+	"jquery",
+	"../tests/integration/listview/sparing-setup-teardown"
+	], function( QUnit, $, sparingSetupTeardown ) {
 
 var helper = $.testHelper;
 
@@ -104,6 +105,19 @@ QUnit.test( "Turning on class ui-shadow", function( assert ) {
 	this.listview.option( "classes.ui-listview-inset", "ui-shadow" );
 	assert.strictEqual( this.listview.option( "shadow" ), true,
 		"Option shadow is true whenever ui-shadow is present in ui-listview-inset" );
+} );
+
+QUnit.module( "Sparingness of refresh()", sparingSetupTeardown );
+
+QUnit.test( "refresh()", function( assert ) {
+	assert.expect( 2 );
+
+	this.listview.refresh();
+
+	assert.strictEqual( this.calls[ 1 ][ 0 ].length, 1,
+		"One element was passed to _addClass()" );
+	assert.deepEqual( this.calls[ 1 ][ 0 ].get( 0 ), this.newItem[ 0 ],
+		"The single item in the call is as expected" );
 } );
 
 } );

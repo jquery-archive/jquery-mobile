@@ -5,8 +5,9 @@
 // TODO split out into separate test files
 define( [
 	"qunit",
-	"jquery"
-	], function( QUnit, $ ) {
+	"jquery",
+	"../tests/integration/listview/sparing-setup-teardown"
+	], function( QUnit, $, sparingSetupTeardown ) {
 
 QUnit.module( "Basic Linked list" );
 
@@ -456,6 +457,60 @@ QUnit.test( "basic pre-enhanced listview", function( assert ) {
 	list.append( item ).listview( "refresh" );
 	assert.hasClasses( item.children( "a" ), "ui-button",
 		"Listview refresh() enhances new items" );
+} );
+
+QUnit.module( "Sparingness of refresh() and updateItems()", sparingSetupTeardown );
+
+QUnit.test( "refresh()", function( assert ) {
+	assert.expect( 5 );
+
+	this.listview.refresh();
+
+	assert.strictEqual( this.calls[ 0 ][ 0 ].length, 3,
+		"Three elements were passed to _addClass()" );
+	assert.strictEqual( this.calls[ 0 ][ 1 ], "ui-listview-item ui-listview-item-static",
+		"Class ui-listview-item-static was assigned" );
+	assert.strictEqual( this.calls[ 0 ][ 0 ].first().attr( "id" ), "sparing-check-first-item",
+		"The first item in the call is as expected" );
+	assert.deepEqual( this.calls[ 0 ][ 0 ].get( 1 ), this.newItem[ 0 ],
+		"The second item in the call is as expected" );
+	assert.strictEqual( this.calls[ 0 ][ 0 ].last().attr( "id" ), "sparing-check-second-item",
+		"The last item in the call is as expected" );
+} );
+
+QUnit.test( "updateItems()", function( assert ) {
+	assert.expect( 2 );
+
+	this.listview.updateItems( this.newItem );
+
+	assert.strictEqual( this.calls[ 0 ][ 0 ].length, 1,
+		"One element was passed to _addClass()" );
+	assert.deepEqual( this.calls[ 0 ][ 0 ].get( 0 ), this.newItem[ 0 ],
+		"The single item in the call is as expected" );
+} );
+
+QUnit.module( "Dynamic icon update" );
+
+QUnit.test( "via refresh()", function( assert ) {
+	var listview = $( "#icon-refresh" );
+
+	listview.children().first().attr( "data-ui-icon", "back" );
+	listview.listview( "refresh" );
+
+	assert.hasClasses( listview.children().first().find( ".ui-listview-item-icon" ),
+		"ui-icon-back",
+		"Listview item icon is as expected" );
+} );
+
+QUnit.test( "via updateItems()", function( assert ) {
+	var listview = $( "#icon-update-items" );
+
+	listview.children().first().attr( "data-ui-icon", "back" );
+	listview.listview( "updateItems", listview.children().first() );
+
+	assert.hasClasses( listview.children().first().find( ".ui-listview-item-icon" ),
+		"ui-icon-back",
+		"Listview item icon is as expected" );
 } );
 
 } );
