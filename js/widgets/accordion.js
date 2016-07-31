@@ -20,8 +20,8 @@
 		define( [
 			"jquery",
 			"jquery-ui/widget",
-			"widget.theme",
-			"jquery-ui/widgets/accordion" ], factory );
+			"jquery-ui/widgets/accordion",
+			"./widget.theme" ], factory );
 	} else {
 
 		// Browser globals
