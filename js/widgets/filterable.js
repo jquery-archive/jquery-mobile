@@ -26,6 +26,7 @@ $.widget( "mobile.filterable", {
 		filterCallback: defaultFilterCallback,
 		enhanced: false,
 		input: null,
+		ignore: null,
 		children: "> li, > option, > optgroup option, > tbody tr, > .ui-controlgroup-controls > .ui-btn, > .ui-controlgroup-controls > .ui-checkbox, > .ui-controlgroup-controls > .ui-radio"
 	},
 
@@ -92,7 +93,7 @@ $.widget( "mobile.filterable", {
 	},
 
 	_filterItems: function( val ) {
-		var idx, callback, length, dst, noFilter,
+		var idx, callback, length, dst, noFilter
 			show = [],
 			hide = [],
 			opts = this.options,
@@ -104,7 +105,7 @@ $.widget( "mobile.filterable", {
 
 			// Partition the items into those to be hidden and those to be shown
 			for ( idx = 0 ; idx < length ; idx++ ) {
-				noFilter = $.mobile.getAttribute( filterItems[ idx ], "no-filter" ) === true;
+				noFilter = opts.ignore ? $( filterItems[ idx ] ).is( opts.ignore ) : false;
 				dst = ( !noFilter && callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
 				dst.push( filterItems[ idx ] );
 			}
