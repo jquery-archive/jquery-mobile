@@ -19,6 +19,7 @@
 	},
 	"devDependencies": {
 		"requirejs": "2.1.2",
+		"requirejs-plugins": "1.0.3",
 		"qunit": "1.18.0",
 		"qunit-assert-classes": "1.0.2",
 		"jquery-1.11.3": "jquery#1.11.3",
