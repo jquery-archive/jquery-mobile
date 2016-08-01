@@ -31,7 +31,8 @@ return {
 	requirejs: {
 		files: {
 			"requirejs/require.js": "requirejs/require.js",
-			"requirejs/plugins/json.js": "requirejs-plugins/src/json.js"
+			"requirejs/plugins/json.js": "requirejs-plugins/src/json.js",
+			"requirejs/plugins/text.js": "requirejs-text/text.js"
 		}
 	},
 	"jquery": {
