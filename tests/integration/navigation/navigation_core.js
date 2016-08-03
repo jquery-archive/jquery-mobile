@@ -1177,7 +1177,7 @@ QUnit.test( "handling of active button state when navigating", 1, function( asse
 
 		function() {
 			assert.lacksClasses( $( "#active-state-page1 a" ), "ui-button-active",
-				"No button should not have class " + $.mobile.activeBtnClass );
+				"No button should not have class ui-button-active" );
 			ready();
 		}
 	] );

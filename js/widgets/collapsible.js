@@ -300,10 +300,10 @@ $.widget( "mobile.collapsible", {
 		ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 			.find( "a" ).first()
-				.removeClass( $.mobile.activeBtnClass );
+				.removeClass( "ui-button-active" );
 		ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
-			.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+			.find( "a" ).first().removeClass( "ui-button-active" );
 
 		if ( ui.icon ) {
 			ui.icon.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
