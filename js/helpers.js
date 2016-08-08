@@ -134,31 +134,6 @@ $.extend( $.mobile, {
 		$.mobile.activeClickedLink = null;
 	},
 
-	// DEPRECATED in 1.4
-	// Find the closest parent with a theme class on it. Note that
-	// we are not using $.fn.closest() on purpose here because this
-	// method gets called quite a bit and we need it to be as fast
-	// as possible.
-	getInheritedTheme: function( el, defaultTheme ) {
-		var e = el[ 0 ],
-			ltr = "",
-			re = /ui-(bar|body|overlay)-([a-z])\b/,
-			c, m;
-		while ( e ) {
-			c = e.className || "";
-			if ( c && ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
-				// We found a parent with a theme class
-				// on it so bail from this loop.
-				break;
-			}
-
-			e = e.parentNode;
-		}
-		// Return the theme letter we found, if none, return the
-		// specified default.
-		return ltr || defaultTheme || "a";
-	},
-
 	enhanceable: function( elements ) {
 		return this.haveParents( elements, "enhance" );
 	},
