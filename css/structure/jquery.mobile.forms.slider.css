@@ -28,9 +28,6 @@ input.ui-slider-input {
 	text-align: center;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	appearance: none;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 }
 .ui-slider-input::-webkit-outer-spin-button,
@@ -111,8 +108,6 @@ div.ui-slider-switch.ui-mini {
 	padding: 0;
 }
 .ui-slider-handle-snapping {
-	-webkit-transition: left 70ms linear;
-	-moz-transition: left 70ms linear;
 	transition: left 70ms linear;
 }
 .ui-slider-switch .ui-slider-label {
@@ -145,7 +140,6 @@ div.ui-slider-switch.ui-mini {
 .ui-slider-switch .ui-slider-label,
 .ui-slider-switch .ui-slider-inneroffset,
 .ui-slider-handle {
-	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
 .ui-field-contain div.ui-slider-switch {

@@ -30,8 +30,6 @@
 .ui-controlgroup-vertical > .ui-button,
 .ui-controlgroup-vertical > li > .ui-button {
     display: block;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -94,7 +92,5 @@
 
 .ui-controlgroup > .ui-shadow:not(:focus),
 .ui-controlgroup > .ui-shadow:not(.ui-focus) {
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }

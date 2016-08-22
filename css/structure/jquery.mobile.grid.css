@@ -29,8 +29,6 @@
 	border: 0;
 	float: left;
 	min-height: 1px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 /* force new row */
