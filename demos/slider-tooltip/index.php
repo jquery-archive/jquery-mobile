@@ -33,8 +33,8 @@
               <input type="range" name="slider-2" id="slider-2" min="0" max="100" value="50" data-show-value="true">
               <label for="slider-3">Both options together:</label>
               <input type="range" name="slider-3" id="slider-3" min="0" max="100" value="50" data-show-value="true" data-popup-enabled="true">
-              <label for="slider-3">Both options together (mini):</label>
-              <input type="range" name="slider-3" id="slider-3" min="0" max="100" value="50" data-show-value="true" data-popup-enabled="true" data-mini="true">
+              <label for="slider-4">Both options together (mini):</label>
+              <input type="range" name="slider-4" id="slider-4" min="0" max="100" value="50" data-show-value="true" data-popup-enabled="true" data-mini="true">
             </form>
         </div><!-- /demo-html -->
 
