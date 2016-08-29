@@ -63,7 +63,7 @@
 			<div data-demo-html="true">
 				<div class="ui-field-contain">
 					<legend>Checkbox legend:</legend>
-					<label for="checkbox-b">Checkbox with legend:</label>
+					<label for="checkbox-b">Checkbox with legend</label>
 					<input type="checkbox" name="checkbox-b" id="checkbox-b">
 				</div>
 			</div><!--/demo-html -->
@@ -101,8 +101,8 @@
 				<div class="ui-field-contain">
 					<fieldset data-role="controlgroup">
 						<legend>Vertical controlgroup, buttons:</legend>
-						<button class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
-						<input type="button" data-icon="back" data-iconpos="right" value="Two">
+						<button class="ui-shadow ui-button">One <span class="ui-icon ui-icon-home"></span></button>
+						<input type="button" value="Two">
 						<a href="#">Three <span class="ui-icon ui-icon-grid"></span></a>
 					</fieldset>
 				</div>
@@ -112,8 +112,8 @@
 				<div class="ui-field-contain">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, buttons:</legend>
-						<button class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
-						<input type="button" data-icon="back" data-iconpos="right" value="Two">
+						<button class="ui-shadow ui-button">One <span class="ui-icon ui-icon-home"></span></button>
+						<input type="button" value="Two">
 						<a href="#">Three <span class="ui-icon ui-icon-grid"></span></a>
 					</fieldset>
 				</div>
@@ -176,7 +176,7 @@
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, mixed:</legend>
 						<a href="#">Link <span class="ui-icon ui-icon-arrow-r"></span></a>
-						<button class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
+						<button class="ui-shadow ui-button ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
 						<label for="select-v-1e" class="ui-hidden-accessible">Select</label>
 						<select name="select-v-1e" id="select-v-1e">
 							<option value="#">One</option>
@@ -197,7 +197,7 @@
 			<div data-demo-html="true">
 				<div class="ui-field-contain">
 					<label for="flip-1">Flip toggle:</label>
-					<select name="flip-1" id="flip-1" data-role="slider">
+					<select name="flip-1" id="flip-1" data-role="flipswitch">
 						<option value="off">Off</option>
 						<option value="on">On</option>
 					</select>
@@ -331,9 +331,9 @@
 				<div class="ui-field-contain">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical controlgroup, buttons:</legend>
-						<button class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
-						<input type="button" data-icon="back" data-iconpos="right" value="Two">
-						<a href="#" class="ui-shadow ui-button ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
+						<button class="ui-shadow ui-button">One <span class="ui-icon ui-icon-home"></span></button>
+						<input type="button" value="Two">
+						<a href="#" class="ui-shadow ui-button">Three <span class="ui-icon ui-icon-grid"></span></a>
 					</fieldset>
 				</div>
 			</div><!--/demo-html -->
@@ -342,9 +342,9 @@
 				<div class="ui-field-contain">
 					<fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
 						<legend>Horizontal controlgroup, buttons:</legend>
-						<button class="ui-shadow ui-button ui-corner-all">One <span class="ui-icon ui-icon-home"></span></button>
-						<input type="button" data-icon="back" data-iconpos="right" value="Two">
-						<a href="#" class="ui-shadow ui-button ui-corner-all">Three <span class="ui-icon ui-icon-grid"></span></a>
+						<button class="ui-shadow ui-button">One <span class="ui-icon ui-icon-home"></span></button>
+						<input type="button" value="Two">
+						<a href="#" class="ui-shadow ui-button">Three <span class="ui-icon ui-icon-grid"></span></a>
 					</fieldset>
 				</div>
 			</div><!--/demo-html -->
@@ -406,7 +406,7 @@
 					<fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
 						<legend>Horizontal controlgroup, mixed:</legend>
 						<a href="#">Link <span class="ui-icon ui-icon-arrow-r"></span></a>
-						<button class="ui-shadow ui-button ui-corner-all ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
+						<button class="ui-shadow ui-button ui-button-icon-only">Button <span class="ui-icon ui-icon-grid"></span></button>
 						<label for="select-v-5e" class="ui-hidden-accessible">Select</label>
 						<select name="select-v-5e" id="select-v-5e">
 							<option value="#">One</option>
@@ -427,7 +427,7 @@
 			<div data-demo-html="true">
 				<div class="ui-field-contain">
 					<label for="flip-5">Flip toggle:</label>
-					<select name="flip-5" id="flip-5" data-role="slider" data-mini="true">
+					<select name="flip-5" id="flip-5" data-role="flipswitch" data-mini="true">
 						<option value="off">Off</option>
 						<option value="on">On</option>
 					</select>
