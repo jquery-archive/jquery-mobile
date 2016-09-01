@@ -327,7 +327,8 @@ input.ui-button-inline,
 	width: auto;
 }
 /* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
-button.ui-button::-moz-focus-inner {
+button.ui-button::-moz-focus-inner,
+input.ui-button::-moz-focus-inner {
 	border: 0;
 }
 button.ui-button-icon-only,
