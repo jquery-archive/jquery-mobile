@@ -277,8 +277,7 @@ div.ui-mobile-viewport {
 	height: 22px;
 	line-height: inherit;
 	vertical-align: middle;
-	position: relative;
-	bottom: 2px;
+	margin-top: -2px;
 }
 .ui-widget-icon-block {
 	display: block;
@@ -290,7 +289,6 @@ div.ui-mobile-viewport {
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
-	bottom: auto;
 	top: 50%;
 	left: 50%;
 }
@@ -303,14 +301,12 @@ div.ui-mobile-viewport {
 
 /* Float icons helper classes */
 .ui-widget-icon-floatbeginning {
-	bottom: auto;
 	float: left;
-	margin-right: 1em;
+	margin: 1px 1em 0 0;
 }
 .ui-widget-icon-floatend {
-	bottom: auto;
 	float: right;
-	margin-left: 1em;
+	margin: 1px 0 0 1em;
 }
 
 /* Button elements and input buttons */
