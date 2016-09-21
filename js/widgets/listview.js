@@ -284,17 +284,6 @@ return $.widget( "mobile.listview", $.extend( {
 		// NOTE: Using the extension addFirstLastClasses is deprecated as of 1.5.0 and this and the
 		// extension itself will be removed in 1.6.0.
 		this._addFirstLastClasses( allItems, this._getVisibles( allItems, create ), create );
-
-		// Untrack removed items
-		if ( this._oldListItems ) {
-			this._removeClass(
-				this._oldListItems.filter( function() {
-					return ( $( this ).parent().length === 0 );
-				} ),
-				"ui-listview-item ui-listview-item-static ui-listview-item-has-count " +
-				"ui-listview-item-has-alternate ui-listview-item-divider" );
-			this._oldListItems = allItems;
-		}
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
