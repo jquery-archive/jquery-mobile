@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Controlgroup master
+ * jQuery UI Controlgroup 1.12.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -33,7 +33,7 @@
 var controlgroupCornerRegex = /ui-corner-([a-z]){2,6}/g;
 
 return $.widget( "ui.controlgroup", {
-	version: "master",
+	version: "1.12.1",
 	defaultElement: "<div>",
 	options: {
 		direction: "horizontal",
@@ -234,7 +234,7 @@ return $.widget( "ui.controlgroup", {
 		var result = {};
 		$.each( classes, function( key ) {
 			var current = instance.options.classes[ key ] || "";
-			current = current.replace( controlgroupCornerRegex, "" ).trim();
+			current = $.trim( current.replace( controlgroupCornerRegex, "" ) );
 			result[ key ] = ( current + " " + classes[ key ] ).replace( /\s+/g, " " );
 		} );
 		return result;

@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Tabbable master
+ * jQuery UI Tabbable 1.12.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
