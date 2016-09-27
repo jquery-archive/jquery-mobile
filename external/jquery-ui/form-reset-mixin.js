@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Form Reset Mixin master
+ * jQuery UI Form Reset Mixin 1.12.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
