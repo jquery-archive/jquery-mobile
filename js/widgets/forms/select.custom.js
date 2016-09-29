@@ -195,9 +195,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Toggle checkbox class for multiple selects
 		if ( this.isMultiple ) {
-			anchors = listItem.find( "a" );
-			this._toggleClass( anchors, null, "ui-checkbox-on", option.selected );
-			this._toggleClass( anchors, null, "ui-checkbox-off", !option.selected );
+			anchors = listItem.find( "a .ui-checkboxradio-icon" );
+			this._toggleClass( anchors, null, "ui-icon-check ui-state-checked", option.selected );
+			this._toggleClass( anchors, null, "ui-icon-blank", !option.selected );
 		}
 
 		// If it's not a multiple select, trigger change after it has finished closing
@@ -403,9 +403,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				// Multiple selects: add the "on" checkbox state to the icon
 				if ( this.isMultiple ) {
-					anchors = item.find( "a" );
-					this._removeClass( anchors, null, "ui-checkbox-off" );
-					this._addClass( anchors, null, "ui-checkbox-on" );
+					anchors = item.find( "a .ui-checkboxradio-icon" );
+					this._removeClass( anchors, null, "ui-icon-blank" );
+					this._addClass( anchors, null, "ui-icon-check ui-state-checked" );
 				} else {
 					if ( item.hasClass( "ui-screen-hidden" ) ) {
 						this._addClass( item.next().find( "a" ), null, "ui-button-active" );
@@ -414,9 +414,9 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 					}
 				}
 			} else if ( this.isMultiple ) {
-				anchors = item.find( "a" );
-				this._removeClass( anchors, null, "ui-checkbox-on" );
-				this._addClass( anchors, null, "ui-checkbox-off" );
+				anchors = item.find( "a .ui-checkboxradio-icon" );
+				this._removeClass( anchors, null, "ui-icon-check ui-state-checked" );
+				this._addClass( anchors, null, "ui-icon-blank" );
 			}
 		}, this ) );
 	},
@@ -659,7 +659,14 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			item.setAttribute( "role", "option" );
 			anchor.setAttribute( "tabindex", "-1" );
 			if ( this.isMultiple ) {
-				this._addClass( $( anchor ), null, "ui-button ui-checkbox-off ui-icon-end" );
+				this._addClass( $( anchor ), null, "ui-button ui-icon-end" );
+
+				var spanEl = $( "<span></span>", {
+					"class": "ui-checkboxradio-icon ui-corner-all" +
+					" ui-icon ui-icon-blank ui-icon-background"
+				} );
+
+				$( anchor ).append( spanEl );
 			}
 
 			item.appendChild( anchor );

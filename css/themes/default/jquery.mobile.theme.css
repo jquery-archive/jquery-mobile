@@ -179,9 +179,16 @@ html .ui-alt-icon .ui-radio-off .ui-icon {
 	opacity: .3;
 }
 
-.ui-checkboxradio-label:not(.ui-checkboxradio-radio-label) .ui-checkboxradio-icon {
+.ui-checkboxradio-label:not(.ui-checkboxradio-radio-label) .ui-checkboxradio-icon,
+.ui-listview-item .ui-checkboxradio-icon {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
+}
+
+.ui-listview-item .ui-checkboxradio-icon {
+	position: absolute;
+	right: .5625em;
+	top: 30%;
 }
 
 .ui-checkboxradio-checked .ui-checkboxradio-icon {
@@ -337,6 +344,7 @@ html body .ui-group-theme-a .ui-button.ui-button-active,
 html head + body .ui-button.ui-button-a.ui-button-active,
 /* Active checkboxradio */
 .ui-page-theme-a .ui-checkboxradio-checked .ui-icon,
+.ui-page-theme-a .ui-listview-item .ui-checkboxradio-icon.ui-state-checked,
 html .ui-bar-a .ui-checkboxradio-checked .ui-icon,
 html .ui-body-a .ui-checkboxradio-checked .ui-icon,
 html body .ui-group-theme-a .ui-checkboxradio-checked .ui-icon,
@@ -516,6 +524,7 @@ html body .ui-group-theme-b .ui-button.ui-button-active,
 html head + body .ui-button.ui-button-b.ui-button-active,
 /* Active checkboxradio */
 .ui-page-theme-b .ui-checkboxradio-checked .ui-icon,
+.ui-page-theme-b .ui-listview-item .ui-checkboxradio-icon.ui-state-checked,
 html .ui-bar-b .ui-checkboxradio-checked .ui-icon,
 html .ui-body-b .ui-checkboxradio-checked .ui-icon,
 html body .ui-group-theme-b .ui-checkboxradio-checked .ui-icon,
