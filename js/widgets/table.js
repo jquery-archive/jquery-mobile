@@ -61,7 +61,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 					}
 					// Store "cells" data on header as a reference to all cells in the same column as this TH
 					$( this )
-						.jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
+						.jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).children( sel ) );
 
 					coltally++;
 

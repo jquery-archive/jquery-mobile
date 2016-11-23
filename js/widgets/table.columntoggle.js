@@ -47,7 +47,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 		$menu,
 		$switchboard;
 
-	if ( o.mode !== "columntoggle" ) {
+	if ( $table.jqmData("mode") !== "columntoggle" ) {
 		return;
 	}
 
@@ -96,10 +96,8 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 
 	if ( event !== "refresh" ) {
 		$switchboard.on( "change", "input", function( e ){
-			if( this.checked ){
-				$( this ).jqmData( "cells" ).removeClass( "ui-table-cell-hidden" ).addClass( "ui-table-cell-visible" );
-			} else {
-				$( this ).jqmData( "cells" ).removeClass( "ui-table-cell-visible" ).addClass( "ui-table-cell-hidden" );
+			if (e.bubbles === undefined) {
+				self.update( $(this), true );
 			}
 		});
 
@@ -114,24 +112,47 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 			.popup();
 	}
 
-	// refresh method
-	self.update = function(){
-		$switchboard.find( "input" ).each( function(){
-			if (this.checked) {
-				this.checked = $( this ).jqmData( "cells" ).eq(0).css( "display" ) === "table-cell";
-				if (event === "refresh") {
-					$( this ).jqmData( "cells" ).addClass('ui-table-cell-visible');
+	// toggle handler
+	self.update = function( pass, override ){
+		var elems = pass === true ? $switchboard.find( "input" ) : pass;
+
+		elems.each(function(){
+			var blocker, undo;
+			// manual toggle lock/unlock
+			if ( override ) {
+				if (this.getAttribute("set")) {
+					undo = this.getAttribute("locked");
+					this.removeAttribute("set");
+					this.removeAttribute("locked");
+				} else {
+					blocker = this.checked ? "show" : "hide";
+					this.setAttribute("set",true);
+					this.setAttribute("locked", blocker);
 				}
-			} else {
-				$( this ).jqmData( "cells" ).addClass('ui-table-cell-hidden');
 			}
-			$( this ).checkboxradio( "refresh" );
+
+			if (event === "refresh") {
+				if (this.getAttribute("set")) {
+					blocker = this.checked ? "show" : "hide";
+				}
+			}
+
+			if (blocker) {
+				$( this ).jqmData( "cells" )[blocker]();
+			} else {
+				if (undo) {
+					$( this ).jqmData( "cells" ).removeAttr("style");
+				} else {
+					this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
+				}
+				$( this ).checkboxradio( "refresh" );
+			}
 		});
 	};
 
-	$.mobile.window.on( "throttledresize", self.update );
+	$.mobile.window.on( "throttledresize", function () { self.update(true) });
 
-	self.update();
+	self.update(true);
 
 });
 

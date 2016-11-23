@@ -162,39 +162,25 @@
 	});
 	asyncTest( "Column toggle table refresh" , function(){
 		expect( 5 );
-		
-		var $input;
-		
-		$.testHelper.pageSequence([
-			function() {
-				$( ".ui-table-columntoggle-btn" ).click();
-			},
-			function() {
-				$input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0);
-				$input.click();
-			},
-			function(){
-				setTimeout(function () {
-					$(window).trigger("refresh_test_table", ["#column-table-test"]);
-					
-					var $table = $('#column-table-test .ui-table'),
-						$first_input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0),
-						$visibleCells = $table.find("tbody tr:first").find("th, td").not('.ui-table-cell-hidden'),
-						$visibleHeaders = $table.find("thead tr:first").find("th, td").not('.ui-table-cell-hidden');
-						
-					ok( $table.length, "table still enhanced");
-					equal( $table.find('tbody tr:first')
-						.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, "random cell in hidden column has ui-table-cell-hidden class");
-					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
-					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
-						"cell reference in popup is to cell currently in table");
-					equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
-				}, 800);
-			},
-			function() {
-				start();
-			}
-		]);
+		var $input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0);
+		$input.click();
+
+		setTimeout(function () {
+			$(window).trigger("refresh_test_table", ["#column-table-test"]);
+
+			var $table = $('#column-table-test .ui-table'),
+				$first_input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0),
+				$visibleCells = $table.find("tbody tr:first").find("th, td").filter( ":visible" ),
+				$visibleHeaders = $table.find("thead tr:first").find("th, td").filter( ":visible" );
+			ok( $table.length, "table still enhanced");
+			equal( $table.find('tbody tr:first')
+				.find("th, td").eq(2).is(":visible"), false, "random cell in hidden column is not visible");
+			equal( $input.is( ":checked" ), true, "input is checked after refresh");
+			equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
+				"cell reference in popup is to cell currently in table");
+			equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
+			start();
+		}, 800);
 	});
 	asyncTest( "The dialog should become visible when button is clicked" , function(){
 		expect( 2 );
@@ -209,16 +195,16 @@
 				}, 800);
 			},
 			function() {
-				$input = $( ".ui-popup-container" ).find( "input:first" );
+				$input = $( "#movie-table-column-popup-popup" ).find( "input:first" );
 				$input.click();
 			},
 			function(){
 				setTimeout(function(){
-					var headers = $( "#column-table-test table tr" ).find( "th:first" );
+					var headers = $( "#column-table-test table thead tr" ).find( "th:first" );
 					if( $input.is( ":checked" ) ){
-						ok( headers.not( ".ui-table-cell-hidden" ) );
+						ok( headers.is( ":visible" )  );
 					} else {
-						ok( headers.is( ".ui-table-cell-hidden" ) );
+						ok( headers.is( ":hidden" ) );
 					}
 				}, 800);
 			},
