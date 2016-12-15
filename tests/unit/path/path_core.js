@@ -23,6 +23,7 @@ QUnit.test( "path.get method is working properly", function( assert ) {
 
 QUnit.test( "path.isPath method is working properly", function( assert ) {
 	assert.ok( !$.mobile.path.isPath( "bar" ), "anything without a slash is not a path" );
+	assert.ok( !$.mobile.path.isPath( "#bar/foo" ), "anything starting with hasbang is not a path" );
 	assert.ok( $.mobile.path.isPath( "bar/" ), "anything with a slash is a path" );
 	assert.ok( $.mobile.path.isPath( "/bar" ), "anything with a slash is a path" );
 	assert.ok( $.mobile.path.isPath( "a/r" ), "anything with a slash is a path" );
