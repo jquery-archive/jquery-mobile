@@ -207,7 +207,7 @@ Marcin Szczepanski <marcins@gmail.com>
 Robin Helgelin <robin@connectedtable.com>
 Elijah Manor <elijah.manor@gmail.com>
 Eric Caron <eric.caron@gmail.com>
-jerone <jeronevw@hotmail.com>
+Jeroen van Warmerdam <jeronevw@hotmail.com>
 Ryan McGeary <ryan@mcgeary.org>
 Jonah Schulte <jonah.schulte@dealer.com>
 Alex Schmitz <arschmitz@gmail.com>
