@@ -450,6 +450,9 @@ return $.widget( "mobile.panel", {
 					// Scroll to the top
 					that._positionPanel( true );
 
+					//scroll to the top
+					self._positionPanel( true );
+
 					if ( o.display !== "overlay" ) {
 						that._removeClass( currentPage.parent(), "ui-panel-page-container" );
 						that._removeClass( that._wrapper, "ui-panel-page-content-open" );
