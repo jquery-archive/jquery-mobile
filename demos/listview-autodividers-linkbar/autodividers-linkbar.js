@@ -9,7 +9,7 @@ $.mobile.document.on( "pagecreate", "#demo-page", function(){
 
 		if ( divider.length > 0 ) {
 			top = divider.offset().top;
-			$.mobile.silentScroll( top );
+			$("html, body").animate({ "scrollTop" : top},0);
 		} else {
 			return false;
 		}
