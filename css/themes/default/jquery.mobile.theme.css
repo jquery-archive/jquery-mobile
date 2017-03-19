@@ -609,3 +609,6 @@ button[disabled],
 	outline-width: 1px;
 	outline-style: inherit;
 }
+
+::-moz-selection { text-shadow: none; }
+::selection { text-shadow: none; }
