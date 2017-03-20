@@ -99,7 +99,10 @@
     	<dl>
             <dt>Swipe <span>verb</span></dt>
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
-        </dl>
+            <dd>
+            	<form>Form textual inputs are not effected.<br><input type="text" placeholder="INPUT field"><br><textarea placeholder="TEXTAREA field"></textarea></form>
+            </dd>
+        </dl>   
 
 		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Back to demo intro <span class="ui-icon ui-icon-back"></span></a>
 
