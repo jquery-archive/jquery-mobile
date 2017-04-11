@@ -1,0 +1,25 @@
+/*
+* jQuery Mobile Framework : popover plugin
+* Copyright (c) 2010 Adobe Systems Incorporated - Alexandre Capt (acapt@adobe.com)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change
+*/
+.ui-popover {
+    z-index: 9999 !important;
+    position: absolute;
+}
+
+.ui-popover-shadow {
+    -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, .6);
+    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, .6);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, .6);
+}
+
+.ui-popover-modal-mask {
+    opacity: .85;
+    z-index: 9990;
+    top: 0;
+    left: 0;
+    background-color: #CCC;
+    position: absolute;
+}

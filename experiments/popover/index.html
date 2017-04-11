@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+/*
+* jQuery Mobile Framework : asset browser experimental demo component
+* Copyright (c) 2010 Adobe Systems Incorporated - Alexandre Capt (acapt@adobe.com)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change
+*/
+-->
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>jQuery Mobile: Experiment popovers</title>
+    <link rel="stylesheet" href="../../themes/default"/>
+    <link rel="stylesheet" href="jquery.mobile.popover.css"/>
+    <link rel="stylesheet" href="carousel.css"/>
+    <link rel="stylesheet" href="assetbrowser.css"/>
+    <script src="../../js"></script>
+    <script src="jquery.mobile.popover.js"></script>
+    <script src="carousel.js"></script>
+    <script src="assetbrowser.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="b" id="main">
+
+    <div data-role="header">
+        <h1>Experimental popovers</h1>
+    </div>
+
+    <div data-role="content">
+        <h1>Asset Browser</h1>
+
+        <p>This page is a showcase for popovers. This is an alpha version, optimized for the iPad only.</p>
+        <p>Swippe the carousel to view more images. Tap images to select/deselect.</p>
+        <a href="#" id="asset-browser" data-role="button">Open the Asset Browser</a>
+        <a href="#" id="asset-browser-mask" data-role="button">Open the Asset Browser (modal mode)</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#asset-browser").bind("tap", function() {
+            window.AssetsBrowser.create(this);
+        });
+    $("#asset-browser-mask").bind("tap", function() {
+            window.AssetsBrowser.create(this, true);
+        });
+    });
+</script>
+</body>
+</html>

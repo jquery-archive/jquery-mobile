@@ -1,0 +1,69 @@
+/*
+* jQuery Mobile Framework : asset browser demo component
+* Copyright (c) 2010 Adobe Systems Incorporated - Alexandre Capt (acapt@adobe.com)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change
+*/
+
+.asset-view {
+    overflow: auto;
+    height: 408px;
+}
+
+.asset-selected {
+    -webkit-box-shadow: 0px 0px 35px #EFF5FB;
+    border: 1px #99BBE8 solid !important;
+    background-color: #EFF5FB;
+}
+
+.asset-wrap {
+    float:left;
+    margin:4px;
+    margin-right:0;
+    padding:6px;
+    border:1px solid transparent;
+}
+
+.asset-preview {
+    background-position:center center;
+    background-repeat:no-repeat;
+    height:100px;
+    width:140px;
+}
+
+.asset-title {
+    color: #000;
+    display:block;
+    overflow:hidden;
+    text-align:center;
+    width:140px;
+    text-shadow: white 0 0;
+}
+
+.ui-carousel {
+    height: 320px;
+    width: 342px;
+
+    background: #FFF -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FDFDFD), to(#FFF));
+    border: 1px solid #AAA;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+
+    border-radius: 0.6em;
+    border: 1px solid #AAA;
+    margin: 0.5em 0px 1em;
+    padding-right: 5px;
+}
+
+.ui-carousel-banner-item {
+    background-color: #fff;
+
+    height: 320px;
+    width: 322px;
+    margin: 5px;
+    padding-left: 10px;
+}
+
+.popover-assets h3 {
+    padding-left: 5px;
+}
