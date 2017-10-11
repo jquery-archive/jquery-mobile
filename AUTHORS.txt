@@ -290,7 +290,7 @@ Willy Aguirre <marti1125@gmail.com>
 Romeo Zivoin <rzivoin@healthx.com>
 Shawn Miller <shawn@mediocre.com>
 kapil garg <kapilgarg1996@gmail.com>
-Michał Gołębiowski <m.goleb@gmail.com>
+Michał Gołębiowski-Owczarek <m.goleb@gmail.com>
 Brad Tippett <brad@bradtippett.com>
 Sonali-Goyal <sonaligoyal654321@gmail.com>
 Ivan Enderlin <ivan.enderlin@hoa-project.net>
