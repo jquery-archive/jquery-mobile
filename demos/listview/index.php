@@ -272,7 +272,7 @@
 
 				<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
 					<li data-role="list-divider">Divider</li>
-					<li><a href="index.php" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
+					<li data-theme="a"><a href="index.php">Inbox <span class="ui-li-count">12</span></a></li>
 					<li><a href="index.php">Outbox <span class="ui-li-count">0</span></a></li>
 					<li><a href="index.php">Sent <span class="ui-li-count">328</span></a></li>
 				</ul>
