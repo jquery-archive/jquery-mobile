@@ -25,7 +25,6 @@
 	}
 } )( function( $ ) {
 
-var uiButtonInlineRegex = /ui-button-inline/g;
 var uiShadowRegex = /ui-shadow/g;
 
 return $.widget( "ui.controlgroup", $.ui.controlgroup, {
@@ -64,8 +63,8 @@ return $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	// select element to its parent which is still visible.
 	//
 	// The selectmenu widget's wrapper needs to have the class ui-button-inline, but only when the
-	// selectmenu is oriented horizontally. Thus, we remove it here, and allow the refresh() to
-	// determine whether it needs to be added.
+	// selectmenu is oriented horizontally. Thus, we and allow the refresh() to determine whether
+	// it needs to be added.
 	//
 	// The ui-shadow class needs to be removed here.
 	_initWidgets: function() {
@@ -80,12 +79,6 @@ return $.widget( "ui.controlgroup", $.ui.controlgroup, {
 					$.data( this, "ui-controlgroup-data" ) );
 				$.removeData( this, "ui-controlgroup-data" );
 
-				// Remove the class ui-button-inline. It may be re-added if this controlgroup is
-				// horizontal.
-				selectmenuWidget.option( "classes.ui-selectmenu",
-					selectmenuWidget.option( "classes.ui-selectmenu" )
-						.replace( uiButtonInlineRegex, "" )
-						.trim() );
 				selectmenuWidget.option( "classes.ui-selectmenu-button",
 					selectmenuWidget.option( "classes.ui-selectmenu-button" )
 						.replace( uiShadowRegex, "" )
