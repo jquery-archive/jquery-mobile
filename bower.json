@@ -26,5 +26,6 @@
 		"jquery-1.11.3": "jquery#1.11.3",
 		"jquery-mobile-datepicker-wrapper": "arschmitz/jquery-mobile-datepicker-wrapper#0.1.9",
 		"jshint": "2.4.0"
-	}
+	},
+	"version": "1.5.0-rc1"
 }
