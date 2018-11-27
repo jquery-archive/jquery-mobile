@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Panel Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="panel"
+		data-set-push-state="true"
+		data-init="true"
+		data-modules="panel_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="page1">
+		<div data-nstest-role="panel" id="panel-test-create">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-events">
+			<p>Contents of a panel.</p>
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-open">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-close">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-toggle">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-wrapper">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-dismiss">
+			<input id="dismiss-input">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-destroy">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-non-default-theme" data-nstest-theme="c">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-with-close">
+			<p>Contents of a panel.</p>
+			<a href="#demo-links" data-nstest-rel="close" data-nstest-role="button">Close panel</a>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-ignore-unrelated-link">
+			<a href="#" id="unrelated-link" data-nstest-ajax="false">Unrelated link</a>
+		</div>
+		<div data-nstest-role="panel" id="panel-test-id-change">
+			<p>Contents of a panel.</p>
+		</div>
+		<div id="panel-test-get-wrapper">
+			<p>Contents of a panel.</p>
+		</div>
+		<div id="panel-test-get-wrapper-overlay">
+			<p>Contents of a panel.</p>
+		</div>
+		<div id="panel-test-get-wrapper-push">
+			<p>Contents of a panel.</p>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Panel Test</h1>
+		</div>
+		<div data-nstest-role="content">
+			<h1 id="demo-links">Panels</h1>
+			<a href="#panel-test-create">Open Panel</a>
+			<a href="#panel-test-events">Open Panel</a>
+			<a href="#panel-test-open">Open Panel</a>
+			<a href="#panel-test-close">Open Panel</a>
+			<a href="#panel-test-toggle">Open Panel</a>
+			<a href="#panel-test-wrapper">Open Panel</a>
+			<a href="#panel-test-dismiss">Open Panel</a>
+			<a href="#panel-test-destroy">Open Panel</a>
+			<a href="#panel-test-non-default-theme">Open Panel</a>
+			<a href="#panel-test-with-close">Open Panel</a>
+			<a href="#panel-test-id-change">Open Panel</a>
+			<a href="#panel-test-external">Open Panel</a>
+		</div>
+
+		<div data-nstest-role="panel" id="panel-panelclose-event">
+			<h1>Panel!</h1>
+		</div>
+		<div data-nstest-role="panel" id="panel-openfirst" data-position="left">
+			<h1>first panel</h1>
+		</div>
+		<div data-nstest-role="panel" id="panel-opensecond" data-position="right">
+			<h1>second panel</h1>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="page2"></div>
+	<div id="external-panel-getWrapper-test"></div>
+
+	<div data-nstest-role="page" id="multipage">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Multipage</h1>
+		</div>
+		<div data-nstest-role="content">
+			<p>Contents of a page.</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="panel" id="panel-test-external">
+		<a href="#multipage">Multipage</a>
+		<a href="#" data-nstest-rel="back">Back</a>
+	</div>
+
+</body>
+</html>

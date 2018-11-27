@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Sequence Test Suite</title>
+	<script src="../../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet" href="../../../jqm-tests.css"/>
+
+	<script src="../../../lib/bootstrap.js"
+			data-base-url="../../../../js"
+			data-deps="page.dialog.backcompat popup"
+			data-init="true"
+			data-full="true"
+			data-set-push-state="true"
+			data-modules="sequence_core">
+	</script>
+
+	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="sequenceRedirect"></div>
+	<div id="internal-page" data-nstest-role="page"></div>
+
+	<!--
+	This test page is used when testing initial URLs of the form
+	http://domain/path/to/page1.html#/path/to/page2.html. It really only works if
+	you load sequence-tests.html via the hash, i.e.,
+	http://domain/path/to/sequence/index.html#/path/to/sequence-redirect.html
+	-->
+
+</body>
+</html>

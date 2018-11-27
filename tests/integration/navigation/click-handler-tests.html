@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Button Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page forms/button navigation"
+			data-init="true"
+			data-modules="click_handler_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" data-nstest-theme="a">
+		<div data-nstest-role="content" data-nstest-theme="b">
+				<form>
+					<input data-nstest-role="button" type="reset" value="Reset" id="reset-button">
+				</form>
+		</div>
+	</div>
+</body>
+</html>

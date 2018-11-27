@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Init Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-modules="no_autoinit_page_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="foo">
+	</div>
+
+	<div data-nstest-role="page" id="bar" data-nstest-url="bak">
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+	"preset": "jquery",
+
+	// We want to output all errors
+	"maxErrors": 1000000
+}

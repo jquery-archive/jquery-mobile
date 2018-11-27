@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="./popup.setFadeTransition.js popup"
+		data-no-backcompat="true"
+		data-init="true"
+		data-modules="popup_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-ui-role="page" id="start-page">
+		<div class="ui-content" id="page-content">
+			<div data-ui-role="popup" id="test-popup">
+				<p>This is the test popup</p>
+			</div>
+			<div data-ui-role="popup" id="tolerance-test">
+				<p>Tolerance test popup</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

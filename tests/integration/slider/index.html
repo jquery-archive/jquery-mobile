@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Slider Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="forms/slider.tooltip"
+			data-init="true"
+			data-modules="slider_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div class="ui-content">
+			<input id="basic-slider" type="range" min="0" max="100" value="13" step="1">
+			<input id="show-value" type="range"  min="0" max="100" value="13" step="1" data-nstest-show-value="true">
+			<input id="popup" type="range" min="0" max="100" value="13" step="1" data-nstest-popup-enabled="true">
+			<input id="value-and-popup" type="range" min="0" max="100" value="13" step="1" data-nstest-show-value="true" data-nstest-popup-enabled="true">
+			<input id="mini-basic-slider" type="range" min="0" max="100" value="13" step="1" data-nstest-mini="true">
+			<input id="mini-show-value" type="range"  min="0" max="100" value="13" step="1" data-nstest-mini="true" data-nstest-show-value="true">
+			<input id="mini-popup" type="range" min="0" max="100" value="13" step="1" data-nstest-mini="true" data-nstest-popup-enabled="true">
+			<input id="mini-value-and-popup" type="range" min="0" max="100" value="13" step="1" data-nstest-mini="true" data-nstest-show-value="true" data-nstest-popup-enabled="true">
+		</div>
+	</div>
+</body>
+</html>

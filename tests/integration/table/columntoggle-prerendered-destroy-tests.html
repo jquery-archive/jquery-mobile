@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="page table.columntoggle.popup jquery-ui/data"
+		data-modules="columntoggle_prerendered_destroy_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<div style="display: none;" id="columntoggle-prerendered-destroy-test-popup-placeholder"><!-- placeholder for columntoggle-prerendered-destroy-test-popup --></div>
+			<a href="#columntoggle-prerendered-destroy-test-popup" id="columntoggle-prerendered-destroy-test-button" class="ui-table-columntoggle-btn ui-btn ui-btn-a ui-corner-all ui-shadow ui-mini" data-rel="popup">Columns...</a>
+			<table id="columntoggle-prerendered-destroy-test" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-prerendered-destroy-test-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-prerendered-destroy-test-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="columntoggle-prerendered-destroy-test-popup" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-btn ui-corner-all ui-btn-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-btn ui-corner-all ui-btn-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-btn ui-corner-all ui-btn-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-btn ui-corner-all ui-btn-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

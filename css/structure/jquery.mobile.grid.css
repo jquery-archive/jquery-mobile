@@ -1,0 +1,116 @@
+/* content configurations. */
+.ui-grid-a:before,
+.ui-grid-b:before,
+.ui-grid-c:before,
+.ui-grid-d:before,
+.ui-grid-solo:before,
+.ui-grid-a:after,
+.ui-grid-b:after,
+.ui-grid-c:after,
+.ui-grid-d:after,
+.ui-grid-solo:after {
+	content: "";
+	display: table;
+}
+.ui-grid-a:after,
+.ui-grid-b:after,
+.ui-grid-c:after,
+.ui-grid-d:after,
+.ui-grid-solo:after {
+	clear: both;
+}
+.ui-block-a,
+.ui-block-b,
+.ui-block-c,
+.ui-block-d,
+.ui-block-e {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	float: left;
+	min-height: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/* force new row */
+.ui-block-a {
+	clear: left;
+}
+ul.ui-grid-a,
+ul.ui-grid-b,
+ul.ui-grid-c,
+ul.ui-grid-d,
+ul.ui-grid-solo,
+li.ui-block-a,
+li.ui-block-b,
+li.ui-block-c,
+li.ui-block-d,
+li.ui-block-e {
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+	list-style: none;
+}
+/* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
+[class*="ui-block-"] > button.ui-button {
+	margin-right: 0;
+	margin-left: 0;
+}
+[class*="ui-block-"] > .ui-button,
+[class*="ui-block-"] > .ui-selectmenu,
+[class*="ui-block-"] > .ui-checkbox,
+[class*="ui-block-"] > .ui-radio,
+[class*="ui-block-"] > button.ui-button-inline,
+[class*="ui-block-"] > button.ui-button-icon-only,
+.ui-header [class*="ui-block-"] > button.ui-button,
+.ui-footer [class*="ui-block-"] > button.ui-button {
+	margin-right: .3125em;
+	margin-left: .3125em;
+}
+
+.ui-grid-a > .ui-block-a,
+.ui-grid-a > .ui-block-b {
+	/* width: 49.95%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 50%;
+}
+.ui-grid-b > .ui-block-a,
+.ui-grid-b > .ui-block-b,
+.ui-grid-b > .ui-block-c {
+	/* width: 33.25%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 33.333%;
+}
+.ui-grid-c > .ui-block-a,
+.ui-grid-c > .ui-block-b,
+.ui-grid-c > .ui-block-c,
+.ui-grid-c > .ui-block-d {
+	/* width: 24.925%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 25%;
+}
+.ui-grid-d > .ui-block-a,
+.ui-grid-d > .ui-block-b,
+.ui-grid-d > .ui-block-c,
+.ui-grid-d > .ui-block-d,
+.ui-grid-d > .ui-block-e {
+	/* width: 19.925%; IE7 */
+	width: 20%;
+}
+.ui-grid-solo > .ui-block-a {
+	width: 100%;
+	float: none;
+}
+
+/* preset breakpoint to switch to stacked grid styles below 35em (560px) */
+@media (max-width: 35em) {
+	.ui-responsive > .ui-block-a,
+	.ui-responsive > .ui-block-b,
+	.ui-responsive > .ui-block-c,
+	.ui-responsive > .ui-block-d,
+	.ui-responsive > .ui-block-e {
+		width: 100%;
+		float: none;
+	}
+}

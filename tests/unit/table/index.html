@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table"
+		data-init="true"
+		data-modules="table_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table id="table-enhance-test" data-nstest-role="table" class="ui-responsive">
+				<thead>
+					<tr data-test-header-row data-header-rows>
+						<th data-test-header-cell data-headers data-all-headers data-nstest-priority="2">Rank</th>
+						<th data-headers data-all-headers>Movie Title</th>
+						<th data-headers data-all-headers data-nstest-priority="3">Year</th>
+						<th data-headers data-all-headers data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-headers data-all-headers data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-all-rows-except-first>
+						<th data-test-header-expected-cells>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr data-all-rows-except-first>
+						<th data-test-header-expected-cells>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table data-nstest-role="table" id="grouped-test-table" data-nstest-mode="reflow" class="ui-responsive">
+				<thead>
+					<tr data-header-rows>
+						<td data-headers data-all-headers></td>
+						<th data-test-header-cell data-headers data-all-headers colspan="3">Q1 2012</th>
+						<th data-headers data-all-headers class="test-column-header" colspan="3">Q2 2012</th>
+						<th data-headers data-all-headers colspan="3">Q3 2012</th>
+						<th data-headers data-all-headers colspan="3">Q4 2012</th>
+						<th data-headers data-all-headers colspan="3">YTD Totals</th>
+					</tr>
+					<tr data-header-rows data-all-rows-except-first>
+						<th data-all-headers>Store</th>
+						<th data-test-header-expected-cells data-all-headers>Income</th>
+						<th data-test-header-expected-cells data-all-headers>Profit</th>
+						<th data-test-header-expected-cells data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-all-rows-except-first>
+						<th>Boston</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr data-all-rows-except-first>
+						<th>Chicago</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr data-all-rows-except-first>
+						<th>NYC</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="destroy-test">
+				<thead>
+					<tr><td></td><td></td></tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Toolbar Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="toolbar"
+			data-init="true"
+			data-modules="toolbar_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="start-page-header">
+			<a href="#">Left Link</a>
+			<a href="#" data-nstest-role="none">Right Link</a>
+		</div>
+		<div class="ui-content">
+			<a href="#page2" id="go-to-page2">Go</a>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="page2">
+		<div id="header" data-nstest-role="toolbar" data-nstest-type="header" data-nstest-add-back-btn="true">
+			<h1>Header</h1>
+		</div>
+		<div data-nstest-role="content">
+			<p>Content</p>
+		</div>
+	</div>
+</body>
+</html>

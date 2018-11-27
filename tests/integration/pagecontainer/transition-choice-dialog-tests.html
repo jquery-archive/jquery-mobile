@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page.dialog.backcompat"
+			data-init="true"
+			data-modules="transition_choice_dialog_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="a">
+		<a id="go-to-b" data-nstest-transition="flip" data-nstest-rel="dialog" href="#b">Go to b</a>
+	</div>
+
+	<div data-nstest-role="dialog" id="b">
+		<a id="go-to-c" data-nstest-transition="slide" data-nstest-rel="dialog" href="#c">Go to c</a>
+	</div>
+
+	<div data-nstest-role="dialog" id="c">
+	</div>
+</body>
+</html>

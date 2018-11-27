@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Textinput Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="forms/textinput forms/clearButton forms/autogrow
+		forms/textinput.backcompat ./settings.js"
+		data-init="true"
+		data-modules="textinput_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div  data-nstest-role="page">
+		<input name="typeless" id="typeless-input" />
+		<textarea class="should-be-native" data-nstest-role="none"></textarea>
+
+		<textarea id="reference-autogrow">
+		</textarea>
+
+		<textarea id="init-autogrow">
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		</textarea>
+
+		<textarea id="keyup-autogrow">
+		</textarea>
+		<a href="external.html" id="external">external</a>
+
+		<textarea id="destroycorrectly">Test Value</textarea>
+
+		<input type="search" id="search-input">
+
+		<input type="text" id="text-input">
+
+		<input type="text" data-nstest-clear-btn="true" id="text-input-clear-btn">
+
+		<textarea data-nstest-clear-btn="true" id="textarea-clear-btn"></textarea>
+
+		<input id="test-clear-btn-option">
+
+		<input id="slider-input" type="number" data-nstest-type="range" min="0" max="93" step="1" value="17" data-nstest-clear-btn="true">
+
+		<input type="text" id="focus-class-test-for-input">
+		<textarea id="focus-class-test-for-textarea"></textarea>
+		<input id="injection-test" data-nstest-clear-btn="true" data-nstest-clear-btn-text="'>a<script>$.clearBtnTextScriptInjected = true;</script>bc</a><a'">
+		<div id="destroy-test-container">
+			<input type="text" id="destroy-test" data-nstest-role="none">
+		</div>
+		<input type="text" id="disable-test">
+		<input type="text" id="disable-test-default" disabled>
+	</div>
+</body>
+</html>

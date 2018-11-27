@@ -1,0 +1,147 @@
+.ui-selectmenu {
+	margin-top: .5em;
+	margin-bottom: .5em; /* no shorthand for margin because it would override margin-right for inline selects */
+}
+.ui-selectmenu > select {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+.ui-selectmenu .ui-button {
+	margin: 0;
+	opacity: 1; /* Fixes #2588: When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select (including "inherit") without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
+}
+.ui-selectmenu .ui-button select {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 1.5em;
+	min-height: 100%;
+	height: 3em;
+	max-height: 100%;
+	outline: 0;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor: pointer;
+	filter: Alpha(Opacity=0);
+	opacity: 0;
+	z-index: 2;
+}
+
+/* Display none because of issues with IE/WP's filter alpha opacity */
+.ui-selectmenu .ui-state-disabled select {
+	display: none;
+}
+
+/* Because we add all classes of the select and option elements to the span... */
+.ui-selectmenu span.ui-state-disabled {
+	filter: Alpha(Opacity=100);
+	opacity: 1;
+}
+.ui-selectmenu .ui-button.ui-selectmenu-nativeonly {
+	border-radius: 0;
+	border: 0;
+}
+.ui-selectmenu .ui-button.ui-selectmenu-nativeonly select {
+	opacity: 1;
+	text-indent: 0;
+	display: block;
+}
+
+/* ui-listview-item-count is styled in the listview CSS. We set padding and offset here because
+   select supports icon position while listview doesn't. */
+.ui-selectmenu .ui-listview-item-has-count.ui-button {
+	padding-right: 2.8125em;
+}
+.ui-selectmenu .ui-listview-item-has-count.ui-icon-end {
+	padding-right: 4.6875em;
+}
+.ui-selectmenu .ui-icon-end .ui-listview-item-count-bubble {
+	right: 3.2em;
+}
+
+/* Count indicator position must be different for mini version. */
+.ui-selectmenu.ui-mini .ui-btn-icon-right .ui-listview-item-count-bubble {
+	right: 2.5em;
+}
+
+/* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
+.ui-selectmenu .ui-button > span:not(.ui-listview-item-count-bubble) {
+	text-overflow: ellipsis;
+	overflow: hidden !important;
+	white-space: nowrap;
+}
+
+.ui-selectmenu-custom.ui-popup {
+	min-width: 11em;
+}
+
+.ui-selectmenu-custom .ui-page-dialog-contain {
+	overflow: hidden;
+}
+
+.ui-selectmenu-custom .ui-toolbar-header {
+	margin: 0;
+	padding: 0;
+	border-width: 0;
+}
+.ui-selectmenu-custom.ui-page-dialog .ui-toolbar-header {
+	z-index: 1;
+	position: relative;
+}
+.ui-selectmenu-custom.ui-popup .ui-toolbar-header {
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+/* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
+.ui-selectmenu-custom.ui-popup .ui-toolbar-header h1:after {
+	content: ".";
+	visibility: hidden;
+}
+.ui-selectmenu-custom .ui-toolbar-header .ui-toolbar-title {
+	margin: 0 2.875em;
+}
+.ui-selectmenu-custom.ui-page-dialog .ui-content {
+	overflow: visible;
+	z-index: 1;
+}
+
+.ui-selectmenu-custom .ui-selectmenu-custom-list {
+	margin: 0;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+.ui-toolbar-header:not(.ui-screen-hidden) + .ui-selectmenu-custom-list {
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-left-radius: 0;
+}
+.ui-toolbar-header.ui-screen-hidden + .ui-selectmenu-custom-list li.ui-first-child .ui-button {
+	border-top-width: 0;
+}
+.ui-selectmenu-custom .ui-selectmenu-custom-list li.ui-last-child .ui-button {
+	border-bottom-width: 0;
+}
+
+.ui-selectmenu-custom .ui-button.ui-listview-item-divider {
+	cursor: default;
+}
+
+.ui-selectmenu-custom .ui-selectmenu-custom-placeholder {
+	display: none;
+}
+
+/* This is necessary because multi inline select menu hides if width exceeds device width. */
+.ui-selectmenu.ui-button-inline {
+	float: left;
+	max-width: 100% ;
+}

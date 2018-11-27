@@ -1,0 +1,50 @@
+@import url("jquery.mobile.transition.fade.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
+
+.slidefade.out {
+	-webkit-transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+	-webkit-animation-duration: 225ms;
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+	-moz-animation-duration: 225ms;
+	transform: translateX(-100%);
+	animation-name: slideouttoleft;
+	animation-duration: 225ms;
+}
+
+.slidefade.in {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-transform: translateX(0);
+	-moz-animation-name: fadein;
+	-moz-animation-duration: 200ms;
+	transform: translateX(0);
+	animation-name: fadein;
+	animation-duration: 200ms;
+}
+
+.slidefade.out.reverse {
+	-webkit-transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+	-webkit-animation-duration: 200ms;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+	-moz-animation-duration: 200ms;
+	transform: translateX(100%);
+	animation-name: slideouttoright;
+	animation-duration: 200ms;
+}
+
+.slidefade.in.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-transform: translateX(0);
+	-moz-animation-name: fadein;
+	-moz-animation-duration: 200ms;
+	transform: translateX(0);
+	animation-name: fadein;
+	animation-duration: 200ms;
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Navigation Test Suite</title>
+
+	<script>
+	// This unit test requires a base tag to be set within the file.
+	// Most browsers require a base tag with an @href URL that is absolute.
+	// We need to dynamically inject the base tag so we can prefix it with
+	// the location of this test on the server without any server-side language
+	// requirements.
+
+	var baseUrl = location.href.replace(/[^\?\#\/]*(\?[^#]*)?(#.*)?$/, "");
+	document.write("<base href=\"" + baseUrl + "base-tests/app-base/\"/>\n");
+
+	</script>
+
+	<script src="../../../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet" href="../../../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../../../jqm-tests.css"/>
+
+	<script src="../../../../lib/bootstrap.js"
+			data-base-url="../../../../../js/"
+			data-full="true"
+			data-set-ns="true"
+			data-set-push-state="true"
+			data-modules="../../navigation_base">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="internal-page-1" data-nstest-role="page">
+		<a href="base-page-1.html" class="bp1"></a>
+		<a href="base-page-2.html" class="bp2"></a>
+		<a href="../content/content-page-1.html" class="cp1"></a>
+		<a href="../content/content-page-2.html" class="cp2"></a>
+		<a href="#internal-page-2" class="ip2"></a>
+		<img src="images/internal-page-1.png" alt="Internal Page 1">
+	</div>
+
+	<div id="internal-page-2" data-nstest-role="page">
+		<a href="base-page-1.html" class="bp1"></a>
+		<a href="base-page-2.html" class="bp2"></a>
+		<a href="../content/content-page-1.html" class="cp1"></a>
+		<a href="../content/content-page-2.html" class="cp2"></a>
+		<a href="#internal-page-1" class="ip1"></a>
+		<img src="images/internal-page-2.png" alt="Internal Page 2">
+	</div>
+
+	<div data-nstest-role="page" id="internal-no-action-form-page">
+		<div data-nstest-role="content">
+			<form>
+				<input type="hidden" name="foo" value="1">
+				<input type="hidden" name="bar" value="2">
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Dialog Test Suite</title>
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./dialog.bindMobileInit.js page.dialog.backcompat toolbar"
+			data-init="true"
+			data-modules="backcompat_core">
+	</script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<a id="open-hash-test" href="#hash-test" data-nstest-rel="dialog">Hash Test</a>
+	</div>
+
+	<div data-nstest-role="dialog" id="hash-test">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h2>Hash Test</h2>
+		</div>
+		<div class="ui-content">
+			<p>Hash Test</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" id="corners-option-test">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h2>Corners Initially On</h2>
+		</div>
+		<div class="ui-content">
+			<p>Test</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" id="corners-option-test-false" data-nstest-corners="false">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h2>Corners Initially Off Test</h2>
+		</div>
+		<div class="ui-content">
+			<p>Test</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" id="corners-via-class-test">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h2>Corners Initially On</h2>
+		</div>
+		<div class="ui-content">
+			<p>Test</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" id="corners-via-class-test-false" data-nstest-classes='{ "ui-page-dialog-contain": "ui-overlay-shadow" }'>
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h2>Corners Initially Off Test</h2>
+		</div>
+		<div class="ui-content">
+			<p>Test</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" data-nstest-enhanced="true" id="enhanced-corners-option-test" tabindex="0" class="ui-page ui-page-dialog ui-page-theme-a">
+		<div class="ui-page-dialog-contain ui-overlay-shadow ui-corner-all" role="dialog">
+			<div data-nstest-role="toolbar" data-nstest-type="header" role="banner" class="ui-toolbar-header ui-bar-inherit">
+				<a href="#" data-nstest-rel="back" class="ui-page-dialog-close-button ui-button ui-corner-all ui-button-icon-only ui-button-left" data-nstest-role="button">
+					Close
+					<span class="ui-page-dialog-close-button-icon ui-icon-delete ui-icon"></span>
+				</a>
+				<h2 class="ui-title" data-role="heading" aria-level="1">Corners Initially On</h2>
+			</div>
+			<div class="ui-content">
+				<p>Test</p>
+			</div>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" data-nstest-enhanced="true" id="enhanced-corners-option-test-false" data-nstest-corners="false" tabindex="0" class="ui-page ui-page-dialog ui-page-theme-a">
+		<div class="ui-page-dialog-contain ui-overlay-shadow" role="dialog">
+			<div data-nstest-role="toolbar" data-nstest-type="header" role="banner" class="ui-toolbar-header ui-bar-inherit">
+				<a href="#" data-nstest-rel="back" class="ui-page-dialog-close-button ui-button ui-corner-all ui-button-icon-only ui-button-left" data-nstest-role="button">
+					Close
+					<span class="ui-page-dialog-close-button-icon ui-icon-delete ui-icon"></span>
+				</a>
+				<h2 class="ui-title" data-role="heading" aria-level="1">Corners Initially Off Test</h2>
+			</div>
+			<div class="ui-content">
+				<p>Test</p>
+			</div>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" data-nstest-enhanced="true" id="enhanced-corners-via-class-test" tabindex="0" class="ui-page ui-page-dialog ui-page-theme-a">
+		<div class="ui-page-dialog-contain ui-overlay-shadow ui-corner-all" role="dialog">
+			<div data-nstest-role="toolbar" data-nstest-type="header" role="banner" class="ui-toolbar-header ui-bar-inherit">
+				<a href="#" data-nstest-rel="back" class="ui-page-dialog-close-button ui-button ui-corner-all ui-button-icon-only ui-button-left" data-nstest-role="button">
+					Close
+					<span class="ui-page-dialog-close-button-icon ui-icon-delete ui-icon"></span>
+				</a>
+				<h2 class="ui-title" data-role="heading" aria-level="1">Corners Initially On</h2>
+			</div>
+			<div class="ui-content">
+				<p>Test</p>
+			</div>
+		</div>
+	</div>
+
+	<div data-nstest-role="dialog" data-nstest-enhanced="true" id="enhanced-corners-via-class-test-false" data-nstest-classes="{ &quot;ui-page-dialog-contain&quot;: &quot;ui-overlay-shadow&quot; }" data-nstest-url="corners-via-class-test-false" tabindex="0" class="ui-page ui-page-dialog ui-page-theme-a">
+		<div class="ui-page-dialog-contain ui-overlay-shadow" role="dialog">
+			<div data-nstest-role="toolbar" data-nstest-type="header" role="banner" class="ui-toolbar-header ui-bar-inherit">
+				<a href="#" data-nstest-rel="back" class="ui-page-dialog-close-button ui-button ui-corner-all ui-button-icon-only ui-button-left" data-nstest-role="button">
+					Close
+					<span class="ui-page-dialog-close-button-icon ui-icon-delete ui-icon"></span>
+				</a>
+				<h2 class="ui-title" data-role="heading" aria-level="1">Corners Initially Off Test</h2>
+			</div>
+			<div class="ui-content">
+				<p>Test</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+.ui-popup-open .ui-header-fixed,
+.ui-popup-open .ui-footer-fixed {
+	position: absolute !important; /* See issues #4816, #4844 and #4874 and popup.js */
+}
+.ui-popup-screen {
+	background-image: url("data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won't understand the data-URI'd image, it ensures no additional requests occur in all other browsers with little overhead. */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 1px;
+	position: absolute;
+	filter: Alpha(Opacity=0);
+	opacity: 0;
+	z-index: 1099;
+}
+.ui-popup-screen.in {
+	opacity: .5;
+	filter: Alpha(Opacity=50);
+}
+.ui-popup-screen.out {
+	opacity: 0;
+	filter: Alpha(Opacity=0);
+}
+.ui-popup-container {
+	z-index: 1100;
+	display: inline-block;
+	position: absolute;
+	padding: 0;
+	outline: 0;
+}
+.ui-popup {
+	position: relative;
+}
+.ui-popup.ui-body-inherit {
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-popup-hidden {
+	left: 0;
+	top: 0;
+	position: absolute !important;
+	visibility: hidden;
+}
+.ui-popup-truncate {
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+.ui-popup.ui-content,
+.ui-popup .ui-content {
+	overflow: visible;
+}
+.ui-popup > .ui-header {
+	border-top-width: 0;
+}
+.ui-popup > .ui-footer {
+	border-bottom-width: 0;
+}
+.ui-popup > p,
+.ui-popup > h1,
+.ui-popup > h2,
+.ui-popup > h3,
+.ui-popup > h4,
+.ui-popup > h5,
+.ui-popup > h6 {
+	margin: .5em .4375em;
+}
+.ui-popup > span {
+	display: block;
+	margin: .5em .4375em;
+}
+.ui-popup-container .ui-content > p,
+.ui-popup-container .ui-content > h1,
+.ui-popup-container .ui-content > h2,
+.ui-popup-container .ui-content > h3,
+.ui-popup-container .ui-content > h4,
+.ui-popup-container .ui-content > h5,
+.ui-popup-container .ui-content > h6 {
+	margin: .5em 0;
+}
+.ui-popup-container .ui-content > span {
+	margin: 0;
+}
+.ui-popup-container .ui-content > p:first-child,
+.ui-popup-container .ui-content > h1:first-child,
+.ui-popup-container .ui-content > h2:first-child,
+.ui-popup-container .ui-content > h3:first-child,
+.ui-popup-container .ui-content > h4:first-child,
+.ui-popup-container .ui-content > h5:first-child,
+.ui-popup-container .ui-content > h6:first-child {
+	margin-top: 0;
+}
+.ui-popup-container .ui-content > p:last-child,
+.ui-popup-container .ui-content > h1:last-child,
+.ui-popup-container .ui-content > h2:last-child,
+.ui-popup-container .ui-content > h3:last-child,
+.ui-popup-container .ui-content > h4:last-child,
+.ui-popup-container .ui-content > h5:last-child,
+.ui-popup-container .ui-content > h6:last-child {
+	margin-bottom: 0;
+}
+.ui-popup > img {
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+}
+.ui-popup:not(.ui-content) > img:only-child,
+.ui-popup:not(.ui-content) > .ui-button-left:first-child + img:last-child,
+.ui-popup:not(.ui-content) > .ui-button-right:first-child + img:last-child {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+.ui-popup iframe {
+	vertical-align: middle;
+}
+.ui-popup > .ui-button-left,
+.ui-popup > .ui-button-right {
+	position: absolute;
+	top: -11px;
+	margin: 0;
+	z-index: 1101;
+}
+.ui-popup > .ui-button-left {
+	left: -11px;
+}
+.ui-popup > .ui-button-right {
+	right: -11px;
+}

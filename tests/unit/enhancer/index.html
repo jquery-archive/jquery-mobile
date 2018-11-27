@@ -1,0 +1,46 @@
+ <!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Enhancer Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+		data-deps="toolbar enhancer.backcompat enhancer
+		forms/flipswitch forms/textinput forms/textinput.backcompat
+		forms/button"
+		data-modules="enhancer">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+	<div id="basic-enhance">
+		<div data-role="toolbar" data-type="header" id="basic-toolbar"></div>
+		<input type="checkbox" id="basic-flipswitch" data-role="flipswitch">
+		<input type="text" id="basic-textinput">
+	</div>
+	<div id="custom-generator">
+		<div class="toolbar" id="generator-toolbar"></div>
+		<input type="checkbox" class="flipswitch" id="generator-flipswitch" data-role="flipswitch">
+		<input type="text" class="textinput" id="generator-textinput">
+	</div>
+	<div id="hooks">
+		<div class="hook-target"></div>
+	</div>
+	<div data-role="toolbar" data-type="header" id="enhance-within-target">
+		<input type="text" id="enhance-within-input">
+	</div>
+	<div id="enhance-multiple">
+		<div id="enhancer-multiple" data-role="button toolbar"></div>
+	</div>
+	<div id="enhance-options">
+		<div id="enhancer-options" data-role="button toolbar" data-option-foo="bar" data-option-bar="foo" data-optionbaz="boo"></div>
+	</div>
+</html>

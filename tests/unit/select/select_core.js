@@ -1,167 +1,101 @@
 /*
- * mobile select unit tests
+ * Mobile select unit tests
  */
 
-(function($){
-	var libName = "jquery.mobile.forms.select.js",
-			originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
-			originalDefTransitionHandler = $.mobile.defaultTransitionHandler;
+define( [ "qunit", "jquery" ], function( QUnit, $ ) {
 
-	module(libName, {
-		teardown: function(){
-			location.hash = "";
-			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
-			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
-		}
-	});
+QUnit.module( "Native select" );
 
-	asyncTest( "a large select menu should use the default dialog transition", function(){
-		var select = $("#select-choice-many-container-1 a");
+QUnit.test( "Native select does not blur synchronously in response to change", function( assert ) {
+	var selectmenu = $( "#blur-test" );
 
-		//set to something else
+	selectmenu.focus();
 
-		$.mobile.defaultTransitionHandler = $.testHelper.decorate({
-			fn: $.mobile.defaultTransitionHandler,
+	selectmenu.trigger( "change" );
 
-			before: function(name){
-				same(name, $.mobile.defaultDialogTransition);
-			}
-		});
+	assert.deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
+		"Native select is focused after triggering 'change'" );
+} );
 
-    setTimeout(function(){
-		$.testHelper.pageSequence([
-			function(){
-				// bring up the dialog
-				select.trigger("click");
-			},
+QUnit.module( "Custom select" );
 
-			function(){
-        $.mobile.activePage.find(".ui-header .ui-btn").click();
-			},
+QUnit.test( "Custom select is enhanced correctly", function( assert ) {
+	var eventNamespace = ".customSelectIsEnhancedCorrectly",
+		popup = $( "#enhance-test-listbox" ),
+		done = assert.async();
 
-			function(){
-				start();
-			}
-		]);
-    }, 1000);
-	});
-
-	asyncTest( "a large select menu should come up in a dialog many times", function(){
-		var menu, select = $("#select-choice-many-container a");
-
-		$.testHelper.pageSequence([
-			function(){
-				// bring up the dialog
-				select.trigger("click");
-			},
-
-
-			function(){
-				menu = $("#select-choice-many-menu");
-				same(menu.closest('.ui-dialog').length, 1);
-			},
-
-			function(){
-				// select and close the dialog
-				$.mobile.activePage.find(".ui-header .ui-btn").click();
-			},
-
-			function(){
-				//bring up the dialog again
-				select.trigger("click");
-			},
-
-			function(){
-				$.mobile.activePage.find(".ui-header .ui-btn").click();
-			},
-
-			function(){
-				start();
-			}
-		]);
-	});
-
-	asyncTest( "custom select menu always renders screen from the left", function(){
-		expect( 1 );
-		var select = $("ul#select-offscreen-menu");
-
-		$.testHelper.sequence([
-			function(){
-				$("#select-offscreen-container a").trigger("click");
-			},
-
-			function(){
-				ok(select.offset().left >= 30);
-				start();
-			}
-		], 1000);
-	});
-
-	asyncTest( "selecting an item from a dialog sized custom select menu leaves no dialog hash key", function(){
-		var dialogHashKey = "ui-state=dialog";
-
-		$.testHelper.pageSequence([
-			function(){
-				$("#select-choice-many-container-hash-check a").click();
-			},
-
-			function(){
-				ok(location.hash.indexOf(dialogHashKey) > -1);
-				$.mobile.activePage.find(".ui-header .ui-btn").click();
-			},
-
-			function(){
-				ok(location.hash.indexOf(dialogHashKey) == -1);
-				start();
-			}
-		]);
-	});
-
-	asyncTest( "dialog sized select menu opened many times remains a dialog", function(){
-		var dialogHashKey = "ui-state=dialog",
-
-				openDialogSequence = [
-					function(){
-						$("#select-choice-many-container-many-clicks a").click();
-					},
-
-					function(){
-						ok(location.hash.indexOf(dialogHashKey) > -1, "hash should have the dialog hash key");
-						$(".ui-page-active li").click();
-					}
-				],
-
-				sequence = openDialogSequence.concat(openDialogSequence).concat([start]);
-
-		$.testHelper.sequence(sequence, 1000);
-	});
-
-	module("Non native menus", {
-		setup: function() {
-			$.mobile.selectmenu.prototype.options.nativeMenu = false;
+	$.testHelper.detailedEventCascade( [
+		function() {
+			$( "#enhance-test" ).selectmenu( "open" );
 		},
-		teardown: function() {
-			$.mobile.selectmenu.prototype.options.nativeMenu = true;
+		{
+			popupafteropen: { src: popup, event: "popupafteropen" + eventNamespace + "1" }
+		},
+		function() {
+			popup.popup( "close" );
+		},
+		{
+			popupafterclose: { src: popup, event: "popupafterclose" + eventNamespace + 2 }
+		},
+		function() {
+			assert.strictEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button",
+				"The close button for a multiple choice select popup has the " +
+					"\"role='button'\" set" );
+			assert.strictEqual( $( "#enhance-test-button" ).attr( "tabindex" ), "2",
+				"Tabindex is correctly copied from select" );
+			assert.strictEqual( popup.popup( "option", "overlayTheme" ), "b",
+				"Popup has overlayTheme b" );
+			assert.strictEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+			done();
 		}
-	});
+	] );
+} );
 
-	asyncTest( "a large select option should not overflow", function(){
-		// https://github.com/jquery/jquery-mobile/issues/1338
-		var menu, select = $("#select-long-option-label");
+QUnit.module( "Custom select Multiple" );
 
-		$.testHelper.sequence([
-			function(){
-				// bring up the dialog
-				select.trigger("click");
-			},
+QUnit.test( "Custom select multiple is cleared correctly", function( assert ) {
+	var popup = $( "#enhance-test-listbox" );
+	$( "#enhance-test" )
+		.find( "option" )
+			.attr( "selected", false )
+			.prop( "selected", false )
+		.end()
+		.selectmenu( "refresh" );
+	assert.deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
+		"Checkboxes should not have ui-checkbox-on class" );
+} );
 
-			function() {
-				menu = $(".ui-selectmenu-list");
+QUnit.module( "Custom select Multiple Inline" ) ;
 
-				equal(menu.width(), menu.find("li:nth-child(2) .ui-btn-text").width(), "ui-btn-text element should not overflow");
-				start();
-			}
-		], 500);
+QUnit.test( "Custom select multiple inline width is adjusted correctly", function( assert ) {
+	var selectMenu = $( "#width-test" ),
+		parent = selectMenu.parent(),
+		widths = [ 100, 250, 500, 1000 ],
+		finalResult = 0,
+		result = 0;
 
-	});
-})(jQuery);
+	$.each( widths, function( index, width ) {
+		parent.css( { "width": width + "px" } );
+		selectMenu
+			.find( "option" )
+				.prop( "selected", true )
+			.end();
+		selectMenu.selectmenu( "refresh" );
+		result = selectMenu.width() < parent.width() ? 1 : 0;
+		if ( result === 1 ) {
+			finalResult += 1;
+		}
+	} );
+
+	assert.strictEqual( finalResult, 4,
+		"select menu width should not exceed parent's width" );
+} );
+
+QUnit.module( "Native select" );
+
+QUnit.test( "Select menu ID", function( assert ) {
+	assert.ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button",
+		"Select menu without an ID does not result in the button having name 'undefined-button'" );
+} );
+
+} );

@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Kitchen Sink Test Suite</title>
+	<!-- meta viewport left out on purpose for test append -->
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="./preinit.js"
+		data-full="true"
+		data-modules="kitchensink_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="default">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-theme="a">
+			<h1>Fixed toolbars</h1>
+			<a href="../../" data-nstest-icon="home" data-nstest-iconpos="notext" data-nstest-direction="reverse">Home</a>
+			<a href="../nav.html" data-nstest-icon="search" data-nstest-iconpos="notext" data-nstest-rel="dialog" data-nstest-transition="fade">Search</a>
+		</div>
+
+		<div class="ui-content" id="control-group-content">
+
+			<h2>Form Elements in Fieldcontains</h2>
+			<div data-nstest-role="fieldcontain">
+				<label for="name">Text Input:</label>
+				<input type="text" name="name" id="name" value=""  />
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="textarea">Textarea:</label>
+				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="search">Search Input:</label>
+				<input type="search" name="password" id="search" value=""  />
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="slider2">Flip switch:</label>
+				<select name="slider2" id="slider2" data-nstest-role="slider">
+					<option value="off">Off</option>
+					<option value="on">On</option>
+				</select>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="slider">Slider:</label>
+				<input type="range" name="slider" id="slider" value="50" min="0" max="100" data-nstest-highlight="true"  />
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<fieldset data-nstest-role="controlgroup">
+					<legend>Choose as many snacks as you'd like:</legend>
+					<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+					<label for="checkbox-1a">Cheetos</label>
+
+					<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+					<label for="checkbox-2a">Doritos</label>
+
+					<input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+					<label for="checkbox-3a">Fritos</label>
+
+					<input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+					<label for="checkbox-4a">Sun Chips</label>
+				</fieldset>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<legend>Font styling:</legend>
+					<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
+					<label for="checkbox-6">b</label>
+
+					<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" />
+					<label for="checkbox-7"><em>i</em></label>
+
+					<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
+					<label for="checkbox-8">u</label>
+				</fieldset>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<fieldset data-nstest-role="controlgroup" data-nstest-theme="c">
+					<legend>Choose a pet:</legend>
+						<input type="radio" name="radio-choice-1" id="radio-choice-1a" value="choice-1" checked="checked" />
+						<label for="radio-choice-1a">Cat</label>
+
+						<input type="radio" name="radio-choice-1" id="radio-choice-2a" value="choice-2"  />
+						<label for="radio-choice-2a">Dog</label>
+
+						<input type="radio" name="radio-choice-1" id="radio-choice-3a" value="choice-3"  />
+						<label for="radio-choice-3a">Hamster</label>
+
+						<input type="radio" name="radio-choice-1" id="radio-choice-4a" value="choice-4"  />
+						<label for="radio-choice-4a">Lizard</label>
+				</fieldset>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<legend>Layout view:</legend>
+						<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+						<label for="radio-choice-c">List</label>
+						<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
+						<label for="radio-choice-d">Grid</label>
+						<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" />
+						<label for="radio-choice-e">Gallery</label>
+				</fieldset>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="select-choice-1" class="select">Choose shipping method:</label>
+				<select name="select-choice-1" id="select-choice-1">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="select-choice-3" class="select">Your state:</label>
+				<select name="select-choice-3" id="select-choice-3">
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+				</select>
+			</div>
+
+			<div data-nstest-role="fieldcontain">
+				<label for="select-choice-a" class="select">Choose shipping method:</label>
+				<select name="select-choice-a" id="select-choice-a" data-nstest-native-menu="false">
+					<option>Custom menu example</option>
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" id="control-group-footer" class="ui-bar" data-nstest-position="inline">
+			<div data-nstest-role="controlgroup" data-nstest-type="horizontal">
+				<a href="index.html" data-nstest-icon="delete">Remove</a>
+				<a href="index.html" data-nstest-icon="plus">Add</a>
+				<a href="index.html" data-nstest-icon="arrow-u">Up</a>
+				<a href="index.html" data-nstest-icon="arrow-d">Down</a>
+			</div>
+		</div>
+
+		<h2>Mini Form Elements</h2>
+
+		<label for="nameA">Text Input:</label>
+		<input type="text" name="name" id="nameA" value="" data-nstest-mini="true" />
+
+		<label for="textareaA">Textarea:</label>
+		<textarea cols="40" rows="8" name="textarea" id="textareaA" data-nstest-mini="true"></textarea>
+
+		<label for="searchA">Search Input:</label>
+		<input type="search" name="password" id="searchA" value="" data-nstest-mini="true" />
+
+		<label for="slider2a">Flip switch:</label>
+		<select name="slider2" id="slider2a" data-nstest-role="slider" data-nstest-mini="true">
+			<option value="off">Off</option>
+			<option value="on">On</option>
+		</select>
+
+		<div data-nstest-role="fieldcontain">
+			<label for="sliderA">Slider:</label>
+			<input type="range" name="slider" id="sliderA" value="50" min="0" max="100" data-nstest-highlight="true" data-nstest-mini="true" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup" data-nstest-mini="true">
+			<!-- Mini set on controlgroup -->
+
+				<legend>Choose as many snacks as you'd like:</legend>
+				<input type="checkbox" name="checkbox-1a" id="checkbox-1b" class="custom" />
+				<label for="checkbox-1b">Cheetos</label>
+
+				<input type="checkbox" name="checkbox-2a" id="checkbox-2b" class="custom" />
+				<label for="checkbox-2b">Doritos</label>
+
+				<input type="checkbox" name="checkbox-3a" id="checkbox-3b" class="custom" />
+				<label for="checkbox-3b">Fritos</label>
+
+				<input type="checkbox" name="checkbox-4a" id="checkbox-4b" class="custom" />
+				<label for="checkbox-4b">Sun Chips</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal" data-nstest-mini="true">
+
+				<legend>Font styling:</legend>
+				<input type="checkbox" name="checkbox-6" id="checkbox-6b" class="custom" />
+				<label for="checkbox-6b">b</label>
+
+				<input type="checkbox" name="checkbox-7" id="checkbox-7b" class="custom" />
+				<label for="checkbox-7b"><em>i</em></label>
+
+				<input type="checkbox" name="checkbox-8" id="checkbox-8b" class="custom" />
+				<label for="checkbox-8b">u</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="checkbox" name="radio-gaga" id="radio-gaga" value="choice-1" data-nstest-mini="true"/>
+			<label for="radio-gaga">Unchecked by Default</label>
+
+			<input type="checkbox" name="radio-googoo" id="radio-googoo" value="choice-1" data-nstest-mini="true" checked="checked"/>
+			<label for="radio-googoo">Checked by Default</label>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup" data-nstest-theme="c" >
+				<!-- Mini set on individual elements. -->
+
+				<legend>Choose a pet:</legend>
+				<input type="radio" name="radio-choice-1" id="radio-choice-1b" value="choice-1" checked="checked" />
+				<label for="radio-choice-1b">Cat</label>
+
+				<input type="radio" name="radio-choice-1" id="radio-choice-2b" value="choice-2" data-nstest-mini="true"/>
+				<label for="radio-choice-2b">Dog</label>
+
+				<input type="radio" name="radio-choice-1" id="radio-choice-3b" value="choice-3" />
+				<label for="radio-choice-3b">Hamster</label>
+
+				<input type="radio" name="radio-choice-1" id="radio-choice-4b" value="choice-4" />
+				<label for="radio-choice-4b">Lizard</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+				<legend>Layout view:</legend>
+				<input type="radio" name="radio-choice-b" id="radio-choice-ca" value="on" checked="checked" />
+				<label for="radio-choice-ca">List</label>
+				<input type="radio" name="radio-choice-b" id="radio-choice-da" value="off" />
+				<label for="radio-choice-da">Grid</label>
+				<input type="radio" name="radio-choice-b" id="radio-choice-ea" value="other" />
+				<label for="radio-choice-ea">Gallery</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<label for="select-choice-1a" class="select">Choose shipping method:</label>
+			<select name="select-choice-1" id="select-choice-1a">
+				<option value="standard">Standard: 7 day</option>
+				<option value="rush">Rush: 3 days</option>
+				<option value="express">Express: next day</option>
+				<option value="overnight">Overnight</option>
+			</select>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<label for="select-choice-3a" class="select">Your state:</label>
+			<select name="select-choice-3" id="select-choice-3a">
+				<option value="AL">Alabama</option>
+				<option value="AK">Alaska</option>
+				<option value="AZ">Arizona</option>
+				<option value="AR">Arkansas</option>
+				<option value="CA">California</option>
+			</select>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<label for="select-choice-aa" class="select">Choose shipping method:</label>
+			<select name="select-choice-a" id="select-choice-aa" data-nstest-native-menu="false">
+				<option>Custom menu example</option>
+				<option value="standard">Standard: 7 day</option>
+				<option value="rush">Rush: 3 days</option>
+				<option value="express">Express: next day</option>
+				<option value="overnight">Overnight</option>
+			</select>
+		</div>
+
+		<div data-nstest-role="toolbar" data-nstest-type="footer" id="control-group-footer-2" class="ui-bar" data-nstest-position="inline">
+			<div data-nstest-role="controlgroup" data-nstest-type="horizontal">
+				<a href="index.html" data-nstest-icon="delete">Remove</a>
+				<a href="index.html" data-nstest-icon="plus">Add</a>
+				<a href="index.html" data-nstest-icon="arrow-u">Up</a>
+				<a href="index.html" data-nstest-icon="arrow-d">Down</a>
+			</div>
+		</div>
+
+		<h2>Simple list</h2>
+
+		<ul data-nstest-role="listview">
+			<li><a href="index.html">Acura</a></li>
+			<li><a href="index.html">Audi</a></li>
+			<li><a href="index.html">BMW</a></li>
+		</ul>
+
+		<h2>Mini list</h2>
+		<ul data-nstest-role="listview" data-nstest-mini="true">
+			<li><a href="index.html">Cooper</a></li>
+			<li><a href="index.html">Cooper S</a></li>
+			<li><a href="index.html">Clubman</a></li>
+		</ul>
+
+		<h2>Individual mini item</h2>
+		<ul data-nstest-role="listview">
+			<li><a href="index.html">Cooper</a></li>
+			<li data-nstest-mini="true"><a href="index.html">Cooper S</a></li>
+			<li><a href="index.html">Clubman</a></li>
+		</ul>
+
+		<h2>Count bubbles</h2>
+		<ul data-nstest-role="listview">
+			<li><a href="index.html">Inbox <span class="ui-listview-item-count-bubble">12</span></a></li>
+			<li><a href="index.html">Outbox <span class="ui-listview-item-count-bubble">0</span></a></li>
+			<li><a href="index.html">Drafts <span class="ui-listview-item-count-bubble">4</span></a></li>
+			<li><a href="index.html">Sent <span class="ui-listview-item-count-bubble">328</span></a></li>
+			<li><a href="index.html">Trash <span class="ui-listview-item-count-bubble">62</span></a></li>
+		</ul>
+
+		<h2>Numbered list</h2>
+		<ol data-nstest-role="listview">
+			<li><a href="index.html">The Godfather</a></li>
+			<li><a href="index.html">Inception</a></li>
+			<li><a href="index.html">The Good, the Bad and the Ugly </a></li>
+			<li><a href="index.html">Pulp Fiction</a></li>
+			<li><a href="index.html">Schindler's List</a></li>
+		</ol>
+
+		<h2>Divided, formatted content</h2>
+		<ul data-nstest-role="listview">
+			<li><a href="index.html">
+				<h3>Stephen Weber</h3>
+				<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+				<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+				<p class="ui-listview-item-aside"><strong>6:24</strong>PM</p>
+			</a></li>
+			<li><a href="index.html">
+				<h3>jQuery Team</h3>
+				<p><strong>Boston Conference Planning</strong></p>
+				<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+				<p class="ui-listview-item-aside"><strong>9:18</strong>AM</p>
+			</a></li>
+		</ul>
+
+		<h2>Icon list</h2>
+		<ul data-nstest-role="listview" data-nstest-theme="a">
+			<li><a href="index.html"><img src="../../../demos/_assets/img/gf.png" alt="France" class="ui-listview-item-icon">France <span class="ui-listview-item-count-bubble">4</span></a></li>
+			<li><a href="index.html"><img src="../../../demos/_assets/img/de.png" alt="Germany" class="ui-listview-item-icon">Germany <span class="ui-listview-item-count-bubble">4</span></a></li>
+			<li data-nstest-theme="b"><a href="index.html"><img src="../../../demos/_assets/img/gb.png" alt="Great Britain" class="ui-listview-item-icon">Great Britain <span class="ui-listview-item-count-bubble">0</span></a></li>
+			<li><a href="index.html"><img src="../../../demos/_assets/img/fi.png" alt="Finland" class="ui-listview-item-icon">Finland <span class="ui-listview-item-count-bubble">12</span></a></li>
+			<li><a href="index.html"><img src="../../../demos/_assets/img/sj.png" alt="Norway" class="ui-listview-item-icon">Norway <span class="ui-listview-item-count-bubble">328</span></a></li>
+			<li><a href="index.html"><img src="../../../demos/_assets/img/us.png" alt="United States" class="ui-listview-item-icon">United States <span class="ui-listview-item-count-bubble">62</span></a></li>
+		</ul>
+
+		<h2>Thumbnail, split button list</h2>
+
+		<ul data-nstest-role="listview">
+			<li><a href="index.html">
+			<img src="../../../demos/_assets/img/album-bb.jpg" alt="Album BB"/>
+			<h3>Broken Bells</h3>
+			<p>Broken Bells</p>
+			</a><a href="lists-split-purchase.html" data-nstest-rel="dialog" data-nstest-transition="slideup">Purchase album
+		</a></li>
+		<li><a href="index.html">
+			<img src="../../../demos/_assets/img/album-hc.jpg" alt="Album HC"/>
+			<h3>Warning</h3>
+			<p>Hot Chip</p>
+		</a><a href="lists-split-purchase.html" data-nstest-rel="dialog" data-nstest-transition="slideup">Purchase album
+		</a></li>
+		<li><a href="index.html">
+			<img src="../../../demos/_assets/img/album-p.jpg" alt="Album P"/>
+			<h3>Wolfgang Amadeus Phoenix</h3>
+			<p>Phoenix</p>
+			</a><a href="lists-split-purchase.html" data-nstest-rel="dialog" data-nstest-transition="slideup">Purchase album
+		</a></li>
+		</ul>
+
+		<h2>Divided, filterable list</h2>
+		<ul data-nstest-role="listview" data-nstest-filter="true">
+			<li data-nstest-role="list-divider">A</li>
+			<li><a href="index.html">Adam Kinkaid</a></li>
+			<li><a href="index.html">Alex Wickerham</a></li>
+			<li><a href="index.html">Avery Johnson</a></li>
+			<li data-nstest-role="list-divider">B</li>
+			<li><a href="index.html">Bob Cabot</a></li>
+			<li data-nstest-role="list-divider">C</li>
+			<li><a href="index.html">Caleb Booth</a></li>
+			<li><a href="index.html">Christopher Adams</a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+/* Dimensions related to the popup arrow
+-----------------------------------------------------------------------------------------------------------*/
+/* desired triangle height: 10px */
+
+/**
+ * guide for the arrow - its width, height, and offset are theme-dependent and
+ * should be expessed as left, right, top, bottom, so that the element bearing
+ * such a class becomes stretched inside its parent position: relative element.
+ * The left/top/right/bottom specified below should reflect the corresponding
+ * border radii and so it leaves room for the shadow:
+ *     ..--------------------..
+ *   ."        ^ top           ".
+ *  /          v                 \
+ * |     +------------------+     |
+ * |     |                  |     |
+ * | left|                  |right|
+ * |<--->|                  |<--->|
+ * |     +------------------+     |
+ *  \          ^                 /
+ *   `.        v bottom        .'
+ *     ""--------------------""
+ * The idea is that the top/left of the arrow container box does not move to a
+ * coordinate smaller than the top/left of the guide and the right/bottom of
+ * the arrow container box does not move to a coordinate larger than the
+ * bottom/right of the guide. This will help us avoid the following situation:
+ *        ..--------------------..
+ *      ."        ^ top           ".
+ *   /|/          v                 \
+ *  / |     +------------------+     |
+ *  \ |     |                  |     |
+ *   \| left|                  |right|
+ *    |<--->|                  |<--->|
+ *    |     +------------------+     |
+ *     \          ^                 /
+ *      `.        v bottom        .'
+ *        ""--------------------""
+ * The arrow should not receive a top/left coordinate such that it is too close
+ * to one of the corners, because then at first the shadow of the arrow and,
+ * given a coordinate even closer to the corner, even the body of the arrow will
+ * "stick out" of the corner of the popup. The guide provides a hint to the
+ * arrow positioning code as to which range of values is acceptable for the
+ * arrow container's top/left coordinate.
+ **/
+
+.ui-popup-arrow-container {
+	width: 20px;
+	height: 20px;
+}
+
+/* aside from the "infinities" (-1000,2000), triangle height is used */
+.ui-popup-arrow-container.ui-popup-arrow-l {
+	left: -10px;
+	clip: rect(-1000px,10px,2000px,-1000px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-t {
+	top: -10px;
+	clip: rect(-1000px,2000px,10px,-1000px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-r {
+	right: -10px;
+	clip: rect(-1000px,2000px,2000px,10px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-b {
+	bottom: -10px;
+	clip: rect(10px,2000px,1000px,-1000px);
+}
+
+/**
+ * For each side, the arrow is twice the desired size and its corner is aligned
+ * with the edge of the container:
+ *                                           
+ *           /\         /\                +----+       /\
+ *          /  \       /  \               | /\ |top   /  \
+ *      +----+  \     /  +----+       +-->|/  \|     /    \
+ *  left| /  |   \   /   |  \ |right  |   |    |    /      \
+ *      |/   |    \ /    |   \|       |  /|    |\  /        \
+ *      |\   |    / \    |   /|       | / +----+ \ \ +----+ /
+ *      | \  |   /   \   |  / |       | \        /  \|    |/
+ *      +----+  /     \  +----+       |  \      /    |    |
+ *       ^  \  /       \  /  ^        |   \    /  +->|\  /|
+ *       |   \/         \/   |        |    \  /   |  | \/ |bottom
+ *       |                   |        |     \/    |  +----+
+ *       +-------------------+--------+-----------+
+ *                           |
+ *                    arrow container
+ *                     (clips arrow)
+ **/
+
+.ui-popup-arrow-container .ui-popup-arrow {
+	/* (4*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
+	width: 28.284271247px;
+	height: 28.284271247px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow {
+	left: -4.142135623px;
+	top: 5.857864376px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow {
+	left: -4.142135623px;
+	top: -14.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow {
+	left: 5.857864376px;
+	top: -4.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow {
+	left: -14.142135623px;
+	top: -4.142135623px;
+}
+
+/* Fix rotation center for oldIE - see http://www.useragentman.com/IETransformsTranslator/ */
+.ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -7.0710678118654755px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -4.142135623730951px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow {
+    margin-left: -7.0710678118654755px;
+    margin-top: -5.857864376269049px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow {
+    margin-left: -4.142135623730951px;
+    margin-top: -5.857864376269049px;
+}
+
+/* structure */
+.ui-popup > .ui-popup-arrow-guide {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	visibility: hidden;
+}
+
+.ui-popup-arrow-container {
+	position: absolute;
+}
+
+.ui-popup-arrow {
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.ui-popup-arrow-container.ie .ui-popup-arrow {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
+	filter: progid:DXImageTransform.Microsoft.Matrix(
+	      	M11=0.7071067811865474,
+        	M12=-0.7071067811865477,
+        	M21=0.7071067811865477,
+        	M22=0.7071067811865474,
+        	SizingMethod='auto expand');
+}

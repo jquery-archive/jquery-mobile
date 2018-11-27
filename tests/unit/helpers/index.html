@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Helpers Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="helpers fixedToolbar tests/jquery.setNameSpace.immediately"
+		data-modules="helpers_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<!-- heights taken from OGR 24: 0 9 33 37 38 97 122 129 140 142 152 191 205 208 252 278 286 326 332 353 368 384 403 425 -->
+
+	<div id="external-header" data-nstest-role="toolbar" data-nstest-type="header" style="height: 33px;">
+		<h2>External Header</h2>
+	</div>
+	<div id="page" class="ui-page-active">
+		<div id="internal-header" data-nstest-role="toolbar" data-nstest-type="header" style="height: 38px;">
+			<h2>Internal Header</h2>
+		</div>
+		<div class="ui-content">
+			<p>Content</p>
+		</div>
+		<div id="internal-footer" data-nstest-role="toolbar" data-nstest-type="footer" style="height: 97px;">
+			<h2>Internal Footer</h2>
+		</div>
+	</div>
+	<div id="external-footer" data-nstest-role="toolbar" data-nstest-type="footer" style="height: 37px;">
+		<h2>External Footer</h2>
+	</div>
+</body>
+</html>

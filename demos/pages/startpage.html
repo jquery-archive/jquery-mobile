@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JQM latest - issue template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+  <script src="../../external/jquery/jquery.js"></script>
+  <script src="../../js/"></script>
+  <script>
+$('#page1').on('pagecreate', function() {
+
+    $('a').bind('click', function(e) {
+    var trans = $(this).text() || 'none',
+        rev = !!$('#cb1').attr('checked');
+
+    $( this ).closest( ".ui-pagecontainer" ).pagecontainer( "change", "#page1", {
+		transition: trans,
+        allowSamePageTransition: true,
+        reverse: rev
+	});
+    $('#p1').text( 'last transition: ' + trans + ' - reverse: ' + rev );
+  });
+});
+
+$('#page1').bind('pagehide', function(e) {
+  $('a.ui-button').removeClass('ui-button-active');
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-button-active') ) { 
+    $(this).addClass('ui-page-active');
+  }
+});    
+
+</script>
+  <style>
+    #edit-with-js-bin { display: none !important; }
+  </style>
+</head>
+<body>
+<div data-role="page" id="startpage" data-theme="a">
+  
+  <div data-role="toolbar" data-type="header">
+    <h1>same page transitions</h1>
+  </div><!-- /header 1 -->
+
+  <div role="main" class="ui-content">
+     <a data-role="button" href="samepagetransition.html">Go to page 2</a>
+    </div><!-- /content 1 -->
+
+</div><!-- /page 1 -->
+
+</body>
+</html>

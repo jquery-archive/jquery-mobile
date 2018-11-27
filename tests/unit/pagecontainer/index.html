@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Pagecontainer Unit Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-init="true"
+		data-modules="pagecontainer_core">
+	</script>
+</head>
+<body id="the-body">
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page" id="start-page">
+		<div data-role="toolbar" data-type="header"><h1>Start page</h1></div>
+		<div class="ui-content">
+			<a href="other-page.html" id="go-to-other-page">Go to other page</a>
+			<a href="page-does-not-exist.html" id="go-to-nonexistent-page">Go to non-existent page</a>
+		</div>
+	</div>
+	<div data-nstest-role="page" data-nstest-url="Raison d'être.html" class="weird-data-url"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+	"name": "jquery-mobile",
+	"main": [
+		"js/jquery.mobile.js",
+		"css/themes/default/jquery.mobile.css"
+	],
+	"ignore": [
+		".jshintrc",
+		"**/*.txt",
+		"!LICENSE-INFO.txt",
+		"build",
+		"demos",
+		"tests",
+		"tools"
+	],
+	"dependencies": {
+		"jquery": ">=1.8.0",
+		"jquery-ui": "jquery/jquery-ui#1.12.1"
+	},
+	"devDependencies": {
+		"requirejs": "2.1.2",
+		"requirejs-plugins": "1.0.3",
+		"requirejs-text": "2.0.3",
+		"qunit": "1.18.0",
+		"qunit-assert-classes": "1.0.2",
+		"jquery-1.11.3": "jquery#1.11.3",
+		"jquery-mobile-datepicker-wrapper": "arschmitz/jquery-mobile-datepicker-wrapper#0.1.9",
+		"jshint": "2.4.0"
+	}
+}

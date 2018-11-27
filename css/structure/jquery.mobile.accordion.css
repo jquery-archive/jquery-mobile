@@ -1,0 +1,38 @@
+.ui-accordion-header {
+	cursor: pointer;
+	display: block;
+	font-size: 100%;
+	font-weight: normal;
+	margin: 2px 0 0 0;
+	min-height: 0; /* support: IE7 */
+	padding: .5em .5em .5em .7em;
+	position: relative;
+}
+
+.ui-accordion-icons {
+	padding-left: 2.2em;
+}
+
+.ui-accordion-icons .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+
+.ui-accordion-header .ui-accordion-header-icon {
+	position: absolute;
+	bottom: auto;
+	left: .5em;
+	top: 50%;
+	margin-top: -11px;
+}
+
+.ui-accordion-content {
+	padding: 1em 2.2em;
+	border-top: 0;
+	overflow: auto;
+}
+
+.ui-accordion-header-active,
+.ui-accordion-header.ui-state-active {
+	border: 1px solid #aaaaaa;
+	font-weight: normal;
+}

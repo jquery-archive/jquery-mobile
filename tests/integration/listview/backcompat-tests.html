@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Listview Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="listview.backcompat tests/jquery.setNameSpace.immediately"
+			data-modules="backcompat_core">
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="qunit-fixture">
+		<div class="ui-content">
+			<ul id="the-listview" data-nstest-role="listview" data-nstest-inset="true">
+				<li>Item 1</li>
+				<li>Item 2</li>
+			</ul>
+		</div>
+
+		<div class="ui-content">
+			<ul id="listview-off" data-nstest-role="listview" data-nstest-inset="true" data-classes="{ 'ui-listview-inset': '' }">
+				<li>Item 1</li>
+				<li>Item 2</li>
+			</ul>
+		</div>
+
+		<ul id="sparing-check" data-nstest-role="listview">
+			<li id="sparing-check-first-item">Item 1</li>
+			<li id="sparing-check-second-item">Item 2</li>
+		</ul>
+	</div>
+</body>
+</html>

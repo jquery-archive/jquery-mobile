@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Collapsible Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table.columntoggle.popup table.reflow tests/jquery.setNameSpace.immediately jquery-ui/data"
+		data-modules="table_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<table id="reflow-test" data-nstest-mode="reflow">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Color</th>
+				<th>Shape</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Orange</td>
+				<td>Orange</td>
+				<td>Round</td>
+			</tr>
+			<tr>
+				<td>Watermelon</td>
+				<td>Green</td>
+				<td>Oval</td>
+			</tr>
+			<tr>
+				<td>Banana</td>
+				<td>Yellow</td>
+				<td>Sickle</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="columntoggle-test" data-nstest-mode="columntoggle">
+		<thead>
+			<tr>
+				<th data-nstest-priority="permanent">Name</th>
+				<th data-nstest-priority="1">Color</th>
+				<th data-nstest-priority="2">Shape</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Orange</td>
+				<td>Orange</td>
+				<td>Round</td>
+			</tr>
+			<tr>
+				<td>Watermelon</td>
+				<td>Green</td>
+				<td>Oval</td>
+			</tr>
+			<tr>
+				<td>Banana</td>
+				<td>Yellow</td>
+				<td>Sickle</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

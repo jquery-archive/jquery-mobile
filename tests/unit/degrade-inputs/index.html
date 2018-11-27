@@ -1,0 +1,44 @@
+ <!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Degrade Inputs Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page degradeInputs"
+			data-init="true"
+			data-modules="degradeInputs">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="page" data-nstest-role="page">
+		<input id="degrade-range" type="range">
+		<input id="degrade-search" type="search">
+		<input id="degrade-color" type="color">
+		<input id="not-to-be-degraded" type="range" data-nstest-role="nojs" />
+
+	</div>
+	<div id="enhance-container">
+		<input id="enhance-degrade-range" type="range">
+		<input id="enhance-degrade-search" type="search">
+		<input id="enhance-degrade-color" type="color">
+	</div>
+	<div id="degrade-within-container">
+		<input id="degrade-within-range" type="range">
+		<input id="degrade-within-search" type="search">
+		<input id="degrade-within-color" type="color">
+	</div>
+	<div id="custom-degrade">
+		<input type="range" id="custom-range-type">
+	</div>
+</html>

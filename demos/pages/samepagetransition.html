@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JQM latest - issue template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+  <script src="../../external/jquery/jquery.js"></script>
+  <script src="../../js/"></script>
+  <script>
+    // JS
+  </script>
+  <style>
+    #edit-with-js-bin { display: none !important; }
+  </style>
+</head>
+<body>
+<div data-role="page" id="page1" data-theme="a">
+  
+  <div data-role="toolbar" data-type="header">
+    <h1>same page transitions</h1>
+    <div data-role="navbar" id="navh1">
+      <ul>
+        <li><a href="#page1">fade</a></li>
+        <li><a href="#page1">pop</a></li>
+        <li><a href="#page1">flip</a></li>
+        <li><a href="#page1">turn</a></li>
+        <li><a href="#page1">flow</a></li>
+      </ul>
+    </div>
+  </div><!-- /header 1 -->
+
+  <div role="main" class="ui-content">
+     <h1>same page transitions</h1>
+     <div>All links within this page navigate to the page itself having the <code>allowSamePageTransition</code> option at the <code>.pagecontainer( "change" )</code> method set to <strong>true</strong>. It seems, just the slide transition raises an issue so the page gets hidden.
+      <label><input type="checkbox" id="cb1" data-theme="b"> reverse transition </label>
+      <label><input type="checkbox" id="cb2" data-theme="b"> add ui-page-active on pageshow </label>
+    </div>
+      <div id="p1"></div>
+    </div><!-- /content 1 -->
+
+  <div data-role="toolbar" data-type="footer">
+    <div data-role="navbar" id="nav1">
+      <ul>
+        <li><a href="#page1">slide</a></li>
+        <li><a href="#page1">slidefade</a></li>
+        <li><a href="#page1">slideup</a></li>
+        <li><a href="#page1">slidedown</a></li>
+        <li><a href="#page1">none</a></li>
+      </ul>
+    </div>
+  </div><!-- /footer 1 -->
+
+<script>
+$('#page1').on('pagecreate', function() {
+
+    $('a').bind('click', function(e) {
+    var trans = $(this).text() || 'none',
+        rev = !!$('#cb1').attr('checked');
+
+    $( this ).closest( ".ui-pagecontainer" ).pagecontainer( "change", "#page1", {
+		transition: trans,
+		allowSamePageTransition: true,
+		reverse: rev
+	});
+    $('#p1').text( 'last transition: ' + trans + ' - reverse: ' + rev );
+  });
+});
+
+$('#page1').bind('pagehide', function(e) {
+  $('a.ui-button').removeClass('ui-button-active');
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-button-active') ) { 
+    $(this).addClass('ui-page-active');
+  }
+});    
+
+</script>
+
+</div><!-- /page 1 -->
+</body>    
+</html>

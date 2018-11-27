@@ -1,0 +1,26 @@
+{
+	"es3": true,
+	"boss": true,
+	"curly": true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"expr": true,
+	"immed": true,
+	"jquery": true,
+	"noarg": true,
+	"quotmark": "double",
+	"smarttabs": true,
+	"trailing": true,
+	"undef": true,
+	"unused": true,
+
+	"latedef": true,
+	"newcap": true,
+	"sub": true,
+	"browser": true,
+	"globals": {
+		"define": false,
+		"require": false,
+		"requirejs": false
+	}
+}

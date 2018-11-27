@@ -1,61 +1,137 @@
- <!DOCTYPE html>
+ <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Slider Events Test Suite</title>
+	<title>jQuery Mobile Slider Test Suite</title>
 
-	<script src="../../../js/jquery.js"></script>
-	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../external/requirejs/require.js"></script>
 
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
-	<link rel="stylesheet" href="../../../themes/default/"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
-
-	<script src="slider_events.js"></script>
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="forms/slider forms/slider.tooltip"
+		data-no-backcompat="true"
+		data-init="true"
+		data-modules="slider_core slider_events">
+	</script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Slider Event Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<div id="foo"  data-nstest-role="page">
-	<div  data-nstest-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+	<div id="foo" data-ui-role="page">
+		<div data-ui-role="fieldcontain">
+			<input type="number" name="slider-1" data-ui-role="slider" id="range-slider-up" value="0" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+		<div data-ui-role="fieldcontain">
+			<input type="number" name="slider-1" data-ui-role="slider" class="textinput-test" value="0" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-1" id="range-slider-down" value="10" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="background-slider" id="background-slider" value="10" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" data-ui-highlight="true"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="no-background-slider" id="no-background-slider" value="10" min="0" max="100"	data-ui-theme="b" data-ui-track-theme="a"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-1" id="range-slider-home" value="75" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="range-slider-end">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider-1" id="range-slider-end" value="15" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="stepped" id="stepped" value="15" min="0" max="100" step="10"  data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<select name="slider" id="slider-switch" data-ui-role="slider">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="onchange" id="onchange" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-ui-theme="b" data-ui-track-theme="a" />
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="slider">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="step-slider">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="step-slider" id="step-slider" value="25" min="0" max="100" step="20"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="empty-string-val-slider">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="empty-string-val-slider" id="empty-string-val-slider" value="25" min="10" max="100" step="20"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label id="label-id" for="label-id-slider">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider" id="label-id-slider" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="mousedown-which-events">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider" id="mousedown-which-events" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="start-stop-events">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider" id="start-stop-events" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="mouseup-refresh">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-ui-role="fieldcontain">
+			<label for="remove-events-slider">Input slider:</label>
+			<input type="number" data-ui-role="slider" name="remove-events-slider" id="remove-events-slider" value="25" min="0" max="100"/>
+		</div>
+
+		<label>Input slider:
+			<input type="number" data-ui-role="slider" name="disable-test" id="disable-test" value="17" min="0" max="100"/>
+		</label>
+
+		<label>Tooltip slider:
+			<input type="number" data-ui-role="slider" name="tooltip-test" id="tooltip-test" value="17" min="0" max="100" data-ui-popup-enabled="true"/>
+		</label>
+
+		<label>Tooltip w/ Button value:
+			<input type="number" data-ui-role="slider" name="tooltip-test-both" id="tooltip-test-both" value="17" min="0" max="100" data-ui-popup-enabled="true" data-ui-show-value="true"/>
+		</label>
+
+		<label>Input slider:
+			<input type="number" data-ui-role="slider" name="disable-input-test" id="disable-input-test" value="17" min="0" max="100" />
+		</label>
+
+		<div data-ui-role="fieldcontain">
+			<input type="number" data-ui-role="slider" name="slider-change-event" id="slider-change-event" value="2" min="0" max="4" step="1" />
+		</div>
+
 	</div>
 
-	<div  data-nstest-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-down" value="10" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+	<div id="enhancetest">
+		<input type="number" data-ui-role="slider" name="slider-enhancetest" id="range-slider-enhancetest" value="75" min="0" max="100"  data-ui-theme="b" data-ui-track-theme="a" />
 	</div>
 
-	<div  data-nstest-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-home" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
-	</div>
-
-	<div  data-nstest-role="fieldcontain">
-		<label for="slider-1">Input slider:</label>
-		<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
-	</div>
-
-	<div  data-nstest-role="fieldcontain">
-		<input type="range" name="stepped" id="stepped" value="15" min="0" max="100" step="10"  data-nstest-theme="b" data-nstest-track-theme="a" />
-	</div>
-
-	<div  data-nstest-role="fieldcontain">
-		<select name="slider" id="slider-switch"  data-nstest-role="slider">
-			<option value="off">Off</option>
-			<option value="on">On</option>
-		</select>
-	</div>
-
-	<div  data-nstest-role="fieldcontain">
-		<input type="range" name="onchange" id="onchange" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-nstest-theme="b" data-nstest-track-theme="a" />
-	</div>
-</div>
+</body>
 </html>

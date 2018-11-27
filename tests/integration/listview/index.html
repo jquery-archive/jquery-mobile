@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Listview Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page navigation listview listview.autodividers toolbar collapsible"
+			data-init="true"
+			data-no-backcompat="true"
+			data-modules="listview_core">
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<!-- Basic Linked view test -->
+	<div data-ui-role="page" id="main-page">
+		<div class="ui-content">
+			<ul data-ui-role="listview" id="basic-linked-test">
+				<li>Static</li>
+				<li data-ui-role="list-divider">Divider</li>
+				<li><a href="#basic-link-results">Home</a></li>
+				<li><a href="#basic-link-results">Back</a></li>
+				<li><a href="#basic-link-results">Return</a></li>
+			</ul>
+
+			<p>Right padding on item 1 is OK (75px).</p>
+			<p>Right padding on items 2 &amp; 3 should probably be around 30 or 35 (not 25).</p>
+			<p>Right padding on item 4 should be 15px to match the left side.</p>
+			<ol data-ui-role="listview" data-ui-inset="true" id="ui-listview-item-has-test">
+				<li><a href="#">Link LI with counter --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<span class="ui-listview-item-count-bubble">123</span></a></li>
+				<li><a href="#">Link LI without counter -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
+				<li><a href="#page1">Page1 Link LI without counter -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a><a href="#page2"></a></li>
+				<li>Static LI with counter ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<span class="ui-listview-item-count-bubble">123</span></li>
+				<li>Static LI without counter ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</li>
+				<li><a href="#">Link LI with split button -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a><a href="#">Split</a></li>
+				<li><a href="#"><img class="ui-listview-item-icon">Link LI with icon -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
+				<li><a href="#"><img>Link LI with thumb -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
+			</ol>
+
+			<!-- Numbered List -->
+			<ol data-ui-role="listview" id="numbered-list-test">
+				<li><a href="#numbered-list-results">Number 1</a></li>
+				<li><a href="#numbered-list-results">Number 2</a></li>
+				<li><a href="#numbered-list-results">Number 3</a></li>
+			</ol>
+
+			<!-- Read only List -->
+			<ul data-ui-role="listview" id="read-only-list-test">
+				<li>Read</li>
+				<li>Only</li>
+				<li>List</li>
+				<li>View</li>
+			</ul>
+
+			<!-- Split listview -->
+			<ul data-ui-role="listview" id="split-list-test">
+				<li>
+					<a href="#split-list-link1">link one</a>
+					<a href="#split-list-link2">link second</a>
+				</li>
+				<li>
+					<a href="#split-list-link1">link one</a>
+					<a href="#split-list-link2">link second</a>
+				</li>
+				<li>
+					<a href="#split-list-link1">link one</a>
+					<a href="#split-list-link2">link second</a>
+				</li>
+			</ul>
+
+			<!-- List divider -->
+			<ul data-ui-role="listview" id="list-divider-test">
+				<li>a is for aquaman</li>
+				<li>b is for batman</li>
+				<li data-ui-role="list-divider">This is a list divider</li>
+				<li>c is for catwoman</li>
+				<li data-ui-role="list-divider">This is another list divider</li>
+				<li>d is for darkwing</li>
+			</ul>
+
+			<!-- Autodivider -->
+			<ul id="autodividers-test" data-ui-role="listview" data-ui-autodividers="true">
+				<li data-ui-role="list-divider">SHOULD REMOVE</li>
+				<li>a is for aquaman</li>
+				<li>b is for batman</li>
+				<li>c is for catwoman</li>
+				<li>d is for darkwing</li>
+			</ul>
+
+			<ul id="autodividers-selector-test-list1" data-ui-role="listview" data-ui-autodividers="true">
+				<li><a href="#">a is for aquaman</a></li>
+				<li>b is for batman</li>
+				<li><img><a href="">c is for catwoman</a><a href="">split</a></li>
+				<li><a href="#"><h2>d is for darkwing</h2><p>Some text</p></a></li>
+			</ul>
+
+			<ul id="autodividers-selector-test-list2" data-ui-role="listview" data-ui-autodividers="true">
+				<li><div><span class="autodividers-selector-test-selectme">eddie</span> is for aquaman</div></li>
+				<li><div><span class="autodividers-selector-test-selectme">frankie</span> is for batman</div></li>
+				<li><div><span class="autodividers-selector-test-selectme">georgie</span> is for catwoman</div></li>
+				<li><div><span class="autodividers-selector-test-selectme">henry</span> is for darkwing</div></li>
+			</ul>
+
+			<!-- Programmatically generated list items !-->
+			<ul data-ui-role="listview" data-ui-inset="true" id="programmatically-generated-list-items"></ul>
+
+			<!-- Removing items from list -->
+			<ul id="removing-items-from-list-test" data-ui-role="listview" data-ui-inset="true">
+				<li>Item 1</li>
+				<li>Item 2</li>
+				<li>Item 3</li>
+				<li>Item 4</li>
+			</ul>
+
+			<!-- Rounded corners inset list with variable items -->
+			<ul id="corner-rounded-test" data-ui-role="listview" data-ui-inset="true"></ul>
+
+			<ul id="split-list-icon" data-ui-role="listview" data-ui-split-icon="delete">
+				<li data-ui-icon="star"><a href="#">Star</a><a href="#">Star</a></li>
+				<li data-ui-icon="plus"><a href="#">Plus</a><a href="#">Plus</a></li>
+				<li><a href="#">Default</a><a href="#">Default</a></li>
+			<!-- respect the child element icon -->
+				<li data-ui-icon="star"><a href="#">Default</a><a data-ui-icon="grid" href="#">Grid</a></li>
+			</ul>
+
+			<ul id="list-divider-ignore-link" data-ui-role="listview">
+				<li data-ui-role="list-divider">A</li>
+				<li><a href="index.html">Adam Kinkaid</a></li>
+				<li><a href="index.html">Alex Wickerham</a></li>
+				<li><a href="index.html">Avery Johnson</a></li>
+				<li data-ui-role="list-divider" id="ignored-link">B has a <a href="#">link</a></li>
+				<li><a href="index.html">Bob Cabot</a></li>
+				<li data-ui-role="list-divider">C</li>
+				<li><a href="index.html">Caleb Booth</a></li>
+				<li><a href="index.html">Christopher Adams</a></li>
+			</ul>
+
+			<ul id="list-last-visible-item-border" data-ui-role="listview">
+				<li class="listitem"><a href="index.html">Adam Kinkaid</a></li>
+				<li class="listitem"><a href="index.html">Alex Wickerham</a></li>
+				<li class="listitem ui-screen-hidden"><a href="index.html">Bob Cabot</a></li>
+				<li id="lastitem"><a href="index.html">Caleb Booth</a></li>
+				<li class="listitem ui-screen-hidden"><a href="index.html">Christopher Adams</a></li>
+			</ul>
+
+			<!-- Pre-enhanced List -->
+			<ul id="list-pre-enhanced" data-ui-role="listview" class="ui-listview" data-ui-enhanced="true">
+				<li class="ui-listview-item ui-first-child">
+					<a href="#" class="ui-link ui-button">
+						Acura
+						<span class="ui-listview-item-icon ui-icon ui-icon-caret-r ui-widget-icon-flushend"></span>
+					</a>
+				</li>
+				<li class="ui-listview-item">
+					<a href="#" class="ui-link ui-button">
+						Audi
+						<span class="ui-listview-item-icon ui-icon ui-icon-caret-r ui-widget-icon-flushend"></span>
+					</a>
+				</li>
+				<li class="ui-listview-item">
+					<a href="#" class="ui-link ui-button">
+						BMW
+						<span class="ui-listview-item-icon ui-icon ui-icon-caret-r ui-widget-icon-flushend"></span>
+					</a>
+				</li>
+				<li class="ui-listview-item ui-last-child">
+					<a href="#" class="ui-link ui-button">
+						Volvo
+						<span class="ui-listview-item-icon ui-icon ui-icon-caret-r ui-widget-icon-flushend"></span>
+					</a>
+				</li>
+			</ul>
+
+			<ul data-ui-role="listview" id="icon-refresh">
+				<li data-ui-icon="home"><a href="#">Home</a></li>
+				<li data-ui-icon="delete"><a href="#">Delete</a></li>
+			</ul>
+
+			<ul data-ui-role="listview" id="icon-update-items">
+				<li data-ui-icon="home"><a href="#">Home</a></li>
+				<li data-ui-icon="delete"><a href="#">Delete</a></li>
+			</ul>
+
+			<ul data-ui-role="listview" id="sparing-check">
+				<li id="sparing-check-first-item">Item 1</li>
+				<li id="sparing-check-second-item">Item 2</li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-ui-role='page' id='basic-link-results'>
+		<div data-ui-role="toolbar" data-ui-type="header" data-ui-position="inline">
+			<h1>Results</h1>
+		</div>
+	</div>
+
+	<div data-ui-role='page' id='numbered-list-results'>
+		<div data-ui-role="toolbar" data-ui-type="header" data-ui-position="inline">
+			<h1>Numbered List</h1>
+		</div>
+	</div>
+
+	<div data-ui-role="page" id='split-list-link1'>
+		<div data-ui-role="toolbar" data-ui-type="header" >
+			<h1>Split List view 1</h1>
+		</div>
+	</div>
+
+	<div data-ui-role="page" id='split-list-link2'>
+		<div data-ui-role="toolbar" data-ui-type="header" >
+			<h1>Split List view 2</h1>
+		</div>
+	</div>
+
+	<div data-ui-role="page" id="enhancetest">
+		<ul data-ui-role="listview">
+			<li><a href="#basic-link-results">Home</a></li>
+			<li><a href="#basic-link-results">Back</a></li>
+			<li><a href="#basic-link-results">Return</a></li>
+		</ul>
+	</div>
+
+	<div id="list-theme-inherit" data-ui-theme="b">
+		<ul data-ui-role="listview">
+		<li>foo</li>
+		</ul>
+	</div>
+
+	<div data-ui-role="page" id="list-inside-collapsible-content">
+		<div data-ui-role="content">
+			<div data-ui-role="collapsible" data-ui-content-theme="c">
+				<h1>Heading</h1>
+				<ul data-ui-role="listview">
+					<li><a href="index.html">Adam Kinkaid</a></li>
+					<li><a href="index.html">Alex Wickerham</a></li>
+					<li id="noninsetlastli"><a href="index.html">Caleb Booth</a></li>
+				</ul>
+			</div>
+			<div data-ui-role="collapsible" data-ui-content-theme="c">
+				<h1>Heading</h1>
+				<ul data-ui-role="listview" data-ui-inset="true">
+					<li><a href="index.html">Adam Kinkaid</a></li>
+					<li><a href="index.html">Alex Wickerham</a></li>
+					<li id="insetlastli"><a href="index.html">Caleb Booth</a></li>
+				</ul>
+			</div>
+		</div><!-- /content -->
+	</div>
+
+</body>
+</html>

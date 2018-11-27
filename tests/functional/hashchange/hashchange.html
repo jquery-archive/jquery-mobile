@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile: hashchange Tester: A page</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../../external/jquery/jquery.js"></script>
+	<script>
+(function( $, undefined ) {
+	$( document ).bind( "mobileinit", function() {
+		if ( !!~location.search.indexOf( "push-state" ) ) {
+			$.mobile.pushStateEnabled = false;
+		}
+		if ( !!~location.search.indexOf( "popup-history" ) ) {
+			$.mobile.popup.prototype.options.history = false;
+		}
+		if ( !!~location.search.indexOf( "popup-transition" ) ) {
+			$.mobile.popup.prototype.options.transition = "fade";
+		}
+		if ( !!~location.search.indexOf( "no-history" ) ) {
+			$.mobile.pushStateEnabled = false;
+			$.mobile.hashListeningEnabled = false;
+			$.mobile.pagecontainer.prototype.options.changeOptions.changeHash = false;
+		}
+	});
+})( jQuery );
+	</script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="popup" id="common">
+	<p>This popup is common to all pages</p>
+</div>
+<div data-role="page" id="hashChangePage">
+	<div data-role="toolbar" data-type="header">
+		<a href="#popup" data-rel="popup">Popup</a>
+		<a href="#navMenuForAPage" data-rel="popup">Go To</a>
+		<h1>A page</h1>
+	</div>
+	<div data-role="content">
+		<div data-role="popup" data-transition="slideup" id="navMenuForAPage">
+			<div data-role="collapsible">
+				<h3>Navigation</h3>
+				<a href="hashchange.html" data-role="button">A page</a>
+				<a href="hashchange1.html" data-role="button">Another page</a>
+			</div>
+		</div>
+		<div data-role="collapsible" data-content-theme="c">
+			<h1>Lots of text to push things down to where they need to scroll</h1>
+			<div>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut mauris lorem. Nam lacinia ullamcorper facilisis. Ut vel egestas erat. Nullam quis dolor enim, nec dapibus velit. Quisque et nunc mauris, sit amet venenatis libero. Aenean vel odio id augue tristique feugiat a eu lacus. Fusce at sapien augue, mollis molestie ipsum. Aliquam venenatis faucibus lobortis. Ut id sapien lectus. Ut euismod libero vel nunc semper nec sodales lacus rutrum. Aliquam varius, nisl ac mollis pharetra, arcu sapien scelerisque elit, viverra laoreet ipsum lacus quis odio. Curabitur vestibulum aliquet dapibus. Nam venenatis auctor lorem non luctus. Aenean vel malesuada nisi. Vivamus nec enim nec erat fringilla dapibus.</p>
+				<p>Vestibulum id nisl id libero sodales convallis. Fusce augue quam, accumsan sit amet cursus at, congue et metus. Aliquam blandit massa eget augue volutpat ultricies. Nam volutpat sem nec felis accumsan eget consectetur risus blandit. Aenean id ante vitae leo mollis ultricies vel nec turpis. Cras in placerat dolor. Maecenas mollis hendrerit convallis. In hac habitasse platea dictumst.</p>
+				<p>Vestibulum malesuada eleifend ligula non molestie. Nullam sed turpis eget odio cursus fringilla id eget lacus. Curabitur non metus in mi tincidunt varius. Maecenas id pretium erat. Cras odio quam, lacinia sed rhoncus vel, semper a felis. Suspendisse et sem libero, eget consequat sem. Mauris sollicitudin urna vitae magna pretium feugiat. Duis congue, velit sed tristique dapibus, tortor neque elementum arcu, ac bibendum quam augue vitae augue. Integer eleifend dolor eu lectus varius et congue massa cursus. Proin odio est, sollicitudin id pharetra sed, faucibus in turpis. Duis aliquam, magna vitae sodales placerat, lacus tellus volutpat nibh, id euismod leo dui mollis felis. Proin eu urna ut enim interdum hendrerit. Fusce ut nunc a est volutpat facilisis et quis ligula.</p>
+				<p>Nunc non neque vel mi sollicitudin consectetur et id orci. Pellentesque lacinia nisl vel orci pharetra sed tincidunt neque porta. Suspendisse elit ipsum, vehicula nec sagittis ac, posuere non nulla. Cras tristique scelerisque augue, non porttitor erat semper id. Nullam hendrerit lacus et ante malesuada dapibus. Etiam hendrerit est nec sapien vestibulum posuere. Duis suscipit orci non nisl tempor ultricies. Vivamus nisl quam, pellentesque eu faucibus ut, aliquam sed purus. Proin eleifend leo eget enim tincidunt non mollis diam tristique. Pellentesque consequat vestibulum massa sed gravida. Phasellus sodales pellentesque accumsan. Sed consectetur tristique ipsum. Maecenas bibendum ante egestas elit pharetra interdum. Integer vitae ultrices elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+				<p>Nunc laoreet lacinia arcu et mattis. Etiam varius lacinia augue, eu condimentum nisi consectetur ut. Etiam in molestie nunc. Ut risus risus, tempor et rutrum eu, consequat a leo. Aenean dapibus faucibus sagittis. Ut sed congue tellus. Sed condimentum lobortis turpis, non molestie sapien varius id. Quisque et nisi eget ante dignissim semper eget quis dui. Nulla a ipsum sed nibh pellentesque ornare. Aliquam ornare venenatis tortor, bibendum dictum turpis tincidunt a. Maecenas faucibus lacinia pellentesque. Integer cursus sem ut augue viverra eget iaculis lorem mollis. Maecenas nisi erat, fermentum vitae feugiat nec, mollis pretium nulla. Quisque viverra consequat quam.</p>
+			</div>
+		</div>
+		<a data-role="button" href="#common">Common</a>
+		<a data-role="button" href="hashchange1.html">Another page</a>
+		<a data-role="button" href="#page2">A page: internal page</a>
+		<div id="popup" data-role="popup">
+			<a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-button-right"></a>
+			<p>Popup on first page</p>
+			<a href="hashchange.html">A page</a><br/>
+			<a href="hashchange1.html">Another page</a><br/>
+			<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
+		</div>
+		<a data-role="button" href="#popup" data-rel="popup">Popup 1</a>
+		<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
+		<a data-role="button" href="dialog2.html" data-rel="dialog">Yet another dialog</a>
+		<a data-role="button" href="hashchange1.html">Another page</a>
+		<a data-role="button" href="#internalDialog" data-rel="dialog">Internal dialog</a>
+	</div>
+</div>
+<div data-role="page" id="page2">
+	<div data-role="toolbar" data-type="header">
+		<h1>A page: internal Page</h1>
+	</div>
+	<div data-role="content">
+		<div id="the-popup" data-role="popup">
+			<p>The popup</p>
+		</div>
+		<a href="#the-popup" data-role="button" data-inline="true" data-rel="popup">Pop</a>
+	</div>
+</div>
+<div data-role="dialog" id="internalDialog">
+	<div data-role="toolbar" data-type="header">
+		<h1>A page: internal dialog</h1>
+	</div>
+</div>
+</body>
+</html>

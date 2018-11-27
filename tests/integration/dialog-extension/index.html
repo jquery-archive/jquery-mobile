@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Dialog Test Suite</title>
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./dialog.bindMobileInit.js page.dialog toolbar"
+			data-init="true"
+			data-modules="dialog_events">
+	</script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
+		<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button" data-nstest-inline="true" ></a>
+		<a href="#close-button-test" id="close-button-test-link" data-nstest-role="button" data-nstest-inline="true" >Go</a>
+		<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true" >no theme set</a>
+		<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true" >data-theme set</a>
+		<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true" >data-theme & data-nstest-overlay-theme set</a>
+		<a href="#overlayTheme-test" id="open-overlayTheme-test">overlayTheme test</a>
+		<a href="#enhanced-dialog" id="open-enhanced-dialog">Open enhanced dialog</a>
+	</div>
+
+	<div id="doubleCloseTestPage" data-nstest-role="page" data-nstest-dialog="true">
+		<div class="ui-content">
+			<a id="doubleCloseDialogOpener" href="#foo-dialog" >Dialog</a>
+		</div>
+	</div>
+
+	<div id="foo-dialog" data-nstest-role="page" data-nstest-theme="b" data-nstest-dialog="true">
+		<div  data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1>Dialog</h1>
+		</div>
+		<div class="ui-content">
+			<a href="#" id="internal-link">foo</a>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div id="close-button-test" data-nstest-role="page" data-nstest-theme="b" data-nstest-close-btn="none" data-nstest-dialog="true">
+		<div  data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1>Dialog</h1>
+		</div>
+		<div class="ui-content">
+			<a href="#" id="internal-link-2">foo</a>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div id="overlayTheme-test" data-nstest-role="page" data-nstest-dialog="true" data-nstest-overlay-theme="x">
+		<div  data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1>Dialog</h1>
+		</div>
+		<div class="ui-content">
+			<a href="#" id="internal-link-3">foo</a>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="dialog-a" data-nstest-dialog="true">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1> No theme set </h1>
+		</div>
+		<div class="ui-content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-role="page" data-nstest-theme="e" id="dialog-b" data-nstest-dialog="true">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1> data-nstest-theme set </h1>
+		</div>
+		<div class="ui-content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e" data-nstest-dialog="true">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1> data-nstest-theme & data-nstest-overlay-theme set </h1>
+		</div>
+		<div class="ui-content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="enhanced-dialog" data-nstest-enhanced="true" data-nstest-dialog="true" class="ui-page ui-page-theme-a ui-dialog">
+		<div role="dialog" class="ui-page-dialog-contain ui-overlay-shadow ui-corner-all">
+			<div data-nstest-role="toolbar" data-nstest-type="header" role="banner" data-nstest-enhanced="true" class="ui-toolbar-header ui-bar-b">
+				<a href="#" data-nstest-rel="back" class="ui-page-dialog-close-button ui-button ui-corner-all ui-button-icon-only ui-toolbar-header-button-left ui-shadow ui-widget" data-nstest-role="button" role="button">
+					Close
+					<span class="ui-page-dialog-close-button-icon ui-icon-delete ui-icon"></span>
+				</a>
+				<h1 class="ui-title" data-role="heading" aria-level="1">Dialog</h1>
+			</div>
+			<div class="ui-content">
+				<p>Contents</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

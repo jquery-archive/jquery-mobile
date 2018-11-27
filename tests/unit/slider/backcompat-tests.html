@@ -1,0 +1,145 @@
+ <!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Slider Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="set-ns forms/slider forms/slider.backcompat forms/slider.tooltip"
+		data-init="true"
+		data-init-after-modules="true"
+		data-modules="slider_events slider_core slider_backcompat">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="foo" data-nstest-role="page">
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="slider-1" class="textinput-test" value="0" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="slider-1" id="range-slider-down" value="10" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="background-slider" id="background-slider" value="10" min="0" max="100" data-nstest-theme="b" data-nstest-track-theme="a" data-nstest-highlight="true"/>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="no-background-slider" id="no-background-slider" value="10" min="0" max="100"	data-nstest-theme="b" data-nstest-track-theme="a"/>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="slider-1" id="range-slider-home" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<label for="range-slider-end">Input slider:</label>
+			<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="stepped" id="stepped" value="15" min="0" max="100" step="10"  data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<select name="slider" id="slider-switch" data-nstest-role="slider">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<input type="range" name="onchange" id="onchange" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-nstest-theme="b" data-nstest-track-theme="a" />
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="slider">Input slider:</label>
+			<input type="range" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="step-slider">Input slider:</label>
+			<input type="range" name="step-slider" id="step-slider" value="25" min="0" max="100" step="20"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="empty-string-val-slider">Input slider:</label>
+			<input type="range" name="empty-string-val-slider" id="empty-string-val-slider" value="25" min="10" max="100" step="20"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label id="label-id" for="label-id-slider">Input slider:</label>
+			<input type="range" name="slider" id="label-id-slider" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="mousedown-which-events">Input slider:</label>
+			<input type="range" name="slider" id="mousedown-which-events" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="start-stop-events">Input slider:</label>
+			<input type="range" name="slider" id="start-stop-events" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="mouseup-refresh">Input slider:</label>
+			<input type="range" name="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="remove-events-slider">Input slider:</label>
+			<input type="range" name="remove-events-slider" id="remove-events-slider" value="25" min="0" max="100"/>
+		</div>
+
+		<label>Input slider:
+			<input type="range" name="disable-test" id="disable-test" value="17" min="0" max="100"/>
+		</label>
+
+		<label>Tooltip slider:
+			<input type="range" name="tooltip-test" id="tooltip-test" value="17" min="0" max="100" data-nstest-popup-enabled="true"/>
+		</label>
+
+		<label>Tooltip w/ Button value:
+			<input type="range" name="tooltip-test-both" id="tooltip-test-both" value="17" min="0" max="100" data-nstest-popup-enabled="true" data-nstest-show-value="true"/>
+		</label>
+
+		<label>Input slider:
+			<input type="range" name="disable-input-test" id="disable-input-test" value="17" min="0" max="100" />
+		</label>
+
+		<div data-role="fieldcontain">
+			<input type="range" name="slider-change-event" id="slider-change-event" value="2" min="0" max="4" step="1" />
+		</div>
+
+		<div data-role="fieldcontain">
+			<input type="range" name="mini-option-test" id="mini-option-test" data-nstest-mini="true" value="17" min="0" max="100" />
+		</div>
+
+		<div data-role="fieldcontain">
+			<input type="range" name="corners-option-test" id="corners-option-test" data-nstest-role="slider" data-nstest-corners="false" value="17" min="0" max="100" />
+		</div>
+
+	</div>
+
+	<div id="enhancetest">
+		<input type="range" name="slider-enhancetest" id="range-slider-enhancetest" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
+	</div>
+
+</body>
+</html>

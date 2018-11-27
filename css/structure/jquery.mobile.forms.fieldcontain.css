@@ -1,0 +1,86 @@
+.ui-field-contain,
+.ui-mobile fieldset.ui-field-contain {
+	display: block;
+	position: relative;
+	overflow: visible;
+	clear: both;
+	padding: .8em 0;
+}
+.ui-field-contain > label ~ [class*="ui-"],
+.ui-field-contain > legend ~ [class*="ui-"],
+.ui-field-contain .ui-controlgroup {
+	margin: 0;
+}
+.ui-field-contain:last-child {
+	border-bottom-width: 0;
+}
+@media (min-width: 28em) {
+	.ui-field-contain,
+	.ui-mobile fieldset.ui-field-contain {
+		padding: 0;
+		margin: 1em 0;
+		border-bottom-width: 0;
+	}
+	.ui-field-contain:before,
+	.ui-field-contain:after {
+		content: "";
+		display: table;
+	}
+	.ui-field-contain:after {
+		clear: both;
+	}
+	.ui-field-contain > label,
+	.ui-field-contain > legend,
+	.ui-field-contain .ui-controlgroup-label,
+	.ui-field-contain > .ui-rangeslider > label {
+		float: left;
+		width: 20%;
+		margin: .5em 2% 0 0;
+	}
+
+	.ui-field-contain > legend {
+		padding: 0;
+	}
+
+	.ui-field-contain > label.ui-button {
+		width: auto;
+		float: none;
+		margin: .5em 0;
+	}
+
+	.ui-popup .ui-field-contain > label,
+	.ui-popup .ui-field-contain > legend,
+	.ui-popup .ui-field-contain .ui-controlgroup-label,
+	.ui-popup .ui-field-contain > .ui-rangeslider > label {
+		float: none;
+		width: auto;
+		margin: 0 0 .4em;
+	}
+	.ui-field-contain > label ~ [class*="ui-"],
+	.ui-field-contain > legend ~ [class*="ui-"],
+	.ui-field-contain .ui-controlgroup {
+		float: left;
+		width: 78%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.ui-field-contain > legend ~ [class*="ui-"] {
+		margin: 0;
+	}
+
+	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
+	.ui-popup .ui-field-contain > legend ~ [class*="ui-"],
+	.ui-popup .ui-field-contain .ui-controlgroup {
+		float: none;
+		width: 100%;
+	}
+	.ui-field-contain > label ~ .ui-button-inline {
+		width: auto;
+		margin-right: .625em;
+	}
+	.ui-field-contain > label ~ .ui-button-inline.ui-button-icon-only {
+		width: 1.75em;
+	}
+}

@@ -1,0 +1,161 @@
+/* flow transition */
+.flow {
+	-webkit-transform-origin: 50% 30%;
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	-moz-transform-origin: 50% 30%;
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	transform-origin: 50% 30%;
+	box-shadow: 0 0 20px rgba(0,0,0,.4);
+}
+.ui-page-dialog.flow {
+	-webkit-transform-origin: none;
+	-webkit-box-shadow: none;
+	-moz-transform-origin: none;
+	-moz-box-shadow: none;
+	transform-origin: none;
+	box-shadow: none;
+}
+.flow.out {
+	-webkit-transform: translateX(-100%) scale(.7);
+	-webkit-animation-name: flowouttoleft;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-duration: 350ms;
+	-moz-transform: translateX(-100%) scale(.7);
+	-moz-animation-name: flowouttoleft;
+	-moz-animation-timing-function: ease;
+	-moz-animation-duration: 350ms;
+	transform: translateX(-100%) scale(.7);
+	animation-name: flowouttoleft;
+	animation-timing-function: ease;
+	animation-duration: 350ms;
+}
+
+.flow.in {
+	-webkit-transform: translateX(0) scale(1);
+	-webkit-animation-name: flowinfromright;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-duration: 350ms;
+	-moz-transform: translateX(0) scale(1);
+	-moz-animation-name: flowinfromright;
+	-moz-animation-timing-function: ease;
+	-moz-animation-duration: 350ms;
+	transform: translateX(0) scale(1);
+	animation-name: flowinfromright;
+	animation-timing-function: ease;
+	animation-duration: 350ms;
+}
+
+.flow.out.reverse {
+	-webkit-transform: translateX(100%);
+	-webkit-animation-name: flowouttoright;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: flowouttoright;
+	transform: translateX(100%);
+	animation-name: flowouttoright;
+}
+
+.flow.in.reverse {
+	-webkit-animation-name: flowinfromleft;
+	-moz-animation-name: flowinfromleft;
+	animation-name: flowinfromleft;
+}
+
+@-webkit-keyframes flowouttoleft {
+	0% { -webkit-transform: translateX(0) scale(1);
+	}
+	60%, 70% { -webkit-transform: translateX(0) scale(.7);
+	}
+	100% { -webkit-transform: translateX(-100%) scale(.7);
+	}
+}
+@-moz-keyframes flowouttoleft {
+	0% { -moz-transform: translateX(0) scale(1);
+	}
+	60%, 70% { -moz-transform: translateX(0) scale(.7);
+	}
+	100% { -moz-transform:  translateX(-100%) scale(.7);
+	}
+}
+@keyframes flowouttoleft {
+	0% { transform: translateX(0) scale(1);
+	}
+	60%, 70% { transform: translateX(0) scale(.7);
+	}
+	100% { transform:  translateX(-100%) scale(.7);
+	}
+}
+
+@-webkit-keyframes flowouttoright {
+	0% { -webkit-transform: translateX(0) scale(1);
+	}
+	60%, 70% { -webkit-transform: translateX(0) scale(.7);
+	}
+	100% { -webkit-transform:  translateX(100%) scale(.7);
+	}
+}
+@-moz-keyframes flowouttoright {
+	0% { -moz-transform: translateX(0) scale(1);
+	}
+	60%, 70% { -moz-transform: translateX(0) scale(.7);
+	}
+	100% { -moz-transform:  translateX(100%) scale(.7);
+	}
+}
+@keyframes flowouttoright {
+	0% { transform: translateX(0) scale(1);
+	}
+	60%, 70% { transform: translateX(0) scale(.7);
+	}
+	100% { transform:  translateX(100%) scale(.7);
+	}
+}
+
+@-webkit-keyframes flowinfromleft {
+	0% { -webkit-transform: translateX(-100%) scale(.7);
+	}
+	30%, 40% { -webkit-transform: translateX(0) scale(.7);
+	}
+	100% { -webkit-transform: translateX(0) scale(1);
+	}
+}
+@-moz-keyframes flowinfromleft {
+	0% { -moz-transform: translateX(-100%) scale(.7);
+	}
+	30%, 40% { -moz-transform: translateX(0) scale(.7);
+	}
+	100% { -moz-transform: translateX(0) scale(1);
+	}
+}
+@keyframes flowinfromleft {
+	0% { transform: translateX(-100%) scale(.7);
+	}
+	30%, 40% { transform: translateX(0) scale(.7);
+	}
+	100% { transform: translateX(0) scale(1);
+	}
+}
+
+@-webkit-keyframes flowinfromright {
+	0% { -webkit-transform: translateX(100%) scale(.7);
+	}
+	30%, 40% { -webkit-transform: translateX(0) scale(.7);
+	}
+	100% { -webkit-transform: translateX(0) scale(1);
+	}
+}
+@-moz-keyframes flowinfromright {
+	0% { -moz-transform: translateX(100%) scale(.7);
+	}
+	30%, 40% { -moz-transform: translateX(0) scale(.7);
+	}
+	100% { -moz-transform: translateX(0) scale(1);
+	}
+}
+@keyframes flowinfromright {
+	0% { transform: translateX(100%) scale(.7);
+	}
+	30%, 40% { transform: translateX(0) scale(.7);
+	}
+	100% { transform: translateX(0) scale(1);
+	}
+}

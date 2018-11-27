@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Push State Disabled Base Tests</title>
+	<!-- forces the base-tests into a push state disabled run and allows for
+		 the test suite runner to pick it up as a separate test set. See test/integration/ls.php,
+		 test/integration/runner.js, base-tests.html, and tests/jquery.testHelper.js for more. -->
+	<script src="./nav-helper.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
+
+	<script type="text/javascript">
+		navHelper.pushStateRedirect( "base-tests.html" );
+	</script>
+</head>
+<body>
+</body>
+</html>

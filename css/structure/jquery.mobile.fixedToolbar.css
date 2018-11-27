@@ -1,0 +1,76 @@
+/* fixed page header & footer configuration */
+.ui-toolbar-header-fixed,
+.ui-toolbar-footer-fixed {
+	left: 0;
+	right: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+}
+.ui-toolbar-header-fixed {
+	top: -1px;
+	padding-top: 1px;
+}
+.ui-toolbar-header-fixed.ui-toolbar-fixed-hidden {
+	top: 0;
+	padding-top: 0;
+}
+.ui-toolbar-header-fixed .ui-button-left,
+.ui-toolbar-header-fixed .ui-button-right {
+	margin-top: 1px;
+}
+.ui-toolbar-header-fixed.ui-toolbar-fixed-hidden .ui-button-left,
+.ui-toolbar-header-fixed.ui-toolbar-fixed-hidden .ui-button-right {
+	margin-top: 0;
+}
+.ui-toolbar-footer-fixed {
+	bottom: -1px;
+	padding-bottom: 1px;
+}
+.ui-toolbar-footer-fixed.ui-toolbar-fixed-hidden {
+	bottom: 0;
+	padding-bottom: 0;
+}
+.ui-toolbar-header-fullscreen,
+.ui-toolbar-footer-fullscreen {
+	filter: Alpha(Opacity=90);
+	opacity: .9;
+}
+/* updatePagePadding() will update the padding to actual height of header and footer. */
+.ui-page-header-fixed {
+	padding-top: 2.8125em;
+}
+.ui-page-footer-fixed {
+	padding-bottom: 2.8125em;
+}
+.ui-toolbar-page-header-fullscreen > .ui-content,
+.ui-toolbar-page-footer-fullscreen > .ui-content {
+	padding: 0;
+}
+.ui-toolbar-fixed-hidden {
+	position: absolute;
+}
+/* Tap toggle: hide external fixed footer. See issue #6604 */
+.ui-toolbar-footer-fixed.ui-toolbar-fixed-hidden {
+  display: none;
+}
+.ui-page .ui-toolbar-footer-fixed.ui-toolbar-fixed-hidden {
+  display: block
+}
+
+.ui-toolbar-page-header-fullscreen .ui-toolbar-fixed-hidden,
+.ui-toolbar-page-footer-fullscreen .ui-toolbar-fixed-hidden {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+.ui-toolbar-header-fixed .ui-button,
+.ui-toolbar-footer-fixed .ui-button {
+	z-index: 10;
+}
+/* workarounds for other widgets */
+.ui-toolbar-android-2x-fixed .ui-listview-item-has-thumbnail {
+	-webkit-transform: translate3d(0,0,0);
+}

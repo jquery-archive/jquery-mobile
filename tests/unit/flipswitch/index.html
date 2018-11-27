@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Flipswitch Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="page forms/flipswitch"
+		data-init="true"
+		data-no-backcompat="true"
+		data-modules="flipswitch_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-ui-role="page" data-ui-theme="a">
+		<div data-ui-role="content" data-ui-theme="b">
+			<input type="checkbox" data-ui-role="flipswitch" name="flip-checkbox" id="flip-checkbox"/>
+			<input type="checkbox" data-ui-role="flipswitch" name="flip-checkbox" id="flip-checkbox-disabled" disabled/>
+			<input type="checkbox" data-ui-role="flipswitch" name="flip-checkbox" id="flip-checkbox-active" checked/>
+			<select id="flip-select" name="flip-select" data-ui-role="flipswitch">
+				<option>On</option>
+				<option>Off</option>
+			</select>
+			<select id="flip-select-disabled" name="flip-select" data-ui-role="flipswitch" disabled>
+				<option>On</option>
+				<option>Off</option>
+			</select>
+			<select id="flip-select-second-option" name="flip-select" data-ui-role="flipswitch">
+				<option>On</option>
+				<option selected>Off</option>
+			</select>
+			<input type="checkbox" data-ui-mini="true" data-ui-role="flipswitch" name="flip-checkbox" id="flip-checkbox-mini" checked/>
+			<div id="destroy-test-container"></div>
+			<div id="destroy-test-container-checkbox">
+				<input type="checkbox" data-ui-role="flipswitch" name="flip-checkbox" id="flip-checkbox-destroy"/>
+			</div>
+			<div id="destroy-test-container-select">
+				<select id="flip-select-destroy" name="flip-select" data-ui-role="flipswitch">
+					<option>On</option>
+					<option>Off</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

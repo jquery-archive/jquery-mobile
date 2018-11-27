@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Popup sequence test dialog</title>
+</head>
+<body>
+	<div data-nstest-role="dialog" id="popup-sequence-test-dialog">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Dialog</h1>
+		</div>
+		<div data-nstest-role="content">
+			<p>Content</p>
+			<div data-nstest-role="popup" id="popup-sequence-test-popup-inside-dialog">
+				<p>A popup inside this dialog</p>
+			</div>
+			<a href="#popup-sequence-test-popup-inside-dialog" data-nstest-rel="popup">Pop</a>
+		</div>
+	</div>
+</body>
+</html>

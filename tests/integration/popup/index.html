@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./popup.setFadeTransitition.js popup listview page.dialog"
+			data-init="true"
+			data-no-backcompat="true"
+			data-modules="popup_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-ui-role="page" id="start-page">
+		<div data-ui-role="content" id="page-content">
+			<div data-ui-role="popup" data-ui-transition="fade" id="test-popup">
+				<p>This is the test popup</p>
+				<a href="other.html">other.html</a>
+			</div>
+			<div data-ui-role="popup" id="test-popup-2">
+				<p>This is another test popup</p>
+			</div>
+			<a id="open-xyzzy-popup" class="ui-button" href="#xyzzy" data-ui-rel="popup" data-ui-role="button">Pop</a>
+			<input type="text" id="test-input" value="test" />
+			<a id="open-test-popup" class="ui-button" href="#test-popup" data-ui-rel="popup" data-ui-role="button">Pop</a>
+			<ul data-ui-role="listview">
+				<li id="open-test-popup-li"><a id="open-test-popup-li-link" href="#test-popup" data-ui-rel="popup">Pop</a></li>
+			</ul>
+			<div data-ui-role="popup" id="popup-sequence-test">
+				<a id="popup-sequence-test-open-dialog" href="popup-sequence-test-dialog.html">Dialog</a>
+			</div>
+
+			<div data-ui-role="popup" id="test-history-popup" data-ui-history="false">
+				<p>This is the test popup</p>
+				<a href="#" data-ui-rel="back" data-ui-role="button" data-ui-theme="a" data-ui-icon="delete" data-ui-iconpos="notext" class="ui-button-right">Close</a>
+			</div>
+
+			<div data-ui-role="popup" id="test-destroy-popup" data-ui-history="false">
+				<p>This is the test popup</p>
+			</div>
+
+			<div data-ui-role="popup" id="test-popup-dismissible" data-ui-dismissible="false">
+				<p>This is the test popup</p>
+			</div>
+			<a id="go-to-another-page" href="back-two.html">Go</a>
+
+			<div data-ui-role="popup" id="popupLogin">
+				<form>
+					<input type="text" name="user" id="textBox" value="" placeholder="username" />
+				</form>
+			</div>
+
+			<div data-ui-role="popup" id="double-close">
+				<p>Double close</p>
+			</div>
+			<a id="open-double-close" href="#double-close" data-ui-rel="popup">Go</a>
+
+			<a id="open-disabled-popup" href="#disabled-popup" data-ui-rel="popup">Go</a>
+			<div data-ui-role="popup" id="disabled-popup">
+				<p>This popup is used for testing the response to setting the "disabled" option.</p>
+			</div>
+
+			<div style="display:none;" id="already-enhanced-placeholder"><!-- placeholder for already-enhanced --></div>
+			<a id="open-already-enhanced" href="#already-enhanced" data-ui-rel="popup" aria-haspopup="true" aria-owns="already-enhanced" aria-expanded="false">Already-enhanced popup</a>
+		</div>
+		<div id="already-enhanced-screen" class="ui-popup-screen ui-screen-hidden"></div>
+		<div id="already-enhanced-popup" class="ui-popup-container ui-popup-hidden">
+			<div id="already-enhanced" data-ui-enhanced="true" data-ui-transition="fade" data-ui-role="popup" class="ui-popup ui-overlay-shadow ui-body-inherit ui-corner-all">
+				<p>This is a popup already enhanced</p>
+			</div>
+		</div>
+	</div>
+
+	<div data-ui-role="page" id="no-popups">
+		Page that is not the popup page
+	</div>
+</body>
+</html>

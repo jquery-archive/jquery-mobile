@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Sequence Test Suite</title>
+	<script src="../../../../external/requirejs/require.js"></script>
+
+	<script src="../../../lib/bootstrap.js"
+			data-base-url="../../../../js"
+			data-deps="page.dialog.backcompat popup"
+			data-init="true"
+			data-full="true"
+			data-set-push-state="true"
+			data-modules="sequence_core">
+	</script>
+
+	<link rel="stylesheet" href="../../../jqm-tests.css"/>
+	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="basicTestPage" data-nstest-role="page" data-nstest-theme="a">
+		<div data-nstest-role="content">
+			<div data-nstest-role="popup" id="thePopup">
+				<a id="openDialogFromPopup" href="basic-dialog.html" data-nstest-rel="dialog">Dialog</a>
+				<a id="openPageFromPopup" href="another-page.html">Page</a>
+			</div>
+			<div data-nstest-role="popup" id="anotherPopup">
+				<p>Another popup</p>
+			</div>
+			<a id="openPopup" href="#thePopup" data-nstest-rel="popup">Pop</a>
+			<a id="openAnotherPopup" href="#anotherPopup" data-nstest-rel="popup">Pop 1</a>
+			<a id="openBasicDialog" href="basic-dialog.html" data-nstest-rel="dialog">Dialog</a>
+			<a id="openAnotherDialog" href="basic-dialog1.html" data-nstest-rel="dialog">Dialog 1</a>
+			<a id="openAnotherPage" href="another-page.html">Another page</a>
+			<a id="openInternalPage" href="#internal-page">Internal page</a>
+		</div>
+	</div>
+
+	<div id="internal-page" data-nstest-role="page"></div>
+</body>
+</html>

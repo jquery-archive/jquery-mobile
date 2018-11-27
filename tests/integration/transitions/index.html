@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Navigation Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-set-push-state="true"
+			data-set-ns="true"
+			data-full="true"
+			data-modules="transitions_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="harmless-default-page"	 data-nstest-role="page" class="first-page">
+	</div>
+
+	<div id="foo" data-nstest-role="page" class="foo-class">
+		<a href="#bar" data-nstest-transition="flip"></a>
+		<a id="bad-internal-page-link" href="#non-existent-page"></a>
+	</div>
+
+	<div id="prefetch" data-nstest-role="page">
+		<a href="prefetched.html" data-nstest-prefetch>Prefetch test</a>
+	</div>
+
+	<div id="foozball" data-nstest-role="page">
+	</div>
+
+	<div id="bar"	 data-nstest-role="page">
+		<a href="#baz"></a>
+	</div>
+
+	<div id="baz"	 data-nstest-role="page">
+		<a href="#foo"></a>
+	</div>
+
+	<div id="fade-trans" data-nstest-role="page">
+		<a href="#flip-trans" data-nstest-transition="fade"></a>
+	</div>
+
+	<div id="flip-trans" data-nstest-role="page">
+		<a href="#fade-trans" data-nstest-transition="flip"></a>
+	</div>
+
+	<div id="no-trans" data-nstest-role="page">
+		<a href="#pop-trans"></a>
+	</div>
+
+	<div id="pop-trans"	 data-nstest-role="page">
+		<a href="#no-trans" data-nstest-transition="pop"></a>
+	</div>
+
+	<div id="default-trans"	 data-nstest-role="page">
+		<a href="#no-trans"></a>
+	</div>
+
+	<div id="data-url" data-nstest-role="page">
+		<a href="data-url-tests/data-url.html"></a>
+	</div>
+
+	<div id="non-data-url" data-nstest-role="page">
+		<a href="data-url-tests/non-data-url.html"></a>
+	</div>
+
+	<div id="nested-data-url"	 data-nstest-role="page">
+		<a href="data-url-tests/nested.html"></a>
+	</div>
+
+	<div id="single-quotes-data-url" data-nstest-role="page">
+		<a href="data-url-tests/single-quotes.html"></a>
+	</div>
+
+	<div id="reverse-attr-data-url"	 data-nstest-role="page">
+		<a href="data-url-tests/reverse-attr.html"></a>
+	</div>
+
+	<div id="ajax-disabled-form" data-nstest-role="page">
+		<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="false">
+		</form>
+
+		<form method="POST" id="ajax-form" action="/ajax-disabled-form">
+		</form>
+
+		<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="foo">
+		</form>
+	</div>
+
+	<div id="default-trans-dialog" data-nstest-role="page">
+		<a href="#no-trans-dialog" data-nstest-rel="dialog"></a>
+	</div>
+
+	<div id="no-trans-dialog" data-nstest-role="page">
+	</div>
+
+	<div id="dup-history-first" data-nstest-role="page">
+		<a href="#dup-history-second" data-nstest-transition="slideup" data-nstest-role="button" >
+			Page 2
+		</a>
+	</div>
+
+	<div id="dup-history-second" data-nstest-role="page">
+		<a href="#dup-history-first" data-nstest-transition="slideup" data-nstest-role="button">
+			Page 1
+		</a>
+		<a href="#dup-history-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
+	</div>
+
+	<div id="dup-history-dialog" data-nstest-role="dialog">
+		 <div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			 <h1>Dialog</h1>
+		 </div>
+	</div>
+
+	<div id="skip-dialog-first" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="#skip-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
+		</div>
+	</div>
+
+	<div id="skip-dialog" data-nstest-role="dialog">
+		<div data-nstest-role="content">
+			<a href="#skip-dialog-second">Page 2</a>
+		</div>
+	</div>
+
+	<div id="skip-dialog-second" data-nstest-role="page">
+		<a href="#" data-nstest-rel="back">Go Back</a>
+	</div>
+
+	<div id="nested-dialog-page" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="#nested-dialog-first">Dialog</a>
+		</div>
+	</div>
+
+	<div id="nested-dialog-first" data-nstest-role="dialog">
+		<div data-nstest-role="content">
+			<a href="#nested-dialog-second">Dialog 2</a>
+		</div>
+	</div>
+
+	<div id="nested-dialog-second" data-nstest-role="dialog">
+	</div>
+
+	<div id="relative-after-embedded-page-first" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="#relative-after-embedded-page-second">second page</a>
+		</div>
+	</div>
+
+	<div id="relative-after-embedded-page-second" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="data-url-tests/data-url.html">file path page</a>
+		</div>
+	</div>
+
+	<div id="ajax-title-page" data-nstest-title="Title Attr 1" data-nstest-role="page">
+		<a href="title1.html" id="titletest1" data-nstest-transition="none">test</a>
+		<a href="title2.html" id="titletest2" data-nstest-transition="none">test</a>
+		<a href="title3.html" id="titletest3" data-nstest-transition="none">test</a>
+	</div>
+
+	<div data-nstest-role="page" id="titletest4" data-nstest-title="Title Attr 2">
+		<div data-nstest-role="toolbar" data-nstest-type="header"><h1>Title Heading</h1></div>
+	</div>
+
+	<div data-nstest-role="page" id="titletest5" data-nstest-title="Title Attr">
+		<div data-nstest-role="toolbar" data-nstest-type="header"><h1>Title Heading</h1></div>
+	</div>
+
+	<div data-nstest-role="page" id="self-link">
+		<a href="#self-link">self!</a>
+	</div>
+
+	<div data-nstest-role="page" id="dialog-param-link">
+		<a href="dialog-param-test/dialog-param.html">go</a>
+	</div>
+
+	<div data-nstest-role="page" id="pathing-tests">
+		<!-- doc rel links -->
+		<a href="file.html" id="doc-rel-test-one">go</a>
+		<a href="path-tests/file.html" id="doc-rel-test-two">go</a>
+		<a href="path-tests/sub-dir/file.html" id="doc-rel-test-three">go</a>
+		<a href="path-tests/sub-dir/" id="doc-rel-test-four">go</a>
+		<a href="../../integration/navigation/path-tests/parent-ref.html" id="doc-rel-test-five">go</a>
+		<a href="../../integration/navigation/path-tests/parent/" id="doc-rel-test-six">go</a>
+
+		<!-- site rel links -->
+		<!-- these will be altered before the test suite runs to use the current path -->
+		<a href="file.html" id="site-rel-test-one" class="site-rel">go</a>
+		<a href="path-tests/file.html" id="site-rel-test-two" class="site-rel">go</a>
+		<a href="path-tests/sub-dir/file.html" id="site-rel-test-three" class="site-rel">go</a>
+		<a href="path-tests/sub-dir/" id="site-rel-test-four" class="site-rel">go</a>
+		<a href="../../integration/navigation/path-tests/parent-ref.html" id="site-rel-test-five" class="site-rel">go</a>
+		<a href="../../integration/navigation/path-tests/parent/" id="site-rel-test-six" class="site-rel">go</a>
+
+		<!-- protocol rel links -->
+		<!-- these will be altered before the test suite runs to use the
+				 current domain and path -->
+		<a href="file.html" id="protocol-rel-test-one" class="protocol-rel">go</a>
+		<a href="path-tests/file.html" id="protocol-rel-test-two" class="protocol-rel">go</a>
+		<a href="path-tests/sub-dir/file.html" id="protocol-rel-test-three" class="protocol-rel">go</a>
+		<a href="path-tests/sub-dir/" id="protocol-rel-test-four" class="protocol-rel">go</a>
+		<a href="../../integration/navigation/path-tests/parent-ref.html" id="protocol-rel-test-five" class="protocol-rel">go</a>
+		<a href="../../integration/navigation/path-tests/parent/" id="protocol-rel-test-six" class="protocol-rel">go</a>
+
+		<!-- absolute links -->
+		<!-- these will be altered before the test suite runs to use the
+				 current protocol, domain and path -->
+		<a href="file.html" id="absolute-test-one" class="absolute">go</a>
+		<a href="path-tests/file.html" id="absolute-test-two" class="absolute">go</a>
+		<a href="path-tests/sub-dir/file.html" id="absolute-test-three" class="absolute">go</a>
+		<a href="path-tests/sub-dir/" id="absolute-test-four" class="absolute">go</a>
+		<a href="../../integration/navigation/path-tests/parent-ref.html" id="absolute-test-five" class="absolute">go</a>
+		<a href="../../integration/navigation/path-tests/parent/" id="absolute-test-six" class="absolute">go</a>
+
+	</div>
+
+	<div data-nstest-role="page" id="pathing-tests-reset">
+		<div class="reset-value">page didn't change!</div>
+	</div>
+
+	<div data-nstest-role="page" id="internal-no-action-form-page">
+		<div data-nstest-role="content">
+			<form>
+				<input type="hidden" name="foo" value="1">
+				<input type="hidden" name="bar" value="2">
+			</form>
+					<a href="form-tests/form-no-action.html">External page containing form with no action.</a>
+			</div>
+	</div>
+
+	<div id="active-state-page1" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="#active-state-page2" data-nstest-role="button">page2</a>
+		</div>
+	</div>
+
+	<div id="active-state-page2" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a href="#active-state-page1" data-nstest-role="button">href button</a>
+			<a href="#active-state-page1" data-nstest-rel="back" data-nstest-role="button">back button</a>
+		</div>
+	</div>
+
+	<div id="odd-clicks-page" data-nstest-role="page">
+		<a href="#odd-clicks-page-dest" id="right-or-middle-click">foo</a>
+	</div>
+
+	<div id="odd-clicks-page-dest" data-nstest-role="page"></div>
+
+	<div id="inject-links-page" data-nstest-role="page">
+		<a href="#injected-test-page" id="static-injected-test-page-link">static link</a>
+	</div>
+
+	<div id="prefetched-dialog-page" data-nstest-role="page">
+		<a href="prefetched-dialog.html"
+		 id="prefetched-dialog-link"
+		 data-nstest-role="prefetch"
+		 data-nstest-rel="dialog">
+		static link
+		</a>
+	</div>
+</body>
+</html>

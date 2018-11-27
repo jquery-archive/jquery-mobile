@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Form Submission Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="popup"
+			data-init="true"
+			data-no-backcompat="true"
+			data-modules="form_submission_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<form data-ui-role="page">
+		<input type="hidden" name="abc" value="def">
+		<div data-ui-role="popup" id="popup">
+			<button type="submit">Submit from popup</button>
+		</div>
+		<a href="#popup" data-ui-rel="popup" id="open-popup-link">Open Popup</a>
+	</form>
+</body>
+</html>

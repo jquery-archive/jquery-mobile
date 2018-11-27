@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table.reflow"
+		data-init="true"
+		data-modules="grouped_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table data-nstest-role="table" id="grouped-test-table" data-nstest-column-btn-theme="b" data-nstest-column-popup-theme="a" data-nstest-mode="reflow" class="ui-responsive">
+				<thead>
+					<tr>
+						<td></td>
+						<th colspan="3">Q1 2012</th>
+						<th class="test-column-header" colspan="3">Q2 2012</th>
+						<th colspan="3">Q3 2012</th>
+						<th colspan="3">Q4 2012</th>
+						<th colspan="3">YTD Totals</th>
+					</tr>
+					<tr>
+						<th>Store</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+						<th data-column>Income</th>
+						<th data-column>Profit</th>
+						<th data-column>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Boston</th>
+						<td data-top-label>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-top-label data-column>3,647</td>
+						<td data-column>1,354</td>
+						<td data-column>+5.8%</td>
+						<td data-top-label>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td data-top-label>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td data-top-label>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr>
+						<th>Chicago</th>
+						<td data-top-label>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-top-label data-column>3,647</td>
+						<td data-column>1,354</td>
+						<td data-column>+5.8%</td>
+						<td data-top-label>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td data-top-label>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td data-top-label>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr>
+						<th>NYC</th>
+						<td data-top-label>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-top-label data-column>3,647</td>
+						<td data-column>1,354</td>
+						<td data-column>+5.8%</td>
+						<td data-top-label>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td data-top-label>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td data-top-label>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="single-column-grouped" data-nstest-role="table" data-nstest-mode="reflow" class="ui-responsive">
+				<thead>
+					<tr>
+						<th class="test-column-header">Romania</th>
+						<th>Canada</th>
+						<th>Finland</th>
+						<th>Hungary</th>
+					</tr>
+					<tr>
+						<th data-column>Population</th>
+						<th>Population</th>
+						<th>Population</th>
+						<th>Population</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-column data-top-label>20121642</td>
+						<td data-top-label>35344962</td>
+						<td data-top-label>5457429</td>
+						<td data-top-label>9879000</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+.ui-toolbar,
+.ui-toolbar-header,
+.ui-toolbar-footer {
+	border-width: 1px 0;
+	border-style: solid;
+	position: relative;
+}
+.ui-toolbar:empty,
+.ui-toolbar-header:empty,
+.ui-toolbar-footer:empty {
+	min-height: 2.6875em;
+}
+.ui-toolbar .ui-toolbar-title,
+.ui-toolbar-header .ui-toolbar-title,
+.ui-toolbar-footer .ui-toolbar-title {
+	font-size: 1em;
+	min-height: 1.1em;
+	text-align: center;
+	display: block;
+	margin: 0 30%;
+	padding: .7em 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	outline: 0 !important;
+}
+.ui-toolbar .ui-toolbar-title,
+.ui-toolbar-footer .ui-toolbar-title {
+	margin: 0 1em;
+}
+/* Buttons in header position classes */
+.ui-toolbar-header .ui-toolbar-header-button-left,
+.ui-toolbar-header .ui-toolbar-header-button-right,
+.ui-toolbar-header-button-left > [class*="ui-"],
+.ui-toolbar-header-button-right > [class*="ui-"] {
+	margin: 0;
+}
+.ui-toolbar-header-button-left,
+.ui-toolbar-header-button-right {
+	position: absolute;
+	top: .24em;
+}
+.ui-toolbar-header-button-left {
+	left: .4em;
+}
+.ui-toolbar-header-button-right {
+	right: .4em;
+}
+.ui-btn-icon-notext.ui-toolbar-header-button-left {
+	top: .3125em;
+	left: .3125em;
+}
+.ui-btn-icon-notext.ui-toolbar-header-button-right {
+	top: .3125em;
+	right: .3125em;
+}
+.ui-toolbar-header .ui-controlgroup-horizontal:after {
+    clear: none;
+}

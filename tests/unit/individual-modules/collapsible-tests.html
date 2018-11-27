@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Collapsible Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="collapsible"
+		data-modules="collapsible_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div id="collapsible" data-nstest-role="collapsible" data-nstest-theme="a" data-nstest-content-theme="b">
+		<h1>Collapsible</h1>
+		<p>Collapsible content</p>
+	</div>
+</body>
+</html>

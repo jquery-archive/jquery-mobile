@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Page</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="toolbar"
+		data-init="true"
+		data-modules="page_title_entity page_enhance_within page_theme">
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<a id="openTestPage" href="#title-test">Go</a>
+		<a href="enhance.html" id="open-enhance">Enhance Within</a>
+		<a href="no-enhance.html" id="open-no-enhance">No Enhance Within</a>
+	</div>
+
+	<div data-nstest-role="page" id="title-test">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Page title contains an entity: &lt;&amp;&gt;&copy;</h1>
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="theme-test">
+		<div class="ui-content">
+			<p>Page that inherits its theme</p>
+		</div>
+	</div>
+</body>
+</html>

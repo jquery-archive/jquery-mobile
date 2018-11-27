@@ -1,0 +1,70 @@
+.ui-navbar {
+	max-width: 100%;
+}
+.ui-navbar ul:before,
+.ui-navbar ul:after {
+	content: "";
+	display: table;
+}
+.ui-navbar ul:after {
+	clear: both;
+}
+.ui-navbar ul {
+	padding: 0;
+	display: table;
+	table-layout:fixed;
+	width: 100%;
+	margin: 0;
+}
+.ui-navbar li {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+}
+.ui-navbar li .ui-button {
+	font-size: 12.5px;
+	display: block;
+	width: 100%;
+	margin: 0;
+	border-right-width: 0;
+	box-sizing: border-box;
+}
+.ui-toolbar-header .ui-navbar li button.ui-button,
+.ui-toolbar-footer .ui-navbar li button.ui-button {
+	margin: 0;
+	width: 100%;
+}
+.ui-navbar .ui-button:focus {
+	z-index: 1;
+}
+.ui-navbar-row li .ui-button {
+	border-top-width: 0;
+}
+/* fixes gaps caused by subpixel problem */
+.ui-navbar li:last-child .ui-button {
+	margin-right: -4px;
+}
+.ui-navbar li:last-child .ui-button:after {
+	margin-right: 4px;
+}
+.ui-content .ui-navbar li .ui-button {
+	border-right-width: 0;
+	border-radius: 0;
+}
+.ui-content .ui-navbar li:last-child .ui-button {
+	border-right-width: 1px;
+	margin-right: 0;
+}
+.ui-content .ui-navbar li:last-child .ui-button:after {
+	margin-right: 0;
+}
+.ui-toolbar-header .ui-navbar .ui-button,
+.ui-toolbar-footer .ui-navbar .ui-button {
+	border-top-width: 0;
+	border-bottom-width: 0;
+	display: inline-block;
+}
+.ui-toolbar-header .ui-title ~ .ui-navbar .ui-button,
+.ui-toolbar-footer .ui-title ~ .ui-navbar .ui-button {
+	border-top-width: 1px;
+}

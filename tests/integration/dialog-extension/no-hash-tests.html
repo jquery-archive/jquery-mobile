@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Dialog Test Suite</title>
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./dialog.bindMobileInitNoHash.js page.dialog.backcompat toolbar"
+			data-init="true"
+			data-modules="dialog_no_hash">
+	</script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
+		<div data-nstest-role="content">
+			<a id="dialog-no-hash-link" href="dialog-no-hash.html">Dialog</a>
+		</div>
+	</div>
+
+</body>
+</html>

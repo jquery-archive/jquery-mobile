@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Collapsible Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="forms/textinput forms/autogrow forms/clearButton tests/jquery.setNameSpace.immediately"
+		data-modules="textinput_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<form class="ui-body-a">
+		<input type="text" id="plain-text">
+		<input type="text" data-nstest-type="search" id="search-text" data-nstest-clear-button="true">
+		<textarea id="textarea"></textarea>
+	</form>
+</body>
+</html>

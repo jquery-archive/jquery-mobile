@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile: Event Logger</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
+	<script src="../../js/"></script>
+
+	<script>
+	$(function(){
+		$( "body" ).on( "swipeleft swiperight", function( e ) {
+			$( "#log" )
+				.append( "<li>" + e.type + "</li>" )
+				.listview( "refresh" );
+			return false;
+		})
+		.on("swipeleft swiperight", false);
+
+		$( "#horizontal" ).on( "change", function() {
+			$.event.special.swipe.horizontalDistanceThreshold = this.value;
+		});
+		$( "#vertical" ).on( "change", function() {
+			$.event.special.swipe.verticalDistanceThreshold = this.value;
+		});
+	});
+	</script>
+
+	<style>
+		#jqm-home {
+			height: 500px;
+		}
+		.ui-textinput-text {
+			display:inline-block !important;
+			width: 20%;
+		}
+		.ui-mobile label {
+			display: inline-block;
+			width: 20%;
+			text-align: right;
+		}
+		html body .ui-page .ui-content ol.ui-listview li.ui-listview-item-static {
+			display: inline-block;
+			width: 25%;
+			border: 1px #333 solid;
+			padding: .2em .5em;
+		}
+	</style>
+</head>
+<body>
+<div  data-role="page"  data-theme="a" id="jqm-home">
+	<div  data-role="toolbar" data-type="header">
+		<h1>Event Logger</h1>
+	</div>
+
+	<div  data-role="content">
+		<h2>Set Thresholds</h2>
+		<label for="horizontal">Horizontal</label>
+		<input type="number" name="horizontal" id="horizontal" value="30">
+		<label for="vertical">Vertical</label>
+		<input type="number" name="vertical" id="vertical" value="30">
+		<h3>swipe events on this page will log out below, appending to the bottom as they arrive.</h3>
+		<br/>
+		<ol data-role="listview" id="log" class="ui-mini"></ol>
+	</div>
+</div>
+</body>
+</html>

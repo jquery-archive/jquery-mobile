@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Form Reset Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="widgets/page widgets/controlgroup widgets/forms/checkboxradio
+					   widgets/forms/select widgets/forms/select.backcompat widgets/forms/slider widgets/forms/textinput widgets/forms/flipswitch"
+			data-init="true"
+			data-modules="forms_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div id="startPage" data-nstest-role="page">
+		<a href="#testPage" id="goToTestPage">Go</a>
+	</div>
+
+	<div id="testPage" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<form id="theForm" action="#" method="get">
+				<fieldset data-nstest-role="controlgroup">
+					<label for="testVCheckbox1">Test Vertical Checkbox 1</label>
+					<input type="checkbox" id="testVCheckbox1">
+
+					<label for="testVCheckbox4">Test Vertical Checkbox 4</label>
+					<input type="checkbox" id="testVCheckbox4" checked>
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<label for="testHCheckbox1">Test Horizontal Checkbox 1</label>
+					<input type="checkbox" id="testHCheckbox1" checked>
+
+					<label for="testHCheckbox4">Test Horizontal Checkbox 4</label>
+					<input type="checkbox" id="testHCheckbox4">
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup">
+					<label for="testVRadio1">Test Vertical Radio 1</label>
+					<input type="radio" name="vradioTest" id="testVRadio1">
+
+					<label for="testVRadio4">Test Vertical Radio 4</label>
+					<input type="radio" name="vradioTest" id="testVRadio4">
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<label for="testHRadio1">Test Horizontal Radio 1</label>
+					<input type="radio" name="hradioTest" id="testHRadio1">
+
+					<label for="testHRadio4">Test Horizontal Radio 4</label>
+					<input type="radio" name="hradioTest" id="testHRadio4">
+				</fieldset>
+				<div data-nstest-role="fieldcontain">
+					<label for="selectTest">Select Test</label>
+					<select id="selectTest">
+						<option value="option1">Option 1</option>
+						<option value="option2">Option 2</option>
+						<option value="option3">Option 3</option>
+					</select>
+				</div>
+				<div data-nstest-role="fieldcontain">
+					<label for="testRange">Test Range</label>
+					<input id="testRange" type="range" min="0" max="100" value="42">
+				</div>
+				<input type="checkbox" id="checkbox-based-flipswitch" data-nstest-role="flipswitch">
+				<select id="select-based-flipswitch" data-nstest-role="flipswitch">
+					<option id="op1">Option 1</option>
+					<option id="op2">Option 2</option>
+				</select>
+				<button id="reset" type="reset" value="Test Reset"></button>
+			</form>
+			<a href="#startPage" id="goToStartPage">Go</a>
+			<form id="formactiontest" action="landing1.html">
+				<input type="submit" id="default-submit">Default Submit
+				<input type="submit" id="formaction-submit" formaction="landing2.html">Formaction Submit
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+/* slide down */
+.slidedown.out {
+	-webkit-animation-name: fadeout;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-name: fadeout;
+	-moz-animation-duration: 100ms;
+	animation-name: fadeout;
+	animation-duration: 100ms;
+}
+
+.slidedown.in {
+	-webkit-transform: translateY(0);
+	-webkit-animation-name: slideinfromtop;
+	-webkit-animation-duration: 250ms;
+	-moz-transform: translateY(0);
+	-moz-animation-name: slideinfromtop;
+	-moz-animation-duration: 250ms;
+	transform: translateY(0);
+	animation-name: slideinfromtop;
+	animation-duration: 250ms;
+}
+
+.slidedown.in.reverse {
+	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 150ms;
+	-moz-animation-name: fadein;
+	-moz-animation-duration: 150ms;
+	animation-name: fadein;
+	animation-duration: 150ms;
+}
+
+.slidedown.out.reverse {
+	-webkit-transform: translateY(-100%);
+	-webkit-animation-name: slideouttotop;
+	-webkit-animation-duration: 200ms;
+	-moz-transform: translateY(-100%);
+	-moz-animation-name: slideouttotop;
+	-moz-animation-duration: 200ms;
+	transform: translateY(-100%);
+	animation-name: slideouttotop;
+	animation-duration: 200ms;
+}
+
+@-webkit-keyframes slideinfromtop {
+	from { -webkit-transform: translateY(-100%);
+	}
+	to { -webkit-transform: translateY(0);
+	}
+}
+@-moz-keyframes slideinfromtop {
+	from { -moz-transform: translateY(-100%);
+	}
+	to { -moz-transform: translateY(0);
+	}
+}
+@keyframes slideinfromtop {
+	from { transform: translateY(-100%);
+	}
+	to { transform: translateY(0);
+	}
+}
+
+@-webkit-keyframes slideouttotop {
+	from { -webkit-transform: translateY(0);
+	}
+	to { -webkit-transform: translateY(-100%);
+	}
+}
+@-moz-keyframes slideouttotop {
+	from { -moz-transform: translateY(0);
+	}
+	to { -moz-transform: translateY(-100%);
+	}
+}
+@keyframes slideouttotop {
+	from { transform: translateY(0);
+	}
+	to { transform: translateY(-100%);
+	}
+}

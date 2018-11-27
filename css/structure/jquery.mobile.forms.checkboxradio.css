@@ -1,0 +1,32 @@
+.ui-checkboxradio-label {
+	margin: .5em 0;
+	position: relative;
+	text-align: left;
+	white-space: normal; /* Nowrap + ellipsis doesn't work on label. Issue #1419. */
+}
+
+.ui-checkboxradio-label.ui-icon-top,
+.ui-checkboxradio-label.ui-icon-bottom {
+	text-align: center;
+}
+
+.ui-checkboxradio-label .ui-icon.ui-checkboxradio-icon {
+	width: 18px;
+	height: 18px;
+	margin: 0 2px;
+}
+
+.ui-checkboxradio-radio-label.ui-state-active .ui-checkboxradio-icon {
+	width: 8px;
+	height: 8px;
+	border-width: 5px;
+	border-style: solid;
+}
+
+.ui-controlgroup-horizontal .ui-checkboxradio-icon {
+	display: none;
+}
+
+.ui-checkboxradio-disabled {
+	pointer-events: none;
+}

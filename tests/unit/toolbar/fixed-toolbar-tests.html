@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Toolbar Test Suite</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="navigation/method fixedToolbar"
+		data-init="true"
+		data-modules="fixed_toolbar_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+	<div data-nstest-role="page" id="default">
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="testHeader">
+			<h1>Header</h1>
+		</div>
+		<div class="ui-content">
+			<p>Content</p>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" id="testFooter">
+			<h1>Footer</h1>
+		</div>
+	</div>
+</body>
+</html>

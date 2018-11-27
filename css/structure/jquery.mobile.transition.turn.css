@@ -1,0 +1,136 @@
+/* The properties in this rule are only necessary for the 'flip' transition.
+ * We need specify the perspective to create a projection matrix. This will add
+ * some depth as the element flips. The depth number represents the distance of
+ * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
+ * value.
+ */
+
+.viewport-turn {
+	-webkit-perspective: 200px;
+	-moz-perspective: 200px;
+	-ms-perspective: 200px;
+	perspective: 200px;
+	position: absolute;
+}
+.turn {
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+	-webkit-transform-origin: 0;
+
+	-moz-backface-visibility: hidden;
+	-moz-transform: translateX(0);
+	-moz-transform-origin: 0;
+
+	backface-visibility :hidden;
+	transform: translateX(0);
+	transform-origin: 0;
+}
+
+.turn.out {
+	-webkit-transform: rotateY(-90deg) scale(.9);
+	-webkit-animation-name: flipouttoleft;
+	-webkit-animation-duration: 125ms;
+	-moz-transform: rotateY(-90deg) scale(.9);
+	-moz-animation-name: flipouttoleft;
+	-moz-animation-duration: 125ms;
+	transform: rotateY(-90deg) scale(.9);
+	animation-name: flipouttoleft;
+	animation-duration: 125ms;
+}
+
+.turn.in {
+	-webkit-animation-name: flipintoright;
+	-webkit-animation-duration: 250ms;
+	-moz-animation-name: flipintoright;
+	-moz-animation-duration: 250ms;
+	animation-name: flipintoright;
+	animation-duration: 250ms;
+}
+
+.turn.out.reverse {
+	-webkit-transform: rotateY(90deg) scale(.9);
+	-webkit-animation-name: flipouttoright;
+	-moz-transform: rotateY(90deg) scale(.9);
+	-moz-animation-name: flipouttoright;
+	transform: rotateY(90deg) scale(.9);
+	animation-name: flipouttoright;
+}
+
+.turn.in.reverse {
+	-webkit-animation-name: flipintoleft;
+	-moz-animation-name: flipintoleft;
+	animation-name: flipintoleft;
+}
+
+@-webkit-keyframes flipouttoleft {
+	from { -webkit-transform: rotateY(0);
+	}
+	to { -webkit-transform: rotateY(-90deg) scale(.9);
+	}
+}
+@-moz-keyframes flipouttoleft {
+	from { -moz-transform: rotateY(0);
+	}
+	to { -moz-transform: rotateY(-90deg) scale(.9);
+	}
+}
+@keyframes flipouttoleft {
+	from { transform: rotateY(0);
+	}
+	to { transform: rotateY(-90deg) scale(.9);
+	}
+}
+@-webkit-keyframes flipouttoright {
+	from { -webkit-transform: rotateY(0) ;
+	}
+	to { -webkit-transform: rotateY(90deg) scale(.9);
+	}
+}
+@-moz-keyframes flipouttoright {
+	from { -moz-transform: rotateY(0);
+	}
+	to { -moz-transform: rotateY(90deg) scale(.9);
+	}
+}
+@keyframes flipouttoright {
+	from { transform: rotateY(0);
+	}
+	to { transform: rotateY(90deg) scale(.9);
+	}
+}
+@-webkit-keyframes flipintoleft {
+	from { -webkit-transform: rotateY(-90deg) scale(.9);
+	}
+	to { -webkit-transform: rotateY(0);
+	}
+}
+@-moz-keyframes flipintoleft {
+	from { -moz-transform: rotateY(-90deg) scale(.9);
+	}
+	to { -moz-transform: rotateY(0);
+	}
+}
+@keyframes flipintoleft {
+	from { transform: rotateY(-90deg) scale(.9);
+	}
+	to { transform: rotateY(0);
+	}
+}
+@-webkit-keyframes flipintoright {
+	from { -webkit-transform: rotateY(90deg) scale(.9);
+	}
+	to { -webkit-transform: rotateY(0);
+	}
+}
+@-moz-keyframes flipintoright {
+	from { -moz-transform: rotateY(90deg) scale(.9);
+	}
+	to { -moz-transform: rotateY(0);
+	}
+}
+@keyframes flipintoright {
+	from { transform: rotateY(90deg) scale(.9);
+	}
+	to { transform: rotateY(0);
+	}
+}

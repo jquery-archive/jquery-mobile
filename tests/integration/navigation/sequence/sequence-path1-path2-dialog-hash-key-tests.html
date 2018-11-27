@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<title>Path 1 Path 2 Dialog Hash Key Tests</title>
+	<script src="../../../../external/qunit/qunit.js"></script>
+	<script>
+(function() {
+
+	// Regex taken from navigation/path
+	var parsedLocation = location.href.match( /^\s*(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/ );
+
+	// Redirect to sequence-tests.html in the same directory as this file
+	location.href =
+
+		// protocol
+		( parsedLocation[ 4 ] || "" ) +
+
+		// double slash
+		( parsedLocation[ 5 ] || "" ) +
+
+		// host
+		( parsedLocation[ 10 ] || "" ) +
+
+		// directory
+		( parsedLocation[ 14 ] || "" ) +
+
+		"sequence-redirect.html" +
+
+		// search
+		( parsedLocation[ 16 ] || "" ) +
+
+		"#" +
+
+		// directory
+		( parsedLocation[ 14 ] || "" ) +
+
+		"index.html" + "&ui-state=dialog";
+})();
+	</script>
+</head>
+</html>

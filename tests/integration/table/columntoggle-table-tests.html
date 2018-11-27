@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<style>
+		.make-it-red {
+			color: red;
+		}
+	</style>
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table
+		jquery-ui/data
+		table.columntoggle.popup"
+		data-set-push-state="true"
+		data-init="true"
+		data-modules="columntoggle_table_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="toggle-column-test" class="ui-responsive">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column-add-row" class="ui-responsive">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column-add-column" class="ui-responsive">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="refresh-column-count-test" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive table-stroke">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="refresh-hidden-column-test" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive table-stroke">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table id="setColumnVisibility-test" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" data-column-under-test>Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th data-column-under-test>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th data-column-under-test>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="generated-id-test-container">
+				<table data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive">
+					<thead>
+						<tr>
+							<th data-nstest-priority="2">Rank</th>
+							<th>Movie Title</th>
+							<th data-nstest-priority="3">Year</th>
+							<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+							<th data-nstest-priority="5">Reviews</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>1</th>
+							<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+							<td>1941</td>
+							<td>100%</td>
+							<td>74</td>
+						</tr>
+						<tr>
+							<th>2</th>
+							<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+							<td>1942</td>
+							<td>97%</td>
+							<td>64</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<table id="turn-off-ui-test" data-nstest-role="table" data-nstest-mode="columntoggle" data-nstest-column-ui="false" class="ui-responsive">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

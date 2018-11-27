@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Filter Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="listview filterable listview.autodividers toolbar
+			collapsible forms/button controlgroup forms/select forms/textinput
+			forms/checkboxradio"
+			data-init="true"
+			data-modules="filterable_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div id="content" class="ui-content">
+			<div id="hidedividers-option-test" data-nstest-role="listview" data-nstest-filter="true">
+			</div>
+			<form id="test-input-preventDefault-form">
+				<input id="test-input-preventDefault">
+			</form>
+			<ul data-nstest-filter="true" id="test-input-preventDefault-list" data-nstest-input="#test-input-preventDefault">
+				<li>Alabama</li>
+				<li>California</li>
+				<li>Oregon</li>
+			</ul>
+			<form id="test-filter-reveal-show-all-form">
+				<input id="test-filter-reveal-show-all-input">
+			</form>
+			<ul data-nstest-filter="true" data-nstest-filter-reveal="true" id="test-filter-reveal-show-all-list" data-nstest-input="#test-filter-reveal-show-all-input">
+				<li>Test 1</li>
+				<li>Test 2</li>
+				<li>Test 3</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Fixed Toolbar Integration Test</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./toolbar.setFixedToolbar.js navigation/method toolbar fixedToolbar popup"
+			data-init="true"
+			data-modules="fixedToolbar">
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page" id="default">
+		<!-- structural classes -->
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="classes-test-a"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" id="classes-test-b"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-fullscreen="true" id="classes-test-c"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" id="classes-test-d"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" id="classes-test-e"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" id="classes-test-f"></div>
+		<!-- transition classes -->
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" id="classes-test-g"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-transition="none" id="classes-test-h"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-transition="slide" id="classes-test-i"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" data-nstest-transition="slide" id="classes-test-j"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-transition="fade" id="classes-test-k"></div>
+	</div>
+
+	<div data-nstest-role="page" id="fullscreen-test-a">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-fullscreen="true" id="classes-test-l"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" id="classes-test-m"></div>
+	</div>
+
+	<div data-nstest-role="page" id="page-show-visible-false">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="false">
+			<h1>foo</h1>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="false">
+			<h1>foo</h1>
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="page-show-visible-true">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="true"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="true"></div>
+	</div>
+
+	<div data-nstest-role="page" id="page-show-visible-undefined">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
+	</div>
+	<div data-nstest-role="page" id="page-retains-fixed-header-on-popup-removed">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed"></div>
+	</div>
+	<div data-nstest-role="page" id="page-destroy-test">
+		<div id="testDestroyFixedFullscreen" data-nstest-position="fixed" data-nstest-fullscreen="true" >
+			<h1>title</h1>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="stale-animation-test-page">
+		<div id="stale-animation-test" data-nstest-position="fixed" data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Toolbar</h1>
+		</div>
+		<div class="ui-content">
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="page-destroy-test-page-1">
+		<div id="headerOnFirstPage" data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed">
+			<h1>title</h1>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="page-destroy-test-page-2">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="fixed">
+			<h1>title</h1>
+		</div>
+	</div>
+</body>
+</html>

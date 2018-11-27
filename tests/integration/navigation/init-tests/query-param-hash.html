@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Navigation Test Suite</title>
+
+	<script src="../../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"	href="../../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../../jqm-tests.css"/>
+
+	<script src="../../../lib/bootstrap.js"
+			data-base-url="../../../../js"
+			data-full="true"
+			data-set-ns="true"
+			data-set-push-state="true"
+			data-no-autostart="true"
+			data-modules="navigation_query_param_hash">
+	</script>
+</head>
+<body>
+  <div id="qunit"></div>
+
+  <!-- default page is not the targeted page -->
+  <div id="default" data-nstest-role="page">
+  </div>
+
+  <div id="loaded" data-nstest-role="page">
+  </div>
+</body>
+</html>

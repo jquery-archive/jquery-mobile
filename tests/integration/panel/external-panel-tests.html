@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Panel Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page panel"
+			data-init="true"
+			data-modules="external_panel_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+
+	<div data-nstest-role="panel" id="wrapper-test-panel" data-nstest-display="reveal">
+		<p>The panel</p>
+		<a href="#other-page" id="go-to-other-page" data-nstest-transition="none">Go to other page</a>
+	</div>
+
+	<div data-nstest-role="panel" id="panel-stretch-test" data-nstest-display="overlay">
+		<p>Panel stretch test</p>
+	</div>
+
+	<div data-nstest-role="page" id="start-page">
+		<div class="ui-content">
+			<p>Start page</p>
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="other-page">
+		<div class="ui-content">
+			<p>Other page</p>
+		</div>
+	</div>
+	<div data-nstest-role="page" id="panel-stretch-page">
+		<div class="ui-content"></div>
+	</div>
+</body>

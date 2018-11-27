@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table.reflow tests/jquery.setNameSpace.immediately"
+		data-init="true"
+		data-modules="reflow_destroy_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table id="reflow-destroy-test" data-nstest-role="table" data-nstest-mode="reflow" data-nstest-enhanced="true" class="ui-table ui-table-reflow ui-responsive">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" data-nstest-colstart="1">Rank</th>
+						<th data-nstest-colstart="2">Movie Title</th>
+						<th data-nstest-priority="3" data-nstest-colstart="3">Year</th>
+						<th data-nstest-priority="1" data-nstest-colstart="4"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" data-nstest-colstart="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th><b class="ui-table-cell-label">Rank</b>1</th>
+						<td><b class="ui-table-cell-label">Movie Title</b><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td><b class="ui-table-cell-label">Year</b>1941</td>
+						<td><b class="ui-table-cell-label">Rotten Tomato Rating</b>100%</td>
+						<td><b class="ui-table-cell-label">Reviews</b>74</td>
+					</tr>
+					<tr>
+						<th><b class="ui-table-cell-label">Rank</b>2</th>
+						<td><b class="ui-table-cell-label">Movie Title</b><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td><b class="ui-table-cell-label">Year</b>1942</td>
+						<td><b class="ui-table-cell-label">Rotten Tomato Rating</b>97%</td>
+						<td><b class="ui-table-cell-label">Reviews</b>64</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/*
+* jQuery Mobile v@VERSION
+* http://jquerymobile.com
+*
+* Copyright jQuery Foundation, Inc. and other contributors
+* Released under the MIT license.
+* http://jquery.org/license
+*
+*/

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Page Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="toolbar"
+		data-init="true"
+		data-modules="page_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="qunit-fixture">
+		<div data-nstest-role="page">
+			<div data-nstest-role="toolbar" data-nstest-type="header">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+				<a href="foo">foo</a>
+			</div><!-- /header -->
+
+			<div  data-nstest-role="toolbar" data-nstest-type="footer">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+
+				<a href="foo">foo</a>
+			</div><!-- /header -->
+
+			<div class="ui-bar">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+
+				<a href="foo">foo</a>
+			</div>
+		</div>
+	</div>
+
+	<div data-nstest-enhance="false">
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="ignored-header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+	</div>
+
+	<div>
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="enhanced-header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+	</div>
+</body>
+</html>

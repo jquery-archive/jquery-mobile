@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Init Test Suite</title>
+	<!-- meta viewport left out on purpose for test append -->
+	<script src="../../../external/requirejs/require.js"></script>
+	<script
+		src="../../lib/bootstrap.js"
+		data-full="true"
+		data-set-ns="true"
+		data-modules="init_core_nopage">
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+
+	<style>
+	[data-nstest-role="page"], [data-nstest-role="dialog"] {
+	position: static !important;
+	}
+	</style>
+</head>
+
+<h1 id="qunit-header">jQuery Mobile Init Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+</body>
+</html>

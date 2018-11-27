@@ -1,0 +1,64 @@
+.ui-rangeslider {
+	margin: .5em 0;
+}
+.ui-rangeslider:before,
+.ui-rangeslider:after {
+	content: "";
+	display: table;
+}
+.ui-rangeslider:after {
+	clear: both;
+}
+.ui-rangeslider .ui-slider-input.ui-rangeslider-last {
+	float: right;
+}
+.ui-rangeslider .ui-rangeslider-sliders {
+	position: relative;
+	overflow: visible;
+	height: 30px;
+	margin: 0 68px;
+}
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
+	position: absolute;
+	top: 6px;
+	right: 0;
+	left: 0;
+	margin: 0;
+}
+.ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track {
+	top: 8px;
+}
+.ui-rangeslider .ui-slider-track:first-child .ui-slider-bg {
+	display: none;
+}
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-track:first-child {
+	background-color: transparent;
+	background: none;
+	border-width: 0;
+	height: 0;
+}
+
+/* this makes ie6 and ie7 set height to 0 to fix z-index problem */
+html >/**/body .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track:first-child {
+	height: 15px;
+	border-width: 1px;
+}
+html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:first-child {
+	height: 12px;
+}
+
+/* Hide the second label (the first is moved outside the div) */
+div.ui-rangeslider label {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+}
+.ui-field-contain .ui-rangeslider input.ui-slider-input,
+.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
+.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
+.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	margin-top: 0;
+	margin-bottom: 0;
+}

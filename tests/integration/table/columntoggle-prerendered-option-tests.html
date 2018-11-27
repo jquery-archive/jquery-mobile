@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="table.columntoggle.popup ./columntoggle_prerendered_option_setup.js"
+		data-modules="columntoggle_option_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<div style="display: none;" id="columntoggle-option-test-blank-popup-placeholder"><!-- placeholder for columntoggle-option-test-blank-popup --></div>
+			<a href="#columntoggle-option-test-blank-popup" id="columntoggle-option-test-blank-button" class="ui-table-columntoggle-btn ui-button ui-button-inherit ui-corner-all ui-shadow ui-mini" data-rel="popup">Columns...</a>
+			<table id="columntoggle-option-test-blank" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="display: none;" id="columntoggle-option-test-explicit-popup-placeholder"><!-- placeholder for columntoggle-option-test-explicit-popup --></div>
+			<a href="#columntoggle-option-test-explicit-popup" id="columntoggle-option-test-explicit-button" class="ui-table-columntoggle-btn ui-button ui-button-b ui-corner-all ui-shadow ui-mini" data-rel="popup">Show/Hide</a>
+			<table id="columntoggle-option-test-explicit" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" data-nstest-column-button-theme="b" data-nstest-column-popup-theme="b" data-nstest-column-button-text="Show/Hide" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="display: none;" id="columntoggle-toggle-button-popup-placeholder"><!-- placeholder for columntoggle-toggle-button-popup --></div>
+			<a href="#columntoggle-toggle-button-popup" id="columntoggle-toggle-button-button" class="ui-table-columntoggle-btn ui-button ui-button-a ui-corner-all ui-shadow ui-mini" data-rel="popup">Columns...</a>
+			<table id="columntoggle-toggle-button" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="display: none;" id="columntoggle-toggle-button-initially-absent-popup-placeholder"><!-- placeholder for columntoggle-toggle-button-initially-absent-popup --></div>
+			<table id="columntoggle-toggle-button-initially-absent" data-nstest-column-button="false" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="display: none;" id="columntoggle-toggle-ui-popup-placeholder"><!-- placeholder for columntoggle-toggle-ui-popup --></div>
+			<a href="#columntoggle-toggle-ui-popup" id="columntoggle-toggle-ui-button" class="ui-table-columntoggle-btn ui-button ui-button-a ui-corner-all ui-shadow ui-mini" data-rel="popup">Columns...</a>
+			<table id="columntoggle-toggle-ui" data-nstest-enhanced="true" data-nstest-role="table" data-nstest-mode="columntoggle" class="ui-responsive ui-table ui-table-columntoggle">
+				<thead>
+					<tr>
+						<th data-nstest-priority="2" class="ui-table-priority-2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3" class="ui-table-priority-3">Year</th>
+						<th data-nstest-priority="1" class="ui-table-priority-1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5" class="ui-table-priority-5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="ui-table-priority-2">1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
+						<td class="ui-table-priority-3">1941</td>
+						<td class="ui-table-priority-1">100%</td>
+						<td class="ui-table-priority-5">74</td>
+					</tr>
+					<tr>
+						<th class="ui-table-priority-2">2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
+						<td class="ui-table-priority-3">1942</td>
+						<td class="ui-table-priority-1">97%</td>
+						<td class="ui-table-priority-5">64</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-option-test-blank-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-option-test-blank-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="columntoggle-option-test-blank-popup" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-option-test-explicit-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-option-test-explicit-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-b ui-overlay-shadow ui-corner-all" id="columntoggle-option-test-explicit-popup" data-nstest-theme="b" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-toggle-button-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-toggle-button-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="columntoggle-toggle-button-popup" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-toggle-button-initially-absent-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-toggle-button-initially-absent-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="columntoggle-toggle-button-initially-absent-popup" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="columntoggle-toggle-ui-popup-screen"></div>
+		<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="columntoggle-toggle-ui-popup-popup">
+			<div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="columntoggle-toggle-ui-popup" data-nstest-enhanced="true">
+				<fieldset data-nstest-role="controlgroup" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+					<div class="ui-controlgroup-controls">
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rank
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Year
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Rotten Tomato Rating
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+						<div class="ui-checkbox">
+							<label class="ui-button ui-corner-all ui-button-icon-left ui-checkbox-on ui-first-child">
+								Reviews
+								<input type="checkbox" data-nstest-enhanced="true" checked>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

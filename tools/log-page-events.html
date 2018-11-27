@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page Event Logger Bookmarklet</title>
+</head>
+
+<body>
+<h1>Page Event Logger Bookmarklet</h1>
+<p>A simple bookmarklet for logging jQuery Mobile page events. To use, bookmark the following link:</p>
+<script>
+document.write('<p><a id="bookmarklet-link" href="javascript:function loadScript(u){var s=document.createElement(\'script\');s.setAttribute(\'language\',\'javascript\');s.setAttribute(\'src\',u);document.body.appendChild(s);} loadScript(\'' + ( location.href.replace( /\.html/, ".js" ) ) + '\');">Page EventLogger Bookmark</a></p>');
+</script>
+<p>For platforms that don't allow bookmarking of <code>javascript:</code> urls, you can copy/paste the following source for the bookmarklet directly into the browser's location bar then hit enter or hit the &quot;go&quot; button on your keypad:</p>
+<p>
+  <textarea id="ta" rows="10" cols="50"></textarea>
+</p>
+<p>NOTE: Some browsers like Chrome will strip off the javascript: prefix from the string above when you paste it into the location bar. Make sure what you pasted is prefixed by javascript: before attempting to load the bookmarklet.</p>
+<script>
+document.getElementById("ta").value = document.getElementById("bookmarklet-link").href;
+  </script>
+</body>
+</html>

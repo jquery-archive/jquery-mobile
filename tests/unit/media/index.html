@@ -1,29 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Media Test Suite</title>
 
-	<script src="../../../js/jquery.js"></script>
-	<script src="../../../js/jquery.ui.widget.js"></script>
-	<script src="../../../js/jquery.mobile.widget.js"></script>
-	<script src="../../../js/jquery.mobile.media.js"></script>
+	<script src="../../../external/requirejs/require.js"></script>
 
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
-	<script src="media_core.js"></script>
+	<script src="../../lib/bootstrap.js"
+			data-deps="media"
+			data-modules="media_core">
+	</script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Media Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<div id="qunit-fixture"></div>
+	<div id="qunit-fixture"></div>
 
 </body>
 </html>

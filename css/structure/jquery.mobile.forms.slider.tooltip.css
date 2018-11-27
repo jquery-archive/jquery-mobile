@@ -1,0 +1,21 @@
+/* slider tooltip
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-slider-popup {
+	width: 64px;
+	height: 64px;
+	font-size: 36px;
+	padding-top: 14px;
+	opacity: .8;
+}
+
+.ui-slider-popup {
+	position: absolute !important;
+	text-align: center;
+	z-index: 100;
+}
+
+.ui-slider-track .ui-button.ui-slider-handle {
+	font-size: .9em;
+	line-height: 30px;
+}

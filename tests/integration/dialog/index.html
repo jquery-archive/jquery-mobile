@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Dialog Test Suite</title>
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="./dialog.bindMobileInit.js page.dialog toolbar"
+			data-init="true"
+			data-modules="dialog_events">
+	</script>
+
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
+		<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog"></a>
+		<a href="#close-button-test" id="close-button-test-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">Go</a>
+		<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true">no theme set</a>
+		<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true">data-theme set</a>
+		<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true">data-theme & data-nstest-overlay-theme set</a>
+	</div>
+
+	<div id="doubleCloseTestPage" data-nstest-role="page">
+		<div data-nstest-role="content">
+			<a id="doubleCloseDialogOpener" href="#foo-dialog" data-nstest-rel="dialog">Dialog</a>
+		</div>
+	</div>
+
+	<div id="foo-dialog" data-nstest-dialog="true" data-nstest-theme="b">
+		<div  data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1>Dialog</h1>
+		</div>
+		<div data-nstest-role="content" >
+			<a href="#" id="internal-link">foo</a>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div id="close-button-test" data-nstest-dialog="true" data-nstest-theme="b" data-nstest-close-btn="none">
+		<div  data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1>Dialog</h1>
+		</div>
+		<div data-nstest-role="content" >
+			<a href="#" id="internal-link-1">foo</a>
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-role="page" id="dialog-a" data-nstest-dialog="true">
+		<div data-nstest-role="toolbar" data-nstest-type="header" data-nstest-position="inline">
+			<h1> No theme set </h1>
+		</div>
+		<div data-nstest-role="content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-dialog="true" data-nstest-theme="e" id="dialog-b">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1> data-nstest-theme set </h1>
+		</div>
+		<div data-nstest-role="content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+	<div data-nstest-dialog="true" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1> data-nstest-theme & data-nstest-overlay-theme set </h1>
+		</div>
+		<div data-nstest-role="content">
+			 Some text here....
+		</div>
+		<div data-nstest-role="toolbar" data-nstest-type="footer">
+			footer
+		</div>
+	</div>
+
+</body>
+</html>

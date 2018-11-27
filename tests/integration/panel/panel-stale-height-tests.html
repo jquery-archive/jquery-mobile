@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Panel Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page panel"
+			data-init="true"
+			data-modules="panel_stale_height_core">
+	</script>
+</head>
+<body class="ui-body-b">
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div data-nstest-role="panel" id="stale-height-panel">
+			<p>The panel</p>
+		</div>
+		<a href="#stale-height-panel" id="stale-height-panel-link">Open panel</a>
+	</div>
+
+</body>

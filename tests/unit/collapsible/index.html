@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Collapsible Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="enhancer enhancer.backcompat collapsible tests/jquery.setNameSpace.immediately"
+			data-modules="collapsible_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="outer" data-nstest-role="collapsible" data-nstest-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed ui-collapsible-themed-content">
+		<div id="outer-heading" class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+			<div id="outer-anchor" class="ui-collapsible-heading-toggle ui-button ui-icon-beginning ui-icon-plus">
+			Outer
+			<div id="outer-status" class="ui-collapsible-heading-status"> click to expand contents</div>
+			</div>
+		</div>
+		<div id="outer-content" class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+			<div id="inner" data-nstest-role="collapsible" data-nstest-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed ui-collapsible-themed-content">
+				<div class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+					<div class="ui-collapsible-heading-toggle ui-button ui-icon-beginning ui-icon-plus">
+					Inner
+					<div class="ui-collapsible-heading-status"> click to expand contents</div>
+					</div>
+				</div>
+				<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+				<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,48 +1,119 @@
 /*
- * mobile page unit tests
+ * Mobile page unit tests
  */
-(function($){
-	var libName = 'jquery.mobile.page.js',
-			typeAttributeRegex = $.mobile.page.prototype._typeAttributeRegex;
+define( [
+	"qunit",
+	"jquery"
+	], function( QUnit, $ ) {
 
-	module(libName);
+var libName = "jquery.mobile.page",
+	themedefault = $.mobile.page.prototype.options.theme;
 
-	test( "nested header anchors aren't altered", function(){
-		ok(!$('.ui-header > div > a').hasClass('ui-btn'));
-	});
+QUnit.module( libName );
 
-	test( "nested footer anchors aren't altered", function(){
-		ok(!$('.ui-footer > div > a').hasClass('ui-btn'));
-	});
+var eventStack = [],
+	etargets = [],
+	cEvents = [],
+	cTargets = [];
 
-	test( "nested bar anchors aren't styled", function(){
-		ok(!$('.ui-bar > div > a').hasClass('ui-btn'));
-	});
+$( document ).bind( "pagebeforecreate pagecreate", function( e ) {
+	eventStack.push( e.type );
+	etargets.push( e.target );
+} );
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
-	});
+$( document ).on( "pagebeforecreate", "#c", function( e ) {
+	cEvents.push( e.type );
+	cTargets.push( e.target );
+	return false;
+} );
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
-	});
+QUnit.test( "pagecreate event fires when page is created", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagecreate" || eventStack[ 1 ] === "pagecreate" );
+} );
 
-	test( "unnested bar anchors are styled", function(){
-		ok($('.ui-bar > a').hasClass('ui-btn'));
-	});
+QUnit.test( "pagebeforecreate event fires when page is created", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagebeforecreate" || eventStack[ 1 ] === "pagebeforecreate" );
+} );
 
-	test( "no auto-generated back button exists on first page", function(){
-		ok( !$(".ui-header > :jqmData(rel='back')").length );
-	});
+QUnit.test( "pagebeforecreate fires before pagecreate", function( assert ) {
+	assert.ok( eventStack[ 0 ] === "pagebeforecreate" );
+} );
 
-	test( "input type replacement regex works properly", function(){
-		ok(typeAttributeRegex.test( "<input type=range" ), "test no quotes" );
-		ok(typeAttributeRegex.test( "<input type='range'" ), "test single quotes" );
-		ok(typeAttributeRegex.test( "<input type=\"range\"" ), "test double quotes" );
-		ok(typeAttributeRegex.test( "<input type=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"), "test \w" );
-		ok(typeAttributeRegex.test( "<input        type=\"range\"" ), "test many preceding spaces" );
-		ok(typeAttributeRegex.test( "<input type='range'>" ), "test final attribute (FF)" );
+QUnit.test( "target of pagebeforecreate event was div #a", function( assert ) {
+	assert.ok( $( etargets[ 0 ] ).is( "#a" ) );
+} );
 
-		ok(!typeAttributeRegex.test( "<inputtype=\"range\"" ), "requires preceding space" );
-	});
-})(jQuery);
+QUnit.test( "target of pagecreate event was div #a", function( assert ) {
+	assert.ok( $( etargets[ 0 ] ).is( "#a" ) );
+} );
+
+QUnit.test( "page element has ui-page class", function( assert ) {
+	assert.ok( $( "#a" ).hasClass( "ui-page" ) );
+} );
+
+QUnit.test( "page element has default page theme class when not overidden", function( assert ) {
+	assert.ok( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ) );
+} );
+
+QUnit.test( "setting option 'theme' on page updates classes correctly", function( assert ) {
+	$( "#a" ).page( "option", "theme", "x" );
+	assert.deepEqual( $( "#a" ).hasClass( "ui-page-theme-x" ), true, "After setting option 'theme' to 'x', the page has the new theme class" );
+	assert.deepEqual( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ), false, "After setting option 'theme', the page does not have default theme class" );
+	$( "#a" ).page( "option", "theme", themedefault );
+} );
+
+QUnit.test( "B page has non-default theme matching its data-theme attr", function( assert ) {
+	$( "#b" ).page();
+	var btheme = $( "#b" ).jqmData( "theme" );
+	assert.ok( $( "#b" ).hasClass( "ui-page-theme-" + btheme ) );
+} );
+
+QUnit.test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing", function( assert ) {
+	$( "#c" ).page();
+
+	assert.ok( cEvents[ 0 ] === "pagebeforecreate" );
+	assert.ok( !cTargets[ 1 ] );
+} );
+
+QUnit.test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page", function( assert ) {
+	$( "#c" ).page();
+
+	assert.ok( !$( "#c" ).hasClass( "ui-body-" + themedefault ) );
+	assert.ok( !$( "#c" ).hasClass( "ui-page" ) );
+} );
+
+QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ) {
+	assert.expect( 1 );
+
+	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
+
+	$( ".ui-pagecontainer" ).removeClass( pageTheme );
+
+	$.mobile.activePage
+		.bind( "pagebeforeshow", function() {
+			assert.ok( $( ".ui-pagecontainer" ).hasClass( pageTheme ),
+				"Page container has the same theme as the page on pagebeforeshow" );
+			QUnit.start();
+		} )
+		.trigger( "pagebeforeshow" );
+
+} );
+
+QUnit.asyncTest( "page container is updated to page theme at pagebeforeshow", function( assert ) {
+
+	assert.expect( 1 );
+
+	var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
+
+	$( ".ui-pagecontainer" ).addClass( pageTheme );
+
+	$.mobile.activePage
+		.bind( "pagebeforehide", function() {
+			assert.ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
+			QUnit.start();
+		} )
+		.trigger( "pagebeforehide" );
+
+} );
+
+} );

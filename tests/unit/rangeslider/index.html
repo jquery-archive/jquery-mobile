@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Rangeslider Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="forms/slider forms/rangeslider"
+		data-no-backcompat="true"
+		data-init="true"
+		data-modules="rangeslider_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="foo" data-ui-role="page">
+		<form>
+			<div data-ui-role="fieldcontain">
+				<div data-ui-role="rangeslider" id="rangeslider-highlight">
+					<input type="range" name="rangeslider-first" id="rangeslider-highlight-first" value="10" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+					<input type="range" name="rangeslider-last" id="rangeslider-highlight-last" value="90" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+				</div>
+			</div>
+			<div data-ui-role="fieldcontain">
+				<div data-ui-role="rangeslider" id="rangeslider-minmax">
+					<input type="range" name="rangeslider-first" id="rangeslider-minmax-first" value="30" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+					<input type="range" name="rangeslider-last" id="rangeslider-minmax-last" value="70" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+				</div>
+			</div>
+			<div data-ui-role="fieldcontain">
+				<div data-ui-role="rangeslider" id="rangeslider-extreams">
+					<input type="range" name="rangeslider-first" id="rangeslider-extreams-first" value="45" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+					<input type="range" name="rangeslider-last" id="rangeslider-extreams-last" value="55" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+				</div>
+			</div>
+			<div data-ui-role="fieldcontain">
+				<div data-ui-role="rangeslider" id="rangeslider-startstop">
+					<input type="range" name="rangeslider-first" id="rangeslider-startstop-first" value="0" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+					<input type="range" name="rangeslider-last" id="rangeslider-startstop-last" value="100" min="0" max="100" data-ui-theme="b" data-ui-track-theme="a" />
+				</div>
+			</div>
+			<div data-ui-role="rangeslider" id="disable-rangeslider">
+				<input name="range-disabled-first" id="range-disabled-first" min="0" max="100" value="0" type="range">
+				<input name="range-disabled-last" id="range-disabled-last" min="0" max="100" value="100" type="range">
+			</div>
+			<div id="change-proximity-rangeslider" data-ui-role="rangeslider">
+				<input name="rangeslider-first" id="rangeslider-proximity-first" min="1" max="2" value="1" type="number" data-ui-role="slider">
+				<input name="rangeslider-last" id="rangeslider-proximity-last" min="1" max="2" value="2" type="number" data-ui-role="slider">
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

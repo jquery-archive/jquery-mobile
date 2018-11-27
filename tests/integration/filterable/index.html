@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Filter Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="page navigation listview filterable listview.autodividers
+				   toolbar collapsible forms/button forms/button.backcompat
+				   controlgroup controlgroup.backcompat forms/select
+				   forms/checkboxradio forms/checkboxradio.backcompat"
+		data-init="true"
+		data-modules="filterable_core">
+	</script>
+
+
+	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<style type="text/css">
+		.ui-filterable {
+			border-width: 0;
+			overflow: hidden;
+			margin: -1em -1em 1em -1em;
+		}
+		.ui-filterable-inset {
+			margin: 1em -.3125em -1em;
+			background: transparent;
+		}
+		.ui-collapsible-content .ui-filterable {
+			margin: -.625em -1em .625em -1em;
+			border-bottom: inherit;
+		}
+		.ui-collapsible-content .ui-filterable-inset {
+			margin: -.3125em;
+			border-bottom-width: 0;
+		}
+		.ui-filterable .ui-textinput-search {
+			margin: .3125em;
+			width: auto;
+			display: block;
+		}
+		.ui-screen-hidden {
+			display: none !important;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<!-- Search bar filter -->
+	<div data-nstest-role="page" id='search-filter-test'>
+		<div data-nstest-role="toolbar" data-nstest-type="header">
+			<h1>Filterable</h1>
+		</div>
+		<div data-nstest-role="content">
+			<input id="filtered-listview-input">
+			<ul id="filtered-listview" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#filtered-listview-input">
+				<li>a is for aquaman</li>
+				<li>b is for batman</li>
+				<li>c is for catwoman</li>
+				<li>d is for darkwing</li>
+			</ul>
+
+			<input id="test-prevent-default-handler">
+			<ul id="test-prevent-default-signal-emission"
+				data-nstest-role="listview"
+				data-nstest-filter="true"
+				data-nstest-input="#test-prevent-default-handler">
+				<li>San Francisco, CA</li>
+				<li>Portland, OR</li>
+				<li>Washington, DC</li>
+				<li>New York, NY</li>
+			</ul>
+
+			<input id="custom-callback-listview-input">
+			<ul id="custom-callback-listview" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#custom-callback-listview-input">
+				<li>a is for aquaman</li>
+				<li data-nstest-important="true">b is for batman</li>
+				<li>c is for catwoman</li>
+				<li>d is for darkwing</li>
+			</ul>
+
+			<input id="multi-set-filterable-input"
+				data-nstest-type="search"
+				data-nstest-filter="true"
+				data-nstest-input="#multi-set-filterable-input">
+			<ul id="multi-set-filterable-set1" data-nstest-role="listview" class="multi-set-filterable-children">
+				<li>Acura</li>
+				<li>Audi</li>
+				<li>BMW</li>
+				<li>Cadillac</li>
+				<li>Chrysler</li>
+			</ul>
+			<ul id="multi-set-filterable-set2" data-nstest-role="listview" class="multi-set-filterable-children">
+				<li>Acura</li>
+				<li>Audi</li>
+				<li>BMW</li>
+				<li>Cadillac</li>
+				<li>Chrysler</li>
+			</ul>
+
+			<input id="table-filter-test-input">
+			<table id="table-filter-test"
+				data-nstest-input="#table-filter-test-input"
+				data-nstest-role="table"
+				data-nstest-mode="columntoggle"
+				data-nstest-filter="true">
+			 <thead>
+				<tr>
+					<th rowspan="2" >Company</th>
+					<th rowspan="2" data-nstest-sortable="true" data-nstest-priority="6">Last Trade</th>
+					<th rowspan="2" data-nstest-priority="3" data-nstest-sortable="true">Trade Time</th>
+					<th rowspan="2" data-nstest-priority="6">Change</th>
+					<th rowspan="2" data-nstest-priority="3">Prev Close</th>
+					<th rowspan="2" data-nstest-priority="5" data-nstest-sortable="true">Open</th>
+					<th colspan="3" >Stuff</th>
+				</tr>
+				<tr>
+					<th data-nstest-priority="6" data-nstest-sortable="true">Bid</th>
+					<th data-nstest-priority="6">Ask</th>
+					<th data-nstest-priority="3">1y Target Est</th>
+				</tr>
+			 </thead>
+			 <tbody class="table_body">
+				<tr>
+					<th>GOOG <span class="co-name">Google Inc.</span></th>
+					<td>597.74</td>
+					<td>12:12PM</td>
+					<td>14.81 (2.54%)</td>
+					<td>582.93</td>
+					<td>597.95</td>
+					<td>597.73 x 100</td>
+					<td>597.91 x 300</td>
+					<td>731.10</td>
+				</tr>
+				<tr>
+					<th>AAPL <span class="co-name">Apple Inc.</span></th>
+					<td>378.94</td>
+					<td>12:22PM</td>
+					<td>5.74 (1.54%)</td>
+					<td>373.20</td>
+					<td>381.02</td>
+					<td>378.92 x 300</td>
+					<td>378.99 x 100</td>
+					<td>505.94</td>
+				</tr>
+				<tr>
+					<th>AMZN <span class="co-name">Amazon.com Inc.</span></th>
+					<td>191.55</td>
+					<td>12:23PM</td>
+					<td>3.16 (1.68%)</td>
+					<td>188.39</td>
+					<td>194.99</td>
+					<td>191.52 x 300</td>
+					<td>191.58 x 100</td>
+					<td>240.32</td>
+				</tr>
+				<tr>
+					<th>ORCL <span class="co-name">Oracle Corporation</span></th>
+					<td>31.15</td>
+					<td>12:44PM</td>
+					<td>1.41 (4.72%)</td>
+					<td>29.74</td>
+					<td>30.67</td>
+					<td>31.14 x 6500</td>
+					<td>31.15 x 3200</td>
+					<td>36.11</td>
+				</tr>
+				<tr>
+					<th>MSFT <span class="co-name">Microsoft Corporation</span></th>
+					<td>25.50</td>
+					<td>12:27PM</td>
+					<td>0.66 (2.67%)</td>
+					<td>24.84</td>
+					<td>25.37</td>
+					<td>25.50 x 71100</td>
+					<td>25.51 x 17800</td>
+					<td>31.50</td>
+				</tr>
+			 </tbody>
+			</table>
+
+			<input id="search-controlgroup-test-input">
+			<div id="search-controlgroup-test"
+				data-nstest-role="controlgroup"
+				data-nstest-filter="true"
+				data-nstest-input="#search-controlgroup-test-input"
+				class="helper">
+				<input type="button" data-role="button" value="acura" id="bt1" />
+				<input type="button" data-role="button" value="audi" id="bt2" data-nstest-filtertext="opqrstuvwxyz some xyz" />
+				<input type="button" data-role="button" value="bmw" id="bt3" />
+				<input type="button" data-role="button" value="cadillac" id="bt4" />
+				<input type="button" data-role="button" value="chrysel" id="bt5" />
+				<a data-nstest-role="button" href="#">acporsche</a>
+			</div>
+
+			<input id="search-select-test-input">
+			<label for="anotherSelect">Select Element</label>
+			<select id="anotherSelect" name="anotherselect"
+				data-nstest-filter="true"
+				data-nstest-input="#search-select-test-input">
+				<option value="A">Option A</option>
+				<option value="B" data-nstest-filtertext="this goes B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J">Option J</option>
+			</select>
+
+			<input id="p-text-element-filter-input">
+			<div
+				id="p-text-element-filter"
+				data-nstest-filter="true"
+				data-nstest-input="#p-text-element-filter-input">
+				<p>a</p>
+				<p>b</p>
+				<p>c</p>
+				<p>d</p>
+				<p>e</p>
+				<p>f</p>
+			</div>
+
+			<input id="p-filtertext-element-filter-input">
+			<div
+				id="p-filtertext-element-filter"
+				data-nstest-filter="true"
+				data-nstest-input="#p-filtertext-element-filter-input">
+				<p data-nstest-filtertext="f">a</p>
+				<p data-nstest-filtertext="e">b</p>
+				<p data-nstest-filtertext="d">c</p>
+				<p data-nstest-filtertext="c">d</p>
+				<p data-nstest-filtertext="b">e</p>
+				<p data-nstest-filtertext="a">f</p>
+			</div>
+
+			<input id="span-text-element-filter-input">
+			<div
+				id="span-text-element-filter"
+				data-nstest-filter="true"
+				data-nstest-input="#span-text-element-filter-input">
+				<span>a</span>
+				<span>b</span>
+				<span>c</span>
+				<span>d</span>
+				<span>e</span>
+				<span>f</span>
+			</div>
+
+			<input id="span-filtertext-element-filter-input">
+			<div
+				id="span-filtertext-element-filter"
+				data-nstest-filter="true"
+				data-nstest-input="#span-filtertext-element-filter-input">
+				<span data-nstest-filtertext="f">a</span>
+				<span data-nstest-filtertext="e">b</span>
+				<span data-nstest-filtertext="d">c</span>
+				<span data-nstest-filtertext="c">d</span>
+				<span data-nstest-filtertext="b">e</span>
+				<span data-nstest-filtertext="a">f</span>
+			</div>
+
+			<input id="destroy-test-input">
+			<div id="destroy-test" data-nstest-filter="true" data-nstest-input="#destroy-test-input">
+				<p>San Francisco, CA</p>
+				<p>Portland, OR</p>
+				<p>Washington, DC</p>
+				<p>New York, NY</p>
+			</div>
+
+			<input id="pre-rendered-destroy-test-input">
+			<div id="pre-rendered-destroy-test"
+				data-nstest-enhanced="true"
+				data-nstest-filter="true"
+				data-nstest-input="#pre-rendered-destroy-test-input"
+				data-nstest-filter-reveal="true">
+				<p class="ui-screen-hidden">San Francisco, CA</p>
+				<p class="ui-screen-hidden">Portland, OR</p>
+				<p class="ui-screen-hidden">Washington, DC</p>
+				<p class="ui-screen-hidden">New York, NY</p>
+			</div>
+
+			<input id="test-backcompat-signal-emission-input">
+			<ul id="test-backcompat-signal-emission"
+				data-nstest-role="listview"
+				data-nstest-filter="true"
+				data-nstest-input="#test-backcompat-signal-emission-input">
+				<li>San Francisco, CA</li>
+				<li>Portland, OR</li>
+				<li>Washington, DC</li>
+				<li>New York, NY</li>
+			</ul>
+
+			<input id="test-keyboard-flag-reset-input">
+			<ul id="test-keyboard-flag-reset-list"
+				data-nstest-role="listview"
+				data-nstest-filter="true"
+				data-nstest-input="#test-keyboard-flag-reset-input">
+				<li id="acura">Acura</li>
+				<li id="audi">Audi</li>
+				<li id="bmw">BMW</li>
+				<li id="cadillac">Cadillac</li>
+				<li id="ferrari">Ferrari</li>
+			</ul>
+
+			<input id="test-handler-removal-input">
+			<ul id="test-handler-removal-list"
+				data-nstest-role="listview"
+				data-nstest-filter="true">
+				<li id="acura1">Acura</li>
+				<li id="audi1">Audi</li>
+				<li id="bmw1">BMW</li>
+				<li id="cadillac1">Cadillac</li>
+				<li id="ferrari1">Ferrari</li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>
+

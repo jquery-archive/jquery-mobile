@@ -1,0 +1,100 @@
+.ui-controlgroup {
+    margin: .5em 0;
+}
+
+.ui-controlgroup .ui-button,
+.ui-controlgroup .ui-selectmenu {
+    margin: 0;
+}
+
+.ui-controlgroup li {
+	list-style: none;
+}
+
+.ui-controlgroup-horizontal:before,
+.ui-controlgroup-horizontal:after {
+	content: "";
+	display: table;
+}
+.ui-controlgroup-horizontal:after {
+	clear: both;
+}
+
+.ui-controlgroup-horizontal > .ui-button,
+.ui-controlgroup-horizontal > li > .ui-button {
+	float: left;
+	clear: none;
+    width: auto;
+}
+
+.ui-controlgroup-vertical > .ui-button,
+.ui-controlgroup-vertical > li > .ui-button {
+    display: block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ui-controlgroup .ui-button-icon-only {
+	height: auto;
+	padding: .7em 1em;
+}
+
+.ui-controlgroup-horizontal .ui-button-icon-only,
+.ui-controlgroup-horizontal button.ui-button-icon-only {
+	width: 1.5em;
+}
+
+.ui-controlgroup-vertical .ui-button-icon-only,
+.ui-controlgroup-vertical button.ui-button-icon-only {
+	width: 100%;
+}
+
+.ui-controlgroup.ui-mini .ui-button-icon-only,
+.ui-controlgroup .ui-mini.ui-button-icon-only {
+	font-size: inherit;
+}
+
+.ui-controlgroup-horizontal > .ui-button,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-button,
+.ui-controlgroup-horizontal > li > .ui-button {
+	border-left-width: 0;
+}
+
+.ui-controlgroup-horizontal > .ui-corner-left,
+.ui-controlgroup-horizontal > .ui-corner-all,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-corner-left,
+.ui-controlgroup-horizontal > .ui-selectmenu .ui-corner-all,
+.ui-controlgroup-horizontal > li > .ui-corner-left,
+.ui-controlgroup-horizontal > li > .ui-corner-all {
+	border-left-width: 1px;
+}
+
+.ui-controlgroup-vertical > .ui-button,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-button,
+.ui-controlgroup-vertical > li > .ui-button {
+	border-top-width: 0;
+}
+
+.ui-controlgroup-vertical > .ui-corner-top,
+.ui-controlgroup-vertical > .ui-corner-all,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-corner-top,
+.ui-controlgroup-vertical > .ui-selectmenu .ui-corner-all,
+.ui-controlgroup-vertical > li > .ui-corner-top,
+.ui-controlgroup-vertical > li > .ui-corner-all {
+	border-top-width: 1px;
+}
+
+.ui-controlgroup > .ui-button:focus,
+.ui-controlgroup > .ui-button.ui-focus,
+.ui-controlgroup > li > .ui-button:focus,
+.ui-controlgroup > li > .ui-button.ui-focus {
+	z-index: 1;
+}
+
+.ui-controlgroup > .ui-shadow:not(:focus),
+.ui-controlgroup > .ui-shadow:not(.ui-focus) {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}

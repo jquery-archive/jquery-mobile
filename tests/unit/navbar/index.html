@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Navigation Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="page navbar navbar.morebutton"
+		data-init="true"
+		data-no-backcompat="true"
+		data-modules="navbar_core">
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-ui-role="page" id="disabled-button-click">
+		<div data-ui-role="navbar">
+			<ul>
+				<li><a href="#" class="ui-state-disabled">One</a></li>
+				<li><a href="#">Two</a></li>
+			</ul>
+		</div>
+
+		<div data-ui-role="navbar">
+			<ul id="enhanced-classes">
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-r">a</a></li>
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-d">b</a></li>
+				<li><a href="#" data-ui-role="button" data-ui-icon="ui-icon-arrow-u">c</a></li>
+			</ul>
+		</div>
+		<div data-ui-role="navbar" id="default-maxbutton-overflow">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+				<li><a href="#">four</a></li>
+				<li><a href="#">five</a></li>
+				<li><a href="#">six</a></li>
+			</ul>
+		</div>
+
+		<div data-ui-role="navbar" data-ui-maxbutton="6" id="default-maxbutton-override">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+				<li><a href="#">four</a></li>
+				<li><a href="#">five</a></li>
+				<li><a href="#">six</a></li>
+			</ul>
+		</div>
+
+		<div data-ui-role="navbar" id="add-items-navbar">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+			</ul>
+		</div>
+
+		<div data-ui-role="navbar" id="default-maxbutton-overflow-destroy">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+				<li><a href="#">four</a></li>
+				<li><a href="#">five</a></li>
+				<li><a href="#">six</a></li>
+			</ul>
+		</div>
+
+		<div data-ui-role="navbar" data-ui-morebutton="true" id="default-maxbutton-morebutton">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+				<li><a href="#">four</a></li>
+				<li><a href="#">five</a></li>
+				<li><a href="#">six</a></li>
+			</ul>
+		</div>
+
+
+	</div>
+
+</body>
+</html>

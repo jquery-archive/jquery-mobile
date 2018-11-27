@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Controlgroup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script
+		src="../../lib/bootstrap.js"
+		data-deps="widgets/page widgets/forms/select.custom widgets/controlgroup.selectmenu"
+		data-init="true"
+		data-no-backcompat="true"
+		data-modules="controlgroup_interaction_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-ui-role="page">
+		<div class="ui-content">
+			<div data-ui-role="controlgroup" id="group">
+				<select data-ui-role="selectmenu" id="select1">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+				<select data-ui-role="selectmenu" id="select2">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+			</div>
+			<div data-ui-role="controlgroup" id="disabled-group">
+				<select data-ui-role="selectmenu" disabled="disabled" id="disabled-select1">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+				<select data-ui-role="selectmenu" disabled="disabled" id="disabled-select2">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+				<select data-ui-role="selectmenu" id="disabled-select3">
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

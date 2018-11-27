@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Core Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="core"
+			data-modules="core_scroll"
+			data-init="true">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+	</div>
+
+	<div id="qunit-fixtures">
+		<div id="parent"></div>
+		<div id="dependent"></div>
+		<div id="encoded">foo&gt;</div>
+		<div id="unencoded"><script>var foo;</script></div>
+
+		<div id="parent-page" data-nstest-role="page">
+		<div id="page-child"></div>
+		</div>
+
+		<div id="parent-dialog" data-nstest-role="dialog">
+		<div id="dialog-child"></div>
+		</div>
+	</div>
+
+	<div id="hijackable">
+		<a href="#" id="hijacked-link"></a>
+		<a href="#" id="unhijacked-link-by-attr" data-nstest-ajax="false"></a>
+	</div>
+
+	<div id="not-hijackable" data-nstest-ajax="false">
+		<a href="#" id="unhijacked-link-by-parent"></a>
+	</div>
+</body>
+</html>

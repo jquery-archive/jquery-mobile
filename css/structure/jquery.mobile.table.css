@@ -1,0 +1,25 @@
+.ui-table {
+	border: 0;
+	border-collapse: collapse;
+	padding: 0;
+	width: 100%;
+}
+.ui-table th,
+.ui-table td {
+	line-height: 1.5em;
+	text-align: left;
+	padding: .4em .5em;
+	vertical-align:top;
+}
+.ui-table th .ui-button,
+.ui-table td .ui-button {
+	line-height: normal;
+}
+.ui-table th {
+	font-weight: bold;
+}
+.ui-table caption {
+	text-align: left;
+	margin-bottom: 1.4em;
+	opacity: .5;
+}

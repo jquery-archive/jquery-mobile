@@ -1,0 +1,46 @@
+@import url("jquery.mobile.transition.slidein.keyframes.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
+
+.slide.out, .slide.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-duration: 350ms;
+	animation-timing-function: ease-out;
+	animation-duration: 350ms;
+}
+.slide.out {
+	-webkit-transform: translate3d(-100%,0,0);
+	-webkit-animation-name: slideouttoleft;
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+	transform: translateX(-100%);
+	animation-name: slideouttoleft;
+}
+
+.slide.in {
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-animation-name: slideinfromright;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromright;
+	transform: translateX(0);
+	animation-name: slideinfromright;
+}
+
+.slide.out.reverse {
+	-webkit-transform: translate3d(100%,0,0);
+	-webkit-animation-name: slideouttoright;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+	transform: translateX(100%);
+	animation-name: slideouttoright;
+}
+
+.slide.in.reverse {
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-animation-name: slideinfromleft;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromleft;
+	transform: translateX(0);
+	animation-name: slideinfromleft;
+}

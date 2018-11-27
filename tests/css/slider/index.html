@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Slider Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../lib/bootstrap.js"
+			data-deps="page forms/slider"
+			data-init="true"
+			data-modules="slider_core">
+	</script>
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div class="ui-content">
+			<input type="range" id="test-slider-mini" data-nstest-mini="true" min="0" max="100" value="13" step="1">
+			<input type="range" id="test-slider-normal" min="0" max="100" value="13" step="1">
+		</div>
+	</div>
+
+</body>
+</html>

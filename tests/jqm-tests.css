@@ -1,0 +1,13 @@
+[data-nstest-role='page'], [data-nstest-role='dialog'],
+[data-ui-role='page'], [data-ui-role='dialog'] {
+	position: absolute !important;
+	top: -10000px !important;
+}
+[data-ui-role='header'][data-ui-position='fixed']
+[data-nstest-role='header'][data-nstest-position='fixed'] {
+	top: -10000px !important;
+}
+[data-ui-role='footer'][data-ui-position='fixed'],
+[data-nstest-role='footer'][data-nstest-position='fixed'] {
+	left: -10000px !important;
+}
