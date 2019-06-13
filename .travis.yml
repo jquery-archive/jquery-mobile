@@ -16,7 +16,7 @@ before_script:
   - npm install
   - npm install -g casperjs
 
-script: npm run-script ci
+script: npm run-script test
 
 env:
   - JQUERIES=1.10.2
