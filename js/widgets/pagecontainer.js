@@ -565,7 +565,7 @@ $.widget( "mobile.pagecontainer", {
 		return $.proxy( function( html, textStatus, xhr ) {
 
 			// Check that Content-Type is "text/html" (https://github.com/jquery/jquery-mobile/issues/8640)
-			if ( !/^text\/html\b/.test( xhr.getResponseHeader('Content-Type') ) ) {
+			if ( !/^text\/html\b/.test( xhr.getResponseHeader("Content-Type") ) ) {
 				// Display error message for unsupported content type
 				if ( settings.showLoadMsg ) {
 					this._showError();
