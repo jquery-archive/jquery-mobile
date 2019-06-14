@@ -1,11 +1,11 @@
 language: php
 
 php:
-  - "7.0"
+  - "5.5"
 
 sudo: required
 
-dist: xenial
+dist: trusty
 cache:
   directories:
   - node_modules
@@ -15,7 +15,7 @@ before_script:
   - npm install
   - npm install -g casperjs
 
-script: npm run-script test
+script: npm run-script ci
 
 env:
   - JQUERIES=1.10.2
