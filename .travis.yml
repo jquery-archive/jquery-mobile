@@ -16,7 +16,7 @@ before_script:
   - npm install -g casperjs
   - npm i -g npm
 
-script: npm run-script ci
+script: travis_wait npm run-script ci
 
 env:
   - JQUERIES=1.10.2
