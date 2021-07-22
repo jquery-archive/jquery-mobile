@@ -125,6 +125,13 @@ var forceTouchSupport = function() {
 	} );
 };
 
+var forceNoTouchSupport = function() {
+	$.mobile.support.touch = false;
+	$.each( components, function( index, value ) {
+		$.testHelper.reloadLib( value );
+	} );
+};
+
 QUnit.asyncTest( "long press fires tap hold after taphold duration", function( assert ) {
 	var taphold = false,
 		target;
@@ -475,6 +482,41 @@ QUnit.asyncTest( "scrolling prevented when coordinate change > 10", function( as
 	} );
 
 	$( "#qunit-fixture" ).trigger( "touchmove" );
+} );
+
+QUnit.asyncTest( "mouse action not prevented when coordinate change > 10", function( assert ) {
+	assert.expect( 0 );
+
+	forceNoTouchSupport();
+
+	// Ensure the swipe custome event is setup
+	$( "#qunit-fixture" ).bind( "swipe", function() {} );
+
+	$.Event.prototype.preventDefault = function() {
+		assert.ok( false, "prevent default called" );
+	};
+
+	$( "#qunit-fixture" ).one( "mouseup", function() {
+		QUnit.start();
+	} );
+
+	// NOTE bypass the trigger source check
+	$.testHelper.mockOriginalEvent( {
+		clientX: 0,
+		clientY: 0
+	} );
+
+	$( "#qunit-fixture" ).trigger( "mousedown" );
+
+	// NOTE bypass the trigger source check
+	$.testHelper.mockOriginalEvent( {
+		clientX: 200,
+		clientY: 0
+	} );
+
+	$( "#qunit-fixture" ).trigger( "mousemove" );
+
+	$( "#qunit-fixture" ).trigger( "mouseup" );
 } );
 
 QUnit.test( "Swipe get cords returns proper values", function( assert ) {
