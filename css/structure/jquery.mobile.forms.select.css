@@ -56,7 +56,7 @@
 /* ui-listview-item-count is styled in the listview CSS. We set padding and offset here because
    select supports icon position while listview doesn't. */
 .ui-selectmenu .ui-listview-item-has-count.ui-button {
-	padding-right: 2.8125em;
+	padding-right: 0.51em;
 }
 .ui-selectmenu .ui-listview-item-has-count.ui-icon-end {
 	padding-right: 4.6875em;
