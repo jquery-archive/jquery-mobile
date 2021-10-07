@@ -7,18 +7,9 @@
 	border-style: solid;
 	margin: .5em 0;
 	overflow: hidden;
-	-webkit-transition-property: padding, width, background-color, color, border-color;
-	-moz-transition-property: padding, width, background-color, color, border-color;
-	-o-transition-property: padding, width, background-color, color, border-color;
 	transition-property: padding, width, background-color, color, border-color;
-	-webkit-transition-duration: 100ms;
-	-moz-transition-duration: 100ms;
-	-o-transition-duration: 100ms;
 	transition-duration: 100ms;
 	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 	cursor: pointer;
 }
@@ -52,8 +43,6 @@
 	text-align: left;
 	border-width: 1px;
 	border-style: solid;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border-radius: inherit;
 	overflow: visible;
@@ -69,8 +58,6 @@ html .ui-field-contain > label + .ui-flipswitch,
 html .ui-popup .ui-field-contain > label + .ui-flipswitch {
 	display: inline-block;
 	width: 5.875em; /* If you override the width for .ui-flipswitch you should repeat the same value here */
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 }
 .ui-field-contain .ui-flipswitch.ui-flipswitch-active,

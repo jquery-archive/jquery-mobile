@@ -38,20 +38,12 @@
 
 .fade.out {
 	opacity: 0;
-	-webkit-animation-duration: 125ms;
-	-webkit-animation-name: fadeout;
-	-moz-animation-duration: 125ms;
-	-moz-animation-name: fadeout;
 	animation-duration: 125ms;
 	animation-name: fadeout;
 }
 
 .fade.in {
 	opacity: 1;
-	-webkit-animation-duration: 225ms;
-	-webkit-animation-name: fadein;
-	-moz-animation-duration: 225ms;
-	-moz-animation-name: fadein;
 	animation-duration: 225ms;
 	animation-name: fadein;
 }

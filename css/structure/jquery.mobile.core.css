@@ -27,7 +27,7 @@
 	margin: 0;
 	overflow-x: visible;
 	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust:none;
+	-ms-text-size-adjust: none;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 /* Issue #2066 */
@@ -149,7 +149,6 @@ div.ui-mobile-viewport {
 	width: 2.75em;
 	height: 2.75em;
 	padding: .0625em;
-	-webkit-border-radius: 2.25em;
 	border-radius: 2.25em;
 }
 .ui-loader-verbose .ui-icon-loading {
@@ -194,17 +193,13 @@ div.ui-mobile-viewport {
 .ui-corner-all > .ui-toolbar-header:first-child,
 .ui-corner-all > .ui-content:first-child,
 .ui-corner-all > .ui-toolbar-footer:first-child {
-	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
-	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
 .ui-corner-all > .ui-toolbar-header:last-child,
 .ui-corner-all > .ui-content:last-child,
 .ui-corner-all > .ui-toolbar-footer:last-child {
-	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
-	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
 
@@ -221,9 +216,6 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 	white-space: nowrap;
 	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 }
 .ui-button-icon-only,
@@ -320,8 +312,6 @@ div.ui-mobile-viewport {
 /* Button elements and input buttons */
 button.ui-button,
 input.ui-button {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -341,8 +331,6 @@ input.ui-button::-moz-focus-inner {
 }
 button.ui-button-icon-only,
 input.ui-button-icon-only {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	width: 1.75em;
 }

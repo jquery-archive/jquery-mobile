@@ -1,16 +1,8 @@
 .pop {
-	-webkit-transform-origin: 50% 50%;
-	-moz-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
 }
 
 .pop.in {
-	-webkit-transform: scale(1);
-	-webkit-animation-name: popin;
-	-webkit-animation-duration: 350ms;
-	-moz-transform: scale(1);
-	-moz-animation-name: popin;
-	-moz-animation-duration: 350ms;
 	transform: scale(1);
 	animation-name: popin;
 	animation-duration: 350ms;
@@ -18,26 +10,16 @@
 }
 
 .pop.out {
-	-webkit-animation-name: fadeout;
-	-webkit-animation-duration: 100ms;
-	-moz-animation-name: fadeout;
-	-moz-animation-duration: 100ms;
 	animation-name: fadeout;
 	animation-duration: 100ms;
 	opacity: 0;
 }
 
 .pop.in.reverse {
-	-webkit-animation-name: fadein;
-	-moz-animation-name: fadein;
 	animation-name: fadein;
 }
 
 .pop.out.reverse {
-	-webkit-transform: scale(.8);
-	-webkit-animation-name: popout;
-	-moz-transform: scale(.8);
-	-moz-animation-name: popout;
 	transform: scale(.8);
 	animation-name: popout;
 }

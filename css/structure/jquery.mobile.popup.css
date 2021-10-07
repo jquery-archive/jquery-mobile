@@ -109,7 +109,6 @@
 .ui-popup:not(.ui-content) > img:only-child,
 .ui-popup:not(.ui-content) > .ui-button-left:first-child + img:last-child,
 .ui-popup:not(.ui-content) > .ui-button-right:first-child + img:last-child {
-	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
 .ui-popup iframe {

@@ -64,46 +64,33 @@
 }
 .ui-listview > li.ui-first-child,
 .ui-listview > li.ui-first-child > a.ui-button {
-	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
-	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 }
 .ui-listview > li.ui-last-child,
 .ui-listview > li.ui-last-child > a.ui-button {
-	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
-	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
 .ui-listview > li.ui-listview-item-has-alternate > a.ui-button {
-	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
 .ui-listview > li.ui-first-child > a.ui-button + a.ui-button {
-	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
-	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
 .ui-listview > li.ui-last-child > a.ui-button + a.ui-button {
-	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
-	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
 .ui-listview > li.ui-first-child img:first-child:not(.ui-listview-item-icon) {
-	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 }
 .ui-listview > li.ui-last-child img:first-child:not(.ui-listview-item-icon) {
-	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) {
-	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
 .ui-listview > .ui-listview-item-static {
@@ -199,8 +186,6 @@
 	position: absolute;
 	width: 2.5em;
 	height: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border-left-width: 1px;
 	top: 0;

@@ -23,7 +23,6 @@
 	height: 3em;
 	max-height: 100%;
 	outline: 0;
-	-webkit-border-radius: inherit;
 	border-radius: inherit;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -95,9 +94,7 @@
 	position: relative;
 }
 .ui-selectmenu-custom.ui-popup .ui-toolbar-header {
-	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
-	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
 
@@ -116,13 +113,10 @@
 
 .ui-selectmenu-custom .ui-selectmenu-custom-list {
 	margin: 0;
-	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
 .ui-toolbar-header:not(.ui-screen-hidden) + .ui-selectmenu-custom-list {
-	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
-	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
 }
 .ui-toolbar-header.ui-screen-hidden + .ui-selectmenu-custom-list li.ui-first-child .ui-button {
