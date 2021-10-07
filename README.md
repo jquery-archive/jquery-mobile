@@ -1,5 +1,7 @@
 # jQuery Mobile [![Build Status](https://travis-ci.org/jquery/jquery-mobile.svg?branch=master)](https://travis-ci.org/jquery/jquery-mobile) [![Coverage Status](http://img.shields.io/coveralls/jquery/jquery-mobile/master.svg)](https://coveralls.io/r/jquery/jquery-mobile?branch=master)
 
+_**Note:** jQuery Mobile is not maintained anymore. Please read [the project status blog post](https://blog.jquerymobile.com/2021/10/07/jquery-maintainers-continue-modernization-initiative-with-deprecation-of-jquery-mobile/) for more information._
+
 jQuery Mobile is a unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
 jQuery Mobile 1.4.x works with versions of jQuery core from 1.8.3 to 1.11.1 / 2.1.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://demos.jquerymobile.com/). Alternatively, more information can also be found on the [jquerymobile site](http://jquerymobile.com).
