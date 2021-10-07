@@ -22,6 +22,7 @@
 		define( [
 			"jquery",
 			"../widget",
+			"./widget.theme",
 			"./addFirstLastClasses" ], factory );
 	} else {
 
@@ -71,7 +72,7 @@ function filterBubbleSpan() {
 	}
 }
 
-return $.widget( "mobile.listview", $.extend( {
+$.widget( "mobile.listview", $.extend( {
 	version: "@VERSION",
 
 	options: {
@@ -286,5 +287,7 @@ return $.widget( "mobile.listview", $.extend( {
 		this._addFirstLastClasses( allItems, this._getVisibles( allItems, create ), create );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+
+return $.widget( "mobile.listview", $.mobile.listview, $.mobile.widget.theme );
 
 } );
