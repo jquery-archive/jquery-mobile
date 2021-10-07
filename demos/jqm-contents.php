@@ -70,6 +70,7 @@
 			<li data-filtertext="single page"><a href="../pages-single-page/" data-ajax="false">Single page</a></li>
 			<li data-filtertext="multipage multi-page page"><a href="../pages-multi-page/" data-ajax="false">Multi-page template</a></li>
 			<li data-filtertext="dialog page widget modal popup"><a href="../pages-dialog/" data-ajax="false">Dialog page</a></li>
+			<li data-filtertext="dialog page widget modal popup navigation"><a href="../pages-dialog-nav/" data-ajax="false">Dialog page (with navigation support)</a></li>
 		</ul>
 	</div>
 </li>
